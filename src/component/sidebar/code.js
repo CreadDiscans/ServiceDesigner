@@ -5,21 +5,68 @@ import { ListGroup,
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter
+    ModalFooter,
+    Input,
+    Label
 } from 'reactstrap'
-import {FaPlus} from 'react-icons/fa'
+import {FaPlus, FaEdit} from 'react-icons/fa'
+import comData from '../../resource/components.json' 
 
 export default class SidebarCode extends React.Component {
     state = {
-        components: [
-            {name:'alerts'},
-            {name:'badge'}
-        ],
-        modal: false
+        components: [],
+        modal: false,
+        id:-1,
+        code: '',
+        name:'',
+        import: '',
+        properties: '',
+    }
+
+    componentWillMount() {
+        this.setState({components:comData})
     }
 
     toggle = ()=> {
         this.setState({modal:!this.state.modal})
+    }
+
+    save = () => {
+        if (this.isValid()) {
+            this.toggle()
+            this.state.components.push({
+                name:this.state.name,
+                import: this.state.import,
+                code:this.state.code,
+                properties: JSON.parse(this.state.properties)
+            })
+        }
+    }
+
+    isValid() {
+        return true
+    }
+
+    editComponent = (item) => {
+        this.setState({
+            modal: true,
+            id: item.id,
+            name: item.name,
+            code: item.code,
+            import: item.import,
+            properties: JSON.stringify(item.properties),
+        })
+    }
+
+    addComponent = () => {
+        this.setState({
+            modal: true,
+            id: -1,
+            name: '',
+            code: '',
+            import: '',
+            properties: '{}'
+        })
     }
 
     render() {
@@ -29,23 +76,41 @@ export default class SidebarCode extends React.Component {
                 <ListGroup>
                     {
                         this.state.components.map(item=> {
-                            return <ListGroupItem action key={item.name}>{item.name}</ListGroupItem>
+                            return <ListGroupItem action key={item.name}>
+                                {item.name}
+                                <FaEdit style={styles.editIcon} onClick={()=> this.editComponent(item)}/>
+                            </ListGroupItem>
                         })
                     }
                 </ListGroup>
-                <Button color="success" style={styles.listItem} onClick={this.toggle}><FaPlus />Element</Button>
+                <Button color="success" style={styles.listItem} onClick={this.addComponent}><FaPlus />Element</Button>
             </div>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Add Element</ModalHeader>
                 <ModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <Label>Name</Label>
+                    <Input type="text" onChange={(e)=>this.setState({name:e.target.value})} value={this.state.name} />
+                    <Label>import</Label>
+                    <Input type="textarea" name="text" value={this.state.import} rows="2" onChange={(e)=>this.setState({import:e.target.value})}/>
+                    <Label>Code</Label>
+                    {this.sandbox()}
+                    <Label>Property</Label>
+                    {this.setProperty()}
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+                    <Button color="primary" onClick={this.save}>Save</Button>{' '}
                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         </div>
+    }
+
+    sandbox() {
+        return <Input type="textarea" name="text" value={this.state.code} rows="10" onChange={(e)=>this.setState({code:e.target.value})}/>
+    }
+
+    setProperty() {
+        return <Input type="textarea" name="text" value={this.state.properties} rows="3" onChange={(e)=>this.setState({properties:e.target.value})}/>
     }
 }
 
@@ -56,5 +121,18 @@ const styles = {
     listItem: {
         marginTop:5,
         width:'100%'
+    },
+    editIcon:{
+        fontSize:20,
+        float:'right',
+        cursor:'pointer'
+    },
+    propertyKey: {
+        width:'40%',
+        display:'inline-block'
+    },
+    propertyValue: {
+        width:'60%',
+        display:'inline-block'
     }
 }
