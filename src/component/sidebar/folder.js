@@ -11,7 +11,13 @@ export default class SidebarFolder extends React.Component {
             name: '',
             type: 'root',
             collapse: true,
-            children: []
+            children: [{
+                id:1,
+                name:'home.js',
+                type:'js',
+                collapse: false,
+                children: []
+            }]
         },
         selected: -1,
         inserting: false,

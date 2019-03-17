@@ -11,7 +11,7 @@ import {
 export default class Header extends React.Component {
     state = {
         isOpen: false,
-        path: ''
+        path: '/home.js'
     }
     render() {
         return <div>
