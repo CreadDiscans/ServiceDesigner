@@ -2,12 +2,14 @@ import React from 'react';
 import PubsubService from './../service/pubsub.service';
 import CodeSandbox from 'react-code-sandbox'
 import ReactStrapService from '../service/reactstrap.service';
+import homeData from '../resource/home.json' 
+import ParserService from '../service/parser.service'
 
 export default class Home extends React.Component {
 
     state = {
-        imports: [{library: ReactStrapService, items: ['Alert']}],
-        code: '<div><Alert>This is a source string</Alert></div>'
+        imports: [{library: ReactStrapService, items: ['Alert', 'Container']}],
+        code: '<Container><Alert>This is a source string</Alert></Container>'
     }
 
     componentWillMount() {
@@ -16,6 +18,8 @@ export default class Home extends React.Component {
                 console.log(value)
             }
         })
+
+        ParserService.parse(homeData)
     }
 
     render() {
