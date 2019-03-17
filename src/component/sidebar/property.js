@@ -9,7 +9,8 @@ export default class SidebarProperty extends React.Component {
             name: 'layout',
             style: {},
             properties: {},
-            code: '<div></div>',
+            import: '',
+            code: '<div>{children}</div>',
             collapse: true,
             children: []
         },

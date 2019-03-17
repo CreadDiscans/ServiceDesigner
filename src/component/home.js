@@ -1,10 +1,14 @@
 import React from 'react';
 import PubsubService from './../service/pubsub.service';
 import CodeSandbox from 'react-code-sandbox'
-// import { Button } from 'reactstrap';
-
+import ReactStrapService from '../service/reactstrap.service';
 
 export default class Home extends React.Component {
+
+    state = {
+        imports: [{library: ReactStrapService, items: ['Alert']}],
+        code: '<div><Alert>This is a source string</Alert></div>'
+    }
 
     componentWillMount() {
         PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(value=> {
@@ -14,23 +18,17 @@ export default class Home extends React.Component {
         })
     }
 
-    code = '<div> render string </div>'
-
     render() {
-        const A = require('reactstrap').Button
-        const code = `
-            
-            render(
-            <A>
-                This is a source string
-            </A>
-            )
-        `
-        const imp = {React, A}
-        console.log(imp)
+        const imp = {React}
+        this.state.imports.forEach(lib=> {
+            lib.items.forEach(item=> {
+                imp[item] = lib.library.get(item)
+            })
+        })
+        
         return <div>
             <CodeSandbox imports={imp}>
-            {code}
+            {'render(' +this.state.code + ')'}
             </CodeSandbox>
         </div>
     }
