@@ -142,17 +142,57 @@ export default class SidebarFolder extends React.Component {
 
     handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            const item = this.findItem(this.state.selected)[0]
-            item.name = this.state.insertValue
-            if (item.type.indexOf('js') !== -1) {
-                item.name += '.js'
-                this.openJs(item.id)
+            const tmp = this.findItem(this.state.selected)
+            const item = tmp[0]
+            const parent = tmp[1]
+            const type = item.type.replace(' insert', '')
+            if (this.isValid(type)) {
+                item.name = this.state.insertValue
+                item.type = type
+                if (item.type.indexOf('js') !== -1) {
+                    item.name += '.js'
+                    this.openJs(item.id)
+                }
+                parent.children.sort((a,b)=> {
+                    if (a.type === b.type) {
+                        return a.name > b.name ? 1 : -1
+                    } else if (a.type === 'folder') {
+                        return -1
+                    } else if (b.type === 'folder') {
+                        return 1
+                    } else {
+                        return 0
+                    }
+                })
+                this.setState({
+                    tree: this.state.tree,
+                    inserting: false
+                })
             }
-            item.type = item.type.replace(' insert', '')
-            this.setState({
-                tree: this.state.tree,
-                inserting: false
-            })
+        }
+    }
+
+    isValid(type) {
+        let targetKey
+        const keyList = []
+        const makeMap = (item, path) => {
+            if (this.state.selected === item.id) {
+                targetKey = path + '/' + this.state.insertValue
+                if (type==='js') {
+                    targetKey += '.js'
+                }
+                return
+            }
+            path += '/'+item.name
+            keyList.push(path)
+            item.children.forEach(subItem=> makeMap(subItem, path))
+        }
+        makeMap(this.state.tree, '')
+
+        if (keyList.indexOf(targetKey) !== -1) {
+            return false
+        } else {
+            return true
         }
     }
 
