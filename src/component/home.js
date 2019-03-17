@@ -1,11 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-const Home = () => {
-  return (
-    <div>
-        
-    </div>
-  );
-};
+import PubsubService from './../service/pubsub.service';
 
-export default Home;
+export default class Home extends React.Component {
+
+    componentWillMount() {
+        PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(value=> {
+            if (value) {
+                console.log(value)
+            }
+        })
+    }
+
+    render() {
+        return <div>
+        </div>
+    }
+}

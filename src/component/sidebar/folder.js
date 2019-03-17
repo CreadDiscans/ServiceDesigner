@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'reactstrap'
 import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
+import PubsubService from '../../service/pubsub.service';
 
 export default class SidebarFolder extends React.Component {
 
@@ -136,7 +137,7 @@ export default class SidebarFolder extends React.Component {
 
     openJs = (id) => {
         const item = this.findItem(id)
-        console.log(item)
+        PubsubService.pub(PubsubService.KEY_OPEN_PAGE, item[3])
     }
 
     handleKeyPress = (e) => {
