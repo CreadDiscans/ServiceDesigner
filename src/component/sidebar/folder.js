@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from 'reactstrap'
-import {FaPlus, FaJs, FaTrashAlt, FaRegFolder} from 'react-icons/fa'
+import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
 
 export default class SidebarFolder extends React.Component {
 
@@ -9,6 +9,7 @@ export default class SidebarFolder extends React.Component {
             id: 0,
             name: '',
             type: 'root',
+            collapse: true,
             children: []
         },
         selected: -1,
@@ -30,7 +31,7 @@ export default class SidebarFolder extends React.Component {
 
     findItem = (id, item=this.state.tree) => {
         if (id === 0) {
-            return [item, null, 0]
+            return [item, null, 0, '']
         } else if (id === item.id) {
             return item
         } else if (item.type === 'js') {
@@ -39,18 +40,22 @@ export default class SidebarFolder extends React.Component {
             let value = false
             let index = 0
             let isParent = false
+            let path = item.name
             item.children.forEach((child, i)=> {
                 const tmp = this.findItem(id, child)
                 if (tmp) {
                     if (!Array.isArray(tmp)) {
                         isParent = true
                         index = i
+                        path += '/' + tmp.name
+                    } else {
+                        path += '/' + tmp[3]
                     }
                     value = tmp
                 }
             })
             if (isParent) {
-                return [value, item, index]
+                return [value, item, index, path]
             } else {
                 return value
             }
@@ -66,6 +71,7 @@ export default class SidebarFolder extends React.Component {
                 id: maxId + 1,
                 name: '',
                 type: type + ' insert',
+                collapse: true,
                 children: []
             })
             this.setState({
@@ -91,8 +97,18 @@ export default class SidebarFolder extends React.Component {
     }
 
     treeView = (item) => {
-        return <div key={item.id} style={styles.tree}>
-            <div style={{
+        return <div key={item.id} style={{...styles.tree,...{
+            marginLeft: item.type === 'root' ? 0: 10
+        }}}>
+            {item.type === 'js' && <span style={{marginLeft:5}}></span>}
+            {item.type === 'folder' && (item.collapse ?  <FaAngleDown onClick={()=>{
+                item.collapse = false
+                this.setState({tree: this.state.tree})
+            }}/>: <FaAngleRight onClick={()=> {
+                item.collapse = true
+                this.setState({tree: this.state.tree})
+            }}/>)} 
+            <span style={{
                     color: this.state.selected === item.id ? 'red' : 'black'
                 }}
                 onClick={()=>{
@@ -101,15 +117,26 @@ export default class SidebarFolder extends React.Component {
                             this.setState({selected: -1})
                         } else {
                             this.setState({selected: item.id})
+                            if (item.type === 'js') {
+                                this.openJs(item.id)
+                            }
                         }
                     }
                 }}
             >{item.type.indexOf('insert') !== -1 ? <input 
                 onKeyPress={this.handleKeyPress}
                 onChange={(e)=> this.setState({insertValue:e.target.value})}
-                /> : '/'+item.name}</div>
-            {item.children.map(subItem=> this.treeView(subItem))}
+                /> : item.name}
+                {item.type === 'root' && '/'}</span>
+            {
+                item.collapse && item.children.map(subItem=> this.treeView(subItem))
+            }
         </div>
+    }
+
+    openJs = (id) => {
+        const item = this.findItem(id)
+        console.log(item)
     }
 
     handleKeyPress = (e) => {
@@ -118,6 +145,7 @@ export default class SidebarFolder extends React.Component {
             item.name = this.state.insertValue
             if (item.type.indexOf('js') !== -1) {
                 item.name += '.js'
+                this.openJs(item.id)
             }
             item.type = item.type.replace(' insert', '')
             this.setState({
@@ -128,7 +156,6 @@ export default class SidebarFolder extends React.Component {
     }
 
     render() {
-        console.log(this.state.tree)
         return <div>
             <h5>Folder</h5>
             <Button color="info" onClick={()=>this.addFile('folder')}><FaPlus /> <FaRegFolder /></Button>{' '}
@@ -141,7 +168,6 @@ export default class SidebarFolder extends React.Component {
 
 const styles = {
     tree: {
-        marginLeft:10,
         cursor:'pointer'
     }
 }
