@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { 
-    Navbar,
+import { Link } from 'react-router-dom'; 
+import PubsubService from './../service/pubsub.service';
+import { Navbar,
     NavbarToggler,
     Collapse,
     Nav,
@@ -11,8 +11,16 @@ import {
 export default class Header extends React.Component {
     state = {
         isOpen: false,
-        path: '/home.js'
+        path: ''
     }
+    componentWillMount() {
+        PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(value=> {
+            if(value) {
+                this.setState({path:value})
+            }
+        })
+    }
+
     render() {
         return <div>
             <Navbar color="dark" dark expand="md">

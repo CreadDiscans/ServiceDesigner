@@ -1,0 +1,21 @@
+{
+    "/home.js": {
+        "id": 0,
+        "component":"layout",
+        "import":[{"items":["Container"], "from":"reactstrap"}],
+        "code":"<Container style={{style}}>{children}</Container>",
+        "style":{},
+        "children":[
+            {
+                "id":1,
+                "component":"alert",
+                "import":[{"items":["Alert"], "from":"reactstrap"}],
+                "code":"<Alert color={{color}} style={{style}}>{text} {children}</Alert>",
+                "style":{},
+                "color":"primary",
+                "text": "text",
+                "children":[]
+            }
+        ]
+    }
+}

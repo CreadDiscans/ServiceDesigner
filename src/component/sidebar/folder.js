@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'reactstrap'
 import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
 import PubsubService from '../../service/pubsub.service';
+import DataService from './../../service/data.service';
 
 export default class SidebarFolder extends React.Component {
 
@@ -22,6 +23,14 @@ export default class SidebarFolder extends React.Component {
         selected: -1,
         inserting: false,
         insertValue: ''
+    }
+
+    componentWillMount() {
+        PubsubService.sub(PubsubService.KEY_LOAD_JSON).subscribe(value=> {
+            if(value) {
+                console.log(DataService.getFolder())
+            }
+        })
     }
 
     getMaxId = (id=0, item=this.state.tree) => {
