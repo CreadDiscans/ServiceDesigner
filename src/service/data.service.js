@@ -76,6 +76,43 @@ export default class DataService {
     }
 
     static getFolder() {
-        return Object.keys(DataService.data)
+        const createNode = (parent, name) => {
+            let target = null
+            parent.children.forEach(item=> {
+                if (item.name === name) {
+                    target = item
+                }
+            })
+            if (target === null) {
+                target = {
+                    id: id,
+                    name: name,
+                    type: name.indexOf('.js') === -1 ? 'folder' : 'js',
+                    collapse: true,
+                    children: [] 
+                }
+                parent.children.push(target)
+                id += 1
+            }
+            return target
+        }
+
+        let id = 0
+        const paths = Object.keys(DataService.data).sort()
+        const hierarchy = {
+            id:0,
+            name: '',
+            type: 'root',
+            collapse: true,
+            children: [],
+        }
+        paths.forEach(item=> {
+            const parts = item.split('/')
+            let parent = {children:[hierarchy]}
+            parts.forEach((name)=> {
+                parent = createNode(parent, name)
+            })
+        })
+        return hierarchy
     }
 }

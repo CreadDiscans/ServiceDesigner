@@ -28,7 +28,12 @@ export default class SidebarFolder extends React.Component {
     componentWillMount() {
         PubsubService.sub(PubsubService.KEY_LOAD_JSON).subscribe(value=> {
             if(value) {
-                console.log(DataService.getFolder())
+                this.setState({
+                    tree: DataService.getFolder(),
+                    selected: -1,
+                    inserting: false,
+                    insertValue: ''
+                })
             }
         })
     }
