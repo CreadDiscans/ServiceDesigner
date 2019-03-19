@@ -40,7 +40,7 @@ export default class Sidebar extends React.Component {
                     {this.state.page === 'code' && <SidebarCode />}
                     {this.state.page === 'property' && <SidebarProperty />}
                 </div>
-                <div style={styles.body}>
+                <div style={styles.body} onClick={()=>{this.setState({collapse: false})}}>
                     {this.props.children}
                 </div>
             </div>
@@ -67,7 +67,8 @@ const styles = {
         left:40,
         bottom:0,
         backgroundColor:'#EEE',
-        zIndex:5
+        zIndex:5,
+        overflow:'auto'
     },
     baricon: {
         cursor:'pointer'
@@ -78,6 +79,6 @@ const styles = {
         left:40,
         right:0,
         position: 'absolute',
-
+        overflow:'auto'
     }
 }
