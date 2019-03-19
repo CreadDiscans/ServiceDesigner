@@ -7,6 +7,7 @@ export default class PubsubService {
     static KEY_LAYOUT_UPDATED = 'layout_updated'
     static KEY_SELECT_ELEMENT = 'select_element'
     static KEY_INSERT_COMPONENT = 'insert_component'
+    static KEY_SIDEBAR_LAYOUT_UPDATE = 'sidebar_layout_update'
 
     static streams = {};
 

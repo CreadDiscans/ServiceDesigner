@@ -1,6 +1,6 @@
 import React from 'react';
-import { Input, Label } from 'reactstrap'
-import {FaAngleRight, FaAngleDown} from 'react-icons/fa'
+import { Input, Label, Button } from 'reactstrap'
+import {FaAngleRight, FaAngleDown, FaTrashAlt} from 'react-icons/fa'
 import PubsubService from '../../service/pubsub.service'
 import DataService from './../../service/data.service'
 import ReactJSONEditor from '../reactJsonEditor'
@@ -22,13 +22,29 @@ export default class SidebarProperty extends React.Component {
         property: {}
     }
 
+    _isMounted = false
+
     componentWillMount() {
+        this._isMounted = true
         PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(page=> {
-            if (page) {
+            if (page && this._isMounted) {
                 const data = DataService.getLayout(page)
-                this.setState({tree: data})
+                this.setState({
+                    tree: data
+                })
             }
         })
+        PubsubService.sub(PubsubService.KEY_SIDEBAR_LAYOUT_UPDATE).subscribe(page=> {
+            if (page && this._isMounted) {
+                const data = DataService.getLayout(page)
+                this.setState({
+                    tree: data
+                })
+            }
+        })
+    }
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     selectView = (item) => {
@@ -66,9 +82,14 @@ export default class SidebarProperty extends React.Component {
         </div>
     }
 
+    removeElement() {
+        PubsubService.pub(PubsubService.KEY_REMOVE_COMPONENT, true)
+    }
+
     render() {
         return <div>
             <h5>Layout</h5>
+            <Button color="danger" onClick={()=>this.removeElement()}><FaTrashAlt /></Button>
             {this.treeView(this.state.tree)}
             <h5>Style</h5>
             <ReactJSONEditor values={this.state.style} onChange={(values)=>{

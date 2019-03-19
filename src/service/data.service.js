@@ -166,4 +166,25 @@ export default class DataService {
             children: []
         })
     }
+
+    static remove(page, item) {
+        let target;
+        const findParent = (parent) => {
+            parent.children.forEach(child=> {
+                if (target) {
+                    return
+                }
+                if (child === item) {
+                    target = parent
+                } else {
+                    findParent(child)
+                }
+            })
+        }
+        findParent(DataService.data[page])
+        if (target) {
+            const index = target.children.indexOf(item)
+            target.children.splice(index, 1)
+        }
+    }
 }

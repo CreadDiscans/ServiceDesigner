@@ -28,7 +28,6 @@ export default class Home extends React.Component {
         })
         PubsubService.sub(PubsubService.KEY_LAYOUT_UPDATED).subscribe(value=> {
             if (value) {
-                console.log(DataService.data[this.state.page])
                 const layout = DataService.get(this.state.page)
                 this.setState({
                     imports:layout.imports,
@@ -50,6 +49,13 @@ export default class Home extends React.Component {
             if (item && this.state.selected) {
                 DataService.insert(this.state.page, item, this.state.selected)
                 PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
+            }
+        })
+        PubsubService.sub(PubsubService.KEY_REMOVE_COMPONENT).subscribe(value=> {
+            if (value && this.state.selected) {
+                DataService.remove(this.state.page, this.state.selected)
+                PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
+                PubsubService.pub(PubsubService.KEY_SIDEBAR_LAYOUT_UPDATE, this.state.page)
             }
         })
     }
