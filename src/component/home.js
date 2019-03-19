@@ -8,6 +8,7 @@ export default class Home extends React.Component {
 
     state = {
         page: '',
+        selected: null,
         imports: [{library: ReactStrapService, items: ['Container']}],
         code: '<Container></Container>'
     }
@@ -27,6 +28,7 @@ export default class Home extends React.Component {
         })
         PubsubService.sub(PubsubService.KEY_LAYOUT_UPDATED).subscribe(value=> {
             if (value) {
+                console.log(DataService.data[this.state.page])
                 const layout = DataService.get(this.state.page)
                 this.setState({
                     imports:layout.imports,
@@ -38,9 +40,16 @@ export default class Home extends React.Component {
             if (item) {
                 const layout = DataService.get(this.state.page, item.id)
                 this.setState({
+                    selected: item,
                     imports:layout.imports,
                     code: layout.code
                 })
+            }
+        })
+        PubsubService.sub(PubsubService.KEY_INSERT_COMPONENT).subscribe(item=> {
+            if (item && this.state.selected) {
+                DataService.insert(this.state.page, item, this.state.selected)
+                PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
             }
         })
     }

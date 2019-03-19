@@ -1,6 +1,7 @@
 import initJson from '../resource/init.json'
 import PubsubService from './pubsub.service.js';
 import ReactStrapService from './reactstrap.service.js';
+import Utils from '../service/utils';
 
 export default class DataService {
 
@@ -48,7 +49,7 @@ export default class DataService {
                 }
                 code = code.replace('{'+prop+'}', value)
             })
-            const style = JSON.parse(JSON.stringify(item.style))
+            const style = Utils.deepcopy(item.style)
             if (item.id === selected_id) {
                 style.border = 'solid 1px red'
             } 
@@ -124,5 +125,45 @@ export default class DataService {
         }
         convertForm(DataService.data[page])
         return DataService.data[page]
+    }
+
+    static insert(page, component, parent) {
+        let maxId = 0
+        const findMaxId = (item) => {
+            if (maxId < item.id) {
+                maxId = item.id
+            }
+            item.children.forEach(child=>findMaxId(child))
+        }
+        const convertImport = () => {
+            const imp = []
+            component.import.split('\n').forEach(line=> {
+                line = line.replace(/;/gi, '')
+                const lib = line.split('from')[1].replace(/ /, '').replace(/'/gi, '')
+                const items = []
+                line.split('{')[1].split('}')[0].split(',').forEach(it=> {
+                    items.push(it.replace(/ /gi, ''))
+                })
+                imp.push({from:lib, items:items})
+            })
+            return imp
+        }
+
+        findMaxId(DataService.data[page])
+        const prop = Utils.deepcopy(component.property)
+        let style = {}
+        if (prop.style) {
+            style = prop.style
+            delete prop.style
+        }
+        parent.children.push({
+            id: maxId+1,
+            component: component.name,
+            import: convertImport(),
+            code: component.code,
+            style: style,
+            property: prop,
+            children: []
+        })
     }
 }

@@ -6,6 +6,7 @@ export default class PubsubService {
     static KEY_OPEN_PAGE = 'open_page'
     static KEY_LAYOUT_UPDATED = 'layout_updated'
     static KEY_SELECT_ELEMENT = 'select_element'
+    static KEY_INSERT_COMPONENT = 'insert_component'
 
     static streams = {};
 

@@ -10,7 +10,8 @@ import { ListGroup,
     Label
 } from 'reactstrap'
 import {FaPlus, FaEdit} from 'react-icons/fa'
-import comData from '../../resource/components.json' 
+import comData from '../../resource/components.json'
+import PusbubService from '../../service/pubsub.service'
 
 export default class SidebarCode extends React.Component {
     state = {
@@ -20,7 +21,7 @@ export default class SidebarCode extends React.Component {
         code: '',
         name:'',
         import: '',
-        properties: '',
+        property: '',
     }
 
     componentWillMount() {
@@ -38,7 +39,7 @@ export default class SidebarCode extends React.Component {
                 name:this.state.name,
                 import: this.state.import,
                 code:this.state.code,
-                properties: JSON.parse(this.state.properties)
+                property: JSON.parse(this.state.property)
             })
         }
     }
@@ -54,7 +55,7 @@ export default class SidebarCode extends React.Component {
             name: item.name,
             code: item.code,
             import: item.import,
-            properties: JSON.stringify(item.properties),
+            property: JSON.stringify(item.property),
         })
     }
 
@@ -65,8 +66,12 @@ export default class SidebarCode extends React.Component {
             name: '',
             code: '',
             import: '',
-            properties: '{}'
+            property: '{}'
         })
+    }
+
+    clickComponent = (item) => {
+        PusbubService.pub(PusbubService.KEY_INSERT_COMPONENT, item)
     }
 
     render() {
@@ -76,7 +81,9 @@ export default class SidebarCode extends React.Component {
                 <ListGroup>
                     {
                         this.state.components.map(item=> {
-                            return <ListGroupItem action key={item.name}>
+                            return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
+                                    this.clickComponent(item)
+                                }}>
                                 {item.name}
                                 <FaEdit style={styles.editIcon} onClick={()=> this.editComponent(item)}/>
                             </ListGroupItem>
@@ -110,7 +117,7 @@ export default class SidebarCode extends React.Component {
     }
 
     setProperty() {
-        return <Input type="textarea" name="text" value={this.state.properties} rows="3" onChange={(e)=>this.setState({properties:e.target.value})}/>
+        return <Input type="textarea" name="text" value={this.state.property} rows="3" onChange={(e)=>this.setState({property:e.target.value})}/>
     }
 }
 
