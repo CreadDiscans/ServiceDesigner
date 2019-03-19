@@ -3,6 +3,7 @@ import { Input, Label } from 'reactstrap'
 import {FaAngleRight, FaAngleDown} from 'react-icons/fa'
 import PubsubService from '../../service/pubsub.service'
 import DataService from './../../service/data.service'
+import ReactJSONEditor from '../reactJsonEditor'
 
 export default class SidebarProperty extends React.Component {
 
@@ -17,7 +18,7 @@ export default class SidebarProperty extends React.Component {
             children: []
         },
         selected: null,
-        style: '{}',
+        style: {},
         property: {}
     }
 
@@ -33,7 +34,7 @@ export default class SidebarProperty extends React.Component {
     selectView = (item) => {
         this.setState({
             selected: item,
-            style: JSON.stringify(item.style),
+            style: item.style,
             property: item.property
         })
     }
@@ -69,12 +70,13 @@ export default class SidebarProperty extends React.Component {
             <h5>Layout</h5>
             {this.treeView(this.state.tree)}
             <h5>Style</h5>
-            <Input type="textarea" value={this.state.style} onChange={(e)=>{
-                try{
-                    const style = JSON.parse(e.target.value)
-                    this.state.selected.style = style
-                } catch(e) {}
-                this.setState({style:e.target.value})
+            <ReactJSONEditor values={this.state.style} onChange={(values)=>{
+                if (this.state.selected) {
+                    const selected = this.state.selected
+                    selected.style = values
+                    PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
+                    this.setState({style:values})
+                }
             }}/>
             <h5>Property</h5>
             {
@@ -85,6 +87,7 @@ export default class SidebarProperty extends React.Component {
                             const prop = this.state.property
                             prop[key] = e.target.value
                             this.setState({property: prop})
+                            PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
                         }}/>
                     </div>
                 })

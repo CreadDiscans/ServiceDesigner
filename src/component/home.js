@@ -25,8 +25,8 @@ export default class Home extends React.Component {
                 })
             }
         })
-        document.addEventListener('keydown', e=> {
-            if (e.key === 'Enter') {
+        PubsubService.sub(PubsubService.KEY_LAYOUT_UPDATED).subscribe(value=> {
+            if (value) {
                 const layout = DataService.get(this.state.page)
                 this.setState({
                     imports:layout.imports,
