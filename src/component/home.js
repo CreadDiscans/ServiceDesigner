@@ -28,7 +28,11 @@ export default class Home extends React.Component {
         })
         PubsubService.sub(PubsubService.KEY_LAYOUT_UPDATED).subscribe(value=> {
             if (value) {
-                const layout = DataService.get(this.state.page)
+                let selected_id = -1
+                if (this.state.selected) {
+                    selected_id = this.state.selected.id
+                }
+                const layout = DataService.get(this.state.page, selected_id)
                 this.setState({
                     imports:layout.imports,
                     code: layout.code

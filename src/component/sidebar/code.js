@@ -12,6 +12,11 @@ import { ListGroup,
 import {FaPlus, FaEdit} from 'react-icons/fa'
 import comData from '../../resource/components.json'
 import PusbubService from '../../service/pubsub.service'
+import ReactJSONEditor from '../reactJsonEditor'
+import Utils from '../../service/utils'
+import AceEditor from 'react-ace'
+import 'brace/mode/jsx'
+import 'brace/theme/github'
 
 export default class SidebarCode extends React.Component {
     state = {
@@ -21,7 +26,7 @@ export default class SidebarCode extends React.Component {
         code: '',
         name:'',
         import: '',
-        property: '',
+        property: {},
     }
 
     componentWillMount() {
@@ -39,7 +44,7 @@ export default class SidebarCode extends React.Component {
                 name:this.state.name,
                 import: this.state.import,
                 code:this.state.code,
-                property: JSON.parse(this.state.property)
+                property: Utils.deepcopy(this.state.property) 
             })
         }
     }
@@ -55,7 +60,7 @@ export default class SidebarCode extends React.Component {
             name: item.name,
             code: item.code,
             import: item.import,
-            property: JSON.stringify(item.property),
+            property: Utils.deepcopy(item.property),
         })
     }
 
@@ -66,7 +71,7 @@ export default class SidebarCode extends React.Component {
             name: '',
             code: '',
             import: '',
-            property: '{}'
+            property: {}
         })
     }
 
@@ -98,7 +103,15 @@ export default class SidebarCode extends React.Component {
                     <Label>Name</Label>
                     <Input type="text" onChange={(e)=>this.setState({name:e.target.value})} value={this.state.name} />
                     <Label>import</Label>
-                    <Input type="textarea" name="text" value={this.state.import} rows="2" onChange={(e)=>this.setState({import:e.target.value})}/>
+                    <AceEditor 
+                        style={{width:'100%', height:45}}
+                        theme="github" 
+                        mode="jsx" 
+                        value={this.state.import}
+                        onChange={(value)=> this.setState({import:value})}
+                        editorProps={{
+                          $blockScrolling: false,
+                        }} />
                     <Label>Code</Label>
                     {this.sandbox()}
                     <Label>Property</Label>
@@ -113,11 +126,19 @@ export default class SidebarCode extends React.Component {
     }
 
     sandbox() {
-        return <Input type="textarea" name="text" value={this.state.code} rows="10" onChange={(e)=>this.setState({code:e.target.value})}/>
+        return <AceEditor 
+            style={{width:'100%', height:200}}
+            theme="github" 
+            mode="jsx" 
+            value={this.state.code}
+            onChange={(value)=> this.setState({code:value})}
+            editorProps={{
+              $blockScrolling: false,
+            }} />
     }
 
     setProperty() {
-        return <Input type="textarea" name="text" value={this.state.property} rows="3" onChange={(e)=>this.setState({property:e.target.value})}/>
+        return <ReactJSONEditor values={this.state.property} onChange={(values)=>this.setState({property:values})}/>
     }
 }
 

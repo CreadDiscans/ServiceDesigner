@@ -28,11 +28,12 @@ export default class ReactJSONEditor extends React.Component {
           } catch(e) {}
         }
       },
-      mode:'code'
+      mode:'code',
+      statusBar: false,
+      mainMenuBar: false
     }
     this.editor = new JSONEditor(this.container, this.options)
     this.editor.set(this.props.values)
-    // this.editor.expandAll()
   }
   
   render() {
