@@ -21,7 +21,7 @@ export default class DataService {
         PubsubService.pub(PubsubService.KEY_OPEN_PAGE, page)
     }
 
-    static get(page) {
+    static get(page, selected_id=-1) {
         const imports = {}
         const parse = (item) => {
             item.import.forEach(imp=> {
@@ -48,7 +48,11 @@ export default class DataService {
                 }
                 code = code.replace('{'+prop+'}', value)
             })
-            code = code.replace('{style}', JSON.stringify(item.style))
+            const style = JSON.parse(JSON.stringify(item.style))
+            if (item.id === selected_id) {
+                style.border = 'solid 1px red'
+            } 
+            code = code.replace('{style}', JSON.stringify(style))
             code = code.replace('{children}', children)
             return code
         }

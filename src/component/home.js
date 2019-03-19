@@ -34,6 +34,15 @@ export default class Home extends React.Component {
                 })
             }
         })
+        PubsubService.sub(PubsubService.KEY_SELECT_ELEMENT).subscribe(item=> {
+            if (item) {
+                const layout = DataService.get(this.state.page, item.id)
+                this.setState({
+                    imports:layout.imports,
+                    code: layout.code
+                })
+            }
+        })
     }
 
     render() {
@@ -44,7 +53,7 @@ export default class Home extends React.Component {
             })
         })
         
-        return <div>
+        return <div id="design">
             <CodeSandbox imports={imp}>
             {'render(' +this.state.code + ')'}
             </CodeSandbox>

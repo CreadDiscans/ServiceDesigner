@@ -37,6 +37,7 @@ export default class SidebarProperty extends React.Component {
             style: item.style,
             property: item.property
         })
+        PubsubService.pub(PubsubService.KEY_SELECT_ELEMENT, item)
     }
 
     treeView(item, index=0, depth=0) {
