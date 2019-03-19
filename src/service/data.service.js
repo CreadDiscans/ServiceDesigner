@@ -22,8 +22,6 @@ export default class DataService {
     }
 
     static get(page) {
-        const internalKeys = ['children', 'code', 'component', 'id', 'import']
-
         const imports = {}
         const parse = (item) => {
             item.import.forEach(imp=> {
@@ -41,17 +39,16 @@ export default class DataService {
             item.children.forEach(child=> {
                 children += parse(child)
             })
-            Object.keys(item).forEach(prop=> {
-                if (internalKeys.indexOf(prop) === -1) {
-                    let value = String(item[prop])
-                    if (typeof(item[prop]) === 'object') {
-                        value = JSON.stringify(item[prop])
-                    } else if (typeof(item[prop]) === 'string') {
-                        value = '"' + String(item[prop]) + '"'
-                    }
-                    code = code.replace('{'+prop+'}', value)
+            Object.keys(item.property).forEach(prop=> {
+                let value = String(item.property[prop])
+                if (typeof(item.property[prop]) === 'object') {
+                    value = JSON.stringify(item.property[prop])
+                } else if (prop !== 'text' && typeof(item.property[prop]) === 'string') {
+                    value = '"' + String(item.property[prop]) + '"'
                 }
+                code = code.replace('{'+prop+'}', value)
             })
+            code = code.replace('{style}', JSON.stringify(item.style))
             code = code.replace('{children}', children)
             return code
         }
@@ -114,5 +111,14 @@ export default class DataService {
             })
         })
         return hierarchy
+    }
+
+    static getLayout(page) {
+        const convertForm = (item) => {
+            item.collapse = true
+            item.children.forEach(child=>convertForm(child))
+        }
+        convertForm(DataService.data[page])
+        return DataService.data[page]
     }
 }

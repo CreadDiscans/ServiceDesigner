@@ -4,7 +4,6 @@ export default class PubsubService {
 
     static KEY_LOAD_JSON = 'load_json'
     static KEY_OPEN_PAGE = 'open_page'
-    static KEY_LOAD_PAGE = 'load_page'
 
     static streams = {};
 

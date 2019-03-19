@@ -5,6 +5,7 @@
         "import":[{"items":["Container"], "from":"reactstrap"}],
         "code":"<Container style={{style}}>{children}</Container>",
         "style":{},
+        "property":{},
         "children":[
             {
                 "id":1,
@@ -12,8 +13,7 @@
                 "import":[{"items":["Alert"], "from":"reactstrap"}],
                 "code":"<Alert color={{color}} style={{style}}>{text} {children}</Alert>",
                 "style":{},
-                "color":"primary",
-                "text": "text",
+                "property": {"color": "primary", "text":"text"},
                 "children":[]
             }
         ]

@@ -7,6 +7,7 @@ import DataService from '../service/data.service'
 export default class Home extends React.Component {
 
     state = {
+        page: '',
         imports: [{library: ReactStrapService, items: ['Container']}],
         code: '<Container></Container>'
     }
@@ -18,8 +19,18 @@ export default class Home extends React.Component {
             if (value) {
                 const layout = DataService.get(value)
                 this.setState({
+                    page: value,
                     imports:layout.imports,
                     code:layout.code
+                })
+            }
+        })
+        document.addEventListener('keydown', e=> {
+            if (e.key === 'Enter') {
+                const layout = DataService.get(this.state.page)
+                this.setState({
+                    imports:layout.imports,
+                    code: layout.code
                 })
             }
         })

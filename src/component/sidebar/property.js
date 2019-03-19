@@ -1,14 +1,16 @@
 import React from 'react';
 import { Input, Label } from 'reactstrap'
 import {FaAngleRight, FaAngleDown} from 'react-icons/fa'
+import PubsubService from '../../service/pubsub.service'
+import DataService from './../../service/data.service'
 
 export default class SidebarProperty extends React.Component {
 
     state = {
         tree: {
-            name: 'layout',
+            component: 'layout',
             style: {},
-            properties: {},
+            property: {},
             import: 'import {Container} from \'reactstrap\'',
             code: '<Container>{children}</Container>',
             collapse: true,
@@ -16,19 +18,29 @@ export default class SidebarProperty extends React.Component {
         },
         selected: null,
         style: '{}',
-        properties: {}
+        property: {}
+    }
+
+    componentWillMount() {
+        PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(page=> {
+            if (page) {
+                const data = DataService.getLayout(page)
+                this.setState({tree: data})
+            }
+        })
     }
 
     selectView = (item) => {
         this.setState({
             selected: item,
             style: JSON.stringify(item.style),
-            properties: item.properties
+            property: item.property
         })
     }
 
-    treeView(item, key=0) {
-        return <div key={key}>
+    treeView(item, index=0, depth=0) {
+        return <div key={depth+'/'+index} style={{
+                paddingLeft: depth === 0? 0: item.children.length === 0? 15: 10}}>
             {
                 item.children.length > 0 && (
                     item.collapse ? <FaAngleDown onClick={()=> {
@@ -45,7 +57,10 @@ export default class SidebarProperty extends React.Component {
                     color:this.state.selected === item ? 'red' : 'black',
                     cursor:'pointer'
                 }}
-                onClick={()=> {this.selectView(item)}}>{item.name}</span>
+                onClick={()=> {this.selectView(item)}}>{item.component}</span>
+            {
+                item.collapse && item.children.map((child, i)=> this.treeView(child, i, depth+1))
+            }
         </div>
     }
 
@@ -54,16 +69,22 @@ export default class SidebarProperty extends React.Component {
             <h5>Layout</h5>
             {this.treeView(this.state.tree)}
             <h5>Style</h5>
-            <Input type="textarea" value={this.state.style} onChange={(e)=>this.setState({style:e.target.value})}/>
-            <h5>Properties</h5>
+            <Input type="textarea" value={this.state.style} onChange={(e)=>{
+                try{
+                    const style = JSON.parse(e.target.value)
+                    this.state.selected.style = style
+                } catch(e) {}
+                this.setState({style:e.target.value})
+            }}/>
+            <h5>Property</h5>
             {
-                Object.keys(this.state.properties).map(key=> {
+                Object.keys(this.state.property).map(key=> {
                     return <div key={key}>
                         <Label style={styles.propLabel}>{key}</Label>
-                        <Input style={styles.propValue} value={this.state.properties[key]} onChange={(e)=>{
-                            const prop = this.state.properties
+                        <Input style={styles.propValue} value={this.state.property[key]} onChange={(e)=>{
+                            const prop = this.state.property
                             prop[key] = e.target.value
-                            this.setState({properties: prop})
+                            this.setState({property: prop})
                         }}/>
                     </div>
                 })
