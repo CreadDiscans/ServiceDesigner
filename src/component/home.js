@@ -66,7 +66,7 @@ export default class Home extends React.Component {
             if (value) {
                 const output = {data: DataService.getSaveForm(), components: DataService.components}
                 const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
-                if (dirs.length > 0) {
+                if (dirs) {
                     fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), err=> {
                         if (err) {
                             return console.log(err)
@@ -79,7 +79,7 @@ export default class Home extends React.Component {
         PubsubService.sub(PubsubService.KEY_LOAD).subscribe(value=> {
             if (value) {
                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-                if (file.length > 0) {
+                if (file) {
                     fs.readFile(file[0], (err, data)=> {
                         if (err) throw err
                         try {

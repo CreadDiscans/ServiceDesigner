@@ -99,7 +99,7 @@ export default class DataService {
             return target
         }
 
-        let id = 0
+        let id = 1
         const paths = Object.keys(DataService.data).sort()
         const hierarchy = {
             id:0,

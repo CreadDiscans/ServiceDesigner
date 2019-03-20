@@ -2,8 +2,8 @@
     "/home.js": {
         "id": 0,
         "component":"layout",
-        "import":[{"items":["Container"], "from":"reactstrap"}],
-        "code":"<Container style={{style}}>{children}</Container>",
+        "import":[],
+        "code":"<div style={{style}}>{children}</div>",
         "style":{},
         "property":{},
         "children":[

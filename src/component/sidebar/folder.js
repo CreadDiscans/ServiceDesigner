@@ -25,9 +25,12 @@ export default class SidebarFolder extends React.Component {
         insertValue: ''
     }
 
+    _isMounted = false
+
     componentWillMount() {
+        this._isMounted = true
         PubsubService.sub(PubsubService.KEY_LOAD_JSON).subscribe(value=> {
-            if(value) {
+            if(value && this._isMounted) {
                 this.setState({
                     tree: DataService.getFolder(),
                     selected: -1,
@@ -36,6 +39,10 @@ export default class SidebarFolder extends React.Component {
                 })
             }
         })
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     getMaxId = (id=0, item=this.state.tree) => {
