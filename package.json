@@ -13,15 +13,34 @@
     "react-icons": "^3.5.0",
     "react-router": "^4.4.0",
     "react-router-dom": "^4.4.0",
-    "react-scripts": "2.1.8",
     "reactstrap": "^7.1.0",
     "rxjs": "^6.4.0"
   },
+  "devDependencies": {
+    "react-scripts": "2.1.8",
+    "foreman": "^3.0.1",
+    "electron": "^4.1.0",
+    "electron-builder": "^20.39.0",
+    "jquery": "^3.3.1",
+    "typescript": "^3.3.4000"
+  },
+  "homepage": "./",
+  "main": "electron/electron-starter.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "nf start",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "electron": "electron .",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dist": "npm run react-build && build -w"
+  },
+  "build": {
+    "extends": null,
+    "directories": {
+      "buildResources": "public"
+    },
+    "target": "portable"
   },
   "eslintConfig": {
     "extends": "react-app"

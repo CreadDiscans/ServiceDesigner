@@ -13,8 +13,6 @@ export default class Home extends React.Component {
         code: '<Container></Container>'
     }
 
-    dataService
-
     componentWillMount() {
         PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(value=> {
             if (value) {
@@ -64,14 +62,16 @@ export default class Home extends React.Component {
         })
         PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
             if (value) {
-                console.log(DataService.getSaveForm())
-                console.log(DataService.components)
+                const output = {data: DataService.getSaveForm(), components: DataService.components}
+                // saveAs(new Blob([JSON.stringify(output)]), 'design.json')
+                console.log('save')
             }
         })
         PubsubService.sub(PubsubService.KEY_LOAD).subscribe(value=> {
             if (value) {
-                const json = {}
-                DataService.setLoadData(json)
+                // const json = {}
+                // DataService.setLoadData(json)
+                console.log('load')
             }
         })
     }
