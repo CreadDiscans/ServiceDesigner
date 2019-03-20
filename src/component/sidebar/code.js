@@ -10,7 +10,7 @@ import { ListGroup,
     Label
 } from 'reactstrap'
 import {FaPlus, FaEdit} from 'react-icons/fa'
-import comData from '../../resource/components.json'
+import DataService from '../../service/data.service'
 import PusbubService from '../../service/pubsub.service'
 import ReactJSONEditor from '../reactJsonEditor'
 import Utils from '../../service/utils'
@@ -29,8 +29,8 @@ export default class SidebarCode extends React.Component {
         property: {},
     }
 
-    componentWillMount() {
-        this.setState({components:comData})
+    componentDidMount() {
+        this.setState({components:DataService.components})
     }
 
     toggle = ()=> {
@@ -40,7 +40,14 @@ export default class SidebarCode extends React.Component {
     save = () => {
         if (this.isValid()) {
             this.toggle()
+            let maxId = 0
+            this.state.components.forEach(com=> {
+                if (maxId < com.id) {
+                    maxId = com.id
+                }
+            })
             this.state.components.push({
+                id: maxId +1,
                 name:this.state.name,
                 import: this.state.import,
                 code:this.state.code,
@@ -77,6 +84,10 @@ export default class SidebarCode extends React.Component {
 
     clickComponent = (item) => {
         PusbubService.pub(PusbubService.KEY_INSERT_COMPONENT, item)
+    }
+
+    componentDidUpdate() {
+        DataService.components = this.state.components
     }
 
     render() {

@@ -1,4 +1,5 @@
 import initJson from '../resource/init.json'
+import comData from '../resource/components.json'
 import PubsubService from './pubsub.service.js';
 import ReactStrapService from './reactstrap.service.js';
 import Utils from '../service/utils';
@@ -6,16 +7,15 @@ import Utils from '../service/utils';
 export default class DataService {
 
     static data
+    static components
 
     static libTable = {
         reactstrap: ReactStrapService
     }
 
     static inialize() {
-        DataService.data = initJson
-        const page = Object.keys(DataService.data)[0]
-        PubsubService.pub(PubsubService.KEY_LOAD_JSON, true)
-        DataService.open(page)
+        DataService.components = comData
+        DataService.setLoadData(initJson)
     }
 
     static open(page) {
@@ -186,5 +186,22 @@ export default class DataService {
             const index = target.children.indexOf(item)
             target.children.splice(index, 1)
         }
+    }
+
+    static getSaveForm() {
+        const form = Utils.deepcopy(DataService.data)
+        const removeCollapse = (item) => {
+            delete item.collapse
+            item.children.forEach(child=>removeCollapse(child))
+        }
+        Object.keys(form).forEach(key=> removeCollapse(form[key]))
+        return form
+    }
+
+    static setLoadData(json) {
+        DataService.data = json
+        const page = Object.keys(DataService.data)[0]
+        PubsubService.pub(PubsubService.KEY_LOAD_JSON, true)
+        DataService.open(page)
     }
 }

@@ -21,6 +21,14 @@ export default class Header extends React.Component {
         })
     }
 
+    save = () => {
+        PubsubService.pub(PubsubService.KEY_SAVE, true)
+    }
+
+    load = () => {
+        PubsubService.pub(PubsubService.KEY_LOAD, true)
+    }
+
     render() {
         return <div>
             <Navbar color="dark" dark expand="md">
@@ -33,7 +41,7 @@ export default class Header extends React.Component {
                             <Link className="nav-link" to="/">Load</Link>
                         </NavItem>
                         <NavItem>
-                            <Link className="nav-link" to="/">Save</Link>
+                            <Link className="nav-link" to="/" onClick={()=>this.save()}>Save</Link>
                         </NavItem>
                     </Nav>
                 </Collapse>

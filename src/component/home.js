@@ -62,6 +62,18 @@ export default class Home extends React.Component {
                 PubsubService.pub(PubsubService.KEY_SIDEBAR_LAYOUT_UPDATE, this.state.page)
             }
         })
+        PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
+            if (value) {
+                console.log(DataService.getSaveForm())
+                console.log(DataService.components)
+            }
+        })
+        PubsubService.sub(PubsubService.KEY_LOAD).subscribe(value=> {
+            if (value) {
+                const json = {}
+                DataService.setLoadData(json)
+            }
+        })
     }
 
     render() {
