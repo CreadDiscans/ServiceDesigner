@@ -3,11 +3,14 @@ import {
     FaBars,
     FaFolder,
     FaCode,
-    FaCog
+    FaCog,
+    FaFileImport,
+    FaSave
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
 import SidebarProperty from './property';
+import PubsubService from './../../service/pubsub.service';
 
 export default class Sidebar extends React.Component {
 
@@ -28,6 +31,8 @@ export default class Sidebar extends React.Component {
             <div>
                 <div style={styles.sidebar}>
                     {this.icon(<FaBars onClick={()=>this.setState({collapse: !this.state.collapse})} />)}
+                    {this.icon(<FaSave onClick={()=>PubsubService.pub(PubsubService.KEY_SAVE, true)}/>)}
+                    {this.icon(<FaFileImport onClick={()=>PubsubService.pub(PubsubService.KEY_LOAD, true)}/>)}
                     {this.icon(<FaFolder onClick={()=>this.setState({collapse: true, page:'folder'}) } />)}
                     {this.icon(<FaCode onClick={()=>this.setState({collapse: true, page:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({collapse: true, page:'property'})} />)}

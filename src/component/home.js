@@ -4,6 +4,8 @@ import CodeSandbox from 'react-code-sandbox'
 import ReactStrapService from '../service/reactstrap.service'
 import DataService from '../service/data.service'
 
+const { remote } = window.require('electron')
+const fs = window.require('fs')
 export default class Home extends React.Component {
 
     state = {
@@ -63,15 +65,30 @@ export default class Home extends React.Component {
         PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
             if (value) {
                 const output = {data: DataService.getSaveForm(), components: DataService.components}
-                // saveAs(new Blob([JSON.stringify(output)]), 'design.json')
-                console.log('save')
+                const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
+                if (dirs.length > 0) {
+                    fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), err=> {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        console.log('saved')
+                    })
+                }
             }
         })
         PubsubService.sub(PubsubService.KEY_LOAD).subscribe(value=> {
             if (value) {
-                // const json = {}
-                // DataService.setLoadData(json)
-                console.log('load')
+                const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+                if (file.length > 0) {
+                    fs.readFile(file[0], (err, data)=> {
+                        if (err) throw err
+                        try {
+                            const json = JSON.parse(data.toString())
+                            DataService.setLoadData(json.data)
+                            DataService.components = json.components
+                        }catch(e) {console.log(e)}
+                    })
+                }
             }
         })
     }
