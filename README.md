@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-element 수정 버튼시 추가 안되도록
-
 element 삭제버튼 추가
 
 실행취소 기능

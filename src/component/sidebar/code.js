@@ -61,7 +61,7 @@ export default class SidebarCode extends React.Component {
         return true
     }
 
-    editComponent = (item) => {
+    editComponent = (e, item) => {
         this.setState({
             modal: true,
             id: item.id,
@@ -70,6 +70,7 @@ export default class SidebarCode extends React.Component {
             import: item.import,
             property: Utils.deepcopy(item.property),
         })
+        e.stopPropagation();
     }
 
     addComponent = () => {
@@ -103,7 +104,7 @@ export default class SidebarCode extends React.Component {
                                     this.clickComponent(item)
                                 }}>
                                 {item.name}
-                                <FaEdit style={styles.editIcon} onClick={()=> this.editComponent(item)}/>
+                                <FaEdit style={styles.editIcon} onClick={(e)=> this.editComponent(e, item)}/>
                             </ListGroupItem>
                         })
                     }
