@@ -2,6 +2,9 @@ import React from 'react';
 import { Button } from 'reactstrap'
 import {FaAngleRight, FaAngleDown, FaTrashAlt} from 'react-icons/fa'
 import PubsubService from './../../service/pubsub.service';
+import { ActionService } from './../../service/action.service';
+import Utils from './../../service/utils';
+import DataService from './../../service/data.service';
 
 export default class Layout extends React.Component {
 
@@ -46,7 +49,25 @@ export default class Layout extends React.Component {
     }
 
     removeElement() {
-        PubsubService.pub(PubsubService.KEY_REMOVE_COMPONENT, true);
+        if (this.props.selected) {
+            let parent;
+            Utils.loop(DataService.data[DataService.page], (item)=> {
+                item.children.forEach(child=> {
+                    if (child.id === this.props.selected.id) {
+                        parent = item
+                    }
+                })
+            });
+            if (parent) {
+                ActionService.do({
+                    type: ActionService.ACTION_DELETE_LATOUT,
+                    tab: this.props.tab,
+                    page: DataService.page,
+                    target: Utils.deepcopy(this.props.selected),
+                    parent: Utils.deepcopy(parent)
+                })
+            }
+        }
     }
 
     render() {

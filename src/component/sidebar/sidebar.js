@@ -4,7 +4,8 @@ import {
     FaCode,
     FaCog,
     FaFileImport,
-    FaSave
+    FaSave,
+    FaUndo
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -81,12 +82,15 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaFolder onClick={()=>this.setState({collapse: true, tab:'folder'}) } />)}
                     {this.icon(<FaCode onClick={()=>this.setState({collapse: true, tab:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({collapse: true, tab:'property'})} />)}
+                    {this.icon(<FaUndo onClick={()=>console.log('undo')} />)}
 
                 </div>
                 <div style={styles.collapseSidebar}>
                     {this.state.tab === 'folder' && <SidebarFolder />}
-                    {this.state.tab === 'code' && <SidebarCode layout={this.state.layout} selected={this.state.selected}/>}
-                    {this.state.tab === 'property' && <SidebarProperty layout={this.state.layout} selected={this.state.selected}/>}
+                    {this.state.tab === 'code' && <SidebarCode 
+                        layout={this.state.layout} selected={this.state.selected} />}
+                    {this.state.tab === 'property' && <SidebarProperty 
+                        layout={this.state.layout} selected={this.state.selected} />}
                 </div>
                 <div style={styles.body}>
                     {this.props.children}

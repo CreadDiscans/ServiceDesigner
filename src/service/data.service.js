@@ -9,6 +9,7 @@ export default class DataService {
 
     static data
     static components
+    static page
 
     static libTable = {
         reactstrap: ReactStrapService
@@ -23,7 +24,8 @@ export default class DataService {
         PubsubService.pub(PubsubService.KEY_OPEN_PAGE, page)
     }
 
-    static get(page, selected_id=-1) {
+    static get(page, selected_id=-1, currentPage=true) {
+        if (currentPage) DataService.page = page
         const imports = {}
         const parse = (item) => {
             item.import.forEach(imp=> {
@@ -169,27 +171,6 @@ export default class DataService {
         })
     }
 
-    static remove(page, item) {
-        let target;
-        const findParent = (parent) => {
-            parent.children.forEach(child=> {
-                if (target) {
-                    return
-                }
-                if (child === item) {
-                    target = parent
-                } else {
-                    findParent(child)
-                }
-            })
-        }
-        findParent(DataService.data[page])
-        if (target) {
-            const index = target.children.indexOf(item)
-            target.children.splice(index, 1)
-        }
-    }
-
     static getSaveForm() {
         const form = Utils.deepcopy(DataService.data)
         const removeCollapse = (item) => {
@@ -214,7 +195,7 @@ export default class DataService {
         const classes = [];
 
         Object.keys(DataService.data).forEach(page=> {
-            const target = DataService.get(page);
+            const target = DataService.get(page, -1, false);
             target.imports.forEach(imp=> {
                 if (!(imp.libname in imps)) {
                     imps[imp.libname] = [];

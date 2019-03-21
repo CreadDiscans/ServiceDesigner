@@ -109,7 +109,7 @@ export default class SidebarCode extends React.Component {
 
     render() {
         return <div>
-            <Layout layout={this.props.layout} selected={this.props.selected}/>
+            <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/>
             <h5>Code</h5>
             <div style={styles.listView}>
                 <ListGroup>

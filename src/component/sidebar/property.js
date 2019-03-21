@@ -1,20 +1,27 @@
 import React from 'react';
 import { Input, Label } from 'reactstrap'
-import PubsubService from '../../service/pubsub.service'
 import ReactJSONEditor from '../reactJsonEditor'
 import Layout from './layout'
+import { ActionService } from './../../service/action.service';
+import Utils from '../../service/utils';
+import DataService from '../../service/data.service';
 
 export default class SidebarProperty extends React.Component {
     
     render() {
         return <div>
-            <Layout layout={this.props.layout} selected={this.props.selected} />
+            <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
             <h5>Style</h5>
             <ReactJSONEditor values={this.props.selected ? this.props.selected.style : {}} onChange={(values)=>{
                 if (this.props.selected) {
-                    const selected = this.props.selected
-                    selected.style = values
-                    PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
+                    ActionService.do({
+                        type: ActionService.ACTION_CHANGE_STYLE,
+                        tab: 'property',
+                        target: Utils.deepcopy(this.props.selected),
+                        before: Utils.deepcopy(this.props.selected.style),
+                        after: Utils.deepcopy(values),
+                        page: DataService.page
+                    });
                 }
             }}/>
             <h5>Property</h5>
@@ -23,9 +30,16 @@ export default class SidebarProperty extends React.Component {
                     return <div key={key}>
                         <Label style={styles.propLabel}>{key}</Label>
                         <Input style={styles.propValue} value={this.props.selected.property[key]} onChange={(e)=>{
-                            const prop = this.props.selected.property
-                            prop[key] = e.target.value
-                            PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
+                            const after = Utils.deepcopy(this.props.selected.property);
+                            after[key] = e.target.value;
+                            ActionService.do({
+                                type: ActionService.ACTION_CHANGE_PROPERTY,
+                                tab: 'property',
+                                target: Utils.deepcopy(this.props.selected),
+                                before: Utils.deepcopy(this.props.selected.property),
+                                after: after,
+                                page: DataService.page
+                            })
                         }}/>
                     </div>
                 })
