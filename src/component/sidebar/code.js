@@ -11,10 +11,11 @@ import { ListGroup,
 } from 'reactstrap'
 import {FaPlus, FaEdit} from 'react-icons/fa'
 import DataService from '../../service/data.service'
-import PusbubService from '../../service/pubsub.service'
+import PubsubService from '../../service/pubsub.service'
 import ReactJSONEditor from '../reactJsonEditor'
 import Utils from '../../service/utils'
 import AceEditor from 'react-ace'
+import Layout from './layout'
 import 'brace/mode/jsx'
 import 'brace/theme/github'
 
@@ -83,7 +84,7 @@ export default class SidebarCode extends React.Component {
     }
 
     clickComponent = (item) => {
-        PusbubService.pub(PusbubService.KEY_INSERT_COMPONENT, item)
+        PubsubService.pub(PubsubService.KEY_INSERT_COMPONENT, item);
     }
 
     componentDidUpdate() {
@@ -92,6 +93,7 @@ export default class SidebarCode extends React.Component {
 
     render() {
         return <div>
+            <Layout layout={this.props.layout} selected={this.props.selected}/>
             <h5>Code</h5>
             <div style={styles.listView}>
                 <ListGroup>

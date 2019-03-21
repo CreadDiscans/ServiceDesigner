@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-code탭에도 layout 사용
-
 sidebar는 collapse 없이 고정
 
 햄버거 아이콘 제거

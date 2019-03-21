@@ -59,7 +59,6 @@ export default class Home extends React.Component {
             if (value && this.state.selected) {
                 DataService.remove(this.state.page, this.state.selected)
                 PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
-                PubsubService.pub(PubsubService.KEY_SIDEBAR_LAYOUT_UPDATE, this.state.page)
             }
         })
         PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
