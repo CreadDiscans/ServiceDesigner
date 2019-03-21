@@ -12,10 +12,6 @@ npm run dist
 
 # todo
 
-sidebar는 collapse 없이 고정
-
-햄버거 아이콘 제거
-
 element 수정 버튼시 추가 안되도록
 
 element 삭제버튼 추가

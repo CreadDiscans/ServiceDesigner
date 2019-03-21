@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-    FaBars,
     FaFolder,
     FaCode,
     FaCog,
@@ -16,7 +15,6 @@ import DataService from './../../service/data.service';
 export default class Sidebar extends React.Component {
 
     state = {
-        collapse: false,
         tab: 'folder',
         page:'',
         layout: {
@@ -36,14 +34,6 @@ export default class Sidebar extends React.Component {
             action(item);
             item.children.forEach(child=> loop(child, action));
         }
-
-        // const maxId = () => {
-        //     let id = 0;
-        //     loop(this.state.layout, (item)=> {
-        //         if (id < item.id) id = item.id;
-        //     });
-        //     return id;
-        // }
 
         PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(page=> {
             if (page) {
@@ -86,7 +76,6 @@ export default class Sidebar extends React.Component {
         return (
             <div>
                 <div style={styles.sidebar}>
-                    {this.icon(<FaBars onClick={()=>this.setState({collapse: !this.state.collapse})} />)}
                     {this.icon(<FaSave onClick={()=>PubsubService.pub(PubsubService.KEY_SAVE, true)}/>)}
                     {this.icon(<FaFileImport onClick={()=>PubsubService.pub(PubsubService.KEY_LOAD, true)}/>)}
                     {this.icon(<FaFolder onClick={()=>this.setState({collapse: true, tab:'folder'}) } />)}
@@ -94,14 +83,12 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaCog onClick={()=>this.setState({collapse: true, tab:'property'})} />)}
 
                 </div>
-                <div style={{...styles.collapseSidebar, ...{
-                    left: this.state.collapse ? 40 : -160
-                }}}>
+                <div style={styles.collapseSidebar}>
                     {this.state.tab === 'folder' && <SidebarFolder />}
                     {this.state.tab === 'code' && <SidebarCode layout={this.state.layout} selected={this.state.selected}/>}
                     {this.state.tab === 'property' && <SidebarProperty layout={this.state.layout} selected={this.state.selected}/>}
                 </div>
-                <div style={styles.body} onClick={()=>{this.setState({collapse: false})}}>
+                <div style={styles.body}>
                     {this.props.children}
                 </div>
             </div>
@@ -137,7 +124,7 @@ const styles = {
     body: {
         top:0,
         bottom:0,
-        left:40,
+        left:240,
         right:0,
         position: 'absolute',
         overflow:'auto'
