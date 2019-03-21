@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-element 삭제버튼 추가
-
 실행취소 기능
 
 아이콘 기능 설명 메뉴

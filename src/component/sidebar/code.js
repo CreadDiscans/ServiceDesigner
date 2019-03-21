@@ -57,6 +57,21 @@ export default class SidebarCode extends React.Component {
         }
     }
 
+    delete = () => {
+        let index;
+        this.state.components.forEach((item, i)=> {
+            if (this.state.id === item.id) {
+                index = i;
+            }
+        });
+        this.state.components.splice(index, 1);
+        this.setState({
+            components: this.state.components,
+            modal: false
+        });
+
+    }
+
     isValid() {
         return true
     }
@@ -133,6 +148,7 @@ export default class SidebarCode extends React.Component {
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={this.save}>Save</Button>{' '}
+                    <Button color="danger" onClick={this.delete}>Delete</Button>{' '}
                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
