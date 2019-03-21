@@ -26,8 +26,6 @@ element 삭제버튼 추가
 
 아이콘 기능 설명 메뉴
 
-save하면 design.js 파일도 생성
-
 element별로 if 기능 가능하도록
 
 element별로 for 기능 가능하도록

@@ -3,6 +3,7 @@ import comData from '../resource/components.json'
 import PubsubService from './pubsub.service.js';
 import ReactStrapService from './reactstrap.service.js';
 import Utils from '../service/utils';
+import template from '../resource/template.json';
 
 export default class DataService {
 
@@ -63,7 +64,8 @@ export default class DataService {
             Object.keys(imports).forEach(lib=> {
                 const item = {
                     library: DataService.libTable[lib],
-                    items: imports[lib]
+                    items: imports[lib],
+                    libname: lib
                 }
                 out.push(item)
             })
@@ -204,4 +206,48 @@ export default class DataService {
         PubsubService.pub(PubsubService.KEY_LOAD_JSON, true)
         DataService.open(page)
     }
-}
+
+    static getReactJs() {
+        let js = '';
+        let impjs = '';
+        const imps = {};
+        const classes = [];
+
+        Object.keys(DataService.data).forEach(page=> {
+            const target = DataService.get(page);
+            target.imports.forEach(imp=> {
+                if (!(imp.libname in imps)) {
+                    imps[imp.libname] = [];
+                }
+                imp.items.forEach(item=> {
+                    if (imps[imp.libname].indexOf(item) === -1) {
+                        imps[imp.libname].push(item);
+                    }
+                });
+            });
+            let className = 'Designed';
+            page.slice(0, page.length-3).split('/').forEach(path=> {
+                if (path.length > 0) {
+                    className += path[0].toUpperCase() + path.slice(1, path.length);
+                }
+            })
+            classes.push(template.class.replace('{code}', target.code).replace('{classname}', className));
+        });
+        Object.keys(imps).forEach(from=> {
+            impjs +='import { '
+            imps[from].forEach((item, i)=> {
+                impjs += item;
+                if (imps[from].length -1 !== i) {
+                    impjs += ', '
+                }
+            });
+            impjs += ' } from \''+from+'\';\n';
+        })
+        js = template.abstract.replace('{import}', impjs);
+        
+        classes.forEach(com=> {
+            js += '\n' + com;
+        });
+        return js;
+    }
+} 

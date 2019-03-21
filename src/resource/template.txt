@@ -1,6 +1,0 @@
-export class {classname} extends DesignComponent {
-
-    render() {
-        return {code}
-    }
-}

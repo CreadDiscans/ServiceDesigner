@@ -64,6 +64,7 @@ export default class Home extends React.Component {
         })
         PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
             if (value) {
+                const js = DataService.getReactJs();
                 const output = {data: DataService.getSaveForm(), components: DataService.components}
                 const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
                 if (dirs) {
@@ -71,8 +72,14 @@ export default class Home extends React.Component {
                         if (err) {
                             return console.log(err)
                         }
-                        console.log('saved')
-                    })
+                        console.log('saved json')
+                    });
+                    fs.writeFile(dirs[0]+'/design.js', js, err=> {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        console.log('saved js')
+                    });
                 }
             }
         })
