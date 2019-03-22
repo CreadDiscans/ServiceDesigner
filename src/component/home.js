@@ -4,8 +4,6 @@ import CodeSandbox from 'react-code-sandbox'
 import ReactStrapService from '../service/reactstrap.service'
 import { DataManager } from './../manager/data.manager';
 
-const { remote } = window.require('electron')
-const fs = window.require('fs')
 export default class Home extends React.Component {
 
     state = {

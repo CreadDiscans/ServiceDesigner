@@ -1,6 +1,7 @@
 import { Singletone } from "../service/singletone";
 import Utils from "../service/utils";
 import PubsubService from './../service/pubsub.service';
+import { DataManager } from './data.manager';
 
 export class FolderManager extends Singletone {
 
@@ -23,6 +24,7 @@ export class FolderManager extends Singletone {
     // }]
     initialize(data) {
         this.data = data;
+        this.selected = 0;
     }
 
     create(name, type) {
@@ -69,7 +71,19 @@ export class FolderManager extends Singletone {
     }
 
     select(id) {
+        const stack = [];
+        const loop = (item) => {
+            stack.push(item.name);
+            if (item.id ===  id && item.type === FolderManager.TYPE_JS) {
+                DataManager.getInstance(DataManager).openJs(stack.join('/'));
+            }
+            item.children.forEach(child=> loop(child))
+            stack.pop();
+        }
+
         this.selected = id;
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+
+        loop(this.data);
     }
 }

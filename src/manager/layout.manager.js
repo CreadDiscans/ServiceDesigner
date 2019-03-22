@@ -17,6 +17,7 @@ export class LayoutManager extends Singletone {
 
     initialize(data) {
         this.data = data;
+        this.selected = 0;
         Utils.loop(this.data, (item)=> item.collapse = true)
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);

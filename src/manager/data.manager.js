@@ -25,6 +25,11 @@ export class DataManager extends Singletone {
         FolderManager.getInstance(FolderManager).initialize(this.getFolder());
     }
 
+    openJs(page) {
+        this.page = page;
+        LayoutManager.getInstance(LayoutManager).initialize(this.data[this.page]);
+    }
+
     getFolder() {
         const createNode = (parent, name) => {
             let target = null
