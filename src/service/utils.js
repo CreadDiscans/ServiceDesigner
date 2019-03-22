@@ -10,4 +10,14 @@ export default class Utils {
         }
         localLoop(item)
     }
+
+    static maxId(item) {
+        let id = 0;
+        Utils.loop(item, (child=> {
+            if (id < child.id) {
+                id = child.id;
+            }
+        }));
+        return id;
+    }
 }

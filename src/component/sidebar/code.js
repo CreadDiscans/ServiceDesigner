@@ -11,7 +11,7 @@ import { ListGroup,
 } from 'reactstrap'
 import {FaPlus, FaEdit} from 'react-icons/fa'
 import DataService from '../../service/data.service'
-import PubsubService from '../../service/pubsub.service'
+import { ActionService } from './../../service/action.service';
 import ReactJSONEditor from '../reactJsonEditor'
 import Utils from '../../service/utils'
 import AceEditor from 'react-ace'
@@ -41,35 +41,63 @@ export default class SidebarCode extends React.Component {
     save = () => {
         if (this.isValid()) {
             this.toggle()
-            let maxId = 0
-            this.state.components.forEach(com=> {
-                if (maxId < com.id) {
-                    maxId = com.id
-                }
-            })
-            this.state.components.push({
-                id: maxId +1,
-                name:this.state.name,
-                import: this.state.import,
-                code:this.state.code,
-                property: Utils.deepcopy(this.state.property) 
-            })
+            if (this.state.id === -1) {
+                let maxId = 0
+                this.state.components.forEach(com=> {
+                    if (maxId < com.id) {
+                        maxId = com.id
+                    }
+                })
+                ActionService.do({
+                    type: ActionService.ACTION_CREATE_ELEMENT,
+                    page: DataService.page,
+                    tag: 'code',
+                    item: {
+                        id: maxId +1,
+                        name:this.state.name,
+                        import: this.state.import,
+                        code:this.state.code,
+                        property: Utils.deepcopy(this.state.property) 
+                    },
+                })
+            } else {
+                let target;
+                this.state.components.forEach(item=> {
+                    if (item.id === this.state.id) target = item;
+                })
+                ActionService.do({
+                    type: ActionService.ACTION_UPDATE_ELEMENT,
+                    page: DataService.page,
+                    tab: 'code',
+                    before: Utils.deepcopy(target),
+                    after: {
+                        id: this.state.id,
+                        name:this.state.name,
+                        import: this.state.import,
+                        code:this.state.code,
+                        property: Utils.deepcopy(this.state.property) 
+                    }
+                })
+            }
         }
     }
 
     delete = () => {
-        let index;
-        this.state.components.forEach((item, i)=> {
-            if (this.state.id === item.id) {
-                index = i;
-            }
-        });
-        this.state.components.splice(index, 1);
-        this.setState({
-            components: this.state.components,
-            modal: false
-        });
-
+        if (this.state.id !== -1) {
+            let target;
+            this.state.components.forEach((item)=> {
+                if (this.state.id === item.id) {
+                    target = item;
+                }
+            });
+            ActionService.do({
+                type:ActionService.ACTION_DELETE_ELEMENT,
+                page: DataService.page,
+                tab: 'code',
+                item: Utils.deepcopy(target)
+            })
+        }
+        this.toggle();
     }
 
     isValid() {
@@ -99,8 +127,45 @@ export default class SidebarCode extends React.Component {
         })
     }
 
-    clickComponent = (item) => {
-        PubsubService.pub(PubsubService.KEY_INSERT_COMPONENT, item);
+    clickComponent = (component) => {
+        const convertImport = () => {
+            const imp = []
+            component.import.split('\n').forEach(line=> {
+                line = line.replace(/;/gi, '')
+                const lib = line.split('from')[1].replace(/ /, '').replace(/'/gi, '')
+                const items = []
+                line.split('{')[1].split('}')[0].split(',').forEach(it=> {
+                    items.push(it.replace(/ /gi, ''))
+                })
+                imp.push({from:lib, items:items})
+            })
+            return imp
+        }
+        if (this.props.selected) {
+            const prop = Utils.deepcopy(component.property)
+            let style = {}
+            if (prop.style) {
+                style = prop.style
+                delete prop.style
+            }
+    
+            ActionService.do({
+                type: ActionService.ACTION_INSERT_LAYOUT,
+                tab: 'code',
+                page: DataService.page,
+                parent: Utils.deepcopy(this.props.selected),
+                item: {
+                    id: Utils.maxId(DataService.data[DataService.page])+1,
+                    component: component.name,
+                    import: convertImport(),
+                    code: component.code,
+                    style: style,
+                    property: prop,
+                    children: []
+                }
+            })
+        }
+
     }
 
     componentDidUpdate() {

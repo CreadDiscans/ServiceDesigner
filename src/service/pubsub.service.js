@@ -10,6 +10,7 @@ export default class PubsubService {
     static KEY_SIDEBAR_LAYOUT_UPDATE = 'sidebar_layout_update'
     static KEY_SAVE = 'save'
     static KEY_LOAD = 'load'
+    static KEY_UPDATE_FOLDER = 'update_folder'
 
     static streams = {};
 

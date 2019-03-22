@@ -60,7 +60,7 @@ export default class Layout extends React.Component {
             });
             if (parent) {
                 ActionService.do({
-                    type: ActionService.ACTION_DELETE_LATOUT,
+                    type: ActionService.ACTION_DELETE_LAYOUT,
                     tab: this.props.tab,
                     page: DataService.page,
                     target: Utils.deepcopy(this.props.selected),

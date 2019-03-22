@@ -49,12 +49,6 @@ export default class Home extends React.Component {
                 })
             }
         })
-        PubsubService.sub(PubsubService.KEY_INSERT_COMPONENT).subscribe(item=> {
-            if (item && this.state.selected) {
-                DataService.insert(this.state.page, item, this.state.selected)
-                PubsubService.pub(PubsubService.KEY_LAYOUT_UPDATED, true)
-            }
-        })
         PubsubService.sub(PubsubService.KEY_SAVE).subscribe(value=> {
             if (value) {
                 const js = DataService.getReactJs();

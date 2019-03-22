@@ -12,12 +12,26 @@ import SidebarCode from './code';
 import SidebarProperty from './property';
 import PubsubService from './../../service/pubsub.service';
 import DataService from './../../service/data.service';
+import Utils from './../../service/utils';
 
 export default class Sidebar extends React.Component {
 
     state = {
         tab: 'folder',
-        page:'',
+        folder: {
+            id: 0,
+            name: '',
+            type: 'root',
+            collapse: true,
+            children: [{
+                id:1,
+                name:'home.js',
+                type:'js',
+                collapse: false,
+                children: []
+            }]
+        },
+        selectedFolder: 0,
         layout: {
             component: 'layout',
             style: {},
@@ -38,10 +52,9 @@ export default class Sidebar extends React.Component {
 
         PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(page=> {
             if (page) {
-                const data = DataService.getLayout(page)
                 this.setState({
-                    layout: data,
-                    page:page
+                    layout: DataService.getLayout(page),
+                    folder: DataService.getFolder()
                 })
             }
         })
@@ -61,6 +74,20 @@ export default class Sidebar extends React.Component {
                     this.setState({
                         selected: obj.item
                     });
+                }
+            }
+        });
+        PubsubService.sub(PubsubService.KEY_UPDATE_FOLDER).subscribe(obj=> {
+            if (obj) {
+                if (obj.type === 'selected') {
+                    this.setState({selectedFolder: obj.id});
+                } else if (obj.type == 'collapse') {
+                    Utils.loop(this.state.folder, (item)=> {
+                        if (item.id === obj.id) {
+                            item.collapse = obj.value;
+                        }
+                    });
+                    this.setState({folder: this.state.folder});
                 }
             }
         })
@@ -86,7 +113,8 @@ export default class Sidebar extends React.Component {
 
                 </div>
                 <div style={styles.collapseSidebar}>
-                    {this.state.tab === 'folder' && <SidebarFolder />}
+                    {this.state.tab === 'folder' && <SidebarFolder 
+                        folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
                     {this.state.tab === 'code' && <SidebarCode 
                         layout={this.state.layout} selected={this.state.selected} />}
                     {this.state.tab === 'property' && <SidebarProperty 

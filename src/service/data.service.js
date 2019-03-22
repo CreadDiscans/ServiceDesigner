@@ -10,6 +10,7 @@ export default class DataService {
     static data
     static components
     static page
+    static folder
 
     static libTable = {
         reactstrap: ReactStrapService
@@ -119,7 +120,8 @@ export default class DataService {
                 parent = createNode(parent, name)
             })
         })
-        return hierarchy
+        DataService.folder = hierarchy
+        return DataService.folder
     }
 
     static getLayout(page) {
@@ -129,46 +131,6 @@ export default class DataService {
         }
         convertForm(DataService.data[page])
         return DataService.data[page]
-    }
-
-    static insert(page, component, parent) {
-        let maxId = 0
-        const findMaxId = (item) => {
-            if (maxId < item.id) {
-                maxId = item.id
-            }
-            item.children.forEach(child=>findMaxId(child))
-        }
-        const convertImport = () => {
-            const imp = []
-            component.import.split('\n').forEach(line=> {
-                line = line.replace(/;/gi, '')
-                const lib = line.split('from')[1].replace(/ /, '').replace(/'/gi, '')
-                const items = []
-                line.split('{')[1].split('}')[0].split(',').forEach(it=> {
-                    items.push(it.replace(/ /gi, ''))
-                })
-                imp.push({from:lib, items:items})
-            })
-            return imp
-        }
-
-        findMaxId(DataService.data[page])
-        const prop = Utils.deepcopy(component.property)
-        let style = {}
-        if (prop.style) {
-            style = prop.style
-            delete prop.style
-        }
-        parent.children.push({
-            id: maxId+1,
-            component: component.name,
-            import: convertImport(),
-            code: component.code,
-            style: style,
-            property: prop,
-            children: []
-        })
     }
 
     static getSaveForm() {
