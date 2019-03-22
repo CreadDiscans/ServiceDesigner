@@ -11,85 +11,38 @@ import SidebarFolder from './folder';
 import SidebarCode from './code';
 import SidebarProperty from './property';
 import PubsubService from './../../service/pubsub.service';
-import DataService from './../../service/data.service';
-import Utils from './../../service/utils';
+import { FolderManager } from './../../manager/folder.manager';
+import { LayoutManager } from './../../manager/layout.manager';
+import { ElementManager } from './../../manager/element.manager';
+import { DataManager } from './../../manager/data.manager';
 
 export default class Sidebar extends React.Component {
 
     state = {
         tab: 'folder',
-        folder: {
-            id: 0,
-            name: '',
-            type: 'root',
-            collapse: true,
-            children: [{
-                id:1,
-                name:'home.js',
-                type:'js',
-                collapse: false,
-                children: []
-            }]
-        },
+        folder: {},
         selectedFolder: 0,
-        layout: {
-            component: 'layout',
-            style: {},
-            property: {},
-            import: 'import {Container} from \'reactstrap\'',
-            code: '<Container>{children}</Container>',
-            collapse: true,
-            children: []
-        },
-        selected: null
+        layout: {},
+        selected: 0,
+        elements: []
     }
 
-    componentWillMount() {
-        const loop = (item, action) => {
-            action(item);
-            item.children.forEach(child=> loop(child, action));
-        }
+    dataManager;
 
-        PubsubService.sub(PubsubService.KEY_OPEN_PAGE).subscribe(page=> {
-            if (page) {
-                this.setState({
-                    layout: DataService.getLayout(page),
-                    folder: DataService.getFolder()
-                })
-            }
-        })
-        PubsubService.sub(PubsubService.KEY_LAYOUT_UPDATED).subscribe(value=> {
-            if (value) this.setState({});
-        })
-        PubsubService.sub(PubsubService.KEY_SIDEBAR_LAYOUT_UPDATE).subscribe(obj=> {
-            if (obj) {
-                if (obj.type === 'collapse') {
-                    loop(this.state.layout, (item)=> {
-                        if (item.id === obj.id) {
-                            item[obj.type] = obj.value;
-                        }
-                    });
-                    this.setState({layout: this.state.layout});
-                } else if (obj.type === 'selected') {
-                    this.setState({
-                        selected: obj.item
-                    });
-                }
-            }
-        });
-        PubsubService.sub(PubsubService.KEY_UPDATE_FOLDER).subscribe(obj=> {
-            if (obj) {
-                if (obj.type === 'selected') {
-                    this.setState({selectedFolder: obj.id});
-                } else if (obj.type == 'collapse') {
-                    Utils.loop(this.state.folder, (item)=> {
-                        if (item.id === obj.id) {
-                            item.collapse = obj.value;
-                        }
-                    });
-                    this.setState({folder: this.state.folder});
-                }
-            }
+    componentWillMount() {
+        this.dataManager = DataManager.getInstance(DataManager);
+        const folderManager = FolderManager.getInstance(FolderManager);
+        const layoutManager = LayoutManager.getInstance(LayoutManager);
+        const elementManager = ElementManager.getInstance(ElementManager); 
+
+        PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe(value=> {
+            this.setState({
+                folder: folderManager.data,
+                selectedFolder: folderManager.selected,
+                layout: layoutManager.data,
+                selected: layoutManager.selected,
+                elements: elementManager.data
+            })
         })
     }
 
@@ -104,11 +57,11 @@ export default class Sidebar extends React.Component {
         return (
             <div>
                 <div style={styles.sidebar}>
-                    {this.icon(<FaSave onClick={()=>PubsubService.pub(PubsubService.KEY_SAVE, true)}/>)}
-                    {this.icon(<FaFileImport onClick={()=>PubsubService.pub(PubsubService.KEY_LOAD, true)}/>)}
-                    {this.icon(<FaFolder onClick={()=>this.setState({collapse: true, tab:'folder'}) } />)}
-                    {this.icon(<FaCode onClick={()=>this.setState({collapse: true, tab:'code'}) } />)}
-                    {this.icon(<FaCog onClick={()=>this.setState({collapse: true, tab:'property'})} />)}
+                    {this.icon(<FaSave onClick={()=>this.dataManager.export()}/>)}
+                    {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
+                    {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
+                    {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
+                    {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
                     {this.icon(<FaUndo onClick={()=>console.log('undo')} />)}
 
                 </div>
@@ -116,6 +69,7 @@ export default class Sidebar extends React.Component {
                     {this.state.tab === 'folder' && <SidebarFolder 
                         folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
                     {this.state.tab === 'code' && <SidebarCode 
+                        elements={this.state.elements}
                         layout={this.state.layout} selected={this.state.selected} />}
                     {this.state.tab === 'property' && <SidebarProperty 
                         layout={this.state.layout} selected={this.state.selected} />}

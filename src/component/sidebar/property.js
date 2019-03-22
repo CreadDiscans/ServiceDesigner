@@ -2,44 +2,39 @@ import React from 'react';
 import { Input, Label } from 'reactstrap'
 import ReactJSONEditor from '../reactJsonEditor'
 import Layout from './layout'
-import { ActionService } from './../../service/action.service';
 import Utils from '../../service/utils';
-import DataService from '../../service/data.service';
+import { LayoutManager } from './../../manager/layout.manager';
 
 export default class SidebarProperty extends React.Component {
+
+    layoutManager
+    
+    componentWillMount() {
+        this.layoutManager = LayoutManager.getInstance(LayoutManager);
+    }
     
     render() {
+        let selctedItem;
+        Utils.loop(this.props.layout, item=> {
+            if (this.props.selected === item.id) {
+                selctedItem = item;
+            }
+        });
+
         return <div>
             <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
             <h5>Style</h5>
-            <ReactJSONEditor values={this.props.selected ? this.props.selected.style : {}} onChange={(values)=>{
-                if (this.props.selected) {
-                    ActionService.do({
-                        type: ActionService.ACTION_CHANGE_STYLE,
-                        tab: 'property',
-                        target: Utils.deepcopy(this.props.selected),
-                        before: Utils.deepcopy(this.props.selected.style),
-                        after: Utils.deepcopy(values),
-                        page: DataService.page
-                    });
-                }
+            <ReactJSONEditor values={selctedItem.style} onChange={(values)=>{
+                this.layoutManager.update({id:selctedItem.id, style:values});
             }}/>
             <h5>Property</h5>
             {
-                this.props.selected && Object.keys(this.props.selected.property).map(key=> {
+                Object.keys(selctedItem.property).map(key=> {
                     return <div key={key}>
                         <Label style={styles.propLabel}>{key}</Label>
-                        <Input style={styles.propValue} value={this.props.selected.property[key]} onChange={(e)=>{
-                            const after = Utils.deepcopy(this.props.selected.property);
-                            after[key] = e.target.value;
-                            ActionService.do({
-                                type: ActionService.ACTION_CHANGE_PROPERTY,
-                                tab: 'property',
-                                target: Utils.deepcopy(this.props.selected),
-                                before: Utils.deepcopy(this.props.selected.property),
-                                after: after,
-                                page: DataService.page
-                            })
+                        <Input style={styles.propValue} value={selctedItem.property[key]} onChange={(e)=>{
+                            selctedItem.property[key] = e.target.value
+                            this.layoutManager.update({id:selctedItem.id, property:selctedItem.property});
                         }}/>
                     </div>
                 })

@@ -2,15 +2,8 @@ import { BehaviorSubject } from "rxjs";
 
 export default class PubsubService {
 
-    static KEY_LOAD_JSON = 'load_json'
-    static KEY_OPEN_PAGE = 'open_page'
-    static KEY_LAYOUT_UPDATED = 'layout_updated'
-    static KEY_SELECT_ELEMENT = 'select_element'
-    static KEY_INSERT_COMPONENT = 'insert_component'
-    static KEY_SIDEBAR_LAYOUT_UPDATE = 'sidebar_layout_update'
-    static KEY_SAVE = 'save'
-    static KEY_LOAD = 'load'
-    static KEY_UPDATE_FOLDER = 'update_folder'
+    static KEY_RELOAD_SIDEBAR = 'reload_sidebar';
+    static KEY_RELOAD_HOME = 'reload_home';
 
     static streams = {};
 
