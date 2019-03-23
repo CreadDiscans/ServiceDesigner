@@ -84,7 +84,6 @@ export class FolderManager extends Singletone {
             parentId: parent.id,
             child: target
         })
-        console.log('delete', this.data);
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
     }
 

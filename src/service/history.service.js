@@ -3,6 +3,7 @@ import { LayoutManager } from '../manager/layout.manager';
 import Utils from './utils';
 import { FolderManager } from '../manager/folder.manager';
 import { ElementManager } from './../manager/element.manager';
+import { ColorManager } from './../manager/color.manager';
 
 export class HistoryService extends Singletone {
 
@@ -17,6 +18,10 @@ export class HistoryService extends Singletone {
     static ACTION_ELEMENT_CREATE = 'element_create';
     static ACTION_ELEMENT_UPDATE = 'element_update';
     static ACTION_ELEMENT_DELETE = 'element_delete';
+
+    static ACTION_COLOR_CREATE = 'color_create';
+    static ACTION_COLOR_UPDATE = 'color_update';
+    static ACTION_COLOR_DELETE = 'color_delete';
 
     stack = [];
     undoStack = [];
@@ -58,6 +63,9 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_ELEMENT_CREATE) this.deleteElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_DELETE) this.createElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_UPDATE) this.updateElement(history.before);
+            else if (history.action === HistoryService.ACTION_COLOR_CREATE) this.deleteColor(history.name);
+            else if (history.action === HistoryService.ACTION_COLOR_UPDATE) this.updateColor(history.before.name, history.before.color);
+            else if (history.action === HistoryService.ACTION_COLOR_DELETE) this.createColor(history.name, history.color);
             this.undoStack.push(history);
         }
     }
@@ -75,6 +83,9 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_ELEMENT_CREATE) this.createElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_DELETE) this.deleteElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_UPDATE) this.updateElement(history.after);
+            else if (history.action === HistoryService.ACTION_COLOR_CREATE) this.createColor(history.name, history.color);
+            else if (history.action === HistoryService.ACTION_COLOR_UPDATE) this.updateColor(history.after.name, history.after.color);
+            else if (history.action === HistoryService.ACTION_COLOR_DELETE) this.deleteColor(history.name);
         }
     }
 
@@ -125,5 +136,20 @@ export class HistoryService extends Singletone {
     updateElement(elem) {
         const manager = ElementManager.getInstance(ElementManager);
         manager.update(elem);
+    }
+
+    createColor(name, color) {
+        const manager = ColorManager.getInstance(ColorManager);
+        manager.create(name, color);
+    }
+
+    updateColor(name, color) {
+        const manager = ColorManager.getInstance(ColorManager);
+        manager.create(name, color);
+    }
+
+    deleteColor(name) {
+        const manager = ColorManager.getInstance(ColorManager);
+        manager.delete(name);
     }
 }

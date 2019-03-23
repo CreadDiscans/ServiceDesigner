@@ -1,6 +1,7 @@
 import { Singletone } from "../service/singletone";
 import { LayoutManager } from "./layout.manager";
 import { FolderManager } from "./folder.manager";
+import { ColorManager } from './color.manager';
 import { HistoryService } from './../service/history.service';
 import ReactStrapService from './../service/reactstrap.service';
 import Utils from '../service/utils';
@@ -73,9 +74,10 @@ export class DataManager extends Singletone {
     }
 
     render() {
+        const colorManager = ColorManager.getInstance(ColorManager);
         const selected_id = LayoutManager.getInstance(LayoutManager).selected;
         const imports = {}
-        const parseProperty = (key, value) => {
+        const parseProperty = (value) => {
             if (typeof(value) === 'object') {
                 value = JSON.stringify(value)
             } else if (typeof(value) === 'string') {
@@ -88,6 +90,19 @@ export class DataManager extends Singletone {
                 }
             }
             return value;
+        }
+
+        const parseStyle = (id, value) => {
+            const style = Utils.deepcopy(value)
+            if (id === selected_id) {
+                style.border = 'solid 1px red'
+            }
+            let stringStyle = JSON.stringify(style);
+            Object.keys(colorManager.data).forEach(color=> {
+                const re = new RegExp('"Color.'+color+'"', 'g');
+                stringStyle = stringStyle.replace(re, '"' + colorManager.data[color]+'"');
+            });
+            return stringStyle;
         }
 
         const parse = (item) => {
@@ -107,13 +122,9 @@ export class DataManager extends Singletone {
                 children += parse(child)
             })
             Object.keys(item.property).forEach(prop=> {
-                code = code.replace('{'+prop+'}', parseProperty(prop, item.property[prop]))
+                code = code.replace('{'+prop+'}', parseProperty(item.property[prop]))
             })
-            const style = Utils.deepcopy(item.style)
-            if (item.id === selected_id) {
-                style.border = 'solid 1px red'
-            } 
-            code = code.replace('{style}', JSON.stringify(style))
+            code = code.replace('{style}', parseStyle(item.id, item.style))
             code = code.replace('{children}', children)
             let brace = false;
             if (item.property['for'] && item.property['for'] !== '') {
