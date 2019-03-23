@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-아이콘 기능 설명 메뉴
-
 element별로 if 기능 가능하도록
 
 element별로 for 기능 가능하도록

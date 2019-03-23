@@ -6,7 +6,8 @@ import {
     FaFileImport,
     FaSave,
     FaUndo,
-    FaRedo
+    FaRedo,
+    FaQuestion
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -17,11 +18,12 @@ import { LayoutManager } from './../../manager/layout.manager';
 import { ElementManager } from './../../manager/element.manager';
 import { DataManager } from './../../manager/data.manager';
 import { HistoryService } from './../../service/history.service';
+import { SidebarHelp } from './help';
 
 export default class Sidebar extends React.Component {
 
     state = {
-        tab: 'folder',
+        tab: 'help',
         folder: {},
         selectedFolder: 0,
         layout: {},
@@ -63,6 +65,7 @@ export default class Sidebar extends React.Component {
         return (
             <div>
                 <div style={styles.sidebar}>
+                    {this.icon(<FaQuestion onClick={()=>this.setState({tab:'help'})} />)}
                     {this.icon(<FaSave onClick={()=>this.dataManager.export()}/>)}
                     {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
                     {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
@@ -73,6 +76,7 @@ export default class Sidebar extends React.Component {
 
                 </div>
                 <div style={styles.collapseSidebar}>
+                    {this.state.tab === 'help' && <SidebarHelp />}
                     {this.state.tab === 'folder' && <SidebarFolder 
                         folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
                     {this.state.tab === 'code' && <SidebarCode 
