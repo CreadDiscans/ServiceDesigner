@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-page state 편집
-
 element별로 for 기능 가능하도록
 
 electron devtool 창 기본으로 안뜨도록

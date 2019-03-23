@@ -7,8 +7,6 @@ import { DataManager } from './../manager/data.manager';
 export default class Home extends React.Component {
 
     state = {
-        page: '',
-        selected: null,
         imports: [{library: ReactStrapService, items: ['Container']}],
         code: '<Container></Container>'
     }
@@ -29,10 +27,9 @@ export default class Home extends React.Component {
                 imp[item] = lib.library.get(item)
             })
         })
-        
         return <div id="design">
             <CodeSandbox imports={imp}>
-            {'render(' +this.state.code + ')'}
+            {'state='+JSON.stringify(this.state.state)+';render(' +this.state.code + ')'}
             </CodeSandbox>
         </div>
     }

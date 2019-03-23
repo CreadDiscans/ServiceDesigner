@@ -102,6 +102,12 @@ export class LayoutManager extends Singletone {
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
 
+    setState(state) {
+        this.data.state = state;
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'state');
+        PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
+    }
+
     delete() {
         let parent;
         let index;

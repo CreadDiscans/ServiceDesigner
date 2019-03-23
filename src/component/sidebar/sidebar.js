@@ -7,7 +7,8 @@ import {
     FaSave,
     FaUndo,
     FaRedo,
-    FaQuestion
+    FaQuestion,
+    FaReact
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -19,6 +20,7 @@ import { ElementManager } from './../../manager/element.manager';
 import { DataManager } from './../../manager/data.manager';
 import { HistoryService } from './../../service/history.service';
 import { SidebarHelp } from './help';
+import { SidebarState } from './state';
 
 export default class Sidebar extends React.Component {
 
@@ -69,6 +71,7 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaSave onClick={()=>this.dataManager.export()}/>)}
                     {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
                     {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
+                    {this.icon(<FaReact onClick={()=>this.setState({tab:'state'})} />)}
                     {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
                     {this.icon(<FaUndo onClick={()=>HistoryService.getInstance(HistoryService).undo()} />)}
@@ -79,6 +82,8 @@ export default class Sidebar extends React.Component {
                     {this.state.tab === 'help' && <SidebarHelp />}
                     {this.state.tab === 'folder' && <SidebarFolder 
                         folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
+                    {this.state.tab === 'state' && <SidebarState 
+                        layout={this.state.layout} />}
                     {this.state.tab === 'code' && <SidebarCode 
                         elements={this.state.elements}
                         layout={this.state.layout} selected={this.state.selected} />}

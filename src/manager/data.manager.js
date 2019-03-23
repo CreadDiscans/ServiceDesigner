@@ -128,7 +128,8 @@ export class DataManager extends Singletone {
 
         return {
             imports: convertImport(),
-            code: code
+            code: code,
+            state: this.data[this.page].state
         }
     }
 
@@ -200,7 +201,10 @@ export class DataManager extends Singletone {
                     className += path[0].toUpperCase() + path.slice(1, path.length);
                 }
             })
-            classes.push(template.class.replace('{code}', target.code).replace('{classname}', className));
+            let templateJs = template.class.replace('{code}', target.code);
+            templateJs = templateJs.replace('{classname}', className);
+            templateJs = templateJs.replace('{state}', 'state='+JSON.stringify(target.state)+';')
+            classes.push(templateJs);
         });
         Object.keys(imps).forEach(from=> {
             impjs +='import { '
