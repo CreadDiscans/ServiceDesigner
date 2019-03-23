@@ -14,7 +14,7 @@
                 "import":[{"items":["Alert"], "from":"reactstrap"}],
                 "code":"<Alert color={{color}} style={{style}}>{{text}} {children}</Alert>",
                 "style":{},
-                "property": {"color": "primary", "text":"text", "if":"", "for": "arr"},
+                "property": {"color": "primary", "text":"text", "if":"", "for": ""},
                 "children":[]
             }
         ]
