@@ -6,15 +6,15 @@
         "code":"<div style={{style}}>{children}</div>",
         "style":{},
         "property":{},
-        "state": {"hello":true},
+        "state": {},
         "children":[
             {
                 "id":1,
                 "component":"alert",
                 "import":[{"items":["Alert"], "from":"reactstrap"}],
-                "code":"<Alert color={{color}} style={{style}}>{text} {children}</Alert>",
+                "code":"<Alert color={{color}} style={{style}}>{{text}} {children}</Alert>",
                 "style":{},
-                "property": {"color": "primary", "text":"text", "if":"", "for": ""},
+                "property": {"color": "primary", "text":"text", "if":"", "for": "arr"},
                 "children":[]
             }
         ]
@@ -32,7 +32,7 @@
                 "id":1,
                 "component":"alert",
                 "import":[{"items":["Alert"], "from":"reactstrap"}],
-                "code":"<Alert color={{color}} style={{style}}>{text} {children}</Alert>",
+                "code":"<Alert color={{color}} style={{style}}>{{text}} {children}</Alert>",
                 "style":{},
                 "property": {"color": "success", "text":"next"},
                 "children":[]

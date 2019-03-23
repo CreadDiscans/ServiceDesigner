@@ -3,7 +3,7 @@
         "id": 0,
         "name": "Alerts",
         "import": "import { Alert } from 'reactstrap'",
-        "code": "<Alert style={{style}} color={{color}}>{text}{children}</Alert>",
+        "code": "<Alert style={{style}} color={{color}}>{{text}}{children}</Alert>",
         "property": {
             "style": {},
             "color": "primary",

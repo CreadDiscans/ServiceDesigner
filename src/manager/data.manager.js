@@ -75,6 +75,21 @@ export class DataManager extends Singletone {
     render() {
         const selected_id = LayoutManager.getInstance(LayoutManager).selected;
         const imports = {}
+        const parseProperty = (key, value) => {
+            if (typeof(value) === 'object') {
+                value = JSON.stringify(value)
+            } else if (typeof(value) === 'string') {
+                if (value === '{item}' || 
+                    (value.indexOf('{item.') === 0 && value[value.length-1] === '}' && value !== '{item.}') ||
+                    (value.indexOf('{this.state.') === 0 && value[value.length-1] === '}' && value !== '{this.state.}')) {
+                    value = value.slice(1, value.length-1)
+                } else {
+                    value = '"' + String(value) + '"'
+                }
+            }
+            return value;
+        }
+
         const parse = (item) => {
             item.import.forEach(imp=> {
                 if (!(imp.from in imports)) {
@@ -92,13 +107,7 @@ export class DataManager extends Singletone {
                 children += parse(child)
             })
             Object.keys(item.property).forEach(prop=> {
-                let value = String(item.property[prop])
-                if (typeof(item.property[prop]) === 'object') {
-                    value = JSON.stringify(item.property[prop])
-                } else if (prop !== 'text' && typeof(item.property[prop]) === 'string') {
-                    value = '"' + String(item.property[prop]) + '"'
-                }
-                code = code.replace('{'+prop+'}', value)
+                code = code.replace('{'+prop+'}', parseProperty(prop, item.property[prop]))
             })
             const style = Utils.deepcopy(item.style)
             if (item.id === selected_id) {
@@ -106,9 +115,21 @@ export class DataManager extends Singletone {
             } 
             code = code.replace('{style}', JSON.stringify(style))
             code = code.replace('{children}', children)
-            if (item.property['if'] && item.property['if'] != '') {
-                code = '{ this.state && this.state.'+ item.property['if'] + ' && ' + code+'}'
+            let brace = false;
+            if (item.property['for'] && item.property['for'] !== '') {
+                code = code.replace('>', 'key={i} >');
+                code = 'Array.isArray(this.state.'+item.property['for']+') && this.state.' 
+                    + item.property['for'] + '.map((item, i)=> '+code+')';
+                brace = true;
             }
+            if (item.property['if'] && item.property['if'] !== '') {
+                code = 'this.state.'+ item.property['if'] + ' && ' + code;
+                brace = true;
+            }
+            if (brace) {
+                code = '{ ' + code + ' }';
+            }
+            console.log(code)
             return code
         }
         
