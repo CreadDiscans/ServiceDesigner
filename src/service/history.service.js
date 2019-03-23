@@ -1,12 +1,16 @@
 import { Singletone } from './singletone';
 import { LayoutManager } from '../manager/layout.manager';
 import Utils from './utils';
+import { FolderManager } from '../manager/folder.manager';
 
 export class HistoryService extends Singletone {
 
     static ACTION_LAYOUT_CREATE = 'layout_create';
     static ACTION_LAYOUT_UPDATE = 'layout_update';
     static ACTION_LAYOUT_DELETE = 'layout_delete';
+
+    static ACTION_FOLDER_CREATE = 'folder_create';
+    static ACTION_FOLDER_DELETE = 'folder_delete';
 
     stack = [];
     undoStack = [];
@@ -29,14 +33,21 @@ export class HistoryService extends Singletone {
         this.state = 'wait';
     }
 
+    flush() {
+        this.reset();
+        this.stack = [];
+        this.undoStack = [];
+    }
+
     undo() {
         if (this.stack.length > 0) {
             this.state = 'undo';
             const history = this.stack.pop();
-            if (history.action === HistoryService.ACTION_LAYOUT_CREATE) this.deleteLayout(history.childId, true);
-            else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.before, true);
+            if (history.action === HistoryService.ACTION_LAYOUT_CREATE) this.deleteLayout(history.childId);
+            else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.before);
             else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.createLayout(history.parentId, history.child); 
-            console.log(this.stack)
+            else if (history.action === HistoryService.ACTION_FOLDER_CREATE) this.deleteFolder(history.child.id);
+            else if (history.action === HistoryService.ACTION_FOLDER_DELETE) this.createFolder(history.parentId, history.child);
             this.undoStack.push(history);
         }
     }
@@ -48,24 +59,37 @@ export class HistoryService extends Singletone {
             if (history.action === HistoryService.ACTION_LAYOUT_CREATE) this.createLayout(history.parentId, history.child);
             else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.after);
             else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.deleteLayout(history.child.id);
-            console.log(this.undoStack);
+            else if (history.action === HistoryService.ACTION_FOLDER_CREATE) this.createFolder(history.parentId, history.child);
+            else if (history.action === HistoryService.ACTION_FOLDER_DELETE) this.deleteFolder(history.child.id);
         }
     }
 
-    createLayout(parentId, elem, fromUndo=false) {
+    createLayout(parentId, elem) {
         const manager = LayoutManager.getInstance(LayoutManager);
         manager.selected = parentId;
-        manager.create(Utils.deepcopy(elem), fromUndo);
+        manager.create(Utils.deepcopy(elem));
     }
 
-    updateLayout(after, fromUndo=false) {
+    updateLayout(after) {
         const manager = LayoutManager.getInstance(LayoutManager);
-        manager.update(Utils.deepcopy(after), fromUndo);
+        manager.update(Utils.deepcopy(after));
     }
 
-    deleteLayout(id, fromUndo=false) {
+    deleteLayout(id) {
         const manager = LayoutManager.getInstance(LayoutManager);
         manager.selected = id;
-        manager.delete(fromUndo);
+        manager.delete();
+    }
+
+    createFolder(parentId, elem) {
+        const manager = FolderManager.getInstance(FolderManager);
+        manager.selected = parentId;
+        manager.create(elem, FolderManager.TYPE_OBJ);
+    }
+
+    deleteFolder(id) {
+        const manager = FolderManager.getInstance(FolderManager);
+        manager.selected = id;
+        manager.delete();
     }
 }

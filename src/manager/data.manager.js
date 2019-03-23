@@ -1,6 +1,7 @@
 import { Singletone } from "../service/singletone";
 import { LayoutManager } from "./layout.manager";
 import { FolderManager } from "./folder.manager";
+import { HistoryService } from './../service/history.service';
 import ReactStrapService from './../service/reactstrap.service';
 import Utils from '../service/utils';
 import { ElementManager } from "./element.manager";
@@ -20,7 +21,7 @@ export class DataManager extends Singletone {
     initialize(data) {
         this.data = data;
         this.page = Object.keys(data)[0];
-        
+        HistoryService.getInstance(HistoryService).flush();
         LayoutManager.getInstance(LayoutManager).initialize(this.data[this.page]);
         FolderManager.getInstance(FolderManager).initialize(this.getFolder());
     }
@@ -209,7 +210,6 @@ export class DataManager extends Singletone {
             impjs += ' } from \''+from+'\';\n';
         })
         js = template.abstract.replace('{import}', impjs);
-        
         classes.forEach(com=> {
             js += '\n' + com;
         });
