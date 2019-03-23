@@ -72,16 +72,26 @@ export class LayoutManager extends Singletone {
     }
 
     update(layout) {
+        let before;
+        let after;
         Utils.loop(this.data, (item)=> {
             if (layout.id === item.id) {
+                before = Utils.deepcopy(item);
                 if ('style' in layout) item.style = layout.style;
                 if ('property' in layout) item.property = layout.property;
                 if ('collapse' in layout) item.collapse = layout.collapse;
+                after = Utils.deepcopy(item);
             }
         })
-        HistoryService.getInstance(HistoryService).push({
-            action:HistoryService.ACTION_LAYOUT_UPDATE
-        });
+        if (!Utils.equal(before, after)) {
+            HistoryService.getInstance(HistoryService).push({
+                action:HistoryService.ACTION_LAYOUT_UPDATE,
+                before: before,
+                after: after
+            });
+        } else {
+            HistoryService.getInstance(HistoryService).reset();
+        }
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
@@ -97,14 +107,16 @@ export class LayoutManager extends Singletone {
                 }
             });
         });
-        HistoryService.getInstance(HistoryService).push({
-            action:HistoryService.ACTION_LAYOUT_DELETE
-        });
         if (parent) {
+            HistoryService.getInstance(HistoryService).push({
+                action:HistoryService.ACTION_LAYOUT_DELETE
+            });
             this.selected = 0;
             parent.children.splice(index, 1);
             PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
             PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
+        } else {
+            HistoryService.getInstance(HistoryService).reset()
         }
     }
 

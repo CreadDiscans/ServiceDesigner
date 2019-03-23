@@ -33,8 +33,9 @@ export default class SidebarProperty extends React.Component {
                     return <div key={key}>
                         <Label style={styles.propLabel}>{key}</Label>
                         <Input style={styles.propValue} value={selctedItem.property[key]} onChange={(e)=>{
-                            selctedItem.property[key] = e.target.value
-                            this.layoutManager.update({id:selctedItem.id, property:selctedItem.property});
+                            const prop = Utils.deepcopy(selctedItem.property);
+                            prop[key] = e.target.value;
+                            this.layoutManager.update({id:selctedItem.id, property:prop});
                         }}/>
                     </div>
                 })

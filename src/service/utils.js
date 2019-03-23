@@ -20,4 +20,8 @@ export default class Utils {
         }));
         return id;
     }
+
+    static equal(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    }
 }
