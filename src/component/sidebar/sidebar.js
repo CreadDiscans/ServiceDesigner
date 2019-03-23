@@ -8,7 +8,8 @@ import {
     FaUndo,
     FaRedo,
     FaQuestion,
-    FaReact
+    FaReact,
+    FaPalette
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -21,6 +22,7 @@ import { DataManager } from './../../manager/data.manager';
 import { HistoryService } from './../../service/history.service';
 import { SidebarHelp } from './help';
 import { SidebarState } from './state';
+import { SidebarColor } from './color';
 
 export default class Sidebar extends React.Component {
 
@@ -74,6 +76,7 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaReact onClick={()=>this.setState({tab:'state'})} />)}
                     {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
+                    {this.icon(<FaPalette onClick={()=> this.setState({tab:'color'})} />)}
                     {this.icon(<FaUndo onClick={()=>HistoryService.getInstance(HistoryService).undo()} />)}
                     {this.icon(<FaRedo onClick={()=>HistoryService.getInstance(HistoryService).redo()} />)}
 
@@ -89,6 +92,7 @@ export default class Sidebar extends React.Component {
                         layout={this.state.layout} selected={this.state.selected} />}
                     {this.state.tab === 'property' && <SidebarProperty 
                         layout={this.state.layout} selected={this.state.selected} />}
+                    {this.state.tab === 'color' && <SidebarColor />}
                 </div>
                 <div style={styles.body}>
                     {this.props.children}
@@ -112,7 +116,7 @@ const styles = {
     collapseSidebar: {
         transition: '0.5s',
         position:'absolute',
-        width: 200,
+        width: 220,
         top:0,
         left:40,
         bottom:0,
@@ -126,7 +130,7 @@ const styles = {
     body: {
         top:0,
         bottom:0,
-        left:240,
+        left:260,
         right:0,
         position: 'absolute',
         overflow:'auto'

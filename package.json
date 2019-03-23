@@ -9,6 +9,7 @@
     "react": "^16.8.4",
     "react-ace": "^6.4.0",
     "react-code-sandbox": "^1.0.0",
+    "react-color": "^2.17.0",
     "react-dom": "^16.8.4",
     "react-icons": "^3.5.0",
     "react-router": "^4.4.0",
