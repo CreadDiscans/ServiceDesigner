@@ -5,7 +5,8 @@ import {
     FaCog,
     FaFileImport,
     FaSave,
-    FaUndo
+    FaUndo,
+    FaRedo
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -15,6 +16,7 @@ import { FolderManager } from './../../manager/folder.manager';
 import { LayoutManager } from './../../manager/layout.manager';
 import { ElementManager } from './../../manager/element.manager';
 import { DataManager } from './../../manager/data.manager';
+import { HistoryService } from './../../service/history.service';
 
 export default class Sidebar extends React.Component {
 
@@ -62,7 +64,8 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
                     {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
-                    {this.icon(<FaUndo onClick={()=>console.log('undo')} />)}
+                    {this.icon(<FaUndo onClick={()=>HistoryService.getInstance(HistoryService).undo()} />)}
+                    {this.icon(<FaRedo onClick={()=>HistoryService.getInstance(HistoryService).redo()} />)}
 
                 </div>
                 <div style={styles.collapseSidebar}>

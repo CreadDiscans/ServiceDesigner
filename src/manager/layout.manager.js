@@ -1,4 +1,5 @@
 import { Singletone } from "../service/singletone";
+import { HistoryService } from './../service/history.service';
 import Utils from "../service/utils";
 import PubsubService from './../service/pubsub.service';
 
@@ -44,19 +45,27 @@ export class LayoutManager extends Singletone {
             delete prop.style
         }
 
+        const newLayout = {
+            id: Utils.maxId(this.data)+1,
+            component: elem.name,
+            style: style,
+            property: prop, 
+            import: convertImport(),
+            code: elem.code,
+            collapse: true,
+            children: []
+        }
+
         Utils.loop(this.data, (item)=> {
             if (this.selected === item.id) {
-                item.children.push({
-                    id: Utils.maxId(this.data)+1,
-                    component: elem.name,
-                    style: style,
-                    property: prop, 
-                    import: convertImport(),
-                    code: elem.code,
-                    collapse: true,
-                    children: []
-                });
+                item.children.push(newLayout);
             }
+        });
+        HistoryService.getInstance(HistoryService).push({
+            action:HistoryService.ACTION_LAYOUT_CREATE,
+            parentId: this.selected,
+            childId: newLayout.id,
+            child: Utils.deepcopy(elem)
         });
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
@@ -70,6 +79,9 @@ export class LayoutManager extends Singletone {
                 if ('collapse' in layout) item.collapse = layout.collapse;
             }
         })
+        HistoryService.getInstance(HistoryService).push({
+            action:HistoryService.ACTION_LAYOUT_UPDATE
+        });
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
@@ -84,6 +96,9 @@ export class LayoutManager extends Singletone {
                     index = i;
                 }
             });
+        });
+        HistoryService.getInstance(HistoryService).push({
+            action:HistoryService.ACTION_LAYOUT_DELETE
         });
         if (parent) {
             this.selected = 0;
