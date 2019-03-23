@@ -103,6 +103,11 @@ export class LayoutManager extends Singletone {
     }
 
     setState(state) {
+        HistoryService.getInstance(HistoryService).push({
+            action:HistoryService.ACTION_LAYOUT_STATE,
+            before: Utils.deepcopy(this.data.state),
+            after: Utils.deepcopy(state)
+        });
         this.data.state = state;
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'state');
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);

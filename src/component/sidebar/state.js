@@ -9,7 +9,7 @@ export class SidebarState extends React.Component{
         return <div>
             <h5>State</h5>
             <div>- {DataManager.getInstance(DataManager).page}</div>
-            <ReactJSONEditor values={this.props.layout.state} onChange={(values)=>{
+            <ReactJSONEditor style={{height:400}} values={this.props.layout.state} onChange={(values)=>{
                 LayoutManager.getInstance(LayoutManager).setState(values);
             }}/>
         </div>

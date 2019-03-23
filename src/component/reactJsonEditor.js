@@ -38,7 +38,7 @@ export default class ReactJSONEditor extends React.Component {
   
   render() {
     return (
-      <div className="react-json-editor-wrapper" ref={(el) => {this.container = el}} />
+      <div style={this.props.style} className="react-json-editor-wrapper" ref={(el) => {this.container = el}} />
     )
   }
 }
