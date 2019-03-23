@@ -2,6 +2,7 @@
     {
         "id": 0,
         "name": "Alerts",
+        "group": "reactstrap",
         "import": "import { Alert } from 'reactstrap'",
         "code": "<Alert style={{style}} color={{color}}>{{text}}{children}</Alert>",
         "property": {

@@ -30,7 +30,8 @@ export class ElementManager extends Singletone {
             name: elem.name,
             import: elem.import,
             code: elem.code,
-            property: elem.property
+            property: elem.property,
+            group: elem.group
         }
         this.data.push(newOne);
         HistoryService.getInstance(HistoryService).push({

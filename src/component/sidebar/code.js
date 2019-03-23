@@ -26,6 +26,8 @@ export default class SidebarCode extends React.Component {
         name:'',
         import: '',
         property: {},
+        group: '',
+        selectedGroup: ''
     }
 
     layoutManger;
@@ -44,12 +46,14 @@ export default class SidebarCode extends React.Component {
             obj.code = '';
             obj.import = '';
             obj.property = {};
+            obj.group = '';
         } else if (item) {
             obj.id = item.id;
             obj.name = item.name;
             obj.code = item.code;
             obj.import = item.import;
             obj.property = item.property;
+            obj.group = item.group;
             e.stopPropagation();
         }
         this.setState(obj);
@@ -70,13 +74,26 @@ export default class SidebarCode extends React.Component {
     }
 
     render() {
+        const groups = [];
+        this.props.elements.forEach(item=> {
+            if(groups.indexOf(item.group) === -1) {
+                groups.push(item.group);
+            }
+        });
         return <div>
             <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/>
             <h5>Element</h5>
             <div style={styles.listView}>
                 <ListGroup>
+                    {groups.map(item=> {
+                        return <ListGroupItem color={item===this.state.selectedGroup?'primary':'secondary'} key={item} style={{cursor:'pointer'}} onClick={()=>{
+                            this.setState({selectedGroup: item})
+                        }}> {item}</ListGroupItem>
+                    })}
                     {
-                        this.props.elements.map(item=> {
+                        this.props.elements.filter(item=> {
+                            return item.group === this.state.selectedGroup
+                        }).map(item=> {
                             return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
                                     this.layoutManger.create(item);
                                 }}>
@@ -91,6 +108,8 @@ export default class SidebarCode extends React.Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Add Element</ModalHeader>
                 <ModalBody>
+                    <Label>Group</Label>
+                    <Input type="text" onChange={(e)=>this.setState({group:e.target.value})} value={this.state.group} />
                     <Label>Name</Label>
                     <Input type="text" onChange={(e)=>this.setState({name:e.target.value})} value={this.state.name} />
                     <Label>import</Label>

@@ -8,15 +8,22 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600, webPreferences:{devTools:false}})
+  let debug = false;
+  let startUrl;
+  if (process.env.ELECTRON_START_URL) {
+    startUrl = process.env.ELECTRON_START_URL;
+    debug = true;
+  } else {
+    startUrl = url.format({
+      pathname: path.join(__dirname, '/../build/index.html'),
+      protocol: 'file:',
+      slashes: true
+    });
+  }
+  win = new BrowserWindow({width: 800, height: 600, webPreferences:{devTools:debug}})
 
 //   and load the index.html of the app.
 //   win.loadFile('src/index.html')
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, '/../build/index.html'),
-    protocol: 'file:',
-    slashes: true
-  });
   win.loadURL(startUrl);
 
   // Open the DevTools.

@@ -129,7 +129,6 @@ export class DataManager extends Singletone {
             if (brace) {
                 code = '{ ' + code + ' }';
             }
-            console.log(code)
             return code
         }
         
