@@ -6,7 +6,7 @@ export class HistoryService extends Singletone {
 
     static ACTION_LAYOUT_CREATE = 'layout_create';
     static ACTION_LAYOUT_UPDATE = 'layout_update';
-    // static ACTION_LAYOUT_DELETE = 'layout_delete';
+    static ACTION_LAYOUT_DELETE = 'layout_delete';
 
     stack = [];
     undoStack = [];
@@ -35,6 +35,7 @@ export class HistoryService extends Singletone {
             const history = this.stack.pop();
             if (history.action === HistoryService.ACTION_LAYOUT_CREATE) this.deleteLayout(history.childId, true);
             else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.before, true);
+            else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.createLayout(history.parentId, history.child); 
             console.log(this.stack)
             this.undoStack.push(history);
         }
@@ -45,7 +46,8 @@ export class HistoryService extends Singletone {
             this.state = 'redo';
             const history = this.undoStack.pop();
             if (history.action === HistoryService.ACTION_LAYOUT_CREATE) this.createLayout(history.parentId, history.child);
-            else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.after)
+            else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.after);
+            else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.deleteLayout(history.child.id);
             console.log(this.undoStack);
         }
     }

@@ -38,23 +38,29 @@ export class LayoutManager extends Singletone {
             })
             return imp
         }
-        const prop = Utils.deepcopy(elem.property)
-        let style = {}
-        if (prop.style) {
-            style = prop.style
-            delete prop.style
+        let newLayout;
+        if (Array.isArray(elem.import)) {
+            newLayout =  elem;
+        } else {
+            const prop = Utils.deepcopy(elem.property)
+            let style = {}
+            if (prop.style) {
+                style = prop.style
+                delete prop.style
+            }
+    
+            newLayout = {
+                id: Utils.maxId(this.data)+1,
+                component: elem.name,
+                style: style,
+                property: prop, 
+                import: convertImport(),
+                code: elem.code,
+                collapse: true,
+                children: []
+            }
         }
-
-        const newLayout = {
-            id: Utils.maxId(this.data)+1,
-            component: elem.name,
-            style: style,
-            property: prop, 
-            import: convertImport(),
-            code: elem.code,
-            collapse: true,
-            children: []
-        }
+        
 
         Utils.loop(this.data, (item)=> {
             if (this.selected === item.id) {
@@ -99,9 +105,11 @@ export class LayoutManager extends Singletone {
     delete() {
         let parent;
         let index;
+        let target;
         Utils.loop(this.data, (item)=> {
             item.children.forEach((child, i)=> {
                 if (child.id === this.selected) {
+                    target = child;
                     parent = item;
                     index = i;
                 }
@@ -109,7 +117,9 @@ export class LayoutManager extends Singletone {
         });
         if (parent) {
             HistoryService.getInstance(HistoryService).push({
-                action:HistoryService.ACTION_LAYOUT_DELETE
+                action:HistoryService.ACTION_LAYOUT_DELETE,
+                parentId:parent.id,
+                child: target
             });
             this.selected = 0;
             parent.children.splice(index, 1);
