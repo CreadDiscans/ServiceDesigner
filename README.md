@@ -12,7 +12,7 @@ npm run dist
 
 # todo
 
-element별로 if 기능 가능하도록
+page state 편집
 
 element별로 for 기능 가능하도록
 
