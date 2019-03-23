@@ -37,15 +37,19 @@ export default class Sidebar extends React.Component {
         const layoutManager = LayoutManager.getInstance(LayoutManager);
         const elementManager = ElementManager.getInstance(ElementManager); 
 
-        PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe(value=> {
-            this.setState({
+        PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe(tab=> {
+            const obj = {
                 folder: folderManager.data,
                 selectedFolder: folderManager.selected,
                 layout: layoutManager.data,
                 selected: layoutManager.selected,
                 elements: elementManager.data
-            })
-        })
+            }
+            if (tab) {
+                obj.tab = tab;
+            }
+            this.setState(obj);
+        });
     }
 
     icon(iconTag) {

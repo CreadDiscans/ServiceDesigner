@@ -54,11 +54,11 @@ export class FolderManager extends Singletone {
         if (parent) {
             parent.children.push(newOne);
             HistoryService.getInstance(HistoryService).push({
-                action:HistoryService.ACTION_FOLDER_DELETE,
+                action:HistoryService.ACTION_FOLDER_CREATE,
                 parentId: parent.id,
-                elem: newOne
+                child: newOne
             });
-            PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+            PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
         } else {
             HistoryService.getInstance(HistoryService).reset();
         }
@@ -84,7 +84,8 @@ export class FolderManager extends Singletone {
             parentId: parent.id,
             child: target
         })
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        console.log('delete', this.data);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
     }
 
     update(id, collapse) {
@@ -93,7 +94,7 @@ export class FolderManager extends Singletone {
                 item.collapse = collapse;
             }
         });
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
     }
 
     select(id) {
@@ -108,7 +109,7 @@ export class FolderManager extends Singletone {
         }
 
         this.selected = id;
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
 
         loop(this.data);
     }

@@ -20,7 +20,7 @@ export class LayoutManager extends Singletone {
         this.data = data;
         this.selected = 0;
         Utils.loop(this.data, (item)=> item.collapse = true)
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
 
@@ -73,7 +73,7 @@ export class LayoutManager extends Singletone {
             childId: newLayout.id,
             child: Utils.deepcopy(elem)
         });
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'code');
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
 
@@ -98,7 +98,7 @@ export class LayoutManager extends Singletone {
         } else {
             HistoryService.getInstance(HistoryService).reset();
         }
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'property');
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
 
@@ -123,7 +123,7 @@ export class LayoutManager extends Singletone {
             });
             this.selected = 0;
             parent.children.splice(index, 1);
-            PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+            PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR);
             PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
         } else {
             HistoryService.getInstance(HistoryService).reset()
@@ -132,7 +132,7 @@ export class LayoutManager extends Singletone {
 
     select(id) {
         this.selected = id;
-        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, true);
+        PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR);
         PubsubService.pub(PubsubService.KEY_RELOAD_HOME, true);
     }
 }

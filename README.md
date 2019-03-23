@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-실행취소 기능
-
 아이콘 기능 설명 메뉴
 
 element별로 if 기능 가능하도록
@@ -28,3 +26,4 @@ components collapse 탭형식으로 수정
 
 파레트 추가
 
+assets 관리
