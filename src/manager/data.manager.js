@@ -106,6 +106,9 @@ export class DataManager extends Singletone {
             } 
             code = code.replace('{style}', JSON.stringify(style))
             code = code.replace('{children}', children)
+            if (item.property['if'] && item.property['if'] != '') {
+                code = '{ this.state && this.state.'+ item.property['if'] + ' && ' + code+'}'
+            }
             return code
         }
         

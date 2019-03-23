@@ -7,7 +7,9 @@
         "property": {
             "style": {},
             "color": "primary",
-            "text": "This is a primary alert"
+            "text": "This is a primary alert",
+            "if": "",
+            "for": ""
         }
     }
 ]
