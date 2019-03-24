@@ -14,15 +14,15 @@ export class SidebarHelp extends React.Component {
             <h3>Help</h3>
             
             {this.icon(<FaQuestion  />, 'Help')}
-            {this.icon(<FaSave />, 'Export')}
+            {this.icon(<FaSave />, 'Export [Ctrl+s]')}
             {this.icon(<FaFileImport />, 'Import')}
-            {this.icon(<FaFolder  />, 'Folder')}
-            {this.icon(<FaReact />, 'State')}
-            {this.icon(<FaCode />, 'Element')}
-            {this.icon(<FaCog  />, 'Property / Style')}
-            {this.icon(<FaPalette />, 'Color')}
-            {this.icon(<FaImages />, 'Asset')}
-            {this.icon(<FaUndo />, 'Undo')}
+            {this.icon(<FaFolder  />, 'Folder [F1]')}
+            {this.icon(<FaReact />, 'State [F2]')}
+            {this.icon(<FaCode />, 'Element [F3]')}
+            {this.icon(<FaCog  />, 'Property / Style [F4]')}
+            {this.icon(<FaPalette />, 'Color [F5]')}
+            {this.icon(<FaImages />, 'Asset [F6]')}
+            {this.icon(<FaUndo />, 'Undo [Ctrl+z]')}
             {this.icon(<FaRedo />, 'Redo')}
         </div>
     }

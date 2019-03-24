@@ -8,6 +8,7 @@ import { ColorManager } from './manager/color.manager';
 import comData from './resource/components.json';
 import initJson from './resource/init.json';
 import colorData from './resource/colors.json';
+import { ShortcutService } from './service/shortcut.service';
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
         DataManager.getInstance(DataManager).initialize(initJson);
         ElementManager.getInstance(ElementManager).initialize(comData);
         ColorManager.getInstance(ColorManager).initialize(colorData);
+        ShortcutService.getInstance(ShortcutService).initialize();
     }   
 
     render() {
