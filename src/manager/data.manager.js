@@ -247,7 +247,8 @@ export class DataManager extends Singletone {
             });
             impjs += ' } from \''+from+'\';\n';
         })
-        js = template.abstract.replace('{import}', impjs);
+        js = template.import.replace('{import}', impjs);
+        js += '\n'+template.abstract;
         classes.forEach(com=> {
             js += '\n' + com;
         });
