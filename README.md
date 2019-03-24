@@ -9,7 +9,3 @@ npm start
 npm install
 
 npm run dist
-
-# todo
-
-components, home 초기 데이터 추가
