@@ -11,7 +11,8 @@ import {
     FaReact,
     FaPalette,
     FaImages,
-    FaCss3
+    FaCss3,
+    FaFileExport
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -74,8 +75,6 @@ export default class Sidebar extends React.Component {
             <div>
                 <div style={styles.sidebar}>
                     {this.icon(<FaQuestion onClick={()=>this.setState({tab:'help'})} />)}
-                    {this.icon(<FaSave onClick={()=>this.dataManager.export()}/>)}
-                    {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
                     {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
                     {this.icon(<FaReact onClick={()=>this.setState({tab:'state'})} />)}
                     {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
@@ -83,6 +82,9 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaCss3 onClick={()=>this.setState({tab:'css'})} />)}
                     {this.icon(<FaPalette onClick={()=> this.setState({tab:'color'})} />)}
                     {this.icon(<FaImages onClick={()=> this.setState({tab: 'asset'})} />)}
+                    {this.icon(<FaSave onClick={()=>this.dataManager.export(true)}/>)}
+                    {this.icon(<FaFileExport onClick={()=>this.dataManager.export()} />)}
+                    {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
                     {this.icon(<FaUndo onClick={()=>HistoryService.getInstance(HistoryService).undo()} />)}
                     {this.icon(<FaRedo onClick={()=>HistoryService.getInstance(HistoryService).redo()} />)}
 

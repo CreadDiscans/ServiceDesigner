@@ -39,6 +39,7 @@ export class HistoryService extends Singletone {
     state = 'wait';
 
     push(action) {
+        document.getElementsByTagName('title')[0].innerText = '*Service Designer';
         if (this.state === 'wait') {
             this.stack.push(action);
             this.undoStack = [];

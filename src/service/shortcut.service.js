@@ -30,7 +30,7 @@ export class ShortcutService extends Singletone {
                 HistoryService.getInstance(HistoryService).undo();
                 e.stopPropagation();
             } else if (this.isCtrl && e.key === 's') {
-                DataManager.getInstance(DataManager).export();
+                DataManager.getInstance(DataManager).export(true);
             }
         });
         fromEvent(document, 'keyup').subscribe(e=> {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaCog, FaUndo, FaRedo, FaReact, FaPalette, FaImages, FaCss3 } from 'react-icons/fa';
+import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaCog, FaUndo, FaRedo, FaReact, FaPalette, FaImages, FaCss3, FaFileExport } from 'react-icons/fa';
 
 export class SidebarHelp extends React.Component {
 
@@ -14,8 +14,6 @@ export class SidebarHelp extends React.Component {
             <h3>Help</h3>
             
             {this.icon(<FaQuestion  />, 'Help')}
-            {this.icon(<FaSave />, 'Export [Ctrl+s]')}
-            {this.icon(<FaFileImport />, 'Import')}
             {this.icon(<FaFolder  />, 'Folder [F1]')}
             {this.icon(<FaReact />, 'State [F2]')}
             {this.icon(<FaCode />, 'Element [F3]')}
@@ -23,6 +21,9 @@ export class SidebarHelp extends React.Component {
             {this.icon(<FaCss3 />, 'Css [F5]')}
             {this.icon(<FaPalette />, 'Color [F6]')}
             {this.icon(<FaImages />, 'Asset [F7]')}
+            {this.icon(<FaSave />, 'Save [Ctrl+s]')}
+            {this.icon(<FaFileExport />, 'Export')}
+            {this.icon(<FaFileImport />, 'Import')}
             {this.icon(<FaUndo />, 'Undo [Ctrl+z]')}
             {this.icon(<FaRedo />, 'Redo')}
         </div>

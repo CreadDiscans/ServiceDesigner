@@ -16,6 +16,7 @@ export class DataManager extends Singletone {
 
     data;
     page;
+    savePath;
 
     static libTable = {
         reactstrap: ReactStrapService
@@ -190,7 +191,7 @@ export class DataManager extends Singletone {
         }
     }
 
-    export() {
+    export(save=false) {
         const js = this.getReactJs();
         const output = {
             data: this.getSaveForm(), 
@@ -198,13 +199,20 @@ export class DataManager extends Singletone {
             colors: ColorManager.getInstance(ColorManager).data,
             css: CssManager.getInstance(CssManager).data
         }
-        const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
+        let dirs;
+        if (save && this.savePath) {
+            dirs = [this.savePath];
+        } else {
+            dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] });
+        }
         if (dirs) {
+            this.savePath = dirs[0];
             fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), err=> {
                 if (err) {
                     return console.log(err)
                 }
                 console.log('saved json')
+                document.getElementsByTagName('title')[0].innerText = 'Service Designer';
             });
             fs.writeFile(dirs[0]+'/design.js', js, err=> {
                 if (err) {
@@ -224,6 +232,7 @@ export class DataManager extends Singletone {
     import() {
         const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
         if (file) {
+            this.savePath = file[0].replace('/design.json');
             fs.readFile(file[0], (err, data)=> {
                 if (err) throw err
                 try {
