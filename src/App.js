@@ -3,15 +3,18 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './component/home';
 import Sidebar from './component/sidebar/sidebar';
 import { ElementManager } from './manager/element.manager';
+import { DataManager } from './manager/data.manager';
+import { ColorManager } from './manager/color.manager';
 import comData from './resource/components.json';
 import initJson from './resource/init.json';
-import { DataManager } from './manager/data.manager';
+import colorData from './resource/colors.json';
 
 class App extends Component {
 
     componentWillMount() {
         DataManager.getInstance(DataManager).initialize(initJson);
         ElementManager.getInstance(ElementManager).initialize(comData);
+        ColorManager.getInstance(ColorManager).initialize(colorData);
     }   
 
     render() {

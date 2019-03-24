@@ -4,10 +4,10 @@ import PubsubService from './../service/pubsub.service';
 
 export class ColorManager extends Singletone {
 
-    data = {
-        red: '#ff0000',
-        blue: '#0000ff'
-    };
+    data = {};
+    
+    // red: '#ff0000',
+    // blue: '#0000ff'
 
     initialize(data) {
         this.data = data;

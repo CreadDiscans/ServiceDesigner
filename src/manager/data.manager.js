@@ -166,7 +166,11 @@ export class DataManager extends Singletone {
 
     export() {
         const js = this.getReactJs();
-        const output = {data: this.getSaveForm(), components: ElementManager.getInstance(ElementManager).data}
+        const output = {
+            data: this.getSaveForm(), 
+            components: ElementManager.getInstance(ElementManager).data,
+            colors: ColorManager.getInstance(ColorManager).data
+        }
         const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
         if (dirs) {
             fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), err=> {
@@ -193,6 +197,7 @@ export class DataManager extends Singletone {
                     const json = JSON.parse(data.toString())
                     this.initialize(json);
                     ElementManager.getInstance(ElementManager).initialize(json.components);
+                    ColorManager.getInstance(ColorManager).initialize(json.colors);
                 }catch(e) {console.log(e)}
             })
         }
