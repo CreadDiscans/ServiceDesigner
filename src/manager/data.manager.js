@@ -220,7 +220,7 @@ export class DataManager extends Singletone {
                 if (err) throw err
                 try {
                     const json = JSON.parse(data.toString())
-                    this.initialize(json);
+                    this.initialize(json.data);
                     ElementManager.getInstance(ElementManager).initialize(json.components);
                     ColorManager.getInstance(ColorManager).initialize(json.colors);
                 }catch(e) {console.log(e)}

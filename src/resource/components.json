@@ -60,7 +60,7 @@
         "name": "h1",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h1 className={{class}} style={{style}}>{text}{children}</h1>",
+        "code": "<h1 className={{class}} style={{style}}>{{text}}{children}</h1>",
         "property": {
             "class": "",
             "style": {},
@@ -73,7 +73,7 @@
         "name": "h2",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h2 className={{class}} style={{style}}>{text}{children}</h2>",
+        "code": "<h2 className={{class}} style={{style}}>{{text}}{children}</h2>",
         "property": {
             "class": "",
             "style": {},
@@ -86,7 +86,7 @@
         "name": "h3",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h3 className={{class}} style={{style}}>{text}{children}</h3>",
+        "code": "<h3 className={{class}} style={{style}}>{{text}}{children}</h3>",
         "property": {
             "class": "",
             "style": {},
@@ -99,7 +99,7 @@
         "name": "h4",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h4 className={{class}} style={{style}}>{text}{children}</h4>",
+        "code": "<h4 className={{class}} style={{style}}>{{text}}{children}</h4>",
         "property": {
             "class": "",
             "style": {},
@@ -112,7 +112,7 @@
         "name": "h5",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h5 className={{class}} style={{style}}>{text}{children}</h5>",
+        "code": "<h5 className={{class}} style={{style}}>{{text}}{children}</h5>",
         "property": {
             "class": "",
             "style": {},
@@ -125,7 +125,7 @@
         "name": "h6",
         "group": "HtmlElement",
         "import":"",
-        "code": "<h6 className={{class}} style={{style}}>{text}{children}</h6>",
+        "code": "<h6 className={{class}} style={{style}}>{{text}}{children}</h6>",
         "property": {
             "class": "",
             "style": {},
@@ -138,7 +138,7 @@
         "name": "p",
         "group": "HtmlElement",
         "import":"",
-        "code": "<p className={{class}} style={{style}}>{text}{children}</p>",
+        "code": "<p className={{class}} style={{style}}>{{text}}{children}</p>",
         "property": {
             "class": "",
             "style": {},
@@ -151,7 +151,7 @@
         "name": "a",
         "group": "HtmlElement",
         "import":"",
-        "code": "<a className={{class}} style={{style}} href={{href}}>{text}{children}</a>",
+        "code": "<a className={{class}} style={{style}} href={{href}}>{{text}}{children}</a>",
         "property": {
             "class": "",
             "style": {},
@@ -165,7 +165,7 @@
         "name": "Link",
         "group": "HtmlElement",
         "import":"import { Link } from 'react-router-dom'",
-        "code": "<Link className={{class}} style={{style}} to={{to}}>{text}{children}</Link>",
+        "code": "<Link className={{class}} style={{style}} to={{to}}>{{text}}{children}</Link>",
         "property": {
             "class": "",
             "style": {},
@@ -179,7 +179,7 @@
         "name": "button",
         "group": "HtmlElement",
         "import":"",
-        "code": "<button className={{class}} style={{style}} onClick={this.handleClick}>{text}{children}</button>",
+        "code": "<button className={{class}} style={{style}} onClick={this.handleClick}>{{text}}{children}</button>",
         "property": {
             "class": "",
             "style": {},
@@ -206,7 +206,7 @@
         "name": "option",
         "group": "HtmlElement",
         "import":"",
-        "code": "<option className={{class}} style={{style}} value={{value}}>{text}{children}</option>",
+        "code": "<option className={{class}} style={{style}} value={{value}}>{{text}}{children}</option>",
         "property": {
             "class": "",
             "style": {},
@@ -232,7 +232,7 @@
         "name": "li",
         "group": "HtmlElement",
         "import":"",
-        "code": "<li className={{class}} style={{style}}>{text}{children}</li>",
+        "code": "<li className={{class}} style={{style}}>{{text}}{children}</li>",
         "property": {
             "class": "",
             "style": {},
@@ -269,7 +269,7 @@
         "name": "th",
         "group": "HtmlElement",
         "import":"",
-        "code": "<th className={{class}} style={{style}}>{text}{children}</th>",
+        "code": "<th className={{class}} style={{style}}>{{text}}{children}</th>",
         "property": {
             "class": "",
             "style": {},
@@ -282,7 +282,7 @@
         "name": "td",
         "group": "HtmlElement",
         "import":"",
-        "code": "<td className={{class}} style={{style}}>{text}{children}</td>",
+        "code": "<td className={{class}} style={{style}}>{{text}}{children}</td>",
         "property": {
             "class": "",
             "style": {},
@@ -323,7 +323,7 @@
         "name": "Button",
         "group": "reactstrap",
         "import": "import { Button } from 'reactstrap'",
-        "code": "<Button className={{class}} style={{style}} color={{color}} name={{name}} outline={{outline}==='true'} onClick={this.handleClick}>{text}{children}</Button>",
+        "code": "<Button className={{class}} style={{style}} color={{color}} name={{name}} outline={{outline}==='true'} onClick={this.handleClick}>{{text}}{children}</Button>",
         "property": {
             "class": "",
             "style": {},
