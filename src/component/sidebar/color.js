@@ -43,7 +43,7 @@ export class SidebarColor extends React.Component{
         return <div>
             <h5>Color</h5>
             <SketchPicker color={this.state.color} onChangeComplete={this.handleChange}/>
-            {Object.keys(this.colorManager.data).map(color=> {
+            {Object.keys(this.colorManager.data).sort().map(color=> {
                 return <div key={color}>
                     <div style={{width:10, height:10, 
                         display: 'inline-block',

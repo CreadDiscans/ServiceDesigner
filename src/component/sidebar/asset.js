@@ -61,7 +61,7 @@ export class SidebarAsset extends React.Component {
     render() {
         return <div>
             <h5>Asset</h5>
-            {Object.keys(this.assetManager.data).map(asset=> {
+            {Object.keys(this.assetManager.data).sort().map(asset=> {
                 return <div key={asset} style={{margin:10}}>
                     {asset} 
                     <img 

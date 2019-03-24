@@ -46,7 +46,7 @@ export class SidebarCss extends React.Component {
                 editorProps={{
                 $blockScrolling: false,
                 }} />
-            {Object.keys(this.cssManager.data).map(item=> {
+            {Object.keys(this.cssManager.data).sort().map(item=> {
                 return <div key={item} style={{cursor:'pointer'}} onClick={()=> {
                     this.setState({value: this.cssManager.data[item]})
                 }}>{item}</div>

@@ -84,25 +84,28 @@ export default class SidebarCode extends React.Component {
             <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/>
             <h5>Element</h5>
             <div style={styles.listView}>
-                <ListGroup>
-                    {groups.map(item=> {
-                        return <ListGroupItem color={item===this.state.selectedGroup?'primary':'secondary'} key={item} style={{cursor:'pointer'}} onClick={()=>{
+                {/* <ListGroup> */}
+                {groups.sort().map(item=> {
+                    return <ListGroup key={item}>
+                        <ListGroupItem color={item===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
                             this.setState({selectedGroup: item})
                         }}> {item}</ListGroupItem>
-                    })}
-                    {
-                        this.props.elements.filter(item=> {
-                            return item.group === this.state.selectedGroup
-                        }).map(item=> {
-                            return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
-                                    this.layoutManger.create(item);
-                                }}>
-                                {item.name}
-                                <FaEdit style={styles.editIcon} onClick={(e)=> this.toggle(e, item)}/>
-                            </ListGroupItem>
-                        })
-                    }
-                </ListGroup>
+                        {
+                            this.state.selectedGroup === item && this.props.elements.sort((a,b)=>a.name > b.name?1:-1).filter(item=> {
+                                return item.group === this.state.selectedGroup
+                            }).map(item=> {
+                                return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
+                                        this.layoutManger.create(item);
+                                    }}>
+                                    {item.name}
+                                    <FaEdit style={styles.editIcon} onClick={(e)=> this.toggle(e, item)}/>
+                                </ListGroupItem>
+                            })
+                        }
+                    </ListGroup>
+                })}
+                    
+                {/* </ListGroup> */}
                 <Button color="success" style={styles.listItem} onClick={this.toggle} name='add'><FaPlus />Element</Button>
             </div>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
