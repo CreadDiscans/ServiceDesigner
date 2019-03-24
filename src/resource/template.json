@@ -3,6 +3,6 @@
     "import":"import React from 'react';\n{import}\n",
     "colors":"export class DesignedColors {\n\t{color}\n}\n",
     "assets":"export class DesignedAssets {\n\t{asset}\n}\n",
-    "abstract":"class DesignComponent extends React.Component {\n\thandleClick = (e) => {};\n\thandleChange = (e) => {};\n}\n"
+    "abstract":"class DesignComponent extends React.Component {\n\thandleClick = (e) => {};\n\thandleChange = (e) => {};\n\trenderPart = (name) => {}\n}\n"
 }
 

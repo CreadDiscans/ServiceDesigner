@@ -3,9 +3,9 @@
         "id": 0,
         "component":"layout",
         "import":[],
-        "code":"<div style={{style}}>{children}</div>",
+        "code":"<div className={{class}} style={{style}}>{children}</div>",
         "style":{},
-        "property":{},
+        "property":{"class":""},
         "state": {},
         "children":[
             {

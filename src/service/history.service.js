@@ -64,7 +64,7 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.createLayout(history.parentId, history.child); 
             else if (history.action === HistoryService.ACTION_LAYOUT_STATE) this.updateLayoutState(history.before);
             else if (history.action === HistoryService.ACTION_FOLDER_CREATE) this.deleteFolder(history.child.id);
-            else if (history.action === HistoryService.ACTION_FOLDER_DELETE) this.createFolder(history.parentId, history.child);
+            else if (history.action === HistoryService.ACTION_FOLDER_DELETE) this.createFolder(history.parentId, history.child, history.layoutData);
             else if (history.action === HistoryService.ACTION_ELEMENT_CREATE) this.deleteElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_DELETE) this.createElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_UPDATE) this.updateElement(history.before);
@@ -86,7 +86,7 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_LAYOUT_UPDATE) this.updateLayout(history.after);
             else if (history.action === HistoryService.ACTION_LAYOUT_DELETE) this.deleteLayout(history.child.id);
             else if (history.action === HistoryService.ACTION_LAYOUT_STATE) this.updateLayoutState(history.after);
-            else if (history.action === HistoryService.ACTION_FOLDER_CREATE) this.createFolder(history.parentId, history.child);
+            else if (history.action === HistoryService.ACTION_FOLDER_CREATE) this.createFolder(history.parentId, history.child, history.layoutData);
             else if (history.action === HistoryService.ACTION_FOLDER_DELETE) this.deleteFolder(history.child.id);
             else if (history.action === HistoryService.ACTION_ELEMENT_CREATE) this.createElement(history.elem);
             else if (history.action === HistoryService.ACTION_ELEMENT_DELETE) this.deleteElement(history.elem);
@@ -122,10 +122,10 @@ export class HistoryService extends Singletone {
         manager.setState(state);
     }
 
-    createFolder(parentId, elem) {
+    createFolder(parentId, elem, layoutData) {
         const manager = FolderManager.getInstance(FolderManager);
         manager.selected = parentId;
-        manager.create(elem, FolderManager.TYPE_OBJ);
+        manager.create(elem, FolderManager.TYPE_OBJ, layoutData);
     }
 
     deleteFolder(id) {

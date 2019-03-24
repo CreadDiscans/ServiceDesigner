@@ -32,13 +32,14 @@
         "name": "input",
         "group": "HtmlElement",
         "import":"",
-        "code": "<input className={{class}} type={{type}} style={{style}} name={{name}} value={{value}} onChange={this.handleChange} />",
+        "code": "<input className={{class}} type={{type}} style={{style}} name={{name}} value={{value}} onChange={this.handleChange} placeholder={{placeholder}} />",
         "property": {
             "class": "",
             "style": {},
             "type": "",
             "value": "",
             "name": "",
+            "placeholder":"",
             "if": "",
             "for": ""
         }
@@ -339,12 +340,13 @@
         "name": "Input",
         "group": "reactstrap",
         "import": "import { Input } from 'reactstrap'",
-        "code": "<Input className={{class}} style={{style}} name={{name}} onChange={this.handleChange} value={{value}}/>",
+        "code": "<Input className={{class}} style={{style}} name={{name}} onChange={this.handleChange} value={{value}} placeholder={{placeholder}}/>",
         "property": {
             "class": "",
             "style": {},
             "name": "",
             "value":"",
+            "placeholder":"",
             "if": "",
             "for": ""
         }
@@ -381,6 +383,19 @@
         "property": {
             "class": "",
             "style": {},
+            "if": "",
+            "for": ""
+        }
+    },{
+        "id": 29,
+        "name": "render",
+        "group": "HtmlElement",
+        "import":"",
+        "code": "<div className={{class}} style={{style}} name={{name}} onClick={this.handleClick}>{this.renderPart('{name}')}</div>",
+        "property": {
+            "class": "",
+            "style": {},
+            "name": "",
             "if": "",
             "for": ""
         }

@@ -67,9 +67,9 @@ export class SidebarAsset extends React.Component {
                     <img 
                         id={'asset-'+asset}
                         style={{width:30, height:30, float:'right'}} 
-                        src={this.assetManager.data[asset]} />
+                        src={this.assetManager.data[asset]} alt=""/>
                     <Tooltip placement="right" target={'asset-'+asset} isOpen={this.state.open === asset} toggle={()=>this.toogle(asset)}>
-                        <img style={{width:150}} src={this.assetManager.data[asset]} />
+                        <img style={{width:150}} src={this.assetManager.data[asset]} alt=""/>
                     </Tooltip>
                 </div>
             })}

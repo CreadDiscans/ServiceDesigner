@@ -24,13 +24,27 @@ export class FolderManager extends Singletone {
     //     collapse: false,
     //     children: []
     // }]
+
+    initLayout = {
+        "id": 0,
+        "component":"layout",
+        "import":[],
+        "code":"<div className={{class}} style={{style}}>{children}</div>",
+        "style":{},
+        "property":{"class":""},
+        "state": {},
+        "children":[]
+    }
+
     initialize(data) {
         this.data = data;
         this.selected = 0;
     }
 
-    create(name, type) {
+    create(name, type, layoutData=this.initLayout) {
+        const stack = [];
         let newOne;
+        let parent;
         if (type === FolderManager.TYPE_OBJ) {
             newOne = name;
         } else {
@@ -45,7 +59,15 @@ export class FolderManager extends Singletone {
                 children: []
             }
         }
-        let parent;
+
+        const findKey = (item, func) => {
+            stack.push(item.name);
+            if (item.id ===  newOne.id && item.type === FolderManager.TYPE_JS) {
+                func(stack.join('/'));
+            }
+            item.children.forEach(child=> findKey(child, func))
+            stack.pop();
+        }
         Utils.loop(this.data, (item)=> {
             if (this.selected === item.id) {
                 parent = item;
@@ -53,10 +75,16 @@ export class FolderManager extends Singletone {
         });
         if (parent) {
             parent.children.push(newOne);
+            if (type === FolderManager.TYPE_JS) {
+                findKey(this.data, (pageKey)=> {
+                    DataManager.getInstance(DataManager).data[pageKey] = Utils.deepcopy(layoutData);
+                });
+            }
             HistoryService.getInstance(HistoryService).push({
                 action:HistoryService.ACTION_FOLDER_CREATE,
                 parentId: parent.id,
-                child: newOne
+                child: newOne,
+                layoutData: Utils.deepcopy(layoutData)
             });
             PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
         } else {
@@ -68,6 +96,7 @@ export class FolderManager extends Singletone {
         let parent;
         let index;
         let target;
+        let stack = [];
         Utils.loop(this.data, (item)=> {
             item.children.forEach((child, i)=> {
                 if (child.id === this.selected) {
@@ -77,12 +106,26 @@ export class FolderManager extends Singletone {
                 }
             });
         });
+        const findKey = (item, func) => {
+            stack.push(item.name);
+            if (item.id ===  this.selected && item.type === FolderManager.TYPE_JS) {
+                func(stack.join('/'));
+            }
+            item.children.forEach(child=> findKey(child, func))
+            stack.pop();
+        }
+        let layoutData;
+        findKey(this.data, (pageKey)=> {
+            layoutData = DataManager.getInstance(DataManager).data[pageKey];
+            delete DataManager.getInstance(DataManager).data[pageKey];
+        });
         this.selected = 0;
         parent.children.splice(index, 1);
         HistoryService.getInstance(HistoryService).push({
             action: HistoryService.ACTION_FOLDER_DELETE,
             parentId: parent.id,
-            child: target
+            child: target,
+            layoutData: layoutData
         })
         PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'folder');
     }
@@ -112,4 +155,5 @@ export class FolderManager extends Singletone {
 
         loop(this.data);
     }
+
 }

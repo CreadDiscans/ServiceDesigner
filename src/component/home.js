@@ -29,7 +29,7 @@ export default class Home extends React.Component {
         })
         return <div id="design">
             <CodeSandbox imports={imp}>
-            {'state='+JSON.stringify(this.state.state)+';render(' +this.state.code + ')'}
+            {'state='+JSON.stringify(this.state.state)+';renderPart=(name)=>{};render(' +this.state.code + ')'}
             </CodeSandbox>
         </div>
     }
