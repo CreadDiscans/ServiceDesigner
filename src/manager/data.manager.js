@@ -2,6 +2,7 @@ import { Singletone } from "../service/singletone";
 import { LayoutManager } from "./layout.manager";
 import { FolderManager } from "./folder.manager";
 import { ColorManager } from './color.manager';
+import { AssetManager } from './asset.manager';
 import { HistoryService } from './../service/history.service';
 import ReactStrapService from './../service/reactstrap.service';
 import Utils from '../service/utils';
@@ -73,8 +74,9 @@ export class DataManager extends Singletone {
         return hierarchy;
     }
 
-    render() {
+    render(exporting=false) {
         const colorManager = ColorManager.getInstance(ColorManager);
+        const assetManager = AssetManager.getInstance(AssetManager);
         const selected_id = LayoutManager.getInstance(LayoutManager).selected;
         const imports = {}
         const parseProperty = (value) => {
@@ -85,6 +87,17 @@ export class DataManager extends Singletone {
                     (value.indexOf('{item.') === 0 && value[value.length-1] === '}' && value !== '{item.}') ||
                     (value.indexOf('{this.state.') === 0 && value[value.length-1] === '}' && value !== '{this.state.}')) {
                     value = value.slice(1, value.length-1)
+                } else if (value.indexOf('Asset.') === 0) {
+                    value = '';
+                    Object.keys(assetManager.data).forEach(asset=> {
+                        if (value === 'Asset.'+asset) {
+                            if (exporting) {
+                                value = 'DesignedAssets.'+ asset;
+                            } else {
+                                value = '"' + assetManager.data[asset] + '"';
+                            }
+                        }
+                    });
                 } else {
                     value = '"' + String(value) + '"'
                 }
@@ -100,7 +113,19 @@ export class DataManager extends Singletone {
             let stringStyle = JSON.stringify(style);
             Object.keys(colorManager.data).forEach(color=> {
                 const re = new RegExp('"Color.'+color+'"', 'g');
-                stringStyle = stringStyle.replace(re, '"' + colorManager.data[color]+'"');
+                if (exporting) {
+                    stringStyle = stringStyle.replace(re, 'DesignedColors.'+color);
+                } else {
+                    stringStyle = stringStyle.replace(re, '"' + colorManager.data[color]+'"');
+                }
+            });
+            Object.keys(assetManager.data).forEach(asset=> {
+                const re = new RegExp('"Asset.'+asset+'"', 'g');
+                if (exporting) {
+                    stringStyle = stringStyle.replace(re, '"url("+DesignedAssets.'+asset+'+")"');
+                } else {
+                    stringStyle = stringStyle.replace(re, '"url('+assetManager.data[asset]+')"');
+                }
             });
             return stringStyle;
         }
@@ -218,9 +243,27 @@ export class DataManager extends Singletone {
         let impjs = '';
         const imps = {};
         const classes = [];
+        const colorManager = ColorManager.getInstance(ColorManager);
+        const assetManager = AssetManager.getInstance(AssetManager);
+        const form = 'static {name} = {value};\n';
+        const toColorClass = () => {
+            let out = '';
+            Object.keys(colorManager.data).forEach(color=> {
+                out += form.replace('{name}', color).replace('{value}', '"'+colorManager.data[color]+'"');
+            });
+            return out;
+        }
+
+        const toAssetClass = () => {
+            let out = '';
+            Object.keys(assetManager.data).forEach(color=> {
+                out += form.replace('{name}', color).replace('{value}', '"'+assetManager.data[color]+'"');
+            });
+            return out;
+        }
 
         Object.keys(this.data).forEach(page=> {
-            const target = this.render();
+            const target = this.render(true);
             target.imports.forEach(imp=> {
                 if (!(imp.libname in imps)) {
                     imps[imp.libname] = [];
@@ -253,6 +296,8 @@ export class DataManager extends Singletone {
             impjs += ' } from \''+from+'\';\n';
         })
         js = template.import.replace('{import}', impjs);
+        js += '\n'+template.colors.replace('{color}', toColorClass());
+        js += '\n'+template.assets.replace('{asset}', toAssetClass());
         js += '\n'+template.abstract;
         classes.forEach(com=> {
             js += '\n' + com;
