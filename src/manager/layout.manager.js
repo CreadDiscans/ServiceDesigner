@@ -28,6 +28,7 @@ export class LayoutManager extends Singletone {
         const convertImport = () => {
             const imp = []
             elem.import.split('\n').forEach(line=> {
+                if (line === '') return
                 line = line.replace(/;/gi, '')
                 const lib = line.split('from')[1].replace(/ /, '').replace(/'/gi, '')
                 const items = []
