@@ -3,6 +3,7 @@ import PubsubService from './../service/pubsub.service'
 import CodeSandbox from 'react-code-sandbox'
 import ReactStrapService from '../service/reactstrap.service'
 import { DataManager } from './../manager/data.manager';
+import { CssManager } from './../manager/css.manager';
 
 export default class Home extends React.Component {
 
@@ -14,9 +15,12 @@ export default class Home extends React.Component {
     dataManager;
 
     componentWillMount() {
+        const style = document.createElement('style');
+        document.head.appendChild(style);
         this.dataManager = DataManager.getInstance(DataManager);
         PubsubService.sub(PubsubService.KEY_RELOAD_HOME).subscribe(value=> {
-            this.setState(this.dataManager.render())
+            this.setState(this.dataManager.render());
+            style.innerHTML = CssManager.getInstance(CssManager).getCssFile();
         });
     }
 

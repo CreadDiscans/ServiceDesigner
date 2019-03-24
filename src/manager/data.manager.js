@@ -3,6 +3,7 @@ import { LayoutManager } from "./layout.manager";
 import { FolderManager } from "./folder.manager";
 import { ColorManager } from './color.manager';
 import { AssetManager } from './asset.manager';
+import { CssManager } from './css.manager';
 import { HistoryService } from './../service/history.service';
 import ReactStrapService from './../service/reactstrap.service';
 import Utils from '../service/utils';
@@ -194,7 +195,8 @@ export class DataManager extends Singletone {
         const output = {
             data: this.getSaveForm(), 
             components: ElementManager.getInstance(ElementManager).data,
-            colors: ColorManager.getInstance(ColorManager).data
+            colors: ColorManager.getInstance(ColorManager).data,
+            css: CssManager.getInstance(CssManager).data
         }
         const dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
         if (dirs) {
@@ -210,6 +212,12 @@ export class DataManager extends Singletone {
                 }
                 console.log('saved js')
             });
+            fs.writeFile(dirs[0]+'/design.css', CssManager.getInstance(CssManager).getCssFile(), err=> {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log('saved css');
+            });
         }
     }
 
@@ -223,6 +231,7 @@ export class DataManager extends Singletone {
                     this.initialize(json.data);
                     ElementManager.getInstance(ElementManager).initialize(json.components);
                     ColorManager.getInstance(ColorManager).initialize(json.colors);
+                    CssManager.getInstance(CssManager).initialize(json.css);
                 }catch(e) {console.log(e)}
             })
         }

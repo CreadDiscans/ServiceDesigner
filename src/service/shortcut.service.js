@@ -19,8 +19,10 @@ export class ShortcutService extends Singletone {
             } else if (e.key === 'F4') {
                 PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'property');
             } else if (e.key === 'F5') {
-                PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'color');
+                PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'css');
             } else if (e.key === 'F6') {
+                PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'color');
+            } else if (e.key === 'F7') {
                 PubsubService.pub(PubsubService.KEY_RELOAD_SIDEBAR, 'asset');
             } else if (e.key === 'Control') {
                 this.isCtrl = true;
