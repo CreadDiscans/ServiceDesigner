@@ -4,6 +4,7 @@ import Utils from './utils';
 import { FolderManager } from '../manager/folder.manager';
 import { ElementManager } from './../manager/element.manager';
 import { ColorManager } from './../manager/color.manager';
+import { AssetManager } from './../manager/asset.manager';
 
 export class HistoryService extends Singletone {
 
@@ -22,6 +23,10 @@ export class HistoryService extends Singletone {
     static ACTION_COLOR_CREATE = 'color_create';
     static ACTION_COLOR_UPDATE = 'color_update';
     static ACTION_COLOR_DELETE = 'color_delete';
+
+    static ACTION_ASSET_CREATE = 'asset_create';
+    static ACTION_ASSET_UPDATE = 'asset_update';
+    static ACTION_ASSET_DELETE = 'asset_delete';
 
     stack = [];
     undoStack = [];
@@ -66,6 +71,9 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_COLOR_CREATE) this.deleteColor(history.name);
             else if (history.action === HistoryService.ACTION_COLOR_UPDATE) this.updateColor(history.before.name, history.before.color);
             else if (history.action === HistoryService.ACTION_COLOR_DELETE) this.createColor(history.name, history.color);
+            else if (history.action === HistoryService.ACTION_ASSET_CREATE) this.deleteAsset(history.name);
+            else if (history.action === HistoryService.ACTION_ASSET_UPDATE) this.updateAsset(history.before.name, history.before.value);
+            else if (history.action === HistoryService.ACTION_ASSET_DELETE) this.createAsset(history.name, history.value);
             this.undoStack.push(history);
         }
     }
@@ -86,6 +94,9 @@ export class HistoryService extends Singletone {
             else if (history.action === HistoryService.ACTION_COLOR_CREATE) this.createColor(history.name, history.color);
             else if (history.action === HistoryService.ACTION_COLOR_UPDATE) this.updateColor(history.after.name, history.after.color);
             else if (history.action === HistoryService.ACTION_COLOR_DELETE) this.deleteColor(history.name);
+            else if (history.action === HistoryService.ACTION_ASSET_CREATE) this.createAsset(history.name, history.value);
+            else if (history.action === HistoryService.ACTION_ASSET_UPDATE) this.updateAsset(history.after.name, history.after.value);
+            else if (history.action === HistoryService.ACTION_ASSET_DELETE) this.deleteAsset(history.name);
         }
     }
 
@@ -150,6 +161,21 @@ export class HistoryService extends Singletone {
 
     deleteColor(name) {
         const manager = ColorManager.getInstance(ColorManager);
+        manager.delete(name);
+    }
+
+    createAsset(name, color) {
+        const manager = AssetManager.getInstance(AssetManager);
+        manager.create(name, color);
+    }
+
+    updateAsset(name, color) {
+        const manager = AssetManager.getInstance(AssetManager);
+        manager.update(name, color);
+    }
+
+    deleteAsset(name) {
+        const manager = AssetManager.getInstance(AssetManager);
         manager.delete(name);
     }
 }

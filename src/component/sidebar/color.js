@@ -60,11 +60,11 @@ export class SidebarColor extends React.Component{
                 <Button 
                     color="success" 
                     style={{dispaly:'inline-block', width:'50%'}} 
-                    onClick={this.addColor}>add</Button>
+                    onClick={this.addColor}>Add</Button>
                 <Button 
                     color="danger"
                     style={{display:'inline-block', width:'50%'}}
-                    onClick={this.deleteColor}>delete</Button>
+                    onClick={this.deleteColor}>Delete</Button>
             </div>
         </div>
 

@@ -9,7 +9,8 @@ import {
     FaRedo,
     FaQuestion,
     FaReact,
-    FaPalette
+    FaPalette,
+    FaImages
  } from 'react-icons/fa'
 import SidebarFolder from './folder';
 import SidebarCode from './code';
@@ -23,6 +24,7 @@ import { HistoryService } from './../../service/history.service';
 import { SidebarHelp } from './help';
 import { SidebarState } from './state';
 import { SidebarColor } from './color';
+import { SidebarAsset } from './asset';
 
 export default class Sidebar extends React.Component {
 
@@ -77,6 +79,7 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
                     {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
                     {this.icon(<FaPalette onClick={()=> this.setState({tab:'color'})} />)}
+                    {this.icon(<FaImages onClick={()=> this.setState({tab: 'asset'})} />)}
                     {this.icon(<FaUndo onClick={()=>HistoryService.getInstance(HistoryService).undo()} />)}
                     {this.icon(<FaRedo onClick={()=>HistoryService.getInstance(HistoryService).redo()} />)}
 
@@ -93,6 +96,7 @@ export default class Sidebar extends React.Component {
                     {this.state.tab === 'property' && <SidebarProperty 
                         layout={this.state.layout} selected={this.state.selected} />}
                     {this.state.tab === 'color' && <SidebarColor />}
+                    {this.state.tab === 'asset' && <SidebarAsset />}
                 </div>
                 <div style={styles.body}>
                     {this.props.children}
