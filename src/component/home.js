@@ -15,9 +15,13 @@ export default class Home extends React.Component {
     dataManager;
 
     componentWillMount() {
+        this.dataManager = DataManager.getInstance(DataManager);
+        if (!this.dataManager.projectType) {
+            this.props.history.push('/');
+            return;
+        }
         const style = document.createElement('style');
         document.head.appendChild(style);
-        this.dataManager = DataManager.getInstance(DataManager);
         PubsubService.sub(PubsubService.KEY_RELOAD_HOME).subscribe(value=> {
             this.setState(this.dataManager.render());
             style.innerHTML = CssManager.getInstance(CssManager).getCssFile();

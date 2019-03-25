@@ -2,27 +2,18 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './component/home';
 import Sidebar from './component/sidebar/sidebar';
-import { ElementManager } from './manager/element.manager';
-import { DataManager } from './manager/data.manager';
-import comData from './resource/components.json';
-import initJson from './resource/init.json';
-import { ShortcutService } from './service/shortcut.service';
+import { Intro } from './component/intro';
 
-class App extends Component {
-
-    componentWillMount() {
-        DataManager.getInstance(DataManager).initialize(initJson);
-        ElementManager.getInstance(ElementManager).initialize(comData);
-        ShortcutService.getInstance(ShortcutService).initialize();
-    }   
+class App extends Component { 
 
     render() {
         return (
         <div>
             <Sidebar>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="*" render={() => (<Redirect to="/" />)} />
+                    <Route exact path="/intro" component={Intro} />
+                    <Route exact path="/home" component={Home} />
+                    <Route path="*" render={() => (<Redirect to="/intro" />)} />
                 </Switch>
             </Sidebar>
         </div>

@@ -89,7 +89,7 @@ export default class Sidebar extends React.Component {
                     {this.icon(<FaRedo onClick={()=>HistoryService.getInstance(HistoryService).redo()} />)}
 
                 </div>
-                <div style={styles.collapseSidebar}>
+                {this.dataManager.projectType? <div style={styles.collapseSidebar}>
                     {this.state.tab === 'help' && <SidebarHelp />}
                     {this.state.tab === 'folder' && <SidebarFolder 
                         folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
@@ -103,7 +103,9 @@ export default class Sidebar extends React.Component {
                     {this.state.tab === 'css' && <SidebarCss />}
                     {this.state.tab === 'color' && <SidebarColor />}
                     {this.state.tab === 'asset' && <SidebarAsset />}
-                </div>
+                </div>: <div style={styles.collapseSidebar}>
+                    <SidebarHelp />
+                </div>}
                 <div style={styles.body}>
                     {this.props.children}
                 </div>

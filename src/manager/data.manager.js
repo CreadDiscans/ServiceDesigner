@@ -17,6 +17,7 @@ export class DataManager extends Singletone {
     data;
     page;
     savePath;
+    projectType;
 
     static libTable = {
         reactstrap: ReactStrapService
@@ -192,6 +193,7 @@ export class DataManager extends Singletone {
     }
 
     export(save=false) {
+        if (!this.projectType) return;
         const js = this.getReactJs();
         const output = {
             data: this.getSaveForm(), 
