@@ -17,6 +17,9 @@ export class Intro extends React.Component {
             this.props.history.push('/home');
         } else if (e.target.name === 'react-native') {
             DataManager.getInstance(DataManager).projectType = 'react-native';
+            DataManager.getInstance(DataManager).initialize(initJson);
+            ElementManager.getInstance(ElementManager).initialize(comData);
+            ShortcutService.getInstance(ShortcutService).initialize();
             this.props.history.push('/home');
         } else if (e.target.name === 'load') {
             DataManager.getInstance(DataManager).import();

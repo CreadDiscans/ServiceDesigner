@@ -17,6 +17,7 @@ import 'brace/mode/jsx'
 import 'brace/theme/github'
 import { LayoutManager } from '../../manager/layout.manager';
 import { ElementManager } from '../../manager/element.manager';
+import { DataManager } from '../../manager/data.manager';
 
 export default class SidebarCode extends React.Component {
     state = {
@@ -32,10 +33,12 @@ export default class SidebarCode extends React.Component {
 
     layoutManger;
     elementManger;
+    dataManager;
 
     componentWillMount() {
         this.layoutManger = LayoutManager.getInstance(LayoutManager);
         this.elementManger = ElementManager.getInstance(ElementManager);
+        this.dataManager = DataManager.getInstance(DataManager);
     }
 
     toggle = (e, item)=> {
@@ -74,24 +77,32 @@ export default class SidebarCode extends React.Component {
     }
 
     render() {
+        this.props.elements.sort((a,b)=>a.name > b.name?1:-1);
         const groups = [];
         this.props.elements.forEach(item=> {
-            if(groups.indexOf(item.group) === -1) {
-                groups.push(item.group);
+            let exist = false;
+            groups.forEach(g=> {
+                if (g.name === item.group) {
+                    exist = true;
+                }
+            });
+            if (!exist) {
+                groups.push({name:item.group, type:item.type});
             }
         });
         return <div>
             <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/>
             <h5>Element</h5>
             <div style={styles.listView}>
-                {/* <ListGroup> */}
-                {groups.sort().map(item=> {
-                    return <ListGroup key={item}>
-                        <ListGroupItem color={item===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
-                            this.setState({selectedGroup: item})
-                        }}> {item}</ListGroupItem>
+                {groups.filter((item)=> {
+                    return this.dataManager.projectType === item.type;
+                }).map(item=> {
+                    return <ListGroup key={item.name}>
+                        <ListGroupItem color={item.name===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
+                            this.setState({selectedGroup: item.name})
+                        }}> {item.name}</ListGroupItem>
                         {
-                            this.state.selectedGroup === item && this.props.elements.sort((a,b)=>a.name > b.name?1:-1).filter(item=> {
+                            this.state.selectedGroup === item.name && this.props.elements.filter(item=> {
                                 return item.group === this.state.selectedGroup
                             }).map(item=> {
                                 return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
@@ -105,7 +116,6 @@ export default class SidebarCode extends React.Component {
                     </ListGroup>
                 })}
                     
-                {/* </ListGroup> */}
                 <Button color="success" style={styles.listItem} onClick={this.toggle} name='add'><FaPlus />Element</Button>
             </div>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
