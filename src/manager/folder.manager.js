@@ -26,14 +26,22 @@ export class FolderManager extends Singletone {
     // }]
 
     initLayout = {
-        "id": 0,
-        "component":"layout",
-        "import":[],
-        "code":"<div className={{class}} style={{style}}>{children}</div>",
-        "style":{},
-        "property":{"class":""},
-        "state": {},
-        "children":[]
+        'react': {
+            "id": 0,
+            "component":"layout",
+            "import":[],
+            "code":"<div className={{class}} style={{style}}>{children}</div>",
+            "style":{},
+            "property":{"class":""},
+            "state": {},
+            "children":[]
+        },
+        'react-native': {
+            "id":0,
+            "component":"View",
+            "import":[{from:'react-native', items:['View']}],
+            "code":"<View style={{style}}>{children}</View>"
+        }
     }
 
     initialize(data) {
@@ -41,7 +49,10 @@ export class FolderManager extends Singletone {
         this.selected = 0;
     }
 
-    create(name, type, layoutData=this.initLayout) {
+    create(name, type, layoutData=undefined) {
+        if (layoutData === undefined) {
+            layoutData = this.layoutData[DataManager.getInstance(DataManager).projectType]
+        }
         const stack = [];
         let newOne;
         let parent;

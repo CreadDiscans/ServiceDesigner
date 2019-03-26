@@ -12,6 +12,7 @@
     "react-color": "^2.17.0",
     "react-dom": "^16.8.4",
     "react-icons": "^3.5.0",
+    "react-native-web": "^0.11.2",
     "react-router": "^4.4.0",
     "react-router-dom": "^4.4.0",
     "reactstrap": "^7.1.0",

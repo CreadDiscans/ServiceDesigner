@@ -8,16 +8,42 @@ import initJson from '../resource/init.json';
 
 export class Intro extends React.Component {
     
+    react_init = {
+        '/home.js': {
+            "id": 0,
+            "component":"layout",
+            "import":[],
+            "code":"<div className={{class}} style={{style}}>{children}</div>",
+            "style":{},
+            "property":{"class":""},
+            "state": {},
+            "children":[]        
+        }
+    }
+
+    react_native_init = {
+        '/home.js': {
+            "id": 0,
+            "component":"View",
+            "import":[{from:"react-native", items:['View']}],
+            "code":"<View style={{style}}>{children}</View>",
+            "style":{},
+            "property":{},
+            "state":{},
+            "children":[]
+        }
+    }
+
     handleClick = (e) => {
         if (e.target.name === 'react') {
             DataManager.getInstance(DataManager).projectType = 'react';
-            DataManager.getInstance(DataManager).initialize(initJson);
+            DataManager.getInstance(DataManager).initialize(this.react_init);
             ElementManager.getInstance(ElementManager).initialize(comData);
             ShortcutService.getInstance(ShortcutService).initialize();
             this.props.history.push('/home');
         } else if (e.target.name === 'react-native') {
             DataManager.getInstance(DataManager).projectType = 'react-native';
-            DataManager.getInstance(DataManager).initialize(initJson);
+            DataManager.getInstance(DataManager).initialize(this.react_native_init);
             ElementManager.getInstance(ElementManager).initialize(comData);
             ShortcutService.getInstance(ShortcutService).initialize();
             this.props.history.push('/home');

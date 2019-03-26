@@ -434,7 +434,7 @@
         "name":"View",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { View } from 'readct-native'",
+        "import":"import { View } from 'react-native'",
         "code": "<View style={{style}}>{children}</View>",
         "property": {
             "style": {},
@@ -446,7 +446,7 @@
         "name":"ScrollView",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { ScrollView } from 'readct-native'",
+        "import":"import { ScrollView } from 'react-native'",
         "code": "<ScrollView style={{style}}>{children}</ScrollView>",
         "property": {
             "style": {},
@@ -458,7 +458,7 @@
         "name":"Text",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { Text } from 'readct-native'",
+        "import":"import { Text } from 'react-native'",
         "code": "<Text style={{style}}>{{text}}</Text>",
         "property": {
             "style": {},
@@ -471,7 +471,7 @@
         "name":"TextInput",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { TextInput } from 'readct-native'",
+        "import":"import { TextInput } from 'react-native'",
         "code": "<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{{name}})}/>",
         "property": {
             "style": {},
@@ -486,7 +486,7 @@
         "name":"TouchableOpacity",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { TouchableOpacity } from 'readct-native'",
+        "import":"import { TouchableOpacity } from 'react-native'",
         "code": "<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableOpacity>",
         "property": {
             "style": {},
@@ -499,7 +499,7 @@
         "name":"TouchableWithoutFeedback",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { TouchableWithoutFeedback } from 'readct-native'",
+        "import":"import { TouchableWithoutFeedback } from 'react-native'",
         "code": "<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableWithoutFeedback>",
         "property": {
             "style": {},
@@ -512,7 +512,7 @@
         "name":"Image",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { Image } from 'readct-native'",
+        "import":"import { Image } from 'react-native'",
         "code": "<Image style={{style}} source={uri: \"{src}\"} />",
         "property": {
             "style": {},

@@ -12,8 +12,6 @@ npm run dist
 
 # todo
 
-react-native 태그를 web에 그리기
-
 react-native 태그를 design.js로 뽑기
 
 design.json에 react-native type 구분 추가

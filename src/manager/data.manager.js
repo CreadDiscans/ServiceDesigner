@@ -9,6 +9,7 @@ import ReactStrapService from './../service/reactstrap.service';
 import Utils from '../service/utils';
 import { ElementManager } from "./element.manager";
 import template from '../resource/template.json';
+import { ReactNativeService } from "../service/react-native.service";
 
 const { remote } = window.require('electron')
 const fs = window.require('fs')
@@ -20,7 +21,8 @@ export class DataManager extends Singletone {
     projectType;
 
     static libTable = {
-        reactstrap: ReactStrapService
+        reactstrap: ReactStrapService,
+        'react-native': ReactNativeService
     }
 
     initialize(data) {
@@ -111,7 +113,12 @@ export class DataManager extends Singletone {
         const parseStyle = (id, value) => {
             const style = Utils.deepcopy(value)
             if (id === selected_id) {
-                style.border = 'solid 1px red'
+                if (this.projectType === 'react') {
+                    style.border = 'solid 1px red';
+                } else {
+                    style.borderColor = 'red';
+                    style.borderWidth = 1;
+                }
             }
             let stringStyle = JSON.stringify(style);
             Object.keys(colorManager.data).forEach(color=> {
@@ -132,8 +139,8 @@ export class DataManager extends Singletone {
             });
             return stringStyle;
         }
-
         const parse = (item) => {
+            console.log(item.import)
             item.import.forEach(imp=> {
                 if (!(imp.from in imports)) {
                     imports[imp.from] = []
@@ -170,7 +177,7 @@ export class DataManager extends Singletone {
             }
             return code
         }
-        
+        console.log(imports)
         const convertImport = () => {
             const out = []
             Object.keys(imports).forEach(lib=> {

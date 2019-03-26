@@ -36,9 +36,23 @@ export default class Home extends React.Component {
             })
         })
         return <div id="design">
-            <CodeSandbox imports={imp}>
-            {'state='+JSON.stringify(this.state.state)+';renderPart=(name)=>{};render(' +this.state.code + ')'}
-            </CodeSandbox>
+            { this.dataManager.projectType === 'react-native' && <img style={{height:'100vh'}} src="/frame.jpg" /> }
+            <div style={(this.dataManager.projectType === 'react-native') ? styles.mobile : {}}>
+                <CodeSandbox imports={imp}>
+                {'state='+JSON.stringify(this.state.state)+';renderPart=(name)=>{};render(' +this.state.code + ')'}
+                </CodeSandbox>
+            </div>
         </div>
+    }
+}
+
+const styles = {
+    mobile: {
+        width: '42.5vh',
+        position: 'absolute',
+        top: '12%',
+        bottom: '12.5%',
+        left: '3vh',
+        overflow: 'auto'
     }
 }
