@@ -140,7 +140,6 @@ export class DataManager extends Singletone {
             return stringStyle;
         }
         const parse = (item) => {
-            console.log(item.import)
             item.import.forEach(imp=> {
                 if (!(imp.from in imports)) {
                     imports[imp.from] = []
@@ -177,7 +176,6 @@ export class DataManager extends Singletone {
             }
             return code
         }
-        console.log(imports)
         const convertImport = () => {
             const out = []
             Object.keys(imports).forEach(lib=> {
@@ -206,7 +204,8 @@ export class DataManager extends Singletone {
             data: this.getSaveForm(), 
             components: ElementManager.getInstance(ElementManager).data,
             colors: ColorManager.getInstance(ColorManager).data,
-            css: CssManager.getInstance(CssManager).data
+            css: CssManager.getInstance(CssManager).data,
+            projectType : this.projectType
         }
         let dirs;
         if (save && this.savePath) {
@@ -250,6 +249,7 @@ export class DataManager extends Singletone {
                     ElementManager.getInstance(ElementManager).initialize(json.components);
                     ColorManager.getInstance(ColorManager).initialize(json.colors);
                     CssManager.getInstance(CssManager).initialize(json.css);
+                    this.projectType = json.projectType;
                 }catch(e) {console.log(e)}
             })
         }
