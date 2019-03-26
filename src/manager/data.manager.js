@@ -112,7 +112,7 @@ export class DataManager extends Singletone {
 
         const parseStyle = (id, value) => {
             const style = Utils.deepcopy(value)
-            if (id === selected_id) {
+            if (id === selected_id && !exporting) {
                 if (this.projectType === 'react') {
                     style.border = 'solid 1px red';
                 } else {

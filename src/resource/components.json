@@ -520,5 +520,16 @@
             "if": "",
             "for": ""
         }
+    }, {
+        "id":37,
+        "name":"render",
+        "group": "react-native",
+        "type": "react-native",
+        "import":"import { View } from 'react-native'",
+        "code": "<View style={{style}}>{this.renderPart('{name}')}</View>",
+        "property": {
+            "style":{},
+            "name": ""
+        }
     }
 ]

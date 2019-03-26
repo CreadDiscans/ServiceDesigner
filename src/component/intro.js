@@ -4,7 +4,6 @@ import { DataManager } from '../manager/data.manager';
 import { ElementManager } from '../manager/element.manager';
 import { ShortcutService } from '../service/shortcut.service';
 import comData from '../resource/components.json';
-import initJson from '../resource/init.json';
 
 export class Intro extends React.Component {
     
