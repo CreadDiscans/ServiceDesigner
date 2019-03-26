@@ -27,7 +27,7 @@ export class Intro extends React.Component {
             "import":[{from:"react-native", items:['View']}],
             "code":"<View style={{style}}>{children}</View>",
             "style":{},
-            "property":{},
+            "property":{"class":""},
             "state":{},
             "children":[]
         }

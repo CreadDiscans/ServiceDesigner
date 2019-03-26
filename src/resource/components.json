@@ -437,6 +437,7 @@
         "import":"import { View } from 'react-native'",
         "code": "<View style={{style}}>{children}</View>",
         "property": {
+            "class": "",
             "style": {},
             "if": "",
             "for": ""
@@ -449,6 +450,7 @@
         "import":"import { ScrollView } from 'react-native'",
         "code": "<ScrollView style={{style}}>{children}</ScrollView>",
         "property": {
+            "class": "",
             "style": {},
             "if": "",
             "for": ""
@@ -461,6 +463,7 @@
         "import":"import { Text } from 'react-native'",
         "code": "<Text style={{style}}>{{text}}</Text>",
         "property": {
+            "class": "",
             "style": {},
             "text":"",
             "if": "",
@@ -474,6 +477,7 @@
         "import":"import { TextInput } from 'react-native'",
         "code": "<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{{name}})}/>",
         "property": {
+            "class": "",
             "style": {},
             "value":"",
             "name":"",
@@ -489,6 +493,7 @@
         "import":"import { TouchableOpacity } from 'react-native'",
         "code": "<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableOpacity>",
         "property": {
+            "class": "",
             "style": {},
             "name":"",
             "if": "",
@@ -502,6 +507,7 @@
         "import":"import { TouchableWithoutFeedback } from 'react-native'",
         "code": "<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableWithoutFeedback>",
         "property": {
+            "class": "",
             "style": {},
             "name":"",
             "if": "",
@@ -515,6 +521,7 @@
         "import":"import { Image } from 'react-native'",
         "code": "<Image style={{style}} source={uri: \"{src}\"} />",
         "property": {
+            "class": "",
             "style": {},
             "src":"",
             "if": "",
@@ -528,6 +535,7 @@
         "import":"import { View } from 'react-native'",
         "code": "<View style={{style}}>{this.renderPart('{name}')}</View>",
         "property": {
+            "class": "",
             "style":{},
             "name": ""
         }

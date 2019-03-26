@@ -110,8 +110,8 @@ export class DataManager extends Singletone {
             return value;
         }
 
-        const parseStyle = (id, value) => {
-            const style = Utils.deepcopy(value)
+        const parseStyle = (id, value, origin={}) => {
+            let style = Utils.deepcopy(value)
             if (id === selected_id && !exporting) {
                 if (this.projectType === 'react') {
                     style.border = 'solid 1px red';
@@ -120,6 +120,7 @@ export class DataManager extends Singletone {
                     style.borderWidth = 1;
                 }
             }
+            style = Utils.merge(origin, style);
             let stringStyle = JSON.stringify(style);
             Object.keys(colorManager.data).forEach(color=> {
                 const re = new RegExp('"Color.'+color+'"', 'g');
@@ -155,10 +156,18 @@ export class DataManager extends Singletone {
             item.children.forEach(child=> {
                 children += parse(child)
             })
+            let styles = {};
             Object.keys(item.property).forEach(prop=> {
-                code = code.replace('{'+prop+'}', parseProperty(item.property[prop]))
+                if (this.projectType === 'react-native' && prop === 'class') {
+                    const className = item.property[prop];
+                    className.split(' ').forEach(cls=> {
+                        styles = Utils.merge(styles, this.convertCssToStyle(CssManager.getInstance(CssManager).data[cls], cls));
+                    });
+                } else {
+                    code = code.replace('{'+prop+'}', parseProperty(item.property[prop]))
+                }
             })
-            code = code.replace('{style}', parseStyle(item.id, item.style))
+            code = code.replace('{style}', parseStyle(item.id, item.style, styles))
             code = code.replace('{children}', children)
             let brace = false;
             if (item.property['for'] && item.property['for'] !== '') {
@@ -197,6 +206,14 @@ export class DataManager extends Singletone {
         }
     }
 
+    convertCssToStyle(css, key) {
+        if (css === undefined) {
+            return {}
+        } 
+        console.log(Utils.transform(css)[key])
+        return Utils.transform(css)[key];
+    }
+
     export(save=false) {
         if (!this.projectType) return;
         const js = this.getReactJs();
@@ -228,12 +245,14 @@ export class DataManager extends Singletone {
                 }
                 console.log('saved js')
             });
-            fs.writeFile(dirs[0]+'/design.css', CssManager.getInstance(CssManager).getCssFile(), err=> {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log('saved css');
-            });
+            if (this.projectType === 'react') {
+                fs.writeFile(dirs[0]+'/design.css', CssManager.getInstance(CssManager).getCssFile(), err=> {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log('saved css');
+                });
+            }
         }
     }
 
@@ -268,6 +287,9 @@ export class DataManager extends Singletone {
     getReactJs() {
         let js = '';
         let impjs = '';
+        if (this.projectType === 'react') {
+            impjs += 'import \'./design.css\';\n';
+        }
         const imps = {};
         const classes = [];
         const colorManager = ColorManager.getInstance(ColorManager);
@@ -322,6 +344,7 @@ export class DataManager extends Singletone {
             });
             impjs += ' } from \''+from+'\';\n';
         })
+
         js = template.import.replace('{import}', impjs);
         js += '\n'+template.colors.replace('{color}', toColorClass());
         js += '\n'+template.assets.replace('{asset}', toAssetClass());

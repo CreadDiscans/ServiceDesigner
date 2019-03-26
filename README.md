@@ -12,10 +12,22 @@ npm run dist
 
 # todo
 
-css를 style로 대체 (react는 {...style} react-native는 [style]로 되도록)
-
 icon탭 추가
 
 react design 테스트
 
 react-native design 테스트
+
+folder manager validation
+
+element manager validation
+
+css manager validation
+
+asset manager validation
+
+color manager validation
+
+data manager validation
+
+layout manager validation
