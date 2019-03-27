@@ -10,6 +10,7 @@ import Utils from '../service/utils';
 import { ElementManager } from "./element.manager";
 import template from '../resource/template.json';
 import { ReactNativeService } from "../service/react-native.service";
+import { ReactIconsService } from "../service/react-icons.service";
 
 const { remote } = window.require('electron')
 const fs = window.require('fs')
@@ -22,7 +23,8 @@ export class DataManager extends Singletone {
 
     static libTable = {
         reactstrap: ReactStrapService,
-        'react-native': ReactNativeService
+        'react-native': ReactNativeService,
+        'react-icons': ReactIconsService
     }
 
     initialize(data) {
@@ -84,7 +86,7 @@ export class DataManager extends Singletone {
         const assetManager = AssetManager.getInstance(AssetManager);
         const selected_id = LayoutManager.getInstance(LayoutManager).selected;
         const imports = {}
-        const parseProperty = (value) => {
+        const parseProperty = (key, value) => {
             if (typeof(value) === 'object') {
                 value = JSON.stringify(value)
             } else if (typeof(value) === 'string') {
@@ -103,6 +105,7 @@ export class DataManager extends Singletone {
                             }
                         }
                     });
+                } else if (key === 'icon') {
                 } else {
                     value = '"' + String(value) + '"'
                 }
@@ -141,6 +144,10 @@ export class DataManager extends Singletone {
             return stringStyle;
         }
         const parse = (item) => {
+            if (!this.isValidIcon(item)) {
+                return 'no icon';
+            }        
+
             item.import.forEach(imp=> {
                 if (!(imp.from in imports)) {
                     imports[imp.from] = []
@@ -164,7 +171,7 @@ export class DataManager extends Singletone {
                         styles = Utils.merge(styles, this.convertCssToStyle(CssManager.getInstance(CssManager).data[cls], cls));
                     });
                 } else {
-                    code = code.replace('{'+prop+'}', parseProperty(item.property[prop]))
+                    code = code.replace('{'+prop+'}', parseProperty(prop, item.property[prop]))
                 }
             })
             code = code.replace('{style}', parseStyle(item.id, item.style, styles))
@@ -183,16 +190,24 @@ export class DataManager extends Singletone {
             if (brace) {
                 code = '{ ' + code + ' }';
             }
+            console.log(code);
             return code
         }
         const convertImport = () => {
             const out = []
             Object.keys(imports).forEach(lib=> {
+                // let items = imports[lib]
+                // if (lib.indexOf('react-icons') !== -1) {
+                //     key = lib.split('/')[1]
+                //     lib = lib.split('/')[0];
+                //     items = 
+                // }
                 const item = {
                     library: DataManager.libTable[lib],
                     items: imports[lib],
                     libname: lib
                 }
+                console.log(item);
                 out.push(item)
             })
             return out
@@ -210,7 +225,7 @@ export class DataManager extends Singletone {
         if (css === undefined) {
             return {}
         } 
-        console.log(Utils.transform(css)[key])
+        // console.log(Utils.transform(css)[key])
         return Utils.transform(css)[key];
     }
 
@@ -254,6 +269,21 @@ export class DataManager extends Singletone {
                 });
             }
         }
+    }
+
+    isValidIcon(item) {
+        if (item.import.length > 0 && item.import[0].from.indexOf('react-icons') !== -1) {
+            const icon = item.property.icon;
+            const froms = item.import[0].from.split('/');
+            const lib = DataManager.libTable[froms[0]].lib[froms[1]];
+            if (icon in lib) {
+                item.import[0].items = [icon];
+                return true;
+            } else {
+                return false;
+            }
+        } 
+        return true;
     }
 
     import() {

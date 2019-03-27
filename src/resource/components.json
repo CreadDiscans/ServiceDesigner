@@ -539,5 +539,330 @@
             "style":{},
             "name": ""
         }
+    }, {
+        "id":38,
+        "name":"Font Awesome",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/fa'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":39,
+        "name":"Ionicons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/io'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":40,
+        "name":"Material Design icons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/md'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":41,
+        "name":"Typicons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/ti'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":42,
+        "name":"Github Octions icons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/go'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":43,
+        "name":"Feather",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/fi'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":44,
+        "name":"Game Icons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/gi'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":45,
+        "name":"Weachther Icons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/wi'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":46,
+        "name":"Devicons",
+        "group":"react-icons",
+        "type":"react",
+        "import":"import { {icon} } from 'react-icons/di'",
+        "code": "<{icon} className={{class}} style={{style}} name={{name}} onClick={this.handleClick}/>",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "name":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":47,
+        "name":"AntDesign",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/AntDesign'",
+        "code": "<Icon name={{icon}} style={{style}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":48,
+        "name":"Entypo",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Entypo'",
+        "code": "<Icon name={{icon}} style={{style}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":49,
+        "name":"EvilIcons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/EvilIcons'",
+        "code": "<Icon name={{icon}} style={{style}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":50,
+        "name":"Feather",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Feather'",
+        "code": "<Icon name={{icon}} style={{style}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":51,
+        "name":"FontAwesome",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/FontAwesome'",
+        "code": "<Icon name={{icon}} style={{style}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":52,
+        "name":"FontAwesome5",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/FontAwesome5'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":53,
+        "name":"Foundation",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Foundation'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":54,
+        "name":"Ionicons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Ionicons'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":55,
+        "name":"MaterialIcons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/MaterialIcons'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":56,
+        "name":"MaterialCommunityIcons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/MaterialCommunityIcons'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":57,
+        "name":"Octicons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Octicons'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":58,
+        "name":"Zocial",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/Zocial'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
+    }, {
+        "id":59,
+        "name":"SimpleLineIcons",
+        "group":"react-native-vector-icons",
+        "type":"react-native",
+        "import":"import Icon from 'react-native-vector-icons/SimpleLineIcons'",
+        "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
+        "property":{
+            "icon":"",
+            "class":"",
+            "style":{},
+            "color":"",
+            "if":"",
+            "for":""
+        }
     }
 ]
