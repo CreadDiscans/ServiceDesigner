@@ -11,6 +11,7 @@ import { ElementManager } from "./element.manager";
 import template from '../resource/template.json';
 import { ReactNativeService } from "../service/react-native.service";
 import { ReactIconsService } from "../service/react-icons.service";
+import { ReactNativeVectorIconsService } from "../service/react-native-vector-icons.service";
 
 const { remote } = window.require('electron')
 const fs = window.require('fs')
@@ -24,7 +25,8 @@ export class DataManager extends Singletone {
     static libTable = {
         reactstrap: ReactStrapService,
         'react-native': ReactNativeService,
-        'react-icons': ReactIconsService
+        'react-icons': ReactIconsService,
+        'react-native-vector-icons': ReactNativeVectorIconsService
     }
 
     initialize(data) {
@@ -105,7 +107,7 @@ export class DataManager extends Singletone {
                             }
                         }
                     });
-                } else if (key === 'icon') {
+                } else if (key === 'icon' && this.projectType === 'react') {
                 } else {
                     value = '"' + String(value) + '"'
                 }
@@ -145,7 +147,15 @@ export class DataManager extends Singletone {
         }
         const parse = (item) => {
             if (!this.isValidIcon(item)) {
-                return 'no icon';
+                if (this.projectType === 'react') {
+                    return 'no icon';
+                } else {
+                    if (!('react-native' in imports)) {
+                        imports['react-native'] = [];
+                    }
+                    imports['react-native'].push('Text');
+                    return '<Text>no icon</Text>'
+                }
             }        
 
             item.import.forEach(imp=> {
@@ -173,7 +183,16 @@ export class DataManager extends Singletone {
                 } else {
                     code = code.replace('{'+prop+'}', parseProperty(prop, item.property[prop]))
                 }
-            })
+            });
+
+            if (item.import.length > 0 && item.import[0].from.indexOf('react-native-vector-icons') !== -1) {
+                if (exporting) {
+                    code = code.replace('<Icon', '<'+item.import[0].items[0]);
+                } else {
+                    styles={'width':30, 'height':30, backgroundColor:'#777'}
+                    code = code.replace('<Icon', '<View');
+                }
+            }
             code = code.replace('{style}', parseStyle(item.id, item.style, styles))
             code = code.replace('{children}', children)
             let brace = false;
@@ -190,24 +209,17 @@ export class DataManager extends Singletone {
             if (brace) {
                 code = '{ ' + code + ' }';
             }
-            console.log(code);
+            
             return code
         }
         const convertImport = () => {
             const out = []
             Object.keys(imports).forEach(lib=> {
-                // let items = imports[lib]
-                // if (lib.indexOf('react-icons') !== -1) {
-                //     key = lib.split('/')[1]
-                //     lib = lib.split('/')[0];
-                //     items = 
-                // }
                 const item = {
                     library: DataManager.libTable[lib],
                     items: imports[lib],
                     libname: lib
                 }
-                console.log(item);
                 out.push(item)
             })
             return out
@@ -282,7 +294,17 @@ export class DataManager extends Singletone {
             } else {
                 return false;
             }
-        } 
+        } else if (item.import.length > 0 && item.import[0].from.indexOf('react-native-vector-icons') !== -1) {
+            const icon = item.property.icon;
+            const froms = item.import[0].from.split('/');
+            const lib = DataManager.libTable[froms[0]].lib[froms[1]];
+            if (lib.indexOf(icon) === -1) {
+                return false;
+            } else {
+                item.import[0].items = [froms[1]];
+                return true;
+            }
+        }
         return true;
     }
 
@@ -365,15 +387,26 @@ export class DataManager extends Singletone {
             classes.push(templateJs);
         });
         Object.keys(imps).forEach(from=> {
-            impjs +='import { '
-            imps[from].forEach((item, i)=> {
-                impjs += item;
-                if (imps[from].length -1 !== i) {
-                    impjs += ', '
-                }
-            });
-            impjs += ' } from \''+from+'\';\n';
-        })
+            if (from.indexOf('react-native-vector-icons') === -1) {
+                impjs +='import { '
+                imps[from].forEach((item, i)=> {
+                    impjs += item;
+                    if (imps[from].length -1 !== i) {
+                        impjs += ', '
+                    }
+                });
+                impjs += ' } from \''+from+'\';\n';
+            } else {
+                impjs +='import '
+                imps[from].forEach((item, i)=> {
+                    impjs += item;
+                    if (imps[from].length -1 !== i) {
+                        impjs += ', '
+                    }
+                });
+                impjs += ' from \''+from+'\';\n';
+            }
+        });
 
         js = template.import.replace('{import}', impjs);
         js += '\n'+template.colors.replace('{color}', toColorClass());

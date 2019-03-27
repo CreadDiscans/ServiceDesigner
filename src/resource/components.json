@@ -679,7 +679,7 @@
         "name":"AntDesign",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/AntDesign'",
+        "import":"import { {icon} } from 'react-native-vector-icons/AntDesign'",
         "code": "<Icon name={{icon}} style={{style}} />",
         "property":{
             "icon":"",
@@ -693,7 +693,7 @@
         "name":"Entypo",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Entypo'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Entypo'",
         "code": "<Icon name={{icon}} style={{style}} />",
         "property":{
             "icon":"",
@@ -707,7 +707,7 @@
         "name":"EvilIcons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/EvilIcons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/EvilIcons'",
         "code": "<Icon name={{icon}} style={{style}} />",
         "property":{
             "icon":"",
@@ -721,7 +721,7 @@
         "name":"Feather",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Feather'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Feather'",
         "code": "<Icon name={{icon}} style={{style}} />",
         "property":{
             "icon":"",
@@ -735,7 +735,7 @@
         "name":"FontAwesome",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/FontAwesome'",
+        "import":"import { {icon} } from 'react-native-vector-icons/FontAwesome'",
         "code": "<Icon name={{icon}} style={{style}} />",
         "property":{
             "icon":"",
@@ -749,7 +749,7 @@
         "name":"FontAwesome5",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/FontAwesome5'",
+        "import":"import { {icon} } from 'react-native-vector-icons/FontAwesome5'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -764,7 +764,7 @@
         "name":"Foundation",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Foundation'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Foundation'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -779,7 +779,7 @@
         "name":"Ionicons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Ionicons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Ionicons'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -794,7 +794,7 @@
         "name":"MaterialIcons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/MaterialIcons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/MaterialIcons'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -809,7 +809,7 @@
         "name":"MaterialCommunityIcons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/MaterialCommunityIcons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/MaterialCommunityIcons'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -824,7 +824,7 @@
         "name":"Octicons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Octicons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Octicons'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -839,7 +839,7 @@
         "name":"Zocial",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/Zocial'",
+        "import":"import { {icon} } from 'react-native-vector-icons/Zocial'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",
@@ -854,7 +854,7 @@
         "name":"SimpleLineIcons",
         "group":"react-native-vector-icons",
         "type":"react-native",
-        "import":"import Icon from 'react-native-vector-icons/SimpleLineIcons'",
+        "import":"import { {icon} } from 'react-native-vector-icons/SimpleLineIcons'",
         "code": "<Icon name={{icon}} style={{style}} color={{color}} />",
         "property":{
             "icon":"",

@@ -12,12 +12,6 @@ npm run dist
 
 # todo
 
-icon탭 추가
-
-react design 테스트
-
-react-native design 테스트
-
 folder manager validation
 
 element manager validation
@@ -31,3 +25,7 @@ color manager validation
 data manager validation
 
 layout manager validation
+
+react design 테스트
+
+react-native design 테스트

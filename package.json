@@ -20,11 +20,11 @@
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
-    "react-scripts": "2.1.8",
-    "foreman": "^3.0.1",
     "electron": "^4.1.0",
     "electron-builder": "^20.39.0",
+    "foreman": "^3.0.1",
     "jquery": "^3.3.1",
+    "react-scripts": "2.1.8",
     "typescript": "^3.3.4000"
   },
   "homepage": "./",

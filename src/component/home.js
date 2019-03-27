@@ -34,12 +34,13 @@ export default class Home extends React.Component {
             if (lib.libname && lib.libname.indexOf('react-icons') !== -1) {
                 const font_group = lib.libname.split('/')[1];
                 imp[lib.items[0]] = DataManager.libTable['react-icons'].lib[font_group][lib.items[0]]
+            } else if (lib.libname && lib.libname.indexOf('react-native-vector-icons') !== -1) {
+
             } else {
                 lib.items.forEach(item=> {
                     imp[item] = lib.library.get(item)
                 })
             }
-            console.log(lib);
         })
         return <div id="design">
             { this.dataManager.projectType === 'react-native' && <img style={{height:'100vh'}} src="/frame.jpg" /> }
