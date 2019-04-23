@@ -40,7 +40,11 @@ export class FolderManager extends Singletone {
             "id":0,
             "component":"View",
             "import":[{from:'react-native', items:['View']}],
-            "code":"<View style={{style}}>{children}</View>"
+            "code":"<View style={{style}}>{children}</View>",
+            "style":{},
+            "property":{"class":""},
+            "state": {},
+            "children":[]
         }
     }
 
@@ -51,7 +55,7 @@ export class FolderManager extends Singletone {
 
     create(name, type, layoutData=undefined) {
         if (layoutData === undefined) {
-            layoutData = this.layoutData[DataManager.getInstance(DataManager).projectType]
+            layoutData = this.initLayout[DataManager.getInstance(DataManager).projectType]
         }
         const stack = [];
         let newOne;
