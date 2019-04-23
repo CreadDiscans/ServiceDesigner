@@ -21,6 +21,7 @@ export class DataManager extends Singletone {
     page;
     savePath;
     projectType;
+    cssCache = {};
 
     static libTable = {
         reactstrap: ReactStrapService,
@@ -143,6 +144,7 @@ export class DataManager extends Singletone {
                     stringStyle = stringStyle.replace(re, '"url('+assetManager.data[asset]+')"');
                 }
             });
+            // console.log(stringStyle);
             return stringStyle;
         }
         const parse = (item) => {
@@ -237,8 +239,12 @@ export class DataManager extends Singletone {
         if (css === undefined) {
             return {}
         } 
-        // console.log(Utils.transform(css)[key])
-        return Utils.transform(css)[key];
+        try {
+            this.cssCache = Utils.transform(css)[key];
+        } catch(e) {
+            console.log(e);
+        }
+        return this.cssCache;
     }
 
     export(save=false) {

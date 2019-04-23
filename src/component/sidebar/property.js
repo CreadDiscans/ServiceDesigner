@@ -6,24 +6,24 @@ import { LayoutManager } from './../../manager/layout.manager';
 import AceEditor from 'react-ace';
 import 'brace/theme/github';
 import 'brace/mode/css';
+import 'brace/ext/language_tools';
 
 export default class SidebarProperty extends React.Component {
 
     layoutManager
     state = {
         value: 'style {\n\n}',
-        selectedItem: undefined
+        selectedItem: {}
     }
 
     componentWillMount() {
         this.layoutManager = LayoutManager.getInstance(LayoutManager);
-
     }
-    
-    render() {
+
+    componentWillReceiveProps(nextProps) {
         let selectedItem;
-        Utils.loop(this.props.layout, item=> {
-            if (this.props.selected === item.id) {
+        Utils.loop(nextProps.layout, item=> {
+            if (nextProps.selected === item.id) {
                 selectedItem = item;
             }
         });
@@ -33,6 +33,9 @@ export default class SidebarProperty extends React.Component {
                 selectedItem: selectedItem
             });
         }
+    }
+    
+    render() {
         return <div>
             <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
             <h5>Style</h5>
@@ -47,21 +50,30 @@ export default class SidebarProperty extends React.Component {
                     value.forEach(item=> {
                         if (item.type === 'error') error = true;
                     });
-                    if (!error) this.layoutManager.update({id:selectedItem.id, style:this.state.value})
+                    if (!error) this.layoutManager.update({id:this.state.selectedItem.id, style:this.state.value})
                 }}
-                editorProps={{
-                $blockScrolling: false,
-                }} />
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                editorProps={{$blockScrolling: Infinity }}
+                setOptions={{
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    enableSnippets: true,
+                    showLineNumbers: true,
+                    tabSize: 2
+                }}
+                />
             
             <h5>Property</h5>
             {
-                Object.keys(selectedItem.property).map(key=> {
+                this.state.selectedItem.property && Object.keys(this.state.selectedItem.property).map(key=> {
                     return <div key={key}>
                         <Label style={styles.propLabel}>{key}</Label>
-                        <Input style={styles.propValue} value={selectedItem.property[key]} onChange={(e)=>{
-                            const prop = Utils.deepcopy(selectedItem.property);
+                        <Input style={styles.propValue} value={this.state.selectedItem.property[key]} onChange={(e)=>{
+                            const prop = Utils.deepcopy(this.state.selectedItem.property);
                             prop[key] = e.target.value;
-                            this.layoutManager.update({id:selectedItem.id, property:prop});
+                            this.layoutManager.update({id:this.state.selectedItem.id, property:prop});
                         }}/>
                     </div>
                 })
