@@ -31,7 +31,7 @@ export class FolderManager extends Singletone {
             "component":"layout",
             "import":[],
             "code":"<div className={{class}} style={{style}}>{children}</div>",
-            "style":{},
+            "style":"style{\n\n}",
             "property":{"class":""},
             "state": {},
             "children":[]

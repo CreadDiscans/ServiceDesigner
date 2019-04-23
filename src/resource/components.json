@@ -8,7 +8,7 @@
         "code": "<div className={{class}} style={{style}} name={{name}} onClick={this.handleClick}>{{text}}{children}</div>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name": "",
             "text": "",
             "if": "",
@@ -23,7 +23,7 @@
         "code": "<span className={{class}} style={{style}} name={{name}} onClick={this.handleClick}>{{text}}{children}</span>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name": "",
             "text": "",
             "if": "",
@@ -38,7 +38,7 @@
         "code": "<input className={{class}} type={{type}} style={{style}} name={{name}} value={{value}} onChange={this.handleChange} placeholder={{placeholder}} />",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "type": "",
             "value": "",
             "name": "",
@@ -55,7 +55,7 @@
         "code": "<img className={{class}} style={{style}} src={{src}} />",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "src": "",
             "if": "",
             "for": ""
@@ -69,7 +69,7 @@
         "code": "<h1 className={{class}} style={{style}}>{{text}}{children}</h1>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -83,7 +83,7 @@
         "code": "<h2 className={{class}} style={{style}}>{{text}}{children}</h2>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -97,7 +97,7 @@
         "code": "<h3 className={{class}} style={{style}}>{{text}}{children}</h3>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -111,7 +111,7 @@
         "code": "<h4 className={{class}} style={{style}}>{{text}}{children}</h4>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -125,7 +125,7 @@
         "code": "<h5 className={{class}} style={{style}}>{{text}}{children}</h5>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -139,7 +139,7 @@
         "code": "<h6 className={{class}} style={{style}}>{{text}}{children}</h6>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -153,7 +153,7 @@
         "code": "<p className={{class}} style={{style}}>{{text}}{children}</p>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -167,7 +167,7 @@
         "code": "<a className={{class}} style={{style}} href={{href}}>{{text}}{children}</a>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "href":"",
             "if": "",
@@ -182,7 +182,7 @@
         "code": "<Link className={{class}} style={{style}} to={{to}}>{{text}}{children}</Link>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "to":"",
             "text":"",
             "if": "",
@@ -197,7 +197,7 @@
         "code": "<button className={{class}} style={{style}} onClick={this.handleClick}>{{text}}{children}</button>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -211,7 +211,7 @@
         "code": "<select className={{class}} style={{style}} value={{value}} name={{name}} onChange={this.handleChange}>{children}</select>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "value":"",
             "name":"",
             "if": "",
@@ -226,7 +226,7 @@
         "code": "<option className={{class}} style={{style}} value={{value}}>{{text}}{children}</option>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "value":"",
             "text":"",
             "if": "",
@@ -241,7 +241,7 @@
         "code": "<ul className={{class}} style={{style}}>{children}</ul>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -254,7 +254,7 @@
         "code": "<li className={{class}} style={{style}}>{{text}}{children}</li>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -268,7 +268,7 @@
         "code": "<table className={{class}} style={{style}}>{children}</table>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -281,7 +281,7 @@
         "code": "<tr className={{class}} style={{style}}>{children}</tr>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -294,7 +294,7 @@
         "code": "<th className={{class}} style={{style}}>{{text}}{children}</th>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -308,7 +308,7 @@
         "code": "<td className={{class}} style={{style}}>{{text}}{children}</td>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -322,7 +322,7 @@
         "code": "<Alert className={{class}} style={{style}} color={{color}}>{{text}}{children}</Alert>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "color": "primary",
             "text": "This is a primary alert",
             "if": "",
@@ -337,7 +337,7 @@
         "code": "<Badge className={{class}} style={{style}} color={{color}}>{{text}}{children}</Badge>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "color": "primary",
             "text": "New",
             "if": "",
@@ -352,7 +352,7 @@
         "code": "<Button className={{class}} style={{style}} color={{color}} name={{name}} outline={{outline}==='true'} onClick={this.handleClick}>{{text}}{children}</Button>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name": "",
             "color":"primary",
             "outline":"false",
@@ -369,7 +369,7 @@
         "code": "<Input className={{class}} style={{style}} name={{name}} onChange={this.handleChange} value={{value}} placeholder={{placeholder}}/>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name": "",
             "value":"",
             "placeholder":"",
@@ -385,7 +385,7 @@
         "code": "<Container className={{class}} style={{style}} >{children}</Container>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -398,7 +398,7 @@
         "code": "<Row className={{class}} style={{style}} >{children}</Row>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -411,7 +411,7 @@
         "code": "<Col className={{class}} style={{style}} >{children}</Col>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -424,7 +424,7 @@
         "code": "<div className={{class}} style={{style}} name={{name}} onClick={this.handleClick}>{this.renderPart('{name}')}</div>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name": "",
             "if": "",
             "for": ""
@@ -438,7 +438,7 @@
         "code": "<View style={{style}}>{children}</View>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -451,7 +451,7 @@
         "code": "<ScrollView style={{style}}>{children}</ScrollView>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "if": "",
             "for": ""
         }
@@ -464,7 +464,7 @@
         "code": "<Text style={{style}}>{{text}}</Text>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "text":"",
             "if": "",
             "for": ""
@@ -478,7 +478,7 @@
         "code": "<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{{name}})}/>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "value":"",
             "name":"",
             "placeholder":"",
@@ -494,7 +494,7 @@
         "code": "<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableOpacity>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name":"",
             "if": "",
             "for": ""
@@ -508,7 +508,7 @@
         "code": "<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableWithoutFeedback>",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "name":"",
             "if": "",
             "for": ""
@@ -522,7 +522,7 @@
         "code": "<Image style={{style}} source={uri: \"{src}\"} />",
         "property": {
             "class": "",
-            "style": {},
+            "style":"style{\n\n}",
             "src":"",
             "if": "",
             "for": ""
@@ -536,7 +536,7 @@
         "code": "<View style={{style}}>{this.renderPart('{name}')}</View>",
         "property": {
             "class": "",
-            "style":{},
+            "style":"style{\n\n}",
             "name": ""
         }
     }, {
@@ -549,7 +549,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -564,7 +564,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -579,7 +579,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -594,7 +594,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -609,7 +609,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -624,7 +624,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -639,7 +639,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -654,7 +654,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -669,7 +669,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "name":"",
             "if":"",
             "for":""
@@ -684,7 +684,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "if":"",
             "for":""
         }
@@ -698,7 +698,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "if":"",
             "for":""
         }
@@ -712,7 +712,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "if":"",
             "for":""
         }
@@ -726,7 +726,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "if":"",
             "for":""
         }
@@ -740,7 +740,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "if":"",
             "for":""
         }
@@ -754,7 +754,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -769,7 +769,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -784,7 +784,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -799,7 +799,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -814,7 +814,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -829,7 +829,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -844,7 +844,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""
@@ -859,7 +859,7 @@
         "property":{
             "icon":"",
             "class":"",
-            "style":{},
+            "style":"style{\n\n}",
             "color":"",
             "if":"",
             "for":""

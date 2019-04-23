@@ -48,7 +48,11 @@ export default class Utils {
                     rule.declarations.forEach(function (declaration) {
                         if (declaration.type === 'declaration') {
                             var cleanProperty = cleanPropertyName(declaration.property);
-                            obj[cleanProperty] = declaration.value;
+                            if (isNaN(declaration.value)) {
+                                obj[cleanProperty] = declaration.value;
+                            } else {
+                                obj[cleanProperty] = Number(declaration.value);
+                            }
                         }
                     });
                     rule.selectors.forEach(function (selector) {

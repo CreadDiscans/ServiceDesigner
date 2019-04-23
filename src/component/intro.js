@@ -13,7 +13,7 @@ export class Intro extends React.Component {
             "component":"layout",
             "import":[],
             "code":"<div className={{class}} style={{style}}>{children}</div>",
-            "style":{},
+            "style":"style{\n\n}",
             "property":{"class":""},
             "state": {},
             "children":[]        
@@ -26,7 +26,7 @@ export class Intro extends React.Component {
             "component":"View",
             "import":[{from:"react-native", items:['View']}],
             "code":"<View style={{style}}>{children}</View>",
-            "style":{},
+            "style":"style{\n\n}",
             "property":{"class":""},
             "state":{},
             "children":[]
