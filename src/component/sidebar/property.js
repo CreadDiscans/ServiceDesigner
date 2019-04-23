@@ -44,13 +44,15 @@ export default class SidebarProperty extends React.Component {
                 theme="github" 
                 mode="css" 
                 value={this.state.value}
-                onChange={(value)=> this.setState({value:value})}
+                onChange={(value)=> {
+                    this.setState({value:value})}}
                 onValidate={(value)=> {
                     let error = false;
                     value.forEach(item=> {
                         if (item.type === 'error') error = true;
                     });
-                    if (!error) this.layoutManager.update({id:this.state.selectedItem.id, style:this.state.value})
+                    if (!error && this.state.selectedItem.style !== this.state.value) 
+                        this.layoutManager.update({id:this.state.selectedItem.id, style:this.state.value})
                 }}
                 showPrintMargin={true}
                 showGutter={true}
