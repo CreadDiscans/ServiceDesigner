@@ -475,7 +475,7 @@
         "group": "react-native",
         "type":"react-native",
         "import":"import { TextInput } from 'react-native'",
-        "code": "<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{{name}})}/>",
+        "code": "<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{name}}})}/>",
         "property": {
             "class": "",
             "style":"style{\n\n}",
@@ -491,7 +491,7 @@
         "group": "react-native",
         "type":"react-native",
         "import":"import { TouchableOpacity } from 'react-native'",
-        "code": "<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableOpacity>",
+        "code": "<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{name}}})}>{children}</TouchableOpacity>",
         "property": {
             "class": "",
             "style":"style{\n\n}",
@@ -504,8 +504,8 @@
         "name":"TouchableWithoutFeedback",
         "group": "react-native",
         "type":"react-native",
-        "import":"import { TouchableWithoutFeedback } from 'react-native'",
-        "code": "<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{{name}})}>{children}</TouchableWithoutFeedback>",
+        "import":"import { View, TouchableWithoutFeedback } from 'react-native'",
+        "code": "<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{name}}})}><View>{children}</View></TouchableWithoutFeedback>",
         "property": {
             "class": "",
             "style":"style{\n\n}",
