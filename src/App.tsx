@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from './component/home';
-import Sidebar from './component/sidebar/sidebar';
-import { Intro } from './component/intro';
+import Home from './views/home'
+import Sidebar from './views/sidebar/sidebar'
+import { Intro } from './views/intro'
 
 class App extends React.Component { 
 

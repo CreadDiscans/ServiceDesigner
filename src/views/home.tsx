@@ -1,8 +1,8 @@
 import React from 'react';
-import PubsubService from './../service/pubsub.service'
+import PubsubService from '../service/pubsub.service'
 import CodeSandbox from 'react-code-sandbox'
 import ReactStrapService from '../service/reactstrap.service'
-import { DataManager } from './../manager/data.manager';
+import { DataManager } from '../manager/data.manager'
 import { CssManager } from '../manager/css.manager';
 
 export default class Home extends React.Component<any, any> {
