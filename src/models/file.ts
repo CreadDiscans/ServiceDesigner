@@ -11,17 +11,15 @@ export class File extends FileHelper {
     id:number;
     name:string;
     type:FileType;
-    collapse:boolean;
-    children:Array<File>;
+    collapse:boolean = true;
+    children:Array<File> = [];
     element?:Element;
     state:object = {};
 
-    constructor(id:number, name:string, type:FileType, collapse: boolean, children: Array<File>) {
+    constructor(id:number, name:string, type:FileType) {
         super();
         this.id = id;
         this.name = name;
         this.type = type;
-        this.collapse = collapse;
-        this.children = children;
     }
 }

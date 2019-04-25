@@ -1,27 +1,22 @@
 import { ElementHelper } from './helper/element.helper';
+import { Library } from './library';
 
 export class Element extends ElementHelper {
 
-    id:number;
     name:string;
-    imp:string;
+    library?:Array<Library>;
     code:string;
-    style:string;
-    property:object;
+    style:string = 'style{\n\n}';
+    property:object = {class:''};
+    children:Array<Element> = [];
 
     constructor(
-        id:number, 
         name:string,
-        imp:string,
-        code:string,
-        style:string,
-        property:object) {
+        library:Array<Library>,
+        code:string) {
             super();
-            this.id = id;
             this.name = name;
-            this.imp = imp;
+            this.library = library;
             this.code = code;
-            this.style = style;
-            this.property = property
     }
 }

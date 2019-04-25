@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Button } from 'reactstrap';
 import { DataManager } from '../manager/data.manager';
 import { ElementManager } from '../manager/element.manager';
 import { ShortcutService } from '../service/shortcut.service';
 import comData from '../resource/components.json';
+import { FileController } from '../controllers/file.controller';
+import { Platform } from '../utils/constant';
 
 export class Intro extends React.Component<any, any> {
     
@@ -36,22 +38,29 @@ export class Intro extends React.Component<any, any> {
     dataManager:DataManager;
     elementManager:ElementManager;
     shortcutService:ShortcutService;
+    
+    fileController:FileController;
 
     constructor(props:any) {
         super(props);
         this.dataManager = DataManager.getInstance(DataManager);
         this.elementManager = ElementManager.getInstance(ElementManager);
         this.shortcutService = ShortcutService.getInstance(ShortcutService);
+        this.fileController = FileController.getInstance(FileController);
     }
 
     handleClick = (e:any) => {
         if (e.target.name === 'react') {
+            this.fileController.initialize(Platform.React);
+
             this.dataManager.projectType = 'react';
             this.dataManager.initialize(this.react_init);
             this.elementManager.initialize(comData);
             this.shortcutService.initialize();
             this.props.history.push('/home');
         } else if (e.target.name === 'react-native') {
+            this.fileController.initialize(Platform.ReactNative);
+            
             this.dataManager.projectType = 'react-native';
             this.dataManager.initialize(this.react_native_init);
             this.elementManager.initialize(comData);
@@ -60,6 +69,7 @@ export class Intro extends React.Component<any, any> {
         } else if (e.target.name === 'load') {
             this.dataManager.import();
         }
+
     }
 
     render() {
@@ -77,7 +87,7 @@ export class Intro extends React.Component<any, any> {
     }
 }
 
-const styles:any = {
+const styles:{[s: string]: CSSProperties;} = {
     title: {
         margin:100,
         textAlign:"center"
@@ -85,4 +95,4 @@ const styles:any = {
     button: {
         margin:10
     }
-}
+};
