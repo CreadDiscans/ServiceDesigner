@@ -1,7 +1,6 @@
-import { ElementHelper } from './helper/element.helper';
 import { Library } from './library';
 
-export class Element extends ElementHelper {
+export class Element {
 
     name:string;
     library?:Array<Library>;
@@ -14,7 +13,6 @@ export class Element extends ElementHelper {
         name:string,
         library:Array<Library>,
         code:string) {
-            super();
             this.name = name;
             this.library = library;
             this.code = code;

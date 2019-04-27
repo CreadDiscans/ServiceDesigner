@@ -1,14 +1,16 @@
-import { Singletone } from "../service/singletone";
 import { Platform } from "../utils/constant";
 import { File, FileType } from "../models/file";
 import { Element } from "../models/element";
 import { Library, LibraryDependency } from "../models/library";
+import { Controller } from './controller';
+import { BehaviorSubject } from 'rxjs';
 
-export class FileController extends Singletone<FileController> {
+export class FileController extends Controller {
 
     Root:File = new File(0, '/', FileType.ROOT);
 
-    initialize(platform:Platform) {
+    init(platform:Platform, home$:BehaviorSubject<boolean>, sidebar$:BehaviorSubject<boolean>) {
+        super.init(platform, home$, sidebar$);
         const home:File = new File(1, 'home.js', FileType.FILE);
         if (platform === Platform.React) {
             home.element = new Element('layout', [], '<div className={{class}} style={{style}}>{children}</div>');

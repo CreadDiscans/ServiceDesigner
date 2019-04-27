@@ -1,4 +1,3 @@
-import { LibraryHelper } from "./helper/library.helper";
 
 export enum LibraryDependency {
     ReactIcon = 'react-icon',
@@ -7,13 +6,12 @@ export enum LibraryDependency {
     Reactscrap = 'reactstrap'
 }
 
-export class Library extends LibraryHelper {
+export class Library {
 
     dependency:LibraryDependency;
     items: Array<string>;
 
     constructor(dependency:LibraryDependency, items:Array<string>) {
-        super();
         this.dependency = dependency;
         this.items = items;
     } 

@@ -1,5 +1,5 @@
-import { Singletone } from "../service/singletone";
+import { Controller } from './controller';
 
-export class ResourceController extends Singletone<ResourceController> {
+export class ResourceController extends Controller {
     
 }

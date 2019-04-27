@@ -3,7 +3,7 @@ import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaCog, FaUndo, FaRe
 
 export class SidebarHelp extends React.Component {
 
-    icon(children:any, desc:any) {
+    icon(children:JSX.Element, desc:string) {
         return <div style={{padding:5}}>
             {children} {desc}
         </div>

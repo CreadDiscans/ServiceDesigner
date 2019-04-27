@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { 
     FaFolder,
     FaCode,
@@ -28,11 +28,13 @@ import { SidebarState } from './state';
 import { SidebarColor } from './color';
 import { SidebarAsset } from './asset';
 import { SidebarCss } from './css';
+import { MainController } from '../../controllers/main.controller';
+import { IProps } from '../../utils/interface';
+import { SideTab } from '../../utils/constant';
 
-export default class Sidebar extends React.Component {
+export default class Sidebar extends React.Component<IProps> {
 
     state:any = {
-        tab: 'help',
         folder: {},
         selectedFolder: 0,
         layout: {},
@@ -40,33 +42,39 @@ export default class Sidebar extends React.Component {
         elements: []
     }
 
-    dataManager:DataManager;
-    historyService:HistoryService;
+    // dataManager:DataManager;
+    // historyService:HistoryService;
+    mainCtrl: MainController;
 
-    constructor(props:any) {
+    constructor(props:IProps) {
         super(props);
-        this.dataManager = DataManager.getInstance(DataManager);
-        this.historyService = HistoryService.getInstance(HistoryService);
-        const folderManager:FolderManager = FolderManager.getInstance(FolderManager);
-        const layoutManager:LayoutManager = LayoutManager.getInstance(LayoutManager);
-        const elementManager:ElementManager = ElementManager.getInstance(ElementManager); 
+        this.mainCtrl = MainController.getInstance(MainController);
+        // this.dataManager = DataManager.getInstance(DataManager);
+        // this.historyService = HistoryService.getInstance(HistoryService);
+        // const folderManager:FolderManager = FolderManager.getInstance(FolderManager);
+        // const layoutManager:LayoutManager = LayoutManager.getInstance(LayoutManager);
+        // const elementManager:ElementManager = ElementManager.getInstance(ElementManager); 
 
-        PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe((tab:any)=> {
-            const obj:any = {
-                folder: folderManager.data,
-                selectedFolder: folderManager.selected,
-                layout: layoutManager.data,
-                selected: layoutManager.selected,
-                elements: elementManager.data
-            }
-            if (tab) {
-                obj.tab = tab;
-            }
-            this.setState(obj);
-        });
+        // PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe((tab:any)=> {
+        //     const obj:any = {
+        //         folder: folderManager.data,
+        //         selectedFolder: folderManager.selected,
+        //         layout: layoutManager.data,
+        //         selected: layoutManager.selected,
+        //         elements: elementManager.data
+        //     }
+        //     if (tab) {
+        //         obj.tab = tab;
+        //     }
+        //     this.setState(obj);
+        // });
     }
 
-    icon(iconTag:any) {
+    componentDidMount() {
+        this.mainCtrl.sidebar$.subscribe(()=> this.setState({}));
+    }
+
+    icon(iconTag:JSX.Element):JSX.Element {
         iconTag = React.cloneElement(iconTag, {style:styles.baricon})
         return <div style={styles.baricon}>
             {iconTag}
@@ -74,38 +82,39 @@ export default class Sidebar extends React.Component {
     }
 
     render() {
+        const tab = this.mainCtrl.getTab();
         return (
             <div>
                 <div style={styles.sidebar}>
-                    {this.icon(<FaQuestion onClick={()=>this.setState({tab:'help'})} />)}
-                    {this.icon(<FaFolder onClick={()=>this.setState({tab:'folder'}) } />)}
-                    {this.icon(<FaReact onClick={()=>this.setState({tab:'state'})} />)}
-                    {this.icon(<FaCode onClick={()=>this.setState({tab:'code'}) } />)}
-                    {this.icon(<FaCog onClick={()=>this.setState({tab:'property'})} />)}
-                    {this.icon(<FaCss3 onClick={()=>this.setState({tab:'css'})} />)}
-                    {this.icon(<FaPalette onClick={()=> this.setState({tab:'color'})} />)}
-                    {this.icon(<FaImages onClick={()=> this.setState({tab: 'asset'})} />)}
-                    {this.icon(<FaSave onClick={()=>this.dataManager.export(true)}/>)}
-                    {this.icon(<FaFileExport onClick={()=>this.dataManager.export()} />)}
-                    {this.icon(<FaFileImport onClick={()=>this.dataManager.import()}/>)}
-                    {this.icon(<FaUndo onClick={()=>this.historyService.undo()} />)}
-                    {this.icon(<FaRedo onClick={()=>this.historyService.redo()} />)}
+                    {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>)}
+                    {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />)}
+                    {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />)}
+                    {this.icon(<FaCode onClick={()=>this.mainCtrl.setTab(SideTab.Element)} />)}
+                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Property)} />)}
+                    {this.icon(<FaCss3 onClick={()=>this.mainCtrl.setTab(SideTab.Css)} />)}
+                    {this.icon(<FaPalette onClick={()=>this.mainCtrl.setTab(SideTab.Color)} />)}
+                    {this.icon(<FaImages onClick={()=>this.mainCtrl.setTab(SideTab.Asset)} />)}
+                    {this.icon(<FaSave onClick={()=>this.mainCtrl.export(true)}/>)}
+                    {this.icon(<FaFileExport onClick={()=>this.mainCtrl.export()} />)}
+                    {this.icon(<FaFileImport onClick={()=>this.mainCtrl.import()}/>)}
+                    {this.icon(<FaUndo onClick={()=>this.mainCtrl.undo()} />)}
+                    {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />)}
 
                 </div>
-                {this.dataManager.projectType? <div style={styles.collapseSidebar}>
-                    {this.state.tab === 'help' && <SidebarHelp />}
-                    {this.state.tab === 'folder' && <SidebarFolder 
+                {this.mainCtrl.isInitialized() ? <div style={styles.collapseSidebar}>
+                    {tab === SideTab.Help && <SidebarHelp />}
+                    {tab === SideTab.Folder && <SidebarFolder 
                         folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
-                    {this.state.tab === 'state' && <SidebarState 
+                    {tab === SideTab.State && <SidebarState 
                         layout={this.state.layout} />}
-                    {this.state.tab === 'code' && <SidebarCode 
+                    {tab === SideTab.Element && <SidebarCode 
                         elements={this.state.elements}
                         layout={this.state.layout} selected={this.state.selected} />}
-                    {this.state.tab === 'property' && <SidebarProperty 
+                    {tab === SideTab.Property && <SidebarProperty 
                         layout={this.state.layout} selected={this.state.selected} />}
-                    {this.state.tab === 'css' && <SidebarCss />}
-                    {this.state.tab === 'color' && <SidebarColor />}
-                    {this.state.tab === 'asset' && <SidebarAsset />}
+                    {tab === SideTab.Css && <SidebarCss />}
+                    {tab === SideTab.Color && <SidebarColor />}
+                    {tab === SideTab.Asset && <SidebarAsset />}
                 </div>: <div style={styles.collapseSidebar}>
                     <SidebarHelp />
                 </div>}
@@ -117,7 +126,7 @@ export default class Sidebar extends React.Component {
     }
 };
 
-const styles:any = {
+const styles:{[s: string]: CSSProperties;} = {
     sidebar: {
         position:'absolute',
         width:40,

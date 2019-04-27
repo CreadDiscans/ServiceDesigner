@@ -1,4 +1,3 @@
-import { FileHelper } from "./helper/file.helper";
 import { Element } from "./element";
 
 export enum FileType {
@@ -7,7 +6,7 @@ export enum FileType {
     FILE = 'file'
 }
 
-export class File extends FileHelper {
+export class File {
     id:number;
     name:string;
     type:FileType;
@@ -17,7 +16,6 @@ export class File extends FileHelper {
     state:object = {};
 
     constructor(id:number, name:string, type:FileType) {
-        super();
         this.id = id;
         this.name = name;
         this.type = type;

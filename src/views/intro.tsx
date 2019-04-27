@@ -4,72 +4,72 @@ import { DataManager } from '../manager/data.manager';
 import { ElementManager } from '../manager/element.manager';
 import { ShortcutService } from '../service/shortcut.service';
 import comData from '../resource/components.json';
-import { FileController } from '../controllers/file.controller';
 import { Platform } from '../utils/constant';
+import { MainController } from '../controllers/main.controller';
+import { IProps } from '../utils/interface';
 
-export class Intro extends React.Component<any, any> {
+export class Intro extends React.Component<IProps> {
     
-    react_init = {
-        '/home.js': {
-            "id": 0,
-            "component":"layout",
-            "import":[],
-            "code":"<div className={{class}} style={{style}}>{children}</div>",
-            "style":"style{\n\n}",
-            "property":{"class":""},
-            "state": {},
-            "children":[]        
-        }
-    }
+    // react_init = {
+    //     '/home.js': {
+    //         "id": 0,
+    //         "component":"layout",
+    //         "import":[],
+    //         "code":"<div className={{class}} style={{style}}>{children}</div>",
+    //         "style":"style{\n\n}",
+    //         "property":{"class":""},
+    //         "state": {},
+    //         "children":[]        
+    //     }
+    // }
 
-    react_native_init = {
-        '/home.js': {
-            "id": 0,
-            "component":"View",
-            "import":[{from:"react-native", items:['View']}],
-            "code":"<View style={{style}}>{children}</View>",
-            "style":"style{\n\n}",
-            "property":{"class":""},
-            "state":{},
-            "children":[]
-        }
-    }
+    // react_native_init = {
+    //     '/home.js': {
+    //         "id": 0,
+    //         "component":"View",
+    //         "import":[{from:"react-native", items:['View']}],
+    //         "code":"<View style={{style}}>{children}</View>",
+    //         "style":"style{\n\n}",
+    //         "property":{"class":""},
+    //         "state":{},
+    //         "children":[]
+    //     }
+    // }
 
-    dataManager:DataManager;
-    elementManager:ElementManager;
-    shortcutService:ShortcutService;
+    // dataManager:DataManager;
+    // elementManager:ElementManager;
+    // shortcutService:ShortcutService;
     
-    fileController:FileController;
+    mainCtrl:MainController;
 
-    constructor(props:any) {
+    constructor(props:IProps) {
         super(props);
-        this.dataManager = DataManager.getInstance(DataManager);
-        this.elementManager = ElementManager.getInstance(ElementManager);
-        this.shortcutService = ShortcutService.getInstance(ShortcutService);
-        this.fileController = FileController.getInstance(FileController);
+        // this.dataManager = DataManager.getInstance(DataManager);
+        // this.elementManager = ElementManager.getInstance(ElementManager);
+        // this.shortcutService = ShortcutService.getInstance(ShortcutService);
+        this.mainCtrl = MainController.getInstance(MainController);
     }
 
     handleClick = (e:any) => {
         if (e.target.name === 'react') {
-            this.fileController.initialize(Platform.React);
+            this.mainCtrl.initialize(Platform.React);
 
-            this.dataManager.projectType = 'react';
-            this.dataManager.initialize(this.react_init);
-            this.elementManager.initialize(comData);
-            this.shortcutService.initialize();
-            this.props.history.push('/home');
+            // this.dataManager.projectType = 'react';
+            // this.dataManager.initialize(this.react_init);
+            // this.elementManager.initialize(comData);
+            // this.shortcutService.initialize();
+            if (this.props.history) this.props.history.push('/home');
         } else if (e.target.name === 'react-native') {
-            this.fileController.initialize(Platform.ReactNative);
+            this.mainCtrl.initialize(Platform.ReactNative);
             
-            this.dataManager.projectType = 'react-native';
-            this.dataManager.initialize(this.react_native_init);
-            this.elementManager.initialize(comData);
-            this.shortcutService.initialize();
-            this.props.history.push('/home');
+            // this.dataManager.projectType = 'react-native';
+            // this.dataManager.initialize(this.react_native_init);
+            // this.elementManager.initialize(comData);
+            // this.shortcutService.initialize();
+            if (this.props.history) this.props.history.push('/home');
         } else if (e.target.name === 'load') {
-            this.dataManager.import();
+            // this.dataManager.import();
         }
-
     }
 
     render() {

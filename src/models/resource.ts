@@ -1,4 +1,3 @@
-import { ResourceHelper } from "./helper/resource.helper";
 
 export enum ResourceType {
     CSS = 'css',
@@ -6,14 +5,13 @@ export enum ResourceType {
     ASSET = 'asset'
 }
 
-export class Resource extends ResourceHelper {
+export class Resource {
 
     name: string;
     type: ResourceType;
     value: string;
 
     constructor(name:string, type:ResourceType, value:string) {
-        super();
         this.name = name;
         this.type = type;
         this.value = value;
