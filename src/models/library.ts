@@ -1,4 +1,3 @@
-
 export enum LibraryDependency {
     ReactIcon = 'react-icon',
     ReactNativeVectorIcon = 'react-native-vector-icon',

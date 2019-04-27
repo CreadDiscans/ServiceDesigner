@@ -6,7 +6,8 @@ import { FolderManager } from '../../manager/folder.manager';
 import { IProps } from './../../utils/interface';
 import { MainController } from './../../controllers/main.controller';
 import { FileType, File } from '../../models/file';
-import { Action } from '../../utils/constant';
+import { Action, Platform } from '../../utils/constant';
+import { Element } from '../../models/element';
 
 export default class SidebarFolder extends React.Component<IProps> {
 
@@ -50,7 +51,7 @@ export default class SidebarFolder extends React.Component<IProps> {
         this.mainCtrl.fileControl(Action.Update, item);
     }
 
-    async getSelectItem(parent = false):Promise<File> {
+    async getSelectItem(parent = false, id=-1):Promise<File> {
         return new Promise(resolve=> {
             if (!this.props.root) {
                 throw 'root is null';
@@ -63,7 +64,9 @@ export default class SidebarFolder extends React.Component<IProps> {
                         }
                     }) 
                 } else {
-                    if (item.id === this.state.selectId) {
+                    if (id === -1 && item.id === this.state.selectId) {
+                        resolve(item);
+                    } else if (item.id === id){
                         resolve(item);
                     }
                 }
@@ -84,7 +87,8 @@ export default class SidebarFolder extends React.Component<IProps> {
             <span style={{
                     color: this.state.selectId === item.id ? 'red' : 'black'
                 }}
-                onClick={()=>{
+                onClick={async()=>{
+                    this.mainCtrl.selectFile(await this.getSelectItem(false, item.id));
                     this.setState({inserting:false, selectId: item.id});
                 }}
             >{item.name}{item.type === FolderManager.TYPE_ROOT && '/'}</span>
@@ -107,6 +111,11 @@ export default class SidebarFolder extends React.Component<IProps> {
             const maxId = Utils.maxId(this.props.root);
             const name = this.state.insertType === FileType.FILE ? this.state.insertValue + '.js' : this.state.insertValue;
             const newOne = new File(maxId+1, name, this.state.insertType);
+            if (this.mainCtrl.getPlatform() === Platform.React) {
+                newOne.element = Element.getReactRootElement();
+            } else if (this.mainCtrl.getPlatform() === Platform.ReactNative) {
+                newOne.element = Element.getReactNativeRootElement();
+            }
             parent.children.push(newOne);
             this.mainCtrl.fileControl(Action.Create, parent);
         }

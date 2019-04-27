@@ -1,4 +1,4 @@
-import { Library } from './library';
+import { Library, LibraryDependency } from './library';
 
 export class Element {
 
@@ -6,7 +6,7 @@ export class Element {
     library?:Array<Library>;
     code:string;
     style:string = 'style{\n\n}';
-    property:object = {class:''};
+    property:any = {class:''};
     children:Array<Element> = [];
 
     constructor(
@@ -17,4 +17,12 @@ export class Element {
             this.library = library;
             this.code = code;
     }
-}
+
+    static getReactRootElement():Element {
+        return new Element('layout', [], '<div className={{class}} style={{style}}>{children}</div>');
+    }
+
+    static getReactNativeRootElement():Element {
+        return new Element('View', [new Library(LibraryDependency.ReactNative, ['View'])], '<View style={{style}}>{children}</View>');
+    }
+} 

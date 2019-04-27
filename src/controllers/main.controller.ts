@@ -7,7 +7,8 @@ import { Platform, SideTab, Action } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { Container } from 'reactstrap';
 import React from 'react';
-import { File } from "../models/file";
+import { File, FileType } from "../models/file";
+import { RenderController } from "./render.controller";
 
 export class MainController extends Singletone<MainController> {
 
@@ -15,10 +16,12 @@ export class MainController extends Singletone<MainController> {
     private fileCtrl: FileController;
     private resourceCtrl: ResourceController;
     private shortcutCtrl: ShortcutController;
+    private renderCtrl: RenderController;
 
     private _isInitialized = false;
     private _platform!: Platform;
     private _tab:SideTab = SideTab.Help;
+    private _file!:File;
 
     home$ = new BehaviorSubject(false);
     sidebar$ = new BehaviorSubject(false);
@@ -29,6 +32,7 @@ export class MainController extends Singletone<MainController> {
         this.fileCtrl = FileController.getInstance(FileController);
         this.resourceCtrl = ResourceController.getInstance(ResourceController);
         this.shortcutCtrl = ShortcutController.getInstance(ShortcutController);
+        this.renderCtrl = RenderController.getInstance(RenderController);
     }
 
     init(platform:Platform) {
@@ -38,6 +42,7 @@ export class MainController extends Singletone<MainController> {
         this.elementCtrl.init(this);
         this.resourceCtrl.init(this);
         this.shortcutCtrl.init(this);
+        this._file = this.fileCtrl.getRoot().children[0];
     }
 
     isInitialized():boolean {
@@ -49,11 +54,7 @@ export class MainController extends Singletone<MainController> {
     }
 
     getRenderData() {
-        return {
-            state: {},
-            imp: {React, Container},
-            code: '<Container></Container>'
-        }
+        return this.renderCtrl.render(this._file);
     }
 
     export(useCache=false) {
@@ -87,5 +88,12 @@ export class MainController extends Singletone<MainController> {
 
     fileControl(action:Action, file:File) {
         this.fileCtrl.control(action, file);
+    }
+
+    selectFile(file:File) {
+        if (file.type === FileType.FILE) {
+            this._file = file;
+            this.home$.next(true);
+        }
     }
 }
