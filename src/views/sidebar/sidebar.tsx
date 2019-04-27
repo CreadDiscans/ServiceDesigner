@@ -104,7 +104,7 @@ export default class Sidebar extends React.Component<IProps> {
                 {this.mainCtrl.isInitialized() ? <div style={styles.collapseSidebar}>
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder 
-                        folder={this.state.folder} selectedFolder={this.state.selectedFolder}/>}
+                        root={this.mainCtrl.getFolderData()}/>}
                     {tab === SideTab.State && <SidebarState 
                         layout={this.state.layout} />}
                     {tab === SideTab.Element && <SidebarCode 

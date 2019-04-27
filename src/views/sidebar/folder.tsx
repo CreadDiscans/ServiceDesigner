@@ -1,66 +1,98 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import {Button} from 'reactstrap'
 import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
 import Utils from '../../utils/utils';
 import { FolderManager } from '../../manager/folder.manager';
+import { IProps } from './../../utils/interface';
+import { MainController } from './../../controllers/main.controller';
+import { FileType, File } from '../../models/file';
+import { Action } from '../../utils/constant';
 
-export default class SidebarFolder extends React.Component<any, any> {
+export default class SidebarFolder extends React.Component<IProps> {
 
     state = {
         inserting: false,
-        insertType: 'js', // js, folder
-        insertValue: ''
+        insertType: FileType.FOLDER,
+        insertValue: '',
+        selectId: 0
     }
 
-    folderManager:FolderManager
+    mainCtrl:MainController;
     
-    constructor(props:any) {
+    constructor(props:IProps) {
         super(props);
-        this.folderManager = FolderManager.getInstance(FolderManager);
+        this.mainCtrl = MainController.getInstance(MainController);
     }
 
-    addFile = (type:any) => {
-        let parent:any;
-        Utils.loop(this.props.folder, (item:any)=> {
-            if (this.props.selectedFolder === item.id) {
-                parent = item;
+    async addFile(type:FileType) {
+        const parent:File = await this.getSelectItem();
+        if (parent.type !== FileType.FILE) {
+            this.setState({
+                inserting: true,
+                insertType: type,
+                insertValue: ''
+            })
+        }
+    }
+
+    async removeFile() {
+        if (this.state.selectId !== 0) {
+            const parent:File = await this.getSelectItem(true);
+            const index:number = Utils.search(parent.children, (item:File)=> item.id === this.state.selectId)[1];
+            parent.children.splice(index, 1);
+            this.mainCtrl.fileControl(Action.Delete, parent);
+            this.setState({selectId:0});
+        }
+    }
+
+    async collapse(item:File, value:boolean) {
+        item.collapse = value;
+        this.mainCtrl.fileControl(Action.Update, item);
+    }
+
+    async getSelectItem(parent = false):Promise<File> {
+        return new Promise(resolve=> {
+            if (!this.props.root) {
+                throw 'root is null';
             }
+            Utils.loop(this.props.root, (item:File)=> {
+                if (parent) {
+                    item.children.forEach((child:File)=> {
+                        if (child.id === this.state.selectId) {
+                            resolve(item);
+                        }
+                    }) 
+                } else {
+                    if (item.id === this.state.selectId) {
+                        resolve(item);
+                    }
+                }
+            }); 
         });
-        if (parent.type === 'js') return;
-        this.setState({
-            inserting: true,
-            insertType: type,
-            insertValue: ''
-        })
     }
 
-    removeFile = () => {
-        this.folderManager.delete();
-    }
-
-    treeView = (item:any) => {
+    treeView = (item:File) => {
         return <div key={item.id} style={{...styles.tree,...{
-            marginLeft: item.type === FolderManager.TYPE_ROOT ? 0: 10
+            marginLeft: item.type === FileType.ROOT ? 0: 10
         }}}>
-            {item.type === FolderManager.TYPE_JS && <span style={{marginLeft:5}}></span>}
-            {item.type === FolderManager.TYPE_FOLDER && (item.collapse ?  <FaAngleDown onClick={()=>{
-                this.folderManager.update(item.id, false);
+            {item.type === FileType.FILE && <span style={{marginLeft:5}}></span>}
+            {item.type === FileType.FOLDER && (item.collapse ?  <FaAngleDown onClick={()=>{
+                this.collapse(item, false);
             }}/>: <FaAngleRight onClick={()=> {
-                this.folderManager.update(item.id, true);
+                this.collapse(item, true);
             }}/>)} 
             <span style={{
-                    color: this.props.selectedFolder === item.id ? 'red' : 'black'
+                    color: this.state.selectId === item.id ? 'red' : 'black'
                 }}
                 onClick={()=>{
-                    this.setState({inserting:false});
-                    this.folderManager.select(item.id);
+                    this.setState({inserting:false, selectId: item.id});
                 }}
             >{item.name}{item.type === FolderManager.TYPE_ROOT && '/'}</span>
             {
-                item.collapse && item.children.map((subItem:any)=> this.treeView(subItem))
+                item.collapse && item.children.map((subItem:File)=> this.treeView(subItem))
             }
             {
-                this.props.selectedFolder === item.id && this.state.inserting && <input 
+                this.state.selectId === item.id && this.state.inserting && <input 
                     onKeyPress={this.handleKeyPress}
                     onChange={(e)=> this.setState({insertValue:e.target.value})}
                 />
@@ -68,10 +100,15 @@ export default class SidebarFolder extends React.Component<any, any> {
         </div>
     }
 
-    handleKeyPress = (e:any) => {
+    handleKeyPress = async(e:any) => {
         if (e.key === 'Enter') {
             this.setState({inserting: false});
-            this.folderManager.create(this.state.insertValue ,this.state.insertType);
+            const parent = await this.getSelectItem();
+            const maxId = Utils.maxId(this.props.root);
+            const name = this.state.insertType === FileType.FILE ? this.state.insertValue + '.js' : this.state.insertValue;
+            const newOne = new File(maxId+1, name, this.state.insertType);
+            parent.children.push(newOne);
+            this.mainCtrl.fileControl(Action.Create, parent);
         }
     }
 
@@ -79,15 +116,15 @@ export default class SidebarFolder extends React.Component<any, any> {
     render() {
         return <div>
             <h5>Folder</h5>
-            <Button color="info" onClick={()=>this.addFile('folder')}><FaPlus /> <FaRegFolder /></Button>{' '}
-            <Button color="info" onClick={()=>this.addFile('js')}><FaPlus /> <FaJs /></Button> {' '}
+            <Button color="info" onClick={()=>this.addFile(FileType.FOLDER)}><FaPlus /> <FaRegFolder /></Button>{' '}
+            <Button color="info" onClick={()=>this.addFile(FileType.FILE)}><FaPlus /> <FaJs /></Button> {' '}
             <Button color="danger" onClick={()=>this.removeFile()}><FaTrashAlt /></Button>
-            {this.treeView(this.props.folder)}
+            {this.props.root && this.treeView(this.props.root)}
         </div>
     }
 }
 
-const styles = {
+const styles:{[s: string]: CSSProperties;} = {
     tree: {
         cursor:'pointer'
     }

@@ -3,10 +3,11 @@ import { ElementController } from "./element.controller";
 import { FileController } from './file.controller';
 import { ResourceController } from "./resource.controller";
 import { ShortcutController } from './shortcut.controller';
-import { Platform, SideTab } from "../utils/constant";
+import { Platform, SideTab, Action } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { Container } from 'reactstrap';
 import React from 'react';
+import { File } from "../models/file";
 
 export class MainController extends Singletone<MainController> {
 
@@ -78,5 +79,13 @@ export class MainController extends Singletone<MainController> {
 
     getTab():SideTab {
         return this._tab;
+    }
+
+    getFolderData():File {
+        return this.fileCtrl.getRoot();
+    }
+
+    fileControl(action:Action, file:File) {
+        this.fileCtrl.control(action, file);
     }
 }

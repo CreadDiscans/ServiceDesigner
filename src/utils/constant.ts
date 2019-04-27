@@ -13,3 +13,9 @@ export enum SideTab {
     Color = 'color',
     Asset = 'asset',
 }
+
+export enum Action {
+    Create = 'create',
+    Delete = 'delete',
+    Update = 'update'
+}

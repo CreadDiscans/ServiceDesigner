@@ -1,11 +1,12 @@
 import cssParser from 'css';
+import { File } from '../models/file';
 
 export default class Utils {
     static deepcopy(obj:any) {
         return JSON.parse(JSON.stringify(obj))
     }
 
-    static loop(item:any, handle:any) {
+    static loop(item:File, handle:Function) {
         const localLoop = (parent:any) => {
             handle(parent);
             parent.children.forEach((child:any)=> localLoop(child));
@@ -105,5 +106,17 @@ export default class Utils {
         }
 
         return result;
+    }
+
+    static search(list:Array<any>, check:Function):Array<any> {
+        let target;
+        let index;
+        list.forEach((item, i)=> {
+            if (check(item)) {
+                target = item;
+                index = i;
+            }
+        });
+        return [target, index];
     }
 }
