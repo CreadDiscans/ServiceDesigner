@@ -1,24 +1,24 @@
 import React from 'react';
-import { DataManager } from '../../manager/data.manager';
 import ReactJSONEditor from '../reactJsonEditor';
-import { LayoutManager } from '../../manager/layout.manager';
+import { MainController } from './../../controllers/main.controller';
+import { IProps } from './../../utils/interface';
 
-export class SidebarState extends React.Component<any, any>{
+export class SidebarState extends React.Component{
 
-    layoutManager: LayoutManager;
-    dataManager:DataManager;
-    constructor(props:any) {
+    mainCtrl:MainController;
+    constructor(props:IProps) {
         super(props);
-        this.layoutManager = LayoutManager.getInstance(LayoutManager);
-        this.dataManager = DataManager.getInstance(DataManager);
+        this.mainCtrl = MainController.getInstance(MainController);
     }
 
     render() {
+        const file = this.mainCtrl.getSelectedFile();
         return <div>
             <h5>State</h5>
-            <div>- {this.dataManager.page}</div>
-            <ReactJSONEditor style={{height:400}} values={this.props.layout.state} onChange={(values:any)=>{
-                this.layoutManager.setState(values);
+            <div>- {file.name}</div>
+            <ReactJSONEditor style={{height:400}} values={file.state} onChange={(values:any)=>{
+                file.setState(values);
+                this.mainCtrl.home$.next(true);
             }}/>
         </div>
     }

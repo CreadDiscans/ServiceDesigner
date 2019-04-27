@@ -96,4 +96,8 @@ export class MainController extends Singletone<MainController> {
             this.home$.next(true);
         }
     }
+
+    getSelectedFile():File {
+        return this._file;
+    }
 }

@@ -105,8 +105,7 @@ export default class Sidebar extends React.Component<IProps> {
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder 
                         root={this.mainCtrl.getFolderData()}/>}
-                    {tab === SideTab.State && <SidebarState 
-                        layout={this.state.layout} />}
+                    {tab === SideTab.State && <SidebarState />}
                     {tab === SideTab.Element && <SidebarCode 
                         elements={this.state.elements}
                         layout={this.state.layout} selected={this.state.selected} />}

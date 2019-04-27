@@ -15,7 +15,7 @@ export class RenderController extends Controller {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state);
-        console.log(imp, code);
+        console.log(imp, code, file.state);
         return {
             state: file.state,
             imp: imp,
