@@ -1,5 +1,5 @@
-import { Singletone } from "../service/singletone";
-import Utils from "../service/utils";
+import { Singletone } from "../utils/singletone";
+import Utils from "../utils/utils";
 import PubsubService from '../service/pubsub.service';
 import { DataManager } from './data.manager';
 import { HistoryService } from '../service/history.service';

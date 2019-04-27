@@ -1,6 +1,6 @@
-import { Singletone } from "../service/singletone";
+import { Singletone } from "../utils/singletone";
 import { HistoryService } from '../service/history.service';
-import Utils from "../service/utils";
+import Utils from "../utils/utils";
 import PubsubService from '../service/pubsub.service';
 
 export class LayoutManager extends Singletone<LayoutManager> {

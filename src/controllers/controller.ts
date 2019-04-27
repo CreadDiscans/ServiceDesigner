@@ -1,4 +1,4 @@
-import { Singletone } from "../service/singletone";
+import { Singletone } from "../utils/singletone";
 import { MainController } from './main.controller';
 
 export class Controller extends Singletone<Controller> {

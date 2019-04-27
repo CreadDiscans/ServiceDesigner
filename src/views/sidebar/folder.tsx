@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'reactstrap'
 import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
-import Utils from '../../service/utils';
+import Utils from '../../utils/utils';
 import { FolderManager } from '../../manager/folder.manager';
 
 export default class SidebarFolder extends React.Component<any, any> {

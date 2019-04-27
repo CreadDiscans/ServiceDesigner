@@ -1,4 +1,4 @@
-import { Singletone } from '../service/singletone';
+import { Singletone } from '../utils/singletone';
 import { HistoryService } from '../service/history.service';
 import PubsubService from '../service/pubsub.service';
 

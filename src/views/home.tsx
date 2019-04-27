@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import PubsubService from '../service/pubsub.service'
 import CodeSandbox from 'react-code-sandbox'
-import ReactStrapService from '../service/reactstrap.service'
+import ReactStrapService from '../controllers/library/reactstrap.service'
 import { DataManager } from '../manager/data.manager'
 import { CssManager } from '../manager/css.manager';
 import { MainController } from '../controllers/main.controller';

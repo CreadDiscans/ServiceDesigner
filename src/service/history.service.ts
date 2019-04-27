@@ -1,6 +1,6 @@
-import { Singletone } from './singletone';
+import { Singletone } from '../utils/singletone';
 import { LayoutManager } from '../manager/layout.manager';
-import Utils from './utils';
+import Utils from '../utils/utils';
 import { FolderManager } from '../manager/folder.manager';
 import { ElementManager } from '../manager/element.manager';
 import { ColorManager } from '../manager/color.manager';

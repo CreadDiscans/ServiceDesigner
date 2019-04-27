@@ -1,17 +1,17 @@
-import { Singletone } from "../service/singletone";
+import { Singletone } from "../utils/singletone";
 import { LayoutManager } from "./layout.manager";
 import { FolderManager } from "./folder.manager";
 import { ColorManager } from './color.manager';
 import { AssetManager } from './asset.manager';
 import { CssManager } from './css.manager';
 import { HistoryService } from '../service/history.service';
-import ReactStrapService from '../service/reactstrap.service';
-import Utils from '../service/utils';
+import ReactStrapService from '../controllers/library/reactstrap.service';
+import Utils from '../utils/utils';
 import { ElementManager } from "./element.manager";
 import template from '../resource/template.json';
-import { ReactNativeService } from "../service/react-native.service";
-import { ReactIconsService } from "../service/react-icons.service";
-import { ReactNativeVectorIconsService } from "../service/react-native-vector-icons.service";
+import { ReactNativeService } from "../controllers/library/react-native.service";
+import { ReactIconsService } from "../controllers/library/react-icons.service";
+import { ReactNativeVectorIconsService } from "../controllers/library/react-native-vector-icons.service";
 declare var window:any;
 const { remote } = window.require('electron')
 const fs = window.require('fs')

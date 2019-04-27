@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Label } from 'reactstrap'
 import Layout from './layout'
-import Utils from '../../service/utils';
+import Utils from '../../utils/utils';
 import { LayoutManager } from '../../manager/layout.manager';
 import AceEditor from 'react-ace';
 import 'brace/theme/github';

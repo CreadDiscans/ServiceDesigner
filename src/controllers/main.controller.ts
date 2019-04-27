@@ -1,4 +1,4 @@
-import { Singletone } from "../service/singletone";
+import { Singletone } from "../utils/singletone";
 import { ElementController } from "./element.controller";
 import { FileController } from './file.controller';
 import { ResourceController } from "./resource.controller";
