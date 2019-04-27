@@ -2,6 +2,7 @@ import { Singletone } from "../service/singletone";
 import { ElementController } from "./element.controller";
 import { FileController } from './file.controller';
 import { ResourceController } from "./resource.controller";
+import { ShortcutController } from './shortcut.controller';
 import { Platform, SideTab } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { Container } from 'reactstrap';
@@ -12,6 +13,7 @@ export class MainController extends Singletone<MainController> {
     private elementCtrl: ElementController;
     private fileCtrl: FileController;
     private resourceCtrl: ResourceController;
+    private shortcutCtrl: ShortcutController;
 
     private _isInitialized = false;
     private _platform!: Platform;
@@ -25,14 +27,16 @@ export class MainController extends Singletone<MainController> {
         this.elementCtrl = ElementController.getInstance(ElementController);
         this.fileCtrl = FileController.getInstance(FileController);
         this.resourceCtrl = ResourceController.getInstance(ResourceController);
+        this.shortcutCtrl = ShortcutController.getInstance(ShortcutController);
     }
 
-    initialize(platform:Platform) {
+    init(platform:Platform) {
         this._platform = platform;
         this._isInitialized = true;
-        this.fileCtrl.init(platform, this.home$, this.sidebar$);
-        this.elementCtrl.init(platform, this.home$, this.sidebar$);
-        this.resourceCtrl.init(platform, this.home$, this.sidebar$);
+        this.fileCtrl.init(this);
+        this.elementCtrl.init(this);
+        this.resourceCtrl.init(this);
+        this.shortcutCtrl.init(this);
     }
 
     isInitialized():boolean {

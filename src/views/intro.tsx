@@ -2,7 +2,6 @@ import React, { CSSProperties } from 'react';
 import { Button } from 'reactstrap';
 import { DataManager } from '../manager/data.manager';
 import { ElementManager } from '../manager/element.manager';
-import { ShortcutService } from '../service/shortcut.service';
 import comData from '../resource/components.json';
 import { Platform } from '../utils/constant';
 import { MainController } from '../controllers/main.controller';
@@ -38,7 +37,6 @@ export class Intro extends React.Component<IProps> {
 
     // dataManager:DataManager;
     // elementManager:ElementManager;
-    // shortcutService:ShortcutService;
     
     mainCtrl:MainController;
 
@@ -46,26 +44,23 @@ export class Intro extends React.Component<IProps> {
         super(props);
         // this.dataManager = DataManager.getInstance(DataManager);
         // this.elementManager = ElementManager.getInstance(ElementManager);
-        // this.shortcutService = ShortcutService.getInstance(ShortcutService);
         this.mainCtrl = MainController.getInstance(MainController);
     }
 
     handleClick = (e:any) => {
         if (e.target.name === 'react') {
-            this.mainCtrl.initialize(Platform.React);
+            this.mainCtrl.init(Platform.React);
 
             // this.dataManager.projectType = 'react';
             // this.dataManager.initialize(this.react_init);
             // this.elementManager.initialize(comData);
-            // this.shortcutService.initialize();
             if (this.props.history) this.props.history.push('/home');
         } else if (e.target.name === 'react-native') {
-            this.mainCtrl.initialize(Platform.ReactNative);
+            this.mainCtrl.init(Platform.ReactNative);
             
             // this.dataManager.projectType = 'react-native';
             // this.dataManager.initialize(this.react_native_init);
             // this.elementManager.initialize(comData);
-            // this.shortcutService.initialize();
             if (this.props.history) this.props.history.push('/home');
         } else if (e.target.name === 'load') {
             // this.dataManager.import();

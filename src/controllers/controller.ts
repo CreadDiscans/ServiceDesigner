@@ -1,16 +1,11 @@
 import { Singletone } from "../service/singletone";
-import { BehaviorSubject } from 'rxjs';
-import { Platform } from "../utils/constant";
+import { MainController } from './main.controller';
 
 export class Controller extends Singletone<Controller> {
 
-    protected platform!:Platform;
-    protected home$!:BehaviorSubject<boolean>;
-    protected sidebar$!:BehaviorSubject<boolean>;
+    protected main!:MainController;
 
-    init(platfrom:Platform, home$:BehaviorSubject<boolean>, sidebar$:BehaviorSubject<boolean>) {
-        this.platform = platfrom;
-        this.home$ = home$;
-        this.sidebar$ = sidebar$;
+    init(main:MainController) {
+        this.main = main;
     }
 }
