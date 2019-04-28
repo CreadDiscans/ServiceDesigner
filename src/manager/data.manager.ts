@@ -13,8 +13,8 @@ import { ReactNativeService } from "../controllers/library/react-native.service"
 import { ReactIconsService } from "../controllers/library/react-icons.service";
 import { ReactNativeVectorIconsService } from "../controllers/library/react-native-vector-icons.service";
 declare var window:any;
-const { remote } = window.require('electron')
-const fs = window.require('fs')
+// const { remote } = window.require('electron')
+// const fs = window.require('fs')
 export class DataManager extends Singletone<DataManager> {
 
     data:any;
@@ -270,32 +270,32 @@ export class DataManager extends Singletone<DataManager> {
         if (save && this.savePath) {
             dirs = [this.savePath];
         } else {
-            dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] });
+            // dirs = remote.dialog.showOpenDialog({ properties: ['openDirectory'] });
         }
-        if (dirs) {
-            this.savePath = dirs[0];
-            fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), (err:any)=> {
-                if (err) {
-                    return console.log(err)
-                }
-                console.log('saved json')
-                document.getElementsByTagName('title')[0].innerText = 'Service Designer';
-            });
-            fs.writeFile(dirs[0]+'/design.js', js, (err:any)=> {
-                if (err) {
-                    return console.log(err)
-                }
-                console.log('saved js')
-            });
-            if (this.projectType === 'react') {
-                fs.writeFile(dirs[0]+'/design.css', cssManager.getCssFile(), (err:any)=> {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    console.log('saved css');
-                });
-            }
-        }
+        // if (dirs) {
+        //     this.savePath = dirs[0];
+        //     fs.writeFile(dirs[0]+'/design.json', JSON.stringify(output), (err:any)=> {
+        //         if (err) {
+        //             return console.log(err)
+        //         }
+        //         console.log('saved json')
+        //         document.getElementsByTagName('title')[0].innerText = 'Service Designer';
+        //     });
+        //     fs.writeFile(dirs[0]+'/design.js', js, (err:any)=> {
+        //         if (err) {
+        //             return console.log(err)
+        //         }
+        //         console.log('saved js')
+        //     });
+        //     if (this.projectType === 'react') {
+        //         fs.writeFile(dirs[0]+'/design.css', cssManager.getCssFile(), (err:any)=> {
+        //             if (err) {
+        //                 return console.log(err);
+        //             }
+        //             console.log('saved css');
+        //         });
+        //     }
+        // }
     }
 
     isValidIcon(item:any) {
@@ -327,21 +327,21 @@ export class DataManager extends Singletone<DataManager> {
         const elementManager:ElementManager = ElementManager.getInstance(ElementManager);
         const colorManager:ColorManager = ColorManager.getInstance(ColorManager);
         const cssManager:CssManager = CssManager.getInstance(CssManager);
-        const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-        if (file) {
-            this.savePath = file[0].replace('/design.json');
-            fs.readFile(file[0], (err:any, data:any)=> {
-                if (err) throw err
-                try {
-                    const json = JSON.parse(data.toString())
-                    this.initialize(json.data);
-                    elementManager.initialize(json.components);
-                    colorManager.initialize(json.colors);
-                    cssManager.initialize(json.css);
-                    this.projectType = json.projectType;
-                }catch(e) {console.log(e)}
-            })
-        }
+        // const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+        // if (file) {
+        //     this.savePath = file[0].replace('/design.json');
+        //     fs.readFile(file[0], (err:any, data:any)=> {
+        //         if (err) throw err
+        //         try {
+        //             const json = JSON.parse(data.toString())
+        //             this.initialize(json.data);
+        //             elementManager.initialize(json.components);
+        //             colorManager.initialize(json.colors);
+        //             cssManager.initialize(json.css);
+        //             this.projectType = json.projectType;
+        //         }catch(e) {console.log(e)}
+        //     })
+        // }
     }
 
     getSaveForm() {

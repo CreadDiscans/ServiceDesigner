@@ -2,8 +2,9 @@ import React from 'react';
 import { SketchPicker } from 'react-color';
 import { ColorManager } from '../../manager/color.manager';
 import { Input, Button } from 'reactstrap';
+import { View } from '../view';
 
-export class SidebarColor extends React.Component{
+export class SidebarColor extends View{
 
     state = {
         color:'#fff',

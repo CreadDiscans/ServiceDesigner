@@ -14,22 +14,14 @@ import {
     FaCss3,
     FaFileExport
  } from 'react-icons/fa'
-import SidebarFolder from './folder';
-import SidebarCode from './code';
-import SidebarProperty from './property';
-import PubsubService from '../../service/pubsub.service';
-import { FolderManager } from '../../manager/folder.manager';
-import { LayoutManager } from '../../manager/layout.manager';
-import { ElementManager } from '../../manager/element.manager';
-import { DataManager } from '../../manager/data.manager';
-import { HistoryService } from '../../service/history.service';
-import { SidebarHelp } from './help';
-import { SidebarState } from './state';
-import { SidebarColor } from './color';
-import { SidebarAsset } from './asset';
-import { SidebarCss } from './css';
-import { MainController } from '../../controllers/main.controller';
-import { IProps } from '../../utils/interface';
+import { SidebarFolder } from './folder.view';
+import { SidebarElement } from './element.view';
+import { SidebarProperty } from './property.view';
+import { SidebarHelp } from './help.view';
+import { SidebarState } from './state.view';
+import { SidebarColor } from './color.view';
+import { SidebarAsset } from './asset.view';
+import { SidebarCss } from './css.view';
 import { SideTab } from '../../utils/constant';
 import { View } from '../view';
 
@@ -39,9 +31,9 @@ export default class Sidebar extends View {
         this.mainCtrl.sidebar$.subscribe(()=> this.setState({}));
     }
 
-    icon(iconTag:JSX.Element):JSX.Element {
+    icon(iconTag:JSX.Element, name:string):JSX.Element {
         iconTag = React.cloneElement(iconTag, {style:styles.baricon})
-        return <div style={styles.baricon}>
+        return <div id={name} style={styles.baricon}>
             {iconTag}
         </div>
     }
@@ -51,26 +43,26 @@ export default class Sidebar extends View {
         return (
             <div>
                 <div style={styles.sidebar}>
-                    {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>)}
-                    {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />)}
-                    {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />)}
-                    {this.icon(<FaCode onClick={()=>this.mainCtrl.setTab(SideTab.Element)} />)}
-                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Property)} />)}
-                    {this.icon(<FaCss3 onClick={()=>this.mainCtrl.setTab(SideTab.Css)} />)}
-                    {this.icon(<FaPalette onClick={()=>this.mainCtrl.setTab(SideTab.Color)} />)}
-                    {this.icon(<FaImages onClick={()=>this.mainCtrl.setTab(SideTab.Asset)} />)}
-                    {this.icon(<FaSave onClick={()=>this.mainCtrl.export(true)}/>)}
-                    {this.icon(<FaFileExport onClick={()=>this.mainCtrl.export()} />)}
-                    {this.icon(<FaFileImport onClick={()=>this.mainCtrl.import()}/>)}
-                    {this.icon(<FaUndo onClick={()=>this.mainCtrl.undo()} />)}
-                    {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />)}
+                    {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>, SideTab.Help.toString())}
+                    {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
+                    {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />, SideTab.State.toString())}
+                    {this.icon(<FaCode onClick={()=>this.mainCtrl.setTab(SideTab.Element)} />, SideTab.Element.toString())}
+                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Property)} />, SideTab.Property.toString())}
+                    {this.icon(<FaCss3 onClick={()=>this.mainCtrl.setTab(SideTab.Css)} />, SideTab.Css.toString())}
+                    {this.icon(<FaPalette onClick={()=>this.mainCtrl.setTab(SideTab.Color)} />, SideTab.Color.toString())}
+                    {this.icon(<FaImages onClick={()=>this.mainCtrl.setTab(SideTab.Asset)} />, SideTab.Asset.toString())}
+                    {this.icon(<FaSave onClick={()=>this.mainCtrl.export(true)}/>, 'save')}
+                    {this.icon(<FaFileExport onClick={()=>this.mainCtrl.export()} />, 'export')}
+                    {this.icon(<FaFileImport onClick={()=>this.mainCtrl.import()}/>, 'import')}
+                    {this.icon(<FaUndo onClick={()=>this.mainCtrl.undo()} />, 'undo')}
+                    {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />, 'redo')}
 
                 </div>
                 {this.mainCtrl.isInitialized() ? <div style={styles.collapseSidebar}>
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}
-                    {tab === SideTab.Element && <SidebarCode />}
+                    {tab === SideTab.Element && <SidebarElement />}
                     {tab === SideTab.Property && <SidebarProperty />}
                     {tab === SideTab.Css && <SidebarCss />}
                     {tab === SideTab.Color && <SidebarColor />}

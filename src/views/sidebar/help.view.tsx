@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaCog, FaUndo, FaRedo, FaReact, FaPalette, FaImages, FaCss3, FaFileExport } from 'react-icons/fa';
+import { View } from '../view';
 
-export class SidebarHelp extends React.Component {
+export class SidebarHelp extends View {
 
     icon(children:JSX.Element, desc:string) {
         return <div style={{padding:5}}>

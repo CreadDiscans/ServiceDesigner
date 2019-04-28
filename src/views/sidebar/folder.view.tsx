@@ -8,16 +8,17 @@ import { Action, Platform } from '../../utils/constant';
 import { Element } from '../../models/element';
 import { View } from '../view';
 
-export default class SidebarFolder extends View {
+export class SidebarFolder extends View {
 
     state = {
         inserting: false,
         insertType: FileType.FOLDER,
         insertValue: '',
+        selectId: 0,
     }
 
     async addFile(root:File, type:FileType) {
-        const parent:File = this.mainCtrl.getSelectedFile();
+        const parent:File = await this.getSelectItem(root);
         if (parent.type !== FileType.FILE) {
             this.setState({
                 inserting: true,
@@ -29,8 +30,8 @@ export default class SidebarFolder extends View {
 
     async removeFile(root:File) {
         if (this.mainCtrl.getSelectedFile().id !== 0) {
-            const parent:File = await this.getSelectItem(root, true);
-            const index:number = Utils.search(parent.children, (item:File)=> item.id === this.mainCtrl.getSelectedFile().id)[1];
+            const parent:File = await this.getSelectItem(root);
+            const index:number = Utils.search(parent.children, (item:File)=> item.id === this.state.selectId)[1];
             parent.children.splice(index, 1);
             this.mainCtrl.fileControl(Action.Delete, parent);
             this.setState({selectId:0});
@@ -47,12 +48,12 @@ export default class SidebarFolder extends View {
             Utils.loop(root, (item:File)=> {
                 if (parent) {
                     item.children.forEach((child:File)=> {
-                        if (child.id === this.mainCtrl.getSelectedFile().id) {
+                        if (child.id === this.state.selectId) {
                             resolve(item);
                         }
                     }) 
                 } else {
-                    if (id === -1 && item.id === this.mainCtrl.getSelectedFile().id) {
+                    if (id === -1 && item.id === this.state.selectId) {
                         resolve(item);
                     } else if (item.id === id){
                         resolve(item);
@@ -73,7 +74,7 @@ export default class SidebarFolder extends View {
                 this.collapse(item, true);
             }}/>)} 
             <span style={{
-                    color: this.mainCtrl.getSelectedFile().id === item.id ? 'red' : 'black'
+                    color: this.state.selectId === item.id ? 'red' : 'black'
                 }}
                 onClick={async()=>{
                     this.mainCtrl.selectFile(await this.getSelectItem(root, false, item.id));
@@ -84,7 +85,7 @@ export default class SidebarFolder extends View {
                 item.collapse && item.children.map((subItem:File)=> this.treeView(subItem, root))
             }
             {
-                this.mainCtrl.getSelectedFile().id === item.id && this.state.inserting && <input 
+                this.state.selectId === item.id && this.state.inserting && <input 
                     onKeyPress={(e)=> this.handleKeyPress(e, root)}
                     onChange={(e)=> this.setState({insertValue:e.target.value})}
                 />
@@ -95,7 +96,7 @@ export default class SidebarFolder extends View {
     handleKeyPress = async(e:any, root:File) => {
         if (e.key === 'Enter') {
             this.setState({inserting: false});
-            const parent = this.mainCtrl.getSelectedFile();
+            const parent = await this.getSelectItem(root);
             const maxId = Utils.maxId(root);
             const name = this.state.insertType === FileType.FILE ? this.state.insertValue + '.js' : this.state.insertValue;
             const newOne = new File(maxId+1, name, this.state.insertType);

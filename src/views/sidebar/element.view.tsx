@@ -12,12 +12,12 @@ import { ListGroup,
 import {FaPlus, FaEdit} from 'react-icons/fa'
 import ReactJSONEditor from '../reactJsonEditor'
 import AceEditor from 'react-ace'
-import Layout from './layout'
+import { Layout } from './layout.view'
 // import 'brace/mode/jsx'
 // import 'brace/theme/github'
 import { View } from '../view';
 
-export default class SidebarCode extends View {
+export class SidebarElement extends View {
     // state = {
     //     modal: false,
     //     id:-1,

@@ -1,25 +1,26 @@
 import React from 'react';
 import { Input, Label } from 'reactstrap'
-import Layout from './layout'
+import { Layout } from './layout.view'
 import Utils from '../../utils/utils';
 import { LayoutManager } from '../../manager/layout.manager';
 import AceEditor from 'react-ace';
-import 'brace/theme/github';
-import 'brace/mode/css';
-import 'brace/ext/language_tools';
+// import 'brace/theme/github';
+// import 'brace/mode/css';
+// import 'brace/ext/language_tools';
+import { View } from '../view';
 
-export default class SidebarProperty extends React.Component<any, any> {
+export class SidebarProperty extends View {
 
-    layoutManager:LayoutManager
+    // layoutManager:LayoutManager
     state:any = {
         value: 'style {\n\n}',
         selectedItem: {}
     }
 
-    constructor(props:any) {
-        super(props);
-        this.layoutManager = LayoutManager.getInstance(LayoutManager);
-    }
+    // constructor(props:any) {
+    //     super(props);
+    //     this.layoutManager = LayoutManager.getInstance(LayoutManager);
+    // }
 
     componentWillReceiveProps(nextProps:any) {
         let selectedItem:any;
@@ -38,7 +39,7 @@ export default class SidebarProperty extends React.Component<any, any> {
     
     render() {
         return <div>
-            <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
+            {/* <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
             <h5>Style</h5>
             <AceEditor
                 style={{width:'100%', height:200}}
@@ -80,7 +81,7 @@ export default class SidebarProperty extends React.Component<any, any> {
                         }}/>
                     </div>
                 })
-            }
+            } */}
         </div>
     }
 }
