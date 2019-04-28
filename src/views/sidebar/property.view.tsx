@@ -2,33 +2,22 @@ import React from 'react';
 import { Input, Label } from 'reactstrap'
 import { Layout } from './layout.view'
 import Utils from '../../utils/utils';
-import { LayoutManager } from '../../manager/layout.manager';
 import AceEditor from 'react-ace';
-// import 'brace/theme/github';
-// import 'brace/mode/css';
-// import 'brace/ext/language_tools';
+import 'brace/theme/github';
+import 'brace/mode/css';
+import 'brace/ext/language_tools';
 import { View } from '../view';
+import { Action } from '../../utils/constant';
 
 export class SidebarProperty extends View {
 
-    // layoutManager:LayoutManager
     state:any = {
         value: 'style {\n\n}',
         selectedItem: {}
     }
 
-    // constructor(props:any) {
-    //     super(props);
-    //     this.layoutManager = LayoutManager.getInstance(LayoutManager);
-    // }
-
-    componentWillReceiveProps(nextProps:any) {
-        let selectedItem:any;
-        Utils.loop(nextProps.layout, (item:any)=> {
-            if (nextProps.selected === item.id) {
-                selectedItem = item;
-            }
-        });
+    componentWillReceiveProps() {
+        const selectedItem = this.mainCtrl.getSelectedElement();
         if (this.state.selectedItem !== selectedItem) {
             this.setState({
                 value: selectedItem.style,
@@ -36,10 +25,14 @@ export class SidebarProperty extends View {
             });
         }
     }
+
+    componentDidCatch(error:any, info:any) {
+        console.log(error, info)
+    }
     
     render() {
         return <div>
-            {/* <Layout layout={this.props.layout} selected={this.props.selected} tab={'property'}/>
+            <Layout />
             <h5>Style</h5>
             <AceEditor
                 style={{width:'100%', height:200}}
@@ -47,14 +40,18 @@ export class SidebarProperty extends View {
                 mode="css" 
                 value={this.state.value}
                 onChange={(value)=> {
-                    this.setState({value:value})}}
+                    this.setState({value:value})
+                }}
                 onValidate={(value)=> {
                     let error = false;
                     value.forEach(item=> {
                         if (item.type === 'error') error = true;
                     });
-                    if (!error && this.state.selectedItem.style !== this.state.value) 
-                        this.layoutManager.update({id:this.state.selectedItem.id, style:this.state.value})
+                    if (!error && this.state.selectedItem.style !== this.state.value) {
+                        const elem = this.mainCtrl.getSelectedElement();
+                        elem.style = this.state.value;
+                        this.mainCtrl.elementControl(Action.Update, elem);
+                    }
                 }}
                 showPrintMargin={true}
                 showGutter={true}
@@ -63,7 +60,7 @@ export class SidebarProperty extends View {
                 setOptions={{
                     enableBasicAutocompletion: true,
                     enableLiveAutocompletion: true,
-                    enableSnippets: true,
+                    enableSnippets: false,
                     showLineNumbers: true,
                     tabSize: 2
                 }}
@@ -77,11 +74,13 @@ export class SidebarProperty extends View {
                         <Input style={styles.propValue} value={this.state.selectedItem.property[key]} onChange={(e)=>{
                             const prop = Utils.deepcopy(this.state.selectedItem.property);
                             prop[key] = e.target.value;
-                            this.layoutManager.update({id:this.state.selectedItem.id, property:prop});
+                            const elem = this.mainCtrl.getSelectedElement();
+                            elem.property = prop;
+                            this.mainCtrl.elementControl(Action.Update, elem);
                         }}/>
                     </div>
                 })
-            } */}
+            }
         </div>
     }
 }

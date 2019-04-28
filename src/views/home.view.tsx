@@ -38,6 +38,9 @@ export default class Home extends View {
     }
 
     render() {
+        if (!this.mainCtrl.isInitialized()) {
+            return <div></div>
+        }
         // this.state.imports.forEach((lib:any)=> {
         //     if (lib.libname && lib.libname.indexOf('react-icons') !== -1) {
         //         const font_group = lib.libname.split('/')[1];
