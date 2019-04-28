@@ -42,6 +42,7 @@ export class MainController extends Singletone<MainController> {
         this.elementCtrl.init(this);
         this.resourceCtrl.init(this);
         this.shortcutCtrl.init(this);
+        this.renderCtrl.init(this);
         this._file = this.fileCtrl.getRoot().children[0];
         this._element = this._file.element ? this._file.element : Element.getReactRootElement();
     }

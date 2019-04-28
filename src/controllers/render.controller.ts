@@ -44,7 +44,7 @@ export class RenderController extends Controller {
                 code = code.replace('{'+prop+'}', this.parseProperty(prop, elem.property[prop]));
             }
         });
-        code = code.replace('{style}', this.parseStyle(elem.style, styles));
+        code = code.replace('{style}', this.parseStyle(elem, styles));
         code = code.replace('{children}', children);
         code = this.parseIfAndForLoop(elem, code, state);
         return code;
@@ -112,9 +112,11 @@ export class RenderController extends Controller {
         return value;
     }
 
-    private parseStyle(value:string, origin={}):string {
-        let style = this.convertCssToStyle(Utils.deepcopy(value), 'style');
-        // select element -> red box
+    private parseStyle(elem:Element, origin={}):string {
+        let style:any = this.convertCssToStyle(Utils.deepcopy(elem.style), 'style');
+        if (elem === this.main.getSelectedElement()) {
+            style.border = 'solid 1px red';
+        }
         style = Utils.merge(origin, style);
         let stringStyle = JSON.stringify(style);
         // color
