@@ -8,6 +8,7 @@ import { MainController } from '../controllers/main.controller';
 import { IProps } from '../utils/interface';
 import { Platform } from '../utils/constant';
 import { View } from './view';
+import { Subscription } from 'rxjs';
 
 export default class Home extends View {
 
@@ -15,6 +16,7 @@ export default class Home extends View {
     //     imports: [{library: ReactStrapService, items: ['Container']}],
     //     code: '<Container></Container>'
     // }
+    subscription?:Subscription;
 
     componentWillMount() {
         if (!this.mainCtrl.isInitialized()) {
@@ -34,7 +36,12 @@ export default class Home extends View {
     }
 
     componentDidMount() {
-        this.mainCtrl.home$.subscribe(()=> this.setState({}));
+        this.subscription = this.mainCtrl.home$.subscribe(()=> this.setState({}));
+    }
+
+    componentWillUnmount() {
+        if (this.subscription)
+            this.subscription.unsubscribe();
     }
 
     render() {

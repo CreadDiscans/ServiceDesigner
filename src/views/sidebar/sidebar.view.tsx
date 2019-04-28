@@ -58,7 +58,7 @@ export default class Sidebar extends View {
                     {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />, 'redo')}
 
                 </div>
-                {this.mainCtrl.isInitialized() ? <div style={styles.collapseSidebar}>
+                {this.mainCtrl.isInitialized() ? <div id="sidebar" style={styles.collapseSidebar}>
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}

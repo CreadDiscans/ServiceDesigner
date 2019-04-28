@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
 import { Element } from "../models/element";
+import { ResourceType, Resource } from "../models/resource";
 
 export class MainController extends Singletone<MainController> {
 
@@ -128,5 +129,15 @@ export class MainController extends Singletone<MainController> {
 
     elementControl(action:Action, elem:Element) {
         this.elementCtrl.control(action, elem);
+    }
+
+    // resource
+
+    getResource(type:ResourceType, name:string|undefined=undefined):Array<Resource>|Resource|undefined {
+        return this.resourceCtrl.get(type, name)
+    }
+
+    resourceControl(action:Action, item:Resource) {
+        this.resourceCtrl.control(action, item);
     }
 }

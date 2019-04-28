@@ -4,39 +4,38 @@ import 'brace/theme/github';
 import 'brace/mode/css';
 import 'brace/ext/language_tools';
 import { Button } from 'reactstrap';
-import { CssManager } from '../../manager/css.manager';
+import { View } from '../view';
+import { ResourceType, Resource } from '../../models/resource';
+import { Action } from '../../utils/constant';
 
 
-export class SidebarCss extends React.Component<any, any> {
+export class SidebarCss extends View {
 
     state = {
         value: ''
     }
 
-    cssManager:CssManager;
-
-    constructor(props:any) {
-        super(props);
-        this.cssManager = CssManager.getInstance(CssManager);
-    }
-
     addCss = () => {
         const name = this.state.value.split('{')[0].slice(1).replace(/^\s+|\s+$/g, '');
-        if (name in this.cssManager.data) {
-            this.cssManager.update(name, this.state.value);
-        } else {
-            this.cssManager.create(name, this.state.value);
+        const resource = this.mainCtrl.getResource(ResourceType.CSS, name);
+        if (resource && !Array.isArray(resource)) {
+            resource.value = this.state.value;
+            this.mainCtrl.resourceControl(Action.Update, resource)
+        } else if (resource === undefined) {
+            let rsc = new Resource(name, ResourceType.CSS, this.state.value);
+            this.mainCtrl.resourceControl(Action.Create, rsc)
         }
     }
 
     deleteCss = () => {
         const name = this.state.value.split('{')[0].slice(1).replace(/^\s+|\s+$/g, '');
-        if (name in this.cssManager.data) {
-            this.cssManager.delete(name);
-        }
+        const resource = this.mainCtrl.getResource(ResourceType.CSS, name);
+        if (resource && !Array.isArray(resource))
+            this.mainCtrl.resourceControl(Action.Delete, resource);
     }
 
     render() {
+        const resource = this.mainCtrl.getResource(ResourceType.CSS);
         return <div>
             <h5>Css</h5>
             <AceEditor
@@ -52,15 +51,15 @@ export class SidebarCss extends React.Component<any, any> {
                 setOptions={{
                     enableBasicAutocompletion: true,
                     enableLiveAutocompletion: true,
-                    enableSnippets: true,
+                    enableSnippets: false,
                     showLineNumbers: true,
                     tabSize: 2
                 }}/>
-            {Object.keys(this.cssManager.data).sort().map(item=> {
-                return <div key={item} style={{cursor:'pointer'}} onClick={()=> {
-                    this.setState({value: this.cssManager.data[item]})
-                }}>{item}</div>
-            })}
+                { Array.isArray(resource) && resource.map((item:Resource, i:number)=> {
+                    return <div key={i} style={{cursor:'pointer'}} onClick={()=> {
+                        this.setState({value: item.value})
+                    }}>{item.name}</div>
+                })}
             <div>
                 <Button 
                     color="success" 

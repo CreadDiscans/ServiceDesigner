@@ -6,6 +6,7 @@ import { Element } from './../models/element';
 import { LibraryTable } from './library/librarytable';
 import Utils from './../utils/utils';
 import { Platform } from '../utils/constant';
+import { ResourceType, Resource } from '../models/resource';
 
 export class RenderController extends Controller {
 
@@ -34,12 +35,12 @@ export class RenderController extends Controller {
         let styles = {};
         Object.keys(elem.property).forEach(prop=> {
             if (prop === 'class') {
-                // const className = elem.property[prop];
-                // className.split(' ').forEach((cls:string)=> {
-                //     styles = Utils.merge(styles, this.convertCssToStyle('', cls))
-                // });
-
-                // css
+                elem.property[prop].split(' ').forEach((cls:string)=> {
+                    const rsc = this.main.getResource(ResourceType.CSS, cls);
+                    if (rsc && !Array.isArray(rsc)) {
+                        styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls));
+                    }
+                })
             } else  {
                 code = code.replace('{'+prop+'}', this.parseProperty(prop, elem.property[prop]));
             }
