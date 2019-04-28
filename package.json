@@ -28,6 +28,7 @@
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
+    "cypress": "^3.2.0",
     "electron": "^4.1.0",
     "electron-builder": "^20.39.0",
     "foreman": "^3.0.1",
@@ -44,7 +45,8 @@
     "electron": "electron .",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dist": "npm run react-build && build -w"
+    "dist": "npm run react-build && build -w",
+    "cypress:open": "cypress open"
   },
   "build": {
     "extends": null,
