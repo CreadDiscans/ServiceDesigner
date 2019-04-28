@@ -6,8 +6,9 @@ import comData from '../resource/components.json';
 import { Platform } from '../utils/constant';
 import { MainController } from '../controllers/main.controller';
 import { IProps } from '../utils/interface';
+import { View } from './view';
 
-export class Intro extends React.Component<IProps> {
+export class Intro extends View {
     
     // react_init = {
     //     '/home.js': {
@@ -34,18 +35,6 @@ export class Intro extends React.Component<IProps> {
     //         "children":[]
     //     }
     // }
-
-    // dataManager:DataManager;
-    // elementManager:ElementManager;
-    
-    mainCtrl:MainController;
-
-    constructor(props:IProps) {
-        super(props);
-        // this.dataManager = DataManager.getInstance(DataManager);
-        // this.elementManager = ElementManager.getInstance(ElementManager);
-        this.mainCtrl = MainController.getInstance(MainController);
-    }
 
     handleClick = (e:any) => {
         if (e.target.name === 'react') {

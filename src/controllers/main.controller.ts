@@ -100,4 +100,12 @@ export class MainController extends Singletone<MainController> {
     getSelectedFile():File {
         return this._file;
     }
+
+    getElements() {
+        if (this._platform === Platform.React) {
+            return this.elementCtrl.reactElements;
+        } else if (this._platform === Platform.ReactNative) {
+            return this.elementCtrl.reactNativeElments;
+        }
+    }
 }

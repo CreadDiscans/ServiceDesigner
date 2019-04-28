@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { ListGroup, 
     ListGroupItem, 
     Button,
@@ -13,88 +13,77 @@ import {FaPlus, FaEdit} from 'react-icons/fa'
 import ReactJSONEditor from '../reactJsonEditor'
 import AceEditor from 'react-ace'
 import Layout from './layout'
-import 'brace/mode/jsx'
-import 'brace/theme/github'
-import { LayoutManager } from '../../manager/layout.manager';
-import { ElementManager } from '../../manager/element.manager';
-import { DataManager } from '../../manager/data.manager';
+// import 'brace/mode/jsx'
+// import 'brace/theme/github'
+import { View } from '../view';
 
-export default class SidebarCode extends React.Component<any,any> {
-    state = {
-        modal: false,
-        id:-1,
-        code: '',
-        name:'',
-        import: '',
-        property: {},
-        group: '',
-        selectedGroup: ''
-    }
+export default class SidebarCode extends View {
+    // state = {
+    //     modal: false,
+    //     id:-1,
+    //     code: '',
+    //     name:'',
+    //     import: '',
+    //     property: {},
+    //     group: '',
+    //     selectedGroup: ''
+    // }
 
-    layoutManger:LayoutManager;
-    elementManger:ElementManager;
-    dataManager:DataManager;
+    // toggle = (e:any=undefined, item:any=undefined)=> {
+    //     const obj:any = { modal:!this.state.modal };
+    //     if (e && e.target.name === 'add') {
+    //         obj.id = -1;
+    //         obj.name = '';
+    //         obj.code = '';
+    //         obj.import = '';
+    //         obj.property = {};
+    //         obj.group = '';
+    //     } else if (item) {
+    //         obj.id = item.id;
+    //         obj.name = item.name;
+    //         obj.code = item.code;
+    //         obj.import = item.import;
+    //         obj.property = item.property;
+    //         obj.group = item.group;
+    //         e.stopPropagation();
+    //     }
+    //     this.setState(obj);
+    // }
 
-    constructor(props:any) {
-        super(props);
-        this.layoutManger = LayoutManager.getInstance(LayoutManager);
-        this.elementManger = ElementManager.getInstance(ElementManager);
-        this.dataManager = DataManager.getInstance(DataManager);
-    }
+    // save = () => {
+    //     if (this.state.id === -1) {
+    //         this.elementManger.create(this.state)
+    //     } else {
+    //         this.elementManger.update(this.state)
+    //     }
+    //     this.toggle();
+    // }
 
-    toggle = (e:any=undefined, item:any=undefined)=> {
-        const obj:any = { modal:!this.state.modal };
-        if (e && e.target.name === 'add') {
-            obj.id = -1;
-            obj.name = '';
-            obj.code = '';
-            obj.import = '';
-            obj.property = {};
-            obj.group = '';
-        } else if (item) {
-            obj.id = item.id;
-            obj.name = item.name;
-            obj.code = item.code;
-            obj.import = item.import;
-            obj.property = item.property;
-            obj.group = item.group;
-            e.stopPropagation();
-        }
-        this.setState(obj);
-    }
-
-    save = () => {
-        if (this.state.id === -1) {
-            this.elementManger.create(this.state)
-        } else {
-            this.elementManger.update(this.state)
-        }
-        this.toggle();
-    }
-
-    delete = () => {
-        this.elementManger.delete(this.state.id);
-        this.toggle();
-    }
+    // delete = () => {
+    //     this.elementManger.delete(this.state.id);
+    //     this.toggle();
+    // }
 
     render() {
-        this.props.elements.sort((a:any,b:any)=>a.name > b.name?1:-1);
-        const groups:any = [];
-        this.props.elements.forEach((item:any)=> {
-            let exist = false;
-            groups.forEach((g:any)=> {
-                if (g.name === item.group) {
-                    exist = true;
-                }
-            });
-            if (!exist) {
-                groups.push({name:item.group, type:item.type});
-            }
-        });
+        // this.props.elements.sort((a:any,b:any)=>a.name > b.name?1:-1);
+        // const groups:any = [];
+        // this.props.elements.forEach((item:any)=> {
+        //     let exist = false;
+        //     groups.forEach((g:any)=> {
+        //         if (g.name === item.group) {
+        //             exist = true;
+        //         }
+        //     });
+        //     if (!exist) {
+        //         groups.push({name:item.group, type:item.type});
+        //     }
+        // });
+        const elements = this.mainCtrl.getElements();
+        console.log(elements);
         return <div>
-            <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/>
+            {/* <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/> */}
             <h5>Element</h5>
-            <div style={styles.listView}>
+            {/* <div style={styles.listView}>
                 {groups.filter((item:any)=> {
                     return this.dataManager.projectType === item.type;
                 }).map((item:any)=> {
@@ -118,8 +107,8 @@ export default class SidebarCode extends React.Component<any,any> {
                 })}
                     
                 <Button color="success" style={styles.listItem} onClick={this.toggle} name='add'><FaPlus />Element</Button>
-            </div>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            </div> */}
+            {/* <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Add Element</ModalHeader>
                 <ModalBody>
                     <Label>Group</Label>
@@ -138,40 +127,40 @@ export default class SidebarCode extends React.Component<any,any> {
                     <Button color="danger" onClick={this.delete}>Delete</Button>{' '}
                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
-            </Modal>
+            </Modal> */}
         </div>
     }
 
-    importbox() {
-        return <AceEditor 
-            style={{width:'100%', height:45}}
-            theme="github" 
-            mode="jsx" 
-            value={this.state.import}
-            onChange={(value)=> this.setState({import:value})}
-            editorProps={{
-            $blockScrolling: false,
-            }} />
-    }
+    // importbox() {
+    //     return <AceEditor 
+    //         style={{width:'100%', height:45}}
+    //         theme="github" 
+    //         mode="jsx" 
+    //         value={this.state.import}
+    //         onChange={(value)=> this.setState({import:value})}
+    //         editorProps={{
+    //             $blockScrolling: false,
+    //         }} />
+    // }
 
-    sandbox() {
-        return <AceEditor 
-            style={{width:'100%', height:200}}
-            theme="github" 
-            mode="jsx" 
-            value={this.state.code}
-            onChange={(value)=> this.setState({code:value})}
-            editorProps={{
-              $blockScrolling: false,
-            }} />
-    }
+    // sandbox() {
+    //     return <AceEditor 
+    //         style={{width:'100%', height:200}}
+    //         theme="github" 
+    //         mode="jsx" 
+    //         value={this.state.code}
+    //         onChange={(value)=> this.setState({code:value})}
+    //         editorProps={{
+    //             $blockScrolling: false,
+    //         }} />
+    // }
 
-    setProperty() {
-        return <ReactJSONEditor values={this.state.property} onChange={(values:any)=>this.setState({property:values})}/>
-    }
+    // setProperty() {
+    //     return <ReactJSONEditor values={this.state.property} onChange={(values:any)=>this.setState({property:values})}/>
+    // }
 }
 
-const styles:any = {
+const styles:{[s: string]: CSSProperties;} = {
     listView: {
         padding:5
     },

@@ -31,44 +31,9 @@ import { SidebarCss } from './css';
 import { MainController } from '../../controllers/main.controller';
 import { IProps } from '../../utils/interface';
 import { SideTab } from '../../utils/constant';
+import { View } from '../view';
 
-export default class Sidebar extends React.Component<IProps> {
-
-    state:any = {
-        folder: {},
-        selectedFolder: 0,
-        layout: {},
-        selected: 0,
-        elements: []
-    }
-
-    // dataManager:DataManager;
-    // historyService:HistoryService;
-    mainCtrl: MainController;
-
-    constructor(props:IProps) {
-        super(props);
-        this.mainCtrl = MainController.getInstance(MainController);
-        // this.dataManager = DataManager.getInstance(DataManager);
-        // this.historyService = HistoryService.getInstance(HistoryService);
-        // const folderManager:FolderManager = FolderManager.getInstance(FolderManager);
-        // const layoutManager:LayoutManager = LayoutManager.getInstance(LayoutManager);
-        // const elementManager:ElementManager = ElementManager.getInstance(ElementManager); 
-
-        // PubsubService.sub(PubsubService.KEY_RELOAD_SIDEBAR).subscribe((tab:any)=> {
-        //     const obj:any = {
-        //         folder: folderManager.data,
-        //         selectedFolder: folderManager.selected,
-        //         layout: layoutManager.data,
-        //         selected: layoutManager.selected,
-        //         elements: elementManager.data
-        //     }
-        //     if (tab) {
-        //         obj.tab = tab;
-        //     }
-        //     this.setState(obj);
-        // });
-    }
+export default class Sidebar extends View {
 
     componentDidMount() {
         this.mainCtrl.sidebar$.subscribe(()=> this.setState({}));
@@ -103,14 +68,10 @@ export default class Sidebar extends React.Component<IProps> {
                 </div>
                 {this.mainCtrl.isInitialized() ? <div style={styles.collapseSidebar}>
                     {tab === SideTab.Help && <SidebarHelp />}
-                    {tab === SideTab.Folder && <SidebarFolder 
-                        root={this.mainCtrl.getFolderData()}/>}
+                    {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}
-                    {tab === SideTab.Element && <SidebarCode 
-                        elements={this.state.elements}
-                        layout={this.state.layout} selected={this.state.selected} />}
-                    {tab === SideTab.Property && <SidebarProperty 
-                        layout={this.state.layout} selected={this.state.selected} />}
+                    {tab === SideTab.Element && <SidebarCode />}
+                    {tab === SideTab.Property && <SidebarProperty />}
                     {tab === SideTab.Css && <SidebarCss />}
                     {tab === SideTab.Color && <SidebarColor />}
                     {tab === SideTab.Asset && <SidebarAsset />}

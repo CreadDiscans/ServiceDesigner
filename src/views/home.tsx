@@ -7,24 +7,14 @@ import { CssManager } from '../manager/css.manager';
 import { MainController } from '../controllers/main.controller';
 import { IProps } from '../utils/interface';
 import { Platform } from '../utils/constant';
+import { View } from './view';
 
-export default class Home extends React.Component<IProps> {
+export default class Home extends View {
 
     // state:any = {
     //     imports: [{library: ReactStrapService, items: ['Container']}],
     //     code: '<Container></Container>'
     // }
-
-    // dataManager:DataManager;
-    // cssManager:CssManager
-    mainCtrl: MainController;
-
-    constructor(props:IProps) {
-        super(props);
-        this.mainCtrl = MainController.getInstance(MainController);
-    //     this.dataManager = DataManager.getInstance(DataManager);
-    //     this.cssManager = CssManager.getInstance(CssManager);
-    }
 
     componentWillMount() {
         if (!this.mainCtrl.isInitialized()) {

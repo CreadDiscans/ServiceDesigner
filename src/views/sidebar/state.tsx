@@ -1,15 +1,8 @@
 import React from 'react';
 import ReactJSONEditor from '../reactJsonEditor';
-import { MainController } from './../../controllers/main.controller';
-import { IProps } from './../../utils/interface';
+import { View } from '../view';
 
-export class SidebarState extends React.Component{
-
-    mainCtrl:MainController;
-    constructor(props:IProps) {
-        super(props);
-        this.mainCtrl = MainController.getInstance(MainController);
-    }
+export class SidebarState extends View {
 
     render() {
         const file = this.mainCtrl.getSelectedFile();
