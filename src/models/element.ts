@@ -1,4 +1,5 @@
 import { Library, LibraryDependency } from './library';
+import Utils from '../utils/utils';
 
 export enum ElementGroup {
     HtmlElement = 'HtmlElement',
@@ -39,8 +40,19 @@ export class Element {
         return this;
     }
 
+    clone():Element {
+        const lib:Array<Library> = [];
+        if (this.library)
+            this.library.forEach((item:Library)=> lib.push(item.clone()));
+        const newOne = new Element(this.name, lib,this.code);
+        newOne.property = Utils.deepcopy(this.property);
+        newOne.style = this.style;
+        newOne.collapse = this.collapse;
+        return newOne;
+    }
+
     static getReactRootElement():Element {
-        return new Element('layout', [], '<div className={{class}} style={{style}}>{children}</div>', false);
+        return new Element('layout', [], '<div style={{style}}>{children}</div>', false);
     }
 
     static getReactNativeRootElement():Element {

@@ -16,9 +16,11 @@ import { Layout } from './layout.view'
 // import 'brace/mode/jsx'
 // import 'brace/theme/github'
 import { View } from '../view';
+import { Element } from '../../models/element';
+import { Action } from '../../utils/constant';
 
 export class SidebarElement extends View {
-    // state = {
+    state = {
     //     modal: false,
     //     id:-1,
     //     code: '',
@@ -26,8 +28,8 @@ export class SidebarElement extends View {
     //     import: '',
     //     property: {},
     //     group: '',
-    //     selectedGroup: ''
-    // }
+        selectedGroup: ''
+    }
 
     // toggle = (e:any=undefined, item:any=undefined)=> {
     //     const obj:any = { modal:!this.state.modal };
@@ -64,6 +66,12 @@ export class SidebarElement extends View {
     //     this.toggle();
     // }
 
+    addElement(item:Element) {
+        const parent = this.mainCtrl.getSelectedElement();
+        parent.children.push(item.clone());
+        this.mainCtrl.elementControl(Action.Create, parent);
+    }
+
     render() {
         // this.props.elements.sort((a:any,b:any)=>a.name > b.name?1:-1);
         // const groups:any = [];
@@ -79,35 +87,31 @@ export class SidebarElement extends View {
         //     }
         // });
         const elements = this.mainCtrl.getElements();
-        console.log(elements);
+        if (!elements) return <div></div>
         return <div>
             <Layout />
             <h5>Element</h5>
-            {/* <div style={styles.listView}>
-                {groups.filter((item:any)=> {
-                    return this.dataManager.projectType === item.type;
-                }).map((item:any)=> {
-                    return <ListGroup key={item.name}>
-                        <ListGroupItem color={item.name===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
-                            this.setState({selectedGroup: item.name})
-                        }}> {item.name}</ListGroupItem>
+            <div style={styles.listView}>
+                {Object.keys(elements).map((group:string)=> {
+                    return <ListGroup key={group}>
+                        <ListGroupItem color={group===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
+                            this.setState({selectedGroup: group})
+                        }}> {group}</ListGroupItem>
                         {
-                            this.state.selectedGroup === item.name && this.props.elements.filter((item:any)=> {
-                                return item.group === this.state.selectedGroup
-                            }).map((item:any)=> {
+                            this.state.selectedGroup === group && elements[group].map((item:Element)=> {
                                 return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
-                                        this.layoutManger.create(item);
+                                        this.addElement(item);
                                     }}>
                                     {item.name}
-                                    <FaEdit style={styles.editIcon} onClick={(e)=> this.toggle(e, item)}/>
+                                    {/* <FaEdit style={styles.editIcon} onClick={(e)=> this.toggle(e, item)}/> */}
                                 </ListGroupItem>
                             })
                         }
                     </ListGroup>
                 })}
                     
-                <Button color="success" style={styles.listItem} onClick={this.toggle} name='add'><FaPlus />Element</Button>
-            </div> */}
+                {/* <Button color="success" style={styles.listItem} onClick={this.toggle} name='add'><FaPlus />Element</Button> */}
+            </div>
             {/* <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Add Element</ModalHeader>
                 <ModalBody>

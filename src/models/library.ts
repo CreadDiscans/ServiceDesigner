@@ -1,3 +1,5 @@
+import Utils from './../utils/utils';
+
 export enum LibraryDependency {
     ReactIcon = 'react-icon',
     ReactNativeVectorIcon = 'react-native-vector-icon',
@@ -13,5 +15,9 @@ export class Library {
     constructor(dependency:LibraryDependency, items:Array<string>) {
         this.dependency = dependency;
         this.items = items;
-    } 
+    }
+
+    clone():Library {
+        return new Library(this.dependency, Utils.deepcopy(this.items));
+    }
 }

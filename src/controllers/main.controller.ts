@@ -126,6 +126,6 @@ export class MainController extends Singletone<MainController> {
     }
 
     elementControl(action:Action, elem:Element) {
-        
+        this.elementCtrl.control(action, elem);
     }
 }

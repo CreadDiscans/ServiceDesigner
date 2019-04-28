@@ -40,7 +40,6 @@ export class RenderController extends Controller {
                 // });
 
                 // css
-                code = code.replace('className={{class}}', '');
             } else  {
                 code = code.replace('{'+prop+'}', this.parseProperty(prop, elem.property[prop]));
             }
@@ -105,13 +104,12 @@ export class RenderController extends Controller {
                 //         }
                 //     }
                 // });
-            } else if (key === 'icon' && this.main.getPlatform() === Platform.React) {
+            } else if (key === 'icon') {
             } else {
                 value = '"' + String(value) + '"'
-            }
-            
+            }   
         }
-        return '';
+        return value;
     }
 
     private parseStyle(value:string, origin={}):string {
