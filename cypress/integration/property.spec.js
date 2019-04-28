@@ -4,7 +4,7 @@ describe('Property, Style 관리', function() {
         cy.visit('/')
         cy.get('button[name="react"]').click()
         cy.get('#property').click()
-        cy.get(".ace_text-input").type("{leftarrow}margin:5px;", {force:true})
+        cy.get(".ace_text-input").type("{leftarrow}{leftarrow}margin:5px;", {force:true})
         cy.get('#design > div > div').should('have.css', 'margin', '5px')    
     })
 

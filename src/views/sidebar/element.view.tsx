@@ -1,20 +1,8 @@
 import React, { CSSProperties } from 'react';
 import { ListGroup, 
     ListGroupItem, 
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Input,
-    Label
 } from 'reactstrap'
-import {FaPlus, FaEdit} from 'react-icons/fa'
-import ReactJSONEditor from '../reactJsonEditor'
-import AceEditor from 'react-ace'
 import { Layout } from './layout.view'
-// import 'brace/mode/jsx'
-// import 'brace/theme/github'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';
