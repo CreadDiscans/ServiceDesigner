@@ -30,7 +30,7 @@ export class SidebarFolder extends View {
 
     async removeFile(root:File) {
         if (this.mainCtrl.getSelectedFile().id !== 0) {
-            const parent:File = await this.getSelectItem(root);
+            const parent:File = await this.getSelectItem(root, true);
             const index:number = Utils.search(parent.children, (item:File)=> item.id === this.state.selectId)[1];
             parent.children.splice(index, 1);
             this.mainCtrl.fileControl(Action.Delete, parent);
@@ -115,9 +115,9 @@ export class SidebarFolder extends View {
         const root = this.mainCtrl.getFolderData();
         return <div>
             <h5>Folder</h5>
-            <Button color="info" onClick={()=>this.addFile(root, FileType.FOLDER)}><FaPlus /> <FaRegFolder /></Button>{' '}
-            <Button color="info" onClick={()=>this.addFile(root, FileType.FILE)}><FaPlus /> <FaJs /></Button> {' '}
-            <Button color="danger" onClick={()=>this.removeFile(root)}><FaTrashAlt /></Button>
+            <Button id="add-folder" color="info" onClick={()=>this.addFile(root, FileType.FOLDER)}><FaPlus /> <FaRegFolder /></Button>{' '}
+            <Button id="add-file" color="info" onClick={()=>this.addFile(root, FileType.FILE)}><FaPlus /> <FaJs /></Button> {' '}
+            <Button id="remove-file" color="danger" onClick={()=>this.removeFile(root)}><FaTrashAlt /></Button>
             {this.treeView(root, root)}
         </div>
     }
