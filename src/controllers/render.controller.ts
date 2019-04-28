@@ -119,8 +119,24 @@ export class RenderController extends Controller {
             style.border = 'solid 1px red';
         }
         style = Utils.merge(origin, style);
+        Object.keys(style).forEach(key=> {
+            const colors = this.main.getResource(ResourceType.COLOR);
+            if (Array.isArray(colors)) {
+                colors.forEach((color:Resource)=> {
+                    if (style[key] === '"Color.'+color.name+'"') {
+                        style[key] = color.value;
+                    }
+                });
+            }
+        })
         let stringStyle = JSON.stringify(style);
-        // color
+        // if (Array.isArray(colors)) {
+        //     colors.forEach((color:Resource)=> {
+        //         const re = new RegExp('"Color.'+color.name+'"', 'g');
+        //         stringStyle = stringStyle.replace(re, color.value);
+        //         console.log(stringStyle, re, color.value);
+        //     });
+        // }
         // asset
         return stringStyle;
     }

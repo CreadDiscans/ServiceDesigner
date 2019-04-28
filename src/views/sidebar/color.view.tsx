@@ -1,57 +1,52 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
-import { ColorManager } from '../../manager/color.manager';
 import { Input, Button } from 'reactstrap';
 import { View } from '../view';
+import { ResourceType, Resource } from '../../models/resource';
+import { Action } from '../../utils/constant';
 
-export class SidebarColor extends View{
+export class SidebarColor extends View {
 
     state = {
         color:'#fff',
         name: '',
-        selected: null
-    }
-
-    colorManager:ColorManager;
-
-    constructor(props:any) {
-        super(props);
-        this.colorManager = ColorManager.getInstance(ColorManager);
     }
 
     handleChange = (e:any) => {
         this.setState({color:e.hex});
     }
 
-    addColor = (e:any) => {
-        if (this.state.name && this.state.name !== '') {
-            if (this.state.name in this.colorManager.data) {
-                this.colorManager.update(this.state.name, this.state.color);
-            } else {
-                this.colorManager.create(this.state.name, this.state.color);
-            }
-            this.setState({name:''});
+    addColor = () => {
+        const name = this.state.name;
+        const resource = this.mainCtrl.getResource(ResourceType.COLOR, name);
+        if (resource && !Array.isArray(resource)) {
+            resource.value = this.state.color;
+            this.mainCtrl.resourceControl(Action.Update, resource);
+        } else if (resource === undefined) {
+            let rsc = new Resource(name, ResourceType.COLOR, this.state.color);
+            this.mainCtrl.resourceControl(Action.Create, rsc);
         }
     }
 
-    deleteColor = (e:any) => {
-        if (this.state.name in this.colorManager.data) {
-            this.colorManager.delete(this.state.name);
-            this.setState({name:''});
-        }
+    deleteColor = () => {
+        const name = this.state.name;
+        const resource = this.mainCtrl.getResource(ResourceType.COLOR, name);
+        if (resource && !Array.isArray(resource))
+            this.mainCtrl.resourceControl(Action.Delete, resource);
     }
 
     render() {
+        const resource = this.mainCtrl.getResource(ResourceType.COLOR);
         return <div>
             <h5>Color</h5>
             <SketchPicker color={this.state.color} onChangeComplete={this.handleChange}/>
-            {Object.keys(this.colorManager.data).sort().map(color=> {
-                return <div key={color}>
+            { Array.isArray(resource) && resource.map((color:Resource, i:number)=> {
+                return <div key={i}>
                     <div style={{width:10, height:10, 
                         display: 'inline-block',
                         marginLeft: 5,
                         marginRight:5,
-                        background:this.colorManager.data[color]}} />{color} 
+                        background:color.value}} />{color.name} 
                 </div>
             })}
             <div>

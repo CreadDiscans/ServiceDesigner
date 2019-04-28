@@ -1,17 +1,6 @@
 describe('공유 리소스 관리', function() {
     
-    it('css를 저장 및 적용 할 수 있다.', function(){
-        cy.visit('/')
-        cy.get('button[name="react"]').click()
-        cy.get('#css').click()
-        cy.get(".ace_text-input").type('.main {{} margin: 5px; }', {force:true})
-        cy.get('button').eq(0).click()
-        cy.get('#property').click()
-        cy.get('input').eq(0).type('main')
-        cy.get('#design > div > div').should('have.css', 'margin', '5px')    
-    })
-
-    it('css를 수정 할 수 있다.', function(){
+    it('Css를 편집 및 적용 할 수 있다.', function(){
         cy.visit('/')
         cy.get('button[name="react"]').click()
         cy.get('#css').click()
@@ -24,21 +13,28 @@ describe('공유 리소스 관리', function() {
         cy.get('#sidebar').find('div').eq(24).click()
         cy.get(".ace_text-input:first").type('{selectall}{backspace}.main {{} margin: 10px; }', {force:true})
         cy.get('button').eq(0).click()
-        cy.get('#design > div > div').should('have.css', 'margin', '10px')    
-    })
-
-    it('css를 삭제 할 수 있다.', function() {
-        cy.visit('/')
-        cy.get('button[name="react"]').click()
-        cy.get('#css').click()
-        cy.get(".ace_text-input").type('.main {{} margin: 5px; }', {force:true})
-        cy.get('button').eq(0).click()
-        cy.get('#property').click()
-        cy.get('input').eq(0).type('main')
-        cy.get('#design > div > div').should('have.css', 'margin', '5px')    
-        cy.get('#css').click()
-        cy.get('#sidebar').find('div').eq(24).click()
+        cy.get('#design > div > div').should('have.css', 'margin', '10px')
         cy.get('button').eq(1).click()
         cy.get('#design > div > div').should('have.css', 'margin', '0px')  
+    })
+
+    it('Color를 편집 및 적용 할 수 있다.', function(){
+        cy.visit('/')
+        cy.get('button[name="react"]').click()
+        cy.get('#color').click()
+        cy.get('input').eq(0).type('{selectall}{backspace}ff0000')
+        cy.get('input').eq(5).type('red')
+        cy.get('button').eq(0).click()
+        cy.get('#property').click()
+        cy.get(".ace_text-input").type('{leftarrow}padding:10px;background:"Color.red";', {force:true})
+        cy.get('#design > div > div').should('have.css', 'background-color', 'rgb(255, 0, 0)')    
+        cy.get('#color').click()
+        cy.get('input').eq(5).type('red')
+        cy.get('input').eq(0).type('{selectall}{backspace}0000ff')
+        cy.get('button').eq(0).click()
+        cy.get('#design > div > div').should('have.css', 'background-color', 'rgb(0, 0, 255)')
+        cy.get('#sidebar').find('div').eq(68).should('have.text', 'red')
+        cy.get('button').eq(1).click()
+        cy.get('#sidebar').find('div').eq(68).should('have.not.text', 'red')
     })
 })

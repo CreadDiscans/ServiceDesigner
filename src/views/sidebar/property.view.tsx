@@ -12,11 +12,11 @@ import { Action } from '../../utils/constant';
 export class SidebarProperty extends View {
 
     state:any = {
-        value: 'style {\n\n}',
+        value: '',
         selectedItem: {}
     }
 
-    componentWillReceiveProps() {
+    componentWillMount() {
         const selectedItem = this.mainCtrl.getSelectedElement();
         if (this.state.selectedItem !== selectedItem) {
             this.setState({
@@ -24,10 +24,6 @@ export class SidebarProperty extends View {
                 selectedItem: selectedItem
             });
         }
-    }
-
-    componentDidCatch(error:any, info:any) {
-        console.log(error, info)
     }
     
     render() {
