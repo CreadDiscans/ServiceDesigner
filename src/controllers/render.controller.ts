@@ -126,10 +126,9 @@ export class RenderController extends Controller {
 
     private parseIfAndForLoop(elem:Element, code:string, state:any):string {
         let brace = false;
-        if (elem.property['for'] && elem.property['for'] !== '') {
+        if (elem.property['for'] && elem.property['for'] !== '' && Array.isArray(state[elem.property['for']])) {
             code = code.replace('>', 'key={i} >');
-            code = 'Array.isArray(this.state.'+elem.property['for']+') && this.state.'
-                + elem.property['for'] + '.map((item, i)=> '+code+')';
+            code = 'this.state.' + elem.property['for'] + '.map((item, i)=> '+code+')';
             brace = true;
         }
         if (elem.property['if'] && elem.property['if'] !== '') {

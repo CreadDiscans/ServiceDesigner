@@ -32,5 +32,6 @@ export class FileController extends Controller {
             }
         });
         this.main.sidebar$.next(true);
+        this.main.home$.next(true);
     }
 }
