@@ -15,6 +15,7 @@ export class Element {
     code:string;
     style:string = 'style{\n\n}';
     property:any = {class:''};
+    collapse:boolean = true;
     children:Array<Element> = [];
 
     constructor(

@@ -6,7 +6,7 @@ export default class Utils {
         return JSON.parse(JSON.stringify(obj))
     }
 
-    static loop(item:File, handle:Function) {
+    static loop(item:any, handle:Function) {
         const localLoop = (parent:any) => {
             handle(parent);
             parent.children.forEach((child:any)=> localLoop(child));

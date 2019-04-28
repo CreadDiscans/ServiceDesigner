@@ -5,10 +5,9 @@ import { ResourceController } from "./resource.controller";
 import { ShortcutController } from './shortcut.controller';
 import { Platform, SideTab, Action } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
-import { Container } from 'reactstrap';
-import React from 'react';
 import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
+import { Element } from "../models/element";
 
 export class MainController extends Singletone<MainController> {
 
@@ -22,6 +21,7 @@ export class MainController extends Singletone<MainController> {
     private _platform!: Platform;
     private _tab:SideTab = SideTab.Help;
     private _file!:File;
+    private _element!:Element;
 
     home$ = new BehaviorSubject(false);
     sidebar$ = new BehaviorSubject(false);
@@ -43,6 +43,7 @@ export class MainController extends Singletone<MainController> {
         this.resourceCtrl.init(this);
         this.shortcutCtrl.init(this);
         this._file = this.fileCtrl.getRoot().children[0];
+        this._element = this._file.element ? this._file.element : Element.getReactRootElement();
     }
 
     isInitialized():boolean {
@@ -82,9 +83,12 @@ export class MainController extends Singletone<MainController> {
         return this._tab;
     }
 
+    // file
+
     getFolderData():File {
         return this.fileCtrl.getRoot();
     }
+
 
     fileControl(action:Action, file:File) {
         this.fileCtrl.control(action, file);
@@ -101,11 +105,27 @@ export class MainController extends Singletone<MainController> {
         return this._file;
     }
 
+    // Element
+
+    selectElement(elem:Element) {
+        this._element = elem;
+        this.home$.next(true);
+        this.sidebar$.next(true);
+    }
+
     getElements() {
         if (this._platform === Platform.React) {
             return this.elementCtrl.reactElements;
         } else if (this._platform === Platform.ReactNative) {
             return this.elementCtrl.reactNativeElments;
         }
+    }
+
+    getSelectedElement():Element {
+        return this._element;
+    }
+
+    elementControl(action:Action, elem:Element) {
+        
     }
 }

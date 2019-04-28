@@ -81,7 +81,7 @@ export class SidebarElement extends View {
         const elements = this.mainCtrl.getElements();
         console.log(elements);
         return <div>
-            {/* <Layout layout={this.props.layout} selected={this.props.selected} tab={'code'}/> */}
+            <Layout />
             <h5>Element</h5>
             {/* <div style={styles.listView}>
                 {groups.filter((item:any)=> {

@@ -1,5 +1,7 @@
 import { Controller } from './controller';
 import { Element, ElementGroup } from '../models/element';
+import { Action } from '../utils/constant';
+import Utils from './../utils/utils';
 
 export class ElementController extends Controller {
     
@@ -25,5 +27,14 @@ export class ElementController extends Controller {
         ]
     }
     
+    control(action:Action, elem:Element) {
+        Utils.loop(this.main.getSelectedFile().element, (item:Element)=> {
+            if (item === elem) {
+                item = elem;
+            }
+        });
+        this.main.sidebar$.next(true);
+        this.main.home$.next(true);
+    }
     
 }
