@@ -94,17 +94,16 @@ export class RenderController extends Controller {
                 (value.indexOf('{this.state.') === 0 && value[value.length-1] === '}' && value !== '{this.state.}')) {
                 value = value.slice(1, value.length-1)
             } else if (value.indexOf('Asset.') === 0) {
-                value = '';
-                // asset
-                // Object.keys(assetManager.data).forEach(asset=> {
-                //     if (value === 'Asset.'+asset) {
-                //         if (exporting) {
-                //             value = 'DesignedAssets.'+ asset;
-                //         } else {
-                //             value = '"' + assetManager.data[asset] + '"';
-                //         }
-                //     }
-                // });
+                const temp = value;
+                value = '""';
+                const assets = this.main.getResource(ResourceType.ASSET);
+                if (Array.isArray(assets)) {
+                    assets.forEach((asset:Resource)=> {
+                        if (temp === 'Asset.'+asset.name) {
+                            value = '"'+asset.value + '"';
+                        }
+                    })
+                }
             } else if (key === 'icon') {
             } else {
                 value = '"' + String(value) + '"'
@@ -128,16 +127,16 @@ export class RenderController extends Controller {
                     }
                 });
             }
+            const assets = this.main.getResource(ResourceType.ASSET);
+            if (Array.isArray(assets)) {
+                assets.forEach((asset:Resource)=> {
+                    if (style[key] === '"Asset.'+asset.name+'"') {
+                        style[key] = 'url(' + asset.value + ')';
+                    }
+                })
+            }
         })
         let stringStyle = JSON.stringify(style);
-        // if (Array.isArray(colors)) {
-        //     colors.forEach((color:Resource)=> {
-        //         const re = new RegExp('"Color.'+color.name+'"', 'g');
-        //         stringStyle = stringStyle.replace(re, color.value);
-        //         console.log(stringStyle, re, color.value);
-        //     });
-        // }
-        // asset
         return stringStyle;
     }
 

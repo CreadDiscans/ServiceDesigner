@@ -17,6 +17,14 @@ export class SidebarProperty extends View {
     }
 
     componentWillMount() {
+        this.update();
+    }
+
+    componentWillReceiveProps() {
+        this.update();
+    }
+
+    update() {
         const selectedItem = this.mainCtrl.getSelectedElement();
         if (this.state.selectedItem !== selectedItem) {
             this.setState({

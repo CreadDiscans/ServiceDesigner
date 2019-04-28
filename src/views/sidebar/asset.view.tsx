@@ -1,9 +1,11 @@
 import React from 'react';
 import { Input, Button, Tooltip } from 'reactstrap';
-import { AssetManager } from '../../manager/asset.manager';
+import { View } from './../view';
+import { ResourceType, Resource } from '../../models/resource';
+import { Action } from '../../utils/constant';
 declare var window:any;
 
-export class SidebarAsset extends React.Component<any, any> {
+export class SidebarAsset extends View {
 
     state = {
         name: '',
@@ -11,21 +13,24 @@ export class SidebarAsset extends React.Component<any, any> {
     }
 
     fileRef:any;
-    assetManager: AssetManager;
 
     constructor(props:any) {
         super(props);
         this.fileRef = React.createRef();
-        this.assetManager = AssetManager.getInstance(AssetManager);
     }
 
     fileSelect = (e:any) => {
+        console.log(e, e.target, e.target.files);
         const FileReader = new window.FileReader();
         FileReader.onload = (e:any) => {
-            if (this.state.name in this.assetManager.data) {
-                this.assetManager.update(this.state.name, e.target.result);
-            } else {
-                this.assetManager.create(this.state.name, e.target.result);
+            const name = this.state.name;
+            const resource = this.mainCtrl.getResource(ResourceType.ASSET, name);
+            if (resource && !Array.isArray(resource)) {
+                resource.value = e.target.result;
+                this.mainCtrl.resourceControl(Action.Update, resource);
+            } else if (resource === undefined) {
+                let rsc = new Resource(name, ResourceType.ASSET, e.target.result);
+                this.mainCtrl.resourceControl(Action.Create, rsc);
             }
             this.setState({name:''});
         }
@@ -39,36 +44,37 @@ export class SidebarAsset extends React.Component<any, any> {
     }
 
     delete = () => {
-        if(this.state.name && this.state.name !== '') {
-            if (this.state.name in this.assetManager.data) {
-                this.assetManager.delete(this.state.name);
-                this.setState({name:''});
-            }
+        const name = this.state.name;
+        const resource = this.mainCtrl.getResource(ResourceType.ASSET, name);
+        if (resource && !Array.isArray(resource)) {
+            this.mainCtrl.resourceControl(Action.Delete, resource);
+            this.setState({name:''});
         }
     }
 
-    toogle = (asset:any) => {
-        if (this.state.open === asset) {
+    toogle = (asset:Resource) => {
+        if (this.state.open === asset.name) {
             this.setState({open:''});
         } else {
-            this.setState({open:asset});
+            this.setState({open:asset.name});
         }
     }
 
     render() {
+        const resource = this.mainCtrl.getResource(ResourceType.ASSET);
         return <div>
             <h5>Asset</h5>
-            {Object.keys(this.assetManager.data).sort().map(asset=> {
-                return <div key={asset} style={{margin:10}}>
-                    {asset} 
-                    <img 
-                        id={'asset-'+asset}
-                        style={{width:30, height:30, float:'right'}} 
-                        src={this.assetManager.data[asset]} alt=""/>
-                    <Tooltip placement="right" target={'asset-'+asset} isOpen={this.state.open === asset} toggle={()=>this.toogle(asset)}>
-                        <img style={{width:150}} src={this.assetManager.data[asset]} alt=""/>
-                    </Tooltip>
-                </div>
+            {Array.isArray(resource) && resource.map((asset:Resource, i:number)=> {
+                return <div key={i} style={{margin:10}}>
+                {asset.name} 
+                <img 
+                    id={'asset-'+asset.name}
+                    style={{width:30, height:30, float:'right'}} 
+                    src={asset.value} alt=""/>
+                <Tooltip placement="right" target={'asset-'+asset.name} isOpen={this.state.open === asset.name} toggle={()=>this.toogle(asset)}>
+                    <img style={{width:150}} src={asset.value} alt=""/>
+                </Tooltip>
+            </div>
             })}
             <Input placeholder="name" value={this.state.name} onChange={(e)=>this.setState({name:e.target.value})}/>
             <input type="file" style={{display:'none'}} ref={this.fileRef} onChange={this.fileSelect}/>

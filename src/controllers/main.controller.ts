@@ -100,6 +100,7 @@ export class MainController extends Singletone<MainController> {
         if (file.type === FileType.FILE) {
             this._file = file;
             this.home$.next(true);
+            this.sidebar$.next(true);
         }
     }
 

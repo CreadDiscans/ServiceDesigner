@@ -9,6 +9,7 @@ export class ElementController extends Controller {
         [ElementGroup.HtmlElement]: [
             new Element('div', [], '<div style={{style}} name={{name}} onClick={this.handleClick}>{{text}}{children}</div>').addProps(['text', 'name']),
             new Element('span', [], '<span style={{style}} name={{name}} onClick={this.handleClick}>{{text}}{children}</span>').addProps(['text', 'name']),
+            new Element('img', [], '<img style={{style}} src={{src}} alt={{alt}} />').addProps(['src', 'alt'])
         ],
         [ElementGroup.Reactstrap]: [
 

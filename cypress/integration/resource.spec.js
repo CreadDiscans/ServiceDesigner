@@ -37,4 +37,29 @@ describe('공유 리소스 관리', function() {
         cy.get('button').eq(1).click()
         cy.get('#sidebar').find('div').eq(68).should('have.not.text', 'red')
     })
+
+    it('Asset을 편집 및 적용 할 수 있다.', function(){
+        cy.visit('/')
+        cy.get('button[name="react"]').click()
+        cy.get('#asset').click()
+        cy.get('input').eq(0).type('file')
+        // cy.get('button').eq(0).click()
+        cy.fixture('image.png').as('img')
+        cy.get('input').eq(1).then(subject=> {
+            return cy.fixture('image.png')
+            .then(Cypress.Blob.base64StringToBlob)
+            .then(blob=> {
+                const el = subject[0]
+                const file = new File([blob], 'image.png', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+                const dataTransfer = new DataTransfer()
+                dataTransfer.items.add(file)
+                el.files = dataTransfer.files
+                return subject
+            })
+        })
+        cy.get('input').eq(1).trigger('change', {force:true});
+        cy.get('#property').click()
+        cy.get(".ace_text-input").type('{leftarrow}padding:100px;background: "Asset.file"', {force:true})
+        cy.get('#design > div > div').should('have.css', 'background-image').and('match', /data:/)
+    })
 })
