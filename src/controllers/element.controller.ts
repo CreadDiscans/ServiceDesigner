@@ -35,7 +35,7 @@ export class ElementController extends Controller {
             new Element('Link', [new Library(D.ReactRouterDom, ['Link'])], '<Link style={{style}} to={{to}}>{{text}}{children}</Link>').addProps(['text', 'to']),
         ],
         [D.Reactscrap]: [
-            new Element('Alerts', [new Library(D.Reactscrap, ['Alerts'])], '<Alert style={{style}} color={{color}}>{{text}}{children}</Alert>').addProps(['color', 'text']),
+            new Element('Alert', [new Library(D.Reactscrap, ['Alert'])], '<Alert style={{style}} color={{color}}>{{text}}{children}</Alert>').addProps(['color', 'text']),
             new Element('Badge', [new Library(D.Reactscrap, ['Badge'])], '<Badge style={{style}} color={{color}}>{{text}}{children}</Badge>').addProps(['color', 'text']),
             new Element('Button', [new Library(D.Reactscrap, ['Button'])], '<Button style={{style}} color={{color}} name={{name}} outline={{outline}==="true"} onClick={this.handleClick}>{{text}}{children}</Button>').addProps(['color', 'outline', 'name', 'text']),
             new Element('Input', [new Library(D.Reactscrap, ['Input'])], '<Input style={{style}} name={{name}} onChange={this.handleChange} value={{value}} placeholder={{placeholder}}/>').addProps(['name', 'value', 'placeholder']),

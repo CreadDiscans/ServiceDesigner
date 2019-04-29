@@ -8,9 +8,9 @@ declare var window:any;
 
 export class ExportController extends Controller {
 
-    private static TEMPLATE_CLASS = "export class {classname} extends DesignComponent {\n\t{state}\n\trender() {\n\t\treturn {code}\n\t}\n}\n";
+    private static TEMPLATE_CLASS = "export class {classname} extends DesignComponent {\n\t{state}\n\trender() {\n\t\t// @ts-ignore\n\t\treturn {code}\n\t}\n}\n";
     private static TEMPLATE_IMPORT = "import React from 'react';\n{import}\n";
-    private static TEMPLATE_ABSTRACT = "class DesignComponent extends React.Component {\n\thandleClick = (e) => {};\n\thandleChange = (e) => {};\n\trenderPart = (name) => {}\n}\n";
+    private static TEMPLATE_ABSTRACT = "class DesignComponent extends React.Component<any, any> {\n\thandleClick = (e:any) => {};\n\thandleChange = (e:any) => {};\n\trenderPart = (name:any) => {}\n}\n";
     private cachePath:string|undefined;
 
     export(root:File, useCache:boolean) {
@@ -33,11 +33,11 @@ export class ExportController extends Controller {
                 console.log('saved json')
                 document.getElementsByTagName('title')[0].innerText = 'Service Designer';
             });
-            fs.writeFile(this.cachePath+'/design.js', js, (err:any)=> {
+            fs.writeFile(this.cachePath+'/design.tsx', js, (err:any)=> {
                 if (err) {
                     return console.log(err)
                 }
-                console.log('saved js')
+                console.log('saved tsx')
             });
         } catch(e) {
             console.log('not electron platfrom');
