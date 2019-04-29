@@ -29,7 +29,7 @@ export class ElementController extends Controller {
             new Element('tr', [], '<tr style={{style}}>{children}</tr>'),
             new Element('th', [], '<th style={{style}}>{children}</th>'),
             new Element('td', [], '<td style={{style}}>{children}</td>'),
-            new Element('render', [], '<div style={{style}}>{this.renderPart("{name}")}</div>').addProps(['name']),
+            new Element('render', [], '<div style={{style}}>{this.renderPart({name})}</div>').addProps(['name']),
         ],
         [D.ReactRouterDom]: [
             new Element('Link', [new Library(D.ReactRouterDom, ['Link'])], '<Link style={{style}} to={{to}}>{{text}}{children}</Link>').addProps(['text', 'to']),
@@ -56,8 +56,8 @@ export class ElementController extends Controller {
             new Element('TextInput', [new Library(D.ReactNative, ['TextInput'])], '<TextInput style={{style}} placeholder={{placeholder}} value={{value}} onChangeText={(text)=>this.handleChange({target:{value:text, name:{name}}})}/>').addProps(['name', 'value', 'placeholder']),
             new Element('TouchableOpacity', [new Library(D.ReactNative, ['TouchableOpacity'])], '<TouchableOpacity style={{style}} onPress={()=>this.handleClick({target:{name:{name}}})}>{children}</TouchableOpacity>').addProps(['name']),
             new Element('TouchableWithoutFeedback', [new Library(D.ReactNative, ['TouchableWithoutFeedback'])], '<TouchableWithoutFeedback style={{style}} onPress={()=>this.handleClick({target:{name:{name}}})}><View>{children}</View></TouchableWithoutFeedback>').addProps(['name']),
-            new Element('Image', [new Library(D.ReactNative, ['Image'])], '<Image style={{style}} source={uri: \"{src}\"} />').addProps(['src']),
-            new Element('render', [new Library(D.ReactNative, ['View'])], '<View style={{style}}>{this.renderPart("{name}")}</View>').addProps(['name']),
+            new Element('Image', [new Library(D.ReactNative, ['Image'])], '<Image style={{style}} source={{uri: {src}}} />').addProps(['src']),
+            new Element('render', [new Library(D.ReactNative, ['View'])], '<View style={{style}}>{this.renderPart({name})}</View>').addProps(['name']),
         ],
         [LibraryDependency.ReactNativeVectorIcon]: [
 
