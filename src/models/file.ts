@@ -25,4 +25,16 @@ export class File {
     setState(obj:any){
         this.state = Utils.merge(this.state, obj);
     }
+
+    toJson():any {
+        return {
+            id:this.id,
+            name:this.name,
+            type: this.type,
+            collapse: this.collapse,
+            children: this.children.map((item:File)=>item.toJson()),
+            element: this.element ? this.element.toJson() : undefined,
+            state: Utils.deepcopy(this.state)
+        }
+    }
 }

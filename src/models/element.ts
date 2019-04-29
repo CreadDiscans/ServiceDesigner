@@ -51,6 +51,18 @@ export class Element {
         return newOne;
     }
 
+    toJson():any {
+        return {
+            name:this.name,
+            library: this.library ? this.library.map((item:Library)=> item.toJson()) : [],
+            code: this.code,
+            style: this.style,
+            property: Utils.deepcopy(this.property),
+            collapse: this.collapse,
+            children: this.children.map((item:Element)=> item.toJson())
+        }
+    }
+
     static getReactRootElement():Element {
         return new Element('layout', [], '<div style={{style}}>{children}</div>', false);
     }

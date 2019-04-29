@@ -20,4 +20,11 @@ export class Library {
     clone():Library {
         return new Library(this.dependency, Utils.deepcopy(this.items));
     }
+
+    toJson() {
+        return {
+            dependency: this.dependency,
+            items: Utils.deepcopy(this.items) 
+        }
+    }
 }

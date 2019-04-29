@@ -9,6 +9,7 @@ import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
 import { Element } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
+import { ExportController } from "./export.controller";
 
 export class MainController extends Singletone<MainController> {
 
@@ -17,6 +18,7 @@ export class MainController extends Singletone<MainController> {
     private resourceCtrl: ResourceController;
     private shortcutCtrl: ShortcutController;
     private renderCtrl: RenderController;
+    private exportCtrl: ExportController;
 
     private _isInitialized = false;
     private _platform!: Platform;
@@ -34,6 +36,7 @@ export class MainController extends Singletone<MainController> {
         this.resourceCtrl = ResourceController.getInstance(ResourceController);
         this.shortcutCtrl = ShortcutController.getInstance(ShortcutController);
         this.renderCtrl = RenderController.getInstance(RenderController);
+        this.exportCtrl = ExportController.getInstance(ExportController);
     }
 
     init(platform:Platform) {
@@ -44,6 +47,7 @@ export class MainController extends Singletone<MainController> {
         this.resourceCtrl.init(this);
         this.shortcutCtrl.init(this);
         this.renderCtrl.init(this);
+        this.exportCtrl.init(this);
         this._file = this.fileCtrl.getRoot().children[0];
         this._element = this._file.element ? this._file.element : Element.getReactRootElement();
     }
@@ -56,12 +60,15 @@ export class MainController extends Singletone<MainController> {
         return this._platform;
     }
 
-    getRenderData() {
-        return this.renderCtrl.render(this._file);
+    getRenderData(file:File|undefined = undefined) {
+        if (file)
+            return this.renderCtrl.render(file);
+        else
+            return this.renderCtrl.render(this._file);
     }
 
     export(useCache=false) {
-
+        this.exportCtrl.export(this.fileCtrl.getRoot(), useCache);
     }
 
     import() {

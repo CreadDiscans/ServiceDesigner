@@ -7,9 +7,12 @@ export default class Utils {
     }
 
     static loop(item:any, handle:Function) {
+        const stack:any = [];
         const localLoop = (parent:any) => {
-            handle(parent);
+            handle(parent, stack);
+            stack.push(parent);
             parent.children.forEach((child:any)=> localLoop(child));
+            stack.pop();
         }
         localLoop(item)
     }
