@@ -27,4 +27,8 @@ export class Library {
             items: Utils.deepcopy(this.items) 
         }
     }
+
+    static parse(json:any):Library {
+        return new Library(json.dependency, json.items);
+    }
 }

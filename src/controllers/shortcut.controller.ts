@@ -6,10 +6,14 @@ import { SideTab } from '../utils/constant';
 export class ShortcutController extends Controller {
 
     private isCtrl = false;
+    private isBind = false;
 
     init(main:MainController) {
         super.init(main);
-        this.bindEvent();
+        if (!this.isBind) {
+            this.bindEvent();
+            this.isBind = true;
+        }
     }
 
     private bindEvent() {

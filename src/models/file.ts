@@ -37,4 +37,13 @@ export class File {
             state: Utils.deepcopy(this.state)
         }
     }
+
+    static parse(json:any):File {
+        const newOne = new File(json.id, json.name, json.type);
+        newOne.collapse = json.collapse;
+        newOne.children = json.children.map((fileJson:any)=>File.parse(fileJson));
+        newOne.element = json.element ? Element.parse(json.element) : undefined;
+        newOne.state = json.state;
+        return newOne;
+    }
 }

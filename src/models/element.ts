@@ -63,6 +63,17 @@ export class Element {
         }
     }
 
+    static parse(json:any):Element {
+        const newOne = new Element(json.name, 
+            json.library.map((libjson:any)=>Library.parse(libjson)),
+            json.code)
+        newOne.style = json.style;
+        newOne.property = json.property;
+        newOne.collapse = json.collapse;
+        newOne.children = json.children.map((elemJson:any)=>Element.parse(elemJson)); 
+        return newOne
+    }
+
     static getReactRootElement():Element {
         return new Element('layout', [], '<div style={{style}}>{children}</div>', false);
     }

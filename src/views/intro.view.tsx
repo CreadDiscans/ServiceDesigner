@@ -36,7 +36,7 @@ export class Intro extends View {
     //     }
     // }
 
-    handleClick = (e:any) => {
+    handleClick = async (e:any) => {
         if (e.target.name === 'react') {
             this.mainCtrl.init(Platform.React);
 
@@ -52,7 +52,8 @@ export class Intro extends View {
             // this.elementManager.initialize(comData);
             if (this.props.history) this.props.history.push('/home');
         } else if (e.target.name === 'load') {
-            // this.dataManager.import();
+            const result = await this.mainCtrl.import();
+            if (this.props.history && result) this.props.history.push('/home');
         }
     }
 

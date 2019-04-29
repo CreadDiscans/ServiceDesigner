@@ -21,6 +21,10 @@ export class FileController extends Controller {
         }
     }
 
+    setRoot(root:File) {
+        this.root = root;
+    }
+
     getRoot():File {
         return this.root;
     }

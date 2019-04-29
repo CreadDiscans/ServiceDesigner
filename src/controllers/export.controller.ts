@@ -44,7 +44,10 @@ export class ExportController extends Controller {
             console.log(js, json);
             return;
         }
+    }
 
+    setCachePath(path:string) {
+        this.cachePath = path;
     }
 
     private makeReactJs(root:File) {

@@ -10,6 +10,7 @@ import { RenderController } from "./render.controller";
 import { Element } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
 import { ExportController } from "./export.controller";
+declare var window:any;
 
 export class MainController extends Singletone<MainController> {
 
@@ -39,10 +40,11 @@ export class MainController extends Singletone<MainController> {
         this.exportCtrl = ExportController.getInstance(ExportController);
     }
 
-    init(platform:Platform) {
+    init(platform:Platform, root:File|undefined=undefined) {
         this._platform = platform;
         this._isInitialized = true;
         this.fileCtrl.init(this);
+        if (root) this.fileCtrl.setRoot(root);
         this.elementCtrl.init(this);
         this.resourceCtrl.init(this);
         this.shortcutCtrl.init(this);
@@ -71,8 +73,24 @@ export class MainController extends Singletone<MainController> {
         this.exportCtrl.export(this.fileCtrl.getRoot(), useCache);
     }
 
-    import() {
-
+    async import():Promise<boolean> {
+        return new Promise(async(resolve)=> {
+            try {
+                const { remote } = window.require('electron')
+                const fs = window.require('fs')
+                const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+                const path = file[0].replace('/design.json');
+                fs.readFile(file[0], (err:any, data:any)=> {
+                    if (err) throw err
+                    const json = JSON.parse(data.toString())
+                    this.init(json.platfrom, File.parse(json.root));
+                    this.exportCtrl.setCachePath(path);
+                    return resolve(true);
+                })
+            } catch(e) {
+                return resolve(false);
+            }
+        })  
     }
 
     undo() {
