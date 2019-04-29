@@ -6,6 +6,7 @@ import { Element } from './../models/element';
 import { LibraryTable } from './library/librarytable';
 import Utils from './../utils/utils';
 import { ResourceType, Resource } from '../models/resource';
+import { Platform } from '../utils/constant';
 
 export class RenderController extends Controller {
 
@@ -113,7 +114,12 @@ export class RenderController extends Controller {
     private parseStyle(elem:Element, origin={}):string {
         let style:any = this.convertCssToStyle(Utils.deepcopy(elem.style), 'style');
         if (elem === this.main.getSelectedElement()) {
-            style.border = 'solid 1px red';
+            if (this.main.getPlatform() === Platform.React) {
+                style.border = 'solid 1px red';
+            } else if (this.main.getPlatform() === Platform.ReactNative) {
+                style.borderColor = 'red';
+                style.borderWidth = '1px';
+            }
         }
         style = Utils.merge(origin, style);
         Object.keys(style).forEach(key=> {
