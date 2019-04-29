@@ -1,10 +1,12 @@
 import Utils from './../utils/utils';
 
 export enum LibraryDependency {
+    HtmlElement = 'HtmlElement',
     ReactIcon = 'react-icon',
     ReactNativeVectorIcon = 'react-native-vector-icon',
     ReactNative = 'react-native',
-    Reactscrap = 'reactstrap'
+    Reactscrap = 'reactstrap',
+    ReactRouterDom = 'react-router-dom'
 }
 
 export class Library {

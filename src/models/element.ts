@@ -1,14 +1,6 @@
 import { Library, LibraryDependency } from './library';
 import Utils from '../utils/utils';
 
-export enum ElementGroup {
-    HtmlElement = 'HtmlElement',
-    Reactstrap = 'reactstrap',
-    ReactNative = 'react-native',
-    ReactIcons = 'react-icons',
-    ReactNativeVectorIcons = 'react-native-vector-icons'
-}
-
 export class Element {
 
     id?:number;

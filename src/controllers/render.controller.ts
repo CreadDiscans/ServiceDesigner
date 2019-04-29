@@ -5,7 +5,6 @@ import React from 'react';
 import { Element } from './../models/element';
 import { LibraryTable } from './library/librarytable';
 import Utils from './../utils/utils';
-import { Platform } from '../utils/constant';
 import { ResourceType, Resource } from '../models/resource';
 
 export class RenderController extends Controller {
@@ -16,7 +15,6 @@ export class RenderController extends Controller {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state);
-        console.log(imp, code, file.state);
         return {
             state: file.state,
             imp: imp,
@@ -77,7 +75,7 @@ export class RenderController extends Controller {
     private parseLibrary(elem:Element, imp:any) {
         if (elem.library) {
             elem.library.forEach(item=> {
-                const service = LibraryTable[item.dependency];
+                const service:any = LibraryTable[item.dependency];
                 item.items.forEach(key=> {
                     imp[key] = service.get(key);
                 });
