@@ -11,14 +11,15 @@ export class Layout extends View {
     removeElement(root?:Element) {
         if (!root) return;
         const target = this.mainCtrl.getSelectedElement();
+        let parent;
         Utils.loop(root, (item:Element)=> {
             item.children.forEach((child:Element, i:number)=> {
-                if (child === target) {
-                    item.children.splice(i, 1);
-                    this.mainCtrl.elementControl(Action.Delete, item);
+                if (child.id === target.id) {
+                    parent = item;
                 }
             })
         })
+        this.mainCtrl.elementControl(Action.Delete, parent, target.clone(), undefined);
     }
 
     treeView(item:Element, index=0, depth=0) {
@@ -28,10 +29,10 @@ export class Layout extends View {
                 item.children.length > 0 && (
                     item.collapse ? <FaAngleDown onClick={()=> {
                         item.collapse = false;
-                        this.mainCtrl.elementControl(Action.Update, item);
+                        this.mainCtrl.sidebar$.next(true);
                     }}/> : <FaAngleRight onClick={()=>{
                         item.collapse = true;
-                        this.mainCtrl.elementControl(Action.Update, item);
+                        this.mainCtrl.sidebar$.next(true);
                     }}/>
                 )
             }

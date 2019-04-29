@@ -8,6 +8,7 @@ import 'brace/mode/css';
 import 'brace/ext/language_tools';
 import { View } from '../view';
 import { Action } from '../../utils/constant';
+import { Element } from '../../models/element';
 
 export class SidebarProperty extends View {
 
@@ -52,9 +53,20 @@ export class SidebarProperty extends View {
                         if (item.type === 'error') error = true;
                     });
                     if (!error && this.state.selectedItem.style !== this.state.value) {
+                        const file = this.mainCtrl.getSelectedFile();
                         const elem = this.mainCtrl.getSelectedElement();
-                        elem.style = this.state.value;
-                        this.mainCtrl.elementControl(Action.Update, elem);
+                        let parent;
+                        Utils.loop(file.element, (item:Element)=> {
+                            item.children.forEach((child:Element)=> {
+                                if (child.id === elem.id) {
+                                    parent = item;
+                                }
+                            })
+                        })
+                        const after = elem.clone();
+                        after.style = this.state.value;
+                        console.log(parent);
+                        this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
                     }
                 }}
                 showPrintMargin={true}
@@ -78,9 +90,19 @@ export class SidebarProperty extends View {
                         <Input style={styles.propValue} value={this.state.selectedItem.property[key]} onChange={(e)=>{
                             const prop = Utils.deepcopy(this.state.selectedItem.property);
                             prop[key] = e.target.value;
+                            const file = this.mainCtrl.getSelectedFile();
                             const elem = this.mainCtrl.getSelectedElement();
-                            elem.property = prop;
-                            this.mainCtrl.elementControl(Action.Update, elem);
+                            let parent;
+                            Utils.loop(file.element, (item:Element)=> {
+                                item.children.forEach((child:Element)=> {
+                                    if (child === elem) {
+                                        parent = item;
+                                    }
+                                })
+                            })
+                            const after = elem.clone();
+                            after.property = prop;
+                            this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
                         }}/>
                     </div>
                 })

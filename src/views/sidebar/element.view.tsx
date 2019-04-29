@@ -6,6 +6,7 @@ import { Layout } from './layout.view'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';
+import Utils from '../../utils/utils';
 
 export class SidebarElement extends View {
     state = {
@@ -55,9 +56,11 @@ export class SidebarElement extends View {
     // }
 
     addElement(item:Element) {
+        const file = this.mainCtrl.getSelectedFile();
         const parent = this.mainCtrl.getSelectedElement();
-        parent.children.push(item.clone());
-        this.mainCtrl.elementControl(Action.Create, parent);
+        const newOne = item.clone();
+        newOne.id = Utils.maxId(file.element) + 1;
+        this.mainCtrl.elementControl(Action.Create, parent, undefined, newOne);
     }
 
     render() {

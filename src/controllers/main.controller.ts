@@ -112,7 +112,7 @@ export class MainController extends Singletone<MainController> {
         if (hist.action === Action.Delete) action = Action.Create;
         let after;
         let before;
-        if (hist.before) before = hist.crtl.parse(hist.before);
+        if (hist.before) before = hist.ctrl.parse(hist.before);
         if (hist.after) after = hist.ctrl.parse(hist.after);
         hist.ctrl.control(action, hist.parent, after, before, hist.ctrl, HisotryAction.Undo);
     }
@@ -180,8 +180,9 @@ export class MainController extends Singletone<MainController> {
         return this._element;
     }
 
-    elementControl(action:Action, elem:Element) {
-        this.elementCtrl.control(action, elem);
+    elementControl(action:Action, parent:Element|undefined, before:Element|undefined,
+            after:Element|undefined) {
+        this.elementCtrl.control(action, parent, before, after, this.elementCtrl);
     }
 
     // resource
@@ -190,7 +191,7 @@ export class MainController extends Singletone<MainController> {
         return this.resourceCtrl.get(type, name)
     }
 
-    resourceControl(action:Action, item:Resource) {
-        this.resourceCtrl.control(action, item);
+    resourceControl(action:Action, before:Resource|undefined, after:Resource|undefined) {
+        this.resourceCtrl.control(action, undefined, before, after, this.resourceCtrl);
     }
 }

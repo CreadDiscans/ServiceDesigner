@@ -43,7 +43,7 @@ export class FileController extends Controller {
         } else if (action === Action.Update && parent && before && after) {
             parent.children.forEach((item:File)=> {
                 if (item.id === before.id) {
-                    item = after
+                    item.state = after.state
                 }
             })
         }

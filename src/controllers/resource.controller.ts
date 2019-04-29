@@ -1,6 +1,6 @@
 import { Controller } from './controller';
 import { Resource, ResourceType } from '../models/resource';
-import { Action } from '../utils/constant';
+import { Action, HisotryAction } from '../utils/constant';
 
 export class ResourceController extends Controller {
     
@@ -15,18 +15,20 @@ export class ResourceController extends Controller {
         return this.rsc.filter((r:Resource)=> r.type === type);
     }
 
-    control(action:Action, item:Resource) {
-        if (action === Action.Create && this.rsc.filter((r:Resource)=> r.type === item.type && r.type === item.name).length === 0) {
-            this.rsc.push(item);
-        } else if (action === Action.Update) {
-            const filteredList = this.rsc.filter((r:Resource)=> r.type === item.type && r.type === item.name)
+    control(action:Action, parent:Resource|undefined, before:Resource|undefined, 
+            after:Resource|undefined, ctrl:ResourceController, historyAction:HisotryAction = HisotryAction.Do) {
+        if (action === Action.Create && after) {
+            if(this.rsc.filter((r:Resource)=> r.type === after.type && r.type === after.name).length === 0)
+                this.rsc.push(after);
+        } else if (action === Action.Update && before && after) {
+            const filteredList = this.rsc.filter((r:Resource)=> r.type === after.type && r.name === after.name)
             if (filteredList.length !== 0) {
-                filteredList[0].value = item.value;
+                filteredList[0].value = after.value;
             }
-        } else if (action === Action.Delete) {
+        } else if (action === Action.Delete && before) {
             let index = -1;
             this.rsc.forEach((r:Resource, i:number)=> {
-                if (r.type === item.type && r.name === item.name) {
+                if (r.type === before.type && r.name === before.name) {
                     index = i
                 }
             })
@@ -34,8 +36,7 @@ export class ResourceController extends Controller {
                 this.rsc.splice(index, 1);
             }
         }
-        this.main.home$.next(true);
-        this.main.sidebar$.next(true);
+        super.control(action, parent, before, after, ctrl, historyAction);
     }
 
     parse(json:any):Resource {

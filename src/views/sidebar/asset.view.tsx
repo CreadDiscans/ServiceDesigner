@@ -26,11 +26,12 @@ export class SidebarAsset extends View {
             const name = this.state.name;
             const resource = this.mainCtrl.getResource(ResourceType.ASSET, name);
             if (resource && !Array.isArray(resource)) {
-                resource.value = e.target.result;
-                this.mainCtrl.resourceControl(Action.Update, resource);
+                const newOne = resource.clone();
+                newOne.value = e.target.result;
+                this.mainCtrl.resourceControl(Action.Update, resource.clone(), newOne);
             } else if (resource === undefined) {
                 let rsc = new Resource(name, ResourceType.ASSET, e.target.result);
-                this.mainCtrl.resourceControl(Action.Create, rsc);
+                this.mainCtrl.resourceControl(Action.Create, undefined, rsc);
             }
             this.setState({name:''});
         }
@@ -47,7 +48,7 @@ export class SidebarAsset extends View {
         const name = this.state.name;
         const resource = this.mainCtrl.getResource(ResourceType.ASSET, name);
         if (resource && !Array.isArray(resource)) {
-            this.mainCtrl.resourceControl(Action.Delete, resource);
+            this.mainCtrl.resourceControl(Action.Delete, resource.clone(), undefined);
             this.setState({name:''});
         }
     }

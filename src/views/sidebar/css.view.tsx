@@ -19,11 +19,12 @@ export class SidebarCss extends View {
         const name = this.state.value.split('{')[0].slice(1).replace(/^\s+|\s+$/g, '');
         const resource = this.mainCtrl.getResource(ResourceType.CSS, name);
         if (resource && !Array.isArray(resource)) {
-            resource.value = this.state.value;
-            this.mainCtrl.resourceControl(Action.Update, resource)
+            const newOne = resource.clone();
+            newOne.value = this.state.value;
+            this.mainCtrl.resourceControl(Action.Update, resource.clone(), newOne);
         } else if (resource === undefined) {
             let rsc = new Resource(name, ResourceType.CSS, this.state.value);
-            this.mainCtrl.resourceControl(Action.Create, rsc)
+            this.mainCtrl.resourceControl(Action.Create, undefined, rsc);
         }
     }
 
@@ -31,7 +32,7 @@ export class SidebarCss extends View {
         const name = this.state.value.split('{')[0].slice(1).replace(/^\s+|\s+$/g, '');
         const resource = this.mainCtrl.getResource(ResourceType.CSS, name);
         if (resource && !Array.isArray(resource))
-            this.mainCtrl.resourceControl(Action.Delete, resource);
+            this.mainCtrl.resourceControl(Action.Delete, resource.clone(), undefined);
     }
 
     render() {

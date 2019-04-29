@@ -17,6 +17,10 @@ export class Resource {
         this.value = value;
     }
 
+    clone() {
+        return Resource.parse(this.toJson());
+    }
+
     toJson() {
         return {
             name:this.name,
