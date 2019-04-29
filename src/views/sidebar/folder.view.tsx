@@ -2,7 +2,6 @@ import React, { CSSProperties } from 'react';
 import {Button} from 'reactstrap'
 import {FaPlus, FaJs, FaTrashAlt, FaRegFolder, FaAngleRight, FaAngleDown} from 'react-icons/fa'
 import Utils from '../../utils/utils';
-import { FolderManager } from '../../manager/folder.manager';
 import { FileType, File } from '../../models/file';
 import { Action, Platform } from '../../utils/constant';
 import { Element } from '../../models/element';
@@ -81,7 +80,7 @@ export class SidebarFolder extends View {
                     this.mainCtrl.selectFile(await this.getSelectItem(root, false, item.id));
                     this.setState({inserting:false, selectId: item.id});
                 }}
-            >{item.name}{item.type === FolderManager.TYPE_ROOT && '/'}</span>
+            >{item.name}{item.type === FileType.ROOT && '/'}</span>
             {
                 item.collapse && item.children.map((subItem:File)=> this.treeView(subItem, root))
             }
