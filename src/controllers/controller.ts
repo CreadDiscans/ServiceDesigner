@@ -1,5 +1,6 @@
 import { Singletone } from "../utils/singletone";
 import { MainController } from './main.controller';
+import { Action, HisotryAction } from "../utils/constant";
 
 export class Controller extends Singletone<Controller> {
 
@@ -7,5 +8,12 @@ export class Controller extends Singletone<Controller> {
 
     init(main:MainController) {
         this.main = main;
+    }
+
+    protected control(action:Action, parent:any, before:any, after:any, ctrl:Controller, historyAction:HisotryAction = HisotryAction.Do) {
+        if (historyAction === HisotryAction.Do)
+            this.main.do(action, parent, before, after, ctrl); 
+        this.main.sidebar$.next(true);
+        this.main.home$.next(true);    
     }
 }

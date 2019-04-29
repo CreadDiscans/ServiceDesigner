@@ -31,16 +31,17 @@ export class SidebarFolder extends View {
     async removeFile(root:File) {
         if (this.mainCtrl.getSelectedFile().id !== 0) {
             const parent:File = await this.getSelectItem(root, true);
-            const index:number = Utils.search(parent.children, (item:File)=> item.id === this.state.selectId)[1];
-            parent.children.splice(index, 1);
-            this.mainCtrl.fileControl(Action.Delete, parent);
+            const target = Utils.search(parent.children, (item:File)=> item.id === this.state.selectId)[0];
+            // parent.children.splice(index, 1);
+            this.mainCtrl.fileControl(Action.Delete, parent, target.clone(), undefined);
             this.setState({selectId:0});
         }
     }
 
     async collapse(item:File, value:boolean) {
         item.collapse = value;
-        this.mainCtrl.fileControl(Action.Update, item);
+        this.setState({});
+        // this.mainCtrl.fileControl(Action.Update, item);
     }
 
     async getSelectItem(root:File, parent = false, id=-1):Promise<File> {
@@ -105,8 +106,8 @@ export class SidebarFolder extends View {
             } else if (this.mainCtrl.getPlatform() === Platform.ReactNative) {
                 newOne.element = Element.getReactNativeRootElement();
             }
-            parent.children.push(newOne);
-            this.mainCtrl.fileControl(Action.Create, parent);
+            // parent.children.push(newOne);
+            this.mainCtrl.fileControl(Action.Create, parent, undefined, newOne);
         }
     }
 

@@ -37,5 +37,9 @@ export class ElementController extends Controller {
         this.main.sidebar$.next(true);
         this.main.home$.next(true);
     }
+
+    parse(json:any):Element {
+        return Element.parse(json);
+    }
     
 }

@@ -3,13 +3,14 @@ import { ElementController } from "./element.controller";
 import { FileController } from './file.controller';
 import { ResourceController } from "./resource.controller";
 import { ShortcutController } from './shortcut.controller';
-import { Platform, SideTab, Action } from "../utils/constant";
+import { Platform, SideTab, Action, HisotryAction } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
 import { Element } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
 import { ExportController } from "./export.controller";
+import { Controller } from "./controller";
 declare var window:any;
 
 export class MainController extends Singletone<MainController> {
@@ -26,6 +27,8 @@ export class MainController extends Singletone<MainController> {
     private _tab:SideTab = SideTab.Help;
     private _file!:File;
     private _element!:Element;
+    private _history:any = [];
+    private _undoHistory:any = [];
 
     home$ = new BehaviorSubject(false);
     sidebar$ = new BehaviorSubject(false);
@@ -93,12 +96,36 @@ export class MainController extends Singletone<MainController> {
         })  
     }
 
-    undo() {
+    do(action:Action, parent:any, before:any, after:any, ctrl:Controller) {
+        this._undoHistory = [];
+        if (before) before = before.toJson();
+        if (after) after = after.toJson();
+        this._history.push({action:action, parent:parent, before:before, after:after, ctrl:ctrl});
+    }
 
+    undo() {
+        if (this._history.length === 0) return;
+        const hist = this._history.pop();
+        this._undoHistory.push(hist);
+        let action = Action.Update
+        if (hist.action === Action.Create) action = Action.Delete;
+        if (hist.action === Action.Delete) action = Action.Create;
+        let after;
+        let before;
+        if (hist.before) before = hist.crtl.parse(hist.before);
+        if (hist.after) after = hist.ctrl.parse(hist.after);
+        hist.ctrl.control(action, hist.parent, after, before, hist.ctrl, HisotryAction.Undo);
     }
 
     redo() {
-
+        if (this._undoHistory.length === 0) return;
+        const hist = this._undoHistory.pop();
+        this._history.push(hist);
+        let after;
+        let before;
+        if (hist.before) before = hist.ctrl.parse(hist.before);
+        if (hist.after) after = hist.ctrl.parse(hist.after);
+        hist.ctrl.control(hist.action, hist.parent, before, after, hist.ctrl, HisotryAction.Redo);
     }
 
     setTab(tab:SideTab) {
@@ -117,8 +144,8 @@ export class MainController extends Singletone<MainController> {
     }
 
 
-    fileControl(action:Action, file:File) {
-        this.fileCtrl.control(action, file);
+    fileControl(action:Action, parent:File|undefined, before:File|undefined, after:File|undefined) {
+        this.fileCtrl.control(action, parent, before, after, this.fileCtrl);
     }
 
     selectFile(file:File) {

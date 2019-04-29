@@ -19,3 +19,9 @@ export enum Action {
     Delete = 'delete',
     Update = 'update'
 }
+
+export enum HisotryAction {
+    Do = 'do',
+    Undo = 'undo',
+    Redo = 'redo'
+}

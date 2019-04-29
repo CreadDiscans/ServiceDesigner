@@ -4,6 +4,8 @@ import AceEditor from 'react-ace';
 import 'brace/theme/github';
 import 'brace/mode/json';
 import { Action } from '../../utils/constant';
+import Utils from './../../utils/utils';
+import { File } from '../../models/file';
 
 export class SidebarState extends View {
 
@@ -36,8 +38,18 @@ export class SidebarState extends View {
                     });
                     if (!error) {
                         const file = this.mainCtrl.getSelectedFile();
-                        file.state = JSON.parse(this.state.value);
-                        this.mainCtrl.fileControl(Action.Update, file);
+                        const root = this.mainCtrl.getFolderData()
+                        let parent;
+                        Utils.loop(root, (item:File)=> {
+                            item.children.forEach((child:File)=> {
+                                if (child.id === file.id) {
+                                    parent = item;
+                                }
+                            })
+                        })
+                        const newOne = file.clone()
+                        newOne.state = JSON.parse(this.state.value);
+                        this.mainCtrl.fileControl(Action.Update, parent, file.clone(), newOne);
                     }
                 }}
                 showPrintMargin={true}

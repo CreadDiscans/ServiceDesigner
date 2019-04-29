@@ -16,4 +16,16 @@ export class Resource {
         this.type = type;
         this.value = value;
     }
+
+    toJson() {
+        return {
+            name:this.name,
+            type:this.type,
+            value:this.value
+        }
+    }
+
+    static parse(json:any):Resource {
+        return new Resource(json.name, json.type, json.value);
+    }
 }

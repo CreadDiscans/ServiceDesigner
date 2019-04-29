@@ -26,6 +26,10 @@ export class File {
         this.state = Utils.merge(this.state, obj);
     }
 
+    clone():File {
+        return File.parse(this.toJson());
+    }
+
     toJson():any {
         return {
             id:this.id,

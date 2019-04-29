@@ -37,4 +37,8 @@ export class ResourceController extends Controller {
         this.main.home$.next(true);
         this.main.sidebar$.next(true);
     }
+
+    parse(json:any):Resource {
+        return Resource.parse(json);
+    }
 }
