@@ -16,7 +16,6 @@ export class RenderController extends Controller {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state, selection);
-        console.log(file.state, imp, code);
         return {
             state: file.state,
             imp: imp,
@@ -152,22 +151,28 @@ export class RenderController extends Controller {
             code = 'this.state.' + elem.property['for'] + '.map((item, i)=> '+code+')';
             brace = true;
         }
-        if (elem.property['if'] && elem.property['if'] !== ''  && elem.property['if'] !== '!' && elem.property['if'][0] !== ' ') {
-            let variable = elem.property['if'];
+        if (elem.property['if']) {
             let skip = false;
-            if (variable.indexOf('!') === 0) {
-                variable = '!this.state.'+variable.slice(1,variable.length);
-            } else if (variable.indexOf('=') !== -1) {
-                if (Utils.countLetter(variable, '\'') === 2) {
-                    variable = 'this.state.'+variable;
-                } else {
-                    skip = true;
+            let state = '';
+            elem.property['if'].split('&').forEach((variable:string)=> {
+                if (variable === '' || variable === '!' || variable === ' ') {
+                    return
                 }
-            } else {
-                variable = 'this.state.'+variable;
-            }
+                if (variable.indexOf('!') === 0) {
+                    variable = '!this.state.'+variable.slice(1,variable.length);
+                } else if (variable.indexOf('=') !== -1 || variable.indexOf('!') !== -1) {
+                    if (Utils.countLetter(variable, '\'') === 2) {
+                        variable = 'this.state.'+variable;
+                    } else {
+                        skip = true;
+                    }
+                } else {
+                    variable = 'this.state.'+variable;
+                }
+                state += variable + ' && ';
+            })
             if (!skip) {
-                code = variable + ' && '+code;
+                code = state + code;
                 brace = true;
             }
         }

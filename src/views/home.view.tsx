@@ -24,19 +24,27 @@ export default class Home extends View {
             this.subscription.unsubscribe();
     }
 
+    componentDidCatch() {
+        console.log('error catch');
+    }
+
     render() {
         if (!this.mainCtrl.isInitialized()) {
             return <div></div>
         }
-        const data = this.mainCtrl.getRenderData();
         return <div id="design">
             { this.mainCtrl.getPlatform() === Platform.ReactNative && <img style={{height:'100vh'}} src="/frame.jpg" /> }
             <div style={(this.mainCtrl.getPlatform() === Platform.ReactNative) ? styles.mobile : {}}>
-                <CodeSandbox imports={data.imp}>
-                {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};render(' +data.code + ')'}
-                </CodeSandbox>
+                {this.sandbox()}
             </div>
         </div>
+    }
+
+    sandbox() {
+        const data = this.mainCtrl.getRenderData();
+        return <CodeSandbox imports={data.imp}>
+        {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};render(' +data.code + ')'}
+        </CodeSandbox>
     }
 }
 

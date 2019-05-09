@@ -65,7 +65,6 @@ export class SidebarProperty extends View {
                         })
                         const after = elem.clone();
                         after.style = this.state.value;
-                        console.log(parent);
                         this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
                     }
                 }}

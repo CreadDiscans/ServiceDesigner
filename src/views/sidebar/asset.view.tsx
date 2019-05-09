@@ -20,7 +20,6 @@ export class SidebarAsset extends View {
     }
 
     fileSelect = (e:any) => {
-        console.log(e, e.target, e.target.files);
         const FileReader = new window.FileReader();
         FileReader.onload = (e:any) => {
             const name = this.state.name;
