@@ -14,6 +14,7 @@ export class Controller extends Singletone<Controller> {
         if (historyAction === HisotryAction.Do)
             this.main.do(action, parent, before, after, ctrl); 
         this.main.sidebar$.next(true);
-        this.main.home$.next(true);    
+        this.main.home$.next(true);   
+        document.getElementsByTagName('title')[0].innerText = '*Service Designer';
     }
 }

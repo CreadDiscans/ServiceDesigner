@@ -40,6 +40,7 @@ export class ExportController extends Controller {
                 }
                 console.log('saved tsx')
             });
+            document.getElementsByTagName('title')[0].innerText = 'Service Designer';
         } catch(e) {
             console.log('not electron platfrom');
             console.log(js, json);
