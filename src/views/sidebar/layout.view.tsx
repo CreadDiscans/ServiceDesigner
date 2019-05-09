@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap'
-import {FaAngleRight, FaAngleDown, FaTrashAlt} from 'react-icons/fa'
+import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp} from 'react-icons/fa'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';
@@ -20,6 +20,34 @@ export class Layout extends View {
             })
         })
         this.mainCtrl.elementControl(Action.Delete, parent, target.clone(), undefined);
+    }
+
+    moveElement(root:Element|undefined, dir:string) {
+        if (!root) return;
+        const target = this.mainCtrl.getSelectedElement();
+        let parent!:Element;
+        let index!:number;
+        Utils.loop(root, (item:Element)=> {
+            item.children.forEach((child:Element, i:number)=> {
+                if (child.id === target.id) {
+                    parent = item;
+                    index = i;
+                }
+            })
+        });
+        if (dir === 'up') {
+            if (index !== 0) {
+                Utils.arrayMove(parent.children, index, index-1);
+                this.mainCtrl.home$.next(true);
+                this.mainCtrl.sidebar$.next(true);
+            }
+        } else if (dir === 'down') {
+            if (index < parent.children.length-1) {
+                Utils.arrayMove(parent.children, index, index+1);
+                this.mainCtrl.home$.next(true);
+                this.mainCtrl.sidebar$.next(true);
+            }
+        }
     }
 
     treeView(item:Element, index=0, depth=0) {
@@ -52,6 +80,8 @@ export class Layout extends View {
         const file = this.mainCtrl.getSelectedFile();
         return <div>
             <h5>Layout</h5>
+            <Button color="info" onClick={()=>this.moveElement(file.element, 'up')}><FaArrowAltCircleUp /></Button>
+            <Button color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
             <Button color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
             {file.element && this.treeView(file.element)}
         </div>
