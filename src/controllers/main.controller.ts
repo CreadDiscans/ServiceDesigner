@@ -154,6 +154,8 @@ export class MainController extends Singletone<MainController> {
     selectFile(file:File) {
         if (file.type === FileType.FILE) {
             this._file = file;
+            if (file.element)
+                this.selectElement(file.element);
             this.home$.next(true);
             this.sidebar$.next(true);
         }
