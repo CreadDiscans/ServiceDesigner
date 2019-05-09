@@ -38,7 +38,7 @@ export class Layout extends View {
             }
             <span 
                 style={{
-                    color:this.mainCtrl.getSelectedElement().name === item.name ? 'red' : 'black',
+                    color:this.mainCtrl.getSelectedElement().id === item.id ? 'red' : 'black',
                     cursor:'pointer'
                 }}
                 onClick={()=> this.mainCtrl.selectElement(item)}>{item.name}</span>
