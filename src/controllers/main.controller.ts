@@ -90,7 +90,7 @@ export class MainController extends Singletone<MainController> {
                     if (err) throw err
                     const json = JSON.parse(data.toString())
                     this.init(json.platform, File.parse(json.root));
-                    this.resourceCtrl.parse(JSON.parse(json.resource));
+                    this.resourceCtrl.loads(JSON.parse(json.resource));
                     this.exportCtrl.setCachePath(file[0].replace('design.json',''));
                     return resolve(true);
                 })
