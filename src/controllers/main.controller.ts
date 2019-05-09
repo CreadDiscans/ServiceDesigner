@@ -65,9 +65,9 @@ export class MainController extends Singletone<MainController> {
         return this._platform;
     }
 
-    getRenderData(file:File|undefined = undefined) {
+    getRenderData(file:File|undefined = undefined, selection=true) {
         if (file)
-            return this.renderCtrl.render(file);
+            return this.renderCtrl.render(file, selection);
         else
             return this.renderCtrl.render(this._file);
     }

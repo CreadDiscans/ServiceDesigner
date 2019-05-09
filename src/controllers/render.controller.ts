@@ -12,10 +12,10 @@ export class RenderController extends Controller {
 
     private cssCache = {};
 
-    render(file:File) {
+    render(file:File, selection=true) {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
-        const code = this.parse(file.element, imp, file.state);
+        const code = this.parse(file.element, imp, file.state, selection);
         console.log(file.state, imp, code);
         return {
             state: file.state,
@@ -24,13 +24,13 @@ export class RenderController extends Controller {
         }
     }
 
-    private parse(elem:Element, imp:any, state:any) {
+    private parse(elem:Element, imp:any, state:any, selection=true) {
         this.parseLibrary(elem, imp)
 
         let code = elem.code;
         let children = '';
         elem.children.forEach((child:Element)=> {
-            children += this.parse(child, imp, state);
+            children += this.parse(child, imp, state, selection);
         });
         let styles = {};
         Object.keys(elem.property).forEach(prop=> {
@@ -45,7 +45,7 @@ export class RenderController extends Controller {
                 code = code.replace('{'+prop+'}', this.parseProperty(prop, elem.property[prop]));
             }
         });
-        code = code.replace('{style}', this.parseStyle(elem, styles));
+        code = code.replace('{style}', this.parseStyle(elem, styles, selection));
         code = code.replace('{children}', children);
         code = this.parseIfAndForLoop(elem, code, state);
         return code;
@@ -112,9 +112,9 @@ export class RenderController extends Controller {
         return value;
     }
 
-    private parseStyle(elem:Element, origin={}):string {
+    private parseStyle(elem:Element, origin={}, selection=true):string {
         let style:any = this.convertCssToStyle(Utils.deepcopy(elem.style), 'style');
-        if (elem === this.main.getSelectedElement()) {
+        if (elem === this.main.getSelectedElement() && selection) {
             if (this.main.getPlatform() === Platform.React) {
                 style.border = 'solid 1px red';
             } else if (this.main.getPlatform() === Platform.ReactNative) {
