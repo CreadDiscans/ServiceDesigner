@@ -13,10 +13,11 @@ export class ExportController extends Controller {
     private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\thandleClick = (e:any) => {};\n\thandleChange = (e:any) => {};\n\trenderPart = (name:any) => {}\n}\n";
     private cachePath:string|undefined;
 
-    export(root:File, useCache:boolean) {
+    export(root:File, rsc:Array<object>, useCache:boolean) {
         const js = this.makeReactJs(root);
         const json = {
             root: root.toJson(),
+            resource: JSON.stringify(rsc),
             platform: this.main.getPlatform(),
         }
         try {

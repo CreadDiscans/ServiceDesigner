@@ -73,7 +73,7 @@ export class MainController extends Singletone<MainController> {
     }
 
     export(useCache=false) {
-        this.exportCtrl.export(this.fileCtrl.getRoot(), useCache);
+        this.exportCtrl.export(this.fileCtrl.getRoot(), this.resourceCtrl.toJson(), useCache);
     }
 
     async import():Promise<boolean> {
@@ -90,6 +90,7 @@ export class MainController extends Singletone<MainController> {
                     if (err) throw err
                     const json = JSON.parse(data.toString())
                     this.init(json.platform, File.parse(json.root));
+                    this.resourceCtrl.parse(JSON.parse(json.resource));
                     this.exportCtrl.setCachePath(file[0].replace('design.json',''));
                     return resolve(true);
                 })

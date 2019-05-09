@@ -39,7 +39,11 @@ export class ResourceController extends Controller {
         super.control(action, parent, before, after, ctrl, historyAction);
     }
 
-    parse(json:any):Resource {
-        return Resource.parse(json);
+    parse(json:Array<object>) {
+        json.forEach((item:any)=> this.rsc.push(Resource.parse(item)));
+    }
+
+    toJson():Array<object> {
+        return this.rsc.map((item:Resource)=>item.toJson())
     }
 }
