@@ -158,7 +158,7 @@ export class RenderController extends Controller {
             if (variable.indexOf('!') === 0) {
                 variable = '!this.state.'+variable.slice(1,variable.length);
             } else if (variable.indexOf('=') !== -1) {
-                if (Utils.countLetter(variable, '=') === 2 && Utils.countLetter(variable, '\'') === 2) {
+                if (Utils.countLetter(variable, '\'') === 2) {
                     variable = 'this.state.'+variable;
                 } else {
                     skip = true;
