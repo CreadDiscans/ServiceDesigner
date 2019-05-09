@@ -38,7 +38,7 @@ export class RenderController extends Controller {
                 elem.property[prop].split(' ').forEach((cls:string)=> {
                     const rsc = this.main.getResource(ResourceType.CSS, cls);
                     if (rsc && !Array.isArray(rsc)) {
-                        styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls));
+                        styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls.replace('-', '_')));
                     }
                 })
             } else  {
