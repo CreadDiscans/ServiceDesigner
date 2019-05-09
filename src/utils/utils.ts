@@ -126,4 +126,12 @@ export default class Utils {
     static toCapital(value:string) {
         return value[0].toUpperCase() + value.slice(1, value.length);
     }
+
+    static countLetter(str:string, letter:string) {
+        let cnt = 0;
+        for(let i=0;i<str.length;i++) {
+            if (str[i] === letter) cnt +=1;
+        }
+        return cnt;
+    }
 }
