@@ -86,12 +86,11 @@ export class MainController extends Singletone<MainController> {
                     alert('Only design.json file is supported to import');
                     return;
                 }
-                const path = file[0].replace('/design.json');
                 fs.readFile(file[0], (err:any, data:any)=> {
                     if (err) throw err
                     const json = JSON.parse(data.toString())
                     this.init(json.platfrom, File.parse(json.root));
-                    this.exportCtrl.setCachePath(path);
+                    this.exportCtrl.setCachePath(file[0].replace('design.json',''));
                     return resolve(true);
                 })
             } catch(e) {
