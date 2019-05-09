@@ -82,6 +82,10 @@ export class MainController extends Singletone<MainController> {
                 const { remote } = window.require('electron')
                 const fs = window.require('fs')
                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+                if (file[0].indexOf('design.json') === -1) {
+                    alert('Only design.json file is supported to import');
+                    return;
+                }
                 const path = file[0].replace('/design.json');
                 fs.readFile(file[0], (err:any, data:any)=> {
                     if (err) throw err
