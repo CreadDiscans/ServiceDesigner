@@ -43,7 +43,7 @@ export default class Home extends View {
     sandbox() {
         const data = this.mainCtrl.getRenderData();
         return <CodeSandbox imports={data.imp}>
-        {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};render(' +data.code + ')'}
+        {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};handleChange=(e)=>{};render(' +data.code + ')'}
         </CodeSandbox>
     }
 }
