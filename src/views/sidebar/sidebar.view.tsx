@@ -27,6 +27,10 @@ import { View } from '../view';
 
 export default class Sidebar extends View {
 
+    state = {
+        sidebarWidth: 220
+    }
+
     componentDidMount() {
         this.mainCtrl.sidebar$.subscribe(()=> this.setState({}));
     }
@@ -41,7 +45,7 @@ export default class Sidebar extends View {
     render() {
         const tab = this.mainCtrl.getTab();
         return (
-            <div>
+            <div style={{borderTop:'solid 1px #CCC'}}>
                 <div style={styles.sidebar}>
                     {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>, SideTab.Help.toString())}
                     {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
@@ -58,7 +62,11 @@ export default class Sidebar extends View {
                     {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />, 'redo')}
 
                 </div>
-                {this.mainCtrl.isInitialized() ? <div id="sidebar" style={styles.collapseSidebar}>
+                {this.mainCtrl.isInitialized() ? <div id="sidebar" 
+                    style={{...styles.collapseSidebar, ...{width:this.state.sidebarWidth}}}>
+                    <div draggable={true} style={styles.sidebarBorder} onDrag={e=> {
+                        this.setState({sidebarWidth: e.screenX - 40});
+                    }}></div>
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}
@@ -67,7 +75,11 @@ export default class Sidebar extends View {
                     {tab === SideTab.Css && <SidebarCss />}
                     {tab === SideTab.Color && <SidebarColor />}
                     {tab === SideTab.Asset && <SidebarAsset />}
-                </div>: <div style={styles.collapseSidebar}>
+                </div>: <div draggable={false}
+                    style={{...styles.collapseSidebar, ...{width:this.state.sidebarWidth}}}>
+                    <div draggable={true} style={styles.sidebarBorder} onDrag={e=> {
+                        this.setState({sidebarWidth: e.screenX - 40});
+                    }}></div>
                     <SidebarHelp />
                 </div>}
                 <div style={styles.body}>
@@ -87,18 +99,29 @@ const styles:{[s: string]: CSSProperties;} = {
         bottom:0,
         backgroundColor:'#EEE',
         textAlign: 'center',
+        borderTop:'solid 1px #CCC',
+        borderRight:'solid 1px #E0E0E0',
         zIndex:10
     },
     collapseSidebar: {
         transition: '0.5s',
         position:'absolute',
-        width: 220,
         top:0,
         left:40,
         bottom:0,
         backgroundColor:'#EEE',
+        borderTop:'solid 1px #CCC',
         zIndex:5,
-        overflow:'auto'
+        overflow:'auto',
+    },
+    sidebarBorder: {
+        right:0,
+        top:0,
+        bottom:0,
+        width:1,
+        background: '#CCC',
+        position:'absolute',
+        cursor:'w-resize'
     },
     baricon: {
         cursor:'pointer'
