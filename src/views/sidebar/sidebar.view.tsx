@@ -113,6 +113,7 @@ const styles:{[s: string]: CSSProperties;} = {
         borderTop:'solid 1px #CCC',
         zIndex:5,
         overflow:'auto',
+        paddingRight:10
     },
     sidebarBorder: {
         right:0,
