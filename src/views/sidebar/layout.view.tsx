@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap'
-import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp} from 'react-icons/fa'
+import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp, FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';
@@ -38,16 +38,35 @@ export class Layout extends View {
         if (dir === 'up') {
             if (index !== 0) {
                 Utils.arrayMove(parent.children, index, index-1);
-                this.mainCtrl.home$.next(true);
-                this.mainCtrl.sidebar$.next(true);
             }
         } else if (dir === 'down') {
             if (index < parent.children.length-1) {
                 Utils.arrayMove(parent.children, index, index+1);
-                this.mainCtrl.home$.next(true);
-                this.mainCtrl.sidebar$.next(true);
+            }
+        } else if (dir === 'right') {
+            if (parent && index !== 0) {
+                parent.children.splice(index, 1);
+                parent.children[index-1].children.push(target);
+            }
+        } else if (dir === 'left') {
+            if (parent) {
+                let pparent:Element|undefined;
+                Utils.loop(root, (item:Element)=> {
+                    item.children.forEach((child:Element, i:number)=> {
+                        if (child.id === parent.id) {
+                            pparent = item;
+                        }
+                    })
+                });
+                if (pparent) {
+                    parent.children.splice(index, 1);
+                    pparent.children.push(target);
+                }
             }
         }
+        this.mainCtrl.home$.next(true);
+        this.mainCtrl.sidebar$.next(true);
+
     }
 
     treeView(item:Element, index=0, depth=0) {
@@ -80,9 +99,11 @@ export class Layout extends View {
         const file = this.mainCtrl.getSelectedFile();
         return <div>
             <h5>Layout</h5>
-            <Button color="info" onClick={()=>this.moveElement(file.element, 'up')}><FaArrowAltCircleUp /></Button>
-            <Button color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
-            <Button color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
+            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'up')}><FaArrowAltCircleUp /></Button>
+            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
+            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'right')}><FaArrowAltCircleRight /></Button>
+            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'left')}><FaArrowAltCircleLeft /></Button>
+            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
             {file.element && this.treeView(file.element)}
         </div>
     }
