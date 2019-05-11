@@ -1,5 +1,5 @@
 import { Controller } from './controller';
-import { Element } from '../models/element';
+import { Element, ElementStyle } from '../models/element';
 import { Action, HisotryAction } from '../utils/constant';
 import { LibraryDependency, Library } from '../models/library';
 
@@ -81,13 +81,13 @@ export class ElementController extends Controller {
                 parent.children.forEach((item:Element)=> {
                     if (item.id === before.id) {
                         item.property = after.property;
-                        item.style = after.style;
+                        item.style = after.style.map((item:ElementStyle)=> item.clone());
                     }
                 })
             } else {
                 const file = this.main.getSelectedFile();
                 if (file.element) {
-                    file.element.style = after.style;
+                    file.element.style = after.style.map((item:ElementStyle)=> item.clone());
                     file.element.property = after.property;
                 }
             }

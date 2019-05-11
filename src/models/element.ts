@@ -1,13 +1,36 @@
 import { Library, LibraryDependency } from './library';
 import Utils from '../utils/utils';
 
+export class ElementStyle {
+    condition:string = '';
+    style:string = 'style{\n\n}';
+
+    toJson() {
+        return {
+            condition: this.condition,
+            style: this.style
+        }
+    }
+
+    clone() {
+        return ElementStyle.parse(this.toJson());
+    }
+
+    static parse(json:any):ElementStyle {
+        const newOne = new ElementStyle();
+        newOne.condition = json.condition;
+        newOne.style = json.style;
+        return newOne;
+    }
+}
+
 export class Element {
 
     id?:number;
     name:string;
     library?:Array<Library>;
     code:string;
-    style:string = 'style{\n\n}';
+    style:Array<ElementStyle> = [new ElementStyle()];
     property:any = {class:''};
     collapse:boolean = true;
     children:Array<Element> = [];
@@ -21,7 +44,6 @@ export class Element {
             this.library = library;
             this.code = code;
             if (logic) {
-                this.property['if'] = '';
                 this.property['for'] = '';
             }
     }
@@ -43,7 +65,7 @@ export class Element {
             name:this.name,
             library: this.library ? this.library.map((item:Library)=> item.toJson()) : [],
             code: this.code,
-            style: this.style,
+            style: this.style.map((item:ElementStyle)=>item.toJson()),
             property: Utils.deepcopy(this.property),
             collapse: this.collapse,
             children: this.children.map((item:Element)=> item.toJson())
@@ -55,7 +77,7 @@ export class Element {
             json.library.map((libjson:any)=>Library.parse(libjson)),
             json.code)
         newOne.id = json.id;
-        newOne.style = json.style;
+        newOne.style = json.style.map((item:any)=>ElementStyle.parse(item));
         newOne.property = json.property;
         newOne.collapse = json.collapse;
         newOne.children = json.children.map((elemJson:any)=>Element.parse(elemJson)); 

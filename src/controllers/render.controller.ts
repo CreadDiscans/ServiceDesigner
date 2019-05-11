@@ -2,7 +2,7 @@
 import { Controller } from './controller';
 import { File } from '../models/file';
 import React from 'react';
-import { Element } from './../models/element';
+import { Element, ElementStyle } from './../models/element';
 import { LibraryTable } from './library/librarytable';
 import Utils from './../utils/utils';
 import { ResourceType, Resource } from '../models/resource';
@@ -46,7 +46,7 @@ export class RenderController extends Controller {
         });
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
         code = code.replace('{children}', children);
-        code = this.parseIfAndForLoop(elem, code, state);
+        code = this.parseForLoop(elem, code, state);
         return code;
     }
 
@@ -112,72 +112,69 @@ export class RenderController extends Controller {
     }
 
     private parseStyle(elem:Element, origin={}, selection=true):string {
-        let style:any = this.convertCssToStyle(Utils.deepcopy(elem.style), 'style');
-        if (elem === this.main.getSelectedElement() && selection) {
-            if (this.main.getPlatform() === Platform.React) {
-                style.border = 'solid 1px red';
-            } else if (this.main.getPlatform() === Platform.ReactNative) {
-                style.borderColor = 'red';
-                style.borderWidth = '1px';
+        const stringItem:Array<string> = [];
+        elem.style.forEach((item:ElementStyle, i:number)=> {
+            let style:any = this.convertCssToStyle(item.style, 'style');
+            if (i === 0) {
+                if (elem === this.main.getSelectedElement() && selection) {
+                    if (this.main.getPlatform() === Platform.React) {
+                        style.border = 'solid 1px red';
+                    } else if (this.main.getPlatform() === Platform.ReactNative) {
+                        style.borderColor = 'red';
+                        style.borderWidth = '1px';
+                    }
+                }
+                style = Utils.merge(origin, style);
             }
+            Object.keys(style).forEach(key=> {
+                const colors = this.main.getResource(ResourceType.COLOR);
+                if (Array.isArray(colors)) {
+                    colors.forEach((color:Resource)=> {
+                        if (style[key] === '"Color.'+color.name+'"') {
+                            style[key] = color.value;
+                        }
+                    });
+                }
+                const assets = this.main.getResource(ResourceType.ASSET);
+                if (Array.isArray(assets)) {
+                    assets.forEach((asset:Resource)=> {
+                        if (style[key] === '"Asset.'+asset.name+'"') {
+                            style[key] = 'url(' + asset.value + ')';
+                        }
+                    })
+                }
+            })
+            let condition = '';
+            if (item.condition !== '') {
+                condition = item.condition + ' && '
+            }
+            stringItem.push(condition + JSON.stringify(style));
+        });
+        let stringStyle = '';
+        if (this.main.getPlatform() === Platform.React) {
+            stringStyle = 'Object.assign({},';
+            stringItem.forEach((item:string, i:number)=> {
+                stringStyle += item;
+                if (i !== stringItem.length-1)
+                    stringStyle += ', '
+            });
+            stringStyle += ')';
+        } else  if (this.main.getPlatform() === Platform.ReactNative) {
+            stringStyle = '[';
+            stringItem.forEach((item:string, i:number)=> {
+                stringStyle += item;
+                if (i !== stringItem.length-1)
+                    stringStyle += ', '
+            });
+            stringStyle += ']';
         }
-        style = Utils.merge(origin, style);
-        Object.keys(style).forEach(key=> {
-            const colors = this.main.getResource(ResourceType.COLOR);
-            if (Array.isArray(colors)) {
-                colors.forEach((color:Resource)=> {
-                    if (style[key] === '"Color.'+color.name+'"') {
-                        style[key] = color.value;
-                    }
-                });
-            }
-            const assets = this.main.getResource(ResourceType.ASSET);
-            if (Array.isArray(assets)) {
-                assets.forEach((asset:Resource)=> {
-                    if (style[key] === '"Asset.'+asset.name+'"') {
-                        style[key] = 'url(' + asset.value + ')';
-                    }
-                })
-            }
-        })
-        let stringStyle = JSON.stringify(style);
         return stringStyle;
     }
 
-    private parseIfAndForLoop(elem:Element, code:string, state:any):string {
-        let brace = false;
+    private parseForLoop(elem:Element, code:string, state:any):string {
         if (elem.property['for'] && elem.property['for'] !== '' && Array.isArray(state[elem.property['for']])) {
             code = code.replace('>', 'key={i} >');
-            code = 'this.state.' + elem.property['for'] + '.map((item, i)=> '+code+')';
-            brace = true;
-        }
-        if (elem.property['if']) {
-            let skip = false;
-            let state = '';
-            elem.property['if'].split('&').forEach((variable:string)=> {
-                if (variable === '' || variable === '!' || variable === ' ') {
-                    return
-                }
-                if (variable.indexOf('!') === 0) {
-                    variable = '!this.state.'+variable.slice(1,variable.length);
-                } else if (variable.indexOf('=') !== -1 || variable.indexOf('!') !== -1) {
-                    if (Utils.countLetter(variable, '\'') === 2) {
-                        variable = 'this.state.'+variable;
-                    } else {
-                        skip = true;
-                    }
-                } else {
-                    variable = 'this.state.'+variable;
-                }
-                state += variable + ' && ';
-            })
-            if (!skip) {
-                code = state + code;
-                brace = true;
-            }
-        }
-        if (brace) {
-            code = '{ ' + code + ' }';
+            code = '{this.state.' + elem.property['for'] + '.map((item, i)=> '+code+')}';
         }
         return code;
     }

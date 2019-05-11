@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Label } from 'reactstrap'
+import { Input, Label, Badge, Button } from 'reactstrap'
 import { Layout } from './layout.view'
 import Utils from '../../utils/utils';
 import AceEditor from 'react-ace';
@@ -8,13 +8,14 @@ import 'brace/mode/css';
 import 'brace/ext/language_tools';
 import { View } from '../view';
 import { Action } from '../../utils/constant';
-import { Element } from '../../models/element';
+import { Element, ElementStyle } from '../../models/element';
 
 export class SidebarProperty extends View {
 
     state:any = {
         value: '',
-        selectedItem: {}
+        selectedItem: {style:[]},
+        stylePage:0
     }
 
     componentWillMount() {
@@ -29,16 +30,48 @@ export class SidebarProperty extends View {
         const selectedItem = this.mainCtrl.getSelectedElement();
         if (this.state.selectedItem !== selectedItem) {
             this.setState({
-                value: selectedItem.style,
-                selectedItem: selectedItem
+                value: selectedItem.style[0].style,
+                selectedItem: selectedItem,
+                stylePage:0
             });
         }
     }
     
     render() {
+        let vari = false;
         return <div>
             <Layout />
-            <h5>Style</h5>
+            <h5>Style 
+            {
+                this.state.selectedItem.style.map((item:ElementStyle, i:number)=> {
+                    return <Badge color={this.state.stylePage === i ? 'info' : 'light'} key={i} pill style={{cursor:'pointer'}}
+                        onClick={()=>{
+                            this.setState({
+                                stylePage: i,
+                                value: this.state.selectedItem.style[i].style,
+                                condition: this.state.selectedItem.style[i].condition
+                            });
+                        }}>{i}</Badge>
+                })
+            }    
+            <Badge color="light" pill style={{cursor:'pointer'}}
+                onClick={()=> {
+                    this.state.selectedItem.style.push(new ElementStyle());
+                    this.setState({});
+                }}>+</Badge>
+            </h5>
+            <Input style={{display:'inline-block', width:'calc(100% - 37px)'}} placeholder={'Condition'} disabled={this.state.stylePage===0} 
+                value={this.state.selectedItem.style[this.state.stylePage].condition}
+                onChange={(e)=>{
+                    this.state.selectedItem.style[this.state.stylePage].condition = e.target.value;
+                    this.setState({});
+                }}/>
+            <Button color="danger" style={{float:'right'}} disabled={this.state.stylePage === 0}
+                onClick={()=> {
+                    this.state.selectedItem.style.splice(this.state.stylePage, 1);
+                    this.setState({stylePage:this.state.stylePage-1})
+                }}
+            >X</Button>
             <AceEditor
                 style={{width:'100%', height:200}}
                 theme="github" 
@@ -64,7 +97,7 @@ export class SidebarProperty extends View {
                             })
                         })
                         const after = elem.clone();
-                        after.style = this.state.value;
+                        after.style[this.state.stylePage].style = this.state.value;
                         this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
                     }
                 }}
