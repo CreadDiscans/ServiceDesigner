@@ -16,6 +16,15 @@ export class SidebarState extends View {
     componentWillMount() {
         const file = this.mainCtrl.getSelectedFile();
         this.setState({value: JSON.stringify(file.state, null, 2)})
+        window.addEventListener('resize', this.resize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
+
+    resize = () => {
+        this.setState({});
     }
 
     render() {
@@ -24,7 +33,7 @@ export class SidebarState extends View {
             <h5>State</h5>
             <div>- {file.name}</div>
             <AceEditor
-                style={{width:'100%', height:200}}
+                style={{width:'100%', height:window.innerHeight - 66}}
                 theme="github" 
                 mode="json" 
                 value={this.state.value}
