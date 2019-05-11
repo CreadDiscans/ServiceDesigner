@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 export default class Home extends View {
 
     subscription?:Subscription;
+    state = {
+        hasError: false
+    }
 
     componentWillMount() {
         if (!this.mainCtrl.isInitialized()) {
@@ -16,7 +19,9 @@ export default class Home extends View {
     }
 
     componentDidMount() {
-        this.subscription = this.mainCtrl.home$.subscribe(()=> this.setState({}));
+        this.subscription = this.mainCtrl.home$.subscribe(()=> this.setState({
+            hasError: false
+        }));
     }
 
     componentWillUnmount() {
@@ -25,7 +30,7 @@ export default class Home extends View {
     }
 
     componentDidCatch() {
-        console.log('error catch');
+        this.setState({hasError:true});
     }
 
     render() {
@@ -42,9 +47,13 @@ export default class Home extends View {
 
     sandbox() {
         const data = this.mainCtrl.getRenderData();
-        return <CodeSandbox imports={data.imp}>
-        {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};handleChange=(e)=>{};render(' +data.code + ')'}
-        </CodeSandbox>
+        if (this.state.hasError) {
+            return <div>Syntax Error</div>
+        } else {
+            return <CodeSandbox imports={data.imp}>
+            {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};handleChange=(e)=>{};render(' +data.code + ')'}
+            </CodeSandbox>
+        }
     }
 }
 
