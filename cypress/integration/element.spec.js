@@ -26,9 +26,9 @@ describe('Element 관리', function() {
         cy.get('li').eq(0).click()
         cy.get('li').eq(1).click()
         cy.get('span:last').should('have.text', 'div')  
-        cy.get('svg').eq(16).click()
+        cy.get('svg').eq(18).click()
         cy.get('span:last').should('have.text', 'layout') 
-        cy.get('svg').eq(16).click()  
+        cy.get('svg').eq(18).click()  
         cy.get('span:last').should('have.text', 'div') 
     })
 
