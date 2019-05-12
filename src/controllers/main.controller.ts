@@ -30,6 +30,7 @@ export class MainController extends Singletone<MainController> {
     private _element!:Element;
     private _history:any = [];
     private _undoHistory:any = [];
+    private _copy_element:Element|undefined;
 
     home$ = new BehaviorSubject(false);
     sidebar$ = new BehaviorSubject(false);
@@ -197,6 +198,29 @@ export class MainController extends Singletone<MainController> {
     elementControl(action:Action, parent:Element|undefined, before:Element|undefined,
             after:Element|undefined) {
         this.elementCtrl.control(action, parent, before, after, this.elementCtrl);
+    }
+
+    copyElement() {
+        this._copy_element = this._element.clone();
+    }
+
+    pasteElement() {
+        if (this._copy_element) {
+            let parent:Element|undefined;
+            Utils.loop(this._file.element, (item:Element)=> {
+                item.children.forEach((child:Element)=> {
+                    if (child.id === this._element.id) {
+                        parent = item;
+                    }
+                })
+            });
+            if (parent)
+                this.elementControl(Action.Create, parent,undefined, this._copy_element.clone())
+        }
+    }
+
+    isPasteEnable() {
+        return this._copy_element !== undefined;
     }
 
     // resource

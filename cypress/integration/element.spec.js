@@ -26,10 +26,23 @@ describe('Element 관리', function() {
         cy.get('li').eq(0).click()
         cy.get('li').eq(1).click()
         cy.get('span:last').should('have.text', 'div')  
-        cy.get('svg').eq(18).click()
+        cy.get('svg').eq(20).click()
         cy.get('span:last').should('have.text', 'layout') 
-        cy.get('svg').eq(18).click()  
+        cy.get('svg').eq(20).click()  
         cy.get('span:last').should('have.text', 'div') 
+    })
+
+    it('Element는 Copy/Paste를 지원한다.', function(){
+        cy.visit('/');
+        cy.get('button[name="react"]').click()
+        cy.get('div[id="element"]').click()
+        cy.get('li').eq(0).click()
+        cy.get('li').eq(1).click()
+        cy.get('span:last').click()
+        cy.get('svg').eq(17).click()
+        cy.get('svg').eq(18).click()
+        cy.get('span').eq(2).should('have.text','div')
+
     })
 
     it('undo/redo를 지원한다.', function() {

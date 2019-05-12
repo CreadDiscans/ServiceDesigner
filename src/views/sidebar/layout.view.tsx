@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Button } from 'reactstrap'
-import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp, FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
+import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp, FaArrowAltCircleRight, FaArrowAltCircleLeft, FaCopy, FaPaste} from 'react-icons/fa'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';
@@ -99,12 +99,23 @@ export class Layout extends View {
         const file = this.mainCtrl.getSelectedFile();
         return <div>
             <h5>Layout</h5>
-            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'up')}><FaArrowAltCircleUp /></Button>
-            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
-            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'right')}><FaArrowAltCircleRight /></Button>
-            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="info" onClick={()=>this.moveElement(file.element, 'left')}><FaArrowAltCircleLeft /></Button>
-            <Button style={{padding:'2px 5px', margin:'0px 3px'}} color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
+            <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'up')}><FaArrowAltCircleUp /></Button>
+            <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
+            <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'right')}><FaArrowAltCircleRight /></Button>
+            <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'left')}><FaArrowAltCircleLeft /></Button>
+            <Button style={styles.iconButton} color="info" onClick={()=>this.mainCtrl.copyElement()}><FaCopy /></Button>
+            <Button style={styles.iconButton} color={this.mainCtrl.isPasteEnable() ? 'info' : 'warning'} 
+                onClick={()=>this.mainCtrl.pasteElement()}><FaPaste /></Button>
+            <Button style={styles.iconButton} color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
             {file.element && this.treeView(file.element)}
         </div>
     }
 } 
+
+const styles:{[s: string]: CSSProperties;} = {
+    iconButton: {
+        padding: '2px 5px',
+        margin: '0px 3px',
+        fontSize: 12
+    }
+}
