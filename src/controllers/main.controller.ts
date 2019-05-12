@@ -11,6 +11,7 @@ import { Element } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
 import { ExportController } from "./export.controller";
 import { Controller } from "./controller";
+import Utils from "../utils/utils";
 declare var window:any;
 
 export class MainController extends Singletone<MainController> {
@@ -91,6 +92,13 @@ export class MainController extends Singletone<MainController> {
                     const json = JSON.parse(data.toString())
                     this.init(json.platform, File.parse(json.root));
                     this.resourceCtrl.loads(JSON.parse(json.resource));
+                    let find = false;
+                    Utils.loop(this.fileCtrl.getRoot(), (item:File)=> {
+                        if (!find && item.type === FileType.FILE) {
+                            this.selectFile(item);
+                            find = true;
+                        }
+                    });
                     this.exportCtrl.setCachePath(file[0].replace('design.json',''));
                     return resolve(true);
                 })
