@@ -7,7 +7,7 @@ import { Platform, SideTab, Action, HisotryAction } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
-import { Element } from "../models/element";
+import { Element, ElementStyle } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
 import { ExportController } from "./export.controller";
 import { Controller } from "./controller";
@@ -202,6 +202,7 @@ export class MainController extends Singletone<MainController> {
 
     copyElement() {
         this._copy_element = this._element.clone();
+        this.sidebar$.next(true);
     }
 
     pasteElement() {
@@ -214,8 +215,22 @@ export class MainController extends Singletone<MainController> {
                     }
                 })
             });
-            if (parent)
-                this.elementControl(Action.Create, parent,undefined, this._copy_element.clone())
+            if (parent) {
+                const newOne = this._copy_element.clone();
+                let maxId = Utils.maxId(this._file.element) + 1;
+                Utils.loop(newOne, (elem:Element)=> {
+                    Object.keys(elem.property).forEach((prop:string)=> {
+                        elem.property[prop] = '';
+                    });
+                    elem.style.forEach((style:ElementStyle)=> {
+                        style.condition = '';
+                    })
+                    elem.id = maxId;
+                    maxId += 1;
+                })
+                console.log(newOne);
+                this.elementControl(Action.Create, parent,undefined, newOne);
+            }
         }
     }
 
