@@ -77,8 +77,8 @@ export class RenderController extends Controller {
         if (elem.library) {
             elem.library.forEach((item:Library)=> {
                 imp[item.key] = item.get().lib;
-                code = code.replace('<', '<'+item.key+'.');
-                code = code.replace('</', '</'+item.key+'.')
+                // code = code.replace('<', '<'+item.key+'.');
+                // code = code.replace('</', '</'+item.key+'.')
             });
         }
         return code;

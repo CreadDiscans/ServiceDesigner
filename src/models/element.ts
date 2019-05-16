@@ -95,4 +95,32 @@ export class Element {
         item.id = 0;
         return item;
     }
+
+    static define(tag:string, lib:Library|undefined, attr:Array<string>, option:any={}):Element {
+        const libs = [];
+        if (lib) libs.push(lib);
+        attr.push('name');
+        let attribute = ' ';
+        let bodyText = '';
+        let tagName = lib ? lib.key + '.' + tag : tag;
+        attr.forEach((item:string)=> {
+            attribute += item + '={{'+ item + '}} ';
+        })
+        if (option.onChange) attribute +=  'onChange={this.handleChange} ';
+        if (option.onChangeText) attribute += 'onChangeText={(text)=>this.handleChange({target:{value:text, name:{name}}})} ';
+        if (option.onClick) attribute += 'onClick={this.handleClick} ';
+        if (option.onPress) attribute += 'onPress={()=>this.handleClick({target:{name:{name}}})} ';
+        if (option.source) {
+            attribute += 'source={{uri: {src}}}'
+            attr.push('src');
+        }
+        if (option.text) {
+            bodyText += '{{text}}';
+            attr.push('text');
+        }
+
+        let code = '<'+tagName+ ' style={{style}} ' + attribute + '>' + bodyText + '{children}</'+tagName+'>'
+
+        return new Element(tag, libs, code).addProps(attr);
+    }
 } 
