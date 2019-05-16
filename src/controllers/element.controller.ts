@@ -36,15 +36,34 @@ export class ElementController extends Controller {
         'reactstrap': [
             Element.define('Alert', new Library(LibraryKeys.ReactStrap), ['color'], {text:true}),
             Element.define('Badge', new Library(LibraryKeys.ReactStrap), ['color'], {text:true}),
-            Element.define('Button', new Library(LibraryKeys.ReactStrap), ['color'], {text:true}),
+            Element.define('Button', new Library(LibraryKeys.ReactStrap), ['color', 'outline'], {text:true}),
             Element.define('Input', new Library(LibraryKeys.ReactStrap), ['value', 'placeholder'], {onChange:true}),
             Element.define('Container', new Library(LibraryKeys.ReactStrap), []),
             Element.define('Row', new Library(LibraryKeys.ReactStrap), []),
             Element.define('Col', new Library(LibraryKeys.ReactStrap), []),
         ],
         'material-ui': [
-            new Element('Button', [new Library(LibraryKeys.MatarialUi)], '<Button style={{style}} color={{color}} name={{name}} onClick={this.handleClick}>{{text}}{children}</Button>').addProps(['color', 'text', 'name']),
-
+            Element.define('AppBar', new Library(LibraryKeys.MatarialUi), ['color', 'position']),
+            Element.define('Avatar', new Library(LibraryKeys.MatarialUi), ['alt', 'src', 'sizes', 'srcSet']),
+            Element.define('Backdrop', new Library(LibraryKeys.MatarialUi), []),
+            Element.define('Badge', new Library(LibraryKeys.MatarialUi), ['max', 'showZero', 'invisible', 'color', 'variant']),
+            Element.define('BottomNavigation', new Library(LibraryKeys.MatarialUi), ['showLabels', 'value'], {onChange:true}),
+            Element.define('Button', new Library(LibraryKeys.MatarialUi), ['color', 'disabled', 'disableFocusRipple', 'disableRipple', 'fullWidth', 'href', 'mini', 'size', 'variant'], {text:true, onClick:true}),
+            Element.define('Card', new Library(LibraryKeys.MatarialUi), ['raised']),
+            Element.define('CardActions', new Library(LibraryKeys.MatarialUi), ['disableActionSpacing']),
+            Element.define('CardContent', new Library(LibraryKeys.MatarialUi), []),
+            Element.define('CardHeader', new Library(LibraryKeys.MatarialUi), ['disableTypography']),
+            Element.define('CardMedia', new Library(LibraryKeys.MatarialUi), ['image', 'src']),
+            Element.define('Checkbox', new Library(LibraryKeys.MatarialUi), ['checked', 'color', 'disabled', 'disableRipple', 'type', 'value'], {onChange:true}),
+            Element.define('Chip', new Library(LibraryKeys.MatarialUi), ['clickable', 'color', 'variant']),
+            Element.define('CircularProgress', new Library(LibraryKeys.MatarialUi), ['disableShrink', 'color', 'size', 'thickness', 'value', 'variant']),
+            Element.define('Collapse', new Library(LibraryKeys.MatarialUi), ['collapsedHeight', 'in', 'timeout']),
+            Element.define('Dialog', new Library(LibraryKeys.MatarialUi), ['disableBackdropClick', 'disableEscapeKeyDown', 'fullScreen', 'maxWidth']),
+            Element.define('DialogContent', new Library(LibraryKeys.MatarialUi), []),
+            Element.define('DialogContentText', new Library(LibraryKeys.MatarialUi), [], {text:true}),
+            Element.define('DialogTitle', new Library(LibraryKeys.MatarialUi), ['disableTypography']),
+            Element.define('Divider', new Library(LibraryKeys.MatarialUi), ['absolute','inset', 'light', 'variant']),
+            Element.define('Typography', new Library(LibraryKeys.MatarialUi), ['color','gutterButtom', 'inine', 'variant'], {text:true}),
         ]
     }
 
