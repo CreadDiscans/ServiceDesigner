@@ -56,20 +56,15 @@ export class ExportController extends Controller {
         let js = '';
         let impjs = '';
         const classes:Array<string> = [];
-        const imp:{[s:string]: Array<string>;} = {};
+        const imp:{[s:string]: string;} = {};
         Utils.loop(root, (file:File, stack:Array<File>)=> {
             if (file.type === FileType.FILE) {
                 Utils.loop(file.element, (elem:Element)=> {
                     if (elem.library) { 
                         elem.library.forEach((lib:Library)=> {
-                            if (!(lib.dependency in imp)) {
-                                imp[lib.dependency] = [];
-                            }     
-                            lib.items.forEach((item:string)=> {
-                                if (imp[lib.dependency].indexOf(item) === -1) {
-                                    imp[lib.dependency].push(item);
-                                }
-                            })
+                            if (!(lib.key in imp)) {
+                                imp[lib.key] = lib.get().name;
+                            }
                         })
                     }
                 });
@@ -88,23 +83,8 @@ export class ExportController extends Controller {
             } 
         });
 
-        Object.keys(imp).forEach((from:any)=> {
-            if (from.indexOf('react-native-vector-icons') !== -1) {
-                impjs += 'import '
-            } else  {
-                impjs += 'import { '
-            }
-            imp[from].forEach((item:string, i:number)=> {
-                impjs += item;
-                if (imp[from].length -1 !== i) {
-                    impjs += ', '
-                } 
-            })
-            if (from.indexOf('react-native-vector-icons') !== -1) {
-                impjs += ' from \'' + from + '\';\n';
-            } else {
-                impjs += ' } from \'' + from + '\';\n';
-            }
+        Object.keys(imp).forEach((key:any)=> {
+            impjs += 'import * as ' + key + ' from \'' + imp[key] + '\';';
         });
 
         js = ExportController.TEMPLATE_IMPORT.replace('{import}', impjs);

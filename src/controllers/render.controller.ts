@@ -3,10 +3,10 @@ import { Controller } from './controller';
 import { File } from '../models/file';
 import React from 'react';
 import { Element, ElementStyle } from './../models/element';
-import { LibraryTable } from './library/librarytable';
 import Utils from './../utils/utils';
 import { ResourceType, Resource } from '../models/resource';
 import { Platform } from '../utils/constant';
+import { Library } from '../models/library';
 
 export class RenderController extends Controller {
 
@@ -24,9 +24,8 @@ export class RenderController extends Controller {
     }
 
     private parse(elem:Element, imp:any, state:any, selection=true) {
-        this.parseLibrary(elem, imp)
+        let code = this.parseLibrary(elem, imp)
 
-        let code = elem.code;
         let children = '';
         elem.children.forEach((child:Element)=> {
             children += this.parse(child, imp, state, selection);
@@ -74,14 +73,15 @@ export class RenderController extends Controller {
     // }
 
     private parseLibrary(elem:Element, imp:any) {
+        let code = elem.code;
         if (elem.library) {
-            elem.library.forEach(item=> {
-                const service:any = LibraryTable[item.dependency];
-                item.items.forEach(key=> {
-                    imp[key] = service.get(key);
-                });
+            elem.library.forEach((item:Library)=> {
+                imp[item.key] = item.get().lib;
+                code = code.replace('<', '<'+item.key+'.');
+                code = code.replace('</', '</'+item.key+'.')
             });
         }
+        return code;
     }
 
     private parseProperty(key:string, value:string):string {

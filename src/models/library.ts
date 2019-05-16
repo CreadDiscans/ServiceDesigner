@@ -1,36 +1,51 @@
-import Utils from './../utils/utils';
+import * as reactstrap from 'reactstrap';
+import * as reactRouterDom from 'react-router-dom';
+import * as reactNative from 'react-native-web';
 
-export enum LibraryDependency {
-    HtmlElement = 'HtmlElement',
-    ReactIcon = 'react-icon',
-    ReactNativeVectorIcon = 'react-native-vector-icon',
-    ReactNative = 'react-native',
-    Reactscrap = 'reactstrap',
-    ReactRouterDom = 'react-router-dom'
+export enum LibraryKeys {
+    ReactStrap = 'reactstrap',
+    ReactRouterDom = 'reactRouterDom',
+    ReactNative = 'reactNative'
 }
+
+export const LibraryTable:any = {
+    [LibraryKeys.ReactStrap]: {
+        name: 'reacstrap',
+        lib: reactstrap
+    },
+    [LibraryKeys.ReactRouterDom]: {
+        name: 'react-router-dom',
+        lib: reactRouterDom
+    },
+    [LibraryKeys.ReactNative]: {
+        name: 'react-native',
+        lib: reactNative
+    }
+} 
 
 export class Library {
 
-    dependency:LibraryDependency;
-    items: Array<string>;
+    key:string;
 
-    constructor(dependency:LibraryDependency, items:Array<string>) {
-        this.dependency = dependency;
-        this.items = items;
+    constructor(key:string) {
+        this.key = key;
     }
 
     clone():Library {
-        return new Library(this.dependency, Utils.deepcopy(this.items));
+        return Library.parse(this.toJson());
     }
 
     toJson() {
         return {
-            dependency: this.dependency,
-            items: Utils.deepcopy(this.items) 
+            key: this.key 
         }
     }
 
+    get() {
+        return LibraryTable[this.key];
+    }
+
     static parse(json:any):Library {
-        return new Library(json.dependency, json.items);
+        return new Library(json.key);
     }
 }

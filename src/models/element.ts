@@ -1,4 +1,4 @@
-import { Library, LibraryDependency } from './library';
+import { Library, LibraryKeys } from './library';
 import Utils from '../utils/utils';
 
 export class ElementStyle {
@@ -91,7 +91,7 @@ export class Element {
     }
 
     static getReactNativeRootElement():Element {
-        const item = new Element('View', [new Library(LibraryDependency.ReactNative, ['View'])], '<View style={{style}}>{children}</View>', false);
+        const item = new Element('View', [new Library(LibraryKeys.ReactNative)], '<View style={{style}}>{children}</View>', false);
         item.id = 0;
         return item;
     }
