@@ -7,7 +7,7 @@ export enum LibraryKeys {
     ReactStrap = 'reactstrap',
     ReactRouterDom = 'reactRouterDom',
     ReactNative = 'reactNative',
-    MatarialUi = 'materialUi'
+    MaterialUi = 'materialUi',
 }
 
 export const LibraryTable:any = {
@@ -23,7 +23,7 @@ export const LibraryTable:any = {
         name: 'react-native',
         lib: reactNative
     },
-    [LibraryKeys.MatarialUi]: {
+    [LibraryKeys.MaterialUi]: {
         name: '@material-ui/core',
         lib: materialUi
     }
