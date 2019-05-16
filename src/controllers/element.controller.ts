@@ -41,6 +41,9 @@ export class ElementController extends Controller {
             new Element('Container', [new Library(LibraryKeys.ReactStrap)], '<Container style={{style}} >{children}</Container>'),
             new Element('Row', [new Library(LibraryKeys.ReactStrap)], '<Row style={{style}} >{children}</Row>'),
             new Element('Col', [new Library(LibraryKeys.ReactStrap)], '<Col style={{style}} >{children}</Col>'),
+        ],
+        'material-ui': [
+            new Element('Button', [new Library(LibraryKeys.MatarialUi)], '<Button style={{style}} color={{color}} name={{name}} onClick={this.handleClick}>{{text}}{children}</Button>').addProps(['color', 'text', 'name'])
         ]
     }
 

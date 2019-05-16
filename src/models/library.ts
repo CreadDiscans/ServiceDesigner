@@ -1,11 +1,13 @@
 import * as reactstrap from 'reactstrap';
 import * as reactRouterDom from 'react-router-dom';
 import * as reactNative from 'react-native-web';
+import * as materialUi from '@material-ui/core';
 
 export enum LibraryKeys {
     ReactStrap = 'reactstrap',
     ReactRouterDom = 'reactRouterDom',
-    ReactNative = 'reactNative'
+    ReactNative = 'reactNative',
+    MatarialUi = 'materialUi'
 }
 
 export const LibraryTable:any = {
@@ -20,6 +22,10 @@ export const LibraryTable:any = {
     [LibraryKeys.ReactNative]: {
         name: 'react-native',
         lib: reactNative
+    },
+    [LibraryKeys.MatarialUi]: {
+        name: '@material-ui/core',
+        lib: materialUi
     }
 } 
 
