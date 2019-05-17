@@ -77,7 +77,9 @@ export class ElementController extends Controller {
             Element.define('TextInput', new Library(LibraryKeys.ReactNative), ['value', 'placeholder'], {onChangeText:true}),
             Element.define('TouchableOpacity', new Library(LibraryKeys.ReactNative), [], {onPress:true}),
             Element.define('Image', new Library(LibraryKeys.ReactNative), [], {source:true}),
-            new Element('render', [new Library(LibraryKeys.ReactNative)], '<View style={{style}}>{this.renderPart({name})}</View>').addProps(['name']),
+            Element.define('Picker', new Library(LibraryKeys.ReactNative), ['selectedValue'], {onValueChange:true}),
+            Element.define('Picker.Item', new Library(LibraryKeys.ReactNative), ['label', 'value']),
+            new Element('render', [new Library(LibraryKeys.ReactNative)], '<reactNative.View style={{style}}>{this.renderPart({name})}</reactNative.View>').addProps(['name']),
         ]
     }
     
