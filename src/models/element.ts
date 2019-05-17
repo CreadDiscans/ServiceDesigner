@@ -91,7 +91,7 @@ export class Element {
     }
 
     static getReactNativeRootElement():Element {
-        const item = new Element('View', [new Library(LibraryKeys.ReactNative)], '<View style={{style}}>{children}</View>', false);
+        const item = new Element('View', [new Library(LibraryKeys.ReactNative)], '<reactNative.View style={{style}}>{children}</reactNative.View>', false);
         item.id = 0;
         return item;
     }
