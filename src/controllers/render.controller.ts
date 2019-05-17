@@ -40,7 +40,7 @@ export class RenderController extends Controller {
                     }
                 })
             } else  {
-                code = code.replace('{'+prop+'}', this.parseProperty(prop, elem.property[prop]));
+                code = code.split('{'+prop+'}').join(this.parseProperty(prop, elem.property[prop]));
             }
         });
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
