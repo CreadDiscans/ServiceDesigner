@@ -27,7 +27,7 @@ export class ExportController extends Controller {
                 this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
             }
             
-            fs.writeFile(this.cachePath+'/design.json', JSON.stringify(json), (err:any)=> {
+            fs.writeFile(this.cachePath+'/designData.json', JSON.stringify(json), (err:any)=> {
                 if (err) {
                     return console.log(err)
                 }

@@ -84,8 +84,8 @@ export class MainController extends Singletone<MainController> {
                 const { remote } = window.require('electron')
                 const fs = window.require('fs')
                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-                if (file[0].indexOf('design.json') === -1) {
-                    alert('Only design.json file is supported to import');
+                if (file[0].indexOf('designData.json') === -1) {
+                    alert('Only designData.json file is supported to import');
                     return;
                 }
                 fs.readFile(file[0], (err:any, data:any)=> {
@@ -100,7 +100,7 @@ export class MainController extends Singletone<MainController> {
                             find = true;
                         }
                     });
-                    this.exportCtrl.setCachePath(file[0].replace('design.json',''));
+                    this.exportCtrl.setCachePath(file[0].replace('designData.json',''));
                     return resolve(true);
                 })
             } catch(e) {
