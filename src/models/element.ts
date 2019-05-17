@@ -108,7 +108,7 @@ export class Element {
         })
         if (option.onChange) attribute +=  'onChange={this.handleChange} ';
         if (option.onChangeText) attribute += 'onChangeText={(text)=>this.handleChange({target:{value:text, name:{name}}})} ';
-        if (option.onValueChange) attribute += 'onValueChange={({val,idx})=>this.handleChange({target:{value:val, index:idx, name:{name}}})} ';
+        if (option.onValueChange) attribute += 'onValueChange={(val,idx)=>this.handleChange({target:{value:val, index:idx, name:{name}}})} ';
         if (option.onClick) attribute += 'onClick={this.handleClick} ';
         if (option.onPress) attribute += 'onPress={()=>this.handleClick({target:{name:{name}}})} ';
         if (option.source) {
