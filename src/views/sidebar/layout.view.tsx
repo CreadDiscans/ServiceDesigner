@@ -103,9 +103,9 @@ export class Layout extends View {
             <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'down')}><FaArrowAltCircleDown /></Button>
             <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'right')}><FaArrowAltCircleRight /></Button>
             <Button style={styles.iconButton} color="info" onClick={()=>this.moveElement(file.element, 'left')}><FaArrowAltCircleLeft /></Button>
-            <Button style={styles.iconButton} color="info" onClick={()=>this.mainCtrl.copyElement()}><FaCopy /></Button>
+            {/* <Button style={styles.iconButton} color="info" onClick={()=>this.mainCtrl.copyElement()}><FaCopy /></Button>
             <Button style={styles.iconButton} color={this.mainCtrl.isPasteEnable() ? 'info' : 'warning'} 
-                onClick={()=>this.mainCtrl.pasteElement()}><FaPaste /></Button>
+                onClick={()=>this.mainCtrl.pasteElement()}><FaPaste /></Button> */}
             <Button style={styles.iconButton} color="danger" onClick={()=>this.removeElement(file.element)}><FaTrashAlt /></Button>
             {file.element && this.treeView(file.element)}
         </div>
