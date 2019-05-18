@@ -1,0 +1,1339 @@
+[
+  {
+    "prop": {
+      "closeClassName": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string",
+        "default": "'success'"
+      },
+      "isOpen": {
+        "type": "bool",
+        "default": "true"
+      },
+      "toggle": {
+        "type": "func"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "fade": {
+        "type": "bool",
+        "default": "true"
+      },
+      "transition": {
+        "type":"bool"
+      }
+    },
+    "name": "Alert"
+  },
+  {
+    "prop":{
+      "color": {
+        "type":"enum",
+        "default":"primary",
+        "select": [
+          "primary",
+          "secondary",
+          "success",
+          "danger",
+          "warning",
+          "info",
+          "light",
+          "dark"
+        ]
+      },
+      "outline":{
+        "type":"bool"
+      },
+      "pill":{
+        "type":"bool"
+      }
+    },
+    "name": "Badge"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "listTag": {
+        "type": "string"
+      }
+    },
+    "name": "Breadcrumb"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "active": {
+        "type": "bool"
+      }
+    },
+    "name": "BreadcrumbItem"
+  },
+  {
+    "prop": {
+      "disabled": {
+        "type": "bool"
+      },
+      "direction": {
+        "type": "enum",
+        "select": [
+          "up",
+          "down",
+          "left",
+          "right"
+        ],
+        "default": "up"
+      },
+      "group": {
+        "type": "bool"
+      },
+      "isOpen": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "toggle": {
+        "type": "func"
+      }
+    },
+    "name": "ButtonDropdown"
+  },
+  {
+    "prop": {
+      "caret": {
+        "type": "bool"
+      },
+      "color": {
+        "type": "string"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "onClick": {
+        "type": "func"
+      }
+    },
+    "name": "DropdownToggle"
+  },
+  {
+    "prop": {
+      "ariaLabel": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      },
+      "vertical": {
+        "type": "bool"
+      }
+    },
+    "name": "ButtonGroup"
+  },
+  {
+    "prop": {
+      "active": {
+        "type": "bool"
+      },
+      "'aria-label'": {
+        "type": "string"
+      },
+      "block": {
+        "type": "bool"
+      },
+      "color": {
+        "type":"string"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "outline": {
+        "type": "bool"
+      },
+      "tag": {
+        "type":"string"
+      },
+      "onClick": {
+        "type": "func"
+      },
+      "size": {
+        "type": "string"
+      },
+      "close": {
+        "type": "bool"
+      }
+    },
+    "name": "Button"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "inverse": {
+        "type": "bool"
+      },
+      "color": {
+        "type": "string"
+      },
+      "body": {
+        "type": "bool"
+      }
+    },
+    "name": "Card"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardBody"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardColumns"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardDeck"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardFooter"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardGroup"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardHeader"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "top": {
+        "type": "bool"
+      },
+      "bottom": {
+        "type": "bool"
+      }
+    },
+    "name": "CardImg"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardImgOverlay"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardLink"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardSubtitle"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardText"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "CardTitle"
+  },
+  {
+    "prop": {
+      "activeIndex": {
+        "type":"number"
+      },
+      "next": {
+        "type": "func"
+      },
+      "previous": {
+        "type": "func"
+      },
+      "keyboard": {
+        "type": "bool"
+      },
+      "pause": {
+        "type": "enum",
+        "select": [
+          "hover",
+          "false"
+        ]
+      },
+      "ride": {
+        "type": "enum",
+        "select": [
+          "carousel"
+        ]
+      },
+      "interval": {
+        "type": "string"
+      },
+      "mouseEnter": {
+        "type": "func"
+      },
+      "mouseLeave": {
+        "type": "func"
+      },
+      "slide": {
+        "type": "bool"
+      }
+    },
+    "name": "Carousel"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "in": {
+        "type": "bool"
+      },
+      "slide": {
+        "type": "bool"
+      }
+    },
+    "name": "CarouselItem"
+  },
+  {
+    "prop": {
+      "direction": {
+        "type": "enum",
+        "select": [
+          "prev",
+          "next"
+        ]
+      },
+      "onClickHandler": {
+        "type": "func"
+      },
+      "directionText": {
+        "type": "string"
+      }
+    },
+    "name": "CarouselControl"
+  },
+  {
+    "prop": {
+      "items": {
+        "type":"any"
+      },
+      "activeIndex": {
+        "type":"number"
+      },
+      "onClickHandler": {
+        "type": "func"
+      }
+    },
+    "name": "CarouselIndicators"
+  },
+  {
+    "prop": {
+      "captionHeader": {
+        "type": "string"
+      },
+      "captionText": {
+        "type": "string"
+      }
+    },
+    "name": "CarouselCaption"
+  },
+  {
+    "prop": {
+      "items": {
+        "type":"any"
+      },
+      "indicators": {
+        "type": "bool",
+        "default": "true"
+      },
+      "controls": {
+        "type": "bool",
+        "default": "true"
+      },
+      "autoPlay": {
+        "type": "bool",
+        "default": "true"
+      }
+    },
+    "name": "UncontrolledCarousel"
+  },
+  {
+    "prop": {
+      "isOpen": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "navbar": {
+        "type": "bool"
+      }
+    },
+    "name": "Collapse"
+  },
+  {
+    "prop":{
+      "in":{
+        "type":"bool"
+      },
+      "mountOnEnter":{
+        "type":"bool"
+      },
+      "unmountOnExit":{
+        "type":"bool"
+      },
+      "apear": {
+        "type":"bool",
+        "default":"true"
+      },
+      "enter":{
+        "type":"bool",
+        "default":"true"
+      },
+      "exit":{
+        "type":"bool",
+        "default":"true"
+      },
+      "timeout":{
+        "type":"number",
+        "default":"150"
+      },
+      "addEneListener":{
+        "type":"func"
+      },
+      "onEnter":{
+        "type":"func"
+      },
+      "onEntering":{
+        "type":"func"
+      },
+      "onEntered":{
+        "type":"func"
+      },
+      "onExit":{
+        "type":"func"
+      },
+      "onExiting":{
+        "type":"func"
+      },
+      "onExited":{
+        "type":"func"
+      },
+      "tag":{
+        "type":"string"
+      }
+    },
+    "name":"Fade"
+  },
+  {
+    "prop": {
+      "disabled": {
+        "type": "bool"
+      },
+      "direction": {
+        "type": "enum",
+        "select": [
+          "up",
+          "down",
+          "left",
+          "right"
+        ]
+      },
+      "group": {
+        "type": "bool"
+      },
+      "isOpen": {
+        "type": "bool"
+      },
+      "nav": {
+        "type": "bool"
+      },
+      "active": {
+        "type": "bool"
+      },
+      "inNavbar": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string",
+        "default": "div"
+      },
+      "toggle": {
+        "type": "func"
+      },
+      "setActiveFromChild": {
+        "type": "bool"
+      }
+    },
+    "name": "Dropdown"
+  },
+  {
+    "prop": {
+      "caret": {
+        "type": "bool"
+      },
+      "color": {
+        "type": "string"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "onClick": {
+        "type": "func"
+      },
+      "'data-toggle'": {
+        "type": "string"
+      },
+      "'aria-haspopup'": {
+        "type": "bool"
+      },
+      "nav": {
+        "type": "bool"
+      },
+      "tag": {}
+    },
+    "name": "DropdownToggle"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "right": {
+        "type": "bool"
+      },
+      "flip": {
+        "type": "bool",
+        "default": "true,"
+      },
+      "modifiers": {
+        "type": "object"
+      },
+      "persist": {
+        "type": "bool"
+      }
+    },
+    "name": "DropdownMenu"
+  },
+  {
+    "prop": {
+      "active": {
+        "type": "bool"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "divider": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "header": {
+        "type": "bool"
+      },
+      "onClick": {
+        "type": "func"
+      },
+      "toggle": {
+        "type": "bool",
+        "default": "true"
+      }
+    },
+    "name": "DropdownItem"
+  },
+  {
+    "prop": {
+      "type": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      },
+      "bsSize": {
+        "type": "string"
+      },
+      "state": {
+        "type": "string"
+      },
+      "valid": {
+        "type": "bool"
+      },
+      "invalid": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "static": {
+        "type": "bool"
+      },
+      "plaintext": {
+        "type": "bool"
+      },
+      "addon": {
+        "type": "bool"
+      }
+    },
+    "name": "Input"
+  },
+  {
+    "prop": {
+      "id": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+      "label": {
+        "type": "string"
+      },
+      "inline": {
+        "type": "bool"
+      },
+      "valid": {
+        "type": "bool"
+      },
+      "invalid": {
+        "type": "bool"
+      },
+      "bsSize": {
+        "type": "string"
+      }
+    },
+    "name": "CustomInput"
+  },
+  {
+    "prop": {
+      "inline": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string",
+        "default": "'form'"
+      }
+    },
+    "name": "Form"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string",
+        "default": "'div'"
+      },
+      "valid": {
+        "type": "bool",
+        "default": "undefined"
+      },
+      "tooltip": {
+        "type": "bool"
+      }
+    },
+    "name": "FormFeedback"
+  },
+  {
+    "prop": {
+      "row": {
+        "type": "bool"
+      },
+      "check": {
+        "type": "bool"
+      },
+      "inline": {
+        "type": "bool"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string",
+        "default": "'div'"
+      }
+    },
+    "name": "FormGroup"
+  },
+  {
+    "prop": {
+      "inline": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string",
+        "default": "small"
+      },
+      "color": {
+        "type": "string",
+        "default": "muted"
+      }
+    },
+    "name": "FormText"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      }
+    },
+    "name": "InputGroup"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "addonType": {
+        "type": "enum",
+        "select": [
+          "prepend",
+          "append"
+        ]
+      }
+    },
+    "name": "InputGroupAddOn"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "addonType": {
+        "type": "enum",
+        "select": [
+          "prepend",
+          "append"
+        ]
+      },
+      "groupClassName": {
+        "type": "string"
+      },
+      "groupAttributes": {
+        "type": "object"
+      }
+    },
+    "name": "InputGroupButton"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "fluid": {
+        "type": "bool"
+      }
+    },
+    "name": "Jumbotron"
+  },
+  {
+    "prop": {
+      "fluid": {
+        "type": "bool"
+      }
+    },
+    "name": "Container"
+  },
+  {
+    "prop": {
+      "noGutters": {
+        "type": "bool"
+      },
+      "form": {
+        "type": "bool"
+      }
+    },
+    "name": "Row"
+  },
+  {
+    "prop": {
+      "xs": {
+        "type":"string"
+      },
+      "sm": {
+        "type":"string"
+      },
+      "md": {
+        "type":"string"
+      },
+      "lg": {
+        "type":"string"
+      },
+      "xl": {
+        "type":"string"
+      },
+      "widths": {
+        "type":"any"
+      }
+    },
+    "name": "Col"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "flush": {
+        "type": "bool"
+      }
+    },
+    "name": "ListGroup"
+  },
+  {
+    "prop": {
+      "body": {
+        "type": "bool"
+      },
+      "bottom": {
+        "type": "bool"
+      },
+      "heading": {
+        "type": "bool"
+      },
+      "left": {
+        "type": "bool"
+      },
+      "list": {
+        "type": "bool"
+      },
+      "middle": {
+        "type": "bool"
+      },
+      "object": {
+        "type": "bool"
+      },
+      "right": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "top": {
+        "type": "bool"
+      }
+    },
+    "name": "Media"
+  },
+  {
+    "prop": {
+      "isOpen": {
+        "type": "bool"
+      },
+      "autoFocus": {
+        "type": "bool"
+      },
+      "centered": {
+        "type": "bool"
+      },
+      "size": {
+        "type": "string"
+      },
+      "toggle": {
+        "type": "func"
+      },
+      "role": {
+        "type": "string"
+      },
+      "labelledBy": {
+        "type": "string"
+      },
+      "keyboard": {
+        "type": "bool"
+      },
+      "backdrop": {
+        "type": "string"
+      },
+      "scrollable": {
+        "type": "bool"
+      },
+      "onEnter": {
+        "type": "func"
+      },
+      "onExit": {
+        "type": "func"
+      },
+      "onOpened": {
+        "type": "func"
+      },
+      "onClosed": {
+        "type": "func"
+      },
+      "wrapClassName": {
+        "type": "string"
+      },
+      "modalClassName": {
+        "type": "string"
+      },
+      "backdropClassName": {
+        "type": "string"
+      },
+      "contentClassName": {
+        "type": "string"
+      },
+      "fade": {
+        "type": "bool"
+      },
+      "zIndex": {
+        "type": "string"
+      },
+      "backdropTransition": {
+        "type":"any"
+      },
+      "modalTransition": {
+        "type":"any"
+      },
+      "unmountOnClose": {
+        "type": "bool"
+      }
+    },
+    "name": "Modal"
+  },
+  {
+    "prop": {
+      "light": {
+        "type": "bool"
+      },
+      "dark": {
+        "type": "bool"
+      },
+      "fixed": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string"
+      },
+      "expand": {
+        "type": "string"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "Navbar"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "NavbarBrand"
+  },
+  {
+    "prop": {
+      "type": {
+        "type": "string"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "NavbarToggler"
+  },
+  {
+    "prop": {
+      "tabs": {
+        "type": "bool"
+      },
+      "pills": {
+        "type": "bool"
+      },
+      "card": {
+        "type": "bool"
+      },
+      "justified": {
+        "type": "bool"
+      },
+      "fill": {
+        "type": "bool"
+      },
+      "vertical": {
+        "type": "string"
+      },
+      "horizontal": {
+        "type": "string"
+      },
+      "navbar": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "Nav"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "active": {
+        "type": "bool"
+      }
+    },
+    "name": "NavItem"
+  },
+  {
+    "prop": {
+      "disabled": {
+        "type": "bool"
+      },
+      "active": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "NavLink"
+  },
+  {
+    "prop": {
+      "listClassName": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "listTag": {
+        "type": "string"
+      },
+      "'aria-label'": {
+        "type": "string"
+      }
+    },
+    "name": "Pagination"
+  },
+  {
+    "prop": {
+      "active": {
+        "type": "bool"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "name": "PaginationItem"
+  },
+  {
+    "prop": {
+      "next": {
+        "type": "bool"
+      },
+      "previous": {
+        "type": "bool"
+      },
+      "first": {
+        "type": "bool"
+      },
+      "last": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "'aria-label'": {
+        "type": "string"
+      }
+    },
+    "name": "PaginationLink"
+  },
+  {
+    "prop": {
+      "trigger": {
+        "type": "string"
+      },
+      "isOpen": {
+        "type": "bool"
+      },
+      "toggle": {
+        "type": "func"
+      },
+      "boundariesElement": {
+        "type": "string"
+      },
+      "target": {
+        "type": "string"
+      },
+      "container": {
+        "type": "string"
+      },
+      "innerClassName": {
+        "type": "string"
+      },
+      "disabled": {
+        "type": "bool"
+      },
+      "hideArrow": {
+        "type": "bool"
+      },
+      "placementPrefix": {
+        "type": "string"
+      },
+      "delay": {
+        "type": "number"
+      },
+      "placement": {
+        "type": "enum",
+        "select": [
+          "auto",
+          "auto-start",
+          "auto-end",
+          "top",
+          "top-start",
+          "top-end",
+          "right",
+          "right-start",
+          "right-end",
+          "bottom",
+          "bottom-start",
+          "bottom-end",
+          "left",
+          "left-start",
+          "left-end"
+        ]
+      },
+      "modifiers": {
+        "type": "object"
+      },
+      "offset": {
+        "type": "string"
+      },
+      "fade": {
+        "type": "bool"
+      },
+      "flip": {
+        "type": "bool"
+      }
+    },
+    "name": "Popover"
+  },
+  {
+    "prop": {
+      "multi": {
+        "type": "bool"
+      },
+      "bar": {
+        "type": "bool"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "value": {
+        "type": "string"
+      },
+      "max": {
+        "type": "string"
+      },
+      "animated": {
+        "type": "bool"
+      },
+      "striped": {
+        "type": "bool"
+      },
+      "color": {
+        "type": "string"
+      },
+      "barClassName": {
+        "type": "string"
+      }
+    },
+    "name": "Progress"
+  },
+  {
+    "prop":{
+      "type": {
+        "type":"string"
+      },
+      "color":{
+        "type":"string"
+      },
+      "size":{
+        "type":"string"
+      }
+    },
+    "name": "Spinner"
+  },
+  {
+    "prop": {
+      "tag": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      },
+      "bordered": {
+        "type": "bool"
+      },
+      "borderless": {
+        "type": "bool"
+      },
+      "striped": {
+        "type": "bool"
+      },
+      "dark": {
+        "type": "bool"
+      },
+      "hover": {
+        "type": "bool"
+      },
+      "responsive": {
+        "type": "bool"
+      }
+    },
+    "name": "Table"
+  },
+  {
+    "prop": {
+      "color": {
+        "type": "string",
+        "default": "'success'"
+      },
+      "isOpen": {
+        "type": "bool",
+        "default": "true"
+      },
+      "tag": {
+        "type": "string"
+      },
+      "transition": {
+        "type":"any"
+      }
+    },
+    "name": "Toast"
+  },
+  {
+    "prop": {
+      "trigger": {
+        "type": "string"
+      },
+      "boundariesElement": {
+        "type": "string"
+      },
+      "isOpen": {
+        "type": "bool"
+      },
+      "hideArrow": {
+        "type": "bool"
+      },
+      "toggle": {
+        "type": "func"
+      },
+      "target": {
+        "type": "string"
+      },
+      "container": {
+        "type": "string"
+      },
+      "delay": {
+        "type": "string"
+      },
+      "innerClassName": {
+        "type": "string"
+      },
+      "arrowClassName": {
+        "type": "string"
+      },
+      "autohide": {
+        "type": "bool"
+      },
+      "placement": {
+        "type": "enum",
+        "select": [
+          "auto",
+          "auto-start",
+          "auto-end",
+          "top",
+          "top-start",
+          "top-end",
+          "right",
+          "right-start",
+          "right-end",
+          "bottom",
+          "bottom-start",
+          "bottom-end",
+          "left",
+          "left-start",
+          "left-end"
+        ]
+      },
+      "modifiers": {
+        "type": "object"
+      },
+      "offset": {
+        "type": "string"
+      },
+      "fade": {
+        "type": "bool"
+      },
+      "flip": {
+        "type": "bool"
+      }
+    },
+    "name": "Tooltip"
+  }
+]
