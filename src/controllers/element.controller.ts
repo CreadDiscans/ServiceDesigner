@@ -2,6 +2,7 @@ import { Controller } from './controller';
 import { Element, ElementStyle } from '../models/element';
 import { Action, HisotryAction } from '../utils/constant';
 import { Library, LibraryKeys } from '../models/library';
+import materialUiAPi from './api/materialUi.json';
 
 export class ElementController extends Controller {
     
@@ -42,31 +43,7 @@ export class ElementController extends Controller {
             Element.define('Row', new Library(LibraryKeys.ReactStrap), []),
             Element.define('Col', new Library(LibraryKeys.ReactStrap), []),
         ],
-        'material-ui': [
-            Element.define('AppBar', new Library(LibraryKeys.MaterialUi), ['color', 'position']),
-            Element.define('Avatar', new Library(LibraryKeys.MaterialUi), ['alt', 'src', 'sizes', 'srcSet']),
-            Element.define('Backdrop', new Library(LibraryKeys.MaterialUi), []),
-            Element.define('Badge', new Library(LibraryKeys.MaterialUi), ['max', 'showZero', 'invisible', 'color', 'variant']),
-            Element.define('BottomNavigation', new Library(LibraryKeys.MaterialUi), ['showLabels', 'value'], {onChange:true}),
-            Element.define('Button', new Library(LibraryKeys.MaterialUi), ['color', 'disabled', 'disableFocusRipple', 'disableRipple', 'fullWidth', 'href', 'mini', 'size', 'variant'], {text:true, onClick:true}),
-            Element.define('Card', new Library(LibraryKeys.MaterialUi), ['raised']),
-            Element.define('CardActions', new Library(LibraryKeys.MaterialUi), ['disableActionSpacing']),
-            Element.define('CardContent', new Library(LibraryKeys.MaterialUi), []),
-            Element.define('CardHeader', new Library(LibraryKeys.MaterialUi), ['disableTypography']),
-            Element.define('CardMedia', new Library(LibraryKeys.MaterialUi), ['image', 'src']),
-            Element.define('Checkbox', new Library(LibraryKeys.MaterialUi), ['checked', 'color', 'disabled', 'disableRipple', 'type', 'value'], {onChange:true}),
-            Element.define('Chip', new Library(LibraryKeys.MaterialUi), ['clickable', 'color', 'variant']),
-            Element.define('CircularProgress', new Library(LibraryKeys.MaterialUi), ['disableShrink', 'color', 'size', 'thickness', 'value', 'variant']),
-            Element.define('Collapse', new Library(LibraryKeys.MaterialUi), ['collapsedHeight', 'in', 'timeout']),
-            Element.define('Dialog', new Library(LibraryKeys.MaterialUi), ['disableBackdropClick', 'disableEscapeKeyDown', 'fullScreen', 'maxWidth']),
-            Element.define('DialogContent', new Library(LibraryKeys.MaterialUi), []),
-            Element.define('DialogContentText', new Library(LibraryKeys.MaterialUi), [], {text:true}),
-            Element.define('DialogTitle', new Library(LibraryKeys.MaterialUi), ['disableTypography']),
-            Element.define('Divider', new Library(LibraryKeys.MaterialUi), ['absolute','inset', 'light', 'variant']),
-            Element.define('Toolbar', new Library(LibraryKeys.MaterialUi), []),
-            Element.define('Typography', new Library(LibraryKeys.MaterialUi), ['color','gutterButtom', 'inine', 'variant'], {text:true}),
-            Element.define('Icon', new Library(LibraryKeys.MaterialUi), ['color'], {text:true}),
-        ]
+        'material-ui': materialUiAPi.map((item:any)=> Element.parseApi(item, new Library(LibraryKeys.MaterialUi)))
     }
 
     reactNativeElments:{[s: string]: Array<Element>} = {

@@ -115,30 +115,62 @@ export class SidebarProperty extends View {
                 />
             
             <h5>Property</h5>
-            {
-                this.state.selectedItem.property && Object.keys(this.state.selectedItem.property).map(key=> {
-                    return <div key={key}>
-                        <Label style={styles.propLabel}>{key}</Label>
-                        <Input style={styles.propValue} value={this.state.selectedItem.property[key]} onChange={(e)=>{
-                            const prop = Utils.deepcopy(this.state.selectedItem.property);
-                            prop[key] = e.target.value;
-                            const file = this.mainCtrl.getSelectedFile();
-                            const elem = this.mainCtrl.getSelectedElement();
-                            let parent;
-                            Utils.loop(file.element, (item:Element)=> {
-                                item.children.forEach((child:Element)=> {
-                                    if (child === elem) {
-                                        parent = item;
-                                    }
-                                })
-                            })
-                            const after = elem.clone();
-                            after.property = prop;
-                            this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
-                        }}/>
-                    </div>
-                })
-            }
+            {this.renderPropsItem(this.state.selectedItem.property)}
+        </div>
+    }
+
+    updateProp = (key:string, value:any) => {
+        const prop = Utils.deepcopy(this.state.selectedItem.property);
+        if (typeof prop[key] === 'string') {
+            prop[key] = value;
+        } else {  
+            prop[key].value = value;
+        }
+        const file = this.mainCtrl.getSelectedFile();
+        const elem = this.mainCtrl.getSelectedElement();
+        let parent;
+        Utils.loop(file.element, (item:Element)=> {
+            item.children.forEach((child:Element)=> {
+                if (child === elem) {
+                    parent = item;
+                }
+            })
+        })
+        const after = elem.clone();
+        after.property = prop;
+        this.mainCtrl.elementControl(Action.Update, parent, elem.clone(), after);
+    }
+
+    renderPropsItem(property:any) {
+        if (!property) return <div></div>
+        return <div>{
+            Object.keys(property).map((key)=> <div key={key}>
+                <Label style={styles.propLabel}>{key}</Label>
+                { typeof property[key] === 'string'  && <Input style={styles.propValue} 
+                    value={this.state.selectedItem.property[key]} 
+                    onChange={(e)=>this.updateProp(key, e.target.value)
+                }/>}
+                { property[key].type === 'enum' && <Input style={styles.propValue} 
+                    type="select"
+                    onChange={(e)=>this.updateProp(key, e.target.value)}
+                    value={property[key].value}>
+                    {property[key].select.map((val:string)=> <option value={val}>{val}</option>)}
+                    </Input>}
+                { property[key].type === 'bool' && <Input style={{width:'70%'}}
+                    type="checkbox" 
+                    onChange={(e)=>this.updateProp(key, e.target.value)}
+                    value={property[key].value} />}
+                { (property[key].type === 'string' 
+                || property[key].type === 'Component'
+                || property[key].type === 'object'
+                || property[key].type === 'any') && 
+                    <Input style={styles.propValue} 
+                    value={property[key].value} 
+                    placeholder={property[key].type}
+                    onChange={(e)=>this.updateProp(key, e.target.value)
+                }/>}
+            </div>)
+        }
         </div>
     }
 }

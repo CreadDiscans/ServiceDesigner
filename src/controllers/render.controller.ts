@@ -16,6 +16,7 @@ export class RenderController extends Controller {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state, selection);
+        console.log(code);
         return {
             state: file.state,
             imp: imp,
@@ -84,10 +85,8 @@ export class RenderController extends Controller {
         return code;
     }
 
-    private parseProperty(key:string, value:string):string {
-        if (typeof(value) === 'object') {
-            value = JSON.stringify(value);
-        } else if (typeof(value) === 'string') {
+    private parseProperty(key:string, value:any):string {
+        if (typeof value === 'string') {
             if (value === '{item}' || 
                 (value.indexOf('{item.')===0 && value[value.length-1] === '}' && value !== '{item.}') ||
                 (value.indexOf('{this.state.') === 0 && value[value.length-1] === '}' && value !== '{this.state.}')) {
@@ -103,10 +102,15 @@ export class RenderController extends Controller {
                         }
                     })
                 }
-            } else if (key === 'icon') {
-            } else {
+            } else if (value) {
                 value = '"' + String(value) + '"'
-            }   
+            } 
+        } else if (!value.type) {
+            value = JSON.stringify(value);
+        } else if (value.type === 'enum') {
+            value = '"' + value.value + '"';
+        } else {
+            value = value.value;
         }
         return value;
     }

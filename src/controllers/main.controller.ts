@@ -90,7 +90,8 @@ export class MainController extends Singletone<MainController> {
                 }
                 fs.readFile(file[0], (err:any, data:any)=> {
                     if (err) throw err
-                    const json = JSON.parse(data.toString())
+                    const json = JSON.parse(data.toString());
+                    console.log(json);
                     this.init(json.platform, File.parse(json.root));
                     this.resourceCtrl.loads(JSON.parse(json.resource));
                     let find = false;

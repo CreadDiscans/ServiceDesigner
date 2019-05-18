@@ -10,7 +10,7 @@ export class ExportController extends Controller {
 
     private static TEMPLATE_CLASS = "export class {classname} extends DesignedComponent {\n\t{state}\n\trender() {\n\t\t// @ts-ignore\n\t\treturn {code}\n\t}\n}\n";
     private static TEMPLATE_IMPORT = "import React from 'react';\n{import}\n";
-    private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\thandleClick = (e:any) => {};\n\thandleChange = (e:any) => {};\n\trenderPart = (name:any) => {}\n}\n";
+    private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\tonEvent = (e:any) => {};\n\thandleClick = (e:any) => {};\n\thandleChange = (e:any) => {};\n\trenderPart = (name:any) => {}\n}\n";
     private cachePath:string|undefined;
 
     export(root:File, rsc:Array<object>, useCache:boolean) {

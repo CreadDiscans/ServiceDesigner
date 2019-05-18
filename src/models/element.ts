@@ -55,6 +55,11 @@ export class Element {
         return this;
     }
 
+    setDefault(key:string, value:string) {
+        this.property[key] = value;
+        return this;
+    }
+
     clone():Element {
         return Element.parse(this.toJson());
     }
@@ -119,9 +124,43 @@ export class Element {
             bodyText += '{{text}}';
             attr.push('text');
         }
+        if (option.nest) {
+            const nestTag = lib ? lib.key + '.' + option.nest : option.nest;
+            bodyText += '<'+ nestTag + '>{children}</'+nestTag+'>'; 
+        } else {
+            bodyText += '{children}'
+        }
 
-        let code = '<'+tagName+ ' style={{style}} ' + attribute + '>' + bodyText + '{children}</'+tagName+'>'
+        let code = '<'+tagName+ ' style={{style}} ' + attribute + '>' + bodyText + '</'+tagName+'>'
 
         return new Element(tag, libs, code).addProps(attr);
+    }
+
+    static parseApi(json:any, lib:Library) {
+        const tagName = lib.key + '.' + json.name;
+        let attr = '';
+        Object.keys(json.prop).forEach((item:any)=> {
+            if (json.prop[item].type === 'func') {
+                if (Object.keys(json.prop).indexOf('name') === -1) {
+                    attr += name + '={{' + name + '}} '
+                }
+                attr += item + '={(val)=>this.onEvent({event:"'+item+'",name:{name},value:val})} '
+            } else {
+                attr += item + '={{' + item + '}} '
+            }
+        });
+        let code = '<'+tagName+' style={{style}} '+attr+'>{children}</'+tagName+'>';
+        const elem = new Element(json.name, [lib], code);
+        Object.keys(json.prop).forEach((item:any)=> {            
+            if (json.prop[item].type === 'func') return
+            elem.property[item] = json.prop[item];
+            if (json.prop[item].type === 'bool') {
+                elem.property[item].value = json.prop[item].default ? json.prop[item].default === 'true' : false;
+            } else {
+                elem.property[item].value = json.prop[item].default ? json.prop[item].default : '';
+            }
+        })
+        console.log(json, elem);
+        return elem;
     }
 } 
