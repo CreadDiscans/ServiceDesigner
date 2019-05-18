@@ -10,7 +10,7 @@ import { View } from '../view';
 import { Action } from '../../utils/constant';
 import { Element, ElementStyle } from '../../models/element';
 
-export class SidebarProperty extends View {
+export class SidebarStyle extends View {
 
     state:any = {
         value: '',
@@ -114,8 +114,8 @@ export class SidebarProperty extends View {
                 }}
                 />
             
-            <h5>Property</h5>
-            {this.renderPropsItem(this.state.selectedItem.property)}
+            {/* <h5>Property</h5>
+            {this.renderPropsItem(this.state.selectedItem.property)} */}
         </div>
     }
 

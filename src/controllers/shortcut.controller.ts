@@ -25,7 +25,7 @@ export class ShortcutController extends Controller {
             } else if (e.key === 'F3') {
                 this.main.setTab(SideTab.Element);
             } else if (e.key === 'F4') {
-                this.main.setTab(SideTab.Property);
+                this.main.setTab(SideTab.Style);
             } else if (e.key === 'F5') {
                 this.main.setTab(SideTab.Css);
             } else if (e.key === 'F6') {

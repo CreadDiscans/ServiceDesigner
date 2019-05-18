@@ -8,7 +8,7 @@ export enum SideTab {
     Folder = 'folder',
     State = 'state',
     Element = 'element',
-    Property = 'property',
+    Style = 'style',
     Css = 'css',
     Color = 'color',
     Asset = 'asset',

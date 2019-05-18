@@ -16,7 +16,7 @@ import {
  } from 'react-icons/fa'
 import { SidebarFolder } from './folder.view';
 import { SidebarElement } from './element.view';
-import { SidebarProperty } from './property.view';
+import { SidebarStyle } from './style.view';
 import { SidebarHelp } from './help.view';
 import { SidebarState } from './state.view';
 import { SidebarColor } from './color.view';
@@ -51,7 +51,7 @@ export default class Sidebar extends View {
                     {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
                     {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />, SideTab.State.toString())}
                     {this.icon(<FaCode onClick={()=>this.mainCtrl.setTab(SideTab.Element)} />, SideTab.Element.toString())}
-                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Property)} />, SideTab.Property.toString())}
+                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Style)} />, SideTab.Style.toString())}
                     {this.icon(<FaCss3 onClick={()=>this.mainCtrl.setTab(SideTab.Css)} />, SideTab.Css.toString())}
                     {this.icon(<FaPalette onClick={()=>this.mainCtrl.setTab(SideTab.Color)} />, SideTab.Color.toString())}
                     {this.icon(<FaImages onClick={()=>this.mainCtrl.setTab(SideTab.Asset)} />, SideTab.Asset.toString())}
@@ -71,7 +71,7 @@ export default class Sidebar extends View {
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}
                     {tab === SideTab.Element && <SidebarElement />}
-                    {tab === SideTab.Property && <SidebarProperty />}
+                    {tab === SideTab.Style && <SidebarStyle />}
                     {tab === SideTab.Css && <SidebarCss />}
                     {tab === SideTab.Color && <SidebarColor />}
                     {tab === SideTab.Asset && <SidebarAsset />}
