@@ -69,8 +69,25 @@ export class ElementProperty {
         }
     }
 
-    toVal() {
-        return '""'
+    toVal(name:string|undefined=undefined) {
+        if (this.name === 'text') {
+            if (this.isVariable) return '{' + this.value + '}';
+            else return this.value;
+        } else if (this.type == ElementPropertyType.Func) {
+            return this.name + '={(e)=>this.onEvent({name:"'+name+'",value:e})}';
+        } else if (this.isVariable) {
+            return this.name + '={'+this.value+'}'
+        } else if (this.type == ElementPropertyType.String) {
+            return this.name + '={"'+this.value+'"}'
+        } else if (this.type == ElementPropertyType.Number) {
+            return this.name + '={'+this.value+'}'
+        } else if (this.type == ElementPropertyType.Bool) {
+            return this.name + '={'+this.value+'}'
+        } else if (this.type == ElementPropertyType.Enum) {
+            return this.name + '={"'+this.value+'"}'
+        }
+
+        return '';
     }
 }
 
@@ -111,7 +128,27 @@ export class Element {
 
     getCode():string {
         if (this.code) return this.code;
-        return '';
+        let tag = this.library ? this.library + '.' + this.name : this.name;
+        let body = '';
+        let attr:Array<string> = [];
+        let propName = this.prop('name');
+        this.property.forEach((item:ElementProperty)=> {
+            if(!item.isActive) return;
+            if (item.name === 'text') {
+                body += item.toVal();
+            } else if (item.name === 'class' || item.name === 'for') {
+                // skip
+            } else {
+                attr.push(item.toVal(propName?propName.value:''));
+            }
+        });
+        let propFor = this.prop('for');
+        let code = '<'+tag+' style={{style}} '+attr.join(' ')+'>'+body+'{children}</'+tag+'>';
+        if (propFor && propFor.isActive && propFor.isVariable) {
+            code = code.replace('>', 'key={i}>');
+            code = '{'+propFor.value+'.map((item, i)=>'+code+')}';
+        }
+        return code;
     }
 
     getLib() {

@@ -32,16 +32,15 @@ export class RenderController extends Controller {
             children += this.parse(child, imp, state, selection);
         });
         let styles = {};
-        elem.property.forEach((prop:ElementProperty)=> {
-            if (prop.name === 'class') {
-                prop.value.split(' ').forEach((cls:string)=> {
-                    const rsc = this.main.getResource(ResourceType.CSS, cls);
-                    if (rsc && !Array.isArray(rsc)) {
-                        styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls.replace('-', '_')));
-                    }
-                })
-            }
-        });
+        const classProp = elem.prop('class');
+        if (classProp && classProp.isActive) {
+            classProp.value.split(' ').forEach((cls:string)=> {
+                const rsc = this.main.getResource(ResourceType.CSS, cls);
+                if (rsc && !Array.isArray(rsc)) {
+                    styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls.replace('-', '_')));
+                }
+            })
+        }
         let code = elem.getCode();
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
         code = code.replace('{children}', children);
@@ -177,12 +176,12 @@ export class RenderController extends Controller {
         return stringStyle;
     }
 
-    private parseForLoop(elem:Element, code:string, state:any):string {
-        const prop = elem.prop('for');
-        if (prop && prop.name !== '' && Array.isArray(state[prop.name])) {
-            code = code.replace('>', 'key={i} >');
-            code = '{this.state.' + prop.name + '.map((item, i)=> '+code+')}';
-        }
-        return code;
-    }
+    // private parseForLoop(elem:Element, code:string, state:any):string {
+    //     const prop = elem.prop('for');
+    //     if (prop && prop.name !== '' && Array.isArray(state[prop.name])) {
+    //         code = code.replace('>', 'key={i} >');
+    //         code = '{this.state.' + prop.name + '.map((item, i)=> '+code+')}';
+    //     }
+    //     return code;
+    // }
 }
