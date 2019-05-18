@@ -24,6 +24,7 @@ import { SidebarAsset } from './asset.view';
 import { SidebarCss } from './css.view';
 import { SideTab } from '../../utils/constant';
 import { View } from '../view';
+import { PropertyView } from './property.view';
 
 export default class Sidebar extends View {
 
@@ -82,6 +83,7 @@ export default class Sidebar extends View {
                     }}></div>
                     <SidebarHelp />
                 </div>}
+                { this.mainCtrl.getSelectedElement() && <PropertyView />}
                 <div style={styles.body}>
                     {this.props.children}
                 </div>
@@ -131,7 +133,7 @@ const styles:{[s: string]: CSSProperties;} = {
         top:0,
         bottom:0,
         left:260,
-        right:0,
+        right:200,
         position: 'absolute',
         overflow:'auto'
     }

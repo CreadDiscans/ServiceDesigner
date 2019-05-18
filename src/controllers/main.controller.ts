@@ -201,39 +201,39 @@ export class MainController extends Singletone<MainController> {
         this.elementCtrl.control(action, parent, before, after, this.elementCtrl);
     }
 
-    copyElement() {
-        this._copy_element = this._element.clone();
-        this.sidebar$.next(true);
-    }
+    // copyElement() {
+    //     this._copy_element = this._element.clone();
+    //     this.sidebar$.next(true);
+    // }
 
-    pasteElement() {
-        if (this._copy_element) {
-            let parent:Element|undefined;
-            Utils.loop(this._file.element, (item:Element)=> {
-                item.children.forEach((child:Element)=> {
-                    if (child.id === this._element.id) {
-                        parent = item;
-                    }
-                })
-            });
-            if (parent) {
-                const newOne = this._copy_element.clone();
-                let maxId = Utils.maxId(this._file.element) + 1;
-                Utils.loop(newOne, (elem:Element)=> {
-                    Object.keys(elem.property).forEach((prop:string)=> {
-                        elem.property[prop] = '';
-                    });
-                    elem.style.forEach((style:ElementStyle)=> {
-                        style.condition = '';
-                    })
-                    elem.id = maxId;
-                    maxId += 1;
-                })
-                console.log(newOne);
-                this.elementControl(Action.Create, parent,undefined, newOne);
-            }
-        }
-    }
+    // pasteElement() {
+    //     if (this._copy_element) {
+    //         let parent:Element|undefined;
+    //         Utils.loop(this._file.element, (item:Element)=> {
+    //             item.children.forEach((child:Element)=> {
+    //                 if (child.id === this._element.id) {
+    //                     parent = item;
+    //                 }
+    //             })
+    //         });
+    //         if (parent) {
+    //             const newOne = this._copy_element.clone();
+    //             let maxId = Utils.maxId(this._file.element) + 1;
+    //             Utils.loop(newOne, (elem:Element)=> {
+    //                 Object.keys(elem.property).forEach((prop:string)=> {
+    //                     elem.property[prop] = '';
+    //                 });
+    //                 elem.style.forEach((style:ElementStyle)=> {
+    //                     style.condition = '';
+    //                 })
+    //                 elem.id = maxId;
+    //                 maxId += 1;
+    //             })
+    //             console.log(newOne);
+    //             this.elementControl(Action.Create, parent,undefined, newOne);
+    //         }
+    //     }
+    // }
 
     isPasteEnable() {
         return this._copy_element !== undefined;

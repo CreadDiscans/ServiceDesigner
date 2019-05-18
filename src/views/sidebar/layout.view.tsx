@@ -88,7 +88,10 @@ export class Layout extends View {
                     color:this.mainCtrl.getSelectedElement().id === item.id ? 'red' : 'black',
                     cursor:'pointer'
                 }}
-                onClick={()=> this.mainCtrl.selectElement(item)}>{item.property.name ? item.property.name : item.name}</span>
+                onClick={()=> this.mainCtrl.selectElement(item)}>{
+                    // item.property.name ? item.property.name : item.name
+                    item.name
+                    }</span>
             {
                 item.collapse && item.children.map((child:any, i:number)=> this.treeView(child, i, depth+1))
             }
