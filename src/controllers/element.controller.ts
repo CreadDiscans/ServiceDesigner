@@ -22,8 +22,7 @@ export class ElementController extends Controller {
                 alt:{type:ElementPropertyType.String}
             }}),
             Element.parseApi({name:'input', prop:{
-                type:{type:ElementPropertyType.Enum},
-
+                type:{type:ElementPropertyType.String},
                 value:{type:ElementPropertyType.String},
                 placeholder:{type:ElementPropertyType.String},
                 onChange:{type:ElementPropertyType.Func}

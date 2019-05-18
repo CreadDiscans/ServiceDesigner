@@ -27,9 +27,9 @@ export class ElementStyle {
 export enum ElementPropertyType {
     String = 'string',
     Number = 'number',
-    Bool = 'bool',
-    Enum = 'enum',
-    Func = 'func'
+    Bool = 'boolean',
+    Array = 'array',
+    Func = 'function'
 }
 
 export class ElementProperty {
@@ -83,8 +83,8 @@ export class ElementProperty {
             return this.name + '={'+this.value+'}'
         } else if (this.type == ElementPropertyType.Bool) {
             return this.name + '={'+this.value+'}'
-        } else if (this.type == ElementPropertyType.Enum) {
-            return this.name + '={"'+this.value+'"}'
+        } else if (this.type == ElementPropertyType.Array) {
+            return this.name + '={'+JSON.stringify(this.value)+'}'
         }
 
         return '';
@@ -114,7 +114,7 @@ export class Element {
             this.library = library;
             this.code = code;
             if (loop) {
-                this.property.push(new ElementProperty(ElementPropertyType.String, 'for', ''));
+                this.property.push(new ElementProperty(ElementPropertyType.Array, 'for', ''));
             }
     }
 
@@ -143,9 +143,9 @@ export class Element {
             }
         });
         let propFor = this.prop('for');
-        let code = '<'+tag+' style={{style}} '+attr.join(' ')+'>'+body+'{children}</'+tag+'>';
+        let code = '<'+tag+' style={{style}} '+attr.join(' ')+' >'+body+'{children}</'+tag+'>';
         if (propFor && propFor.isActive && propFor.isVariable) {
-            code = code.replace('>', 'key={i}>');
+            code = code.replace(' >', ' key={i} >');
             code = '{'+propFor.value+'.map((item, i)=>'+code+')}';
         }
         return code;
@@ -235,9 +235,13 @@ export class Element {
         const elem = new Element(json.name, lib);
         Object.keys(json.prop).forEach((item:any)=> {   
             if (elem.prop(item) === undefined) {
-                const newOne = new ElementProperty(json.prop[item].type, item, json.prop[item].default);
-                if (json.prop[item].select) newOne.select = json.prop[item].select;
-                elem.property.push(newOne);
+                if (Object.keys(ElementPropertyType).filter((type:any)=> ElementPropertyType[type] === json.prop[item].type).length > 0) {
+                    const newOne = new ElementProperty(json.prop[item].type, item, json.prop[item].default);
+                    if (json.prop[item].select) newOne.select = json.prop[item].select;
+                    elem.property.push(newOne);
+                } else {
+                    console.log(item, json.prop[item], 'is not valid property type');
+                }
             }
         });
         return elem;
