@@ -25,7 +25,7 @@ export class RenderController extends Controller {
     }
 
     private parse(elem:Element, imp:any, state:any, selection=true) {
-        let code = this.parseLibrary(elem, imp)
+        this.parseLibrary(elem, imp)
 
         let children = '';
         elem.children.forEach((child:Element)=> {
@@ -40,13 +40,12 @@ export class RenderController extends Controller {
                         styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls.replace('-', '_')));
                     }
                 })
-            } else  {
-                code = code.split('{'+prop.name+'}').join(prop.toVal());
             }
         });
+        let code = elem.getCode();
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
         code = code.replace('{children}', children);
-        code = this.parseForLoop(elem, code, state);
+        // code = this.parseForLoop(elem, code, state);
         return code;
     }
 
@@ -74,15 +73,9 @@ export class RenderController extends Controller {
     // }
 
     private parseLibrary(elem:Element, imp:any) {
-        let code = elem.code;
         if (elem.library) {
-            elem.library.forEach((item:Library)=> {
-                imp[item.key] = item.get().lib;
-                // code = code.replace('<', '<'+item.key+'.');
-                // code = code.replace('</', '</'+item.key+'.')
-            });
+            imp[elem.library] = elem.getLib().lib;
         }
-        return code;
     }
 
     // private parseProperty(key:string, value:any):any {

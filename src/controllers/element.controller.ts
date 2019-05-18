@@ -57,16 +57,16 @@ export class ElementController extends Controller {
             Element.parseApi({name:'tr', prop:{}}),
             Element.parseApi({name:'th', prop:{}}),
             Element.parseApi({name:'td', prop:{}}),
-            new Element('render', [], '<div style={{style}}>{this.renderPart({name})}</div>'),
+            new Element('render', undefined, '<div style={{style}}>{this.renderPart({name})}</div>'),
         ],
         'react-router-dom': [
             Element.parseApi({name:'Link', prop:{
                 to:ElementPropertyType.String, 
                 text:ElementPropertyType.String
-            }}, new Library(LibraryKeys.ReactRouterDom))
+            }}, LibraryKeys.ReactRouterDom)
         ],
-        'reactstrap': reactstrapApi.map((item:any)=> Element.parseApi(item, new Library(LibraryKeys.ReactStrap))),
-        'material-ui': materialUiAPi.map((item:any)=> Element.parseApi(item, new Library(LibraryKeys.MaterialUi)))
+        'reactstrap': reactstrapApi.map((item:any)=> Element.parseApi(item, LibraryKeys.ReactStrap)),
+        'material-ui': materialUiAPi.map((item:any)=> Element.parseApi(item,LibraryKeys.MaterialUi))
     }
 
     reactNativeElments:{[s: string]: Array<Element>} = {

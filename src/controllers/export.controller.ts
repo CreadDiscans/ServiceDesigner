@@ -61,11 +61,7 @@ export class ExportController extends Controller {
             if (file.type === FileType.FILE) {
                 Utils.loop(file.element, (elem:Element)=> {
                     if (elem.library) { 
-                        elem.library.forEach((lib:Library)=> {
-                            if (!(lib.key in imp)) {
-                                imp[lib.key] = lib.get().name;
-                            }
-                        })
+                        imp[elem.library] = elem.getLib().name;
                     }
                 });
 

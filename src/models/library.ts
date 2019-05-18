@@ -10,7 +10,7 @@ export enum LibraryKeys {
     MaterialUi = 'materialUi',
 }
 
-export const LibraryTable:any = {
+export const Library:any = {
     [LibraryKeys.ReactStrap]: {
         name: 'reacstrap',
         lib: reactstrap
@@ -29,29 +29,29 @@ export const LibraryTable:any = {
     }
 } 
 
-export class Library {
+// export class Library {
 
-    key:string;
+//     key:string;
 
-    constructor(key:string) {
-        this.key = key;
-    }
+//     constructor(key:string) {
+//         this.key = key;
+//     }
 
-    clone():Library {
-        return Library.parse(this.toJson());
-    }
+//     clone():Library {
+//         return Library.parse(this.toJson());
+//     }
 
-    toJson() {
-        return {
-            key: this.key 
-        }
-    }
+//     toJson() {
+//         return {
+//             key: this.key 
+//         }
+//     }
 
-    get() {
-        return LibraryTable[this.key];
-    }
+//     get() {
+//         return LibraryTable[this.key];
+//     }
 
-    static parse(json:any):Library {
-        return new Library(json.key);
-    }
-}
+//     static parse(json:any):Library {
+//         return new Library(json.key);
+//     }
+// }

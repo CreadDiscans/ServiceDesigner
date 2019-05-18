@@ -78,8 +78,8 @@ export class Element {
 
     id?:number;
     name:string;
-    library?:Array<Library>;
-    code:string;
+    library:LibraryKeys|undefined;
+    code:string|undefined;
     style:Array<ElementStyle> = [new ElementStyle()];
     property:Array<ElementProperty> = [
         new ElementProperty(ElementPropertyType.String, 'name', ''),
@@ -90,8 +90,8 @@ export class Element {
     
     constructor(
         name:string,
-        library:Array<Library>,
-        code:string,
+        library:LibraryKeys|undefined = undefined,
+        code:string|undefined = undefined,
         loop:boolean = true) {
             this.name = name;
             this.library = library;
@@ -109,6 +109,15 @@ export class Element {
         return property;
     }
 
+    getCode():string {
+        if (this.code) return this.code;
+        return '';
+    }
+
+    getLib() {
+        return this.library ? Library[this.library] : undefined
+    }
+
     clone():Element {
         return Element.parse(this.toJson());
     }
@@ -117,7 +126,7 @@ export class Element {
         return {
             id:this.id,
             name:this.name,
-            library: this.library ? this.library.map((item:Library)=> item.toJson()) : [],
+            library: this.library,
             code: this.code,
             style: this.style.map((item:ElementStyle)=>item.toJson()),
             property: this.property.map((item:ElementProperty)=>item.toJson()),
@@ -128,7 +137,7 @@ export class Element {
 
     static parse(json:any):Element {
         const newOne = new Element(json.name, 
-            json.library.map((libjson:any)=>Library.parse(libjson)),
+            json.library,
             json.code)
         newOne.id = json.id;
         newOne.style = json.style.map((item:any)=>ElementStyle.parse(item));
@@ -139,13 +148,13 @@ export class Element {
     }
 
     static getReactRootElement():Element {
-        const item = new Element('layout', [], '<div style={{style}}>{children}</div>', false);
+        const item = new Element('layout', undefined, '<div style={{style}}>{children}</div>', false);
         item.id = 0;
         return item;
     }
 
     static getReactNativeRootElement():Element {
-        const item = new Element('View', [new Library(LibraryKeys.ReactNative)], '<reactNative.View style={{style}}>{children}</reactNative.View>', false);
+        const item = new Element('View', new Library(LibraryKeys.ReactNative), '<reactNative.View style={{style}}>{children}</reactNative.View>', false);
         item.id = 0;
         return item;
     }
@@ -185,26 +194,8 @@ export class Element {
     //     return new Element(tag, libs, code).addProps(attr);
     // }
 
-    static parseApi(json:any, lib:Library|undefined=undefined) {
-        const tagName = lib?lib.key + '.' + json.name: json.name;
-        const libs = lib? [lib] : [];
-        let attr = '';
-        let body = '';
-        
-        Object.keys(json.prop).forEach((item:any)=> {
-            if (item === 'name') return;
-            if (item === 'text') {
-                body = '{{text}}'
-                return;
-            }
-            if (json.prop[item].type === 'func') {
-                attr += item + '={(val)=>this.onEvent({event:"'+item+'",name:{name},value:val})} '
-            } else {
-                attr += item + '={{' + item + '}} '
-            }
-        });
-        let code = '<'+tagName+' style={{style}} name={{name}} '+attr+'>'+body+'{children}</'+tagName+'>';
-        const elem = new Element(json.name, libs, code);
+    static parseApi(json:any, lib:LibraryKeys|undefined=undefined) {
+        const elem = new Element(json.name, lib);
         Object.keys(json.prop).forEach((item:any)=> {   
             if (elem.prop(item) === undefined) {
                 const newOne = new ElementProperty(json.prop[item].type, item, json.prop[item].default);
