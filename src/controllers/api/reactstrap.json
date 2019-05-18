@@ -1,12 +1,9 @@
 [
   {
     "prop": {
-      "closeClassName": {
-        "type": "string"
-      },
       "color": {
         "type": "string",
-        "default": "'success'"
+        "default": "success"
       },
       "isOpen": {
         "type": "bool",
@@ -16,14 +13,12 @@
         "type": "func"
       },
       "tag": {
-        "type": "string"
+        "type": "string",
+        "default": "div"
       },
       "fade": {
         "type": "bool",
         "default": "true"
-      },
-      "transition": {
-        "type":"bool"
       }
     },
     "name": "Alert"
@@ -143,9 +138,6 @@
     "prop": {
       "active": {
         "type": "bool"
-      },
-      "'aria-label'": {
-        "type": "string"
       },
       "block": {
         "type": "bool"
@@ -536,12 +528,6 @@
       "onClick": {
         "type": "func"
       },
-      "'data-toggle'": {
-        "type": "string"
-      },
-      "'aria-haspopup'": {
-        "type": "bool"
-      },
       "nav": {
         "type": "bool"
       },
@@ -665,7 +651,7 @@
       },
       "tag": {
         "type": "string",
-        "default": "'form'"
+        "default": "form"
       }
     },
     "name": "Form"
@@ -674,7 +660,7 @@
     "prop": {
       "tag": {
         "type": "string",
-        "default": "'div'"
+        "default": "div"
       },
       "valid": {
         "type": "bool",
@@ -702,7 +688,7 @@
       },
       "tag": {
         "type": "string",
-        "default": "'div'"
+        "default": "div"
       }
     },
     "name": "FormGroup"
@@ -1058,9 +1044,6 @@
       },
       "listTag": {
         "type": "string"
-      },
-      "'aria-label'": {
-        "type": "string"
       }
     },
     "name": "Pagination"
@@ -1094,9 +1077,6 @@
         "type": "bool"
       },
       "tag": {
-        "type": "string"
-      },
-      "'aria-label'": {
         "type": "string"
       }
     },
@@ -1251,7 +1231,7 @@
     "prop": {
       "color": {
         "type": "string",
-        "default": "'success'"
+        "default": "success"
       },
       "isOpen": {
         "type": "bool",

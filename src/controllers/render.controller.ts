@@ -85,34 +85,43 @@ export class RenderController extends Controller {
         return code;
     }
 
-    private parseProperty(key:string, value:any):string {
+    private parseProperty(key:string, value:any):any {
+        let val = '';
         if (typeof value === 'string') {
-            if (value === '{item}' || 
-                (value.indexOf('{item.')===0 && value[value.length-1] === '}' && value !== '{item.}') ||
-                (value.indexOf('{this.state.') === 0 && value[value.length-1] === '}' && value !== '{this.state.}')) {
-                value = value.slice(1, value.length-1)
-            } else if (value.indexOf('Asset.') === 0) {
-                const temp = value;
-                value = '""';
-                const assets = this.main.getResource(ResourceType.ASSET);
-                if (Array.isArray(assets)) {
-                    assets.forEach((asset:Resource)=> {
-                        if (temp === 'Asset.'+asset.name) {
-                            value = '"'+asset.value + '"';
-                        }
-                    })
-                }
-            } else if (value) {
-                value = '"' + String(value) + '"'
-            } 
+            val = value
         } else if (!value.type) {
-            value = JSON.stringify(value);
-        } else if (value.type === 'enum') {
-            value = '"' + value.value + '"';
+            return JSON.stringify(value)
+        } else if (value.type === 'bool') {
+            if (value.value === 'true' || value.value === true) {
+                return true
+            } else if(value.value === 'false' || value.value === false) {
+                return false
+            }
+            val = value.value
+        } else if (value.type === 'object') {
+            return value.value
         } else {
-            value = value.value;
+            val = value.value
         }
-        return value;
+        if (val === '{item}' || 
+            (val.indexOf('{item.')===0 && val[val.length-1] === '}' && val !== '{item.}') ||
+            (val.indexOf('{this.state.') === 0 && val[val.length-1] === '}' && val !== '{this.state.}')) {
+            val = val.slice(1, val.length-1)
+        } else if (val.indexOf('Asset.') === 0) {
+            const temp = val;
+            val = '""';
+            const assets = this.main.getResource(ResourceType.ASSET);
+            if (Array.isArray(assets)) {
+                assets.forEach((asset:Resource)=> {
+                    if (temp === 'Asset.'+asset.name) {
+                        val = '"'+asset.value + '"';
+                    }
+                })
+            }
+        } else {
+            val = '"' + String(val) + '"'
+        }
+        return val;
     }
 
     private parseStyle(elem:Element, origin={}, selection=true):string {

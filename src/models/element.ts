@@ -139,10 +139,11 @@ export class Element {
     static parseApi(json:any, lib:Library) {
         const tagName = lib.key + '.' + json.name;
         let attr = '';
+        
         Object.keys(json.prop).forEach((item:any)=> {
             if (json.prop[item].type === 'func') {
                 if (Object.keys(json.prop).indexOf('name') === -1) {
-                    attr += name + '={{' + name + '}} '
+                    attr +=  'name={{name}} '
                 }
                 attr += item + '={(val)=>this.onEvent({event:"'+item+'",name:{name},value:val})} '
             } else {
@@ -159,8 +160,8 @@ export class Element {
             } else {
                 elem.property[item].value = json.prop[item].default ? json.prop[item].default : '';
             }
-        })
-        console.log(json, elem);
+        });
+        elem.addProps(['name']);
         return elem;
     }
 } 

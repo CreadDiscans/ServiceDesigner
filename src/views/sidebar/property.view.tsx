@@ -146,29 +146,11 @@ export class SidebarProperty extends View {
         return <div>{
             Object.keys(property).map((key)=> <div key={key}>
                 <Label style={styles.propLabel}>{key}</Label>
-                { typeof property[key] === 'string'  && <Input style={styles.propValue} 
-                    value={this.state.selectedItem.property[key]} 
+                <Input style={styles.propValue} 
+                    value={typeof property[key] === 'string'  ? 
+                        property[key] : property[key].value} 
                     onChange={(e)=>this.updateProp(key, e.target.value)
-                }/>}
-                { property[key].type === 'enum' && <Input style={styles.propValue} 
-                    type="select"
-                    onChange={(e)=>this.updateProp(key, e.target.value)}
-                    value={property[key].value}>
-                    {property[key].select.map((val:string)=> <option value={val}>{val}</option>)}
-                    </Input>}
-                { property[key].type === 'bool' && <Input style={{width:'70%'}}
-                    type="checkbox" 
-                    onChange={(e)=>this.updateProp(key, e.target.value)}
-                    value={property[key].value} />}
-                { (property[key].type === 'string' 
-                || property[key].type === 'Component'
-                || property[key].type === 'object'
-                || property[key].type === 'any') && 
-                    <Input style={styles.propValue} 
-                    value={property[key].value} 
-                    placeholder={property[key].type}
-                    onChange={(e)=>this.updateProp(key, e.target.value)
-                }/>}
+                }/>
             </div>)
         }
         </div>

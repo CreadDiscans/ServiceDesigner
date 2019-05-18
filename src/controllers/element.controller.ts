@@ -3,6 +3,7 @@ import { Element, ElementStyle } from '../models/element';
 import { Action, HisotryAction } from '../utils/constant';
 import { Library, LibraryKeys } from '../models/library';
 import materialUiAPi from './api/materialUi.json';
+import reactstrapApi from './api/reactstrap.json';
 
 export class ElementController extends Controller {
     
@@ -34,15 +35,7 @@ export class ElementController extends Controller {
         'react-router-dom': [
             Element.define('Link', new Library(LibraryKeys.ReactRouterDom), ['to'], {text:true}),
         ],
-        'reactstrap': [
-            Element.define('Alert', new Library(LibraryKeys.ReactStrap), ['color'], {text:true}),
-            Element.define('Badge', new Library(LibraryKeys.ReactStrap), ['color'], {text:true}),
-            Element.define('Button', new Library(LibraryKeys.ReactStrap), ['color', 'outline'], {text:true}),
-            Element.define('Input', new Library(LibraryKeys.ReactStrap), ['value', 'placeholder'], {onChange:true}),
-            Element.define('Container', new Library(LibraryKeys.ReactStrap), []),
-            Element.define('Row', new Library(LibraryKeys.ReactStrap), []),
-            Element.define('Col', new Library(LibraryKeys.ReactStrap), []),
-        ],
+        'reactstrap': reactstrapApi.map((item:any)=> Element.parseApi(item, new Library(LibraryKeys.ReactStrap))),
         'material-ui': materialUiAPi.map((item:any)=> Element.parseApi(item, new Library(LibraryKeys.MaterialUi)))
     }
 
