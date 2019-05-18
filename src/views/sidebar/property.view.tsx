@@ -1,5 +1,6 @@
 import { View } from '../view';
 import React, {CSSProperties} from 'react';
+import { ElementProperty, ElementPropertyType } from '../../models/element';
 
 export class PropertyView extends View {
 
@@ -8,7 +9,48 @@ export class PropertyView extends View {
         console.log(elem);
         return <div style={style.layout}>
             <h5>Property</h5>
-            
+            {elem.property.map((item:ElementProperty, i:number)=> 
+                <div key={i}>
+                    <div>
+                        <input type="checkbox" checked={item.isActive} onChange={(e)=>{
+                            item.isActive=!item.isActive;
+                            this.mainCtrl.refresh()}}/>
+                        {item.isActive && item.type != ElementPropertyType.Func &&
+                        <input type="checkbox" checked={item.isVariable} onChange={(e)=>{
+                            item.isVariable=!item.isVariable
+                            this.mainCtrl.refresh()}}/>}
+                        {item.name}
+                    </div>
+                    {item.isActive && <div>{
+                        item.isVariable ? <div>
+                            <select style={{flex:1}} value={item.value} onChange={(e)=> {
+                                item.value = e.target.value;
+                                this.mainCtrl.refresh()}}>
+                                {['state'].map((op:any)=><option value={op}>{op}</option>)}
+                            </select>
+                        </div> : <div>
+                            {item.type == ElementPropertyType.String && 
+                            <input style={{flex:1}} type="text" value={item.value} onChange={(e)=> {
+                                item.value = e.target.value
+                                this.mainCtrl.refresh()}}/>}
+                            {item.type == ElementPropertyType.Number && 
+                            <input style={{flex:1}} type="number" value={item.value} onChange={(e)=>{
+                                item.value = e.target.value
+                                this.mainCtrl.refresh()}}/>}
+                            {item.type == ElementPropertyType.Bool && 
+                            <input style={{flex:1}} type="checkbox" checked={item.value} onChange={(e)=>{
+                                item.value = !item.value
+                                this.mainCtrl.refresh()}}/>}
+                            {item.type == ElementPropertyType.Enum && 
+                            <select style={{flex:1}} value={item.value} onChange={(e)=> {
+                                item.value = e.target.value;
+                                this.mainCtrl.refresh()}}>
+                                {item.select.map((op:any)=><option value={op}>{op}</option>)}
+                            </select>}
+                        </div>
+                    }</div>}
+                </div>
+            )}
         </div>
     }
 }

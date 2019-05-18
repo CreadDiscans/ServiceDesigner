@@ -248,4 +248,9 @@ export class MainController extends Singletone<MainController> {
     resourceControl(action:Action, before:Resource|undefined, after:Resource|undefined) {
         this.resourceCtrl.control(action, undefined, before, after, this.resourceCtrl);
     }
+
+    refresh() {
+        this.sidebar$.next(true);
+        this.home$.next(true);
+    }
 }

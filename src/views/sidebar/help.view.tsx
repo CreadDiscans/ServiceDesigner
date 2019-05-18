@@ -25,8 +25,8 @@ export class SidebarHelp extends View {
             {this.icon(<FaSave />, 'Save [Ctrl+s]')}
             {this.icon(<FaFileExport />, 'Export')}
             {this.icon(<FaFileImport />, 'Import')}
-            {this.icon(<FaUndo />, 'Undo [Ctrl+z]')}
-            {this.icon(<FaRedo />, 'Redo')}
+            {/* {this.icon(<FaUndo />, 'Undo [Ctrl+z]')}
+            {this.icon(<FaRedo />, 'Redo')} */}
         </div>
     }
 }
