@@ -59,8 +59,8 @@ export default class Sidebar extends View {
                     {this.icon(<FaSave onClick={()=>this.mainCtrl.export(true)}/>, 'save')}
                     {this.icon(<FaFileExport onClick={()=>this.mainCtrl.export()} />, 'export')}
                     {this.icon(<FaFileImport onClick={()=>this.mainCtrl.import()}/>, 'import')}
-                    {this.icon(<FaUndo onClick={()=>this.mainCtrl.undo()} />, 'undo')}
-                    {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />, 'redo')}
+                    {/* {this.icon(<FaUndo onClick={()=>this.mainCtrl.undo()} />, 'undo')}
+                    {this.icon(<FaRedo onClick={()=>this.mainCtrl.redo()} />, 'redo')} */}
 
                 </div>
                 {this.mainCtrl.isInitialized() ? <div id="sidebar" 

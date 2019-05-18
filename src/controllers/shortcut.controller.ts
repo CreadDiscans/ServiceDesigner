@@ -34,9 +34,9 @@ export class ShortcutController extends Controller {
                 this.main.setTab(SideTab.Asset);
             } else if (e.key === 'Control') {
                 this.isCtrl = true;
-            } else if (this.isCtrl && e.key === 'z') {
-                this.main.undo();
-                e.stopPropagation();
+            // } else if (this.isCtrl && e.key === 'z') {
+            //     this.main.undo();
+            //     e.stopPropagation();
             } else if (this.isCtrl && e.key === 's') {
                 this.main.export(true);
             }
