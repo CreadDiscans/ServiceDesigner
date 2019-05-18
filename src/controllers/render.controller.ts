@@ -2,7 +2,7 @@
 import { Controller } from './controller';
 import { File } from '../models/file';
 import React from 'react';
-import { Element, ElementStyle } from './../models/element';
+import { Element, ElementStyle, ElementProperty } from './../models/element';
 import Utils from './../utils/utils';
 import { ResourceType, Resource } from '../models/resource';
 import { Platform } from '../utils/constant';
@@ -32,16 +32,16 @@ export class RenderController extends Controller {
             children += this.parse(child, imp, state, selection);
         });
         let styles = {};
-        Object.keys(elem.property).forEach(prop=> {
-            if (prop === 'class') {
-                elem.property[prop].split(' ').forEach((cls:string)=> {
+        elem.property.forEach((prop:ElementProperty)=> {
+            if (prop.name === 'class') {
+                prop.value.split(' ').forEach((cls:string)=> {
                     const rsc = this.main.getResource(ResourceType.CSS, cls);
                     if (rsc && !Array.isArray(rsc)) {
                         styles = Utils.merge(styles, this.convertCssToStyle(rsc.value, cls.replace('-', '_')));
                     }
                 })
             } else  {
-                code = code.split('{'+prop+'}').join(this.parseProperty(prop, elem.property[prop]));
+                code = code.split('{'+prop.name+'}').join(prop.toVal());
             }
         });
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
@@ -85,44 +85,44 @@ export class RenderController extends Controller {
         return code;
     }
 
-    private parseProperty(key:string, value:any):any {
-        let val = '';
-        if (typeof value === 'string') {
-            val = value
-        } else if (!value.type) {
-            return JSON.stringify(value)
-        } else if (value.type === 'bool') {
-            if (value.value === 'true' || value.value === true) {
-                return true
-            } else if(value.value === 'false' || value.value === false) {
-                return false
-            }
-            val = value.value
-        } else if (value.type === 'object') {
-            return value.value
-        } else {
-            val = value.value
-        }
-        if (val === '{item}' || 
-            (val.indexOf('{item.')===0 && val[val.length-1] === '}' && val !== '{item.}') ||
-            (val.indexOf('{this.state.') === 0 && val[val.length-1] === '}' && val !== '{this.state.}')) {
-            val = val.slice(1, val.length-1)
-        } else if (val.indexOf('Asset.') === 0) {
-            const temp = val;
-            val = '""';
-            const assets = this.main.getResource(ResourceType.ASSET);
-            if (Array.isArray(assets)) {
-                assets.forEach((asset:Resource)=> {
-                    if (temp === 'Asset.'+asset.name) {
-                        val = '"'+asset.value + '"';
-                    }
-                })
-            }
-        } else {
-            val = '"' + String(val) + '"'
-        }
-        return val;
-    }
+    // private parseProperty(key:string, value:any):any {
+    //     let val = '';
+    //     if (typeof value === 'string') {
+    //         val = value
+    //     } else if (!value.type) {
+    //         return JSON.stringify(value)
+    //     } else if (value.type === 'bool') {
+    //         if (value.value === 'true' || value.value === true) {
+    //             return true
+    //         } else if(value.value === 'false' || value.value === false) {
+    //             return false
+    //         }
+    //         val = value.value
+    //     } else if (value.type === 'object') {
+    //         return value.value
+    //     } else {
+    //         val = value.value
+    //     }
+    //     if (val === '{item}' || 
+    //         (val.indexOf('{item.')===0 && val[val.length-1] === '}' && val !== '{item.}') ||
+    //         (val.indexOf('{this.state.') === 0 && val[val.length-1] === '}' && val !== '{this.state.}')) {
+    //         val = val.slice(1, val.length-1)
+    //     } else if (val.indexOf('Asset.') === 0) {
+    //         const temp = val;
+    //         val = '""';
+    //         const assets = this.main.getResource(ResourceType.ASSET);
+    //         if (Array.isArray(assets)) {
+    //             assets.forEach((asset:Resource)=> {
+    //                 if (temp === 'Asset.'+asset.name) {
+    //                     val = '"'+asset.value + '"';
+    //                 }
+    //             })
+    //         }
+    //     } else {
+    //         val = '"' + String(val) + '"'
+    //     }
+    //     return val;
+    // }
 
     private parseStyle(elem:Element, origin={}, selection=true):string {
         const stringItem:Array<string> = [];
@@ -185,9 +185,10 @@ export class RenderController extends Controller {
     }
 
     private parseForLoop(elem:Element, code:string, state:any):string {
-        if (elem.property['for'] && elem.property['for'] !== '' && Array.isArray(state[elem.property['for']])) {
+        const prop = elem.prop('for');
+        if (prop && prop.name !== '' && Array.isArray(state[prop.name])) {
             code = code.replace('>', 'key={i} >');
-            code = '{this.state.' + elem.property['for'] + '.map((item, i)=> '+code+')}';
+            code = '{this.state.' + prop.name + '.map((item, i)=> '+code+')}';
         }
         return code;
     }
