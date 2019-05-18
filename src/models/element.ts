@@ -185,7 +185,7 @@ export class Element {
     //     return new Element(tag, libs, code).addProps(attr);
     // }
 
-    static parseApi(json:any, lib:Library|undefined) {
+    static parseApi(json:any, lib:Library|undefined=undefined) {
         const tagName = lib?lib.key + '.' + json.name: json.name;
         const libs = lib? [lib] : [];
         let attr = '';
