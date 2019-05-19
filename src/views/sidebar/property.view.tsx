@@ -49,6 +49,11 @@ export class PropertyView extends View {
         const elem = this.mainCtrl.getSelectedElement();
         const root = this.mainCtrl.getSelectedFile().element;
         let itemKey = undefined
+        const propFor = elem.prop('for');
+        if (propFor && propFor.isActive) {
+            itemKey = propFor.value;
+            return itemKey;
+        }
         Utils.loop(root, (item:Element, stack:Array<Element>)=> {
             if (item === elem) {
                 for(let i=stack.length-1;i>=0;i--) {

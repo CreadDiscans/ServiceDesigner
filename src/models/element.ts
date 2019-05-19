@@ -81,7 +81,7 @@ export class ElementProperty {
             if (this.isVariable) return '{' + this.value + '}';
             else return this.value;
         } else if (this.type == ElementPropertyType.Func) {
-            return this.name + '={(e)=>this.onEvent({name:"'+name+'",value:e})}';
+            return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:"'+name+'", value:e})}';
         } else if (this.isVariable) {
             return this.name + '={'+this.value+'}'
         } else if (this.type == ElementPropertyType.String) {
@@ -198,7 +198,7 @@ export class Element {
     }
 
     static getReactNativeRootElement():Element {
-        const item = new Element('View', new Library(LibraryKeys.ReactNative), '<reactNative.View style={{style}}>{children}</reactNative.View>', false);
+        const item = new Element('View', LibraryKeys.ReactNative, '<reactNative.View style={{style}}>{children}</reactNative.View>', false);
         item.id = 0;
         return item;
     }

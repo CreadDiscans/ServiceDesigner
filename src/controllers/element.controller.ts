@@ -80,7 +80,7 @@ export class ElementController extends Controller {
                 placeholder:{type:ElementPropertyType.String},
                 onChangeText:{type:ElementPropertyType.Func}
             }}, LibraryKeys.ReactNative),
-            Element.parseApi({name:'TouchavleOpacity', prop:{
+            Element.parseApi({name:'TouchableOpacity', prop:{
                 onPress:{type:ElementPropertyType.Func}
             }}, LibraryKeys.ReactNative),
             Element.parseApi({name:'Image', prop:{
