@@ -1,7 +1,7 @@
 import { Controller } from './controller';
 import { Element, ElementStyle, ElementPropertyType } from '../models/element';
 import { Action, HisotryAction } from '../utils/constant';
-import { Library, LibraryKeys } from '../models/library';
+import { LibraryKeys } from '../models/library';
 import materialUiAPi from './api/materialUi.json';
 import reactstrapApi from './api/reactstrap.json';
 

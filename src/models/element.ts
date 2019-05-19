@@ -236,7 +236,14 @@ export class Element {
         Object.keys(json.prop).forEach((item:any)=> {   
             if (elem.prop(item) === undefined) {
                 if (Object.keys(ElementPropertyType).filter((type:any)=> ElementPropertyType[type] === json.prop[item].type).length > 0) {
-                    const newOne = new ElementProperty(json.prop[item].type, item, json.prop[item].default);
+                    let default_value = json.prop[item].default;
+                    if (default_value === undefined) {
+                        if (json.prop[item].type == ElementPropertyType.String) default_value = '';
+                        else if (json.prop[item].type == ElementPropertyType.Bool) default_value = false;
+                        else if (json.prop[item].type == ElementPropertyType.Number) default_value = 0;
+                        else if (json.prop[item].type == ElementPropertyType.Array) default_value = [];
+                    }
+                    const newOne = new ElementProperty(json.prop[item].type, item, default_value);
                     if (json.prop[item].select) newOne.select = json.prop[item].select;
                     elem.property.push(newOne);
                 } else {
