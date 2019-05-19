@@ -1,6 +1,7 @@
 import { View } from '../view';
 import React, {CSSProperties} from 'react';
-import { ElementProperty, ElementPropertyType } from '../../models/element';
+import { ElementProperty, ElementPropertyType, Element } from '../../models/element';
+import Utils from './../../utils/utils';
 
 export class PropertyView extends View {
 
@@ -44,9 +45,45 @@ export class PropertyView extends View {
         return stateSeializer
     }
 
+    isInForLoop() {
+        const elem = this.mainCtrl.getSelectedElement();
+        const root = this.mainCtrl.getSelectedFile().element;
+        let itemKey = undefined
+        Utils.loop(root, (item:Element, stack:Array<Element>)=> {
+            if (item === elem) {
+                for(let i=stack.length-1;i>=0;i--) {
+                    const propFor = stack[i].prop('for');
+                    if (propFor && propFor.isActive) {
+                        itemKey = propFor.value;
+                        return;
+                    }
+                }
+            }
+        })
+        return itemKey;
+    }
+
     render() {
         const elem = this.mainCtrl.getSelectedElement();
-        const state = this.getState();
+        let state = this.getState();
+        const itemKey = this.isInForLoop();
+        if (itemKey) {
+            const out = state
+                .filter((item:any)=> item.key.indexOf(itemKey)===0)
+                .map((item:any)=>{
+                    const newKey = item.key.replace(itemKey, 'item')
+                    return {key:newKey.split('[')[0]+newKey.split(']')[1], type:item.type
+                }})
+            const tmp:any = [];
+            state = state.concat(out).filter((item:any)=>{
+                if (tmp.indexOf(item.key) === -1) {
+                    tmp.push(item.key);
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
         return <div style={style.layout}>
             <h5>Property</h5>
             {elem.property.map((item:ElementProperty, i:number)=> 
