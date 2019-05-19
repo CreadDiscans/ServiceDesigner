@@ -70,15 +70,31 @@ export class ElementController extends Controller {
 
     reactNativeElments:{[s: string]: Array<Element>} = {
         'react-native': [
-            // Element.define('View', new Library(LibraryKeys.ReactNative), []),
-            // Element.define('ScrollView', new Library(LibraryKeys.ReactNative), []),
-            // Element.define('Text', new Library(LibraryKeys.ReactNative), [], {text:true}),
-            // Element.define('TextInput', new Library(LibraryKeys.ReactNative), ['value', 'placeholder'], {onChangeText:true}),
-            // Element.define('TouchableOpacity', new Library(LibraryKeys.ReactNative), [], {onPress:true}),
-            // Element.define('Image', new Library(LibraryKeys.ReactNative), [], {source:true}),
-            // Element.define('Picker', new Library(LibraryKeys.ReactNative), ['selectedValue'], {onValueChange:true}),
-            // Element.define('Picker.Item', new Library(LibraryKeys.ReactNative), ['label', 'value']),
-            // new Element('render', [new Library(LibraryKeys.ReactNative)], '<reactNative.View style={{style}}>{this.renderPart({name})}</reactNative.View>').addProps(['name']),
+            Element.parseApi({name:'View', prop:{}}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'ScrollView', prop:{}}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'Text', prop:{
+                text:{type:ElementPropertyType.String}
+            }}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'TextInput', prop:{
+                value:{type:ElementPropertyType.String},
+                placeholder:{type:ElementPropertyType.String},
+                onChangeText:{type:ElementPropertyType.Func}
+            }}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'TouchavleOpacity', prop:{
+                onPress:{type:ElementPropertyType.Func}
+            }}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'Image', prop:{
+                source:{type:ElementPropertyType.String}
+            }}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'Picker', prop:{
+                selectedValue:{type:ElementPropertyType.String},
+                onValueChange:{type:ElementPropertyType.Func}
+            }}, LibraryKeys.ReactNative),
+            Element.parseApi({name:'Picker.Item', prop:{
+                label:{type:ElementPropertyType.String},
+                value:{type:ElementPropertyType.String}
+            }}, LibraryKeys.ReactNative),
+            new Element('render', LibraryKeys.ReactNative, '<reactNative.View style={{style}}>{this.renderPart({name})}</reactNative.View>')
         ]
     }
     
