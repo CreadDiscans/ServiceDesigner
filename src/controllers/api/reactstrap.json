@@ -6,19 +6,19 @@
         "default": "success"
       },
       "isOpen": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       },
       "tag": {
         "type": "string",
         "default": "div"
       },
       "fade": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       }
     },
     "name": "Alert"
@@ -26,7 +26,7 @@
   {
     "prop":{
       "color": {
-        "type":"enum",
+        "type":"string",
         "default":"primary",
         "select": [
           "primary",
@@ -40,10 +40,10 @@
         ]
       },
       "outline":{
-        "type":"bool"
+        "type":"boolean"
       },
       "pill":{
-        "type":"bool"
+        "type":"boolean"
       }
     },
     "name": "Badge"
@@ -65,7 +65,7 @@
         "type": "string"
       },
       "active": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "BreadcrumbItem"
@@ -73,10 +73,10 @@
   {
     "prop": {
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "up",
           "down",
@@ -86,16 +86,16 @@
         "default": "up"
       },
       "group": {
-        "type": "bool"
+        "type": "boolean"
       },
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       }
     },
     "name": "ButtonDropdown"
@@ -103,16 +103,16 @@
   {
     "prop": {
       "caret": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
         "type": "string"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onClick": {
-        "type": "func"
+        "type": "function"
       }
     },
     "name": "DropdownToggle"
@@ -129,7 +129,7 @@
         "type": "string"
       },
       "vertical": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "ButtonGroup"
@@ -137,31 +137,31 @@
   {
     "prop": {
       "active": {
-        "type": "bool"
+        "type": "boolean"
       },
       "block": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
         "type":"string"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "outline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type":"string"
       },
       "onClick": {
-        "type": "func"
+        "type": "function"
       },
       "size": {
         "type": "string"
       },
       "close": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Button"
@@ -172,13 +172,13 @@
         "type": "string"
       },
       "inverse": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
         "type": "string"
       },
       "body": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Card"
@@ -237,10 +237,10 @@
         "type": "string"
       },
       "top": {
-        "type": "bool"
+        "type": "boolean"
       },
       "bottom": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "CardImg"
@@ -291,13 +291,13 @@
         "type":"number"
       },
       "next": {
-        "type": "func"
+        "type": "function"
       },
       "previous": {
-        "type": "func"
+        "type": "function"
       },
       "keyboard": {
-        "type": "bool"
+        "type": "boolean"
       },
       "pause": {
         "type": "enum",
@@ -316,13 +316,13 @@
         "type": "string"
       },
       "mouseEnter": {
-        "type": "func"
+        "type": "function"
       },
       "mouseLeave": {
-        "type": "func"
+        "type": "function"
       },
       "slide": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Carousel"
@@ -333,10 +333,10 @@
         "type": "string"
       },
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "slide": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "CarouselItem"
@@ -344,14 +344,14 @@
   {
     "prop": {
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "prev",
           "next"
         ]
       },
       "onClickHandler": {
-        "type": "func"
+        "type": "function"
       },
       "directionText": {
         "type": "string"
@@ -368,7 +368,7 @@
         "type":"number"
       },
       "onClickHandler": {
-        "type": "func"
+        "type": "function"
       }
     },
     "name": "CarouselIndicators"
@@ -390,16 +390,16 @@
         "type":"any"
       },
       "indicators": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       },
       "controls": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       },
       "autoPlay": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       }
     },
     "name": "UncontrolledCarousel"
@@ -407,13 +407,13 @@
   {
     "prop": {
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
       },
       "navbar": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Collapse"
@@ -421,50 +421,50 @@
   {
     "prop":{
       "in":{
-        "type":"bool"
+        "type":"boolean"
       },
       "mountOnEnter":{
-        "type":"bool"
+        "type":"boolean"
       },
       "unmountOnExit":{
-        "type":"bool"
+        "type":"boolean"
       },
       "apear": {
-        "type":"bool",
-        "default":"true"
+        "type":"boolean",
+        "default":true
       },
       "enter":{
-        "type":"bool",
-        "default":"true"
+        "type":"boolean",
+        "default":true
       },
       "exit":{
-        "type":"bool",
-        "default":"true"
+        "type":"boolean",
+        "default":true
       },
       "timeout":{
         "type":"number",
-        "default":"150"
+        "default":150
       },
       "addEneListener":{
-        "type":"func"
+        "type":"function"
       },
       "onEnter":{
-        "type":"func"
+        "type":"function"
       },
       "onEntering":{
-        "type":"func"
+        "type":"function"
       },
       "onEntered":{
-        "type":"func"
+        "type":"function"
       },
       "onExit":{
-        "type":"func"
+        "type":"function"
       },
       "onExiting":{
-        "type":"func"
+        "type":"function"
       },
       "onExited":{
-        "type":"func"
+        "type":"function"
       },
       "tag":{
         "type":"string"
@@ -475,10 +475,10 @@
   {
     "prop": {
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "up",
           "down",
@@ -487,29 +487,29 @@
         ]
       },
       "group": {
-        "type": "bool"
+        "type": "boolean"
       },
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "nav": {
-        "type": "bool"
+        "type": "boolean"
       },
       "active": {
-        "type": "bool"
+        "type": "boolean"
       },
       "inNavbar": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string",
         "default": "div"
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       },
       "setActiveFromChild": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Dropdown"
@@ -517,19 +517,19 @@
   {
     "prop": {
       "caret": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
         "type": "string"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onClick": {
-        "type": "func"
+        "type": "function"
       },
       "nav": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {}
     },
@@ -541,17 +541,17 @@
         "type": "string"
       },
       "right": {
-        "type": "bool"
+        "type": "boolean"
       },
       "flip": {
-        "type": "bool",
+        "type": "boolean",
         "default": "true,"
       },
       "modifiers": {
         "type": "object"
       },
       "persist": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "DropdownMenu"
@@ -559,26 +559,26 @@
   {
     "prop": {
       "active": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "divider": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
       },
       "header": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onClick": {
-        "type": "func"
+        "type": "function"
       },
       "toggle": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       }
     },
     "name": "DropdownItem"
@@ -598,22 +598,22 @@
         "type": "string"
       },
       "valid": {
-        "type": "bool"
+        "type": "boolean"
       },
       "invalid": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
       },
       "static": {
-        "type": "bool"
+        "type": "boolean"
       },
       "plaintext": {
-        "type": "bool"
+        "type": "boolean"
       },
       "addon": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Input"
@@ -630,13 +630,13 @@
         "type": "string"
       },
       "inline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "valid": {
-        "type": "bool"
+        "type": "boolean"
       },
       "invalid": {
-        "type": "bool"
+        "type": "boolean"
       },
       "bsSize": {
         "type": "string"
@@ -647,7 +647,7 @@
   {
     "prop": {
       "inline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string",
@@ -663,11 +663,10 @@
         "default": "div"
       },
       "valid": {
-        "type": "bool",
-        "default": "undefined"
+        "type": "boolean"
       },
       "tooltip": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "FormFeedback"
@@ -675,16 +674,16 @@
   {
     "prop": {
       "row": {
-        "type": "bool"
+        "type": "boolean"
       },
       "check": {
-        "type": "bool"
+        "type": "boolean"
       },
       "inline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string",
@@ -696,7 +695,7 @@
   {
     "prop": {
       "inline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string",
@@ -726,7 +725,7 @@
         "type": "string"
       },
       "addonType": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "prepend",
           "append"
@@ -741,7 +740,7 @@
         "type": "string"
       },
       "addonType": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "prepend",
           "append"
@@ -762,7 +761,7 @@
         "type": "string"
       },
       "fluid": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Jumbotron"
@@ -770,7 +769,7 @@
   {
     "prop": {
       "fluid": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Container"
@@ -778,10 +777,10 @@
   {
     "prop": {
       "noGutters": {
-        "type": "bool"
+        "type": "boolean"
       },
       "form": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Row"
@@ -815,7 +814,7 @@
         "type": "string"
       },
       "flush": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "ListGroup"
@@ -823,34 +822,34 @@
   {
     "prop": {
       "body": {
-        "type": "bool"
+        "type": "boolean"
       },
       "bottom": {
-        "type": "bool"
+        "type": "boolean"
       },
       "heading": {
-        "type": "bool"
+        "type": "boolean"
       },
       "left": {
-        "type": "bool"
+        "type": "boolean"
       },
       "list": {
-        "type": "bool"
+        "type": "boolean"
       },
       "middle": {
-        "type": "bool"
+        "type": "boolean"
       },
       "object": {
-        "type": "bool"
+        "type": "boolean"
       },
       "right": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
       },
       "top": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Media"
@@ -858,19 +857,19 @@
   {
     "prop": {
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "centered": {
-        "type": "bool"
+        "type": "boolean"
       },
       "size": {
         "type": "string"
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       },
       "role": {
         "type": "string"
@@ -879,25 +878,25 @@
         "type": "string"
       },
       "keyboard": {
-        "type": "bool"
+        "type": "boolean"
       },
       "backdrop": {
         "type": "string"
       },
       "scrollable": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onEnter": {
-        "type": "func"
+        "type": "function"
       },
       "onExit": {
-        "type": "func"
+        "type": "function"
       },
       "onOpened": {
-        "type": "func"
+        "type": "function"
       },
       "onClosed": {
-        "type": "func"
+        "type": "function"
       },
       "wrapClassName": {
         "type": "string"
@@ -912,7 +911,7 @@
         "type": "string"
       },
       "fade": {
-        "type": "bool"
+        "type": "boolean"
       },
       "zIndex": {
         "type": "string"
@@ -924,7 +923,7 @@
         "type":"any"
       },
       "unmountOnClose": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Modal"
@@ -932,10 +931,10 @@
   {
     "prop": {
       "light": {
-        "type": "bool"
+        "type": "boolean"
       },
       "dark": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fixed": {
         "type": "string"
@@ -977,19 +976,19 @@
   {
     "prop": {
       "tabs": {
-        "type": "bool"
+        "type": "boolean"
       },
       "pills": {
-        "type": "bool"
+        "type": "boolean"
       },
       "card": {
-        "type": "bool"
+        "type": "boolean"
       },
       "justified": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fill": {
-        "type": "bool"
+        "type": "boolean"
       },
       "vertical": {
         "type": "string"
@@ -998,7 +997,7 @@
         "type": "string"
       },
       "navbar": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
@@ -1012,7 +1011,7 @@
         "type": "string"
       },
       "active": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "NavItem"
@@ -1020,10 +1019,10 @@
   {
     "prop": {
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "active": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
@@ -1051,10 +1050,10 @@
   {
     "prop": {
       "active": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
@@ -1065,16 +1064,16 @@
   {
     "prop": {
       "next": {
-        "type": "bool"
+        "type": "boolean"
       },
       "previous": {
-        "type": "bool"
+        "type": "boolean"
       },
       "first": {
-        "type": "bool"
+        "type": "boolean"
       },
       "last": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
@@ -1088,10 +1087,10 @@
         "type": "string"
       },
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       },
       "boundariesElement": {
         "type": "string"
@@ -1106,10 +1105,10 @@
         "type": "string"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "hideArrow": {
-        "type": "bool"
+        "type": "boolean"
       },
       "placementPrefix": {
         "type": "string"
@@ -1118,7 +1117,7 @@
         "type": "number"
       },
       "placement": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "auto",
           "auto-start",
@@ -1144,10 +1143,10 @@
         "type": "string"
       },
       "fade": {
-        "type": "bool"
+        "type": "boolean"
       },
       "flip": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Popover"
@@ -1155,10 +1154,10 @@
   {
     "prop": {
       "multi": {
-        "type": "bool"
+        "type": "boolean"
       },
       "bar": {
-        "type": "bool"
+        "type": "boolean"
       },
       "tag": {
         "type": "string"
@@ -1170,10 +1169,10 @@
         "type": "string"
       },
       "animated": {
-        "type": "bool"
+        "type": "boolean"
       },
       "striped": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
         "type": "string"
@@ -1207,22 +1206,22 @@
         "type": "string"
       },
       "bordered": {
-        "type": "bool"
+        "type": "boolean"
       },
       "borderless": {
-        "type": "bool"
+        "type": "boolean"
       },
       "striped": {
-        "type": "bool"
+        "type": "boolean"
       },
       "dark": {
-        "type": "bool"
+        "type": "boolean"
       },
       "hover": {
-        "type": "bool"
+        "type": "boolean"
       },
       "responsive": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Table"
@@ -1234,8 +1233,8 @@
         "default": "success"
       },
       "isOpen": {
-        "type": "bool",
-        "default": "true"
+        "type": "boolean",
+        "default": true
       },
       "tag": {
         "type": "string"
@@ -1255,13 +1254,13 @@
         "type": "string"
       },
       "isOpen": {
-        "type": "bool"
+        "type": "boolean"
       },
       "hideArrow": {
-        "type": "bool"
+        "type": "boolean"
       },
       "toggle": {
-        "type": "func"
+        "type": "function"
       },
       "target": {
         "type": "string"
@@ -1279,10 +1278,10 @@
         "type": "string"
       },
       "autohide": {
-        "type": "bool"
+        "type": "boolean"
       },
       "placement": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "auto",
           "auto-start",
@@ -1308,10 +1307,10 @@
         "type": "string"
       },
       "fade": {
-        "type": "bool"
+        "type": "boolean"
       },
       "flip": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Tooltip"

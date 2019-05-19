@@ -51,7 +51,7 @@ export class ElementController extends Controller {
                 value:{type:ElementPropertyType.String}
             }}),
             Element.parseApi({name:'ul', prop:{}}),
-            Element.parseApi({name:'li', prop:{text:ElementPropertyType.String}}),
+            Element.parseApi({name:'li', prop:{text:{type:ElementPropertyType.String}}}),
             Element.parseApi({name:'table', prop:{}}),
             Element.parseApi({name:'tr', prop:{}}),
             Element.parseApi({name:'th', prop:{}}),
@@ -60,8 +60,8 @@ export class ElementController extends Controller {
         ],
         'react-router-dom': [
             Element.parseApi({name:'Link', prop:{
-                to:ElementPropertyType.String, 
-                text:ElementPropertyType.String
+                to:{type:ElementPropertyType.String}, 
+                text:{type:ElementPropertyType.String}
             }}, LibraryKeys.ReactRouterDom)
         ],
         'reactstrap': reactstrapApi.map((item:any)=> Element.parseApi(item, LibraryKeys.ReactStrap)),

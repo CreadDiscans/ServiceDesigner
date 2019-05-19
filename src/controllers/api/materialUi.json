@@ -2,7 +2,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "primary",
@@ -12,7 +12,7 @@
         "default": "primary"
       },
       "position": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "fixed",
           "absolute",
@@ -31,7 +31,7 @@
         "type": "string"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "imgProps": {
@@ -52,11 +52,11 @@
   {
     "prop": {
       "invisible": {
-        "type": "bool",
+        "type": "boolean",
         "default": "false"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "transitionDuration": {
         "type": "any"
@@ -70,7 +70,7 @@
         "type": "node"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "primary",
@@ -80,22 +80,22 @@
         "default": "default"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "span"
       },
       "invisible": {
-        "type": "bool"
+        "type": "boolean"
       },
       "max": {
         "type": "number",
-        "default": "99"
+        "default": 99
       },
       "showZero": {
-        "type": "bool",
+        "type": "boolean",
         "default": "false"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "dot"
@@ -108,15 +108,15 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "showLabels": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean",
+        "default": false
       },
       "value": {
         "type": "any"
@@ -133,7 +133,7 @@
         "type": "node"
       },
       "showLabel": {
-        "type": "bool"
+        "type": "boolean"
       },
       "value": {
         "type": "any"
@@ -144,7 +144,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "inherit",
@@ -154,33 +154,29 @@
         "default": "default"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "button"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableFocusRipple": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "href": {
         "type": "string"
       },
       "mini": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "size": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "small",
           "medium",
@@ -189,7 +185,7 @@
         "default": "medium"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "text",
           "outlined",
@@ -207,39 +203,37 @@
   {
     "prop": {
       "action": {
-        "type": "func"
+        "type": "function"
       },
       "buttonRef": {
         "type": "any"
       },
       "centerRipple": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "button"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableTouchRipple": {
-        "type": "bool",
+        "type": "boolean",
         "default": "false"
       },
       "focusRipple": {
-        "type": "bool",
+        "type": "boolean",
         "default": "false"
       },
       "focusVisibleClassName": {
         "type": "string"
       },
       "onFocusVisible": {
-        "type": "func"
+        "type": "function"
       },
       "TouchRippleProps": {
         "type": "object"
@@ -254,8 +248,7 @@
   {
     "prop": {
       "raised": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Card"
@@ -267,8 +260,7 @@
   {
     "prop": {
       "disableActionSpacing": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "CardActions"
@@ -276,7 +268,7 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       }
     },
@@ -291,12 +283,11 @@
         "type": "node"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "disableTypography": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "subheader": {
         "type": "node"
@@ -316,7 +307,7 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "image": {
@@ -338,7 +329,7 @@
         "default": "<CheckBoxIcon />"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "primary",
           "secondary",
@@ -347,10 +338,10 @@
         "default": "secondary"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       },
       "icon": {
         "type": "node",
@@ -360,8 +351,7 @@
         "type": "string"
       },
       "indeterminate": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "indeterminateIcon": {
         "type": "node",
@@ -374,7 +364,7 @@
         "type": "any"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "type": {
         "type": "string"
@@ -391,10 +381,10 @@
         "type": "element"
       },
       "clickable": {
-        "type": "bool"
+        "type": "boolean"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "primary",
@@ -403,7 +393,7 @@
         "default": "default"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "deleteIcon": {
@@ -416,10 +406,10 @@
         "type": "node"
       },
       "onDelete": {
-        "type": "func"
+        "type": "function"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "outlined"
@@ -432,7 +422,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "primary",
           "secondary",
@@ -441,22 +431,21 @@
         "default": "primary"
       },
       "disableShrink": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "size": {
         "type": "any"
       },
       "thickness": {
         "type": "number",
-        "default": "3.6"
+        "default": 3.6
       },
       "value": {
         "type": "number",
-        "default": "0"
+        "default": 0
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "determinate",
           "indeterminate",
@@ -470,24 +459,24 @@
   {
     "prop": {
       "mouseEvent": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "onClick",
           "onMouseDown",
           "onMouseUp",
-          " false"
+          "false"
         ],
         "default": "onMouseUp"
       },
       "onClickAway": {
-        "type": "func"
+        "type": "function"
       },
       "touchEvent": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "onTouchStart",
           "onTouchEnd",
-          " false"
+          "false"
         ],
         "default": "onTouchEnd"
       }
@@ -501,20 +490,14 @@
         "default": "0px"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "timeout": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          " { enter?: number, exit?: number } ",
-          "auto"
-        ],
-        "default": "duration.standard"
+        "type": "number"
       }
     },
     "name": "Collapse"
@@ -526,72 +509,68 @@
   {
     "prop": {
       "disableBackdropClick": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableEscapeKeyDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "fullScreen": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "maxWidth": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "xs",
           "sm",
           "md",
           "lg",
           "xl",
-          " false"
+          "false"
         ],
         "default": "sm"
       },
       "onBackdropClick": {
-        "type": "func"
+        "type": "function"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onEnter": {
-        "type": "func"
+        "type": "function"
       },
       "onEntered": {
-        "type": "func"
+        "type": "function"
       },
       "onEntering": {
-        "type": "func"
+        "type": "function"
       },
       "onEscapeKeyDown": {
-        "type": "func"
+        "type": "function"
       },
       "onExit": {
-        "type": "func"
+        "type": "function"
       },
       "onExited": {
-        "type": "func"
+        "type": "function"
       },
       "onExiting": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "PaperComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Paper"
       },
       "PaperProps": {
         "type": "object"
       },
       "scroll": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "body",
           "paper"
@@ -599,7 +578,7 @@
         "default": "paper"
       },
       "TransitionComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Fade"
       },
       "transitionDuration": {
@@ -614,8 +593,7 @@
   {
     "prop": {
       "disableActionSpacing": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "DialogActions"
@@ -631,8 +609,7 @@
   {
     "prop": {
       "disableTypography": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "DialogTitle"
@@ -640,22 +617,20 @@
   {
     "prop": {
       "absolute": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "hr"
       },
       "inset": {
-        "type": "bool"
+        "type": "boolean"
       },
       "light": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "fullWidth",
           "inset",
@@ -669,7 +644,7 @@
   {
     "prop": {
       "anchor": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "left",
           "top",
@@ -680,17 +655,16 @@
       },
       "elevation": {
         "type": "number",
-        "default": "16"
+        "default": 16
       },
       "ModalProps": {
         "type": "object"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "PaperProps": {
         "type": "object"
@@ -702,7 +676,7 @@
         "type": "any"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "permanent",
           "persistent",
@@ -719,18 +693,16 @@
         "type": "object"
       },
       "defaultExpanded": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "expanded": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       }
     },
     "name": "ExpansionPanel"
@@ -757,7 +729,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "inherit",
@@ -767,25 +739,23 @@
         "default": "default"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "button"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableFocusRipple": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       },
       "href": {
         "type": "string"
       },
       "size": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "small",
           "medium",
@@ -794,7 +764,7 @@
         "default": "large"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "round",
           "extended"
@@ -807,7 +777,7 @@
   {
     "prop": {
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "timeout": {
         "type": "any"
@@ -821,7 +791,7 @@
         "type": "string"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "className": {
         "type": "string"
@@ -830,19 +800,19 @@
         "type": "any"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableUnderline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "endAdornment": {
         "type": "node"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool"
+        "type": "boolean"
       },
       "id": {
         "type": "string"
@@ -857,29 +827,29 @@
         "type": "any"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense",
           "none"
         ]
       },
       "multiline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "name": {
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "placeholder": {
         "type": "string"
       },
       "readOnly": {
-        "type": "bool"
+        "type": "boolean"
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "rows": {
         "type": "any"
@@ -902,23 +872,20 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "none",
           "dense",
@@ -927,11 +894,11 @@
         "default": "none"
       },
       "required": {
-        "type": "bool",
+        "type": "boolean",
         "default": "false"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -951,7 +918,7 @@
         "type": "element"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "inputRef": {
         "type": "any"
@@ -960,7 +927,7 @@
         "type": "node"
       },
       "labelPlacement": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "end",
           "start",
@@ -973,7 +940,7 @@
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "value": {
         "type": "string"
@@ -984,8 +951,7 @@
   {
     "prop": {
       "row": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "FormGroup"
@@ -993,32 +959,32 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "p"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "filled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "focused": {
-        "type": "bool"
+        "type": "boolean"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense"
         ]
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -1031,23 +997,23 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "label"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "filled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "focused": {
-        "type": "bool"
+        "type": "boolean"
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "FormLabel"
@@ -1055,7 +1021,7 @@
   {
     "prop": {
       "alignContent": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "stretch",
           "center",
@@ -1067,7 +1033,7 @@
         "default": "stretch"
       },
       "alignItems": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "flex-start",
           "center",
@@ -1078,15 +1044,14 @@
         "default": "stretch"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "container": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "row",
           "row-reverse",
@@ -1096,11 +1061,10 @@
         "default": "row"
       },
       "item": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "justify": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "flex-start",
           "center",
@@ -1112,82 +1076,82 @@
         "default": "flex-start"
       },
       "lg": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: false",
+          "false",
           "auto",
-          " true",
-          " 1",
-          " 2",
-          " 3",
-          " 4",
-          " 5",
-          " 6",
-          " 7",
-          " 8",
-          " 9",
-          " 10",
-          " 11",
-          " 12"
+          "true",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "default": "false"
       },
       "md": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: false",
+          "false",
           "auto",
-          " true",
-          " 1",
-          " 2",
-          " 3",
-          " 4",
-          " 5",
-          " 6",
-          " 7",
-          " 8",
-          " 9",
-          " 10",
-          " 11",
-          " 12"
+          "true",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "default": "false"
       },
       "sm": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: false",
+          "false",
           "auto",
-          " true",
-          " 1",
-          " 2",
-          " 3",
-          " 4",
-          " 5",
-          " 6",
-          " 7",
-          " 8",
-          " 9",
-          " 10",
-          " 11",
-          " 12"
+          "true",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "default": "false"
       },
       "spacing": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: 0",
-          " 8",
-          " 16",
-          " 24",
-          " 32",
-          " 40"
+          "0",
+          "8",
+          "16",
+          "24",
+          "32",
+          "40"
         ],
         "default": "0"
       },
       "wrap": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "nowrap",
           "wrap",
@@ -1196,50 +1160,49 @@
         "default": "wrap"
       },
       "xl": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: false",
+          "false",
           "auto",
-          " true",
-          " 1",
-          " 2",
-          " 3",
-          " 4",
-          " 5",
-          " 6",
-          " 7",
-          " 8",
-          " 9",
-          " 10",
-          " 11",
-          " 12"
+          "true",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "default": "false"
       },
       "xs": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "enum: false",
+          "false",
           "auto",
-          " true",
-          " 1",
-          " 2",
-          " 3",
-          " 4",
-          " 5",
-          " 6",
-          " 7",
-          " 8",
-          " 9",
-          " 10",
-          " 11",
-          " 12"
+          "true",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "default": "false"
       },
       "zeroMinWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Grid"
@@ -1247,24 +1210,20 @@
   {
     "prop": {
       "cellHeight": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          "auto"
-        ],
-        "default": "180"
+        "type": "number",
+        "default": 180
       },
       "cols": {
         "type": "number",
-        "default": "2"
+        "default": 2
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "ul"
       },
       "spacing": {
         "type": "number",
-        "default": "4"
+        "default": 4
       }
     },
     "name": "GridList"
@@ -1273,15 +1232,15 @@
     "prop": {
       "cols": {
         "type": "number",
-        "default": "1"
+        "default": 1
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "li"
       },
       "rows": {
         "type": "number",
-        "default": "1"
+        "default": 1
       }
     },
     "name": "GridListTile"
@@ -1292,7 +1251,7 @@
         "type": "node"
       },
       "actionPosition": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "left",
           "right"
@@ -1306,7 +1265,7 @@
         "type": "node"
       },
       "titlePosition": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "top",
           "bottom"
@@ -1319,16 +1278,10 @@
   {
     "prop": {
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "timeout": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          " { enter?: number, exit?: number } ",
-          "auto"
-        ],
-        "default": "auto"
+        "type": "number"
       }
     },
     "name": "Grow"
@@ -1336,7 +1289,7 @@
   {
     "prop": {
       "implementation": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "js",
           "css"
@@ -1344,7 +1297,7 @@
         "default": "js"
       },
       "initialWidth": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "xs",
           "sm",
@@ -1354,51 +1307,41 @@
         ]
       },
       "lgDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "lgUp": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "mdDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "mdUp": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "only": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "xs",
-          " arrayOf"
+          "arrayOf"
         ]
       },
       "smDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "smUp": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "xlDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "xlUp": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "xsDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "xsUp": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Hidden"
@@ -1406,7 +1349,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "primary",
@@ -1418,11 +1361,11 @@
         "default": "inherit"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "span"
       },
       "fontSize": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "default",
@@ -1437,7 +1380,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "inherit",
@@ -1447,11 +1390,10 @@
         "default": "default"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "IconButton"
@@ -1462,7 +1404,7 @@
         "type": "string"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "className": {
         "type": "string"
@@ -1471,25 +1413,25 @@
         "type": "any"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableUnderline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "endAdornment": {
         "type": "node"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool"
+        "type": "boolean"
       },
       "id": {
         "type": "string"
       },
       "inputComponent": {
-        "type": "Component"
+        "type": "string"
       },
       "inputProps": {
         "type": "object"
@@ -1498,29 +1440,29 @@
         "type": "any"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense",
           "none"
         ]
       },
       "multiline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "name": {
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "placeholder": {
         "type": "string"
       },
       "readOnly": {
-        "type": "bool"
+        "type": "boolean"
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "rows": {
         "type": "any"
@@ -1543,26 +1485,24 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "disablePointerEvents": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableTypography": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "position": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "start",
           "end"
         ]
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -1578,7 +1518,7 @@
         "type": "string"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "className": {
         "type": "string"
@@ -1587,23 +1527,22 @@
         "type": "any"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "endAdornment": {
         "type": "node"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "id": {
         "type": "string"
       },
       "inputComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "input"
       },
       "inputProps": {
@@ -1613,30 +1552,29 @@
         "type": "any"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense",
           "none"
         ]
       },
       "multiline": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "name": {
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "placeholder": {
         "type": "string"
       },
       "readOnly": {
-        "type": "bool"
+        "type": "boolean"
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "rows": {
         "type": "any"
@@ -1660,35 +1598,34 @@
   {
     "prop": {
       "disableAnimation": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "focused": {
-        "type": "bool"
+        "type": "boolean"
       },
       "FormLabelClasses": {
         "type": "object"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense"
         ]
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "shrink": {
-        "type": "bool"
+        "type": "boolean"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -1701,7 +1638,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "primary",
           "secondary"
@@ -1715,7 +1652,7 @@
         "type": "number"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "determinate",
           "indeterminate",
@@ -1730,11 +1667,10 @@
   {
     "prop": {
       "block": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "error",
           "inherit",
@@ -1746,14 +1682,14 @@
         "default": "primary"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "a"
       },
       "TypographyClasses": {
         "type": "object"
       },
       "underline": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "none",
           "hover",
@@ -1771,16 +1707,14 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "ul"
       },
       "dense": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disablePadding": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "subheader": {
         "type": "node"
@@ -1791,7 +1725,7 @@
   {
     "prop": {
       "alignItems": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "flex-start",
           "center"
@@ -1799,38 +1733,32 @@
         "default": "center"
       },
       "button": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "component": {
-        "type": "Component"
+        "type": "string"
       },
       "ContainerComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "li"
       },
       "ContainerProps": {
         "type": "object"
       },
       "dense": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableGutters": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "divider": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "selected": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "ListItem"
@@ -1850,12 +1778,10 @@
   {
     "prop": {
       "disableTypography": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "inset": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "primary": {
         "type": "node"
@@ -1875,7 +1801,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "primary",
@@ -1884,20 +1810,17 @@
         "default": "default"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "li"
       },
       "disableGutters": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableSticky": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "inset": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "ListSubheader"
@@ -1908,47 +1831,40 @@
         "type": "any"
       },
       "disableAutoFocusItem": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "MenuListProps": {
         "type": "object"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onEnter": {
-        "type": "func"
+        "type": "function"
       },
       "onEntered": {
-        "type": "func"
+        "type": "function"
       },
       "onEntering": {
-        "type": "func"
+        "type": "function"
       },
       "onExit": {
-        "type": "func"
+        "type": "function"
       },
       "onExited": {
-        "type": "func"
+        "type": "function"
       },
       "onExiting": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "PopoverClasses": {
         "type": "object"
       },
       "transitionDuration": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          " { enter?: number, exit?: number } ",
-          "auto"
-        ],
-        "default": "auto"
+        "type": "number"
       }
     },
     "name": "Menu"
@@ -1956,12 +1872,11 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "li"
       },
       "disableGutters": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "MenuItem"
@@ -1969,8 +1884,7 @@
   {
     "prop": {
       "disableListWrap": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "MenuList"
@@ -1978,8 +1892,7 @@
   {
     "prop": {
       "activeStep": {
-        "type": "number",
-        "default": "0"
+        "type": "number"
       },
       "backButton": {
         "type": "node"
@@ -1991,7 +1904,7 @@
         "type": "node"
       },
       "position": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "bottom",
           "top",
@@ -2003,7 +1916,7 @@
         "type": "number"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "text",
           "dots",
@@ -2017,65 +1930,56 @@
   {
     "prop": {
       "BackdropComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Backdrop"
       },
       "BackdropProps": {
         "type": "object"
       },
       "closeAfterTransition": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "container": {
         "type": "any"
       },
       "disableAutoFocus": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableBackdropClick": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableEnforceFocus": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableEscapeKeyDown": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disablePortal": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableRestoreFocus": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "hideBackdrop": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "keepMounted": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "onBackdropClick": {
-        "type": "func"
+        "type": "function"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onEscapeKeyDown": {
-        "type": "func"
+        "type": "function"
       },
       "onRendered": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       }
     },
     "name": "Modal"
@@ -2083,7 +1987,7 @@
   {
     "prop": {
       "disableStylesGeneration": {
-        "type": "bool"
+        "type": "boolean"
       },
       "sheetsManager": {
         "type": "object"
@@ -2097,7 +2001,7 @@
   {
     "prop": {
       "IconComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "ArrowDropDownIcon"
       },
       "input": {
@@ -2108,13 +2012,13 @@
         "type": "object"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "value": {
         "type": "any"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -2127,8 +2031,7 @@
   {
     "prop": {
       "defer": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "fallback": {
         "type": "node",
@@ -2143,7 +2046,7 @@
         "type": "string"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "className": {
         "type": "string"
@@ -2152,16 +2055,16 @@
         "type": "any"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "endAdornment": {
         "type": "node"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "fullWidth": {
-        "type": "bool"
+        "type": "boolean"
       },
       "id": {
         "type": "string"
@@ -2179,32 +2082,32 @@
         "type": "number"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "dense",
           "none"
         ]
       },
       "multiline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "name": {
         "type": "string"
       },
       "notched": {
-        "type": "bool"
+        "type": "boolean"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "placeholder": {
         "type": "string"
       },
       "readOnly": {
-        "type": "bool"
+        "type": "boolean"
       },
       "required": {
-        "type": "bool"
+        "type": "boolean"
       },
       "rows": {
         "type": "any"
@@ -2227,16 +2130,15 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "elevation": {
         "type": "number",
-        "default": "2"
+        "default": 2
       },
       "square": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Paper"
@@ -2244,15 +2146,14 @@
   {
     "prop": {
       "action": {
-        "type": "func"
+        "type": "function"
       },
       "anchorEl": {
         "type": "any"
       },
       "anchorOrigin": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "{ horizontal: union: number ",
           "left",
           "center",
           "right",
@@ -2263,10 +2164,10 @@
         "default": "top"
       },
       "anchorPosition": {
-        "type": "{ left: number, top: number }"
+        "type": "object"
       },
       "anchorReference": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "anchorEl",
           "anchorPosition",
@@ -2279,49 +2180,48 @@
       },
       "elevation": {
         "type": "number",
-        "default": "8"
+        "default": 8
       },
       "getContentAnchorEl": {
-        "type": "func"
+        "type": "function"
       },
       "marginThreshold": {
         "type": "number",
-        "default": "16"
+        "default": 16
       },
       "ModalClasses": {
         "type": "object"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onEnter": {
-        "type": "func"
+        "type": "function"
       },
       "onEntered": {
-        "type": "func"
+        "type": "function"
       },
       "onEntering": {
-        "type": "func"
+        "type": "function"
       },
       "onExit": {
-        "type": "func"
+        "type": "function"
       },
       "onExited": {
-        "type": "func"
+        "type": "function"
       },
       "onExiting": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "PaperProps": {
         "type": "object"
       },
       "transformOrigin": {
-        "type": "enum",
+        "type": "string",
         "select": [
-          "{ horizontal: union: number ",
           "left",
           "center",
           "right",
@@ -2332,17 +2232,11 @@
         "default": "top"
       },
       "TransitionComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Grow"
       },
       "transitionDuration": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          " { enter?: number, exit?: number } ",
-          "auto"
-        ],
-        "default": "auto"
+        "type": "number"
       },
       "TransitionProps": {
         "type": "object"
@@ -2359,20 +2253,19 @@
         "type": "any"
       },
       "disablePortal": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "keepMounted": {
-        "type": "bool"
+        "type": "boolean"
       },
       "modifiers": {
         "type": "object"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "placement": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "bottom-end",
           "bottom-start",
@@ -2393,8 +2286,7 @@
         "type": "object"
       },
       "transition": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Popper"
@@ -2405,11 +2297,10 @@
         "type": "any"
       },
       "disablePortal": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "onRendered": {
-        "type": "func"
+        "type": "function"
       }
     },
     "name": "Portal"
@@ -2423,7 +2314,7 @@
         "type": "node"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "primary",
           "secondary",
@@ -2432,10 +2323,10 @@
         "default": "secondary"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       },
       "icon": {
         "type": "node"
@@ -2450,7 +2341,7 @@
         "type": "any"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "type": {
         "type": "string"
@@ -2470,7 +2361,7 @@
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "value": {
         "type": "any"
@@ -2489,15 +2380,13 @@
   {
     "prop": {
       "autoWidth": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "displayEmpty": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "IconComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "ArrowDropDownIcon"
       },
       "input": {
@@ -2511,27 +2400,25 @@
         "type": "object"
       },
       "multiple": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "native": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onOpen": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "renderValue": {
-        "type": "func"
+        "type": "function"
       },
       "SelectDisplayProps": {
         "type": "object"
@@ -2540,7 +2427,7 @@
         "type": "any"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -2553,7 +2440,7 @@
   {
     "prop": {
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "left",
           "right",
@@ -2563,7 +2450,7 @@
         "default": "down"
       },
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "timeout": {
         "type": "any"
@@ -2577,7 +2464,7 @@
         "type": "node"
       },
       "anchorOrigin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "left",
           "center",
@@ -2596,8 +2483,7 @@
         "type": "object"
       },
       "disableWindowBlurListener": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "key": {
         "type": "any"
@@ -2606,34 +2492,34 @@
         "type": "node"
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onEnter": {
-        "type": "func"
+        "type": "function"
       },
       "onEntered": {
-        "type": "func"
+        "type": "function"
       },
       "onEntering": {
-        "type": "func"
+        "type": "function"
       },
       "onExit": {
-        "type": "func"
+        "type": "function"
       },
       "onExited": {
-        "type": "func"
+        "type": "function"
       },
       "onExiting": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "resumeHideDuration": {
         "type": "number"
       },
       "TransitionComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Slide"
       },
       "transitionDuration": {
@@ -2659,16 +2545,13 @@
   {
     "prop": {
       "active": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "completed": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "Step"
@@ -2695,13 +2578,7 @@
         "default": "Collapse"
       },
       "transitionDuration": {
-        "type": "enum",
-        "select": [
-          "union: number ",
-          " { enter?: number, exit?: number } ",
-          "auto"
-        ],
-        "default": "auto"
+        "type": "number"
       },
       "TransitionProps": {
         "type": "object"
@@ -2712,16 +2589,13 @@
   {
     "prop": {
       "active": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "completed": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "icon": {
         "type": "node"
@@ -2732,12 +2606,10 @@
   {
     "prop": {
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "icon": {
         "type": "node"
@@ -2746,7 +2618,7 @@
         "type": "node"
       },
       "StepIconComponent": {
-        "type": "Component"
+        "type": "string"
       },
       "StepIconProps": {
         "type": "object"
@@ -2757,23 +2629,20 @@
   {
     "prop": {
       "activeStep": {
-        "type": "number",
-        "default": "0"
+        "type": "number"
       },
       "alternativeLabel": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "connector": {
         "type": "element",
         "default": "<StepConnector />"
       },
       "nonLinear": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "orientation": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "horizontal",
           "vertical"
@@ -2786,7 +2655,7 @@
   {
     "prop": {
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "primary",
@@ -2798,11 +2667,11 @@
         "default": "inherit"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "svg"
       },
       "fontSize": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "default",
@@ -2830,40 +2699,37 @@
   {
     "prop": {
       "disableBackdropTransition": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableDiscovery": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableSwipeToOpen": {
-        "type": "bool",
-        "default": "undefined"
+        "type": "boolean"
       },
       "hysteresis": {
         "type": "number",
-        "default": "0.55"
+        "default": 0.55
       },
       "minFlingVelocity": {
         "type": "number",
-        "default": "400"
+        "default": 400
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onOpen": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "SwipeAreaProps": {
         "type": "object"
       },
       "swipeAreaWidth": {
         "type": "number",
-        "default": "20"
+        "default": 20
       },
       "transitionDuration": {
         "type": "any"
@@ -2880,7 +2746,7 @@
         "type": "node"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "primary",
           "secondary",
@@ -2889,10 +2755,10 @@
         "default": "secondary"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "disableRipple": {
-        "type": "bool"
+        "type": "boolean"
       },
       "icon": {
         "type": "node"
@@ -2907,7 +2773,7 @@
         "type": "any"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "type": {
         "type": "string"
@@ -2921,8 +2787,7 @@
   {
     "prop": {
       "disabled": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "icon": {
         "type": "node"
@@ -2939,11 +2804,11 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "table"
       },
       "padding": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "checkbox",
@@ -2958,7 +2823,7 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "tbody"
       }
     },
@@ -2967,7 +2832,7 @@
   {
     "prop": {
       "align": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "left",
@@ -2981,10 +2846,10 @@
         "type": "Component"
       },
       "numeric": {
-        "type": "bool"
+        "type": "boolean"
       },
       "padding": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "checkbox",
@@ -2996,15 +2861,15 @@
         "type": "string"
       },
       "sortDirection": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "asc",
           "desc",
-          " false"
+          "false"
         ]
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "head",
           "body",
@@ -3017,7 +2882,7 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "tfoot"
       }
     },
@@ -3026,7 +2891,7 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "thead"
       }
     },
@@ -3035,22 +2900,21 @@
   {
     "prop": {
       "ActionsComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "TablePaginationActions"
       },
       "backIconButtonProps": {
         "type": "object"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "TableCell"
       },
       "count": {
         "type": "number"
       },
       "labelDisplayedRows": {
-        "type": "func",
-        "default": "({ from, to, count }) => ${from}-${to} of ${count}"
+        "type": "function"
       },
       "labelRowsPerPage": {
         "type": "node",
@@ -3060,10 +2924,10 @@
         "type": "object"
       },
       "onChangePage": {
-        "type": "func"
+        "type": "function"
       },
       "onChangeRowsPerPage": {
-        "type": "func"
+        "type": "function"
       },
       "page": {
         "type": "number"
@@ -3073,7 +2937,7 @@
       },
       "rowsPerPageOptions": {
         "type": "array",
-        "default": "[10, 25, 50, 100]"
+        "default": [10, 25, 50, 100]
       },
       "SelectProps": {
         "type": "object"
@@ -3084,16 +2948,14 @@
   {
     "prop": {
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "tr"
       },
       "hover": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "selected": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "TableRow"
@@ -3101,11 +2963,10 @@
   {
     "prop": {
       "active": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "direction": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "asc",
           "desc"
@@ -3113,11 +2974,10 @@
         "default": "desc"
       },
       "hideSortIcon": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "IconComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "ArrowDownwardIcon"
       }
     },
@@ -3126,21 +2986,20 @@
   {
     "prop": {
       "action": {
-        "type": "func"
+        "type": "function"
       },
       "centered": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "component": {
-        "type": "Component",
+        "type": "string",
         "default": "div"
       },
       "fullWidth": {
-        "type": "bool"
+        "type": "boolean"
       },
       "indicatorColor": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "secondary",
           "primary"
@@ -3148,17 +3007,17 @@
         "default": "secondary"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "scrollable": {
-        "type": "bool"
+        "type": "boolean"
       },
       "ScrollButtonComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "TabScrollButton"
       },
       "scrollButtons": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "auto",
           "on",
@@ -3170,7 +3029,7 @@
         "type": "object"
       },
       "textColor": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "secondary",
           "primary",
@@ -3182,7 +3041,7 @@
         "type": "any"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "scrollable",
@@ -3199,22 +3058,22 @@
         "type": "string"
       },
       "autoFocus": {
-        "type": "bool"
+        "type": "boolean"
       },
       "defaultValue": {
         "type": "any"
       },
       "disabled": {
-        "type": "bool"
+        "type": "boolean"
       },
       "error": {
-        "type": "bool"
+        "type": "boolean"
       },
       "FormHelperTextProps": {
         "type": "object"
       },
       "fullWidth": {
-        "type": "bool"
+        "type": "boolean"
       },
       "helperText": {
         "type": "node"
@@ -3238,7 +3097,7 @@
         "type": "node"
       },
       "margin": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "none",
           "dense",
@@ -3246,20 +3105,19 @@
         ]
       },
       "multiline": {
-        "type": "bool"
+        "type": "boolean"
       },
       "name": {
         "type": "string"
       },
       "onChange": {
-        "type": "func"
+        "type": "function"
       },
       "placeholder": {
         "type": "string"
       },
       "required": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "rows": {
         "type": "any"
@@ -3268,8 +3126,7 @@
         "type": "any"
       },
       "select": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "SelectProps": {
         "type": "object"
@@ -3281,7 +3138,7 @@
         "type": "any"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "standard",
           "outlined",
@@ -3295,11 +3152,10 @@
   {
     "prop": {
       "disableGutters": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "regular",
           "dense"
@@ -3312,51 +3168,47 @@
   {
     "prop": {
       "disableFocusListener": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableHoverListener": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "disableTouchListener": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "enterDelay": {
         "type": "number",
-        "default": "0"
+        "default": 0
       },
       "enterTouchDelay": {
         "type": "number",
-        "default": "1000"
+        "default": 1000
       },
       "id": {
         "type": "string"
       },
       "interactive": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "leaveDelay": {
         "type": "number",
-        "default": "0"
+        "default": 0
       },
       "leaveTouchDelay": {
         "type": "number",
-        "default": "1500"
+        "default": 1500
       },
       "onClose": {
-        "type": "func"
+        "type": "function"
       },
       "onOpen": {
-        "type": "func"
+        "type": "function"
       },
       "open": {
-        "type": "bool"
+        "type": "boolean"
       },
       "placement": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "bottom-end",
           "bottom-start",
@@ -3380,7 +3232,7 @@
         "type": "node"
       },
       "TransitionComponent": {
-        "type": "Component",
+        "type": "string",
         "default": "Grow"
       },
       "TransitionProps": {
@@ -3392,8 +3244,7 @@
   {
     "prop": {
       "center": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       }
     },
     "name": "TouchRipple"
@@ -3401,7 +3252,7 @@
   {
     "prop": {
       "align": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "inherit",
           "left",
@@ -3412,7 +3263,7 @@
         "default": "inherit"
       },
       "color": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "default",
           "error",
@@ -3425,33 +3276,29 @@
         "default": "default"
       },
       "component": {
-        "type": "Component"
+        "type": "string"
       },
       "gutterBottom": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "headlineMapping": {
         "type": "object",
         "default": "h1"
       },
       "inline": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "internalDeprecatedVariant": {
-        "type": "bool"
+        "type": "boolean"
       },
       "noWrap": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "paragraph": {
-        "type": "bool",
-        "default": "false"
+        "type": "boolean"
       },
       "variant": {
-        "type": "enum",
+        "type": "string",
         "select": [
           "h1",
           "h2",
@@ -3483,7 +3330,7 @@
   {
     "prop": {
       "in": {
-        "type": "bool"
+        "type": "boolean"
       },
       "timeout": {
         "type": "any"
