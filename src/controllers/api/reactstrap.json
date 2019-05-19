@@ -102,23 +102,6 @@
   },
   {
     "prop": {
-      "caret": {
-        "type": "boolean"
-      },
-      "color": {
-        "type": "string"
-      },
-      "disabled": {
-        "type": "boolean"
-      },
-      "onClick": {
-        "type": "function"
-      }
-    },
-    "name": "DropdownToggle"
-  },
-  {
-    "prop": {
       "ariaLabel": {
         "type": "string"
       },
@@ -530,8 +513,7 @@
       },
       "nav": {
         "type": "boolean"
-      },
-      "tag": {}
+      }
     },
     "name": "DropdownToggle"
   },
