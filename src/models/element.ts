@@ -89,7 +89,11 @@ export class ElementProperty {
         } else if (this.type == ElementPropertyType.Number) {
             return this.name + '={'+this.value+'}'
         } else if (this.type == ElementPropertyType.Bool) {
-            return this.name + '={'+this.value+'}'
+            if (this.isVariable) {
+                return this.name + '={'+this.value+'}'
+            } else {
+                return this.name
+            }
         } else if (this.type == ElementPropertyType.Array) {
             return this.name + '={'+JSON.stringify(this.value)+'}'
         }

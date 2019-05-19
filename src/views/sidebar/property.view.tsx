@@ -128,10 +128,6 @@ export class PropertyView extends View {
                             <input style={{flex:1}} type="number" value={item.value} onChange={(e)=>{
                                 item.value = e.target.value
                                 this.mainCtrl.refresh()}}/>}
-                            {item.type == ElementPropertyType.Bool && 
-                            <input style={{flex:1}} type="checkbox" checked={item.value} onChange={(e)=>{
-                                item.value = !item.value
-                                this.mainCtrl.refresh()}}/>}
                             {item.name !== 'for' && item.type == ElementPropertyType.Array && 
                             <input style={{flex:1}} type="text" checked={item.value} onChange={(e)=>{
                                 try{

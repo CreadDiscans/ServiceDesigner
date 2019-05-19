@@ -11,6 +11,8 @@ export class ElementController extends Controller {
         'HtmlDomElement': [
             Element.parseApi({name:'div', prop:{
                 onClick:{type:ElementPropertyType.Func},
+                onMouseEnter:{type:ElementPropertyType.Func},
+                onMouseLeave:{type:ElementPropertyType.Func},
                 text:{type:ElementPropertyType.String}
             }}),
             Element.parseApi({name:'span', prop:{

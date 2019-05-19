@@ -1373,6 +1373,9 @@
           "large"
         ],
         "default": "default"
+      },
+      "text":{
+        "type":"string"
       }
     },
     "name": "Icon"
