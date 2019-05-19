@@ -90,9 +90,14 @@ export class PropertyView extends View {
                 <div key={i}>
                     <div>
                         <input type="checkbox" checked={item.isActive} onChange={(e)=>{
-                            item.isActive=!item.isActive;
+                            item.active=!item.isActive;
+                            if (item.name === 'for') {
+                                const arrState = state.filter((st:any)=>st.type===item.type)
+                                if (arrState.length > 0) item.value = arrState[0].key;
+                                else item.active = false;
+                            }
                             this.mainCtrl.refresh()}}/>
-                        {item.isActive && item.type != ElementPropertyType.Func &&
+                        {item.name != 'for' && item.isActive && item.type != ElementPropertyType.Func &&
                         <input type="checkbox" checked={item.isVariable} onChange={(e)=>{
                             item.isVariable=!item.isVariable;
                             const arrState = state.filter((st:any)=>st.type===item.type)
@@ -122,8 +127,8 @@ export class PropertyView extends View {
                             <input style={{flex:1}} type="checkbox" checked={item.value} onChange={(e)=>{
                                 item.value = !item.value
                                 this.mainCtrl.refresh()}}/>}
-                            {item.type == ElementPropertyType.Array && 
-                            <input style={{flex:1}} type="checkbox" checked={item.value} onChange={(e)=>{
+                            {item.name !== 'for' && item.type == ElementPropertyType.Array && 
+                            <input style={{flex:1}} type="text" checked={item.value} onChange={(e)=>{
                                 try{
                                     const arr = JSON.parse(e.target.value)
                                     if (Array.isArray(arr)) {

@@ -47,6 +47,13 @@ export class ElementProperty {
         this.value  = value;
     }
 
+    set active(val:boolean) {
+        this.isActive = val;
+        if (this.name === 'for') {
+            this.isVariable = val;
+        }
+    }
+
     static parse(json:any) {
         const one = new ElementProperty(json.type, json.name, json.default);
         if (json.value) one.value = json.value;
