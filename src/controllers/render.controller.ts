@@ -48,7 +48,7 @@ export class RenderController extends Controller {
         return code;
     }
 
-    private convertCssToStyle(css:string, key:string) {
+    private convertCssToStyle(css:string, key:string):object {
         if (css === undefined) {
             return {}
         } 
@@ -56,6 +56,9 @@ export class RenderController extends Controller {
             this.cssCache = Utils.transform(css)[key];
         } catch(e) {
             console.log(e, css);
+        }
+        if (this.cssCache === undefined) {
+            return {}
         }
         return this.cssCache;
     }
