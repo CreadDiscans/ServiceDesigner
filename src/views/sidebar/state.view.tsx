@@ -57,8 +57,10 @@ export class SidebarState extends View {
                             })
                         })
                         const newOne = file.clone()
-                        newOne.state = JSON.parse(this.state.value);
-                        this.mainCtrl.fileControl(Action.Update, parent, file.clone(), newOne);
+                        try {
+                            newOne.state = JSON.parse(this.state.value);
+                            this.mainCtrl.fileControl(Action.Update, parent, file.clone(), newOne);
+                        } catch(e) {}
                     }
                 }}
                 showPrintMargin={true}

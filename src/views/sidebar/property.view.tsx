@@ -52,7 +52,7 @@ export class PropertyView extends View {
         const propFor = elem.prop('for');
         if (propFor && propFor.isActive) {
             itemKey = propFor.value;
-            return itemKey;
+            return [itemKey, true];
         }
         Utils.loop(root, (item:Element, stack:Array<Element>)=> {
             if (item === elem) {
@@ -65,22 +65,24 @@ export class PropertyView extends View {
                 }
             }
         })
-        return itemKey;
+        return [itemKey, false];
     }
 
     render() {
         const elem = this.mainCtrl.getSelectedElement();
-        let state = this.getState();
-        const itemKey = this.isInForLoop();
+        let originState = this.getState();
+        let state:any;
+        const result = this.isInForLoop();
+        const itemKey = result[0];
         if (itemKey) {
-            const out = state
+            const out = originState
                 .filter((item:any)=> item.key.indexOf(itemKey)===0)
                 .map((item:any)=>{
                     const newKey = item.key.replace(itemKey, 'item')
                     return {key:newKey.split('[')[0]+newKey.split(']')[1], type:item.type
                 }})
             const tmp:any = [];
-            state = state.concat(out).filter((item:any)=>{
+            state = originState.concat(out).filter((item:any)=>{
                 if (tmp.indexOf(item.key) === -1) {
                     tmp.push(item.key);
                     return true;
@@ -88,6 +90,8 @@ export class PropertyView extends View {
                     return false;
                 }
             });
+        } else {
+            state = originState;
         }
         return <div style={style.layout}>
             <h5>Property</h5>
@@ -116,8 +120,11 @@ export class PropertyView extends View {
                             <select style={{flex:1}} value={item.value} onChange={(e)=> {
                                 item.value = e.target.value;
                                 this.mainCtrl.refresh()}}>
-                                {state.filter((st:any)=>st.type === item.type)
-                                    .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)}
+                                {item.name === 'for' && result[1] ? 
+                                [originState.filter((st:any)=>st.type === item.type)
+                                    .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)] : 
+                                [state.filter((st:any)=>st.type === item.type)
+                                    .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)]}
                             </select>
                         </div> : <div>
                             {
