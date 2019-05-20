@@ -10,26 +10,6 @@ npm install
 
 npm run dist
 
-# todo
-
-folder manager validation
-
-element manager validation
-
-css manager validation
-
-asset manager validation
-
-color manager validation
-
-data manager validation
-
-layout manager validation
-
-react design 테스트
-
-react-native design 테스트
-
 # how to use
 
 - Folder : To create folder or file, should select folder to be parent.
@@ -42,7 +22,7 @@ react-native design 테스트
 
 - Property : the property supports following special shceme.
 
-  {this.state.XXX} : XXX is state variable.
-  {item} or {item.XXX} : This is for "for loop" scheme.
+  First checkbox is if the attribute is active.
+  Second checkbox is if the attribute is binded with state variable.
   Asset.XXX : Asset tab scheme.
    
