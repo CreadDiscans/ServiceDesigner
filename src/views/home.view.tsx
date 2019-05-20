@@ -1,27 +1,35 @@
 import React, { CSSProperties } from 'react';
-import CodeSandbox from 'react-code-sandbox'
-import { Platform } from '../utils/constant';
 import { View } from './view';
 import { Subscription } from 'rxjs';
 
 export default class Home extends View {
 
     subscription?:Subscription;
-    state = {
-        hasError: false
-    }
+    iframe:any;
 
     componentWillMount() {
+        this.iframe = React.createRef();
         if (!this.mainCtrl.isInitialized()) {
             if(this.props.history) this.props.history.push('/');
             return;
         }
+        window.addEventListener('message', (e:any)=> {
+            const evt = new KeyboardEvent('keydown', {key:e.data});
+            document.dispatchEvent(evt);
+        })
     }
 
     componentDidMount() {
-        this.subscription = this.mainCtrl.home$.subscribe(()=> this.setState({
-            hasError: false
-        }));
+        this.subscription = this.mainCtrl.home$.subscribe(()=> {
+            const data = this.mainCtrl.getRenderData();
+            if (this.iframe.current)
+                this.iframe.current.contentWindow.postMessage({
+                    code: data.code,
+                    state: data.state,
+                    imp: Object.keys(data.imp),
+                    platform: this.mainCtrl.getPlatform()
+                }, '*');
+        });
     }
 
     componentWillUnmount() {
@@ -29,41 +37,19 @@ export default class Home extends View {
             this.subscription.unsubscribe();
     }
 
-    componentDidCatch() {
-        this.setState({hasError:true});
-    }
-
     render() {
         if (!this.mainCtrl.isInitialized()) {
             return <div></div>
         }
-        return <div id="design">
-            { this.mainCtrl.getPlatform() === Platform.ReactNative && <img style={{height:'100vh'}} src="/frame.jpg" /> }
-            <div style={(this.mainCtrl.getPlatform() === Platform.ReactNative) ? styles.mobile : {}}>
-                {this.sandbox()}
-            </div>
-        </div>
-    }
-
-    sandbox() {
-        const data = this.mainCtrl.getRenderData();
-        if (this.state.hasError) {
-            return <div>Syntax Error</div>
-        } else {
-            return <CodeSandbox imports={data.imp}>
-            {'state='+JSON.stringify(data.state)+';renderPart=(name)=>{};handleChange=(e)=>{};render(' +data.code + ')'}
-            </CodeSandbox>
-        }
+        return <iframe style={styles.iframe} src="/frame" ref={this.iframe}></iframe>
     }
 }
 
 const styles:{[s: string]: CSSProperties;} = {
-    mobile: {
-        width: '42.5vh',
+    iframe: {
+        width:'100%',
+        height:'100%',
         position: 'absolute',
-        top: '12%',
-        bottom: '12.5%',
-        left: '3vh',
-        overflow: 'auto'
+        borderWidth: 0,
     }
 }
