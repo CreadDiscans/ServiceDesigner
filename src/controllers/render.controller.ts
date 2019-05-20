@@ -41,7 +41,7 @@ export class RenderController extends Controller {
                 }
             })
         }
-        let code = elem.getCode();
+        let code = elem.getCode(this.main.getResource(ResourceType.ASSET));
         code = code.replace('{style}', this.parseStyle(elem, styles, selection));
         code = code.replace('{children}', children);
         // code = this.parseForLoop(elem, code, state);

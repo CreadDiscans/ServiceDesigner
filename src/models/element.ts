@@ -1,5 +1,6 @@
 import { Library, LibraryKeys } from './library';
 import Utils from '../utils/utils';
+import { Resource } from './resource';
 
 export class ElementStyle {
     condition:string = '';
@@ -76,10 +77,19 @@ export class ElementProperty {
         }
     }
 
-    toVal(name:string|undefined=undefined) {
+    toVal(name:string|undefined=undefined, assets:any=undefined) {
         if (this.name === 'text') {
             if (this.isVariable) return '{' + this.value + '}';
             else return this.value;
+        } else if (this.name === 'source') {
+            let value = this.value;
+            assets.forEach((item:Resource)=> {
+                if ('Asset.'+item.name === this.value) {
+                    value = item.value;
+                }
+            })
+            if (value) return this.name + '={{uri:"'+value+'"}}';
+            else return '';
         } else if (this.type == ElementPropertyType.Func) {
             return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:"'+name+'", value:e})}';
         } else if (this.isVariable) {
@@ -137,7 +147,7 @@ export class Element {
         return property;
     }
 
-    getCode():string {
+    getCode(assets:any):string {
         if (this.code) return this.code;
         let tag = this.library ? this.library + '.' + this.name : this.name;
         let body = '';
@@ -150,7 +160,7 @@ export class Element {
             } else if (item.name === 'class' || item.name === 'for') {
                 // skip
             } else {
-                attr.push(item.toVal(propName?propName.value:''));
+                attr.push(item.toVal(propName?propName.value:'', assets));
             }
         });
         let propFor = this.prop('for');
