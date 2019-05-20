@@ -42,9 +42,6 @@
           "dark"
         ]
       },
-      "outline":{
-        "type":"boolean"
-      },
       "pill":{
         "type":"boolean"
       },
