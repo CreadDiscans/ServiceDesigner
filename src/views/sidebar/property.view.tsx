@@ -120,24 +120,32 @@ export class PropertyView extends View {
                                     .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)}
                             </select>
                         </div> : <div>
-                            {item.type == ElementPropertyType.String && 
-                            <input style={{flex:1}} type="text" value={item.value} onChange={(e)=> {
-                                item.value = e.target.value
-                                this.mainCtrl.refresh()}}/>}
-                            {item.type == ElementPropertyType.Number && 
-                            <input style={{flex:1}} type="number" value={item.value} onChange={(e)=>{
-                                item.value = e.target.value
-                                this.mainCtrl.refresh()}}/>}
-                            {item.name !== 'for' && item.type == ElementPropertyType.Array && 
-                            <input style={{flex:1}} type="text" checked={item.value} onChange={(e)=>{
-                                try{
-                                    const arr = JSON.parse(e.target.value)
-                                    if (Array.isArray(arr)) {
-                                        item.value = arr;
-                                        this.mainCtrl.refresh();
-                                    }
-                                } catch(e) {}
-                                }}/>}
+                            {
+                                item.select.length !== 0 ? <select style={{flex:1}} value={item.value} onChange={(e)=> {
+                                    item.value = e.target.value;
+                                    this.mainCtrl.refresh();
+                                    }}>
+                                    {item.select.map((item:any)=> <option key={item} value={item}>{item}</option>)}
+                                </select> : 
+                                [item.type == ElementPropertyType.String && 
+                                    <input style={{flex:1}} type="text" value={item.value} onChange={(e)=> {
+                                        item.value = e.target.value
+                                        this.mainCtrl.refresh()}}/>, 
+                                item.type == ElementPropertyType.Number && 
+                                <input style={{flex:1}} type="number" value={item.value} onChange={(e)=>{
+                                    item.value = e.target.value
+                                    this.mainCtrl.refresh()}}/>,
+                                item.name !== 'for' && item.type == ElementPropertyType.Array && 
+                                <input style={{flex:1}} type="text" checked={item.value} onChange={(e)=>{
+                                    try{
+                                        const arr = JSON.parse(e.target.value)
+                                        if (Array.isArray(arr)) {
+                                            item.value = arr;
+                                            this.mainCtrl.refresh();
+                                        }
+                                    } catch(e) {}
+                                }}/>]
+                            }
                         </div>
                     }</div>}
                 </div>
