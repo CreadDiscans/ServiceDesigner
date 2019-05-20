@@ -46,7 +46,7 @@
     "electron": "electron .",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dist": "npm run react-build && build -w",
+    "dist": "npm run react-build && electron-builder --ia32 --x64 -w",
     "cypress:open": "cypress open"
   },
   "build": {
