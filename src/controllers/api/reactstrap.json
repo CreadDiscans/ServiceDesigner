@@ -19,6 +19,9 @@
       "fade": {
         "type": "boolean",
         "default": true
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "Alert"
@@ -44,6 +47,9 @@
       },
       "pill":{
         "type":"boolean"
+      },
+      "text":{
+        "type":"string"
       }
     },
     "name": "Badge"
@@ -145,6 +151,9 @@
       },
       "close": {
         "type": "boolean"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "Button"
@@ -169,6 +178,9 @@
   {
     "prop": {
       "tag": {
+        "type": "string"
+      },
+      "text": {
         "type": "string"
       }
     },
@@ -240,6 +252,9 @@
     "prop": {
       "tag": {
         "type": "string"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "CardLink"
@@ -247,6 +262,9 @@
   {
     "prop": {
       "tag": {
+        "type": "string"
+      },
+      "text": {
         "type": "string"
       }
     },
@@ -256,6 +274,9 @@
     "prop": {
       "tag": {
         "type": "string"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "CardText"
@@ -263,6 +284,9 @@
   {
     "prop": {
       "tag": {
+        "type": "string"
+      },
+      "text": {
         "type": "string"
       }
     },
@@ -451,6 +475,9 @@
       },
       "tag":{
         "type":"string"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name":"Fade"
@@ -513,6 +540,9 @@
       },
       "nav": {
         "type": "boolean"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "DropdownToggle"
@@ -561,6 +591,9 @@
       "toggle": {
         "type": "boolean",
         "default": true
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "DropdownItem"
@@ -832,6 +865,9 @@
       },
       "top": {
         "type": "boolean"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "Media"
@@ -1058,6 +1094,9 @@
         "type": "boolean"
       },
       "tag": {
+        "type": "string"
+      },
+      "text": {
         "type": "string"
       }
     },
@@ -1293,6 +1332,9 @@
       },
       "flip": {
         "type": "boolean"
+      },
+      "text": {
+        "type": "string"
       }
     },
     "name": "Tooltip"
