@@ -196,6 +196,9 @@
           "raised"
         ],
         "default": "text"
+      },
+      "text":{
+        "type":"string"
       }
     },
     "name": "Button"
@@ -3326,6 +3329,9 @@
           "title",
           "subheading"
         ]
+      },
+      "text":{
+        "type":"string"
       }
     },
     "name": "Typography"
