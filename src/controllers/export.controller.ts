@@ -80,7 +80,7 @@ export class ExportController extends Controller {
         });
 
         Object.keys(imp).forEach((key:any)=> {
-            impjs += 'import * as ' + key + ' from \'' + imp[key] + '\';';
+            impjs += 'import * as ' + key + ' from \'' + imp[key] + '\';\n';
         });
 
         js = ExportController.TEMPLATE_IMPORT.replace('{import}', impjs);

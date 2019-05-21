@@ -12,7 +12,7 @@ export enum LibraryKeys {
 
 export const Library:any = {
     [LibraryKeys.ReactStrap]: {
-        name: 'reacstrap',
+        name: 'reactstrap',
         lib: reactstrap
     },
     [LibraryKeys.ReactRouterDom]: {
