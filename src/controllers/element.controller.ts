@@ -27,7 +27,8 @@ export class ElementController extends Controller {
                 type:{type:ElementPropertyType.String},
                 value:{type:ElementPropertyType.String},
                 placeholder:{type:ElementPropertyType.String},
-                onChange:{type:ElementPropertyType.Func}
+                onChange:{type:ElementPropertyType.Func},
+                onKeyPress:{type:ElementPropertyType.Func}
             }}),
             Element.parseApi({name:'h1', prop:{text:{type:ElementPropertyType.String}}}),
             Element.parseApi({name:'h2', prop:{text:{type:ElementPropertyType.String}}}),
