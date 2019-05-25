@@ -8,7 +8,8 @@ export class FrameView extends React.Component {
 
   state:any = {
     hasError: false,
-    data:{}
+    data:{},
+    landscape: false
   }
   
   componentDidMount() {
@@ -31,10 +32,15 @@ export class FrameView extends React.Component {
 
   render() {
     return <div id="design">
-        { this.state.data.platform === Platform.ReactNative && <img style={{height:'100vh'}} src="/frame.jpg" /> }
-        <div style={(this.state.data.platform === Platform.ReactNative) ? styles.mobile : {}}>
+        { this.state.data.platform === Platform.ReactNative && <img style={this.state.landscape ? styles.landscapeFrame : {height:'100vh'}} src="/frame.jpg" /> }
+        <div style={(this.state.data.platform === Platform.ReactNative) ? this.state.landscape ? styles.landscapeMobile : styles.mobile : {}}>
             {this.sandbox()}
         </div>
+        {this.state.data.platform === Platform.ReactNative && 
+        <div style={{position:'absolute', right:0, bottom:0, padding:10}}>
+          Landscape <input type="checkbox" value={this.state.landscape} onChange={e=> this.setState({landscape: !this.state.landscape})} />
+        </div>
+        }
     </div>
   }
   
@@ -64,5 +70,17 @@ const styles:{[s: string]: CSSProperties;} = {
       bottom: '12.5%',
       left: '3vh',
       overflow: 'auto'
+  },
+  landscapeMobile: {
+    width: '75vw',
+    position: 'absolute',
+    top: '4.5vw',
+    left: '12.1vw',
+    overflow: 'auto',
+    height: '42.2vw'
+  },
+  landscapeFrame: {
+    height: '100vw',
+    transform: 'rotate(90deg) translate(-50%, -25%)'
   }
 }
