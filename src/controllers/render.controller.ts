@@ -16,7 +16,7 @@ export class RenderController extends Controller {
         if (!file || !file.element) throw 'no element';
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state, selection);
-        // console.log(code);
+        console.log(code);
         return {
             state: file.state,
             imp: imp,
@@ -125,11 +125,16 @@ export class RenderController extends Controller {
             let style:any = this.convertCssToStyle(item.style, 'style');
             if (i === 0) {
                 if (elem === this.main.getSelectedElement() && selection) {
-                    if (this.main.getPlatform() === Platform.React) {
-                        style.border = 'solid 1px red';
-                    } else if (this.main.getPlatform() === Platform.ReactNative) {
+                    if (Object.keys(style).filter(name=>name.indexOf('border') !== -1).length === 0) {
+                        style.borderStyle = 'solid';
+                        style.borderWidth = 1;
                         style.borderColor = 'red';
-                        style.borderWidth = '1px';
+                    } else {
+                        Object.keys(style).filter(name=>name.indexOf('border') !== -1).forEach(name=> {
+                            if (name.indexOf('Color') !== -1) {
+                                style[name] = 'red';
+                            }
+                        })
                     }
                 }
                 style = Utils.merge(origin, style);
