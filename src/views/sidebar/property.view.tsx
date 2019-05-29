@@ -45,54 +45,96 @@ export class PropertyView extends View {
         return stateSeializer
     }
 
-    isInForLoop() {
-        const elem = this.mainCtrl.getSelectedElement();
-        const root = this.mainCtrl.getSelectedFile().element;
-        let itemKey = undefined
-        const propFor = elem.prop('for');
-        if (propFor && propFor.isActive) {
-            itemKey = propFor.value;
-            return [itemKey, true];
-        }
-        Utils.loop(root, (item:Element, stack:Array<Element>)=> {
-            if (item === elem) {
-                for(let i=stack.length-1;i>=0;i--) {
-                    const propFor = stack[i].prop('for');
-                    if (propFor && propFor.isActive) {
-                        itemKey = propFor.value;
-                        return;
+    wrapState(root:Element|undefined, target:Element, state:any) {
+        if (root === undefined) 
+            return [[],[]];
+        const stack:any = [];
+        let appendItems:any = [];
+        const wrapItem = () => {
+            stack.forEach((item:Element)=> {
+                const forProp = item.prop('for');
+                if (forProp !== undefined && forProp.isActive) {
+                    if (forProp.value.indexOf('item') === 0) {
+                        const re = new RegExp(forProp.value+'\\[\\d+\\]')
+                        const tmp:any = [];
+                        appendItems.filter((ai:any)=> ai.key.indexOf(forProp.value) === 0)
+                            .map((ai:any)=> ({
+                                key:ai.key.replace(re, 'item'),
+                                type:ai.key.replace(re, 'item') === 'item' ? '??' : ai.type
+                            })).forEach((ai:any)=> {
+                                if (tmp.filter((tmpItem:any)=> tmpItem.key === ai.key).length === 0) {
+                                    tmp.push(ai);
+                                }
+                            })
+                        appendItems = tmp;
+                    } else {
+                        state.forEach((stateItem:any)=> {
+                            if (stateItem.key.indexOf(forProp.value) === 0) {
+                                let newKey = stateItem.key.replace(forProp.value, 'item');
+                                newKey = newKey.replace(/item\[\d+\]/, 'item')
+                                if (appendItems.filter((ai:any)=>ai.key === newKey).length === 0) {
+                                    appendItems.push({
+                                        key:newKey,
+                                        type:newKey === 'item' ? '??' : stateItem.type
+                                    })
+                                }
+                            }
+                        })
                     }
                 }
+            })
+        }
+
+        const dfs = (item:Element) => {
+            if (item === target) {
+                wrapItem();
+                return false;
             }
-        })
-        return [itemKey, false];
+            stack.push(item);
+            item.children.forEach((child:Element)=> {
+                if (!dfs(child)) {
+                    return false;
+                }
+            });
+            stack.pop();
+            return true;
+        }
+        dfs(root);
+        const forProp = target.prop('for');
+        const stateFor = state.concat(appendItems);
+        let stateEtc = Utils.deepcopy(stateFor);
+        if (forProp !== undefined && forProp.isActive) {
+            const re = new RegExp(forProp.value+'\(\\[\\d+\\]\){0,1}')
+            if (forProp.value.indexOf('item') === 0) {
+                stateEtc = stateEtc.map((ai:any)=> ({
+                    key:ai.key.replace(re, 'item'),
+                    type: ai.key.replace(re, 'item') === 'item' ? '???' : ai.type
+                }))
+            } else {
+                const tmp:any = [];
+                stateEtc.filter((ai:any)=> ai.key.indexOf(forProp.value) === 0)
+                    .map((ai:any)=> ({
+                        key: ai.key.replace(re, 'item'),
+                        type:ai.key.replace(re, 'item') === 'item' ? '????': ai.type
+                    }))
+                    .forEach((ai:any)=> {
+                        if (tmp.filter((tmpItem:any)=> tmpItem.key === ai.key).length === 0) {
+                            tmp.push(ai);
+                        }
+                    })
+                stateEtc = stateEtc.filter((item:any)=>item.key.indexOf('item')=== -1).concat(tmp);
+            }
+        }
+        return [stateFor, stateEtc];
     }
 
     render() {
         const elem = this.mainCtrl.getSelectedElement();
-        let originState = this.getState();
-        let state:any;
-        const result = this.isInForLoop();
-        const itemKey = result[0];
-        if (itemKey) {
-            const out = originState
-                .filter((item:any)=> item.key.indexOf(itemKey)===0)
-                .map((item:any)=>{
-                    const newKey = item.key.replace(itemKey, 'item')
-                    return {key:newKey.split('[')[0]+newKey.split(']')[1], type:item.type
-                }})
-            const tmp:any = [];
-            state = originState.concat(out).filter((item:any)=>{
-                if (tmp.indexOf(item.key) === -1) {
-                    tmp.push(item.key);
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        } else {
-            state = originState;
-        }
+        const root = this.mainCtrl.getSelectedFile().element;
+        const state = this.getState();
+        const result = this.wrapState(root, elem, state);
+        const stateFor = result[0];
+        const stateEtc = result[1];
         return <div style={style.layout}>
             <h5>Property</h5>
             {elem.property.map((item:ElementProperty, i:number)=> 
@@ -120,10 +162,10 @@ export class PropertyView extends View {
                             <select style={{flex:1}} value={item.value} onChange={(e)=> {
                                 item.value = e.target.value;
                                 this.mainCtrl.refresh()}}>
-                                {item.name === 'for' && result[1] ? 
-                                [originState.filter((st:any)=>st.type === item.type)
+                                { item.name === 'for' ? 
+                                [stateFor.filter((st:any)=>st.type === item.type)
                                     .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)] : 
-                                [state.filter((st:any)=>st.type === item.type)
+                                [stateEtc.filter((st:any)=>st.type === item.type)
                                     .map((op:any, i:number)=><option value={op.key} key={i}>{op.key}</option>)]}
                             </select>
                         </div> : <div>
