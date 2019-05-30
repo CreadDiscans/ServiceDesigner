@@ -30,12 +30,16 @@ export class SidebarElement extends View {
             <div style={styles.listView}>
                 {Object.keys(elements).map((group:string)=> {
                     return <ListGroup key={group}>
-                        <ListGroupItem color={group===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer'}} onClick={()=>{
-                            this.setState({selectedGroup: group})
+                        <ListGroupItem color={group===this.state.selectedGroup?'primary':'secondary'} style={{cursor:'pointer', padding:'0 10px'}} onClick={()=>{
+                            if (group === this.state.selectedGroup) {
+                                this.setState({selectedGroup:''})
+                            } else {
+                                this.setState({selectedGroup: group})
+                            }
                         }}> {group}</ListGroupItem>
                         {
                             this.state.selectedGroup === group && elements[group].map((item:Element)=> {
-                                return <ListGroupItem action key={item.name} style={{cursor:'pointer'}} onClick={()=>{
+                                return <ListGroupItem action key={item.name} style={{cursor:'pointer', padding:'0 10px'}} onClick={()=>{
                                         this.addElement(item);
                                     }}>
                                     {item.name}
@@ -53,7 +57,9 @@ export class SidebarElement extends View {
 
 const styles:{[s: string]: CSSProperties;} = {
     listView: {
-        padding:5
+        padding:5,
+        height:500,
+        overflow:'auto'
     },
     listItem: {
         marginTop:5,
