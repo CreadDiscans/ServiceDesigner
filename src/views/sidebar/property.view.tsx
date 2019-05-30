@@ -148,16 +148,17 @@ export class PropertyView extends View {
                                 else item.active = false;
                             }
                             this.mainCtrl.refresh()}}/>
-                        {item.name != 'for' && item.isActive && item.type != ElementPropertyType.Func &&
+                        {item.name != 'for' && item.isActive &&
                         <input type="checkbox" checked={item.isVariable} onChange={(e)=>{
                             item.isVariable=!item.isVariable;
                             const arrState = state.filter((st:any)=>st.type===item.type)
                             if (arrState.length > 0) item.value = arrState[0].key;
+                            else if (item.type === ElementPropertyType.Func) {}
                             else item.isVariable = false;
                             this.mainCtrl.refresh()}}/>}
                         {item.name}
                     </div>
-                    {item.isActive && <div>{
+                    {item.isActive && item.type != ElementPropertyType.Func && <div>{
                         item.isVariable ? <div>
                             <select style={{flex:1}} value={item.value} onChange={(e)=> {
                                 item.value = e.target.value;

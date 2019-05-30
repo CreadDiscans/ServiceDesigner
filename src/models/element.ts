@@ -92,14 +92,20 @@ export class ElementProperty {
             else return '';
         } else if (this.type == ElementPropertyType.Func) {
             let name = '';
+            let item = '';
             if (elem) {
                 const nameProp = elem.prop('name');
-                if (nameProp && nameProp.isVariable) 
+                if (nameProp && nameProp.isVariable) {
                     name = nameProp.value;
-                else if (nameProp && !nameProp.isVariable)
+                } 
+                else if (nameProp && !nameProp.isVariable) {
                     name = '"' + nameProp.value + '"'
+                }
             }
-            return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:'+name+', value:e})}';
+            if (this.isVariable) {
+                item = ', item:item'
+            }
+            return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:'+name+', value:e'+item+'})}';
         } else if (this.isVariable) {
             return this.name + '={'+this.value+'}'
         } else if (this.type == ElementPropertyType.String) {
