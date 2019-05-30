@@ -71,7 +71,9 @@ export class Layout extends View {
 
     treeView(item:Element, index=0, depth=0) {
         return <div key={depth+'/'+index} style={{
-                paddingLeft: depth === 0? 0: item.children.length === 0? 15: 10}}>
+                paddingLeft: depth === 0? 0: item.children.length === 0? 15: 10,
+                lineHeight:1,
+                fontSize:14}}>
             {
                 item.children.length > 0 && (
                     item.collapse ? <FaAngleDown onClick={()=> {
