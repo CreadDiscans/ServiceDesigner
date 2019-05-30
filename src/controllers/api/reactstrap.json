@@ -626,6 +626,12 @@
       },
       "addon": {
         "type": "boolean"
+      },
+      "value": {
+        "type": "string"
+      },
+      "onChange": {
+        "type": "function"
       }
     },
     "name": "Input"
