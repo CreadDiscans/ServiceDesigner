@@ -52,7 +52,7 @@ export default class Sidebar extends View {
                     {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
                     {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />, SideTab.State.toString())}
                     {this.icon(<FaCode onClick={()=>this.mainCtrl.setTab(SideTab.Element)} />, SideTab.Element.toString())}
-                    {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Style)} />, SideTab.Style.toString())}
+                    {/* {this.icon(<FaCog onClick={()=>this.mainCtrl.setTab(SideTab.Style)} />, SideTab.Style.toString())} */}
                     {this.icon(<FaCss3 onClick={()=>this.mainCtrl.setTab(SideTab.Css)} />, SideTab.Css.toString())}
                     {this.icon(<FaPalette onClick={()=>this.mainCtrl.setTab(SideTab.Color)} />, SideTab.Color.toString())}
                     {this.icon(<FaImages onClick={()=>this.mainCtrl.setTab(SideTab.Asset)} />, SideTab.Asset.toString())}
@@ -72,7 +72,7 @@ export default class Sidebar extends View {
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}
                     {tab === SideTab.Element && <SidebarElement />}
-                    {tab === SideTab.Style && <SidebarStyle />}
+                    {/* {tab === SideTab.Style && <SidebarStyle />} */}
                     {tab === SideTab.Css && <SidebarCss />}
                     {tab === SideTab.Color && <SidebarColor />}
                     {tab === SideTab.Asset && <SidebarAsset />}
@@ -83,7 +83,12 @@ export default class Sidebar extends View {
                     }}></div>
                     <SidebarHelp />
                 </div>}
-                { this.mainCtrl.getSelectedElement() && <PropertyView />}
+                { this.mainCtrl.getSelectedElement() && (
+                    <div>
+                        <PropertyView />
+                        <SidebarStyle />
+                    </div>
+                )}
                 <div style={styles.body}>
                     {this.props.children}
                 </div>

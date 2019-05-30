@@ -18,7 +18,7 @@ export class SidebarHelp extends View {
             {this.icon(<FaFolder  />, 'Folder [F1]')}
             {this.icon(<FaReact />, 'State [F2]')}
             {this.icon(<FaCode />, 'Element [F3]')}
-            {this.icon(<FaCog  />, 'Property / Style [F4]')}
+            {/* {this.icon(<FaCog  />, 'Property / Style [F4]')} */}
             {this.icon(<FaCss3 />, 'Css [F5]')}
             {this.icon(<FaPalette />, 'Color [F6]')}
             {this.icon(<FaImages />, 'Asset [F7]')}

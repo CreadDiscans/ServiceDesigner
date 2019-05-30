@@ -207,7 +207,7 @@ const style: {[s:string]: CSSProperties;} = {
     layout: {
         position:'absolute',
         top:0,
-        bottom:0,
+        bottom:283,
         right:0,
         width:200,
         background:'#EEE',

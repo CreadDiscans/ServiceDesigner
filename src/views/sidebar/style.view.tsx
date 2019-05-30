@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Input, Label, Badge, Button } from 'reactstrap'
 import { Layout } from './layout.view'
 import Utils from '../../utils/utils';
@@ -39,8 +39,8 @@ export class SidebarStyle extends View {
     
     render() {
         let vari = false;
-        return <div>
-            <Layout />
+        return <div style={styles.layout}>
+            {/* <Layout /> */}
             <h5>Style 
             {
                 this.state.selectedItem.style.map((item:ElementStyle, i:number)=> {
@@ -157,7 +157,18 @@ export class SidebarStyle extends View {
     }
 }
 
-const styles = {
+const styles: {[s:string]: CSSProperties;} = {
+    layout: {
+        position:'absolute',
+        bottom:0,
+        right:0,
+        width:200,
+        height:283,
+        padding:5,
+        background:'#EEE',
+        borderTop:'solid 1px #CCC',
+        borderLeft:'solid 1px #CCC'
+    },
     propLabel: {
         display:'inline-block',
         width:'30%'
