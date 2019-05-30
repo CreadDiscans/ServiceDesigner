@@ -77,7 +77,7 @@ export class ElementProperty {
         }
     }
 
-    toVal(name:string|undefined=undefined, assets:any=undefined) {
+    toVal(elem:Element|undefined=undefined, assets:any=undefined) {
         if (this.name === 'text') {
             if (this.isVariable) return '{' + this.value + '}';
             else return this.value;
@@ -91,7 +91,15 @@ export class ElementProperty {
             if (value) return this.name + '={{uri:"'+value+'"}}';
             else return '';
         } else if (this.type == ElementPropertyType.Func) {
-            return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:"'+name+'", value:e})}';
+            let name = '';
+            if (elem) {
+                const nameProp = elem.prop('name');
+                if (nameProp && nameProp.isVariable) 
+                    name = nameProp.value;
+                else if (nameProp && !nameProp.isVariable)
+                    name = '"' + nameProp.value + '"'
+            }
+            return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:'+name+', value:e})}';
         } else if (this.isVariable) {
             return this.name + '={'+this.value+'}'
         } else if (this.type == ElementPropertyType.String) {
@@ -152,7 +160,6 @@ export class Element {
         let tag = this.library ? this.library + '.' + this.name : this.name;
         let body = '';
         let attr:Array<string> = [];
-        let propName = this.prop('name');
         this.property.forEach((item:ElementProperty)=> {
             if(!item.isActive) return;
             if (item.name === 'text') {
@@ -160,7 +167,7 @@ export class Element {
             } else if (item.name === 'class' || item.name === 'for') {
                 // skip
             } else {
-                attr.push(item.toVal(propName?propName.value:'', assets));
+                attr.push(item.toVal(this, assets));
             }
         });
         let propFor = this.prop('for');
