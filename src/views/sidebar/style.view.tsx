@@ -73,7 +73,7 @@ export class SidebarStyle extends View {
                 }}
             >X</Button>
             <AceEditor
-                style={{width:'100%', height:200}}
+                style={{width:'100%', height:200, fontSize:10}}
                 theme="github" 
                 mode="css" 
                 value={this.state.value}

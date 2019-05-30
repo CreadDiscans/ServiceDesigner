@@ -33,7 +33,7 @@ export class SidebarState extends View {
             <h5>State</h5>
             <div>- {file.name}</div>
             <AceEditor
-                style={{width:'100%', height:window.innerHeight - 66}}
+                style={{width:'100%', height:window.innerHeight - 66, fontSize:10}}
                 theme="github" 
                 mode="json" 
                 value={this.state.value}
