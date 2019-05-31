@@ -11,7 +11,8 @@ export class ExportController extends Controller {
     private static TEMPLATE_IMPORT = "import React from 'react';\n{import}\n";
     private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {{component_func}\n\trenderPart = (name:any) => {}\n}\n";
     private static TEMPLATE_FUNC_EVENT = "\n\tonEvent(e:any) {\n\t\tif (e.event === 'onMouseEnter') {\n\t\t\tthis.setState({hover:e.name});\n\t\t} else if (e.event === 'onMouseLeave') {\n\t\t\tthis.setState({hover:undefined});\n\t\t}\n\t};";
-    private static TEMPLATE_FUNC_SYNC = "\n\tsync = (key:any, value:any) => {\n\t\tif (this.state[key] !== value) {\n\t\t\tthis.setState({[key]:value});\n\t\t}\n\t}";
+    private static TEMPLATE_FUNC_SYNC = "\n\tsync = (key:any, value:any) => {\n\t\tlet target = this.state;\n\t\tlet parent:any = {};\n\t\tlet lastKey:any = '';\n\t\tkey.split('.').forEach((item:string)=> {\n\t\t\tparent = target;\n\t\t\ttarget = target[item];\n\t\t\tlastKey = item;\n\t\t});\n\t\tif (target !== value) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t}\n\t}";
+
     private cachePath:string|undefined;
 
     export(root:File, rsc:Array<object>, useCache:boolean) {
