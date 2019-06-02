@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io'
 import { View } from '../view';
-import { ExplorerComponentsView } from './components.view';
+import ComponentsView from '../../components/Components.view';
 import { ExplorerElementsView } from './elements.view';
 
 export class ExplorerView extends View {
@@ -23,12 +23,7 @@ export class ExplorerView extends View {
     render() {
         return <div style={styles.layout}>
             <div style={styles.title}>EXPLORER</div>
-            <div style={styles.group} onClick={()=>this.collapse('components')}>
-                {!this.state.components.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
-                {this.state.components.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-                COMPONENTS
-            </div>
-            <ExplorerComponentsView style={this.state.components.collapse && styles.groupHide} />
+            <ComponentsView />
             <div style={styles.group} onClick={()=>this.collapse('elements')}>
                 {!this.state.elements.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
                 {this.state.elements.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 

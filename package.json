@@ -15,6 +15,7 @@
     "@types/react-router-dom": "^4.3.2",
     "@types/react-scrollbar": "^0.4.10",
     "@types/reactstrap": "^8.0.1",
+    "@types/redux-actions": "^2.6.1",
     "bootstrap": "^4.3.1",
     "brace": "^0.11.1",
     "css": "^2.2.4",
@@ -30,6 +31,7 @@
     "react-router-dom": "^4.4.0",
     "react-scrollbar": "^0.5.6",
     "reactstrap": "^7.1.0",
+    "redux-actions": "^2.6.5",
     "redux-pender": "^2.0.12",
     "rxjs": "^6.4.0"
   },
