@@ -109,7 +109,6 @@ const styles:{[s: string]: CSSProperties;} = {
         bottom:0,
         backgroundColor:'#EEE',
         textAlign: 'center',
-        borderTop:'solid 1px #CCC',
         borderRight:'solid 1px #E0E0E0',
         zIndex:10
     },
@@ -120,7 +119,6 @@ const styles:{[s: string]: CSSProperties;} = {
         left:40,
         bottom:0,
         backgroundColor:'#EEE',
-        borderTop:'solid 1px #CCC',
         zIndex:5,
         overflow:'auto',
         paddingRight:10

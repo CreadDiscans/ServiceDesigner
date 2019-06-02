@@ -3,6 +3,7 @@ import { View } from '../view';
 import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io';
 import { DiReact, DiHtml5, DiBootstrap } from 'react-icons/di';
 import { Element } from '../../models/element';
+import ScrollArea from 'react-scrollbar';
 
 export class ExplorerElementsView extends View {
 
@@ -73,8 +74,16 @@ export class ExplorerElementsView extends View {
     render() {
         const elements:any = this.mainCtrl.getElements();
         const styleProp = this.props.style ? this.props.style : {}
-        return <div style={{...styles.layout, ...styleProp}}>
-            {Object.keys(elements).map((group:string)=> this.elemGroup(group, elements[group]))}
+        let height = 0;
+        if (this.refs.layout) {
+            const layout:any = this.refs.layout
+            height = window.innerHeight - layout.offsetTop;
+        }
+        return <div style={{...styles.layout, ...styleProp}} ref='layout' >
+            <ScrollArea style={{height:height}}
+                verticalScrollbarStyle={{backgroundColor:'white'}}>
+                {Object.keys(elements).map((group:string)=> this.elemGroup(group, elements[group]))}
+            </ScrollArea>
         </div>
     }
 }

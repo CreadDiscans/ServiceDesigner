@@ -53,7 +53,7 @@ const styles:any = {
     group: {
         backgroundColor:'#333333',
         color:'#c1c1c1',
-        fontSize:11,
+        fontSize:10,
         fontWeight:600,
         padding:2,
         cursor:'pointer'

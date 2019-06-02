@@ -38,8 +38,8 @@ export class ExplorerComponentsView extends View {
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(item)}>
                 {item.type === FileType.FOLDER ? [
-                    !item.collapse && <IoMdArrowDropright style={styles.arrow} />,
-                    item.collapse && <IoMdArrowDropdown style={styles.arrow} />
+                    !item.collapse && <IoMdArrowDropright style={styles.arrow} key={0} />,
+                    item.collapse && <IoMdArrowDropdown style={styles.arrow} key={1} />
                 ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 {this.removeJsInName(item.name)}
             </div>
