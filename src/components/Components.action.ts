@@ -4,11 +4,12 @@ import { pender } from 'redux-pender';
 const CREATE_FILE = 'components/CREATE_FILE';
 const DELETE_FILE = 'components/DELETE_FILE';
 const SELECT_FILE = 'components/SELECT_FILE';
+const COLLAPSE_FILE = 'components/COLLAPSE_FILE';
 
-export const createFile = createAction(CREATE_FILE);
-export const deleteFile = createAction(DELETE_FILE);
-export const selectFile = createAction(SELECT_FILE);
-
+export const createFile = createAction(CREATE_FILE); // name, type
+export const deleteFile = createAction(DELETE_FILE); 
+export const selectFile = createAction(SELECT_FILE); // ref item in files
+export const collapseFile = createAction(COLLAPSE_FILE);
 
 const initialState = {
     files:[],
@@ -46,6 +47,12 @@ export default handleActions({
         return {
             ...state,
             select: payload
+        }
+    },
+    [COLLAPSE_FILE]: (state, {payload}) => {
+        state.files.forEach(item=> loop(item, target=> target.collapse = false))
+        return {
+            ...state
         }
     }
 }, initialState)

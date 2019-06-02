@@ -57,9 +57,13 @@ describe('Components', function() {
         cy.get('div[id="components-body"]').should('have.text', 'newFolderchildFile')
     })
 
-    // it('Collapse all', function() {
-
-    // })
+    it('Collapse all', function() {
+        createFolder('newFolder')
+        cy.get('div[id="components-body"]>div>div').click()
+        createFolder('childFolder')
+        cy.get('span[id="icon-collapse"]>svg').click()
+        cy.get('div[id="components-body"]').should('have.text', 'newFolder')
+    })
 
     // it('Delete File', function() {
 

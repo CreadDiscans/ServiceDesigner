@@ -58,11 +58,11 @@ class ComponentsView extends React.Component<any> {
 
     collapseAll(e:any) {
         e.stopPropagation();
-
+        const { ComponentsActions } = this.props;
+        ComponentsActions.collapseFile();
     }
 
     recursive(item:any, dep:number) {
-        console.log(item);
         const { data } = this.props;
         return <div key={item.id} >
             <div
