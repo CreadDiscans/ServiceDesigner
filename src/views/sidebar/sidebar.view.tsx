@@ -25,6 +25,7 @@ import { SidebarCss } from './css.view';
 import { SideTab } from '../../utils/constant';
 import { View } from '../view';
 import { PropertyView } from './property.view';
+import { ExplorerView } from '../explorer/explorer.view';
 
 export default class Sidebar extends View {
 
@@ -48,6 +49,7 @@ export default class Sidebar extends View {
         return (
             <div style={{borderTop:'solid 1px #CCC'}}>
                 <div style={styles.sidebar}>
+                    {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Explorer)} />, SideTab.Element.toString())}
                     {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>, SideTab.Help.toString())}
                     {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
                     {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />, SideTab.State.toString())}
@@ -68,6 +70,7 @@ export default class Sidebar extends View {
                     <div draggable={true} style={styles.sidebarBorder} onDrag={e=> {
                         this.setState({sidebarWidth: e.screenX - 40});
                     }}></div>
+                    {tab === SideTab.Explorer && <ExplorerView />}
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}

@@ -50,4 +50,13 @@ export class File {
         newOne.state = json.state;
         return newOne;
     }
+
+    static compare(a:File, b:File) {
+        if (a.type == FileType.FILE && b.type == FileType.FOLDER) 
+            return 1;
+        else if (a.type == FileType.FOLDER && b.type == FileType.FILE) 
+            return -1;
+        else
+            return a.name > b.name ? 1 : -1;
+    }
 }

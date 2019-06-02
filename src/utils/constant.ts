@@ -4,6 +4,7 @@ export enum Platform {
 }
 
 export enum SideTab {
+    Explorer = 'explorer',
     Help = 'help',
     Folder = 'folder',
     State = 'state',
