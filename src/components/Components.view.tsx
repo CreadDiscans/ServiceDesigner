@@ -64,6 +64,10 @@ class ComponentsView extends React.Component<any> {
 
     recursive(item:any, dep:number) {
         const { data } = this.props;
+        let marginLeft = 15+dep*5;
+        if (data.components.select && data.components.select.type == FileType.FILE) {
+            marginLeft -= 5;
+        }
         return <div key={item.id} >
             <div
                 style={Object.assign({
@@ -80,7 +84,7 @@ class ComponentsView extends React.Component<any> {
                 ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 {item.name}
             </div>
-            { data.components.select && data.components.select.id === item.id && this.state.create && <div style={{marginLeft:15+dep*5}}>
+            { data.components.select && data.components.select.id === item.id && this.state.create && <div style={{marginLeft:marginLeft}}>
                 {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
                 {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 <input id="file-create-input" style={styles.insertInput} 
@@ -188,6 +192,7 @@ const styles:any = {
         color:'#c1c1c1',
         backgroundColor:'#393938',
         borderWidth:0,
+        outline:'none'
     }
 }
 

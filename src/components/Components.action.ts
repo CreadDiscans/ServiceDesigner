@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { pender } from 'redux-pender';
+import { FileType } from '../models/file';
 
 const CREATE_FILE = 'components/CREATE_FILE';
 const DELETE_FILE = 'components/DELETE_FILE';
@@ -29,6 +30,7 @@ export default handleActions({
             name:payload.name, 
             type:payload.type, 
             collapse:false,
+            parent: undefined,
             children:[]
         }
         if (state.select === undefined) {
@@ -37,7 +39,13 @@ export default handleActions({
                 files: [...state.files, newFile]
             }
         } else {
-            state.select.children.push(newFile)
+            if (state.select.type == FileType.FILE) {
+                newFile.parent = state.select.parent;
+                newFile.parent.children.push(newFile)
+            } else if (state.select.type == FileType.FOLDER) {
+                newFile.parent = state.select;
+                state.select.children.push(newFile)
+            }
             return {
                 ...state
             }
