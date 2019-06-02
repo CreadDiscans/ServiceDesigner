@@ -16,8 +16,7 @@ const initialState = {
 }
 
 export default handleActions({
-    [CREATE_FILE]: (state:any, {payload}:any) => {
-        console.log(state, payload)
+    [CREATE_FILE]: (state, {payload}:any) => {
         let maxId = 0;
         state.files.forEach(item=> loop(item, (target)=> {
             if (maxId < target.id) {
@@ -37,23 +36,18 @@ export default handleActions({
                 files: [...state.files, newFile]
             }
         } else {
+            state.select.children.push(newFile)
             return {
                 ...state
             }
         }
     },
-    ...pender({
-        type: DELETE_FILE,
-        onSuccess: (state, action) => ({
-            data: action.payload
-        })
-    }),
-    ...pender({
-        type: SELECT_FILE,
-        onSuccess: (state, action) => ({
-            data: action.playload
-        })
-    })
+    [SELECT_FILE]: (state, {payload}) => {
+        return {
+            ...state,
+            select: payload
+        }
+    }
 }, initialState)
 
 const loop = (item, handle) => {

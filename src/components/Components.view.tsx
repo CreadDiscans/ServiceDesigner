@@ -23,6 +23,8 @@ class ComponentsView extends React.Component<any> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
+        const { ComponentsActions } = this.props;
+        ComponentsActions.selectFile(item)
         this.setState({active:item.id});
     }
 
@@ -32,6 +34,8 @@ class ComponentsView extends React.Component<any> {
         let focus;
         if (data.components.select === undefined) {
             focus = 'root'
+        } else {
+            focus = 'input_'+data.components.select.id
         }
         this.setState({create: true, type: type, focus:focus});
     }
@@ -59,6 +63,7 @@ class ComponentsView extends React.Component<any> {
 
     recursive(item:any, dep:number) {
         console.log(item);
+        const { data } = this.props;
         return <div key={item.id} >
             <div
                 style={Object.assign({
@@ -75,7 +80,20 @@ class ComponentsView extends React.Component<any> {
                 ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 {item.name}
             </div>
-            {/* { item.collapse && item.children.sort(File.compare).map((child:File)=> this.recursive(child, dep+1))} */}
+            { data.components.select && data.components.select.id === item.id && this.state.create && <div style={{marginLeft:15+dep*5}}>
+                {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
+                {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
+                <input id="file-create-input" style={styles.insertInput} 
+                    value={this.state.name} 
+                    onChange={(e)=>this.setState({name:e.target.value})}
+                    onBlur={()=>this.createComplete()} ref={'input_'+item.id}
+                    onKeyPress={(e)=>{
+                        if (e.key === 'Enter') {
+                            this.createComplete()
+                        }
+                    }}/>
+            </div> }
+            { item.collapse && item.children.map((child:File)=> this.recursive(child, dep+1))}
         </div>
     }
 
