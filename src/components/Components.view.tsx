@@ -9,13 +9,30 @@ import * as componentsActions from './Components.action';
 
 class ComponentsView extends React.Component<any> {
 
-    state =  {
+    state:any =  {
         hover:0,
         collapse: true,
         create: false,
         type: undefined,
         name: '',
-        focus: undefined
+        focus: undefined,
+        ctxMenu:{
+            x:0,
+            y:0,
+            display:'none',
+            target:undefined
+        }
+    }
+
+    componentWillMount() {
+        document.addEventListener('click', ()=> {
+            if (this.state.ctxMenu.display === 'block') {
+                this.setState({ctxMenu: {
+                    ...this.state.ctxMenu,
+                    display:'none'
+                }})
+            }
+        })
     }
 
     compare(a,b) {
@@ -28,7 +45,7 @@ class ComponentsView extends React.Component<any> {
         }
     }
 
-    clickItem(item:File) {
+    clickItem(item) {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
@@ -36,14 +53,26 @@ class ComponentsView extends React.Component<any> {
         ComponentsActions.selectFile(item)
     }
 
-    create(e:any, type:FileType) {
-        e.stopPropagation();
+    clickItemRight(e, item) {
+        e.preventDefault();
+        this.setState({ctxMenu:{
+            x:e.clientX,
+            y:e.clientY,
+            display:'block',
+            target:item
+        }})
+    }
+
+    create(type:FileType, select=undefined) {
         const { data } = this.props;
         let focus;
         if (data.components.select === undefined) {
             focus = 'root'
         } else {
             focus = 'input_'+data.components.select.id
+        }
+        if (select) {
+            select.collapse = true;
         }
         this.setState({create: true, type: type, focus:focus});
     }
@@ -59,14 +88,12 @@ class ComponentsView extends React.Component<any> {
         this.setState({name:'', type:undefined, create:false})
     }
 
-    unselect(e:any) {
-        e.stopPropagation();
+    unselect() {
         const { ComponentsActions } = this.props;
         ComponentsActions.selectFile(undefined);
     }
 
-    collapseAll(e:any) {
-        e.stopPropagation();
+    collapseAll() {
         const { ComponentsActions } = this.props;
         ComponentsActions.collapseFile();
     }
@@ -86,7 +113,8 @@ class ComponentsView extends React.Component<any> {
                 }, this.state.hover === item.id && styles.hover, data.components.select && data.components.select.id == item.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:item.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
-                onClick={()=> this.clickItem(item)}>
+                onClick={()=> this.clickItem(item)}
+                onContextMenu={(e)=>this.clickItemRight(e, item)}>
                 {item.type === FileType.FOLDER ? [
                     !item.collapse && <IoMdArrowDropright style={styles.arrow} key={0} />,
                     item.collapse && <IoMdArrowDropdown style={styles.arrow} key={1} />
@@ -115,9 +143,47 @@ class ComponentsView extends React.Component<any> {
         if (this.state.focus !== undefined) {
             const focus:any = this.state.focus;
             const input:any = this.refs[focus];
-            input.focus();
-            this.setState({focus: undefined});
+            if (input) {
+                input.focus();
+                this.setState({focus: undefined});
+            }
         }
+    }
+
+    renderContextMenu() {
+        return <div id="contextMenu" 
+            style={{...styles.contextMenu,...{
+                left: this.state.ctxMenu.x - 40,
+                top: this.state.ctxMenu.y,
+                display:this.state.ctxMenu.display
+        }}}>
+        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_1' && styles.hover)} 
+            onMouseEnter={()=> this.setState({hover:'menu_1'})} 
+            onMouseLeave={()=>this.setState({hover:undefined})}
+            onClick={()=>{
+                const { ComponentsActions } = this.props;
+                ComponentsActions.selectFile(this.state.ctxMenu.target);
+                this.create(FileType.FILE, this.state.ctxMenu.target);
+            }}>New File</div>
+        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_2' && styles.hover)} 
+            onMouseEnter={()=> this.setState({hover:'menu_2'})} 
+            onMouseLeave={()=>this.setState({hover:undefined})}
+            onClick={()=>{
+                const { ComponentsActions } = this.props;
+                ComponentsActions.selectFile(this.state.ctxMenu.target);
+                this.create(FileType.FOLDER, this.state.ctxMenu.target);
+            }}>New Folder</div>
+        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_3' && styles.hover)} 
+            onMouseEnter={()=> this.setState({hover:'menu_3'})} 
+            onMouseLeave={()=>this.setState({hover:undefined})}
+            onClick={()=>this.unselect()}>Unselect</div>
+        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_4' && styles.hover)} 
+            onMouseEnter={()=> this.setState({hover:'menu_4'})} 
+            onMouseLeave={()=>this.setState({hover:undefined})}>Rename</div>
+        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_5' && styles.hover)} 
+            onMouseEnter={()=> this.setState({hover:'menu_5'})} 
+            onMouseLeave={()=>this.setState({hover:undefined})}>Delete</div>
+    </div>
     }
 
     render() {
@@ -134,10 +200,10 @@ class ComponentsView extends React.Component<any> {
                     COMPONENTS
                 </span>
                 {this.state.collapse && this.state.hover === -1 && [
-                    <span id="icon-collapse" key={0}><FaRegClone style={styles.actionIcon} onClick={(e)=> this.collapseAll(e)}/></span>, 
-                    <span id="icon-create-file" key={1}><FaRegFile style={styles.actionIcon} onClick={(e)=> this.create(e, FileType.FILE)} key={1}/></span>, 
-                    <span id="icon-create-folder" key={2}><FaRegFolder style={styles.actionIcon} onClick={(e)=> this.create(e, FileType.FOLDER)}/></span>,
-                    <span id="icon-unselect" key={3}><FaRegCircle style={styles.actionIcon} onClick={(e)=> this.unselect(e)}/></span>
+                    <span id="icon-collapse" key={0}><FaRegClone style={styles.actionIcon} onClick={()=> this.collapseAll()}/></span>, 
+                    <span id="icon-create-file" key={1}><FaRegFile style={styles.actionIcon} onClick={()=> this.create(FileType.FILE)} key={1}/></span>, 
+                    <span id="icon-create-folder" key={2}><FaRegFolder style={styles.actionIcon} onClick={()=> this.create(FileType.FOLDER)}/></span>,
+                    <span id="icon-unselect" key={3}><FaRegCircle style={styles.actionIcon} onClick={()=> this.unselect()}/></span>
                 ]}
             </div>
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)}>
@@ -157,6 +223,7 @@ class ComponentsView extends React.Component<any> {
                         autoComplete="off"/>
                 </div>}
             </div>
+            {this.renderContextMenu()}
         </div>
     }
 }
@@ -205,6 +272,19 @@ const styles:any = {
         backgroundColor:'#393938',
         borderWidth:0,
         outline:'none'
+    },
+    contextMenu: {
+        position: 'absolute',
+        left:100,
+        width: 100,
+        backgroundColor: '#484747',
+        color:'#c1c1c1',
+        fontSize:12,
+        padding: '5px 0',
+        zIndex:10
+    },
+    contextMenuItem: {
+        padding: '0 5px'
     }
 }
 

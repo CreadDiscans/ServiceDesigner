@@ -43,7 +43,12 @@ export default handleActions({
         } else {
             if (state.select.type == FileType.FILE) {
                 newFile.parent = state.select.parent;
-                if (newFile.parent.children.filter(item=> item.name == newFile.name).length == 0) {
+                if (newFile.parent === undefined) {
+                    return {
+                        ...state,
+                        files: [...state.files, newFile]
+                    }
+                } else if (newFile.parent.children.filter(item=> item.name == newFile.name).length == 0) {
                     newFile.parent.children.push(newFile)
                 }
             } else if (state.select.type == FileType.FOLDER) {

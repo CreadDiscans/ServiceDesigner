@@ -73,8 +73,17 @@ describe('Components', function() {
         cy.get('div[id="components-body"]>div>div').eq(1).should('have.css', 'padding-left', '10px')
     })
 
-    // it('Delete File', function() {
+    it('Create File in context menu', function() {
+        createFolder('newFolder')
+        cy.get('div[id="components-body"]>div>div').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="file-create-input"]').type('childFile{enter}')
+        cy.get('div[id="components-body"]').should('have.text', 'newFolderchildFile')
+    })
 
+    // it('Delete File', function() {
+    //     createFolder('newFolder')
+    //     cy.get('div[id="components-body"]>div>div').trigger('contextmenu')
     // })
 
     // it('Delete Folder', function() {
