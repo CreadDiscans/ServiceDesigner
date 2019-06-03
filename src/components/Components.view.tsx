@@ -21,13 +21,15 @@ class ComponentsView extends React.Component<any> {
             y:0,
             display:'none',
             target:undefined
-        }
+        },
+        rename: 0,
     }
 
     componentWillMount() {
         document.addEventListener('click', ()=> {
             if (this.state.ctxMenu.display === 'block') {
-                this.setState({ctxMenu: {
+                this.setState({
+                    ctxMenu: {
                     ...this.state.ctxMenu,
                     display:'none'
                 }})
@@ -77,15 +79,29 @@ class ComponentsView extends React.Component<any> {
         this.setState({create: true, type: type, focus:focus});
     }
 
+    rename(){
+        this.setState({
+            name:this.state.ctxMenu.target.name,
+            create: true, 
+            type: this.state.ctxMenu.target.type, 
+            focus:'input_'+this.state.ctxMenu.target.id, 
+            rename: this.state.ctxMenu.target.id
+        });
+    }
+
     createComplete() {
         if (this.state.name !== '') {
-            const { ComponentsActions } = this.props;
-            ComponentsActions.createFile({
-                name: this.state.name,
-                type: this.state.type
-            })
+            if (this.state.rename === 0) {
+                const { ComponentsActions } = this.props;
+                ComponentsActions.createFile({
+                    name: this.state.name,
+                    type: this.state.type
+                })
+            } else {
+                this.state.ctxMenu.target.name = this.state.name
+            }
         }
-        this.setState({name:'', type:undefined, create:false})
+        this.setState({name:'', type:undefined, create:false, rename:0})
     }
 
     unselect() {
@@ -105,7 +121,7 @@ class ComponentsView extends React.Component<any> {
             marginLeft -= 5;
         }
         return <div key={item.id} >
-            <div
+            {this.state.rename !== item.id && <div
                 style={Object.assign({
                     paddingTop:1,
                     paddingBottom:1,
@@ -120,7 +136,7 @@ class ComponentsView extends React.Component<any> {
                     item.collapse && <IoMdArrowDropdown style={styles.arrow} key={1} />
                 ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 {item.name}
-            </div>
+            </div>}
             { data.components.select && data.components.select.id === item.id && this.state.create && <div style={{marginLeft:marginLeft}}>
                 {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
                 {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
@@ -152,43 +168,44 @@ class ComponentsView extends React.Component<any> {
 
     renderContextMenu() {
         return <div id="contextMenu" 
-            style={{...styles.contextMenu,...{
-                left: this.state.ctxMenu.x - 40,
-                top: this.state.ctxMenu.y,
-                display:this.state.ctxMenu.display
-        }}}>
-        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_1' && styles.hover)} 
-            onMouseEnter={()=> this.setState({hover:'menu_1'})} 
-            onMouseLeave={()=>this.setState({hover:undefined})}
-            onClick={()=>{
-                const { ComponentsActions } = this.props;
-                ComponentsActions.selectFile(this.state.ctxMenu.target);
-                this.create(FileType.FILE, this.state.ctxMenu.target);
-            }}>New File</div>
-        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_2' && styles.hover)} 
-            onMouseEnter={()=> this.setState({hover:'menu_2'})} 
-            onMouseLeave={()=>this.setState({hover:undefined})}
-            onClick={()=>{
-                const { ComponentsActions } = this.props;
-                ComponentsActions.selectFile(this.state.ctxMenu.target);
-                this.create(FileType.FOLDER, this.state.ctxMenu.target);
-            }}>New Folder</div>
-        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_3' && styles.hover)} 
-            onMouseEnter={()=> this.setState({hover:'menu_3'})} 
-            onMouseLeave={()=>this.setState({hover:undefined})}
-            onClick={()=>this.unselect()}>Unselect</div>
-        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_4' && styles.hover)} 
-            onMouseEnter={()=> this.setState({hover:'menu_4'})} 
-            onMouseLeave={()=>this.setState({hover:undefined})}>Rename</div>
-        <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_5' && styles.hover)} 
-            onMouseEnter={()=> this.setState({hover:'menu_5'})} 
-            onMouseLeave={()=>this.setState({hover:undefined})}>Delete</div>
-    </div>
+                style={{...styles.contextMenu,...{
+                    left: this.state.ctxMenu.x - 40,
+                    top: this.state.ctxMenu.y,
+                    display:this.state.ctxMenu.display
+            }}}>
+            <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_1' && styles.hover)} 
+                onMouseEnter={()=> this.setState({hover:'menu_1'})} 
+                onMouseLeave={()=>this.setState({hover:undefined})}
+                onClick={()=>{
+                    const { ComponentsActions } = this.props;
+                    ComponentsActions.selectFile(this.state.ctxMenu.target);
+                    this.create(FileType.FILE, this.state.ctxMenu.target);
+                }}>New File</div>
+            <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_2' && styles.hover)} 
+                onMouseEnter={()=> this.setState({hover:'menu_2'})} 
+                onMouseLeave={()=>this.setState({hover:undefined})}
+                onClick={()=>{
+                    const { ComponentsActions } = this.props;
+                    ComponentsActions.selectFile(this.state.ctxMenu.target);
+                    this.create(FileType.FOLDER, this.state.ctxMenu.target);
+                }}>New Folder</div>
+            <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_3' && styles.hover)} 
+                onMouseEnter={()=> this.setState({hover:'menu_3'})} 
+                onMouseLeave={()=>this.setState({hover:undefined})}
+                onClick={()=>this.unselect()}>Unselect</div>
+            <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_4' && styles.hover)} 
+                onMouseEnter={()=> this.setState({hover:'menu_4'})} 
+                onMouseLeave={()=>this.setState({hover:undefined})}
+                onClick={()=>this.rename()}>Rename</div>
+            <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_5' && styles.hover)} 
+                onMouseEnter={()=> this.setState({hover:'menu_5'})} 
+                onMouseLeave={()=>this.setState({hover:undefined})}>Delete</div>
+        </div>
     }
 
     render() {
         const { data } = this.props;
-        console.log(data);
+        console.log(data, this.state);
         return <div>
             <div id="components"
                 style={styles.group} 
