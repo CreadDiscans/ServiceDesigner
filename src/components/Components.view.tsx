@@ -7,6 +7,7 @@ import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as componentsActions from './Components.action';
 import ScrollArea from 'react-scrollbar';
+import Resizeable from 're-resizable';
 
 class ComponentsView extends React.Component<any> {
 
@@ -121,7 +122,7 @@ class ComponentsView extends React.Component<any> {
         if (data.components.select && data.components.select.type == FileType.FILE) {
             marginLeft -= 5;
         }
-        return <div key={item.id} >
+        return <div key={item.id}>
             {this.state.rename !== item.id && <div
                 style={Object.assign({
                     paddingTop:1,
@@ -167,6 +168,25 @@ class ComponentsView extends React.Component<any> {
         }
     }
 
+    renderTitle() {
+        return <div id="components"
+            style={styles.group} 
+            onMouseEnter={()=>this.setState({hover:-1})}
+            onMouseLeave={()=>this.setState({hover:undefined})}>
+            <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
+                {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
+                {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
+                COMPONENTS
+            </span>
+            {this.state.collapse && this.state.hover === -1 && [
+                <span id="icon-collapse" key={0}><FaRegClone style={styles.actionIcon} onClick={()=> this.collapseAll()}/></span>, 
+                <span id="icon-create-file" key={1}><FaRegFile style={styles.actionIcon} onClick={()=> this.create(FileType.FILE)}/></span>, 
+                <span id="icon-create-folder" key={2}><FaRegFolder style={styles.actionIcon} onClick={()=> this.create(FileType.FOLDER)}/></span>,
+                <span id="icon-unselect" key={3}><FaRegCircle style={styles.actionIcon} onClick={()=> this.unselect()}/></span>
+            ]}
+        </div>
+    }
+
     renderContextMenu() {
         return <div id="contextMenu" 
                 style={{...styles.contextMenu,...{
@@ -210,53 +230,32 @@ class ComponentsView extends React.Component<any> {
 
     render() {
         const { data } = this.props;
-    
-        // const height = window.innerHeight - 300;
-    
-        let height:string|number = 'auto';
-        if (this.refs.layout) {
-            const layout:any = this.refs.layout;
-            if (layout.clientHeight >= window.innerHeight-300) {
-                height = window.innerHeight - 300;
-            }
-        }
         return <div>
-            <div id="components"
-                style={styles.group} 
-                onMouseEnter={()=>this.setState({hover:-1})}
-                onMouseLeave={()=>this.setState({hover:undefined})}>
-                <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
-                    {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
-                    {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-                    COMPONENTS
-                </span>
-                {this.state.collapse && this.state.hover === -1 && [
-                    <span id="icon-collapse" key={0}><FaRegClone style={styles.actionIcon} onClick={()=> this.collapseAll()}/></span>, 
-                    <span id="icon-create-file" key={1}><FaRegFile style={styles.actionIcon} onClick={()=> this.create(FileType.FILE)} key={1}/></span>, 
-                    <span id="icon-create-folder" key={2}><FaRegFolder style={styles.actionIcon} onClick={()=> this.create(FileType.FOLDER)}/></span>,
-                    <span id="icon-unselect" key={3}><FaRegCircle style={styles.actionIcon} onClick={()=> this.unselect()}/></span>
-                ]}
-            </div>
+            {this.renderTitle()}
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout">
-
-                <ScrollArea style={{height:height}}
-                    verticalScrollbarStyle={{backgroundColor:'white'}}>
-                    {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
-                    {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
-                        {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
-                        {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
-                        <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-                            value={this.state.name} 
-                            onChange={(e)=>this.setState({name:e.target.value})}
-                            onBlur={()=>this.createComplete()} ref={'root'}
-                            onKeyPress={(e)=>{
-                                if (e.key === 'Enter') {
-                                    this.createComplete()
-                                }
-                            }}
-                            autoComplete="off"/>
-                    </div>}
-                </ScrollArea>
+                <Resizeable
+                    maxHeight={window.innerHeight-300}
+                    minHeight={100}
+                    enable={{top:true, bottom:true, left:false, right:false}}>
+                    <ScrollArea style={{height:this.refs.layout ? this.refs.layout['clientHeight'] : 'auto', userSelect:'none'}}
+                        verticalScrollbarStyle={{backgroundColor:'white'}}>
+                        {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
+                        {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
+                            {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
+                            {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
+                            <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
+                                value={this.state.name} 
+                                onChange={(e)=>this.setState({name:e.target.value})}
+                                onBlur={()=>this.createComplete()} ref={'root'}
+                                onKeyPress={(e)=>{
+                                    if (e.key === 'Enter') {
+                                        this.createComplete()
+                                    }
+                                }}
+                                autoComplete="off"/>
+                        </div>}
+                    </ScrollArea>
+                </Resizeable>
             </div>
             {this.renderContextMenu()}
         </div>
@@ -289,7 +288,8 @@ const styles:any = {
         fontSize:10,
         fontWeight:600,
         padding:2,
-        cursor:'pointer'
+        cursor:'pointer',
+        userSelect:'none'
     },
     groupHide: {
         maxHeight: 1000,

@@ -12,7 +12,7 @@ class ElementsView extends React.Component {
     }
 
     componentWillMount() {
-      
+
     }
 
     clickItem(groupName:string) {
@@ -124,7 +124,8 @@ const styles:any = {
         fontSize:10,
         fontWeight:600,
         padding:2,
-        cursor:'pointer'
+        cursor:'pointer',
+        userSelect:'none'
     },
     groupHide: {
         maxHeight: 1000,

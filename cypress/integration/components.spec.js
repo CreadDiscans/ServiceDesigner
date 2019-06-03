@@ -43,14 +43,14 @@ describe('Components', function() {
 
     it('Create Folder in Folder', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').click()
+        cy.get('.scrollarea-content').eq(0).click()
         createFolder('childFolder')
         cy.get('div[id="components-body"]').should('have.text', 'newFolderchildFolder')
     })
 
     it('Create File in Folder', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').click()
+        cy.get('.scrollarea-content').eq(0).click()
         cy.get('div[id="components"]').trigger('mouseover')
         cy.get('span[id="icon-create-file"]>svg').click()
         cy.get('input[id="file-create-input"]').type('childFile{enter}')
@@ -59,7 +59,7 @@ describe('Components', function() {
 
     it('Collapse all', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').click()
+        cy.get('.scrollarea-content').eq(0).click()
         createFolder('childFolder')
         cy.get('span[id="icon-collapse"]>svg').click()
         cy.get('div[id="components-body"]').should('have.text', 'newFolder')
@@ -67,15 +67,15 @@ describe('Components', function() {
 
     it('Unselect', function(){
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').click()
+        cy.get('.scrollarea-content').eq(0).click()
         cy.get('span[id="icon-unselect"]>svg').click()
         createFolder('nexfFolder')
-        cy.get('div[id="components-body"]>div>div').eq(1).should('have.css', 'padding-left', '10px')
+        cy.get('.scrollarea-content').eq(0).find('div').eq(3).should('have.css', 'padding-left', '10px')
     })
 
     it('Create File in context menu', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').trigger('contextmenu')
+        cy.get('.scrollarea-content').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('input[id="file-create-input"]').type('childFile{enter}')
         cy.get('div[id="components-body"]').should('have.text', 'newFolderchildFile')
@@ -83,7 +83,7 @@ describe('Components', function() {
 
     it('Rename', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').trigger('contextmenu')
+        cy.get('.scrollarea-content').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(3).click()
         cy.get('input[id="file-create-input"]').type('rename{enter}')
         cy.get('div[id="components-body"]').should('have.text', 'newFolderrename')
@@ -91,7 +91,7 @@ describe('Components', function() {
 
     it('Delete File', function() {
         createFolder('newFolder')
-        cy.get('div[id="components-body"]>div>div').trigger('contextmenu')
+        cy.get('.scrollarea-content').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(4).click()
         cy.get('div[id="components-body"]').should('have.text', '')
     })
