@@ -60,6 +60,7 @@ class ComponentsView extends React.Component<any> {
 
     clickItemRight(e, item) {
         e.preventDefault();
+        e.stopPropagation();
         this.setState({ctxMenu:{
             x:e.clientX,
             y:e.clientY,
@@ -69,6 +70,7 @@ class ComponentsView extends React.Component<any> {
     }
 
     create(type:FileType, select=undefined) {
+        console.log(this.state.ctxMenu, select);
         const { data } = this.props;
         let focus;
         if (data.components.select === undefined) {
@@ -81,15 +83,23 @@ class ComponentsView extends React.Component<any> {
         }
         this.setState({create: true, type: type, focus:focus});
     }
+    
+    createByContextMenu(type:FileType) {
+        const { ComponentsActions } = this.props;
+        ComponentsActions.selectFile(this.state.ctxMenu.target);
+        this.create(type, this.state.ctxMenu.target);
+    }
 
     rename(){
-        this.setState({
-            name:this.state.ctxMenu.target.name,
-            create: true, 
-            type: this.state.ctxMenu.target.type, 
-            focus:'input_'+this.state.ctxMenu.target.id, 
-            rename: this.state.ctxMenu.target.id
-        });
+        if (this.state.ctxMenu.target) {
+            this.setState({
+                name:this.state.ctxMenu.target.name,
+                create: true, 
+                type: this.state.ctxMenu.target.type, 
+                focus:'input_'+this.state.ctxMenu.target.id, 
+                rename: this.state.ctxMenu.target.id
+            });
+        }
     }
 
     createComplete() {
@@ -115,6 +125,13 @@ class ComponentsView extends React.Component<any> {
     collapseAll() {
         const { ComponentsActions } = this.props;
         ComponentsActions.collapseFile();
+    }
+
+    deleteFile() {
+        if (this.state.ctxMenu.target) {
+            const { ComponentsActions } = this.props;
+            ComponentsActions.deleteFile(this.state.ctxMenu.target);
+        }
     }
 
     recursive(item:any, dep:number) {
@@ -198,19 +215,11 @@ class ComponentsView extends React.Component<any> {
             <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_1' && styles.hover)} 
                 onMouseEnter={()=> this.setState({hover:'menu_1'})} 
                 onMouseLeave={()=>this.setState({hover:undefined})}
-                onClick={()=>{
-                    const { ComponentsActions } = this.props;
-                    ComponentsActions.selectFile(this.state.ctxMenu.target);
-                    this.create(FileType.FILE, this.state.ctxMenu.target);
-                }}>New File</div>
+                onClick={()=>this.createByContextMenu(FileType.FILE)}>New File</div>
             <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_2' && styles.hover)} 
                 onMouseEnter={()=> this.setState({hover:'menu_2'})} 
                 onMouseLeave={()=>this.setState({hover:undefined})}
-                onClick={()=>{
-                    const { ComponentsActions } = this.props;
-                    ComponentsActions.selectFile(this.state.ctxMenu.target);
-                    this.create(FileType.FOLDER, this.state.ctxMenu.target);
-                }}>New Folder</div>
+                onClick={()=>this.createByContextMenu(FileType.FOLDER)}>New Folder</div>
             <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_3' && styles.hover)} 
                 onMouseEnter={()=> this.setState({hover:'menu_3'})} 
                 onMouseLeave={()=>this.setState({hover:undefined})}
@@ -222,10 +231,7 @@ class ComponentsView extends React.Component<any> {
             <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_5' && styles.hover)} 
                 onMouseEnter={()=> this.setState({hover:'menu_5'})} 
                 onMouseLeave={()=>this.setState({hover:undefined})}
-                onClick={()=>{
-                    const { ComponentsActions } = this.props;
-                    ComponentsActions.deleteFile(this.state.ctxMenu.target);
-                }}>Delete</div>
+                onClick={()=>this.deleteFile()}>Delete</div>
         </div>
     }
 
@@ -233,7 +239,8 @@ class ComponentsView extends React.Component<any> {
         const { data } = this.props;
         return <div>
             {this.renderTitle()}
-            <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout">
+            <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout"
+                onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
                 <Resizeable
                     maxHeight={window.innerHeight-300}
                     minHeight={100}

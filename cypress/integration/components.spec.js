@@ -78,6 +78,7 @@ describe('Components', function() {
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('input[id="file-create-input"]').type('childFile{enter}')
         cy.get('div[id="components-body"]').should('have.text', 'newFolderchildFile')
+        cy.get('.scrollarea-content').eq(0).find('div').eq(3).should('have.css', 'padding-left', '15px')
     })
 
     it('Rename', function() {
@@ -93,5 +94,14 @@ describe('Components', function() {
         cy.get('.scrollarea-content').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(4).click()
         cy.get('div[id="components-body"]').should('have.text', '')
+    })
+
+    it('Create File from context menu in blank area', function() {
+        createFolder('newFolder')
+        cy.get('.scrollarea-content').eq(0).click()
+        cy.get('div[id="components-body"]').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="file-create-input"]').type('nextFile{enter}')
+        cy.get('.scrollarea-content').eq(0).find('div').eq(3).should('have.css', 'padding-left', '10px')
     })
 })
