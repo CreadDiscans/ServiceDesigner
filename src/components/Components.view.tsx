@@ -199,7 +199,11 @@ class ComponentsView extends React.Component<any> {
                 onClick={()=>this.rename()}>Rename</div>
             <div style={Object.assign({}, styles.contextMenuItem, this.state.hover === 'menu_5' && styles.hover)} 
                 onMouseEnter={()=> this.setState({hover:'menu_5'})} 
-                onMouseLeave={()=>this.setState({hover:undefined})}>Delete</div>
+                onMouseLeave={()=>this.setState({hover:undefined})}
+                onClick={()=>{
+                    const { ComponentsActions } = this.props;
+                    ComponentsActions.deleteFile(this.state.ctxMenu.target);
+                }}>Delete</div>
         </div>
     }
 

@@ -8,7 +8,7 @@ const SELECT_FILE = 'components/SELECT_FILE';
 const COLLAPSE_FILE = 'components/COLLAPSE_FILE';
 
 export const createFile = createAction(CREATE_FILE); // name, type
-export const deleteFile = createAction(DELETE_FILE); 
+export const deleteFile = createAction(DELETE_FILE); // ref item in files
 export const selectFile = createAction(SELECT_FILE); // ref item in files
 export const collapseFile = createAction(COLLAPSE_FILE);
 
@@ -70,6 +70,27 @@ export default handleActions({
     },
     [COLLAPSE_FILE]: (state, {payload}) => {
         state.files.forEach(item=> loop(item, target=> target.collapse = false))
+        return {
+            ...state
+        }
+    },
+    [DELETE_FILE]: (state, {payload}:any) => {
+        console.log(state, payload)
+        if (payload.parent) {
+            let idx = undefined;
+            payload.parent.children.forEach((item, i)=> {
+                if (item.id === payload.id) idx = i;
+            })
+            if (idx !== undefined) 
+                payload.children.splice(idx, 1);
+        } else {
+            let idx = undefined;
+            state.files.forEach((item, i)=> {
+                if (item.id === payload.id) idx = i; 
+            })
+            if (idx !== undefined) 
+                state.files.splice(idx, 1);
+        }
         return {
             ...state
         }
