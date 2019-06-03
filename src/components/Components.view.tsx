@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as componentsActions from './Components.action';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
+import { Theme } from '../utils/Theme';
 
 class ComponentsView extends React.Component<any> {
 
@@ -264,18 +265,18 @@ class ComponentsView extends React.Component<any> {
 
 const styles:any = {
     layout: {
-        color:'rgb(205,205,205)',
+        color:Theme.fontColor,
         fontSize:11,
         maxHeight: 0,
         transition: 'max-height 0.15s ease-out',
         overflow: 'hidden'
     },
     hover: {
-        backgroundColor:'rgb(56,56,56)',
+        backgroundColor:Theme.bgBodyHoverColor,
         cursor:'pointer'
     },
     active: {
-        backgroundColor:'#393938',
+        backgroundColor:Theme.bgBodyActiveColor,
     },
     arrow: {
         marginTop: -1,
@@ -283,8 +284,8 @@ const styles:any = {
         marginRight:5
     },
     group: {
-        backgroundColor:'#333333',
-        color:'#c1c1c1',
+        backgroundColor:Theme.bgHeadColor,
+        color:Theme.fontColor,
         fontSize:10,
         fontWeight:600,
         padding:2,
@@ -303,8 +304,8 @@ const styles:any = {
     },
     insertInput: {
         fontSize:12,
-        color:'#c1c1c1',
-        backgroundColor:'#393938',
+        color:Theme.fontColor,
+        backgroundColor:Theme.bgBodyActiveColor,
         borderWidth:0,
         outline:'none'
     },
@@ -312,8 +313,8 @@ const styles:any = {
         position: 'absolute',
         left:100,
         width: 100,
-        backgroundColor: 'rgb(51,51,51)',
-        color:'#c1c1c1',
+        backgroundColor: Theme.bgBodyColor,
+        color:Theme.fontColor,
         fontSize:11,
         padding: '5px 0px',
         zIndex:10,

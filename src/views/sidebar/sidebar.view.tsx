@@ -25,7 +25,6 @@ import { SidebarCss } from './css.view';
 import { SideTab } from '../../utils/constant';
 import { View } from '../view';
 import { PropertyView } from './property.view';
-import { ExplorerView } from '../explorer/explorer.view';
 
 export default class Sidebar extends View {
 
@@ -69,7 +68,6 @@ export default class Sidebar extends View {
                     <div draggable={true} style={styles.sidebarBorder} onDrag={e=> {
                         this.setState({sidebarWidth: e.screenX - 40});
                     }}></div>
-                    {tab === SideTab.Explorer && <ExplorerView />}
                     {tab === SideTab.Help && <SidebarHelp />}
                     {tab === SideTab.Folder && <SidebarFolder />}
                     {tab === SideTab.State && <SidebarState />}

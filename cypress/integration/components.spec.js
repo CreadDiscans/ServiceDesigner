@@ -1,8 +1,7 @@
 describe('Components', function() {
     beforeEach(function(){
         cy.visit('/')
-        cy.get('button[name="react"]').click()
-        cy.get('div[id="explorer"]').click()
+        cy.get('button[name="dev"]').click()
     })
 
     function createFolder(name) {

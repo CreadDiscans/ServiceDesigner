@@ -1,6 +1,7 @@
 import React from 'react';
-import ComponentsView from '../../components/Components.view';
-import ElementsView from '../../elements/Elements.view';
+import ComponentsView from '../components/Components.view';
+import ElementsView from '../elements/Elements.view';
+import { Theme } from '../utils/Theme';
 
 export class ExplorerView extends React.Component {
 
@@ -15,11 +16,11 @@ export class ExplorerView extends React.Component {
 
 const styles:any = {
     layout: {
-        backgroundColor:'#252525',
+        backgroundColor:Theme.bgBodyColor,
         height:'100%'
     },
     title:{
-        color:'rgb(205,205,205)',
+        color:Theme.fontColor,
         fontSize:10,
         padding:10,
         fontWeight:300
