@@ -1,35 +1,14 @@
 import React from 'react';
-import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io'
-import { View } from '../view';
 import ComponentsView from '../../components/Components.view';
-import { ExplorerElementsView } from './elements.view';
+import ElementsView from '../../elements/Elements.view';
 
-export class ExplorerView extends View {
-    
-    state:any = {
-        components: {
-            collapse: true
-        },
-        elements: {
-            collapse: true
-        }
-    }
-
-    collapse(target:string) {
-        this.state[target].collapse = !this.state[target].collapse;
-        this.setState({});
-    }
+export class ExplorerView extends React.Component {
 
     render() {
         return <div style={styles.layout}>
             <div style={styles.title}>EXPLORER</div>
             <ComponentsView />
-            <div style={styles.group} onClick={()=>this.collapse('elements')}>
-                {!this.state.elements.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
-                {this.state.elements.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-                ELEMENTS
-            </div>
-            <ExplorerElementsView style={this.state.elements.collapse && styles.groupHide} />
+            <ElementsView />
         </div>
     }
 }
@@ -44,21 +23,5 @@ const styles:any = {
         fontSize:10,
         padding:10,
         fontWeight:300
-    },
-    group: {
-        backgroundColor:'#333333',
-        color:'#c1c1c1',
-        fontSize:10,
-        fontWeight:600,
-        padding:2,
-        cursor:'pointer'
-    },
-    groupHide: {
-        maxHeight: 1000,
-        transition: 'max-height 0.25s ease-in'
-    },
-    arrow: {
-        marginTop: -3,
-        fontSize: 15
     }
 }

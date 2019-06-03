@@ -6,6 +6,7 @@ import { DiReact } from 'react-icons/di';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as componentsActions from './Components.action';
+import ScrollArea from 'react-scrollbar';
 
 class ComponentsView extends React.Component<any> {
 
@@ -209,6 +210,16 @@ class ComponentsView extends React.Component<any> {
 
     render() {
         const { data } = this.props;
+    
+        // const height = window.innerHeight - 300;
+    
+        let height:string|number = 'auto';
+        if (this.refs.layout) {
+            const layout:any = this.refs.layout;
+            if (layout.clientHeight >= window.innerHeight-300) {
+                height = window.innerHeight - 300;
+            }
+        }
         return <div>
             <div id="components"
                 style={styles.group} 
@@ -226,22 +237,26 @@ class ComponentsView extends React.Component<any> {
                     <span id="icon-unselect" key={3}><FaRegCircle style={styles.actionIcon} onClick={()=> this.unselect()}/></span>
                 ]}
             </div>
-            <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)}>
-                {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
-                {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
-                    {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
-                    {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
-                    <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-                        value={this.state.name} 
-                        onChange={(e)=>this.setState({name:e.target.value})}
-                        onBlur={()=>this.createComplete()} ref={'root'}
-                        onKeyPress={(e)=>{
-                            if (e.key === 'Enter') {
-                                this.createComplete()
-                            }
-                        }}
-                        autoComplete="off"/>
-                </div>}
+            <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout">
+
+                <ScrollArea style={{height:height}}
+                    verticalScrollbarStyle={{backgroundColor:'white'}}>
+                    {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
+                    {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
+                        {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
+                        {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
+                        <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
+                            value={this.state.name} 
+                            onChange={(e)=>this.setState({name:e.target.value})}
+                            onBlur={()=>this.createComplete()} ref={'root'}
+                            onKeyPress={(e)=>{
+                                if (e.key === 'Enter') {
+                                    this.createComplete()
+                                }
+                            }}
+                            autoComplete="off"/>
+                    </div>}
+                </ScrollArea>
             </div>
             {this.renderContextMenu()}
         </div>

@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import { pender } from 'redux-pender';
 import { FileType } from '../models/file';
 
 const CREATE_FILE = 'components/CREATE_FILE';
