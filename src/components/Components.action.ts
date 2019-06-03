@@ -28,8 +28,10 @@ export default handleActions({
             id: maxId + 1,
             name:payload.name, 
             type:payload.type, 
+            elements: {},
             collapse:false,
             parent: undefined,
+            state:{},
             children:[]
         }
         if (state.select === undefined) {
@@ -74,7 +76,6 @@ export default handleActions({
         }
     },
     [DELETE_FILE]: (state, {payload}:any) => {
-        console.log(state, payload)
         if (payload.parent) {
             let idx = undefined;
             payload.parent.children.forEach((item, i)=> {

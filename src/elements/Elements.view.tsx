@@ -3,8 +3,11 @@ import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io';
 import { DiReact, DiHtml5, DiBootstrap } from 'react-icons/di';
 import ScrollArea from 'react-scrollbar';
 import { connectRouter } from '../redux/connection';
+import { bindActionCreators } from 'redux';
+import * as elementsActions from './Elements.action';
+import { Theme } from './../utils/Theme';
 
-class ElementsView extends React.Component {
+class ElementsView extends React.Component<any> {
 
     state:any =  {
         hover:'',
@@ -74,44 +77,56 @@ class ElementsView extends React.Component {
         </div>
     }
 
+    renderTitle() {
+        return <div style={styles.group}>
+          <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
+            {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
+            {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
+            ELEMENTS
+          </span>
+        </div>
+    }
+
+    renderElement(elem) {
+        return <div>
+
+        </div>
+    }
+
     render() {
         let height = 0;
         if (this.refs.layout) {
             const layout:any = this.refs.layout
             height = window.innerHeight - layout.offsetTop;
         }
+        const { data } = this.props;
+        console.log(data);
         return <div>
-          <div style={styles.group}>
-            <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
-              {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
-              {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-              ELEMENTS
-            </span>
-          </div>
-          <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' >
-              <ScrollArea style={{height:height}}
-                  verticalScrollbarStyle={{backgroundColor:'white'}}>
-                  {/* {Object.keys(elements).map((group:string)=> this.elemGroup(group, elements[group]))} */}
-              </ScrollArea>
-          </div>
+            {this.renderTitle()}
+            <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' >
+                <ScrollArea style={{height:height}}
+                    verticalScrollbarStyle={{backgroundColor:'white'}}>
+                    {data.component && data.component.elements.chilren.map(elem=> this.renderElement(elem))}
+                </ScrollArea>
+            </div>
         </div>
     }
 }
 
 const styles:any = {
     layout: {
-        color:'rgb(205,205,205)',
+        color:Theme.bgBodyColor,
         fontSize:11,
         maxHeight: 0,
         transition: 'max-height 0.15s ease-out',
         overflow: 'hidden'
     },
     hover: {
-        backgroundColor:'rgb(56,56,56)',
+        backgroundColor:Theme.bgBodyHoverColor,
         cursor:'pointer'
     },
     active: {
-        backgroundColor:'#393938',
+        backgroundColor:Theme.bgBodyActiveColor,
     },
     arrow: {
         marginTop: -1,
@@ -119,8 +134,8 @@ const styles:any = {
         marginRight:5
     },
     group: {
-        backgroundColor:'#333333',
-        color:'#c1c1c1',
+        backgroundColor:Theme.bgHeadColor,
+        color:Theme.fontColor,
         fontSize:10,
         fontWeight:600,
         padding:2,
@@ -134,7 +149,13 @@ const styles:any = {
 }
 
 export default connectRouter(
-  (state) => ({}),
-  (dispatch) => ({}),
+  (state) => ({
+      data: {
+          elements: state.elements
+      }
+  }),
+  (dispatch) => ({
+      ElementsActions: bindActionCreators(elementsActions, dispatch)
+  }),
   ElementsView
 )

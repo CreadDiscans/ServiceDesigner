@@ -6,6 +6,7 @@ import { DiReact } from 'react-icons/di';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as componentsActions from './Components.action';
+import * as elementsActions from '../elements/Elements.action';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
 import { Theme } from '../utils/Theme';
@@ -54,8 +55,9 @@ class ComponentsView extends React.Component<any> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
-        const { ComponentsActions } = this.props;
-        ComponentsActions.selectFile(item)
+        const { ComponentsActions, ElementsActions } = this.props;
+        ComponentsActions.selectFile(item);
+        ElementsActions.choiceComponent(item);
     }
 
     clickItemRight(e, item) {
@@ -339,7 +341,8 @@ export default connectRouter(
         }
     }),
     (dispatch:any) => ({
-        ComponentsActions: bindActionCreators(componentsActions, dispatch)
+        ComponentsActions: bindActionCreators(componentsActions, dispatch),
+        ElementsActions: bindActionCreators(elementsActions, dispatch)
     }),
     ComponentsView
 )
