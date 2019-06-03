@@ -312,14 +312,15 @@ const styles:any = {
         position: 'absolute',
         left:100,
         width: 100,
-        backgroundColor: '#484747',
+        backgroundColor: 'rgb(51,51,51)',
         color:'#c1c1c1',
-        fontSize:12,
-        padding: '5px 0',
-        zIndex:10
+        fontSize:11,
+        padding: '5px 0px',
+        zIndex:10,
+        boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 1)'
     },
     contextMenuItem: {
-        padding: '0 5px'
+        padding: '2px 10px'
     }
 }
 

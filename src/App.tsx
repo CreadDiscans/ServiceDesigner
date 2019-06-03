@@ -4,6 +4,7 @@ import Home from './views/home.view'
 import Sidebar from './views/sidebar/sidebar.view'
 import { Intro } from './views/intro.view'
 import { FrameView } from './views/frame.view';
+import { HomeView } from './layout/Home.view';
 
 class App extends React.Component { 
 
@@ -11,6 +12,7 @@ class App extends React.Component {
         return (
         <div>
             <Switch>
+                <Route exact path="/dev"  component={HomeView} />
                 <Route exact path="/frame" component={FrameView} />
                 <Route path="*" render={()=> 
                     <Sidebar>

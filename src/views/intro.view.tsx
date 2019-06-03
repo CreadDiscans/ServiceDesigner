@@ -15,6 +15,8 @@ export class Intro extends View {
         } else if (e.target.name === 'load') {
             const result = await this.mainCtrl.import();
             if (this.props.history && result) this.props.history.push('/home');
+        } else if (e.target.name === 'dev') {
+            this.props.history.push('/dev')
         }
     }
 
@@ -28,6 +30,7 @@ export class Intro extends View {
                 <Button style={styles.button} color="info" name="react" onClick={this.handleClick}>React</Button>
                 <Button style={styles.button} color="info" name="react-native" onClick={this.handleClick}>React Native</Button>
                 <Button style={styles.button} color="info" name="load" onClick={this.handleClick}>Load Design</Button>
+                <div><Button style={styles.button} color="info" name="dev" onClick={this.handleClick}>DEV LAB</Button></div>
             </div>
         </div>
     }

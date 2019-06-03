@@ -49,7 +49,6 @@ export default class Sidebar extends View {
         return (
             <div style={{borderTop:'solid 1px #CCC'}}>
                 <div style={styles.sidebar}>
-                    {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Explorer)} />, SideTab.Explorer.toString())}
                     {this.icon(<FaQuestion onClick={()=>this.mainCtrl.setTab(SideTab.Help)}/>, SideTab.Help.toString())}
                     {this.icon(<FaFolder onClick={()=>this.mainCtrl.setTab(SideTab.Folder)} />, SideTab.Folder.toString())}
                     {this.icon(<FaReact onClick={()=>this.mainCtrl.setTab(SideTab.State)} />, SideTab.State.toString())}
