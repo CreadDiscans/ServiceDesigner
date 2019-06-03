@@ -5,15 +5,32 @@ const CREATE_FILE = 'components/CREATE_FILE';
 const DELETE_FILE = 'components/DELETE_FILE';
 const SELECT_FILE = 'components/SELECT_FILE';
 const COLLAPSE_FILE = 'components/COLLAPSE_FILE';
+const UPDATE_NAME = 'components/UPDATE_NAME';
+const READY_TO_CREATE = 'components/READY_TO_CREATE';
+const READY_TO_CREATE_BY_MENU = 'components/READY_TO_CREATE_BY_MENU';
+const READY_TO_RENAME = 'components/READY_TO_RENAME';
+const RESET = 'components/RESET';
+const RESET_FOCUS = 'components/RESET_FOCUS';
 
 export const createFile = createAction(CREATE_FILE); // name, type
 export const deleteFile = createAction(DELETE_FILE); // ref item in files
 export const selectFile = createAction(SELECT_FILE); // ref item in files
 export const collapseFile = createAction(COLLAPSE_FILE);
+export const updateName = createAction(UPDATE_NAME) // name
+export const readyToCreate = createAction(READY_TO_CREATE); // create, type, focus
+export const readyToCreateByMenu = createAction(READY_TO_CREATE_BY_MENU); // create, type, focus, select
+export const readyToRename = createAction(READY_TO_RENAME); // create, type, focus, rename, name
+export const reset = createAction(RESET);
+export const resetFocus = createAction(RESET_FOCUS);
 
 const initialState = {
     files:[],
-    select:undefined
+    select:undefined,
+    name:'',
+    create: false, 
+    type: undefined, 
+    focus:undefined, 
+    rename: 0
 }
 
 export default handleActions({
@@ -94,7 +111,13 @@ export default handleActions({
         return {
             ...state
         }
-    }
+    },
+    [UPDATE_NAME]: (state, {payload}:any) => ({...state, name:payload}),
+    [READY_TO_CREATE]: (state, {payload}:any) => ({...state, create:payload.create, type: payload.type, focus:payload.focus}),
+    [READY_TO_CREATE_BY_MENU]: (state, {payload}:any) => ({...state, create:payload.create, type: payload.type, focus:payload.focus, select:payload.select}),
+    [READY_TO_RENAME]: (state, {payload}:any) => ({...state, create:payload.create, type: payload.type, focus:payload.focus, name:payload.name, rename:payload.rename}),
+    [RESET]: (state,{payload}:any) => ({...state, create:false, type:undefined, focus:undefined, rename:0, name:''}),
+    [RESET_FOCUS]: (state,{payload}:any)=>({...state,focus:undefined})
 }, initialState)
 
 const loop = (item, handle) => {

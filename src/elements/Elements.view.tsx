@@ -5,17 +5,21 @@ import ScrollArea from 'react-scrollbar';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as elementsActions from './Elements.action';
+import * as layoutActions from '../layout/Layout.actions';
 import { Theme } from './../utils/Theme';
+import { ContextMenuType } from '../utils/constant';
 
 class ElementsView extends React.Component<any> {
 
     state:any =  {
         hover:'',
-        collapse: true
-    }
-
-    componentWillMount() {
-
+        collapse: true,
+        ctxMenu:{
+            x:0,
+            y:0,
+            display:'none',
+            target:undefined
+        },
     }
 
     clickItem(groupName:string) {
@@ -25,6 +29,18 @@ class ElementsView extends React.Component<any> {
             this.state.collapse.splice(this.state.collapse.indexOf(groupName), 1);
         }
         this.setState({})
+    }
+
+    clickItemRight(e, item) {
+        e.preventDefault();
+        e.stopPropagation();
+        const { LayoutActions } = this.props;
+        LayoutActions.showContextMenu({
+            x:e.clientX,
+            y:e.clientY,
+            type: ContextMenuType.Element,
+            target:item
+        })
     }
 
     clickElem(elem:Element) {
@@ -94,7 +110,7 @@ class ElementsView extends React.Component<any> {
     }
 
     render() {
-        let height = 0;
+        let height = 1000;
         if (this.refs.layout) {
             const layout:any = this.refs.layout
             height = window.innerHeight - layout.offsetTop;
@@ -103,7 +119,8 @@ class ElementsView extends React.Component<any> {
         console.log(data);
         return <div>
             {this.renderTitle()}
-            <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' >
+            <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' 
+                onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
                 <ScrollArea style={{height:height}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
                     {data.component && data.component.elements.chilren.map(elem=> this.renderElement(elem))}
@@ -149,13 +166,14 @@ const styles:any = {
 }
 
 export default connectRouter(
-  (state) => ({
-      data: {
-          elements: state.elements
-      }
-  }),
-  (dispatch) => ({
-      ElementsActions: bindActionCreators(elementsActions, dispatch)
-  }),
-  ElementsView
+    (state) => ({
+        data: {
+            elements: state.elements
+        }
+    }),
+    (dispatch) => ({
+            ElementsActions: bindActionCreators(elementsActions, dispatch),
+            LayoutActions: bindActionCreators(layoutActions, dispatch)
+    }),
+    ElementsView
 )

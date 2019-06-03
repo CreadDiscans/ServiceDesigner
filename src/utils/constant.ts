@@ -26,3 +26,8 @@ export enum HisotryAction {
     Undo = 'undo',
     Redo = 'redo'
 }
+
+export enum ContextMenuType {
+    Component = 'component',
+    Element = 'element'
+}
