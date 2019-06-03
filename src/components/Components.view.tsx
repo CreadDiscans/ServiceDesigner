@@ -140,7 +140,7 @@ class ComponentsView extends React.Component<any> {
             { data.components.select && data.components.select.id === item.id && this.state.create && <div style={{marginLeft:marginLeft}}>
                 {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
                 {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
-                <input id="file-create-input" style={styles.insertInput} 
+                <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
                     value={this.state.name} 
                     onChange={(e)=>this.setState({name:e.target.value})}
                     onBlur={()=>this.createComplete()} ref={'input_'+item.id}
@@ -209,7 +209,6 @@ class ComponentsView extends React.Component<any> {
 
     render() {
         const { data } = this.props;
-        console.log(data, this.state);
         return <div>
             <div id="components"
                 style={styles.group} 
@@ -232,7 +231,7 @@ class ComponentsView extends React.Component<any> {
                 {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
                     {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
                     {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
-                    <input id="file-create-input" style={styles.insertInput} 
+                    <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
                         value={this.state.name} 
                         onChange={(e)=>this.setState({name:e.target.value})}
                         onBlur={()=>this.createComplete()} ref={'root'}
