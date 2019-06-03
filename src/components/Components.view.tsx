@@ -11,12 +11,21 @@ class ComponentsView extends React.Component<any> {
 
     state =  {
         hover:0,
-        active:0,
         collapse: true,
         create: false,
         type: undefined,
         name: '',
         focus: undefined
+    }
+
+    compare(a,b) {
+        if (a.type == FileType.FILE && b.type == FileType.FOLDER) {
+            return 1;
+        } else if (a.type == FileType.FOLDER && b.type == FileType.FILE) {
+            return -1;
+        } else {
+            return a.name > b.name ? 1: -1
+        }
     }
 
     clickItem(item:File) {
@@ -25,7 +34,6 @@ class ComponentsView extends React.Component<any> {
         }
         const { ComponentsActions } = this.props;
         ComponentsActions.selectFile(item)
-        this.setState({active:item.id});
     }
 
     create(e:any, type:FileType) {
@@ -53,7 +61,8 @@ class ComponentsView extends React.Component<any> {
 
     unselect(e:any) {
         e.stopPropagation();
-        this.setState({active:0});
+        const { ComponentsActions } = this.props;
+        ComponentsActions.selectFile(undefined);
     }
 
     collapseAll(e:any) {
@@ -74,7 +83,7 @@ class ComponentsView extends React.Component<any> {
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === item.id && styles.hover, this.state.active == item.id && styles.active)} 
+                }, this.state.hover === item.id && styles.hover, data.components.select && data.components.select.id == item.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:item.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(item)}>
@@ -95,9 +104,10 @@ class ComponentsView extends React.Component<any> {
                         if (e.key === 'Enter') {
                             this.createComplete()
                         }
-                    }}/>
+                    }}
+                    autoComplete="off"/>
             </div> }
-            { item.collapse && item.children.map((child:File)=> this.recursive(child, dep+1))}
+            { item.collapse && item.children.sort(this.compare).map((child:File)=> this.recursive(child, dep+1))}
         </div>
     }
 
@@ -116,12 +126,13 @@ class ComponentsView extends React.Component<any> {
         return <div>
             <div id="components"
                 style={styles.group} 
-                onClick={()=>this.setState({collapse: !this.state.collapse})}
                 onMouseEnter={()=>this.setState({hover:-1})}
                 onMouseLeave={()=>this.setState({hover:undefined})}>
-                {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
-                {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-                COMPONENTS
+                <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
+                    {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
+                    {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
+                    COMPONENTS
+                </span>
                 {this.state.collapse && this.state.hover === -1 && [
                     <span id="icon-collapse" key={0}><FaRegClone style={styles.actionIcon} onClick={(e)=> this.collapseAll(e)}/></span>, 
                     <span id="icon-create-file" key={1}><FaRegFile style={styles.actionIcon} onClick={(e)=> this.create(e, FileType.FILE)} key={1}/></span>, 
@@ -130,7 +141,7 @@ class ComponentsView extends React.Component<any> {
                 ]}
             </div>
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)}>
-                {data.components.files.map((file:any)=> this.recursive(file, 0))}
+                {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
                 {this.state.create && !data.components.select && <div style={{marginLeft:10}}>
                     {this.state.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
                     {this.state.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
@@ -142,7 +153,8 @@ class ComponentsView extends React.Component<any> {
                             if (e.key === 'Enter') {
                                 this.createComplete()
                             }
-                        }}/>
+                        }}
+                        autoComplete="off"/>
                 </div>}
             </div>
         </div>

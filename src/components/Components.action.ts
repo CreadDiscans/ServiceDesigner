@@ -34,21 +34,27 @@ export default handleActions({
             children:[]
         }
         if (state.select === undefined) {
-            return {
-                ...state,
-                files: [...state.files, newFile]
+            if (state.files.filter(item=> item.name == newFile.name).length == 0) {
+                return {
+                    ...state,
+                    files: [...state.files, newFile]
+                }
             }
         } else {
             if (state.select.type == FileType.FILE) {
                 newFile.parent = state.select.parent;
-                newFile.parent.children.push(newFile)
+                if (newFile.parent.children.filter(item=> item.name == newFile.name).length == 0) {
+                    newFile.parent.children.push(newFile)
+                }
             } else if (state.select.type == FileType.FOLDER) {
                 newFile.parent = state.select;
-                state.select.children.push(newFile)
+                if (state.select.children.filter(item=> item.name == newFile.name).length == 0) {
+                    state.select.children.push(newFile)
+                }
             }
-            return {
-                ...state
-            }
+        }
+        return {
+            ...state
         }
     },
     [SELECT_FILE]: (state, {payload}) => {

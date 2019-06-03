@@ -65,6 +65,14 @@ describe('Components', function() {
         cy.get('div[id="components-body"]').should('have.text', 'newFolder')
     })
 
+    it('Unselect', function(){
+        createFolder('newFolder')
+        cy.get('div[id="components-body"]>div>div').click()
+        cy.get('span[id="icon-unselect"]>svg').click()
+        createFolder('nexfFolder')
+        cy.get('div[id="components-body"]>div>div').eq(1).should('have.css', 'padding-left', '10px')
+    })
+
     // it('Delete File', function() {
 
     // })
