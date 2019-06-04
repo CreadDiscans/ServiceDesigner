@@ -47,11 +47,11 @@ class ElementsView extends React.Component<any> {
 
     getLibIcon(type:ElementType) {
         if (type === ElementType.Html) {
-            return <DiHtml5 style={{...styles.arrow,...{color:'#de4b25'}}} key={0}/>
+            return <DiHtml5 style={{...styles.arrow,...{color:Theme.iconHtmlColor}}} key={0}/>
         } else if (type === ElementType.Reactstrap) {
-            return <DiBootstrap style={{...styles.arrow,...{color:'#563d7c'}}} key={0}/>
+            return <DiBootstrap style={{...styles.arrow,...{color:Theme.iconBootstrapColor}}} key={0}/>
         } else {
-            return <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} key={0}/>
+            return <DiReact style={{...styles.arrow,...{color:Theme.iconReactColor}}} key={0}/>
         }
     }
 
