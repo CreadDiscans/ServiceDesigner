@@ -24,7 +24,6 @@ class ElementsView extends React.Component<any> {
 
     clickItem(item) {
         const { ElementsActions } = this.props;
-        item.collapse = !item.collapse;
         ElementsActions.selectElement(item);
     }
 
@@ -56,42 +55,6 @@ class ElementsView extends React.Component<any> {
         }
     }
 
-    // elemGroup(name:string, items:any) {
-    //     return <div key={name} >
-    //         <div
-    //             style={Object.assign({
-    //                 paddingTop:1,
-    //                 paddingBottom:1,
-    //                 paddingLeft:10
-    //             }, this.state.hover === name && styles.hover)} 
-    //             onMouseEnter={()=>this.setState({hover:name})}
-    //             onMouseLeave={()=>this.setState({hover:undefined})}
-    //             onClick={()=>this.clickItem(name)}>
-    //             {this.state.collapse.indexOf(name) === -1 ?
-    //                 <IoMdArrowDropright style={styles.arrow} /> :
-    //                 <IoMdArrowDropdown style={styles.arrow} /> }
-    //             {name}
-    //         </div>
-    //         { this.state.collapse.indexOf(name) !== -1 && items.map((item:Element)=> this.elemItem(item, name))}
-    //     </div>
-    // }
-
-    // elemItem(elem, group:string) {
-    //     return <div key={elem.name}>
-    //         <div style={Object.assign({
-    //             paddingTop:1,
-    //             paddingBottom:1,
-    //             paddingLeft:15
-    //         }, this.state.hover === elem.name && styles.hover)}
-    //         onMouseEnter={()=>this.setState({hover:elem.name})}
-    //         onMouseLeave={()=>this.setState({hover:undefined})}
-    //         onClick={()=> this.clickElem(elem)}>
-    //             {this.getLibIcon(group)}
-    //             {elem.name}
-    //         </div>
-    //     </div>
-    // }
-
     renderTitle() {
         const { data } = this.props;
         return <div id="element-title" style={styles.group}>
@@ -107,20 +70,23 @@ class ElementsView extends React.Component<any> {
 
     renderElement(elem, dep:number=0) {
         const { data } = this.props; 
-        return <div key={elem.id}
-            style={Object.assign({
-                color:Theme.fontColor,
-                paddingTop:1,
-                paddingBottom:1,
-                paddingLeft:10+dep*5
-            }, this.state.hover === elem.id && styles.hover, data.elements.select && data.elements.select.id == elem.id && styles.active)} 
-            onMouseEnter={()=> this.setState({hover:elem.id})}
-            onMouseLeave={()=> this.setState({hover:undefined})}
-            onClick={()=> this.clickItem(elem)}
-            onContextMenu={(e)=>this.clickItemRight(e, elem)}>
-            {this.getLibIcon(elem.lib)}
-            {elem.tag}
-            {elem.prop.name !== '' && '[' + elem.prop.name + ']'}
+        return <div key={elem.id}>
+            <div style={Object.assign({
+                    color:Theme.fontColor,
+                    paddingTop:1,
+                    paddingBottom:1,
+                    paddingLeft:10+dep*5
+                }, this.state.hover === elem.id && styles.hover, data.elements.select && data.elements.select.id == elem.id && styles.active)} 
+                onMouseEnter={()=> this.setState({hover:elem.id})}
+                onMouseLeave={()=> this.setState({hover:undefined})}
+                onClick={()=> this.clickItem(elem)}
+                onContextMenu={(e)=>this.clickItemRight(e, elem)}>
+                {this.getLibIcon(elem.lib)}
+                {elem.tag}
+                {elem.prop.name !== '' && '[' + elem.prop.name + ']'}
+                {this.renderInput(elem)}
+            </div>
+            {elem.children.map(item=> this.renderElement(item, dep+1))}
         </div>
     }
 
@@ -148,7 +114,6 @@ class ElementsView extends React.Component<any> {
             height = window.innerHeight - layout.offsetTop;
         }
         const { data } = this.props;
-        console.log(data);
         return <div>
             {this.renderTitle()}
             <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' 
@@ -177,6 +142,7 @@ const styles:any = {
     },
     active: {
         backgroundColor:Theme.bgBodyActiveColor,
+        cursor: 'pointer'
     },
     arrow: {
         marginTop: -1,

@@ -26,15 +26,14 @@ const initialState = {
         style: '',
         for: ''
       },
-      children: [],
-      collapse:false
+      children: []
     }
   },
   select:undefined,
   insert: {
     ing: false,
     name: '',
-    type: '',
+    type: ''
   }
 
 }
@@ -80,8 +79,7 @@ export default handleActions({
         style: '',
         for: ''
       },
-      children: [],
-      collapse:false
+      children: []
     }
     if (state.select) {
       newElem['parent'] = state.select;
@@ -101,12 +99,12 @@ export default handleActions({
   },
   [DELETE_ELEMENT]: (state, {payload}:any)=> {
     let idx;
-    payload.parent.forEach((item,i)=> {
+    payload.parent.children.forEach((item,i)=> {
       if (item.id === payload.id) {
         idx = i;
       }
     });
-    payload.parent.splice(idx, 1);
+    payload.parent.children.splice(idx, 1);
     return {
       ...state
     }
