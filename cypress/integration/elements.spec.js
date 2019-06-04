@@ -11,7 +11,16 @@ describe('Components', function() {
         cy.get('.scrollarea-content').eq(0).click()
     }
 
-    it('Create Elements', function(){
+    it('Choice Component', function(){
         createComponent('new')
+        cy.get('div[id="element-title"]').should('have.text', 'new')
+    })
+
+    it('Add Element', function() {
+        createComponent('new')
+        cy.get('div[id="element-title"]').siblings('div').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="element-input"]').type('div{enter}')
+        cy.get('.scrollarea-content').eq(1).should('have.text', 'div')
     })
 })

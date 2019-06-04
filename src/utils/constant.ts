@@ -31,3 +31,9 @@ export enum ContextMenuType {
     Component = 'component',
     Element = 'element'
 }
+
+export enum ElementType {
+    Html = 'html',
+    Reactstrap = 'reactstrap',
+    ReactNative = 'reactnative'
+}

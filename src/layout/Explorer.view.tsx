@@ -4,9 +4,10 @@ import ElementsView from '../elements/Elements.view';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
 import { connectRouter } from '../redux/connection';
-import { ContextMenuType } from '../utils/constant';
+import { ContextMenuType, ElementType } from '../utils/constant';
 import * as layoutActions from './Layout.actions';
 import * as componentsActions from '../components/Components.action';
+import * as elementsActions from '../elements/Elements.action';
 import { bindActionCreators } from 'redux';
 import { FileType } from '../models/file';
 
@@ -47,7 +48,7 @@ class ExplorerView extends React.Component<any> {
             },{
                 name:'Rename',
                 click: ()=> {
-                    const { data, ComponentsActions } = this.props;
+                    const { data, ComponentsActions, LayoutActions } = this.props;
                     if (data.layout.contextMenu.target) {
                         ComponentsActions.readyToRename({
                             name: data.layout.contextMenu.target.name,
@@ -57,12 +58,14 @@ class ExplorerView extends React.Component<any> {
                             rename: data.layout.contextMenu.target.id
                         });
                     }
+                    LayoutActions.hideContextMenu();
                 } 
             },{
                 name:'Delete',
                 click: ()=> {
-                    const { data, ComponentsActions } = this.props;
+                    const { data, ComponentsActions, LayoutActions } = this.props;
                     ComponentsActions.deleteFile(data.layout.contextMenu.target);
+                    LayoutActions.hideContextMenu();
                 }
             }
         ],
@@ -70,22 +73,30 @@ class ExplorerView extends React.Component<any> {
             {
                 name: 'Add HTML',
                 click: ()=> {
-
+                    const { ElementsActions, LayoutActions } = this.props;
+                    ElementsActions.readyToAdd(ElementType.Html);
+                    LayoutActions.hideContextMenu();
                 }
             }, {
                 name: 'Add Reactstrap',
                 click: ()=> {
-
+                    const { ElementsActions, LayoutActions } = this.props;
+                    ElementsActions.readyToAdd(ElementType.Reactstrap);
+                    LayoutActions.hideContextMenu();
                 }
             }, {
                 name: 'Add React Native',
                 click: ()=> {
-
+                    const { ElementsActions, LayoutActions } = this.props;
+                    ElementsActions.readyToAdd(ElementType.ReactNative);
+                    LayoutActions.hideContextMenu();
                 }
             }, {
                 name: 'Delete',
                 click: ()=> {
-
+                    const { data, ElementsActions, LayoutActions } = this.props;
+                    ElementsActions.deleteElement(data.layout.contextMenu.target);
+                    LayoutActions.hideContextMenu();
                 }
             }
         ]
@@ -175,7 +186,8 @@ export default connectRouter(
     }),
     (dispatch)=> ({
         LayoutActions: bindActionCreators(layoutActions, dispatch),
-        ComponentsActions: bindActionCreators(componentsActions, dispatch)
+        ComponentsActions: bindActionCreators(componentsActions, dispatch),
+        ElementsActions: bindActionCreators(elementsActions, dispatch)
     }),
     ExplorerView
 )
