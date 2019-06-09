@@ -118,7 +118,7 @@ class ExplorerView extends React.Component<any> {
                 top: data.layout.contextMenu.y,
                 display:data.layout.contextMenu.display}}}>
             
-            {data.layout.contextMenu.type && this.menuItems[data.layout.contextMenu.type]
+            { this.menuItems[data.layout.contextMenu.type]
                 .map(menu=> <div key={menu.name}
                     style={Object.assign({}, styles.contextMenuItem, this.state.hover === menu && styles.hover)}
                     onMouseEnter={()=> this.setState({hover:menu})}
@@ -130,6 +130,7 @@ class ExplorerView extends React.Component<any> {
     }
 
     render() {
+        const { data } = this.props;
         return <div style={{display:'inline-block'}}>
             <Resizable defaultSize={{width:200, height:window.innerHeight}}
                 maxWidth={window.innerWidth-200}
@@ -142,7 +143,8 @@ class ExplorerView extends React.Component<any> {
                     <ElementsView />
                 </div>
             </Resizable>
-            {this.renderContextMenu()}
+            {(data.layout.contextMenu.type === ContextMenuType.Component ||
+                data.layout.contextMenu.type === ContextMenuType.Element)  && this.renderContextMenu()}
         </div>
     }
 }

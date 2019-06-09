@@ -29,7 +29,8 @@ export enum HisotryAction {
 
 export enum ContextMenuType {
     Component = 'component',
-    Element = 'element'
+    Element = 'element',
+    Property = 'property'
 }
 
 export enum ElementType {

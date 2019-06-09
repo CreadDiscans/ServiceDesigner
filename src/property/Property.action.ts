@@ -26,7 +26,10 @@ const initialState = {
 }
 
 export default handleActions({
-    [CHOICE_ELEMENT]: (state, {payload}:any) => ({...state, element:payload}),
+    [CHOICE_ELEMENT]: (state, {payload}:any) => {
+        if (payload === undefined) return initialState
+        return {...state, element:payload}
+    },
     [CREATE_PROPERTY]: (state, {payload}:any) => {
         if (state.element.id === -1) return {...state}
         state.element.prop[payload.name] = {

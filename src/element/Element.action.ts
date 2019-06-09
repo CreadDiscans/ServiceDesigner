@@ -70,11 +70,7 @@ export default handleActions({
       id: maxId + 1,
       tag: state.insert.name,
       lib: state.insert.type,
-      prop: {
-        name: '',
-        style: '',
-        for: ''
-      },
+      prop: {},
       children: []
     }
     if (state.select) {

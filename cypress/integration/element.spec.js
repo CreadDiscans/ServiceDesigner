@@ -1,4 +1,4 @@
-describe('Components', function() {
+describe('Elements', function() {
     beforeEach(function(){
         cy.visit('/')
         cy.get('button[name="dev"]').click()

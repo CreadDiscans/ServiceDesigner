@@ -1,24 +1,39 @@
 import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
+import { bindActionCreators } from 'redux';
+import * as propertyActions from './Property.action';
+import * as layoutActions from '../layout/Layout.actions';
+import { ContextMenuType } from '../utils/constant';
+import ScrollArea from 'react-scrollbar'
 
-class PropertyView extends React.Component {
+class PropertyView extends React.Component<any> {
+
+    clickItemRight(e, item) {
+        e.preventDefault();
+        e.stopPropagation();
+        const { LayoutActions } = this.props;
+        LayoutActions.showContextMenu({
+            x: e.clientX,
+            y: e.clientY,
+            type: ContextMenuType.Property,
+            target: item
+        })
+    }
 
     render() {
-        return <div>
+        const { data } = this.props;
+        console.log(data);
+        return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
-            <div style={styles.item}>
-                <span style={styles.itemName}>item</span> 
-                <span style={styles.itemType}>type</span>
-            </div>
-            <div style={styles.item}>
-                <span style={styles.itemName}>item</span> 
-                <span style={styles.itemType}>type</span>
-            </div>
-            <div style={styles.item}>
-                <span style={styles.itemName}>item</span> 
-                <span style={styles.itemType}>type</span>
-            </div>
+            <ScrollArea style={{height:500}} verticalScrollbarStyle={{backgroundColor:'white'}}>
+                {Object.keys(data.property.element.prop).map(name=> 
+                    <div style={styles.item} key={name}>
+                        <span style={styles.itemName}>{name}</span> 
+                        <span style={styles.itemType}>{data.property.element.prop[name].type}</span>
+                    </div>
+                )}
+            </ScrollArea>
         </div>
     }
 }
@@ -49,7 +64,14 @@ const styles:any = {
 }
 
 export default connectRouter(
-    (state)=>({}),
-    (dispatch)=> ({}),
+    (state)=> ({
+        data: {
+            property: state.property
+        }
+    }),
+    (dispatch)=> ({
+        PropertyActions: bindActionCreators(propertyActions, dispatch),
+        LayoutActions: bindActionCreators(layoutActions, dispatch)
+    }),
     PropertyView
 )

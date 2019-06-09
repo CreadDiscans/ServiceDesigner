@@ -5,7 +5,7 @@ import EditorView from './Editor.view';
 
 export class HomeView extends React.Component {
     render() {
-        return <div style={styles.layout}>
+        return <div style={styles.layout}  onContextMenu={(e)=> e.preventDefault()}>
             <ExplorerView />
             <div style={styles.main}>
                 <iframe></iframe>
