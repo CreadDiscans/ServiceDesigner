@@ -1,16 +1,16 @@
 import { createAction, handleActions } from 'redux-actions';
 import { FileType } from '../models/file';
 
-const CREATE_FILE = 'components/CREATE_FILE';
-const DELETE_FILE = 'components/DELETE_FILE';
-const SELECT_FILE = 'components/SELECT_FILE';
-const COLLAPSE_FILE = 'components/COLLAPSE_FILE';
-const UPDATE_NAME = 'components/UPDATE_NAME';
-const READY_TO_CREATE = 'components/READY_TO_CREATE';
-const READY_TO_CREATE_BY_MENU = 'components/READY_TO_CREATE_BY_MENU';
-const READY_TO_RENAME = 'components/READY_TO_RENAME';
-const RESET = 'components/RESET';
-const RESET_FOCUS = 'components/RESET_FOCUS';
+const CREATE_FILE = 'component/CREATE_FILE';
+const DELETE_FILE = 'component/DELETE_FILE';
+const SELECT_FILE = 'component/SELECT_FILE';
+const COLLAPSE_FILE = 'component/COLLAPSE_FILE';
+const UPDATE_NAME = 'component/UPDATE_NAME';
+const READY_TO_CREATE = 'component/READY_TO_CREATE';
+const READY_TO_CREATE_BY_MENU = 'component/READY_TO_CREATE_BY_MENU';
+const READY_TO_RENAME = 'component/READY_TO_RENAME';
+const RESET = 'component/RESET';
+const RESET_FOCUS = 'component/RESET_FOCUS';
 
 export const createFile = createAction(CREATE_FILE); // name, type
 export const deleteFile = createAction(DELETE_FILE); // ref item in files

@@ -5,7 +5,7 @@ import { FaRegFolder, FaRegFile, FaRegClone, FaRegCircle } from 'react-icons/fa'
 import { DiReact } from 'react-icons/di';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
-import * as componentsActions from './Components.action';
+import * as componentActions from './Component.action';
 import * as elementsActions from '../elements/Elements.action';
 import * as layoutActions from '../layout/Layout.actions';
 import * as propertiesActions from '../properties/Property.actions';
@@ -14,7 +14,7 @@ import Resizeable from 're-resizable';
 import { Theme } from '../utils/Theme';
 import { ContextMenuType } from '../utils/constant';
 
-class ComponentsView extends React.Component<any> {
+class ComponentView extends React.Component<any> {
 
     state:any =  {
         hover:0,
@@ -35,8 +35,8 @@ class ComponentsView extends React.Component<any> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
-        const { ComponentsActions, ElementsActions, PropertiesActions } = this.props;
-        ComponentsActions.selectFile(item);
+        const { ComponentActions, ElementsActions, PropertiesActions } = this.props;
+        ComponentActions.selectFile(item);
         ElementsActions.choiceComponent(item);
         PropertiesActions.reset();
     }
@@ -44,8 +44,8 @@ class ComponentsView extends React.Component<any> {
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutActions, ComponentsActions } = this.props;
-        ComponentsActions.selectFile(item);
+        const { LayoutActions, ComponentActions } = this.props;
+        ComponentActions.selectFile(item);
         LayoutActions.showContextMenu({
             x:e.clientX,
             y:e.clientY,
@@ -55,54 +55,54 @@ class ComponentsView extends React.Component<any> {
     }
 
     create(type:FileType) {
-        const { data, ComponentsActions } = this.props;
+        const { data, ComponentActions } = this.props;
         let focus;
-        if (data.components.select === undefined) {
+        if (data.component.select === undefined) {
             focus = 'root'
         } else {
-            focus = 'input_'+data.components.select.id
+            focus = 'input_'+data.component.select.id
         }
-        ComponentsActions.readyToCreate({create: true, type: type, focus:focus});
+        ComponentActions.readyToCreate({create: true, type: type, focus:focus});
     }
 
     createComplete() {
-        const { data, ComponentsActions } = this.props;
-        if (data.components.name !== '') {
-            if (data.components.rename === 0) {
-                ComponentsActions.createFile({
-                    name: data.components.name,
-                    type: data.components.type
+        const { data, ComponentActions } = this.props;
+        if (data.component.name !== '') {
+            if (data.component.rename === 0) {
+                ComponentActions.createFile({
+                    name: data.component.name,
+                    type: data.component.type
                 })
             } else {
-                data.components.select.name = data.components.name
+                data.component.select.name = data.component.name
             }
         }
-        ComponentsActions.reset();
+        ComponentActions.reset();
     }
 
     unselect() {
-        const { ComponentsActions } = this.props;
-        ComponentsActions.selectFile(undefined);
+        const { ComponentActions } = this.props;
+        ComponentActions.selectFile(undefined);
     }
 
     collapseAll() {
-        const { ComponentsActions } = this.props;
-        ComponentsActions.collapseFile();
+        const { ComponentActions } = this.props;
+        ComponentActions.collapseFile();
     }
 
     recursive(item:any, dep:number) {
-        const { data, ComponentsActions } = this.props;
+        const { data, ComponentActions } = this.props;
         let marginLeft = 15+dep*5;
-        if (data.components.select && data.components.select.type == FileType.FILE) {
+        if (data.component.select && data.component.select.type == FileType.FILE) {
             marginLeft -= 5;
         }
         return <div key={item.id}>
-            {data.components.rename !== item.id && <div
+            {data.component.rename !== item.id && <div
                 style={Object.assign({
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === item.id && styles.hover, data.components.select && data.components.select.id == item.id && styles.active)} 
+                }, this.state.hover === item.id && styles.hover, data.component.select && data.component.select.id == item.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:item.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(item)}
@@ -113,12 +113,12 @@ class ComponentsView extends React.Component<any> {
                 ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 {item.name}
             </div>}
-            { data.components.select && data.components.select.id === item.id && data.components.create && <div style={{marginLeft:marginLeft}}>
-                {data.components.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
-                {data.components.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
+            { data.component.select && data.component.select.id === item.id && data.component.create && <div style={{marginLeft:marginLeft}}>
+                {data.component.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
+                {data.component.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-                    value={data.components.name} 
-                    onChange={(e)=>ComponentsActions.updateName(e.target.value)}
+                    value={data.component.name} 
+                    onChange={(e)=>ComponentActions.updateName(e.target.value)}
                     onBlur={()=>this.createComplete()} ref={'input_'+item.id}
                     onKeyPress={(e)=>{
                         if (e.key === 'Enter') {
@@ -132,13 +132,13 @@ class ComponentsView extends React.Component<any> {
     }
 
     componentDidUpdate() {
-        const { data, ComponentsActions } = this.props;
-        if (data.components.focus !== undefined) {
-            const focus:any = data.components.focus;
+        const { data, ComponentActions } = this.props;
+        if (data.component.focus !== undefined) {
+            const focus:any = data.component.focus;
             const input:any = this.refs[focus];
             if (input) {
                 input.focus();
-                ComponentsActions.resetFocus();
+                ComponentActions.resetFocus();
             }
         }
     }
@@ -163,7 +163,7 @@ class ComponentsView extends React.Component<any> {
     }
 
     render() {
-        const { data, ComponentsActions } = this.props;
+        const { data, ComponentActions } = this.props;
         return <div>
             {this.renderTitle()}
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout"
@@ -174,13 +174,13 @@ class ComponentsView extends React.Component<any> {
                     enable={{top:true, bottom:true, left:false, right:false}}>
                     <ScrollArea style={{height:this.refs.layout ? this.refs.layout['clientHeight'] : 'auto', userSelect:'none'}}
                         verticalScrollbarStyle={{backgroundColor:'white'}}>
-                        {data.components.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
-                        {data.components.create && !data.components.select && <div style={{marginLeft:10}}>
-                            {data.components.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
-                            {data.components.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
+                        {data.component.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
+                        {data.component.create && !data.component.select && <div style={{marginLeft:10}}>
+                            {data.component.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
+                            {data.component.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                             <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-                                value={data.components.name} 
-                                onChange={(e)=>ComponentsActions.updateName(e.target.value)}
+                                value={data.component.name} 
+                                onChange={(e)=>ComponentActions.updateName(e.target.value)}
                                 onBlur={()=>this.createComplete()} ref={'root'}
                                 onKeyPress={(e)=>{
                                     if (e.key === 'Enter') {
@@ -247,15 +247,15 @@ const styles:any = {
 export default connectRouter(
     (state:any)=> ({
         data: {
-            components: state.components,
+            component: state.component,
             layout: state.layout
         }
     }),
     (dispatch:any) => ({
-        ComponentsActions: bindActionCreators(componentsActions, dispatch),
+        ComponentActions: bindActionCreators(componentActions, dispatch),
         ElementsActions: bindActionCreators(elementsActions, dispatch),
         LayoutActions: bindActionCreators(layoutActions, dispatch),
         PropertiesActions: bindActionCreators(propertiesActions, dispatch)
     }),
-    ComponentsView
+    ComponentView
 )
