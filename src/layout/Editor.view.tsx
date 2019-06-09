@@ -2,8 +2,8 @@ import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
-import PropertiesView from '../properties/Properties.view';
-import PropertyDetailView from '../properties/PropertyDetail.view';
+import PropertiesView from '../property/Property.view';
+import PropertyDetailView from '../property/PropertyDetail.view';
 
 class EditorView extends React.Component {
 

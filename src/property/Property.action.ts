@@ -1,11 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 
-const CHOICE_ELEMENT = 'properties/CHOICE_ELEMENT';
-const CREATE_PROPERTY = 'properties/CREATE_PROPERTY';
-const DELETE_PROPERTY = 'properties/DELETE_PROPERTY';
-const SELECT_PROPERTY = 'properties/SELECT_PROPERTY';
-const UPDATE_PROPERTY = 'properties/UPDATE_PROPERTY';
-const RESET = 'properties/RESET';
+const CHOICE_ELEMENT = 'property/CHOICE_ELEMENT';
+const CREATE_PROPERTY = 'property/CREATE_PROPERTY';
+const DELETE_PROPERTY = 'property/DELETE_PROPERTY';
+const SELECT_PROPERTY = 'property/SELECT_PROPERTY';
+const UPDATE_PROPERTY = 'property/UPDATE_PROPERTY';
+const RESET = 'property/RESET';
 
 export const choiceElement = createAction(CHOICE_ELEMENT);      // element
 export const createProperty = createAction(CREATE_PROPERTY);    // name, value, type, variable, 

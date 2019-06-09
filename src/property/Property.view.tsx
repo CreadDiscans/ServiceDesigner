@@ -2,7 +2,7 @@ import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 
-class PropertiesView extends React.Component {
+class PropertyView extends React.Component {
 
     render() {
         return <div>
@@ -51,5 +51,5 @@ const styles:any = {
 export default connectRouter(
     (state)=>({}),
     (dispatch)=> ({}),
-    PropertiesView
+    PropertyView
 )
