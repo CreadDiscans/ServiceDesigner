@@ -45,7 +45,7 @@ export default handleActions({
             id: maxId + 1,
             name:payload.name, 
             type:payload.type, 
-            elements: {},
+            element: {},
             collapse:false,
             parent: undefined,
             state:{},

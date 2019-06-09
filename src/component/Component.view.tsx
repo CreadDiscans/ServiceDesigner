@@ -6,7 +6,7 @@ import { DiReact } from 'react-icons/di';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as componentActions from './Component.action';
-import * as elementsActions from '../elements/Elements.action';
+import * as elementActions from '../element/Element.action';
 import * as layoutActions from '../layout/Layout.actions';
 import * as propertiesActions from '../properties/Property.actions';
 import ScrollArea from 'react-scrollbar';
@@ -35,9 +35,9 @@ class ComponentView extends React.Component<any> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
-        const { ComponentActions, ElementsActions, PropertiesActions } = this.props;
+        const { ComponentActions, ElementActions, PropertiesActions } = this.props;
         ComponentActions.selectFile(item);
-        ElementsActions.choiceComponent(item);
+        ElementActions.choiceComponent(item);
         PropertiesActions.reset();
     }
 
@@ -253,7 +253,7 @@ export default connectRouter(
     }),
     (dispatch:any) => ({
         ComponentActions: bindActionCreators(componentActions, dispatch),
-        ElementsActions: bindActionCreators(elementsActions, dispatch),
+        ElementActions: bindActionCreators(elementActions, dispatch),
         LayoutActions: bindActionCreators(layoutActions, dispatch),
         PropertiesActions: bindActionCreators(propertiesActions, dispatch)
     }),

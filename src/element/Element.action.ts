@@ -1,11 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import { FileType } from '../models/file';
 
-const CHOICE_COMPONENT = 'elements/CHOICE_COMPONENT';
-const READY_TO_ADD = 'elements/READY_TO_ADD';
-const UPDATE_NAME = 'elements/UPDATE_NAME';
-const COMPLETE_ADD = 'elements/COMPLETE_ADD';
-const DELETE_ELEMENT = 'elements/DELETE_ELEMENT';
+const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
+const READY_TO_ADD = 'element/READY_TO_ADD';
+const UPDATE_NAME = 'element/UPDATE_NAME';
+const COMPLETE_ADD = 'element/COMPLETE_ADD';
+const DELETE_ELEMENT = 'element/DELETE_ELEMENT';
 const SELECT_ELEMENT = 'elments/SELECT_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
@@ -17,7 +17,7 @@ export const selectElement = createAction(SELECT_ELEMENT); // element
 
 const initialState = {
   component: {
-    elements:{
+    element:{
       id:-1,
       tag:'',
       lib:'',
@@ -37,8 +37,8 @@ const initialState = {
 export default handleActions({
   [CHOICE_COMPONENT]: (state, {payload}:any) => {
     if (payload.type == FileType.FILE)  {
-      if (payload.elements.id === undefined) {
-        payload.elements = {
+      if (payload.element.id === undefined) {
+        payload.element = {
           id:0,
           tag:'root',
           children: []
@@ -61,7 +61,7 @@ export default handleActions({
   [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
   [COMPLETE_ADD]: (state, {payload}:any)=>{
     let maxId = 0;
-    loop(state.component.elements, (target)=> {
+    loop(state.component.element, (target)=> {
       if (maxId < target.id) {
         maxId = target.id
       }
@@ -81,8 +81,8 @@ export default handleActions({
       newElem['parent'] = state.select;
       state.select.children.push(newElem);
     } else {
-      newElem['parent'] = state.component.elements;
-      state.component.elements.children.push(newElem);
+      newElem['parent'] = state.component.element;
+      state.component.element.children.push(newElem);
     }
     return {
       ...state,

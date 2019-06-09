@@ -4,13 +4,13 @@ import { DiReact, DiHtml5, DiBootstrap } from 'react-icons/di';
 import ScrollArea from 'react-scrollbar';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
-import * as elementsActions from './Elements.action';
+import * as elementActions from './Element.action';
 import * as layoutActions from '../layout/Layout.actions';
 import * as propertiesActions from '../properties/Property.actions';
-import { Theme } from './../utils/Theme';
+import { Theme } from '../utils/Theme';
 import { ContextMenuType, ElementType } from '../utils/constant';
 
-class ElementsView extends React.Component<any> {
+class ElementView extends React.Component<any> {
 
     state:any =  {
         hover:'',
@@ -24,16 +24,16 @@ class ElementsView extends React.Component<any> {
     }
 
     clickItem(item) {
-        const { ElementsActions, PropertiesActions } = this.props;
-        ElementsActions.selectElement(item);
+        const { ElementActions, PropertiesActions } = this.props;
+        ElementActions.selectElement(item);
         PropertiesActions.choiceElement(item);
     }
 
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutActions, ElementsActions, PropertiesActions } = this.props;
-        ElementsActions.selectElement(item);
+        const { LayoutActions, ElementActions, PropertiesActions } = this.props;
+        ElementActions.selectElement(item);
         PropertiesActions.choiceElement(item);
         LayoutActions.showContextMenu({
             x:e.clientX,
@@ -44,8 +44,8 @@ class ElementsView extends React.Component<any> {
     }
 
     completeAdd() {
-        const { ElementsActions } = this.props;
-        ElementsActions.completeAdd()
+        const { ElementActions } = this.props;
+        ElementActions.completeAdd()
     }
 
     getLibIcon(type:ElementType) {
@@ -64,8 +64,8 @@ class ElementsView extends React.Component<any> {
           <span onClick={()=>this.setState({collapse: !this.state.collapse})}>
             {!this.state.collapse && <IoMdArrowDropright style={styles.arrow} /> } 
             {this.state.collapse && <IoMdArrowDropdown style={styles.arrow} /> } 
-            {data.elements.component.name ? 
-                data.elements.component.name :
+            {data.element.component.name ? 
+                data.element.component.name :
                 'ELEMENTS'}
           </span>
         </div>
@@ -79,7 +79,7 @@ class ElementsView extends React.Component<any> {
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === elem.id && styles.hover, data.elements.select && data.elements.select.id == elem.id && styles.active)} 
+                }, this.state.hover === elem.id && styles.hover, data.element.select && data.element.select.id == elem.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:elem.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(elem)}
@@ -94,13 +94,13 @@ class ElementsView extends React.Component<any> {
     }
 
     renderInput(item) {
-        const { data, ElementsActions } = this.props;
+        const { data, ElementActions } = this.props;
         return <div style={{marginLeft:10}}>
-            {data.elements.insert.ing && (item ? item.id === data.elements.select.id : data.elements.select === undefined) && 
-            [this.getLibIcon(data.elements.insert.type),
+            {data.element.insert.ing && (item ? item.id === data.element.select.id : data.element.select === undefined) && 
+            [this.getLibIcon(data.element.insert.type),
             <input key={1} id="element-input"
             style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-            onChange={(e)=> ElementsActions.updateName(e.target.value)} 
+            onChange={(e)=> ElementActions.updateName(e.target.value)} 
             onBlur={()=> this.completeAdd()}
             onKeyPress={(e)=> {
                 if (e.key === 'Enter') {
@@ -123,7 +123,7 @@ class ElementsView extends React.Component<any> {
                 onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
                 <ScrollArea style={{height:height}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
-                    {data.elements.component && data.elements.component.elements.children.map(elem=> this.renderElement(elem))}
+                    {data.element.component && data.element.component.element.children.map(elem=> this.renderElement(elem))}
                     {this.renderInput(undefined)}
                 </ScrollArea>
             </div>
@@ -177,13 +177,13 @@ const styles:any = {
 export default connectRouter(
     (state) => ({
         data: {
-            elements: state.elements
+            element: state.element
         }
     }),
     (dispatch) => ({
-            ElementsActions: bindActionCreators(elementsActions, dispatch),
+            ElementActions: bindActionCreators(elementActions, dispatch),
             LayoutActions: bindActionCreators(layoutActions, dispatch),
             PropertiesActions: bindActionCreators(propertiesActions, dispatch)
     }),
-    ElementsView
+    ElementView
 )

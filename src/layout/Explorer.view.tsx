@@ -1,13 +1,13 @@
 import React from 'react';
 import ComponentsView from '../component/Component.view';
-import ElementsView from '../elements/Elements.view';
+import ElementsView from '../element/Element.view';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
 import { connectRouter } from '../redux/connection';
 import { ContextMenuType, ElementType } from '../utils/constant';
 import * as layoutActions from './Layout.actions';
 import * as componentsActions from '../component/Component.action';
-import * as elementsActions from '../elements/Elements.action';
+import * as elementsActions from '../element/Element.action';
 import { bindActionCreators } from 'redux';
 import { FileType } from '../models/file';
 
