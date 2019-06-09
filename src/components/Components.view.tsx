@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as componentsActions from './Components.action';
 import * as elementsActions from '../elements/Elements.action';
 import * as layoutActions from '../layout/Layout.actions';
+import * as propertiesActions from '../properties/Property.actions';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
 import { Theme } from '../utils/Theme';
@@ -34,9 +35,10 @@ class ComponentsView extends React.Component<any> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
-        const { ComponentsActions, ElementsActions } = this.props;
+        const { ComponentsActions, ElementsActions, PropertiesActions } = this.props;
         ComponentsActions.selectFile(item);
         ElementsActions.choiceComponent(item);
+        PropertiesActions.reset();
     }
 
     clickItemRight(e, item) {
@@ -252,7 +254,8 @@ export default connectRouter(
     (dispatch:any) => ({
         ComponentsActions: bindActionCreators(componentsActions, dispatch),
         ElementsActions: bindActionCreators(elementsActions, dispatch),
-        LayoutActions: bindActionCreators(layoutActions, dispatch)
+        LayoutActions: bindActionCreators(layoutActions, dispatch),
+        PropertiesActions: bindActionCreators(propertiesActions, dispatch)
     }),
     ComponentsView
 )

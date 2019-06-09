@@ -21,11 +21,7 @@ const initialState = {
       id:-1,
       tag:'',
       lib:'',
-      prop:{
-        name: '',
-        style: '',
-        for: ''
-      },
+      prop:{},
       children: []
     }
   },

@@ -6,6 +6,7 @@ import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as elementsActions from './Elements.action';
 import * as layoutActions from '../layout/Layout.actions';
+import * as propertiesActions from '../properties/Property.actions';
 import { Theme } from './../utils/Theme';
 import { ContextMenuType, ElementType } from '../utils/constant';
 
@@ -23,15 +24,17 @@ class ElementsView extends React.Component<any> {
     }
 
     clickItem(item) {
-        const { ElementsActions } = this.props;
+        const { ElementsActions, PropertiesActions } = this.props;
         ElementsActions.selectElement(item);
+        PropertiesActions.choiceElement(item);
     }
 
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutActions, ElementsActions } = this.props;
+        const { LayoutActions, ElementsActions, PropertiesActions } = this.props;
         ElementsActions.selectElement(item);
+        PropertiesActions.choiceElement(item);
         LayoutActions.showContextMenu({
             x:e.clientX,
             y:e.clientY,
@@ -179,7 +182,8 @@ export default connectRouter(
     }),
     (dispatch) => ({
             ElementsActions: bindActionCreators(elementsActions, dispatch),
-            LayoutActions: bindActionCreators(layoutActions, dispatch)
+            LayoutActions: bindActionCreators(layoutActions, dispatch),
+            PropertiesActions: bindActionCreators(propertiesActions, dispatch)
     }),
     ElementsView
 )

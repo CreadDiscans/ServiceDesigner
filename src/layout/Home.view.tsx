@@ -1,6 +1,7 @@
 import React from 'react';
 import ExplorerView from './Explorer.view';
 import BottomView from './Bottom.view';
+import EditorView from './Editor.view';
 
 export class HomeView extends React.Component {
     render() {
@@ -10,6 +11,7 @@ export class HomeView extends React.Component {
                 <iframe></iframe>
                 <BottomView />
             </div>
+            <EditorView />
         </div>
     }
 }
