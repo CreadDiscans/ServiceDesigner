@@ -5,9 +5,14 @@ import { bindActionCreators } from 'redux';
 import * as propertyActions from './Property.action';
 import * as layoutActions from '../layout/Layout.actions';
 import { ContextMenuType } from '../utils/constant';
-import ScrollArea from 'react-scrollbar'
+import ScrollArea from 'react-scrollbar';
+import Resizeable from 're-resizable';
 
 class PropertyView extends React.Component<any> {
+
+    state = {
+        hover:undefined
+    }
 
     clickItemRight(e, item) {
         e.preventDefault();
@@ -26,14 +31,24 @@ class PropertyView extends React.Component<any> {
         console.log(data);
         return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
-            <ScrollArea style={{height:500}} verticalScrollbarStyle={{backgroundColor:'white'}}>
-                {Object.keys(data.property.element.prop).map(name=> 
-                    <div style={styles.item} key={name}>
-                        <span style={styles.itemName}>{name}</span> 
-                        <span style={styles.itemType}>{data.property.element.prop[name].type}</span>
-                    </div>
-                )}
-            </ScrollArea>
+            <div ref={'layout'}>
+                <Resizeable
+                    maxHeight={window.innerHeight-300}
+                    minHeight={100}
+                    enable={{top:false, bottom:true, left:false, right:false}}>
+                    <ScrollArea style={{height:this.refs.layout ? this.refs.layout['clientHeight'] : 'auto', userSelect:'none'}}
+                        verticalScrollbarStyle={{backgroundColor:'white'}}>
+                        {Object.keys(data.property.element.prop).map(name=> 
+                            <div style={Object.assign({},styles.item, this.state.hover === name && styles.hover)} key={name}
+                                onMouseEnter={()=> this.setState({hover: name})}
+                                onMouseLeave={()=> this.setState({hover: undefined})}>
+                                <span style={styles.itemName}>{name}</span> 
+                                <span style={styles.itemType}>{data.property.element.prop[name].type}</span>
+                            </div>
+                        )}
+                    </ScrollArea>
+                </Resizeable>
+            </div>
         </div>
     }
 }
@@ -60,6 +75,10 @@ const styles:any = {
     },
     itemType: {
         float:'right'
+    },
+    hover: {
+        backgroundColor:Theme.bgBodyHoverColor,
+        cursor:'pointer'
     }
 }
 

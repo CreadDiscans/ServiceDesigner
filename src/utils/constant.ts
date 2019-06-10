@@ -38,3 +38,11 @@ export enum ElementType {
     Reactstrap = 'reactstrap',
     ReactNative = 'reactnative'
 }
+
+export enum PropertyType {
+    String = 'string',
+    Number = 'number',
+    Boolean = 'boolean',
+    Function = 'function',
+    Object = 'object'
+}

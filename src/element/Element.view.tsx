@@ -86,7 +86,7 @@ class ElementView extends React.Component<any> {
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
                 {this.getLibIcon(elem.lib)}
                 {elem.tag}
-                {elem.prop.name !== '' && '[' + elem.prop.name + ']'}
+                {elem.prop.name && elem.prop.name.value !== '' && '[' + elem.prop.name.value + ']'}
                 {this.renderInput(elem)}
             </div>
             {elem.children.map(item=> this.renderElement(item, dep+1))}

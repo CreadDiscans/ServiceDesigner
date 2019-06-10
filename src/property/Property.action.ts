@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import { PropertyType } from '../utils/constant';
 
 const CHOICE_ELEMENT = 'property/CHOICE_ELEMENT';
 const CREATE_PROPERTY = 'property/CREATE_PROPERTY';
@@ -28,6 +29,13 @@ const initialState = {
 export default handleActions({
     [CHOICE_ELEMENT]: (state, {payload}:any) => {
         if (payload === undefined) return initialState
+        if (payload.prop.name === undefined) {
+            payload.prop.name = {
+                type: PropertyType.String,
+                variable: false,
+                value: ''
+            }
+        }
         return {...state, element:payload}
     },
     [CREATE_PROPERTY]: (state, {payload}:any) => {

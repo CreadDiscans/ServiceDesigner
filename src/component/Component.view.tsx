@@ -171,7 +171,7 @@ class ComponentView extends React.Component<any> {
                 <Resizeable
                     maxHeight={window.innerHeight-300}
                     minHeight={100}
-                    enable={{top:true, bottom:true, left:false, right:false}}>
+                    enable={{top:false, bottom:true, left:false, right:false}}>
                     <ScrollArea style={{height:this.refs.layout ? this.refs.layout['clientHeight'] : 'auto', userSelect:'none'}}
                         verticalScrollbarStyle={{backgroundColor:'white'}}>
                         {data.component.files.sort(this.compare).map((file:any)=> this.recursive(file, 0))}
