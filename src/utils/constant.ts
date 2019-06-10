@@ -44,5 +44,6 @@ export enum PropertyType {
     Number = 'number',
     Boolean = 'boolean',
     Function = 'function',
-    Object = 'object'
+    Object = 'object',
+    Variable = 'variable'
 }

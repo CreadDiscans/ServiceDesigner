@@ -21,7 +21,7 @@ const initialState = {
       id:-1,
       tag:'',
       lib:'',
-      prop:{},
+      prop:[],
       children: []
     }
   },
@@ -70,7 +70,7 @@ export default handleActions({
       id: maxId + 1,
       tag: state.insert.name,
       lib: state.insert.type,
-      prop: {},
+      prop: [],
       children: []
     }
     if (state.select) {

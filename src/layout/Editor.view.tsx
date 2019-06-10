@@ -20,14 +20,17 @@ class EditorView extends React.Component<any> {
             {
                 name: 'Add Property',
                 click: ()=> {
-                    const { PropertyActions } = this.props;
-                    
+                    const { PropertyActions, LayoutActions } = this.props;
+                    PropertyActions.readyToCreate();
+                    LayoutActions.hideContextMenu();
                 }
             },
             {
                 name: 'Delete Property',
                 click: ()=> {
-
+                    const { data, PropertyActions, LayoutActions } = this.props;
+                    PropertyActions.deleteProperty(data.layout.contextMenu.target.name);
+                    LayoutActions.hideContextMenu();
                 }
             }
         ]

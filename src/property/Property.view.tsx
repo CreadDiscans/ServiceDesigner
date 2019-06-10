@@ -27,7 +27,7 @@ class PropertyView extends React.Component<any> {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, PropertyActions } = this.props;
         console.log(data);
         return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
@@ -38,14 +38,19 @@ class PropertyView extends React.Component<any> {
                     enable={{top:false, bottom:true, left:false, right:false}}>
                     <ScrollArea style={{height:this.refs.layout ? this.refs.layout['clientHeight'] : 'auto', userSelect:'none'}}
                         verticalScrollbarStyle={{backgroundColor:'white'}}>
-                        {Object.keys(data.property.element.prop).map(name=> 
-                            <div style={Object.assign({},styles.item, this.state.hover === name && styles.hover)} key={name}
-                                onMouseEnter={()=> this.setState({hover: name})}
-                                onMouseLeave={()=> this.setState({hover: undefined})}>
-                                <span style={styles.itemName}>{name}</span> 
-                                <span style={styles.itemType}>{data.property.element.prop[name].type}</span>
-                            </div>
-                        )}
+                        <div id="property-list">
+                            {data.property.element.prop.map(prop=> 
+                                <div style={Object.assign({},styles.item, this.state.hover === prop.name && styles.hover)} key={prop.name}
+                                    onMouseEnter={()=> this.setState({hover: prop.name})}
+                                    onMouseLeave={()=> this.setState({hover: undefined})}
+                                    onClick={()=> {
+                                        PropertyActions.selectProperty(prop)
+                                    }}>
+                                    <span style={styles.itemName}>{prop.name}</span> 
+                                    <span style={styles.itemType}>{prop.type}</span>
+                                </div>
+                            )}
+                        </div>
                     </ScrollArea>
                 </Resizeable>
             </div>

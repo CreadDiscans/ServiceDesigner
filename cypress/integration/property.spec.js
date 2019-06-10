@@ -17,11 +17,18 @@ describe('Elements', function() {
         cy.get('input[id="element-input"]').type(name+'{enter}')
     }
 
-    it('Create Property', function(){
+    it('Create String Property', function(){
         createComponent('new')
         createElement('div')
         cy.get('.scrollarea-content').eq(1).find('div').eq(0).click()
         cy.get('div[id="Property"]').trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="property-name-input"]').type('new')
+        cy.get('input[id="property-value-input"]').type('value')
+        cy.get('button[id="property-submit"]').click()
+        cy.get('div[id="property-list"]').find('div').eq(1).should('have.text', 'newstring')
+        cy.get('input[id="property-name-input"]').should('have.value', '')
+        cy.get('div[id="property-list"]').find('div').eq(1).click()
+        cy.get('input[id="property-value-input"]').should('have.value', 'value')
     })
 });
