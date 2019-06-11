@@ -6,6 +6,7 @@ import { Theme } from '../utils/Theme';
 import ScrollArea from 'react-scrollbar';
 import { PropertyType } from '../utils/constant';
 import AceEditor from 'react-ace';
+import 'brace/mode/css';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow_night';
 
@@ -19,7 +20,7 @@ class PropertyDetailView extends React.Component<any> {
 
     renderValueObject() {
         const { data } = this.props;
-        return <div style={{marginTop:10}}>
+        return <div id="property-value-object" style={{marginTop:10}}>
             { data.property.select.type === PropertyType.Object && <div>
                 {data.property.select.value.map((obj, i)=> <div key={i}
                     style={Object.assign({}, styles.badge, this.state.idx === i && styles.badgeActive)}
@@ -31,29 +32,21 @@ class PropertyDetailView extends React.Component<any> {
                 <AceEditor
                     style={{width:'100%', height: 300}}
                     theme="tomorrow_night" 
-                    mode="json" 
-                    value={''}
+                    mode={data.property.select.name === 'style' ? 'css' : 'json'} 
+                    value={data.property.select.value[this.state.idx].value}
                     onChange={(value)=> {
-                        this.setState({value:value})
-                    }}
-                    onValidate={(value)=> {
-                        let error = false;
-                        value.forEach(item=> {
-                            if (item.type === 'error') error = true;
-                        });
-                        if (!error) {
-                            const { data } = this.props;
-                            try{
-                                data.property.select.value[this.state.idx].value = JSON.parse(this.state.value)
-                            } catch(e) {}
-                        }
+                        data.property.select.value[this.state.idx].value = value;
+                        this.setState({})
                     }}
                     showPrintMargin={true}
                     showGutter={false}
                     highlightActiveLine={true}
                     editorProps={{$blockScrolling: Infinity }}
                     setOptions={{
-                        showLineNumbers: false,
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: false,
+                        showLineNumbers: true,
                         tabSize: 2
                     }}
                     />
@@ -80,8 +73,8 @@ class PropertyDetailView extends React.Component<any> {
                         }}/>
                 }
                 { data.property.select.type === PropertyType.Boolean && 
-                    <input style={{verticalAlign:'bottom'}} type="checkbox" 
-                        value={data.property.select.value}
+                    <input id="property-value-input" style={{verticalAlign:'bottom'}} type="checkbox" 
+                        checked={data.property.select.value}
                         onChange={()=>{
                             const { PropertyActions } = this.props;
                             PropertyActions.updateValue(!data.property.select.value);

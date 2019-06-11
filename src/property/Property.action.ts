@@ -109,7 +109,7 @@ export default handleActions({
         } else if (payload === PropertyType.Function) {
             state.select.value = undefined;
         } else if (payload === PropertyType.Object) {
-            state.select.value = [{condition: '', value: {}}]
+            state.select.value = [{condition: '', value: ''}]
         } else if (payload === PropertyType.Variable) {
             state.select.value = '';
         }
