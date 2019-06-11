@@ -1,11 +1,12 @@
 import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
-import PropertyAction, * as propertyActions from './Property.action';
+import * as propertyActions from './Property.action';
 import { Theme } from '../utils/Theme';
 import ScrollArea from 'react-scrollbar';
 import { PropertyType } from '../utils/constant';
 import AceEditor from 'react-ace';
+import { IoMdTrash } from 'react-icons/io';
 import 'brace/mode/css';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow_night';
@@ -14,21 +15,36 @@ class PropertyDetailView extends React.Component<any> {
 
     state = {
         idx: 0,
-        value:'',
         hover:''
     }
 
     renderValueObject() {
-        const { data } = this.props;
+        const { data, PropertyActions } = this.props;
         return <div id="property-value-object" style={{marginTop:10}}>
             { data.property.select.type === PropertyType.Object && <div>
-                {data.property.select.value.map((obj, i)=> <div key={i}
+                {data.property.select.value.map((obj, i)=> <div className="property-detail-badge" key={i}
                     style={Object.assign({}, styles.badge, this.state.idx === i && styles.badgeActive)}
                     onClick={()=> this.setState({idx:i})}>{i}</div>)}
-                <div style={{...styles.badge,...{padding:0}}} ><span style={styles.badgeText}>+</span></div>
-                <input style={styles.itemInput} placeholder={'Condition'} disabled={this.state.idx === 0} 
-                    value={data.property.select.value[this.state.idx].condition}
-                    onChange={(e)=>data.property.select.value[this.state.idx].condition = e.target.value}/>
+                <div id="property-detail-add-condition" 
+                    style={{...styles.badge,...{padding:0}}} 
+                    onClick={()=> {
+                        PropertyActions.addCondition()
+                        this.setState({idx: this.state.idx + 1})
+                    }}><span style={styles.badgeText}>+</span></div>
+                <div style={{width:'calc(100% - 20px)', display:'inline-block'}}>
+                    <input id="property-detail-condition" style={styles.itemInput} placeholder={'Condition'} disabled={this.state.idx === 0} 
+                        value={data.property.select.value[this.state.idx].condition}
+                        onChange={(e)=> {data.property.select.value[this.state.idx].condition = e.target.value; this.setState({})}}/>
+                </div>
+                <IoMdTrash style={Object.assign({}, {fontSize:18, verticalAlign:'top', cursor:'pointer'}, this.state.hover === 'trash' && {color: Theme.fontActiveColor})} 
+                    onMouseEnter={()=> this.setState({hover:'trash'})}
+                    onMouseLeave={()=> this.setState({hover:undefined})}
+                    onClick={()=> { 
+                        if (this.state.idx > 0) {
+                            PropertyActions.deleteCondition(this.state.idx)
+                            this.setState({idx: this.state.idx-1})
+                        }
+                    }}/>
                 <AceEditor
                     style={{width:'100%', height: 300}}
                     theme="tomorrow_night" 
@@ -123,7 +139,7 @@ class PropertyDetailView extends React.Component<any> {
                     onClick={()=> {
                     const {PropertyActions} = this.props;
                     PropertyActions.createProperty();
-                    this.setState({idx:0, value: ''})
+                    this.setState({idx:0})
                 }}>Save</button>
             </div>}
         </div>

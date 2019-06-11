@@ -9,6 +9,8 @@ const READY_TO_CREATE = 'property/READY_TO_CREATE';
 const UPDATE_TYPE = 'property/UPDATE_TYPE';
 const UPDATE_VALUE = 'property/UPDATE_VALUE';
 const UPDATE_KEY = 'property/UPDATE_KEY';
+const ADD_CONDITION = 'property/ADD_CONDITION';
+const DELETE_CONDITION = 'property/DELETE_CONDITION';
 const RESET = 'property/RESET';
 
 export const choiceElement = createAction(CHOICE_ELEMENT);      // element
@@ -19,6 +21,8 @@ export const readyToCreate = createAction(READY_TO_CREATE);
 export const updateType = createAction(UPDATE_TYPE);            // type
 export const updateValue = createAction(UPDATE_VALUE);          // value
 export const updateKey = createAction(UPDATE_KEY);              // key
+export const addCondition = createAction(ADD_CONDITION);
+export const deleteCondition = createAction(DELETE_CONDITION);  // index
 export const reset = createAction(RESET);
 
 const initialState:any = {
@@ -121,6 +125,16 @@ export default handleActions({
     [UPDATE_KEY]: (state, {payload}:any) => {
         if (state.create) return {...state, select:{...state.select, name:payload}}
         else return {...state}
+    },
+    [ADD_CONDITION]: (state, {payload}:any) => {
+        state.select.value.push({condition:'', value:''})
+        return {...state}
+    },
+    [DELETE_CONDITION]: (state, {payload}:any) => {
+        if (payload !== 0) {
+            state.select.value.splice(payload, 1);
+        }
+        return {...state}
     },
     [RESET]: (state, {payload}:any) => (initialState),
 }, initialState)
