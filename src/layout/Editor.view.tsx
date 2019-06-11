@@ -29,8 +29,10 @@ class EditorView extends React.Component<any> {
                 name: 'Delete Property',
                 click: ()=> {
                     const { data, PropertyActions, LayoutActions } = this.props;
-                    PropertyActions.deleteProperty(data.layout.contextMenu.target.name);
-                    LayoutActions.hideContextMenu();
+                    if (data.layout.contextMenu.target) {
+                        PropertyActions.deleteProperty(data.layout.contextMenu.target.name);
+                        LayoutActions.hideContextMenu();
+                    }
                 }
             }
         ]

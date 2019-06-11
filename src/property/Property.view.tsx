@@ -43,6 +43,7 @@ class PropertyView extends React.Component<any> {
                                 <div style={Object.assign({},styles.item, this.state.hover === prop.name && styles.hover)} key={prop.name}
                                     onMouseEnter={()=> this.setState({hover: prop.name})}
                                     onMouseLeave={()=> this.setState({hover: undefined})}
+                                    onContextMenu={(e)=>this.clickItemRight(e, prop)}
                                     onClick={()=> {
                                         PropertyActions.selectProperty(prop)
                                     }}>
