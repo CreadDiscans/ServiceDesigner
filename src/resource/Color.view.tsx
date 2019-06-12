@@ -77,7 +77,6 @@ class ColorView extends React.Component<any> {
 const styles = {
     layout: {
         padding:10,
-        backgroundColor:Theme.bgBodyDarkColor,
         height:'100%'
     },
     colors: {

@@ -21,40 +21,35 @@ class BottomView extends React.Component<any> {
     }
 
     renderState() {
-        return <div style={{height:'calc(100% - 28px)', overflow:'auto'}} ref={'layout'}>
-            <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28}}
-                    verticalScrollbarStyle={{backgroundColor:'white'}}>
-                <AceEditor
-                    style={{width:'100%', height: window.innerHeight}}
-                    theme="tomorrow_night" 
-                    mode="json" 
-                    value={this.state.value}
-                    onChange={(value)=> {
-                        this.setState({value:value})
-                    }}
-                    onValidate={(value)=> {
-                        let error = false;
-                        value.forEach(item=> {
-                            if (item.type === 'error') error = true;
-                        });
-                        if (!error) {
-                            const { data } = this.props;
-                            try{
-                                data.elements.component.state = JSON.parse(this.state.value)
-                            } catch(e) {}
-                        }
-                    }}
-                    showPrintMargin={true}
-                    showGutter={true}
-                    highlightActiveLine={true}
-                    editorProps={{$blockScrolling: Infinity }}
-                    setOptions={{
-                        showLineNumbers: true,
-                        tabSize: 2
-                    }}
-                    />
-            </ScrollArea>
-        </div>
+        return <AceEditor
+            style={{width:'100%', height: window.innerHeight}}
+            theme="tomorrow_night" 
+            mode="json" 
+            value={this.state.value}
+            onChange={(value)=> {
+                this.setState({value:value})
+            }}
+            onValidate={(value)=> {
+                let error = false;
+                value.forEach(item=> {
+                    if (item.type === 'error') error = true;
+                });
+                if (!error) {
+                    const { data } = this.props;
+                    try{
+                        data.elements.component.state = JSON.parse(this.state.value)
+                    } catch(e) {}
+                }
+            }}
+            showPrintMargin={true}
+            showGutter={true}
+            highlightActiveLine={true}
+            editorProps={{$blockScrolling: Infinity }}
+            setOptions={{
+                showLineNumbers: true,
+                tabSize: 2
+            }}
+            />
     }
 
     render() {
@@ -82,9 +77,14 @@ class BottomView extends React.Component<any> {
                     </div>
                 )}
                 {this.state.active !== undefined && <IoIosArrowDown style={styles.icon} onClick={()=>this.setState({active:undefined})}/>}
-                {this.state.active === 'State' && this.renderState()}
-                {this.state.active === 'Color' && <ColorView />}
-                {this.state.active === 'Asset' && <AssetView />}
+                <div style={{height:'calc(100% - 28px)', overflow:'auto', backgroundColor:Theme.bgBodyDarkColor,}} ref={'layout'}>
+                    <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28, minHeight:'100%'}}
+                    verticalScrollbarStyle={{backgroundColor:'white'}}>
+                        {this.state.active === 'State' && this.renderState()}
+                        {this.state.active === 'Color' && <ColorView />}
+                        {this.state.active === 'Asset' && <AssetView />}
+                    </ScrollArea>
+                </div>
             </Resizable>
         </div>
     }
@@ -108,7 +108,8 @@ const styles:any = {
         color:Theme.fontColor,
         fontSize:12,
         display:'inline-block',
-        cursor:'pointer'
+        cursor:'pointer',
+        userSelect: 'none'
     },
     tabActive: {
         backgroundColor:Theme.bgHeadActiveColor,

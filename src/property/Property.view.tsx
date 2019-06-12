@@ -28,7 +28,6 @@ class PropertyView extends React.Component<any> {
 
     render() {
         const { data, PropertyActions } = this.props;
-        console.log(data);
         return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
             <div ref={'layout'}>

@@ -26,7 +26,6 @@ class AssetView extends React.Component<any> {
 
     render() {
         const { data, ResourceActions } = this.props;
-        console.log(data);
         return <div>
             <div id="asset-item-wrap" style={styles.colors}>
                 {data.resource.asset.map(asset=> <div className="asset-item" key={asset.name}
@@ -84,7 +83,6 @@ class AssetView extends React.Component<any> {
 const styles = {
     layout: {
         padding:10,
-        backgroundColor:Theme.bgBodyDarkColor,
         height:'100%'
     },
     colors: {
