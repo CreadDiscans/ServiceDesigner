@@ -16,7 +16,6 @@ class ColorView extends React.Component<any> {
 
     render() {
         const { data, ResourceActions } = this.props;
-        console.log(data, this.state)
         return <div style={styles.layout}>
             <div id="color-item-wrap" style={styles.colors}>
                 {data.resource.color.map(color=> <div className="color-item" key={color.name}
@@ -28,6 +27,7 @@ class ColorView extends React.Component<any> {
                     onClick={()=> this.setState({name: color.name, color: color.value})}>
                     {color.name}
                     <span style={{float:'right'}}>{color.value}</span>
+                    <div style={{width:15, height:15, marginTop:1, marginRight:5, display:'inline-block', backgroundColor: color.value, float:'right'}} />
                 </div>)}
             </div>
             <div style={styles.pallete}>
@@ -63,8 +63,10 @@ class ColorView extends React.Component<any> {
                         onMouseEnter={()=>this.setState({hover:'create'})}
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
-                            ResourceActions.createColor({name: this.state.newName, value: this.state.color});
-                            this.setState({newName: ''});
+                            if (this.state.newName !== '') {
+                                ResourceActions.createColor({name: this.state.newName, value: this.state.color});
+                                this.setState({newName: ''});
+                            }
                         }}>Create</button>
                 ] }
             </div>

@@ -3,7 +3,7 @@ import { createAction, handleActions } from 'redux-actions';
 const CREATE_COLOR = 'resource/CREATE_COLOR';
 const DELETE_COLOR = 'resource/DELETE_COLOR';
 const UPDATE_COLOR = 'resource/UPDATE_COLOR';
-const CREATE_ASSET = 'resource/DELETE_ASSET';
+const CREATE_ASSET = 'resource/CREATE_ASSET';
 const DELETE_ASSET = 'resource/DELETE_ASSET';
 const UPDATE_ASSET = 'resource/UPDATE_ASSET';
 
