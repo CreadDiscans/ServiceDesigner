@@ -104,7 +104,7 @@ export class PropertyView extends View {
         const stateFor = state.concat(appendItems);
         let stateEtc = Utils.deepcopy(stateFor);
         if (forProp !== undefined && forProp.isActive) {
-            const re = new RegExp(forProp.value+'\(\\[\\d+\\]\){0,1}')
+            const re = new RegExp(forProp.value+'(\\[\\d+\\]){0,1}')
             if (forProp.value.indexOf('item') === 0) {
                 stateEtc = stateEtc.map((ai:any)=> ({
                     key:ai.key.replace(re, 'item'),
@@ -148,7 +148,7 @@ export class PropertyView extends View {
                                 else item.active = false;
                             }
                             this.mainCtrl.refresh()}}/>
-                        {item.name != 'for' && item.isActive &&
+                        {item.name !== 'for' && item.isActive &&
                         <input type="checkbox" checked={item.isVariable} onChange={(e)=>{
                             item.isVariable=!item.isVariable;
                             const arrState = state.filter((st:any)=>st.type===item.type)
@@ -158,7 +158,7 @@ export class PropertyView extends View {
                             this.mainCtrl.refresh()}}/>}
                         {item.name}
                     </div>
-                    {item.isActive && item.type != ElementPropertyType.Func && <div>{
+                    {item.isActive && item.type !== ElementPropertyType.Func && <div>{
                         item.isVariable ? <div>
                             <select style={{flex:1}} value={item.value} onChange={(e)=> {
                                 item.value = e.target.value;
@@ -177,15 +177,15 @@ export class PropertyView extends View {
                                     }}>
                                     {item.select.map((item:any)=> <option key={item} value={item}>{item}</option>)}
                                 </select> : 
-                                [item.type == ElementPropertyType.String && 
+                                [item.type === ElementPropertyType.String && 
                                     <input style={{flex:1}} type="text" value={item.value} onChange={(e)=> {
                                         item.value = e.target.value
                                         this.mainCtrl.refresh()}}/>, 
-                                item.type == ElementPropertyType.Number && 
+                                item.type === ElementPropertyType.Number && 
                                 <input style={{flex:1}} type="number" value={item.value} onChange={(e)=>{
                                     item.value = e.target.value
                                     this.mainCtrl.refresh()}}/>,
-                                item.name !== 'for' && item.type == ElementPropertyType.Array && 
+                                item.name !== 'for' && item.type === ElementPropertyType.Array && 
                                 <input style={{flex:1}} type="text" checked={item.value} onChange={(e)=>{
                                     try{
                                         const arr = JSON.parse(e.target.value)

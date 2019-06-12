@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import { Input, Label, Badge, Button } from 'reactstrap'
-import { Layout } from './layout.view'
 import Utils from '../../utils/utils';
 import AceEditor from 'react-ace';
 import 'brace/theme/github';
@@ -38,7 +37,6 @@ export class SidebarStyle extends View {
     }
     
     render() {
-        let vari = false;
         return <div style={styles.layout}>
             {/* <Layout /> */}
             <h5>Style 

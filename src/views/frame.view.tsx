@@ -32,7 +32,7 @@ export class FrameView extends React.Component {
 
   render() {
     return <div id="design">
-        { this.state.data.platform === Platform.ReactNative && <img style={this.state.landscape ? styles.landscapeFrame : {height:'100vh'}} src="/frame.jpg" /> }
+        { this.state.data.platform === Platform.ReactNative && <img alt={''} style={this.state.landscape ? styles.landscapeFrame : {height:'100vh'}} src="/frame.jpg" /> }
         <div style={(this.state.data.platform === Platform.ReactNative) ? this.state.landscape ? styles.landscapeMobile : styles.mobile : {}}>
             {this.sandbox()}
         </div>

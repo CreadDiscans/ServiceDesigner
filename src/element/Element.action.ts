@@ -36,7 +36,7 @@ const initialState = {
 
 export default handleActions({
   [CHOICE_COMPONENT]: (state, {payload}:any) => {
-    if (payload.type == FileType.FILE)  {
+    if (payload.type === FileType.FILE)  {
       if (payload.element.id === undefined) {
         payload.element = {
           id:0,

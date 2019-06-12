@@ -1,5 +1,4 @@
 import cssParser from 'css';
-import { File } from '../models/file';
 
 export default class Utils {
     static deepcopy(obj:any) {

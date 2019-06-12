@@ -22,9 +22,9 @@ class ComponentView extends React.Component<any> {
     }
 
     compare(a,b) {
-        if (a.type == FileType.FILE && b.type == FileType.FOLDER) {
+        if (a.type === FileType.FILE && b.type === FileType.FOLDER) {
             return 1;
-        } else if (a.type == FileType.FOLDER && b.type == FileType.FILE) {
+        } else if (a.type === FileType.FOLDER && b.type === FileType.FILE) {
             return -1;
         } else {
             return a.name > b.name ? 1: -1
@@ -93,7 +93,7 @@ class ComponentView extends React.Component<any> {
     recursive(item:any, dep:number) {
         const { data, ComponentActions } = this.props;
         let marginLeft = 15+dep*5;
-        if (data.component.select && data.component.select.type == FileType.FILE) {
+        if (data.component.select && data.component.select.type === FileType.FILE) {
             marginLeft -= 5;
         }
         return <div key={item.id}>
@@ -102,7 +102,7 @@ class ComponentView extends React.Component<any> {
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === item.id && styles.hover, data.component.select && data.component.select.id == item.id && styles.active)} 
+                }, this.state.hover === item.id && styles.hover, data.component.select && data.component.select.id === item.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:item.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(item)}

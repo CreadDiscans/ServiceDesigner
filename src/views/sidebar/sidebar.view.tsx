@@ -2,11 +2,8 @@ import React, { CSSProperties } from 'react';
 import { 
     FaFolder,
     FaCode,
-    FaCog,
     FaFileImport,
     FaSave,
-    FaUndo,
-    FaRedo,
     FaQuestion,
     FaReact,
     FaPalette,

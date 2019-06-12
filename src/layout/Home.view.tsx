@@ -8,7 +8,7 @@ export class HomeView extends React.Component {
         return <div style={styles.layout}  onContextMenu={(e)=> e.preventDefault()}>
             <ExplorerView />
             <div style={styles.main}>
-                <iframe></iframe>
+                <iframe title="iframe"></iframe>
                 <BottomView />
             </div>
             <EditorView />

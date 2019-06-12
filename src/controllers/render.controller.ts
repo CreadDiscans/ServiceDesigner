@@ -2,18 +2,24 @@
 import { Controller } from './controller';
 import { File } from '../models/file';
 import React from 'react';
-import { Element, ElementStyle, ElementProperty } from './../models/element';
+import { Element, ElementStyle } from './../models/element';
 import Utils from './../utils/utils';
 import { ResourceType, Resource } from '../models/resource';
 import { Platform } from '../utils/constant';
-import { Library } from '../models/library';
 
 export class RenderController extends Controller {
 
     private cssCache = {};
 
     render(file:File, selection=true) {
-        if (!file || !file.element) throw 'no element';
+        if (!file || !file.element) {
+            console.error('no element');
+            return {
+                state: {},
+                imp: {},
+                code: ''
+            }
+        }
         const imp:any = {React};
         const code = this.parse(file.element, imp, file.state, selection);
         console.log(code);

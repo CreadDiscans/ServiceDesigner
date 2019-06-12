@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { Button } from 'reactstrap'
-import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp, FaArrowAltCircleRight, FaArrowAltCircleLeft, FaCopy, FaPaste} from 'react-icons/fa'
+import {FaAngleRight, FaAngleDown, FaTrashAlt, FaArrowAltCircleDown, FaArrowAltCircleUp, FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
 import { View } from '../view';
 import { Element } from '../../models/element';
 import { Action } from '../../utils/constant';

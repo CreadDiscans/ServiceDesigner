@@ -41,7 +41,7 @@ export default class Home extends View {
         if (!this.mainCtrl.isInitialized()) {
             return <div></div>
         }
-        return <iframe style={styles.iframe} src="/frame" ref={this.iframe}></iframe>
+        return <iframe title="view" style={styles.iframe} src="/frame" ref={this.iframe}></iframe>
     }
 }
 

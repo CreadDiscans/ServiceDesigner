@@ -90,7 +90,7 @@ export class ElementProperty {
             })
             if (value) return this.name + '={{uri:"'+value+'"}}';
             else return '';
-        } else if (this.type == ElementPropertyType.Func) {
+        } else if (this.type === ElementPropertyType.Func) {
             let name = '';
             let item = '';
             if (elem) {
@@ -108,17 +108,17 @@ export class ElementProperty {
             return this.name + '={(e)=>this.onEvent({event:"'+this.name+'", name:'+name+', value:e'+item+'})}';
         } else if (this.isVariable) {
             return this.name + '={'+this.value+'}'
-        } else if (this.type == ElementPropertyType.String) {
+        } else if (this.type === ElementPropertyType.String) {
             return this.name + '={"'+this.value+'"}'
-        } else if (this.type == ElementPropertyType.Number) {
+        } else if (this.type === ElementPropertyType.Number) {
             return this.name + '={'+this.value+'}'
-        } else if (this.type == ElementPropertyType.Bool) {
+        } else if (this.type === ElementPropertyType.Bool) {
             if (this.isVariable) {
                 return this.name + '={'+this.value+'}'
             } else {
                 return this.name
             }
-        } else if (this.type == ElementPropertyType.Array) {
+        } else if (this.type === ElementPropertyType.Array) {
             return this.name + '={'+JSON.stringify(this.value)+'}'
         }
 
@@ -272,10 +272,10 @@ export class Element {
                 if (Object.keys(ElementPropertyType).filter((type:any)=> ElementPropertyType[type] === json.prop[item].type).length > 0) {
                     let default_value = json.prop[item].default;
                     if (default_value === undefined) {
-                        if (json.prop[item].type == ElementPropertyType.String) default_value = '';
-                        else if (json.prop[item].type == ElementPropertyType.Bool) default_value = false;
-                        else if (json.prop[item].type == ElementPropertyType.Number) default_value = 0;
-                        else if (json.prop[item].type == ElementPropertyType.Array) default_value = [];
+                        if (json.prop[item].type === ElementPropertyType.String) default_value = '';
+                        else if (json.prop[item].type === ElementPropertyType.Bool) default_value = false;
+                        else if (json.prop[item].type === ElementPropertyType.Number) default_value = 0;
+                        else if (json.prop[item].type === ElementPropertyType.Array) default_value = [];
                     }
                     const newOne = new ElementProperty(json.prop[item].type, item, default_value);
                     if (json.prop[item].select) newOne.select = json.prop[item].select;

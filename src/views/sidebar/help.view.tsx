@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaCog, FaUndo, FaRedo, FaReact, FaPalette, FaImages, FaCss3, FaFileExport } from 'react-icons/fa';
+import { FaQuestion, FaSave, FaFileImport, FaFolder, FaCode, FaReact, FaPalette, FaImages, FaCss3, FaFileExport } from 'react-icons/fa';
 import { View } from '../view';
 
 export class SidebarHelp extends View {

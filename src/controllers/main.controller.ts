@@ -7,7 +7,7 @@ import { Platform, SideTab, Action, HisotryAction } from "../utils/constant";
 import { BehaviorSubject } from 'rxjs';
 import { File, FileType } from "../models/file";
 import { RenderController } from "./render.controller";
-import { Element, ElementStyle } from "../models/element";
+import { Element } from "../models/element";
 import { ResourceType, Resource } from "../models/resource";
 import { ExportController } from "./export.controller";
 import { Controller } from "./controller";

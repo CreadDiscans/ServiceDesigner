@@ -79,7 +79,7 @@ class ElementView extends React.Component<any> {
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === elem.id && styles.hover, data.element.select && data.element.select.id == elem.id && styles.active)} 
+                }, this.state.hover === elem.id && styles.hover, data.element.select && data.element.select.id === elem.id && styles.active)} 
                 onMouseEnter={()=> this.setState({hover:elem.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(elem)}
