@@ -73,22 +73,28 @@ class ExplorerView extends React.Component<any> {
             {
                 name: 'Add HTML',
                 click: ()=> {
-                    const { ElementsActions, LayoutActions } = this.props;
-                    ElementsActions.readyToAdd(ElementType.Html);
+                    const { data, ElementsActions, LayoutActions } = this.props;
+                    if (data.element.component.element.id !== -1) {
+                        ElementsActions.readyToAdd(ElementType.Html);
+                    }
                     LayoutActions.hideContextMenu();
                 }
             }, {
                 name: 'Add Reactstrap',
                 click: ()=> {
-                    const { ElementsActions, LayoutActions } = this.props;
-                    ElementsActions.readyToAdd(ElementType.Reactstrap);
+                    const { data, ElementsActions, LayoutActions } = this.props;
+                    if (data.element.component.element.id !== -1) {
+                        ElementsActions.readyToAdd(ElementType.Reactstrap);
+                    }
                     LayoutActions.hideContextMenu();
                 }
             }, {
                 name: 'Add React Native',
                 click: ()=> {
-                    const { ElementsActions, LayoutActions } = this.props;
-                    ElementsActions.readyToAdd(ElementType.ReactNative);
+                    const { data, ElementsActions, LayoutActions } = this.props;
+                    if (data.element.component.element.id !== -1) {
+                        ElementsActions.readyToAdd(ElementType.ReactNative);
+                    }
                     LayoutActions.hideContextMenu();
                 }
             }, {
@@ -183,6 +189,7 @@ const styles:any = {
 export default connectRouter(
     (state)=> ({
         data: {
+            element:state.element,
             layout:state.layout
         }
     }),

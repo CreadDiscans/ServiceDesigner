@@ -12,7 +12,7 @@ describe('Elements', function() {
     }
 
     function createElement(name) {
-        cy.get('div[id="element-title"]').siblings('div').trigger('contextmenu')
+        cy.get('#element-wrap').trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('input[id="element-input"]').type(name+'{enter}')
     }
@@ -26,6 +26,7 @@ describe('Elements', function() {
         createComponent('new')
         createElement('div')
         cy.get('.scrollarea-content').eq(1).should('have.text', 'div')
+        createElement('span')
     })
 
     it('Add Nest Element',function() {
@@ -43,5 +44,11 @@ describe('Elements', function() {
         cy.get('.scrollarea-content').eq(1).find('div').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(3).click()
         cy.get('.scrollarea-content').eq(1).should('have.not.text', 'div')
+    })
+
+    it('Negative Create Element', function() {
+        cy.get('#element-wrap').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('.scrollarea-content').eq(1).should('have.text', '')
     })
 })

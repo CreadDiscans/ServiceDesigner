@@ -9,6 +9,9 @@ import * as layoutActions from '../layout/Layout.actions';
 import * as propertyActions from '../property/Property.action';
 import { Theme } from '../utils/Theme';
 import { ContextMenuType, ElementType } from '../utils/constant';
+import htmlJson from '../asset/html.json';
+import reactstrapJson from '../asset/reactstrap.json';
+import reactNativeJson from '../asset/react-native.json';
 
 class ElementView extends React.Component<any> {
 
@@ -58,6 +61,13 @@ class ElementView extends React.Component<any> {
         }
     }
 
+    componentDidUpdate() {
+        if (this.refs.input) {
+            const input:any = this.refs.input;
+            input.focus();
+        }
+    }
+
     renderTitle() {
         const { data } = this.props;
         return <div id="element-title" style={styles.group}>
@@ -96,17 +106,33 @@ class ElementView extends React.Component<any> {
     renderInput(item) {
         const { data, ElementActions } = this.props;
         return <div style={{marginLeft:10}}>
-            {data.element.insert.ing && (item ? item.id === data.element.select.id : data.element.select === undefined) && 
+            {data.element.insert.ing && (item ? (data.element.select && item.id === data.element.select.id) : data.element.select === undefined) && 
             [this.getLibIcon(data.element.insert.type),
             <input key={1} id="element-input"
+            list={data.element.insert.type}
             style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
             onChange={(e)=> ElementActions.updateName(e.target.value)} 
             onBlur={()=> this.completeAdd()}
+            ref={'input'}
             onKeyPress={(e)=> {
                 if (e.key === 'Enter') {
                     this.completeAdd()
                 }
             }}/>]}
+        </div>
+    }
+
+    renderDataList() {
+        return <div>
+            <datalist id={ElementType.Html}>
+                {Object.keys(htmlJson).map(tag=> <option key={tag} value={tag}/>)}
+            </datalist>
+            <datalist id={ElementType.Reactstrap}>
+                {Object.keys(reactstrapJson).map(tag=> <option key={tag} value={tag}/>)}
+            </datalist>
+            <datalist id={ElementType.ReactNative}>
+                {Object.keys(reactNativeJson).map(tag=> <option key={tag} value={tag}/>)}
+            </datalist>
         </div>
     }
 
@@ -119,7 +145,7 @@ class ElementView extends React.Component<any> {
         const { data } = this.props;
         return <div>
             {this.renderTitle()}
-            <div style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' 
+            <div id="element-wrap" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' 
                 onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
                 <ScrollArea style={{height:height}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
@@ -127,6 +153,7 @@ class ElementView extends React.Component<any> {
                     {this.renderInput(undefined)}
                 </ScrollArea>
             </div>
+            {this.renderDataList()}
         </div>
     }
 }

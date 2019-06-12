@@ -1,4 +1,4 @@
-describe('Elements', function() {
+describe('Property', function() {
     beforeEach(function(){
         cy.visit('/')
         cy.get('button[name="dev"]').click()
@@ -12,7 +12,7 @@ describe('Elements', function() {
     }
 
     function createElement(name) {
-        cy.get('div[id="element-title"]').siblings('div').trigger('contextmenu')
+        cy.get('#element-wrap').trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('input[id="element-input"]').type(name+'{enter}')
     }

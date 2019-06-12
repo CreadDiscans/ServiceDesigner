@@ -4,12 +4,15 @@ import { bindActionCreators } from 'redux';
 import * as propertyActions from './Property.action';
 import { Theme } from '../utils/Theme';
 import ScrollArea from 'react-scrollbar';
-import { PropertyType } from '../utils/constant';
+import { PropertyType, ElementType } from '../utils/constant';
 import AceEditor from 'react-ace';
 import { IoMdTrash } from 'react-icons/io';
 import 'brace/mode/css';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow_night';
+import htmlJson from '../asset/html.json';
+import reactstrapJson from '../asset/reactstrap.json';
+import reactNativeJson from '../asset/react-native.json';
 
 class PropertyDetailView extends React.Component<any> {
 
@@ -108,7 +111,7 @@ class PropertyDetailView extends React.Component<any> {
                     Key : 
                 </div>
                 <div style={styles.itemValue}>
-                    <input id="property-name-input" style={styles.itemInput} type="text" 
+                    <input id="property-name-input" list='datalist' style={styles.itemInput} type="text" 
                         value={data.property.select.name}
                         onChange={(e)=> {
                             PropertyActions.updateKey(e.target.value)
@@ -145,6 +148,22 @@ class PropertyDetailView extends React.Component<any> {
         </div>
     }
 
+    renderDataList() {
+        const { data } = this.props;
+        let table;
+        if (data.property.element.lib === ElementType.Html) {
+            table = htmlJson
+        } else if (data.property.element.lib === ElementType.Reactstrap) {
+            table = reactstrapJson
+        } else if (data.property.element.lib === ElementType.ReactNative) {
+            table = reactNativeJson
+        }
+        return <datalist id="datalist">
+            {table && table[data.property.element.tag] && table[data.property.element.tag].map(key=> 
+                <option key={key} value={key} />)}
+        </datalist>
+    }
+
     render() {
         let height = 1000;
         if (this.refs.layout) {
@@ -159,6 +178,7 @@ class PropertyDetailView extends React.Component<any> {
                     {this.renderDetail()}
                 </ScrollArea>
             </div>
+            {this.renderDataList()}
         </div>
     }
 }
