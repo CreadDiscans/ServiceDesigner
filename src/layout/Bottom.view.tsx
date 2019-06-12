@@ -1,13 +1,15 @@
 import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos } from 'react-icons/io';
 import { DiReact } from 'react-icons/di';
 import Resizable from 're-resizable';
 import AceEditor from 'react-ace';
 import ScrollArea from 'react-scrollbar';
 import 'brace/theme/tomorrow_night';
 import 'brace/mode/json';
+import ColorView from '../resource/Color.view';
+import AssetView from '../resource/Asset.view';
 
 
 class BottomView extends React.Component<any> {
@@ -18,7 +20,7 @@ class BottomView extends React.Component<any> {
         value: ''
     }
 
-    renderActive() {
+    renderState() {
         return <div style={{height:'calc(100% - 28px)', overflow:'auto'}} ref={'layout'}>
             <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
@@ -63,16 +65,26 @@ class BottomView extends React.Component<any> {
                 minHeight={this.state.active === undefined ? 0 : 100}
                 maxHeight={this.state.active === undefined ? 28 : window.innerHeight - 100}
                 onResize={(e:any)=>this.setState({height: window.innerHeight-e.clientY})}>
-                {['Style'].map(tab=> 
-                    <div key={tab} 
+                {['State', 'Color', 'Asset'].map(tab=> 
+                    <div className="bottomTab" key={tab} 
                     style={Object.assign({}, styles.tab, this.state.active === tab && styles.tabActive)}
-                    onClick={()=>this.setState({active:tab})}>
-                        <DiReact style={styles.tabIcon}/>
+                    onClick={()=>{
+                            if (this.state.active === tab) {
+                                this.setState({active: undefined})
+                            } else {
+                                this.setState({active:tab})
+                            }
+                        }}>
+                        {tab === 'State' && <DiReact style={styles.tabIcon}/>}
+                        {tab === 'Color' && <IoMdColorPalette style={{...styles.tabIcon,...{color:'#C33'}}}/>}
+                        {tab === 'Asset' && <IoMdPhotos style={{...styles.tabIcon,...{color:'#CCC'}}}/>}
                         {tab}
                     </div>
                 )}
                 {this.state.active !== undefined && <IoIosArrowDown style={styles.icon} onClick={()=>this.setState({active:undefined})}/>}
-                {this.state.active && this.renderActive()}
+                {this.state.active === 'State' && this.renderState()}
+                {this.state.active === 'Color' && <ColorView />}
+                {this.state.active === 'Asset' && <AssetView />}
             </Resizable>
         </div>
     }

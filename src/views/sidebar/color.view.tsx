@@ -57,7 +57,7 @@ export class SidebarColor extends View {
                     placeholder="name"/>
                 <Button 
                     color="success" 
-                    style={{dispaly:'inline-block', width:'50%'}} 
+                    style={{display:'inline-block', width:'50%'}} 
                     onClick={this.addColor}>Add</Button>
                 <Button 
                     color="danger"
