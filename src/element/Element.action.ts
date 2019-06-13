@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { FileType } from '../models/file';
+import Utils from '../utils/utils';
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
@@ -7,6 +8,7 @@ const UPDATE_NAME = 'element/UPDATE_NAME';
 const COMPLETE_ADD = 'element/COMPLETE_ADD';
 const DELETE_ELEMENT = 'element/DELETE_ELEMENT';
 const SELECT_ELEMENT = 'elments/SELECT_ELEMENT';
+const DELETE_HISTORY = 'elements/DELETE_HISTORY';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
@@ -14,9 +16,11 @@ export const updateName = createAction(UPDATE_NAME); // name
 export const completeAdd = createAction(COMPLETE_ADD); 
 export const deleteElement = createAction(DELETE_ELEMENT); // element 
 export const selectElement = createAction(SELECT_ELEMENT); // element
+export const deleteHistory = createAction(DELETE_HISTORY); // id of element
 
 const initialState = {
   component: {
+    id: -1,
     element:{
       id:-1,
       tag:'',
@@ -30,8 +34,8 @@ const initialState = {
     ing: false,
     name: '',
     type: ''
-  }
-
+  },
+  history: [] 
 }
 
 export default handleActions({
@@ -43,6 +47,9 @@ export default handleActions({
           tag:'root',
           children: []
         }
+      }
+      if (state.history.filter(component=> component.id === payload.id).length === 0) {
+        state.history.push(payload)
       }
       return {...state, component:payload}
     } else 
@@ -101,7 +108,24 @@ export default handleActions({
       ...state
     }
   },
-  [SELECT_ELEMENT]: (state, {payload}:any)=>({...state, select:payload})
+  [SELECT_ELEMENT]: (state, {payload}:any)=>({...state, select:payload}),
+  [DELETE_HISTORY]: (state, {payload}:any)=> {
+    let idx = undefined;
+    state.history.forEach((component, i)=> {
+      if (component.id === payload) idx = i;
+    })
+    if (idx !== undefined) {
+      state.history.splice(idx, 1)
+      if (state.component.id === payload) {
+        if (state.history.length === 0) {
+          state.component = Utils.deepcopy(initialState.component)
+        } else {
+          state.component = state.history[state.history.length-1]
+        }
+      }
+    }
+    return {...state}
+  }
 }, initialState)
 
 const loop = (item, handle) => {

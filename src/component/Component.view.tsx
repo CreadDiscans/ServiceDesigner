@@ -96,7 +96,7 @@ class ComponentView extends React.Component<any> {
         if (data.component.select && data.component.select.type === FileType.FILE) {
             marginLeft -= 5;
         }
-        return <div key={item.id}>
+        return <div className="component-item" key={item.id}>
             {data.component.rename !== item.id && <div
                 style={Object.assign({
                     paddingTop:1,
