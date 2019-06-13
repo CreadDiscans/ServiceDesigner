@@ -12,9 +12,18 @@ class BoardView extends React.Component<any> {
         hover:undefined
     }
 
+    componentDidUpdate() {
+        const {data} = this.props;
+        console.log(data);
+        if (this.refs.frame) {
+            const frame:any = this.refs.frame;
+            console.log(frame.contentDocument);
+            // frame.contentDocument.write('<h1>hello</hi>')
+        }
+    }
+
     render() {
         const {data, ElementActions} = this.props;
-        console.log(data);
         return <div style={styles.layout}>
             <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"
@@ -31,7 +40,7 @@ class BoardView extends React.Component<any> {
                         }}/>
                 </div>)}
             </div>
-            <iframe title="iframe" style={styles.frame}></iframe>
+            <iframe title="iframe" style={styles.frame} ref='frame'></iframe>
         </div>
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos } from 'react-icons/io';
-import { DiReact } from 'react-icons/di';
+import { DiReact, DiCss3 } from 'react-icons/di';
 import Resizable from 're-resizable';
 import AceEditor from 'react-ace';
 import ScrollArea from 'react-scrollbar';
@@ -10,6 +10,7 @@ import 'brace/theme/tomorrow_night';
 import 'brace/mode/json';
 import ColorView from '../resource/Color.view';
 import AssetView from '../resource/Asset.view';
+import CssView from '../resource/Css.view';
 
 
 class BottomView extends React.Component<any> {
@@ -60,7 +61,7 @@ class BottomView extends React.Component<any> {
                 minHeight={this.state.active === undefined ? 0 : 100}
                 maxHeight={this.state.active === undefined ? 28 : window.innerHeight - 100}
                 onResize={(e:any)=>this.setState({height: window.innerHeight-e.clientY})}>
-                {['State', 'Color', 'Asset'].map(tab=> 
+                {['State', 'Color', 'Asset', 'Css'].map(tab=> 
                     <div className="bottomTab" key={tab} 
                     style={Object.assign({}, styles.tab, this.state.active === tab && styles.tabActive)}
                     onClick={()=>{
@@ -73,6 +74,7 @@ class BottomView extends React.Component<any> {
                         {tab === 'State' && <DiReact style={styles.tabIcon}/>}
                         {tab === 'Color' && <IoMdColorPalette style={{...styles.tabIcon,...{color:'#C33'}}}/>}
                         {tab === 'Asset' && <IoMdPhotos style={{...styles.tabIcon,...{color:'#CCC'}}}/>}
+                        {tab === 'Css' && <DiCss3 style={{...styles.tabIcon,...{color:'#006db2'}}}/>}
                         {tab}
                     </div>
                 )}
@@ -83,6 +85,7 @@ class BottomView extends React.Component<any> {
                         {this.state.active === 'State' && this.renderState()}
                         {this.state.active === 'Color' && <ColorView />}
                         {this.state.active === 'Asset' && <AssetView />}
+                        {this.state.active === 'Css' && <CssView />}
                     </ScrollArea>
                 </div>
             </Resizable>

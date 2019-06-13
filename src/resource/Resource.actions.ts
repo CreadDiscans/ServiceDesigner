@@ -21,7 +21,12 @@ const initialState = {
         //     value
         // }
     ],
-    asset:[]
+    asset:[],
+    css:[
+        // name
+        // value
+        // type (url, file, text)
+    ],
 }
 
 export default handleActions({
