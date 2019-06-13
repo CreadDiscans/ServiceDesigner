@@ -33,10 +33,10 @@ class ExplorerView extends React.Component<any> {
     menuItems = {
         [ContextMenuType.Component]: [
             {
-                name:'New File',
+                name:'New Component',
                 click: ()=> this.createFile(FileType.FILE)
             }, {
-                name: 'New Folder',
+                name: 'New Group',
                 click: ()=> this.createFile(FileType.FOLDER)
             },{
                 name: 'Unselect',

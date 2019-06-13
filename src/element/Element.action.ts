@@ -67,25 +67,27 @@ export default handleActions({
   },
   [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
   [COMPLETE_ADD]: (state, {payload}:any)=>{
-    let maxId = 0;
-    loop(state.component.element, (target)=> {
-      if (maxId < target.id) {
-        maxId = target.id
+    if (state.insert.name !== '' ) {
+      let maxId = 0;
+      loop(state.component.element, (target)=> {
+        if (maxId < target.id) {
+          maxId = target.id
+        }
+      })
+      const newElem = {
+        id: maxId + 1,
+        tag: state.insert.name,
+        lib: state.insert.type,
+        prop: [],
+        children: []
       }
-    })
-    const newElem = {
-      id: maxId + 1,
-      tag: state.insert.name,
-      lib: state.insert.type,
-      prop: [],
-      children: []
-    }
-    if (state.select) {
-      newElem['parent'] = state.select;
-      state.select.children.push(newElem);
-    } else {
-      newElem['parent'] = state.component.element;
-      state.component.element.children.push(newElem);
+      if (state.select) {
+        newElem['parent'] = state.select;
+        state.select.children.push(newElem);
+      } else {
+        newElem['parent'] = state.component.element;
+        state.component.element.children.push(newElem);
+      }
     }
     return {
       ...state,
