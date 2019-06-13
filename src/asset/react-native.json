@@ -1,1 +1,27 @@
-{}
+{
+    "View":[],
+    "ScrollView":[],
+    "Text":[
+        "text"
+    ],
+    "TextInput":[
+        "value",
+        "placeholder",
+        "onChangeText"
+    ],
+    "TouchableOpacity":[
+        "onPress"
+    ],
+    "Image":[
+        "source"
+    ],
+    "Picker":[
+        "selectedValue",
+        "onValueChange"
+    ],
+    "Picker.Item":[
+        "label",
+        "value"
+    ],
+    "Render":[]
+}
