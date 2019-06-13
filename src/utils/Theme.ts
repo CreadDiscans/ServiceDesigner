@@ -8,6 +8,7 @@ export const Theme = {
     bgBodyDarkColor: 'rgb(30, 30, 30)',
     bgBodyHoverColor: 'rgb(70, 70, 70)',
     bgBodyActiveColor: 'rgb(60, 60, 60)',
+    bgBoardColor: 'rgb(25, 25, 25)',
     borderColor: 'rgb(100, 100, 100)',
 
     iconReactColor: 'rgb(97, 218, 251)',
