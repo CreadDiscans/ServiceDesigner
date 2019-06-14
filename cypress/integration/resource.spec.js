@@ -47,4 +47,37 @@ describe('Resource', function() {
         cy.get('#asset-delete').click()
         cy.get('#asset-item-wrap').should('have.text', '')
     })
+
+    it('Css', function() {
+        cy.get('.bottomTab').eq(3).click()
+        cy.get('#css-input-url').type('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+        cy.get('#css-button-add-url').click()
+        cy.get('.css-item').click()
+        cy.get('#css-input-url').should('have.value', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+        cy.get('#css-input-url').type('{backspace}')
+        cy.get('#css-button-update').click()
+        cy.get('#css-button-cancel').click()
+        cy.get('#css-input-url').should('have.value', '')
+        cy.get('.css-item').click()
+        cy.get('#css-input-url').should('have.value', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.cs')
+        cy.get('#css-button-delete').click()
+        cy.get("#css-item-wrap").should('have.text', '')
+
+        cy.get('#css-input-file').then(subject=> {
+            return cy.fixture('test.css')
+            .then(style=> {
+                const el = subject[0]
+                const file = new File([style], 'test.css', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+                const dataTransfer = new DataTransfer()
+                dataTransfer.items.add(file)
+                el.files = dataTransfer.files
+                return subject
+            })
+        })
+        cy.get('#css-input-file').trigger('change', {force:true});
+        cy.get('#css-input-name').type('new');
+        cy.get('#css-editor').find('textarea').focus().type('style', {force: true});
+        cy.get('#css-button-add-style').click()
+        cy.get('.css-item').eq(1).click()
+    })
 })

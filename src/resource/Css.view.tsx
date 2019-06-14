@@ -3,78 +3,177 @@ import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as resourceActions from './Resource.actions';
 import { Theme } from '../utils/Theme';
+import AceEditor from 'react-ace';
+import { CSSType } from '../utils/constant';
+
 declare var window:any;
 
 class CssView extends React.Component<any> {
 
     state = {
         hover:undefined,
-        name:undefined,
-        newName: '',
-        value: undefined,
+        url:'',
+        name: '',
+        style:'',
+        type: undefined,
     }
 
     fileSelect = (e:any) => {
         const FileReader = new window.FileReader();
+        const name = e.target.files[0].name; 
         FileReader.onload = (e:any) => {
             const { ResourceActions } = this.props;
-            ResourceActions.createAsset({name:this.state.newName, value: e.target.result});
-            this.setState({newName: '', name: this.state.newName, value: e.target.result});
+            ResourceActions.createCss({
+                name: name,
+                value: e.target.result,
+                type: CSSType.Style
+            })
         }
-        FileReader.readAsDataURL(e.target.files[0]);
+        FileReader.readAsText(e.target.files[0]);
     }
 
     render() {
         const { data, ResourceActions } = this.props;
         return <div>
-            <div id="asset-item-wrap" style={styles.colors}>
-                {data.resource.asset.map(asset=> <div className="asset-item" key={asset.name}
-                    style={Object.assign({}, styles.assetItem, 
-                        this.state.hover === 'item-'+asset.name && {backgroundColor:Theme.bgBodyHoverColor}, 
-                        this.state.name === asset.name && {backgroundColor: Theme.bgHeadActiveColor, color:Theme.fontActiveColor})}
-                    onMouseEnter={()=> this.setState({hover: 'item-'+asset.name})}
+            <div id="css-item-wrap" style={styles.colors}>
+                {data.resource.css.map(css=> <div className="css-item" key={css.name}
+                    style={Object.assign({}, styles.cssItem, 
+                        this.state.hover === 'item-'+css.name && {backgroundColor:Theme.bgBodyHoverColor}, 
+                        this.state.type !== undefined && this.state.name === css.name && {backgroundColor: Theme.bgHeadActiveColor, color:Theme.fontActiveColor})}
+                    onMouseEnter={()=> this.setState({hover: 'item-'+css.name})}
                     onMouseLeave={()=> this.setState({hover: undefined})}
-                    onClick={()=> this.setState({name: asset.name, value: asset.value})}>
-                    {asset.name}
-                    <img 
-                        id={'asset-'+asset.name}
-                        style={{width:25, height:25, margin:-3, float:'right'}} 
-                        src={asset.value} alt=""/>
+                    onClick={()=> {
+                        if (css.type === CSSType.Style) {
+                            this.setState({name: css.name, type: css.type, style: css.value});
+                        } else if (css.type === CSSType.Url) {
+                            this.setState({name: css.name, type: css.type, url: css.value});
+                        }
+                    }}>
+                    <input style={{marginRight:5}} type="checkbox" checked={css.active} onChange={()=> ResourceActions.updateCss({name: css.name, active: !css.active})}/>
+                    {css.name}
+                    <span style={{float:'right'}}>{css.type}</span>
                 </div>)}
             </div>
             <div style={styles.pallete}>
-                { this.state.name !== undefined ? [
-                    <img key={0} style={{maxWidth:'100%'}} src={this.state.value} alt=""/>,
-                    <button id="asset-delete" key={1}
-                        style={Object.assign({},styles.btn, this.state.hover === 'delete' && {backgroundColor:Theme.bgBodyHoverColor})} 
-                        onMouseEnter={()=>this.setState({hover:'delete'})}
-                        onMouseLeave={()=>this.setState({hover:undefined})}
-                        onClick={()=> {
-                            ResourceActions.deleteAsset(this.state.name);
-                            this.setState({name: undefined});
-                        }}>Delete</button>,
-                    <button id="asset-cancel" key={2}
-                        style={Object.assign({},styles.btn, this.state.hover === 'cancel' && {backgroundColor:Theme.bgBodyHoverColor})} 
-                        onMouseEnter={()=>this.setState({hover:'cancel'})}
-                        onMouseLeave={()=>this.setState({hover:undefined})}
-                        onClick={()=> {
-                            this.setState({name: undefined, value:undefined});
-                        }}>Cancel</button>] :[
-                    <div key={0} style={{width:160, display:'inline-block'}}>
-                        <input id="asset-input" style={styles.itemInput} value={this.state.newName} onChange={(e)=>this.setState({newName: e.target.value})}/>
-                    </div>,
-                    <button id="asset-create" key={1}
-                        style={Object.assign({},styles.btn, this.state.hover === 'create' && {backgroundColor:Theme.bgBodyHoverColor})} 
-                        onMouseEnter={()=>this.setState({hover:'create'})}
-                        onMouseLeave={()=>this.setState({hover:undefined})}
-                        onClick={()=> {
-                            if (this.state.newName !== '') {
-                                const file:any = this.refs.file;
-                                file.click()
-                            }
-                        }}>Create</button>
-                ] }
-                <input id="asset-file-input" type="file" style={{display:'none'}} ref={'file'} onChange={this.fileSelect}/>
+                <div>
+                    {(this.state.type === undefined || this.state.type === CSSType.Url) && 
+                    <input id="css-input-url" style={styles.itemInput} value={this.state.url} onChange={(e)=>this.setState({url: e.target.value})} placeholder="Url"/>}
+                </div>
+                <div>
+                    {this.state.type === undefined ? [
+                        <button id="css-button-add-url" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'url' && styles.btnHover)} key={0}
+                            onMouseEnter={()=>this.setState({hover:'url'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> {
+                                if (this.state.url !== '') {
+                                    const block = this.state.url.split('/')
+                                    ResourceActions.createCss({
+                                        name: block[block.length-1],
+                                        value: this.state.url,
+                                        type: CSSType.Url
+                                    })
+                                    this.setState({
+                                        url:'',
+                                        name:'',
+                                        style:'',
+                                        select: undefined
+                                    })
+                                }
+                            }}>Add URL</button>,
+                        <button id="css-button-add-file" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'file' && styles.btnHover)} key={1}
+                            onMouseEnter={()=>this.setState({hover:'file'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> {
+                                const input:any = this.refs.file;
+                                input.click()
+                            }}>Add File</button>,
+                        <button id="css-button-add-style" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'style' && styles.btnHover)} key={2}
+                            onMouseEnter={()=>this.setState({hover:'style'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> {
+                                if (this.state.name !== '') {
+                                    ResourceActions.createCss({
+                                        name: this.state.name,
+                                        value: this.state.style,
+                                        type: CSSType.Style
+                                    })
+                                    this.setState({
+                                        url:'',
+                                        name:'',
+                                        style:'',
+                                        type: undefined
+                                    })
+                                }
+                            }}>Add Style</button>,
+                    ] : [
+                        <button id="css-button-update" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'update' && styles.btnHover)} key={0}
+                            onMouseEnter={()=>this.setState({hover:'update'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> {
+                                let value;
+                                if (this.state.type === CSSType.Style) {
+                                    value = this.state.style;
+                                } else if (this.state.type === CSSType.Url) {
+                                    value = this.state.url;
+                                }
+
+                                ResourceActions.updateCss({
+                                    name: this.state.name, 
+                                    value: value,
+                                })
+                            }}>Update</button>,
+                        <button id="css-button-delete" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'delete' && styles.btnHover)} key={1}
+                            onMouseEnter={()=>this.setState({hover:'delete'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> {
+                                ResourceActions.deleteCss(this.state.name);
+                                this.setState({
+                                    url:'',
+                                    name:'',
+                                    style:'',
+                                    type: undefined})
+                            }}>Delete</button>,
+                        <button id="css-button-cancel" 
+                            style={Object.assign({}, styles.btn, this.state.hover === 'cancel' && styles.btnHover)} key={2}
+                            onMouseEnter={()=>this.setState({hover:'cancel'})}
+                            onMouseLeave={()=>this.setState({hover:undefined})}
+                            onClick={()=> this.setState({
+                                name:'',
+                                url:'',
+                                style:'',
+                                type: undefined
+                            })}>Cancel</button>,
+                    ]}
+                    <input id="css-input-file" onChange={this.fileSelect} type="file" ref={'file'} hidden/>
+                </div>
+                <div id="css-editor">
+                    {(this.state.type === CSSType.Style || this.state.type === undefined) && 
+                    [this.state.type === undefined && <input id="css-input-name" style={styles.itemInput} value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})} placeholder="Name" key={0}/>,
+                    <AceEditor
+                        key={1}
+                        style={{width:'100%', height: 300}}
+                        theme="tomorrow_night" 
+                        mode={'css'}
+                        value={this.state.style}
+                        onChange={(value)=> this.setState({style: value})}
+                        showPrintMargin={true}
+                        showGutter={true}
+                        highlightActiveLine={true}
+                        editorProps={{$blockScrolling: Infinity }}
+                        setOptions={{
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: false,
+                            showLineNumbers: true,
+                            tabSize: 2
+                        }}
+                    />]}
+                </div>
             </div>
         </div>
     }
@@ -106,6 +205,9 @@ const styles = {
         borderRadius: 6,
         margin:5
     },
+    btnHover: {
+        backgroundColor:Theme.bgBodyHoverColor
+    },
     itemInput: {
         fontSize:12,
         color:Theme.fontColor,
@@ -114,7 +216,7 @@ const styles = {
         outline:'none',
         width:'100%'
     },
-    assetItem: {
+    cssItem: {
         fontSize:12,
         color:Theme.fontColor,
         padding:5,

@@ -47,3 +47,8 @@ export enum PropertyType {
     Object = 'object',
     Variable = 'variable'
 }
+
+export enum CSSType {
+    Url = 'url',
+    Style = 'style'
+}
