@@ -52,3 +52,9 @@ export enum CSSType {
     Url = 'url',
     Style = 'style'
 }
+
+export enum FrameType {
+    Browser = 'browser',
+    Portrait = 'portrait',
+    Landscape = 'landscape'
+}

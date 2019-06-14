@@ -1,12 +1,16 @@
 import { createAction, handleActions } from 'redux-actions';
+import { FrameType } from '../utils/constant';
 
 const SHOW_CONTEXT_MENU = 'layout/SHOW_CONTEXT_MENU';
 const HIDE_CONTEXT_MENU = 'layout/HIDE_CONTEXT_MENU';
+const SET_FRAME_TYPE = 'layout/SET_FRAME_TYPE';
 
 export const showContextMenu = createAction(SHOW_CONTEXT_MENU); // x, y, type, target
 export const hideContextMenu = createAction(HIDE_CONTEXT_MENU);
+export const setFrameType = createAction(SET_FRAME_TYPE); // frame type
 
 const initialState = {
+    frameType: FrameType.Browser,
     contextMenu: {
         x:0,
         y:0,
@@ -29,5 +33,6 @@ export default handleActions({
           }
       }
   },
-  [HIDE_CONTEXT_MENU]: (state, {payload}) => ({...state, contextMenu:{...state.contextMenu, display:'none'}})
+  [HIDE_CONTEXT_MENU]: (state, {payload}) => ({...state, contextMenu:{...state.contextMenu, display:'none'}}),
+  [SET_FRAME_TYPE]: (state, {payload}:any) => ({...state, frameType: payload})
 }, initialState)

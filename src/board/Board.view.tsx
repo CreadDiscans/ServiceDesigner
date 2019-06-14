@@ -5,6 +5,7 @@ import { DiReact } from 'react-icons/di';
 import { IoMdClose } from 'react-icons/io';
 import { bindActionCreators } from 'redux';
 import * as elementActions from '../element/Element.action';
+import { FrameType } from '../utils/constant';
 
 class BoardView extends React.Component<any> {
 
@@ -40,7 +41,16 @@ class BoardView extends React.Component<any> {
                         }}/>
                 </div>)}
             </div>
-            <iframe title="iframe" style={styles.frame} ref='frame'></iframe>
+            {data.layout.frameType === FrameType.Portrait && 
+                <img alt='' style={styles.phonePortrait} src="/portrait.png" />}
+            {data.layout.frameType === FrameType.Landscape && 
+                <img alt='' style={styles.phoneLandscape} src="/landscape.png"/>}
+            <div style={Object.assign({}, 
+                data.layout.frameType === FrameType.Browser && styles.frame,
+                data.layout.frameType === FrameType.Portrait && styles.frameProtrait,
+                data.layout.frameType === FrameType.Landscape && styles.frameLandscape)}>
+                    <iframe title="iframe" style={{width:'100%', height:'100%', position:'absolute', borderWidth:0}}></iframe>
+            </div>
         </div>
     }
 }
@@ -49,7 +59,8 @@ const styles:any = {
     layout: {
         flex:1,
         background: Theme.bgBoardColor,
-        position:'relative'
+        position:'relative',
+        display:'flex'
     },
     tabWrap: {
         width:'max-content',
@@ -65,6 +76,34 @@ const styles:any = {
         background:'white',
         height:'calc(100% - 58px)',
         marginTop:29
+    },
+    frameProtrait: {
+        position:'absolute',
+        top: 'calc(25px + 11.5%)',
+        left: 'calc(13px + 50% - 21.5vh)',
+        width: 'calc(-23px + 42.5vh)',
+        height: 'calc(-47px + 76%)',
+        borderWidth:0,
+    },
+    frameLandscape: {
+        position:'absolute',
+        left:'12.5%',
+        width:'75.5%',
+        marginTop: '-21%',
+        top: 'calc(-2px + 50%)',
+        paddingBottom:'42.5%',
+        height:0
+    },
+    phonePortrait: {
+        marginTop:29, 
+        height:'calc(100% - 60px)',
+        objectFit: 'contain',
+        margin:'auto'
+    },
+    phoneLandscape: {
+        width:'100%',
+        objectFit: 'contain',
+        margin:'auto'
     },
     tab: {
         padding: '5px 10px',
@@ -98,7 +137,8 @@ const styles:any = {
 export default connectRouter(
     (state)=>({
         data: {
-            element: state.element
+            element: state.element,
+            layout: state.layout
         }
     }),
     (dispatch)=>({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
-import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos } from 'react-icons/io';
+import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos, IoIosPhonePortrait, IoIosPhoneLandscape, IoMdBrowsers } from 'react-icons/io';
 import { DiReact, DiCss3 } from 'react-icons/di';
 import Resizable from 're-resizable';
 import AceEditor from 'react-ace';
@@ -11,6 +11,9 @@ import 'brace/mode/json';
 import ColorView from '../resource/Color.view';
 import AssetView from '../resource/Asset.view';
 import CssView from '../resource/Css.view';
+import { bindActionCreators } from 'redux';
+import * as layoutActions from '../layout/Layout.actions';
+import { FrameType } from '../utils/constant';
 
 
 class BottomView extends React.Component<any> {
@@ -38,7 +41,7 @@ class BottomView extends React.Component<any> {
                 if (!error) {
                     const { data } = this.props;
                     try{
-                        data.elements.component.state = JSON.parse(this.state.value)
+                        data.element.component.state = JSON.parse(this.state.value)
                     } catch(e) {}
                 }
             }}
@@ -54,6 +57,7 @@ class BottomView extends React.Component<any> {
     }
 
     render() {
+        const { data, LayoutActions } = this.props;
         return <div style={styles.layout}>
             <Resizable
                 defaultSize={{height:this.state.active === undefined ? 28 : this.state.height}}
@@ -78,7 +82,13 @@ class BottomView extends React.Component<any> {
                         {tab}
                     </div>
                 )}
-                {this.state.active !== undefined && <IoIosArrowDown style={styles.icon} onClick={()=>this.setState({active:undefined})}/>}
+                <IoIosArrowDown style={Object.assign({}, styles.icon, this.state.active === undefined && {visibility: 'hidden'})} onClick={()=>this.setState({active:undefined})}/>
+                <IoIosPhoneLandscape style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Landscape && styles.iconActive)} 
+                    onClick={()=> LayoutActions.setFrameType(FrameType.Landscape)}/>
+                <IoIosPhonePortrait style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Portrait && styles.iconActive)} 
+                    onClick={()=> LayoutActions.setFrameType(FrameType.Portrait)}/>
+                <IoMdBrowsers style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Browser && styles.iconActive)}  
+                    onClick={()=> LayoutActions.setFrameType(FrameType.Browser)}/>
                 <div style={{height:'calc(100% - 28px)', overflow:'auto', backgroundColor:Theme.bgBodyDarkColor,}} ref={'layout'}>
                     <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28, minHeight:'100%'}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
@@ -125,6 +135,10 @@ const styles:any = {
         fontSize:28,
         cursor:'pointer'
     },
+    iconActive: {
+        backgroundColor: Theme.bgHeadActiveColor,
+        color: Theme.fontActiveColor
+    },
     tabIcon: {
         color: Theme.iconReactColor,
         fontSize: 14,
@@ -136,9 +150,12 @@ const styles:any = {
 export default connectRouter(
     (state)=>({
         data: {
-            elements: state.elements
+            element: state.element,
+            layout: state.layout
         }
     }),
-    (dispatch)=>({}),
+    (dispatch)=>({
+        LayoutActions: bindActionCreators(layoutActions, dispatch)
+    }),
     BottomView
 )
