@@ -84,7 +84,7 @@ class ElementView extends React.Component<any> {
     renderElement(elem, dep:number=0) {
         const { data } = this.props; 
         return <div key={elem.id}>
-            <div style={Object.assign({
+            <div className="element-item" style={Object.assign({
                     color:Theme.fontColor,
                     paddingTop:1,
                     paddingBottom:1,

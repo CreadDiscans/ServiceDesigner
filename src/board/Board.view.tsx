@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { DiReact } from 'react-icons/di';
@@ -6,6 +7,8 @@ import { IoMdClose } from 'react-icons/io';
 import { bindActionCreators } from 'redux';
 import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
+import CodeSandbox from 'react-code-sandbox';
+import { RenderService } from './Render.service';
 
 class BoardView extends React.Component<any> {
 
@@ -15,11 +18,19 @@ class BoardView extends React.Component<any> {
 
     componentDidUpdate() {
         const {data} = this.props;
-        console.log(data);
         if (this.refs.frame) {
+            const renderService = new RenderService(data.element.component)
             const frame:any = this.refs.frame;
-            console.log(frame.contentDocument);
-            // frame.contentDocument.write('<h1>hello</hi>')
+            try {
+                const body = ReactDOMServer.renderToString(<CodeSandbox imports={renderService.imp}>
+                    {renderService.getBody()}
+                </CodeSandbox>)
+                frame.contentWindow.document.open();
+                frame.contentWindow.document.write(body);
+                frame.contentWindow.document.close();
+            } catch(e) {
+                console.error(e);
+            }
         }
     }
 
@@ -49,7 +60,7 @@ class BoardView extends React.Component<any> {
                 data.layout.frameType === FrameType.Browser && styles.frame,
                 data.layout.frameType === FrameType.Portrait && styles.frameProtrait,
                 data.layout.frameType === FrameType.Landscape && styles.frameLandscape)}>
-                    <iframe title="iframe" style={{width:'100%', height:'100%', position:'absolute', borderWidth:0}}></iframe>
+                    <iframe title="iframe" style={{width:'100%', height:'100%', position:'absolute', borderWidth:0}} ref="frame" />
             </div>
         </div>
     }

@@ -39,7 +39,7 @@ class PropertyView extends React.Component<any> {
                         verticalScrollbarStyle={{backgroundColor:'white'}}>
                         <div id="property-list">
                             {data.property.element.prop.map(prop=> 
-                                <div style={Object.assign({},styles.item, this.state.hover === prop.name && styles.hover)} key={prop.name}
+                                <div className="property-item" style={Object.assign({},styles.item, this.state.hover === prop.name && styles.hover)} key={prop.name}
                                     onMouseEnter={()=> this.setState({hover: prop.name})}
                                     onMouseLeave={()=> this.setState({hover: undefined})}
                                     onContextMenu={(e)=>this.clickItemRight(e, prop)}

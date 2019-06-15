@@ -121,7 +121,12 @@ export default handleActions({
             ...state
         }
     },
-    [UPDATE_VALUE]: (state, {payload}:any) => ({...state, select:{...state.select, value: payload}}),
+    [UPDATE_VALUE]: (state, {payload}:any) => {
+        state.select.value = payload
+        return {
+            ...state
+        }
+    },
     [UPDATE_KEY]: (state, {payload}:any) => {
         if (state.create) return {...state, select:{...state.select, name:payload}}
         else return {...state}
