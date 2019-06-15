@@ -89,7 +89,7 @@ class BottomView extends React.Component<any> {
                     onClick={()=> LayoutActions.setFrameType(FrameType.Portrait)}/>
                 <IoMdBrowsers style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Browser && styles.iconActive)}  
                     onClick={()=> LayoutActions.setFrameType(FrameType.Browser)}/>
-                <div style={{height:'calc(100% - 28px)', overflow:'auto', backgroundColor:Theme.bgBodyDarkColor,}} ref={'layout'}>
+                <div id="bottom-view" style={{height:'calc(100% - 28px)', overflow:'auto', backgroundColor:Theme.bgBodyDarkColor,}} ref={'layout'}>
                     <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28, minHeight:'100%'}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
                         {this.state.active === 'State' && this.renderState()}
