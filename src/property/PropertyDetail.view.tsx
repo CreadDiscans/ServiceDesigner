@@ -37,7 +37,10 @@ class PropertyDetailView extends React.Component<any> {
                 <div style={{width:'calc(100% - 20px)', display:'inline-block'}}>
                     <input id="property-detail-condition" style={styles.itemInput} placeholder={'Condition'} disabled={this.state.idx === 0} 
                         value={data.property.select.value[this.state.idx].condition}
-                        onChange={(e)=> {data.property.select.value[this.state.idx].condition = e.target.value; this.setState({})}}/>
+                        onChange={(e)=> {
+                            data.property.select.value[this.state.idx].condition = e.target.value;
+                            PropertyActions.updateValue(data.property.select.value);
+                        }}/>
                 </div>
                 <IoMdTrash style={Object.assign({}, {fontSize:18, verticalAlign:'top', cursor:'pointer'}, this.state.hover === 'trash' && {color: Theme.fontActiveColor})} 
                     onMouseEnter={()=> this.setState({hover:'trash'})}
@@ -55,7 +58,7 @@ class PropertyDetailView extends React.Component<any> {
                     value={data.property.select.value[this.state.idx].value}
                     onChange={(value)=> {
                         data.property.select.value[this.state.idx].value = value;
-                        this.setState({})
+                        PropertyActions.updateValue(data.property.select.value);
                     }}
                     showPrintMargin={true}
                     showGutter={false}
