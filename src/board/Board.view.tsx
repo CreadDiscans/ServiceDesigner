@@ -6,6 +6,7 @@ import { DiReact } from 'react-icons/di';
 import { IoMdClose } from 'react-icons/io';
 import { bindActionCreators } from 'redux';
 import * as elementActions from '../element/Element.action';
+import * as layoutActions from '../layout/Layout.actions';
 import { FrameType } from '../utils/constant';
 import CodeSandbox from 'react-code-sandbox';
 import { RenderService } from './Render.service';
@@ -17,7 +18,7 @@ class BoardView extends React.Component<any> {
     }
 
     componentDidUpdate() {
-        const {data} = this.props;
+        const {data, LayoutActions} = this.props;
         if (this.refs.frame) {
             try {
                 const renderService = new RenderService(data.element.component, {
@@ -32,8 +33,21 @@ class BoardView extends React.Component<any> {
                 frame.contentWindow.document.open();
                 frame.contentWindow.document.write(renderService.head  + body);
                 frame.contentWindow.document.close();
+                if (data.layout.message.text !== 'Rendering Successfully') {
+                    LayoutActions.message({
+                        background: Theme.success,
+                        color: Theme.successFont,
+                        text: 'Rendering Successfully'
+                    })
+                }
             } catch(e) {
-                console.error(e);
+                if (data.layout.message.text !== 'Rendering Failed') {
+                    LayoutActions.message({
+                        background: Theme.danger,
+                        color: Theme.dangerFont,
+                        text: 'Rendering Failed'
+                    })
+                }
             }
         }
     }
@@ -158,7 +172,8 @@ export default connectRouter(
         }
     }),
     (dispatch)=>({
-        ElementActions: bindActionCreators(elementActions, dispatch)
+        ElementActions: bindActionCreators(elementActions, dispatch),
+        LayoutActions: bindActionCreators(layoutActions, dispatch)
     }),
     BoardView
 )

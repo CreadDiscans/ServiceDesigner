@@ -13,7 +13,6 @@ export class RenderService {
     head = '';
 
     constructor(component, options) {
-        console.log(component);
         if (component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
             this.type = 'react-native';
         } else {
@@ -23,7 +22,6 @@ export class RenderService {
         this.state = component.state;
         this.dom = this.toHtml(component.element);
         this.head = this.toHead();
-        console.log(this.dom);
     }
 
     getBody() {

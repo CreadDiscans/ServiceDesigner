@@ -147,6 +147,8 @@ class ExplorerView extends React.Component<any> {
                     <div style={styles.title}>EXPLORER</div>
                     <ComponentsView />
                     <ElementsView />
+                    {data.layout.message.background !== undefined && 
+                        <div style={{...styles.message, ...{background: data.layout.message.background, color: data.layout.message.color}}}>{data.layout.message.text}</div>}
                 </div>
             </Resizable>
             {(data.layout.contextMenu.type === ContextMenuType.Component ||
@@ -183,6 +185,16 @@ const styles:any = {
     hover: {
         backgroundColor:Theme.bgBodyHoverColor,
         cursor:'pointer'
+    },
+    message: {
+        position:'absolute',
+        bottom:0,
+        background:Theme.success,
+        width:'100%',
+        height:29,
+        paddingLeft:5,
+        paddingTop:3,
+        color:Theme.successFont
     }
 }
 

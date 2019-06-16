@@ -13,5 +13,14 @@ export const Theme = {
 
     iconReactColor: 'rgb(97, 218, 251)',
     iconBootstrapColor: '#563d7c',
-    iconHtmlColor: '#de4b25'
+    iconHtmlColor: '#de4b25',
+
+    primary: '#cce5ff',
+    primaryFont: '#004085',
+    success: '#d4edda',
+    successFont: '#155724',
+    danger: '#f8d7da',
+    dangerFont: '#721c24',
+    warning: '#fff3cd',
+    warningFont: '#856404'
 }
