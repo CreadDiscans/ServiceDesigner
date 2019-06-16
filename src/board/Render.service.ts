@@ -1,6 +1,8 @@
 import React from 'react';
 import { ElementType, PropertyType, CSSType } from '../utils/constant';
 import Utils from '../utils/utils';
+import * as reactstrap from 'reactstrap';
+import * as reactNative from 'react-native-web';
 
 export class RenderService {
     
@@ -22,6 +24,7 @@ export class RenderService {
         this.state = component.state;
         this.dom = this.toHtml(component.element);
         this.head = this.toHead();
+        // console.log(this.dom);
     }
 
     getBody() {
@@ -29,6 +32,8 @@ export class RenderService {
     }
 
     toHtml(elem, forStack = []) {
+        this.applyImport(elem);
+
         const children = (forStack) => {
             return elem.children.map(item=> this.toHtml(item, forStack)).join('');
         }
@@ -88,14 +93,18 @@ export class RenderService {
             return output;
         }
 
-        let tag = this.type === 'react' ? 'div' : 'reactNative.View';
+        let tag = this.type === 'react' ? 'div' : ElementType.ReactNative + '.' + 'View';
         if (this.type === 'react') 
         if (elem.tag === 'root' || elem.id === -1) {
             return '<'+tag+' id="'+ elem.id+ '">' + children(forStack) + '</'+tag+'>'
         }
 
         if (elem.tag !== 'render') {
-            tag = elem.tag;
+            if (elem.lib === ElementType.Html) {
+                tag = elem.tag;
+            } else {
+                tag = elem.lib + '.' + elem.tag;
+            }
         }
 
         const forPropValue = this.getPropValue(elem, 'for');                // for property
@@ -110,12 +119,21 @@ export class RenderService {
     toHead() {
         return this.options.css.filter(css=> css.active).map(css=> {
             if (css.type === CSSType.Url) {
-                return '<link rel="stylesheet" href="style.css">'
+                return '<link rel="stylesheet" href="'+css.value+'">'
             } else if (css.type === CSSType.Style) {
                 return '<style>' + css.value + '</style>'
             }
             return ''
         }).join('\n')
+    }
+
+    applyImport(elem) {
+        if (elem.lib === ElementType.Reactstrap && !(ElementType.Reactstrap in this.imp)) {
+            this.imp[ElementType.Reactstrap] = reactstrap;
+        } else if (elem.lib === ElementType.ReactNative && !(ElementType.ReactNative in this.imp)) {
+            this.imp[ElementType.ReactNative] = reactNative;
+        }
+
     }
 
     getAttrId(elem, forStack, isFor) {

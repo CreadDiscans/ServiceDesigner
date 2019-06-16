@@ -126,4 +126,12 @@ describe('Board', function() {
         cy.get('#css-input-name').type('fitst_css')
         cy.get('#css-button-add-style').click()
     })
+
+    it('render bootstrap', function() {
+        createComponent('new')
+        cy.get('#element-wrap').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(1).click()
+        cy.get('input[id="element-input"]').type('Alert{enter}')
+        cy.get('.element-item').last().click()
+    })
 })

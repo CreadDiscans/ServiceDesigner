@@ -162,6 +162,7 @@ class PropertyDetailView extends React.Component<any> {
             table = reactNativeJson
         }
         return <datalist id="datalist">
+            <option value="style" />
             {table && table[data.property.element.tag] && table[data.property.element.tag].map(key=> 
                 <option key={key} value={key} />)}
         </datalist>
