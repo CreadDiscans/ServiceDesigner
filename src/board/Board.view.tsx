@@ -21,7 +21,7 @@ class BoardView extends React.Component<any> {
         const {data, LayoutActions} = this.props;
         if (this.refs.frame) {
             try {
-                const renderService = new RenderService(data.element.component, {
+                const renderService = new RenderService().renderOne(data.element.component, {
                     css: data.resource.css,
                     color: data.resource.color,
                     asset: data.resource.asset

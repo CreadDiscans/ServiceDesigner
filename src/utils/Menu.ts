@@ -51,6 +51,9 @@ export class Menu {
                             label: 'Save file',
                             click: ()=> {
                                 const data = saveFile()
+                                if (data === undefined) {
+                                    return;
+                                }
                                 
                                 if (this.cachePath === undefined) {
                                     this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
@@ -62,7 +65,7 @@ export class Menu {
                                     }
                                     console.log('saved json')
                                 });
-                                fs.writeFile(this.cachePath+'/design.tsx', data.js, (err:any)=> {
+                                fs.writeFile(this.cachePath+'/design.component.tsx', data.js, (err:any)=> {
                                     if (err) {
                                         return console.log(err)
                                     }
@@ -83,6 +86,9 @@ export class Menu {
                             label: 'Save to another foleder',
                             click: ()=> {
                                 const data = saveFile()
+                                if (data === undefined) {
+                                    return;
+                                }
                                 this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
                                 
                                 fs.writeFile(this.cachePath+'/design.save.json', JSON.stringify(data.json), (err:any)=> {
@@ -107,6 +113,12 @@ export class Menu {
                                 }
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
+                        },
+                        {
+                            label: 'Exit',
+                            click: ()=> {
+                                remote.getCurrentWindow().close()
+                            }
                         }
                     ]
                 }

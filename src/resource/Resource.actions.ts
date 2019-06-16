@@ -9,6 +9,7 @@ const UPDATE_ASSET = 'resource/UPDATE_ASSET';
 const CREATE_CSS = 'resource/CREATE_CSS';
 const DELETE_CSS = 'resource/DELETE_CSS';
 const UPDATE_CSS = 'resource/UPDATE_CSS';
+const LOAD_RESOURCE = 'resource/LOAD_RESOURCE';
 
 export const createColor = createAction(CREATE_COLOR); // name, value
 export const deleteColor = createAction(DELETE_COLOR); // name
@@ -19,6 +20,7 @@ export const updateAsset = createAction(UPDATE_ASSET); // name, value
 export const createCss = createAction(CREATE_CSS); // name, value, type
 export const deleteCss = createAction(DELETE_CSS); // name,
 export const updateCss = createAction(UPDATE_CSS); // name, value, active
+export const loadResource = createAction(LOAD_RESOURCE); // color, asset, css
 
 const initialState = {
     color:[
@@ -120,5 +122,12 @@ export default handleActions({
             }
         });
         return {...state}
+    },
+    [LOAD_RESOURCE]: (state, {payload}:any) => {
+        return {
+            color:payload.color,
+            asset:payload.asset,
+            css:payload.css
+        }
     }
 }, initialState)

@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { FileType } from '../models/file';
+import _ from 'lodash';
 
 const CREATE_FILE = 'component/CREATE_FILE';
 const DELETE_FILE = 'component/DELETE_FILE';
@@ -11,6 +12,7 @@ const READY_TO_CREATE_BY_MENU = 'component/READY_TO_CREATE_BY_MENU';
 const READY_TO_RENAME = 'component/READY_TO_RENAME';
 const RESET = 'component/RESET';
 const RESET_FOCUS = 'component/RESET_FOCUS';
+const LOAD_COMPONENT = 'component/LOAD_COMPONENT';
 
 export const createFile = createAction(CREATE_FILE); // name, type
 export const deleteFile = createAction(DELETE_FILE); // ref item in files
@@ -22,6 +24,7 @@ export const readyToCreateByMenu = createAction(READY_TO_CREATE_BY_MENU); // cre
 export const readyToRename = createAction(READY_TO_RENAME); // create, type, focus, rename, name
 export const reset = createAction(RESET);
 export const resetFocus = createAction(RESET_FOCUS);
+export const loadComponent = createAction(LOAD_COMPONENT); // array on components
 
 const initialState = {
     files:[],
@@ -117,10 +120,23 @@ export default handleActions({
     [READY_TO_CREATE_BY_MENU]: (state, {payload}:any) => ({...state, create:payload.create, type: payload.type, focus:payload.focus, select:payload.select}),
     [READY_TO_RENAME]: (state, {payload}:any) => ({...state, create:payload.create, type: payload.type, focus:payload.focus, name:payload.name, rename:payload.rename}),
     [RESET]: (state,{payload}:any) => ({...state, create:false, type:undefined, focus:undefined, rename:0, name:''}),
-    [RESET_FOCUS]: (state,{payload}:any)=>({...state,focus:undefined})
+    [RESET_FOCUS]: (state,{payload}:any)=>({...state,focus:undefined}),
+    [LOAD_COMPONENT]: (state, {payload}:any)=> {
+        payload.forEach(comp=> {
+            loop(comp, (item, stack)=> {
+                item.parent = _.last(stack)
+            })
+        })
+        return {
+            ...state,
+            files: payload
+        }
+    }
 }, initialState)
 
-const loop = (item, handle) => {
-    handle(item);
-    item.children.forEach(child=> loop(child, handle));
+const loop = (item, handle, stack = []) => {
+    handle(item, stack);
+    stack.push(item);
+    item.children.forEach(child=> loop(child, handle, stack));
+    stack.pop();
 }
