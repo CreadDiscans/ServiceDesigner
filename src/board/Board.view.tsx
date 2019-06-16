@@ -19,14 +19,18 @@ class BoardView extends React.Component<any> {
     componentDidUpdate() {
         const {data} = this.props;
         if (this.refs.frame) {
-            const renderService = new RenderService(data.element.component)
-            const frame:any = this.refs.frame;
             try {
+                const renderService = new RenderService(data.element.component, {
+                    css: data.resource.css,
+                    color: data.resource.color,
+                    asset: data.resource.asset
+                })
+                const frame:any = this.refs.frame;
                 const body = ReactDOMServer.renderToString(<CodeSandbox imports={renderService.imp}>
                     {renderService.getBody()}
                 </CodeSandbox>)
                 frame.contentWindow.document.open();
-                frame.contentWindow.document.write(body);
+                frame.contentWindow.document.write(renderService.head  + body);
                 frame.contentWindow.document.close();
             } catch(e) {
                 console.error(e);
@@ -149,7 +153,8 @@ export default connectRouter(
     (state)=>({
         data: {
             element: state.element,
-            layout: state.layout
+            layout: state.layout,
+            resource: state.resource
         }
     }),
     (dispatch)=>({
