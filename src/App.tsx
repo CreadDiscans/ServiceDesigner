@@ -5,8 +5,24 @@ import Sidebar from './views/sidebar/sidebar.view'
 import { Intro } from './views/intro.view'
 import { FrameView } from './views/frame.view';
 import { HomeView } from './layout/Home.view';
+import { Menu } from './utils/Menu';
+import { connectRouter } from './redux/connection';
+
 
 class App extends React.Component { 
+
+    componentWillMount() {
+        new Menu().init(
+            (data) => {console.log(data)},  // load File : input data
+            () => {
+                return {
+                    json:'',
+                    js: '',
+                    css: ''
+                }
+            }                        // save File : return {json, js, css}
+        )
+    }
 
     render() {
         return (
@@ -29,4 +45,8 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default connectRouter(
+    (state)=>({}),
+    (dispatch)=>({}),
+    App
+);
