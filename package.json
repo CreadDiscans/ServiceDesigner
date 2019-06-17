@@ -34,7 +34,7 @@
     "react-scrollbar": "^0.5.6",
     "reactstrap": "^7.1.0",
     "redux-actions": "^2.6.5",
-    "redux-pender": "^2.0.12",
+    "redux-observable": "^1.1.0",
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
