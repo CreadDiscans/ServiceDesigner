@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { FileType } from '../models/file';
 import _ from 'lodash';
+import Utils from '../utils/utils';
 
 const CREATE_FILE = 'component/CREATE_FILE';
 const DELETE_FILE = 'component/DELETE_FILE';
@@ -39,7 +40,7 @@ const initialState = {
 export default handleActions({
     [CREATE_FILE]: (state, {payload}:any) => {
         let maxId = 0;
-        state.files.forEach(item=> loop(item, (target)=> {
+        state.files.forEach(item=> Utils.loop(item, (target)=> {
             if (maxId < target.id) {
                 maxId = target.id
             }
@@ -90,7 +91,7 @@ export default handleActions({
         }
     },
     [COLLAPSE_FILE]: (state, {payload}) => {
-        state.files.forEach(item=> loop(item, target=> target.collapse = false))
+        state.files.forEach(item=> Utils.loop(item, target=> target.collapse = false))
         return {
             ...state
         }
@@ -123,8 +124,11 @@ export default handleActions({
     [RESET_FOCUS]: (state,{payload}:any)=>({...state,focus:undefined}),
     [LOAD_COMPONENT]: (state, {payload}:any)=> {
         payload.forEach(comp=> {
-            loop(comp, (item, stack)=> {
+            Utils.loop(comp, (item, stack)=> {
                 item.parent = _.last(stack)
+                Utils.loop(comp.elememt, (elem, stack)=> {
+                    elem.parent = _.last(stack)
+                })
             })
         })
         return {
@@ -133,10 +137,3 @@ export default handleActions({
         }
     }
 }, initialState)
-
-const loop = (item, handle, stack = []) => {
-    handle(item, stack);
-    stack.push(item);
-    item.children.forEach(child=> loop(child, handle, stack));
-    stack.pop();
-}

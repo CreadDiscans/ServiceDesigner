@@ -10,7 +10,9 @@ export default class Utils {
         const localLoop = (parent:any) => {
             handle(parent, stack);
             stack.push(parent);
-            parent.children.forEach((child:any)=> localLoop(child));
+            if (parent.children !== undefined) {
+                parent.children.forEach((child:any)=> localLoop(child));
+            }
             stack.pop();
         }
         localLoop(item)

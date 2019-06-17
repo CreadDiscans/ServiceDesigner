@@ -56,6 +56,9 @@ class App extends React.Component<any> {
                     copiedComponents.forEach(comp=> {
                         Utils.loop(comp, (item)=> {
                             delete item.parent;
+                            Utils.loop(item.element, (elem)=> {
+                                delete elem.parent;
+                            })
                         })
                     })
                     const json = {
@@ -65,7 +68,7 @@ class App extends React.Component<any> {
                     }
                     const renderService = new RenderService().renderAll(copiedComponents, {
                         color: data.resource.color,
-                        asset: data.resource.assets,
+                        asset: data.resource.asset,
                         css: data.resource.css
                     })
                     LayoutActions.message({
@@ -73,11 +76,11 @@ class App extends React.Component<any> {
                         color: Theme.primaryFont,
                         text: 'Save Successfully'
                     })
-                    return {
+                    return Promise.resolve({
                         json:JSON.stringify(json),
                         js: renderService.toJs(),
                         css: await renderService.toCss()
-                    }
+                    })
                 } catch(e) {
                     console.log(e)
                     LayoutActions.message({
@@ -85,7 +88,7 @@ class App extends React.Component<any> {
                         color: Theme.dangerFont,
                         text: 'Save Failed'
                     })
-                    return undefined
+                    return Promise.resolve(undefined)
                 }
             }                        // save File : return {json, js, css}
         )

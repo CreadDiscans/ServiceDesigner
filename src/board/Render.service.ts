@@ -31,7 +31,7 @@ export class RenderService {
     js = []
 
     renderOne(component, options) {
-        if (component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
+        if (component.element.children && component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
             this.type = 'react-native';
         } else {
             this.type = 'react';
@@ -51,8 +51,8 @@ export class RenderService {
                 const prefix = stack.map(stackItem=> _.capitalize(stackItem.name)).join('')
                 const renderService = new RenderService().renderOne(item, options);
                 this.js.push(RenderService.TEMPLATE_CLASS
-                    .replace('{classname', 'Designed' + prefix + _.capitalize(item.name))
-                    .replace('{state}', JSON.stringify(item.state))
+                    .replace('{classname}', 'Designed' + prefix + _.capitalize(item.name))
+                    .replace('{state}', 'state='+JSON.stringify(item.state))
                     .replace('{code}', renderService.dom)) 
                 this.type = renderService.type;
             }
@@ -93,6 +93,9 @@ export class RenderService {
                 }
             });
             let css = '';
+            if (works.length === 0) {
+                resolve(css);
+            }
             forkJoin(works).pipe(
                 map((res:any)=> res.map(eachRes=> {
                         if (typeof eachRes === 'string') {
@@ -139,7 +142,7 @@ export class RenderService {
             if (isFor) {
                 attrs.push('key={i'+(forStack.length-1)+'}')
             }
-            attrs = attrs.concat(elem.prop.filter(prop=>prop.name !== 'for' || prop.name !== 'text').map(prop=> {
+            attrs = attrs.concat(elem.prop.filter(prop=>prop.name !== 'for' && prop.name !== 'text').map(prop=> {
                 if (prop.type === PropertyType.Function) {
                     let itemParam = '';
                     if (forStack.length !== 0) {
@@ -176,7 +179,9 @@ export class RenderService {
         }
 
         let tag = this.type === 'react' ? 'div' : ElementType.ReactNative + '.View';
-        if (this.type === 'react') 
+        if (elem.children === undefined) {
+            return '<'+tag+'></'+tag+'>';
+        }
         if (elem.tag === 'root' || elem.id === -1) {
             return '<'+tag+' id="'+ elem.id+ '">' + children(forStack) + '</'+tag+'>'
         }
