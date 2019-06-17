@@ -31,6 +31,34 @@ export class Menu {
             const { remote } = window.require('electron');
             const {Menu} = remote;
             const fs = window.require('fs')
+
+            const save = async() => {
+                const data = await saveFile()
+                if (data === undefined) {
+                    return;
+                }
+                fs.writeFile(this.cachePath+'/design.save.json', JSON.stringify(data.json), (err:any)=> {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    console.log('saved json')
+                });
+                fs.writeFile(this.cachePath+'/design.component.tsx', data.js, (err:any)=> {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    console.log('saved tsx')
+                });
+                if (data.css !== undefined) {
+                    fs.writeFile(this.cachePath+'/design.style.css', data.css, (err:any)=> {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        console.log('saved css')
+                    })
+                }
+            }
+
             // define template
             const template = [
                 {
@@ -42,7 +70,7 @@ export class Menu {
                                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
                                 fs.readFile(file[0], (err:any, data:any)=> {
                                     if (err) throw err
-                                    openFile(data)
+                                    openFile(JSON.parse(data))
                                 });
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'
@@ -50,67 +78,19 @@ export class Menu {
                         {
                             label: 'Save file',
                             click: ()=> {
-                                const data = saveFile()
-                                if (data === undefined) {
-                                    return;
-                                }
-                                
                                 if (this.cachePath === undefined) {
                                     this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
                                 }
+                                save();
                                 
-                                fs.writeFile(this.cachePath+'/design.save.json', JSON.stringify(data.json), (err:any)=> {
-                                    if (err) {
-                                        return console.log(err)
-                                    }
-                                    console.log('saved json')
-                                });
-                                fs.writeFile(this.cachePath+'/design.component.tsx', data.js, (err:any)=> {
-                                    if (err) {
-                                        return console.log(err)
-                                    }
-                                    console.log('saved tsx')
-                                });
-                                if (data.css) {
-                                    fs.writeFile(this.cachePath+'/design.style.css', data.css, (err:any)=> {
-                                        if (err) {
-                                            return console.log(err)
-                                        }
-                                        console.log('saved css')
-                                    })
-                                }
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+S' : 'Ctrl+S'
                         },
                         {
                             label: 'Save to another foleder',
-                            click: ()=> {
-                                const data = saveFile()
-                                if (data === undefined) {
-                                    return;
-                                }
+                            click: async()=> {
                                 this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
-                                
-                                fs.writeFile(this.cachePath+'/design.save.json', JSON.stringify(data.json), (err:any)=> {
-                                    if (err) {
-                                        return console.log(err)
-                                    }
-                                    console.log('saved json')
-                                });
-                                fs.writeFile(this.cachePath+'/design.tsx', data.js, (err:any)=> {
-                                    if (err) {
-                                        return console.log(err)
-                                    }
-                                    console.log('saved tsx')
-                                });
-                                if (data.css) {
-                                    fs.writeFile(this.cachePath+'/design.style.css', data.css, (err:any)=> {
-                                        if (err) {
-                                            return console.log(err)
-                                        }
-                                        console.log('saved css')
-                                    })
-                                }
+                                save();
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
                         },

@@ -137,6 +137,7 @@ class ExplorerView extends React.Component<any> {
 
     render() {
         const { data } = this.props;
+        console.log(data);
         return <div style={{display:'inline-block', zIndex: 10}}>
             <Resizable defaultSize={{width:200, height:'100%'}}
                 maxWidth={window.innerWidth-200}

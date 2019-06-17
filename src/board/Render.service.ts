@@ -3,16 +3,32 @@ import { ElementType, PropertyType, CSSType } from '../utils/constant';
 import Utils from '../utils/utils';
 import * as reactstrap from 'reactstrap';
 import * as reactNative from 'react-native-web';
+import { FileType } from '../models/file';
+import _ from 'lodash';
+import { ajax } from 'rxjs/ajax';
+import { forkJoin, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export class RenderService {
-    
+
+    private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as reactstrap from 'reactstrap';\nimport './design.style.css';\n";
+    private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as reactnative from 'react-native';\n";
+    private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\tonEvent(e:any){}\n\trenderPart=(name:any)=>{}\n\tsync = (key:any, value:any) => {\n\t\tlet target = this.state;\n\t\tlet parent:any = {};\n\t\tlet lastKey:any = '';\n\t\tkey.split('.').forEach((item:string)=> {\n\t\t\tparent = target;\n\t\t\ttarget = target[item];\n\t\t\tlastKey = item;\n\t\t});\n\t\tif (target !== value) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t}\n\t}\n}\n";
+    private static TEMPLATE_CLASS = "export class {classname} extends DesignedComponent {\n\t{state}\n\trender() {\n\t\t// @ts-ignore\n\t\treturn {code}\n\t}\n}\n";
+
+    // common 
+    type = 'react' // react or react-native
+    options;
+
+    // render One
     state;
     func = 'renderPart=(name)=>{};onEvent=(e)=>{};';
     dom = '';
     imp = {React};
-    type = 'react' // react or react-native
-    options;
     head = '';
+
+    // render All
+    js = []
 
     renderOne(component, options) {
         if (component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
@@ -29,15 +45,68 @@ export class RenderService {
     }
 
     renderAll(components, options) {
+        this.options = options;
+        components.forEach(comp=> Utils.loop(comp, (item, stack)=> {
+            if (item.type === FileType.FILE) {
+                const prefix = stack.map(stackItem=> _.capitalize(stackItem.name)).join('')
+                const renderService = new RenderService().renderOne(item, options);
+                this.js.push(RenderService.TEMPLATE_CLASS
+                    .replace('{classname', 'Designed' + prefix + _.capitalize(item.name))
+                    .replace('{state}', JSON.stringify(item.state))
+                    .replace('{code}', renderService.dom)) 
+                this.type = renderService.type;
+            }
+        }))
+
         return this;
     }
 
     toJs() {
+        let js = '';
+        if (this.type === 'react') {
+            js += RenderService.TEMPLATE_REACT_IMPORT;
+        } else if (this.type === 'react-native') {
+            js += RenderService.TEMPLATE_REACT_NATIVE_IMPORT;
+        }
 
+        js += RenderService.TEMPLATE_ABSTRACT;
+        js += this.js.join('\n');
+
+        return js;
     }
 
     toCss() {
-        
+        if (this.type === 'react-native') {
+            return Promise.resolve(undefined)
+        }
+        return new Promise(resolve=> {
+            const works = [];
+            this.options.css.filter(css=> css.active).forEach(css=> {
+                if (css.type === CSSType.Url) {
+                    works.push(ajax({
+                        url: css.value,
+                        method: 'GET',
+                        responseType: 'text'
+                    }))
+                } else if (css.type === CSSType.Style) {
+                    works.push(of(css.value))
+                }
+            });
+            let css = '';
+            forkJoin(works).pipe(
+                map((res:any)=> res.map(eachRes=> {
+                        if (typeof eachRes === 'string') {
+                            return eachRes
+                        } else {
+                            return eachRes.response
+                        }
+                    })
+                )
+            ).subscribe(data=> {
+                css = data.join('\n');
+                resolve(css);
+            })
+        })
     }
 
     getBody() {
@@ -106,7 +175,7 @@ export class RenderService {
             return output;
         }
 
-        let tag = this.type === 'react' ? 'div' : ElementType.ReactNative + '.' + 'View';
+        let tag = this.type === 'react' ? 'div' : ElementType.ReactNative + '.View';
         if (this.type === 'react') 
         if (elem.tag === 'root' || elem.id === -1) {
             return '<'+tag+' id="'+ elem.id+ '">' + children(forStack) + '</'+tag+'>'

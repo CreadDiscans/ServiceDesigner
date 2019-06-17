@@ -23,14 +23,15 @@ class App extends React.Component<any> {
     componentWillMount() {
         new Menu().init(
             (json) => {
-                const { data, LayoutActions, ResourceActions, ComponentActions } = this.props;
+                const { LayoutActions, ResourceActions, ComponentActions } = this.props;
                 try {
-                    json = JSON.parse(json);
-                    if (json.version === 2) {
-                        ResourceActions.loadResource(json.resource);
-                        ComponentActions.loadComponent(json.components);
+                    const data = JSON.parse(json);
+                    console.log(json, data);
+                    if (data.version === 2) {
+                        ResourceActions.loadResource(data.resource);
+                        ComponentActions.loadComponent(data.components);
                     } else {
-                        const deprecateService =  new DeprecateService().parseVersion1(json);
+                        const deprecateService =  new DeprecateService().parseVersion1(data);
                         ResourceActions.loadResource(deprecateService.toResource());
                         ComponentActions.loadComponent(deprecateService.toComponents());
                     }
@@ -40,6 +41,7 @@ class App extends React.Component<any> {
                         text: 'Loaded Successfully'
                     })
                 } catch(e) {
+                    console.log(e)
                     LayoutActions.message({
                         background: Theme.danger,
                         color: Theme.dangerFont,
@@ -47,7 +49,7 @@ class App extends React.Component<any> {
                     })
                 }
             },  // load File : input data
-            () => {
+            async () => {
                 const { data, LayoutActions } = this.props;
                 try {
                     const copiedComponents = _.cloneDeep(data.component.files);
@@ -63,7 +65,8 @@ class App extends React.Component<any> {
                     }
                     const renderService = new RenderService().renderAll(copiedComponents, {
                         color: data.resource.color,
-                        asset: data.resource.assets
+                        asset: data.resource.assets,
+                        css: data.resource.css
                     })
                     LayoutActions.message({
                         background: Theme.primary,
@@ -73,9 +76,10 @@ class App extends React.Component<any> {
                     return {
                         json:JSON.stringify(json),
                         js: renderService.toJs(),
-                        css: renderService.toCss()
+                        css: await renderService.toCss()
                     }
                 } catch(e) {
+                    console.log(e)
                     LayoutActions.message({
                         background: Theme.danger,
                         color: Theme.dangerFont,
