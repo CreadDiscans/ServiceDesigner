@@ -41,7 +41,7 @@ class BoardView extends React.Component<any> {
                     })
                 }
             } catch(e) {
-                // console.error(e);
+                console.error(e);
                 if (data.layout.message.text !== 'Rendering Failed') {
                     LayoutActions.message({
                         background: Theme.danger,

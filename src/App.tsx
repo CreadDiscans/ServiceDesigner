@@ -26,7 +26,6 @@ class App extends React.Component<any> {
                 const { LayoutActions, ResourceActions, ComponentActions } = this.props;
                 try {
                     const data = JSON.parse(json);
-                    console.log(json, data);
                     if (data.version === 2) {
                         ResourceActions.loadResource(data.resource);
                         ComponentActions.loadComponent(data.components);

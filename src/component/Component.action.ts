@@ -126,9 +126,11 @@ export default handleActions({
         payload.forEach(comp=> {
             Utils.loop(comp, (item, stack)=> {
                 item.parent = _.last(stack)
-                Utils.loop(comp.elememt, (elem, stack)=> {
-                    elem.parent = _.last(stack)
-                })
+                if (item.type === FileType.FILE) {
+                    Utils.loop(comp.element, (elem, stack)=> {
+                        elem.parent = _.last(stack)
+                    })
+                }
             })
         })
         return {

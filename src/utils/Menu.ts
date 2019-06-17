@@ -1,27 +1,6 @@
 
 declare var window:any;
 
-// const { remote } = window.require('electron')
-// const fs = window.require('fs')
-// if (!this.cachePath || !useCache) {
-//     this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
-// }
-
-// fs.writeFile(this.cachePath+'/designData.json', JSON.stringify(json), (err:any)=> {
-//     if (err) {
-//         return console.log(err)
-//     }
-//     console.log('saved json')
-//     document.getElementsByTagName('title')[0].innerText = 'Service Designer';
-// });
-// fs.writeFile(this.cachePath+'/design.tsx', js, (err:any)=> {
-//     if (err) {
-//         return console.log(err)
-//     }
-//     console.log('saved tsx')
-// });
-// document.getElementsByTagName('title')[0].innerText = 'Service Designer';
-
 export class Menu {
 
     cachePath = undefined;
@@ -37,7 +16,7 @@ export class Menu {
                 if (data === undefined) {
                     return;
                 }
-                fs.writeFile(this.cachePath+'/design.save.json', JSON.stringify(data.json), (err:any)=> {
+                fs.writeFile(this.cachePath+'/design.save.json', data.json, (err:any)=> {
                     if (err) {
                         return console.log(err)
                     }
@@ -68,10 +47,12 @@ export class Menu {
                             label: 'Open file',
                             click: ()=> {
                                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-                                fs.readFile(file[0], (err:any, data:any)=> {
-                                    if (err) throw err
-                                    openFile(JSON.parse(data))
-                                });
+                                if (file !== undefined) {
+                                    fs.readFile(file[0], (err:any, data:any)=> {
+                                        if (err) throw err
+                                        openFile(data.toString())
+                                    });
+                                }
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'
                         },
@@ -79,7 +60,10 @@ export class Menu {
                             label: 'Save file',
                             click: ()=> {
                                 if (this.cachePath === undefined) {
-                                    this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
+                                    const paths = remote.dialog.showOpenDialog({ properties: ['openDirectory'] });
+                                    if (paths !== undefined) {
+                                        this.cachePath = paths[0];
+                                    }
                                 }
                                 save();
                                 
@@ -89,7 +73,10 @@ export class Menu {
                         {
                             label: 'Save to another foleder',
                             click: async()=> {
-                                this.cachePath = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })[0];
+                                const paths = remote.dialog.showOpenDialog({ properties: ['openDirectory'] });
+                                if (paths !== undefined) {
+                                    this.cachePath = paths[0];
+                                }
                                 save();
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
