@@ -10,6 +10,7 @@ import * as componentsActions from '../component/Component.action';
 import * as elementsActions from '../element/Element.action';
 import { bindActionCreators } from 'redux';
 import { FileType } from '../models/file';
+import _ from 'lodash';
 
 class ExplorerView extends React.Component<any> {
 
@@ -148,8 +149,13 @@ class ExplorerView extends React.Component<any> {
                     <div style={styles.title}>EXPLORER</div>
                     <ComponentsView />
                     <ElementsView />
-                    {data.layout.message.background !== undefined && 
-                        <div style={{...styles.message, ...{background: data.layout.message.background, color: data.layout.message.color}}}>{data.layout.message.text}</div>}
+                    <div style={Object.assign({}, styles.message, 
+                        data.layout.message.background !== undefined && {
+                            background: data.layout.message.background, 
+                            color: data.layout.message.color,
+                            opacity: 1
+                        })}>
+                        {data.layout.message.text}</div>
                 </div>
             </Resizable>
             {(data.layout.contextMenu.type === ContextMenuType.Component ||
@@ -195,7 +201,9 @@ const styles:any = {
         height:29,
         paddingLeft:5,
         paddingTop:3,
-        color:Theme.successFont
+        color:Theme.successFont,
+        transition: 'opacity ease .5s 0s',
+        opacity: 0 
     }
 }
 

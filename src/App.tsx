@@ -35,8 +35,8 @@ class App extends React.Component<any> {
                         ComponentActions.loadComponent(deprecateService.toComponents());
                     }
                     LayoutActions.message({
-                        background: Theme.primary,
-                        color: Theme.primaryFont,
+                        background: Theme.success,
+                        color: Theme.successFont,
                         text: 'Loaded Successfully'
                     })
                 } catch(e) {
@@ -71,8 +71,8 @@ class App extends React.Component<any> {
                         css: data.resource.css
                     })
                     LayoutActions.message({
-                        background: Theme.primary,
-                        color: Theme.primaryFont,
+                        background: Theme.success,
+                        color: Theme.successFont,
                         text: 'Save Successfully'
                     })
                     return Promise.resolve({
