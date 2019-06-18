@@ -12,6 +12,7 @@ import { ContextMenuType, ElementType } from '../utils/constant';
 import htmlJson from '../asset/html.json';
 import reactstrapJson from '../asset/reactstrap.json';
 import reactNativeJson from '../asset/react-native.json';
+import _ from 'lodash';
 
 class ElementView extends React.Component<any> {
 
@@ -83,6 +84,7 @@ class ElementView extends React.Component<any> {
 
     renderElement(elem, dep:number=0) {
         const { data } = this.props; 
+        const nameProp = _.last(elem.prop.filter(prop=>prop.name === 'name'));
         return <div key={elem.id}>
             <div className="element-item" style={Object.assign({
                     color:Theme.fontColor,
@@ -96,7 +98,7 @@ class ElementView extends React.Component<any> {
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
                 {this.getLibIcon(elem.lib)}
                 {elem.tag}
-                {elem.prop.name && elem.prop.name.value !== '' && '[' + elem.prop.name.value + ']'}
+                {nameProp && nameProp.value !== '' && '[' + nameProp.value + ']'}
                 {this.renderInput(elem)}
             </div>
             {elem.children.map(item=> this.renderElement(item, dep+1))}
@@ -140,7 +142,7 @@ class ElementView extends React.Component<any> {
         let height = 1000;
         if (this.refs.layout) {
             const layout:any = this.refs.layout
-            height = window.innerHeight - layout.offsetTop;
+            height = window.innerHeight - layout.offsetTop-29;
         }
         const { data } = this.props;
         return <div>
