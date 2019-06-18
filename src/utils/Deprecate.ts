@@ -1,7 +1,7 @@
 import Utils from "./utils";
 import { FileType } from "../models/file";
 import _ from 'lodash';
-import { PropertyType, CSSType, ElementType } from "./constant";
+import { PropertyType, ElementType } from "./constant";
 
 export class DeprecateService {
 
@@ -13,7 +13,8 @@ export class DeprecateService {
         this.resource = {
             color: [],
             asset: [],
-            css: []
+            css: [],
+            style: []
         }
         let id = 1;
         json.root.children.forEach(comp=> {
@@ -21,8 +22,8 @@ export class DeprecateService {
                 let elemId = 0;
                 let root;
                 Utils.loop(item.element, (item, stack)=> {
-                    const forDepth = stack.filter((elem, i)=> stack.length -1 !== i).filter(elem=> 
-                        elem.property.filter(prop=> prop.name === 'for' && prop.isActive)).length
+                    const forDepth = stack.concat([item]).filter(elem=> 
+                        elem.property.filter(prop=> prop.name === 'for' && prop.isActive).length !== 0).length - 1
                     const element = {
                         id: elemId,
                         tag: item.name,
@@ -37,10 +38,10 @@ export class DeprecateService {
                                 })
                             )}
                         ].concat(item.property.filter(prop=> prop.isActive).map(prop=> ({
-                            name: prop.name,
-                            type: prop.isVariable ? PropertyType.Variable : prop.type,
+                            name: prop.name === 'class' ? 'styleName' : prop.name,
+                            type: prop.type !== PropertyType.Function && prop.isVariable ? PropertyType.Variable : prop.type,
                             value: prop.isVariable && prop.value.indexOf('item') === 0 ? 
-                                prop.value.replace('item', 'item' + forDepth) : prop.value
+                                prop.value.replace('item', 'item' + (prop.name === 'for' ? forDepth-1 : forDepth)): prop.value
                         }))),
                         children: []
                     }
@@ -79,10 +80,9 @@ export class DeprecateService {
             } else if (rsc.type === 'asset') {
                 this.resource.asset.push({name: rsc.name, value: rsc.value})
             } else if (rsc.type === 'css') {
-                this.resource.css.push({
+                this.resource.style.push({
                     name: rsc.name,
                     value: rsc.value,
-                    type: CSSType.Style
                 })
             }
         })

@@ -32,6 +32,7 @@ export class RenderService {
     js = []
 
     renderOne(component, options) {
+        // console.log(component);
         if (component.element.children && component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
             this.type = 'react-native';
         } else {
@@ -155,6 +156,9 @@ export class RenderService {
                 } else if (prop.type === PropertyType.Boolean || prop.type === PropertyType.Number || prop.type === PropertyType.Variable) {
                     return prop.name + '={'+prop.value+'}';
                 } else if (prop.type === PropertyType.String) {
+                    if (prop.name === 'source') {
+                        return prop.name + '={{uri:"'+prop.value+'"}}';
+                    }
                     return prop.name + '={"'+prop.value+'"}';
                 } else if (prop.type === PropertyType.Object) {
                     return prop.name + '={Object.assign({}, '+prop.value.map(item=> {
@@ -184,11 +188,11 @@ export class RenderService {
             }));
             let output = attrs.join(' ');
             
-            this.options.color.forEach(color=> {    
+            this.options.color.sort((a,b)=> a.name > b.name ? -1 : 1).forEach(color=> {    
                 const re = new RegExp("Color."+color.name, 'g');
                 output = output.replace(re, color.value);
             });
-            this.options.asset.forEach(asset=> {
+            this.options.asset.sort((a,b)=> a.name > b.name ? -1 : 1).forEach(asset=> {
                 const re = new RegExp("Asset."+asset.name, 'g');
                 output = output.replace(re, asset.value);
             })

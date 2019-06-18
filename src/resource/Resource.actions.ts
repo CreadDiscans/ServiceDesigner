@@ -136,7 +136,8 @@ export default handleActions({
         return {
             color:payload.color,
             asset:payload.asset,
-            css:payload.css
+            css:payload.css,
+            style: payload.style
         }
     },
     [CREATE_STYLE]: (state, {payload}:any) => {
