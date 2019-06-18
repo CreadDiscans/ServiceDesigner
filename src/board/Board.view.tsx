@@ -27,6 +27,7 @@ class BoardView extends React.Component<any> {
                     css: data.resource.css,
                     color: data.resource.color,
                     asset: data.resource.asset,
+                    style: data.resource.style,
                     hover: data.element.hover,
                     select: data.element.select
                 })

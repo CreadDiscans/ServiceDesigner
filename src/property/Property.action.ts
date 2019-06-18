@@ -50,6 +50,11 @@ export default handleActions({
                 type: PropertyType.String,
                 value: ''
             })
+            payload.prop.push({
+                name: 'style',
+                type: PropertyType.Object,
+                value: [{condition:'', value: '{}'}]
+            })
         }
         return {...state, element:payload, select: {
             name:'',

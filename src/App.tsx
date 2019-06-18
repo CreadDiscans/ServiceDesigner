@@ -68,7 +68,8 @@ class App extends React.Component<any> {
                     const renderService = new RenderService().renderAll(copiedComponents, {
                         color: data.resource.color,
                         asset: data.resource.asset,
-                        css: data.resource.css
+                        css: data.resource.css,
+                        style: data.resource.style
                     })
                     LayoutActions.message({
                         background: Theme.success,

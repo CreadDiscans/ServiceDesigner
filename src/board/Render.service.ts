@@ -144,7 +144,8 @@ export class RenderService {
             if (isFor) {
                 attrs.push('key={i'+(forStack.length-1)+'}')
             }
-            attrs = attrs.concat(elem.prop.filter(prop=>prop.name !== 'for' && prop.name !== 'text').map(prop=> {
+            const styleNameProp = this.getPropValue(elem, 'styleName');
+            attrs = attrs.concat(elem.prop.filter(prop=>['for', 'text', 'styleName'].indexOf(prop.name) === -1).map(prop=> {
                 if (prop.type === PropertyType.Function) {
                     let itemParam = '';
                     if (forStack.length !== 0) {
@@ -157,7 +158,12 @@ export class RenderService {
                     return prop.name + '={"'+prop.value+'"}';
                 } else if (prop.type === PropertyType.Object) {
                     return prop.name + '={Object.assign({}, '+prop.value.map(item=> {
-                        const value = prop.name === 'style' ? Utils.transform('style ' + item.value)['style'] : JSON.stringify(item.value);
+                        let value = prop.name === 'style' ? Utils.transform('style ' + item.value)['style'] : JSON.stringify(item.value);
+                        if (styleNameProp !== undefined) {
+                            this.options.style.forEach(style=> {
+                                value = Object.assign({},Utils.transform(style.value)[styleNameProp.replace(/"/gi,'')], value); 
+                            })
+                        }
                         if (this.options.select && this.options.select.id === elem.id) {
                             value['borderStyle'] = 'solid';
                             value['borderWidth'] = 1;

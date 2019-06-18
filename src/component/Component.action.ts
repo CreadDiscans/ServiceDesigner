@@ -52,7 +52,7 @@ export default handleActions({
             element: {},
             collapse:false,
             parent: undefined,
-            state:'',
+            state:'{}',
             children:[]
         }
         if (state.select === undefined) {

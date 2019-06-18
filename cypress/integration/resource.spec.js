@@ -80,4 +80,28 @@ describe('Resource', function() {
         cy.get('#css-button-add-style').click()
         cy.get('.css-item').eq(1).click()
     })
+
+    it('Style', function() {
+        // add style
+        cy.get('.bottomTab').eq(4).click()
+        cy.get('#style-input-name').focus().type('temp')
+        cy.get('#style-editor').find('textarea').first().focus().type('.blue {{}background:blue;padding:10}{del}', {force:true})
+        cy.get('#css-button-add-style').click()
+        // add component
+        cy.get('div[id="components"]').trigger('mouseover')
+        cy.get('span[id="icon-create-file"]>svg').click()
+        cy.get('input[id="file-create-input"]').type('new{enter}')
+        cy.get('.scrollarea-content').eq(0).click()
+        // add element
+        cy.get('#element-wrap').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="element-input"]').type('div{enter}')
+        cy.get('.element-item').first().click()
+        // add property
+        cy.get('div[id="Property"]').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="property-name-input"]').type('styleName')
+        cy.get('input[id="property-value-input"]').type('blue')
+        cy.get('button[id="property-submit"]').click()
+    })
 })

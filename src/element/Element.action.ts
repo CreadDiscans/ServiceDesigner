@@ -32,7 +32,7 @@ const initialState = {
       prop:[],
       children: []
     },
-    state: ''
+    state: '{}'
   },
   hover: undefined,
   select:undefined,
