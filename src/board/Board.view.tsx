@@ -11,6 +11,7 @@ import * as layoutActions from '../layout/Layout.actions';
 import { FrameType } from '../utils/constant';
 import CodeSandbox from 'react-code-sandbox';
 import { RenderService } from './Render.service';
+import imgJson from '../asset/image.json';
 
 class BoardView extends React.Component<any> {
 
@@ -74,9 +75,9 @@ class BoardView extends React.Component<any> {
                 </div>)}
             </div>
             {data.layout.frameType === FrameType.Portrait && 
-                <img alt='' style={styles.phonePortrait} src="/portrait.png" />}
+                <img alt='' style={styles.phonePortrait} src={imgJson.portrait} />}
             {data.layout.frameType === FrameType.Landscape && 
-                <img alt='' style={styles.phoneLandscape} src="/landscape.png"/>}
+                <img alt='' style={styles.phoneLandscape} src={imgJson.landscape} />}
             <div style={Object.assign({}, 
                 data.layout.frameType === FrameType.Browser && styles.frame,
                 data.layout.frameType === FrameType.Portrait && styles.frameProtrait,
