@@ -26,7 +26,7 @@ export class DeprecateService {
                     const element = {
                         id: elemId,
                         tag: item.name,
-                        lib: item.library === undefined ? ElementType.Html : item.library,
+                        lib: item.library === undefined ? ElementType.Html : item.library === 'reactNative' ? ElementType.ReactNative : item.library,
                         prop: [
                             {
                                 name: 'style', 
