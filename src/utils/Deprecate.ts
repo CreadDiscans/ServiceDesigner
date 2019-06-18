@@ -20,6 +20,8 @@ export class DeprecateService {
             Utils.loop(comp, (item, stack)=> {
                 let elemId = 0;
                 let root;
+                const forDepth = stack.filter((elem, i)=> stack.length -1 !== i).filter(elem=> 
+                    elem.property.filter(prop=> prop.name === 'for' && prop.isActive)).length
                 Utils.loop(item.element, (item, stack)=> {
                     const element = {
                         id: elemId,
@@ -30,14 +32,15 @@ export class DeprecateService {
                                 name: 'style', 
                                 type: 'object',
                                 value:item.style.map(style=> ({
-                                    condition: style.condition, 
+                                    condition: style.condition.replace('item', 'item'+forDepth), 
                                     value:style.style.replace('style{', '{')
                                 })
                             )}
                         ].concat(item.property.filter(prop=> prop.isActive).map(prop=> ({
                             name: prop.name,
                             type: prop.isVariable ? PropertyType.Variable : prop.type,
-                            value: prop.value
+                            value: prop.isVariable && prop.value.indexOf('item') === 0 ? 
+                                prop.value.replace('item', 'item' + forDepth) : prop.value
                         }))),
                         children: []
                     }

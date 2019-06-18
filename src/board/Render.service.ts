@@ -113,6 +113,7 @@ export class RenderService {
     }
 
     getBody() {
+        // console.log(this.dom);
         return 'state='+JSON.stringify(this.state)+';'+this.func+'render('+this.dom+')';
     }
 
@@ -197,7 +198,9 @@ export class RenderService {
         const forPropValue = this.getPropValue(elem, 'for');                // for property
         if (forPropValue !== undefined) {
             forStack.push(elem);
-            return '{'+forPropValue + '.map((item' + (forStack.length-1) + ', i' + (forStack.length-1) + ')=> <' + tag + ' ' + attr(true) + '>' + body() + children(forStack) + '</' + tag + '>)}';
+            const code = '{'+forPropValue + '.map((item' + (forStack.length-1) + ', i' + (forStack.length-1) + ')=> <' + tag + ' ' + attr(true) + '>' + body() + children(forStack) + '</' + tag + '>)}';
+            forStack.pop()
+            return code;
         }
 
         return '<'+tag+' '+attr()+'>' + body() + children(forStack) + '</'+tag+'>'
