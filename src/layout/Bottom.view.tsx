@@ -2,7 +2,7 @@ import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos, IoIosPhonePortrait, IoIosPhoneLandscape, IoMdBrowsers } from 'react-icons/io';
-import { DiReact, DiCss3 } from 'react-icons/di';
+import { DiReact, DiCss3, DiCssTricks } from 'react-icons/di';
 import Resizable from 're-resizable';
 import AceEditor from 'react-ace';
 import ScrollArea from 'react-scrollbar';
@@ -15,6 +15,7 @@ import { bindActionCreators } from 'redux';
 import * as layoutActions from '../layout/Layout.actions';
 import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
+import StyleView from '../resource/Style.view';
 
 
 class BottomView extends React.Component<any> {
@@ -53,7 +54,7 @@ class BottomView extends React.Component<any> {
                 minHeight={this.state.active === undefined ? 0 : 100}
                 maxHeight={this.state.active === undefined ? 28 : window.innerHeight - 100}
                 onResize={(e:any)=>this.setState({height: window.innerHeight-e.clientY})}>
-                {['State', 'Color', 'Asset', 'Css'].map(tab=> 
+                {['State', 'Color', 'Asset', 'Css', 'Style'].map(tab=> 
                     <div className="bottomTab" key={tab} 
                     style={Object.assign({}, styles.tab, this.state.active === tab && styles.tabActive)}
                     onClick={()=>{
@@ -67,6 +68,7 @@ class BottomView extends React.Component<any> {
                         {tab === 'Color' && <IoMdColorPalette style={{...styles.tabIcon,...{color:'#C33'}}}/>}
                         {tab === 'Asset' && <IoMdPhotos style={{...styles.tabIcon,...{color:'#CCC'}}}/>}
                         {tab === 'Css' && <DiCss3 style={{...styles.tabIcon,...{color:'#006db2'}}}/>}
+                        {tab === 'Style' && <DiCssTricks style={{...styles.tabIcon, ...{color: '#ff8a00'}}} />}
                         {tab}
                     </div>
                 )}
@@ -84,6 +86,7 @@ class BottomView extends React.Component<any> {
                         {this.state.active === 'Color' && <ColorView />}
                         {this.state.active === 'Asset' && <AssetView />}
                         {this.state.active === 'Css' && <CssView />}
+                        {this.state.active === 'Style' && <StyleView />}
                     </ScrollArea>
                 </div>
             </Resizable>

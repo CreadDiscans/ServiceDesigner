@@ -34,7 +34,6 @@ class CssView extends React.Component<any> {
 
     render() {
         const { data, ResourceActions } = this.props;
-        console.log(data);
         return <div>
             <div id="css-item-wrap" style={styles.colors}>
                 {data.resource.css.map(css=> <div className="css-item" key={css.name}

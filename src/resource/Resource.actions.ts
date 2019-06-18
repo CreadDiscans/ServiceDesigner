@@ -9,6 +9,9 @@ const UPDATE_ASSET = 'resource/UPDATE_ASSET';
 const CREATE_CSS = 'resource/CREATE_CSS';
 const DELETE_CSS = 'resource/DELETE_CSS';
 const UPDATE_CSS = 'resource/UPDATE_CSS';
+const CREATE_STYLE = 'resource/CREATE_STYLE';
+const DELETE_STYLE = 'resource/DELETE_STYLE';
+const UPDATE_STYLE = 'resource/UPDATE_STYLE';
 const LOAD_RESOURCE = 'resource/LOAD_RESOURCE';
 
 export const createColor = createAction(CREATE_COLOR); // name, value
@@ -20,6 +23,9 @@ export const updateAsset = createAction(UPDATE_ASSET); // name, value
 export const createCss = createAction(CREATE_CSS); // name, value, type
 export const deleteCss = createAction(DELETE_CSS); // name,
 export const updateCss = createAction(UPDATE_CSS); // name, value, active
+export const createStyle = createAction(CREATE_STYLE); // name, value
+export const updateStyle = createAction(UPDATE_STYLE); // name, value
+export const deleteStyle = createAction(DELETE_STYLE); // name
 export const loadResource = createAction(LOAD_RESOURCE); // color, asset, css
 
 const initialState = {
@@ -36,6 +42,9 @@ const initialState = {
         // type (url, file, text)
         // active
     ],
+    style: [
+        // name, value
+    ]
 }
 
 export default handleActions({
@@ -129,5 +138,32 @@ export default handleActions({
             asset:payload.asset,
             css:payload.css
         }
-    }
+    },
+    [CREATE_STYLE]: (state, {payload}:any) => {
+        if (state.style.filter(style=>style.name === payload.name).length === 0) {
+            state.style.push({
+                name: payload.name,
+                value: payload.value
+            })
+        }
+        return {...state}
+    },
+    [DELETE_STYLE]: (state, {payload}:any) => {
+        let idx = undefined;
+        state.style.forEach((style, i)=> {
+            if (style.name === payload) {
+                idx = i;
+            }
+        })
+        if (idx !== undefined) {
+            state.style.splice(idx, 1)
+        }
+        return {...state}
+    },
+    [UPDATE_STYLE]: (state, {payload}:any) => {
+        state.style.filter(style=>style.name === payload.name).forEach(style=> {
+            style.value = payload.value;
+        });
+        return {...state}
+    },
 }, initialState)
