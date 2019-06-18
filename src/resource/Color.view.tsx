@@ -26,8 +26,8 @@ class ColorView extends React.Component<any> {
                     onMouseLeave={()=> this.setState({hover: undefined})}
                     onClick={()=> this.setState({name: color.name, color: color.value})}>
                     {color.name}
-                    <span style={{float:'right'}}>{color.value}</span>
-                    <div style={{width:15, height:15, marginTop:1, marginRight:5, display:'inline-block', backgroundColor: color.value, float:'right'}} />
+                    <div style={{width:15, height:15, marginTop:1, display:'inline-block', backgroundColor: color.value, float:'right'}} />
+                    <span style={{float:'right', marginRight:5}}>{color.value}</span>
                 </div>)}
             </div>
             <div style={styles.pallete}>

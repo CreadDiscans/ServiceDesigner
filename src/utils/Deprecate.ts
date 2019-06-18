@@ -90,11 +90,7 @@ export class DeprecateService {
     }
 
     toResource() {
-        return {
-            css:[],
-            color:[],
-            asset:[]
-        }
+        return this.resource;
     }
 
     toComponents() {
