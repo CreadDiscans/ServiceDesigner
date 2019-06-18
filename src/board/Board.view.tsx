@@ -20,7 +20,7 @@ class BoardView extends React.Component<any> {
 
     componentDidUpdate() {
         const {data, LayoutActions} = this.props;
-        if (this.refs.frame) {
+        if (this.refs.frame && data.element.component.id !== -1) {
             try {
                 const renderService = new RenderService().renderOne(data.element.component, {
                     css: data.resource.css,

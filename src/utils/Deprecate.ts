@@ -15,14 +15,14 @@ export class DeprecateService {
             asset: [],
             css: []
         }
-        let id = 0;
+        let id = 1;
         json.root.children.forEach(comp=> {
             Utils.loop(comp, (item, stack)=> {
                 let elemId = 0;
                 let root;
-                const forDepth = stack.filter((elem, i)=> stack.length -1 !== i).filter(elem=> 
-                    elem.property.filter(prop=> prop.name === 'for' && prop.isActive)).length
                 Utils.loop(item.element, (item, stack)=> {
+                    const forDepth = stack.filter((elem, i)=> stack.length -1 !== i).filter(elem=> 
+                        elem.property.filter(prop=> prop.name === 'for' && prop.isActive)).length
                     const element = {
                         id: elemId,
                         tag: item.name,
