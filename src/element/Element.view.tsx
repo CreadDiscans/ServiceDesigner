@@ -83,7 +83,7 @@ class ElementView extends React.Component<any> {
     }
 
     renderElement(elem, dep:number=0) {
-        const { data } = this.props; 
+        const { data, ElementActions } = this.props; 
         const nameProp = _.last(elem.prop.filter(prop=>prop.name === 'name'));
         return <div key={elem.id}>
             <div className="element-item" style={Object.assign({
@@ -92,8 +92,14 @@ class ElementView extends React.Component<any> {
                     paddingBottom:1,
                     paddingLeft:10+dep*5
                 }, this.state.hover === elem.id && styles.hover, data.element.select && data.element.select.id === elem.id && styles.active)} 
-                onMouseEnter={()=> this.setState({hover:elem.id})}
-                onMouseLeave={()=> this.setState({hover:undefined})}
+                onMouseEnter={()=> {
+                    this.setState({hover:elem.id})
+                    ElementActions.hoverElement(elem);
+                }}
+                onMouseLeave={()=> {
+                    this.setState({hover:undefined})
+                    ElementActions.hoverElement(undefined);
+                }}
                 onClick={()=> this.clickItem(elem)}
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
                 {this.getLibIcon(elem.lib)}

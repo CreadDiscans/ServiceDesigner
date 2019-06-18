@@ -7,6 +7,7 @@ const SHOW_CONTEXT_MENU = 'layout/SHOW_CONTEXT_MENU';
 const HIDE_CONTEXT_MENU = 'layout/HIDE_CONTEXT_MENU';
 const SET_FRAME_TYPE = 'layout/SET_FRAME_TYPE';
 const MESSAGE = 'layout/MESSAGE';
+const MESSAGE_RELEASE = 'layout/MESSAGE_RELEASE';
 const RENDERING = 'layout/RENDERING';
 
 export const showContextMenu = createAction(SHOW_CONTEXT_MENU); // x, y, type, target
@@ -18,11 +19,7 @@ export const rendering = createAction(RENDERING); // bool
 export const messageEpic = action$ => action$.pipe(
     filter((action:any) => action.type === MESSAGE),
     delay(3000),
-    mapTo({type: MESSAGE, payload: {
-        background: undefined,
-        color: undefined, 
-        text: ''
-    }})
+    mapTo({type: MESSAGE_RELEASE})
 )
 
 const initialState = {
@@ -62,6 +59,11 @@ export default handleActions({
         background:payload.background,
         color:payload.color,
         text: payload.text
+    }}),
+    [MESSAGE_RELEASE]: (state, {payload})=> ({...state, message: {
+        background: undefined,
+        color: undefined,
+        text: ''
     }}),
     [RENDERING]: (state, {payload}:any) => ({...state, rendering: payload})
 }, initialState)

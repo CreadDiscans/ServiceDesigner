@@ -5,18 +5,22 @@ import Utils from '../utils/utils';
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
 const UPDATE_NAME = 'element/UPDATE_NAME';
+const UPDATE_STATE = 'element/UPDATE_STATE';
 const COMPLETE_ADD = 'element/COMPLETE_ADD';
 const DELETE_ELEMENT = 'element/DELETE_ELEMENT';
-const SELECT_ELEMENT = 'elments/SELECT_ELEMENT';
-const DELETE_HISTORY = 'elements/DELETE_HISTORY';
+const SELECT_ELEMENT = 'element/SELECT_ELEMENT';
+const DELETE_HISTORY = 'element/DELETE_HISTORY';
+const HOVER_ELEMENT = 'element/HOVER_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
 export const updateName = createAction(UPDATE_NAME); // name
+export const updateState = createAction(UPDATE_STATE); // state
 export const completeAdd = createAction(COMPLETE_ADD); 
 export const deleteElement = createAction(DELETE_ELEMENT); // element 
 export const selectElement = createAction(SELECT_ELEMENT); // element
 export const deleteHistory = createAction(DELETE_HISTORY); // id of element
+export const hoverElement = createAction(HOVER_ELEMENT); // element
 
 const initialState = {
   component: {
@@ -27,8 +31,10 @@ const initialState = {
       lib:'',
       prop:[],
       children: []
-    }
+    },
+    state: ''
   },
+  hover: undefined,
   select:undefined,
   insert: {
     ing: false,
@@ -66,6 +72,7 @@ export default handleActions({
     }
   },
   [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
+  [UPDATE_STATE]: (state, {payload}:any)=> ({...state, component:{...state.component, state: payload}}),
   [COMPLETE_ADD]: (state, {payload}:any)=>{
     if (state.insert.name !== '' ) {
       let maxId = 0;
@@ -127,7 +134,8 @@ export default handleActions({
       }
     }
     return {...state}
-  }
+  },
+  [HOVER_ELEMENT]: (state, {payload}:any)=> ({...state, hover: payload})
 }, initialState)
 
 const loop = (item, handle) => {

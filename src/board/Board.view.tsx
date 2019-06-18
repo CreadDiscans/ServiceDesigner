@@ -25,7 +25,9 @@ class BoardView extends React.Component<any> {
                 const renderService = new RenderService().renderOne(data.element.component, {
                     css: data.resource.css,
                     color: data.resource.color,
-                    asset: data.resource.asset
+                    asset: data.resource.asset,
+                    hover: data.element.hover,
+                    select: data.element.select
                 })
                 const frame:any = this.refs.frame;
                 const body = ReactDOMServer.renderToString(<CodeSandbox imports={renderService.imp}>

@@ -13,6 +13,7 @@ import AssetView from '../resource/Asset.view';
 import CssView from '../resource/Css.view';
 import { bindActionCreators } from 'redux';
 import * as layoutActions from '../layout/Layout.actions';
+import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
 
 
@@ -25,26 +26,13 @@ class BottomView extends React.Component<any> {
     }
 
     renderState() {
+        const { data, ElementActions } = this.props;
         return <AceEditor
             style={{width:'100%', height: window.innerHeight}}
             theme="tomorrow_night" 
             mode="json" 
-            value={this.state.value}
-            onChange={(value)=> {
-                this.setState({value:value})
-            }}
-            onValidate={(value)=> {
-                let error = false;
-                value.forEach(item=> {
-                    if (item.type === 'error') error = true;
-                });
-                if (!error) {
-                    const { data } = this.props;
-                    try{
-                        data.element.component.state = JSON.parse(this.state.value)
-                    } catch(e) {}
-                }
-            }}
+            value={data.element.component.state}
+            onChange={(value)=> ElementActions.updateState(value)}
             showPrintMargin={true}
             showGutter={true}
             highlightActiveLine={true}
@@ -155,6 +143,7 @@ export default connectRouter(
         }
     }),
     (dispatch)=>({
+        ElementActions: bindActionCreators(elementActions, dispatch),
         LayoutActions: bindActionCreators(layoutActions, dispatch)
     }),
     BottomView

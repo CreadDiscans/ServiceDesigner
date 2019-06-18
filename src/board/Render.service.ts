@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { ajax } from 'rxjs/ajax';
 import { forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Theme } from '../utils/Theme';
 
 export class RenderService {
 
@@ -114,7 +115,7 @@ export class RenderService {
 
     getBody() {
         // console.log(this.dom);
-        return 'state='+JSON.stringify(this.state)+';'+this.func+'render('+this.dom+')';
+        return 'state='+this.state+';'+this.func+'render('+this.dom+')';
     }
 
     toHtml(elem, forStack = []) {
@@ -157,6 +158,15 @@ export class RenderService {
                 } else if (prop.type === PropertyType.Object) {
                     return prop.name + '={Object.assign({}, '+prop.value.map(item=> {
                         const value = prop.name === 'style' ? Utils.transform('style ' + item.value)['style'] : JSON.stringify(item.value);
+                        if (this.options.select && this.options.select.id === elem.id) {
+                            value['borderStyle'] = 'solid';
+                            value['borderWidth'] = 1;
+                            value['borderColor'] = 'red';
+                        } else if (this.options.hover && this.options.hover.id === elem.id) {
+                            value['borderStyle'] = 'solid';
+                            value['borderWidth'] = 1;
+                            value['borderColor'] = Theme.danger
+                        }
                         if (item.condition === undefined || item.condition === '') {
                             return JSON.stringify(value);
                         } else {

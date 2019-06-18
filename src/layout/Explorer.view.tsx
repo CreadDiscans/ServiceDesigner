@@ -10,7 +10,6 @@ import * as componentsActions from '../component/Component.action';
 import * as elementsActions from '../element/Element.action';
 import { bindActionCreators } from 'redux';
 import { FileType } from '../models/file';
-import _ from 'lodash';
 
 class ExplorerView extends React.Component<any> {
 

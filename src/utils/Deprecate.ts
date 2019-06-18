@@ -60,7 +60,7 @@ export class DeprecateService {
                     type:item.type, 
                     element: item.type === FileType.FILE ? root : {},
                     collapse:false,
-                    state:item.state,
+                    state:JSON.stringify(item.state),
                     children:[]
                 }
                 id += 1
