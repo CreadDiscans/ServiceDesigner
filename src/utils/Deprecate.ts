@@ -57,7 +57,7 @@ export class DeprecateService {
                 })
                 const component = {
                     id: id,
-                    name:item.name, 
+                    name:item.name.replace('.js', ''), 
                     type:item.type, 
                     element: item.type === FileType.FILE ? root : {},
                     collapse:false,

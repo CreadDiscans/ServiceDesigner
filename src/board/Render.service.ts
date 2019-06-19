@@ -54,7 +54,7 @@ export class RenderService {
                 const renderService = new RenderService().renderOne(item, options);
                 this.js.push(RenderService.TEMPLATE_CLASS
                     .replace('{classname}', 'Designed' + prefix + _.capitalize(item.name))
-                    .replace('{state}', 'state='+JSON.stringify(item.state))
+                    .replace('{state}', 'state='+item.state)
                     .replace('{code}', renderService.dom)) 
                 this.type = renderService.type;
             }
