@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import { CSSType } from '../utils/constant';
 
 const CREATE_COLOR = 'resource/CREATE_COLOR';
 const DELETE_COLOR = 'resource/DELETE_COLOR';
@@ -36,12 +37,12 @@ const initialState = {
         // }
     ],
     asset:[],
-    css:[
-        // name
-        // value
-        // type (url, file, text)
-        // active
-    ],
+    css:[{
+        name: 'bootstrap',
+        value: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', 
+        type: CSSType.Url, 
+        active:true
+    }],
     style: [
         // name, value
     ]

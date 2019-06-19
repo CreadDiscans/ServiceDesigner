@@ -227,14 +227,14 @@ export class RenderService {
     }
 
     toHead() {
-        return this.options.css.filter(css=> css.active).map(css=> {
+        return ['<style>body{margin:0}</style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
             if (css.type === CSSType.Url) {
                 return '<link rel="stylesheet" href="'+css.value+'">'
             } else if (css.type === CSSType.Style) {
                 return '<style>' + css.value + '</style>'
             }
             return ''
-        }).join('\n')
+        })).join('\n')
     }
 
     applyImport(elem) {
