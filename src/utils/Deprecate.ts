@@ -19,7 +19,7 @@ export class DeprecateService {
         let id = 1;
         json.root.children.forEach(comp=> {
             Utils.loop(comp, (item, stack)=> {
-                let elemId = 0;
+                let elemId = 1;
                 let root;
                 Utils.loop(item.element, (item, stack)=> {
                     const forDepth = stack.concat([item]).filter(elem=> 
@@ -51,7 +51,6 @@ export class DeprecateService {
                     if (last) {
                         last.convert.children.push(element)
                     } else {
-                        element.tag = 'root';
                         root = element;
                     }
                 })
@@ -59,7 +58,12 @@ export class DeprecateService {
                     id: id,
                     name:item.name.replace('.js', ''), 
                     type:item.type, 
-                    element: item.type === FileType.FILE ? root : {},
+                    element: {
+                        id: 0,
+                        lib: '',
+                        tag: 'root',
+                        children: [item.type === FileType.FILE ? root : {}]
+                    },
                     collapse:false,
                     state:JSON.stringify(item.state),
                     children:[]
