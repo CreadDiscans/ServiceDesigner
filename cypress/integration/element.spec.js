@@ -64,4 +64,14 @@ describe('Elements', function() {
         cy.get('.element-item').first().find('svg').click()
         cy.get('.element-item').last().should('have.text', 'span')
     })
+
+    it('Drag element', function() {
+        createComponent('new')
+        createElement('span')
+        createElement('div')
+        cy.get('.element-item').first().trigger('dragstart')
+        cy.get('.element-item').last().trigger('dragover')
+        cy.get('.element-item').first().trigger('dragend')
+        cy.get('.element-item').last().should('have.text', 'span')
+    })
 })

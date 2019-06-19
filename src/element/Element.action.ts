@@ -12,6 +12,7 @@ const SELECT_ELEMENT = 'element/SELECT_ELEMENT';
 const DELETE_HISTORY = 'element/DELETE_HISTORY';
 const HOVER_ELEMENT = 'element/HOVER_ELEMENT';
 const COLLAPSE_ELEMENT = 'element/COLLAPSE_ELEMENT';
+const DRAG_AND_DROP_ELEMENT = 'element/DRAG_AND_DROP_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
@@ -23,6 +24,7 @@ export const selectElement = createAction(SELECT_ELEMENT); // element
 export const deleteHistory = createAction(DELETE_HISTORY); // id of element
 export const hoverElement = createAction(HOVER_ELEMENT); // element
 export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
+export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to
 
 const initialState = {
   component: {
@@ -142,6 +144,29 @@ export default handleActions({
   [HOVER_ELEMENT]: (state, {payload}:any)=> ({...state, hover: payload}),
   [COLLAPSE_ELEMENT]: (state, {payload}:any)=> {
     payload.collapse = !payload.collapse
+    return {...state}
+  },
+  [DRAG_AND_DROP_ELEMENT]: (state, {payload}:any)=> {
+    if (payload.to === undefined) {
+      payload.to = state.component.element
+    }
+    let valid = true;
+    Utils.loop(payload.from, (item)=> {
+      if (item.id === payload.to.id) {
+        valid = false
+      }
+    })
+    if (!valid) {
+      return {...state}
+    }
+    payload.from.parent.children.splice(
+      payload.from.parent.children
+        .map((elem, i)=>({id:elem.id, idx:i}))
+        .filter(obj=> obj.id === payload.from.id)
+        .map(obj=> obj.idx)[0], 1
+    )
+    payload.to.children.push(payload.from)
+    payload.from.parent = payload.to;
     return {...state}
   }
 }, initialState)
