@@ -102,12 +102,14 @@ class ElementView extends React.Component<any> {
                 }}
                 onClick={()=> this.clickItem(elem)}
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
-                {this.getLibIcon(elem.lib)}
+                {elem.children.length === 0 ? this.getLibIcon(elem.lib) : elem.collapse ? 
+                    <IoMdArrowDropdown onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> : 
+                    <IoMdArrowDropright onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> }
                 {elem.tag}
                 {nameProp && nameProp.value !== '' && '[' + nameProp.value + ']'}
                 {this.renderInput(elem)}
             </div>
-            {elem.children.map(item=> this.renderElement(item, dep+1))}
+            { elem.collapse && elem.children.map(item=> this.renderElement(item, dep+1))}
         </div>
     }
 

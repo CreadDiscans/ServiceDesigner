@@ -43,7 +43,8 @@ export class DeprecateService {
                             value: prop.isVariable && prop.value.indexOf('item') === 0 ? 
                                 prop.value.replace('item', 'item' + (prop.name === 'for' ? forDepth-1 : forDepth)): prop.value
                         }))),
-                        children: []
+                        children: [],
+                        collapse: true
                     }
                     elemId += 1;
                     item.convert = element;

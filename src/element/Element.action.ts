@@ -11,6 +11,7 @@ const DELETE_ELEMENT = 'element/DELETE_ELEMENT';
 const SELECT_ELEMENT = 'element/SELECT_ELEMENT';
 const DELETE_HISTORY = 'element/DELETE_HISTORY';
 const HOVER_ELEMENT = 'element/HOVER_ELEMENT';
+const COLLAPSE_ELEMENT = 'element/COLLAPSE_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
@@ -21,6 +22,7 @@ export const deleteElement = createAction(DELETE_ELEMENT); // element
 export const selectElement = createAction(SELECT_ELEMENT); // element
 export const deleteHistory = createAction(DELETE_HISTORY); // id of element
 export const hoverElement = createAction(HOVER_ELEMENT); // element
+export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
 
 const initialState = {
   component: {
@@ -30,7 +32,8 @@ const initialState = {
       tag:'',
       lib:'',
       prop:[],
-      children: []
+      children: [],
+      collapse: true
     },
     state: '{}'
   },
@@ -86,7 +89,8 @@ export default handleActions({
         tag: state.insert.name,
         lib: state.insert.type,
         prop: [],
-        children: []
+        children: [],
+        collapse: true
       }
       if (state.select) {
         newElem['parent'] = state.select;
@@ -135,7 +139,11 @@ export default handleActions({
     }
     return {...state}
   },
-  [HOVER_ELEMENT]: (state, {payload}:any)=> ({...state, hover: payload})
+  [HOVER_ELEMENT]: (state, {payload}:any)=> ({...state, hover: payload}),
+  [COLLAPSE_ELEMENT]: (state, {payload}:any)=> {
+    payload.collapse = !payload.collapse
+    return {...state}
+  }
 }, initialState)
 
 const loop = (item, handle) => {

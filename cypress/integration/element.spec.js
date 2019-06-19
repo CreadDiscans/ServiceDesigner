@@ -51,4 +51,17 @@ describe('Elements', function() {
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('.scrollarea-content').eq(1).should('have.text', '')
     })
+
+    it('Collapse element', function() {
+        createComponent('new')
+        createElement('div')
+        cy.get('.element-item').last().trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('input[id="element-input"]').type('span{enter}')
+        cy.get('.element-item').last().should('have.text', 'span')
+        cy.get('.element-item').first().find('svg').click()
+        cy.get('.element-item').last().should('have.text', 'div')
+        cy.get('.element-item').first().find('svg').click()
+        cy.get('.element-item').last().should('have.text', 'span')
+    })
 })
