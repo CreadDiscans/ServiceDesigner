@@ -36,7 +36,15 @@ class BoardView extends React.Component<any> {
                     {renderService.getBody()}
                 </CodeSandbox>)
                 frame.contentWindow.document.open();
-                frame.contentWindow.document.write(renderService.head  + body);
+                frame.contentWindow.document.write(' \
+                <head> \
+                    <meta charset="utf-8"> \
+                    <meta name="viewport" content="width=device-width, initial-scale=1"></meta> \
+                    ' +renderService.head + ' \
+                </head>\
+                <body> \
+                    ' + body + '\
+                </body>');
                 frame.contentWindow.document.close();
                 
                 if (data.layout.rendering === false) {

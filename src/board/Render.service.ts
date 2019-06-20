@@ -227,7 +227,34 @@ export class RenderService {
     }
 
     toHead() {
-        return ['<style>body{margin:0}</style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
+        return ['<style>body{margin:0} \
+        .css-view-1dbjc4n { \
+            -webkit-box-align: stretch; \
+            -webkit-box-direction: normal; \
+            -webkit-box-orient: vertical; \
+            align-items: stretch; \
+            box-sizing: border-box; \
+            display: flex; \
+            flex-basis: auto; \
+            flex-direction: column; \
+            flex-shrink: 0; \
+            margin-bottom: 0px; \
+            margin-left: 0px; \
+            margin-right: 0px; \
+            margin-top: 0px; \
+            min-height: 0px; \
+            min-width: 0px; \
+            padding-bottom: 0px; \
+            padding-left: 0px; \
+            padding-right: 0px; \
+            padding-top: 0px; \
+            position: relative; \
+            z-index: 0; \
+            border-width: 0px; \
+            border-style: solid; \
+            border-color: black; \
+            border-image: initial; \
+        }</style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
             if (css.type === CSSType.Url) {
                 return '<link rel="stylesheet" href="'+css.value+'">'
             } else if (css.type === CSSType.Style) {
