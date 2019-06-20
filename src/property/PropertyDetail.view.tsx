@@ -34,7 +34,6 @@ class PropertyDetailView extends React.Component<any> {
         const { data } = this.props;
         if (data.property.create && this.refs.inputName && !this.state.nameFocus) {
             const inputName:any = this.refs.inputName;
-            console.log(inputName);
             inputName.focus();
             this.setState({nameFocus:true})
         }
