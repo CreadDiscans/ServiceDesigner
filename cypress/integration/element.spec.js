@@ -35,7 +35,7 @@ describe('Elements', function() {
         cy.get('.scrollarea-content').eq(1).find('div').eq(0).trigger('contextmenu')
         cy.get('div[id="contextMenu"]>div').eq(0).click()
         cy.get('input[id="element-input"]').type('span{enter}')
-        cy.get('.scrollarea-content').eq(1).find('div').eq(4).should('have.css', 'padding-left', '15px')
+        cy.get('.element-item').eq(1).should('have.css', 'padding-left', '15px')
     })
 
     it('Delete Element',function() {
