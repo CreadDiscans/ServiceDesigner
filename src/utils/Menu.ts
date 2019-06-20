@@ -16,25 +16,10 @@ export class Menu {
                 if (data === undefined) {
                     return;
                 }
-                fs.writeFile(this.cachePath+'/design.save.json', data.json, (err:any)=> {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    console.log('saved json')
-                });
-                fs.writeFile(this.cachePath+'/design.component.tsx', data.js, (err:any)=> {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    console.log('saved tsx')
-                });
+                fs.writeFileSync(this.cachePath+'/design.save.json', data.json);
+                fs.writeFileSync(this.cachePath+'/design.component.tsx', data.js);
                 if (data.css !== undefined) {
-                    fs.writeFile(this.cachePath+'/design.style.css', data.css, (err:any)=> {
-                        if (err) {
-                            return console.log(err)
-                        }
-                        console.log('saved css')
-                    })
+                    fs.writeFileSync(this.cachePath+'/design.style.css', data.css)
                 }
             }
 
@@ -48,10 +33,8 @@ export class Menu {
                             click: ()=> {
                                 const file = remote.dialog.showOpenDialog({ properties: ['openFile'] })
                                 if (file !== undefined) {
-                                    fs.readFile(file[0], (err:any, data:any)=> {
-                                        if (err) throw err
-                                        openFile(data.toString())
-                                    });
+                                    const data = fs.readFileSync(file[0]);
+                                    openFile(data.toString())
                                 }
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'
