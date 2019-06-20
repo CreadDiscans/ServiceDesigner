@@ -170,9 +170,9 @@ export default handleActions({
     )
     if (payload.sibling) {
       payload.to.parent.children.splice(
-        payload.from.parent.children
+        payload.to.parent.children
           .map((elem, i)=>({id:elem.id, idx:i}))
-          .filter(obj=> obj.id === payload.from.id)
+          .filter(obj=> obj.id === payload.to.id)
           .map(obj=> obj.idx)[0], 0, payload.from)
       payload.from.parent = payload.to.parent;
     } else {
