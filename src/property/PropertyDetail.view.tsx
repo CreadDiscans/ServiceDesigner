@@ -21,6 +21,14 @@ class PropertyDetailView extends React.Component<any> {
         hover:''
     }
 
+    componentWillUpdate() {
+        const { data } = this.props;
+        if (this.state.idx !== 0 && data.property.select.value.length <= this.state.idx ) {
+            this.setState({idx:0})
+            return false;
+        }
+    }
+
     renderValueObject() {
         const { data, PropertyActions } = this.props;
         return <div id="property-value-object" style={{marginTop:10}}>
