@@ -77,7 +77,10 @@ export default handleActions({
     }
   },
   [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
-  [UPDATE_STATE]: (state, {payload}:any)=> ({...state, component:{...state.component, state: payload}}),
+  [UPDATE_STATE]: (state, {payload}:any)=> {
+    state.component.state = payload;
+    return {...state}
+  },
   [COMPLETE_ADD]: (state, {payload}:any)=>{
     if (state.insert.name !== '' ) {
       let maxId = 0;
