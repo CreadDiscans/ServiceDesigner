@@ -24,7 +24,7 @@ export const selectElement = createAction(SELECT_ELEMENT); // element
 export const deleteHistory = createAction(DELETE_HISTORY); // id of element
 export const hoverElement = createAction(HOVER_ELEMENT); // element
 export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
-export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to
+export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to, sibling
 
 const initialState = {
   component: {
@@ -168,8 +168,17 @@ export default handleActions({
         .filter(obj=> obj.id === payload.from.id)
         .map(obj=> obj.idx)[0], 1
     )
-    payload.to.children.push(payload.from)
-    payload.from.parent = payload.to;
+    if (payload.sibling) {
+      payload.to.parent.children.splice(
+        payload.from.parent.children
+          .map((elem, i)=>({id:elem.id, idx:i}))
+          .filter(obj=> obj.id === payload.from.id)
+          .map(obj=> obj.idx)[0], 0, payload.from)
+      payload.from.parent = payload.to.parent;
+    } else {
+      payload.to.children.push(payload.from)
+      payload.from.parent = payload.to;
+    }
     return {...state}
   }
 }, initialState)

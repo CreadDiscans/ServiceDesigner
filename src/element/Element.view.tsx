@@ -26,7 +26,8 @@ class ElementView extends React.Component<any> {
             target:undefined
         },
         drag: undefined,
-        drop: undefined
+        drop: undefined,
+        sibling: false
     }
 
     clickItem(item) {
@@ -91,12 +92,10 @@ class ElementView extends React.Component<any> {
             <div className="element-item" style={Object.assign({
                     cursor:'move',
                     color:Theme.fontColor,
-                    paddingTop:1,
-                    paddingBottom:1,
                     paddingLeft:10+dep*5,
                 }, this.state.hover === elem.id && styles.hover, 
                 data.element.select && data.element.select.id === elem.id && styles.active,
-                this.state.drop && this.state.drop.id === elem.id && {
+                this.state.drop && this.state.drop.id === elem.id && !this.state.sibling && {
                     background: Theme.primary
                 })} 
                 onMouseEnter={()=> {
@@ -109,16 +108,23 @@ class ElementView extends React.Component<any> {
                 }}
                 onDragStart={()=> this.setState({drag: elem})}
                 onDragEnd={()=> {
-                    ElementActions.dragAndDropElement({from: this.state.drag, to: this.state.drop})
-                    this.setState({drag: undefined, drop:undefined})
+                    ElementActions.dragAndDropElement({from: this.state.drag, to: this.state.drop, sibling:this.state.sibling})
+                    this.setState({drag: undefined, drop:undefined, sibling:false})
                 }}
                 onDragOver={(e)=> {
                     e.stopPropagation();
-                    this.setState({drop: elem})
+                    this.setState({drop: elem, sibling: false})
                 }}
                 draggable={true}
                 onClick={()=> this.clickItem(elem)}
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
+                <div className="element-item-up" style={Object.assign({
+                    height:5,
+                }, this.state.drop && this.state.sibling && this.state.drop.id === elem.id && {background: Theme.primary})}
+                onDragOver={(e)=> {
+                    e.stopPropagation();
+                    this.setState({drop: elem, sibling:true})
+                }}></div>
                 {elem.children.length === 0 ? this.getLibIcon(elem.lib) : elem.collapse ? 
                     <IoMdArrowDropdown onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> : 
                     <IoMdArrowDropright onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> }
@@ -173,7 +179,7 @@ class ElementView extends React.Component<any> {
         return <div>
             {this.renderTitle()}
             <div id="element-wrap" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref='layout' 
-                onDragOver={()=> this.setState({drop: undefined})}
+                onDragOver={()=> this.setState({drop: undefined, sibling: false})}
                 onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
                 <ScrollArea style={{height:height}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>

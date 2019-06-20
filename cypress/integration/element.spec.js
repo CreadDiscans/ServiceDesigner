@@ -74,4 +74,14 @@ describe('Elements', function() {
         cy.get('.element-item').first().trigger('dragend')
         cy.get('.element-item').last().should('have.text', 'span')
     })
+
+    it('Drag Sibling element', function() {
+        createComponent('new')
+        createElement('span')
+        createElement('div')
+        cy.get('.element-item').last().trigger('dragstart')
+        cy.get('.element-item-up').first().trigger('dragover')
+        cy.get('.element-item').last().trigger('dragend')
+        cy.get('.element-item').first().should('have.css', 'paddingLeft', '10px')
+    })
 })
