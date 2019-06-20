@@ -82,6 +82,10 @@ export class Menu {
                             accelerator: process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
                         },
                         {
+                            label: 'reload',
+                            click: ()=> window.location.reload()
+                        },
+                        {
                             label: 'Exit',
                             click: ()=> {
                                 remote.getCurrentWindow().close()
