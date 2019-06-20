@@ -19,7 +19,8 @@ class PropertyDetailView extends React.Component<any> {
     state = {
         idx: 0,
         hover:'',
-        nameFocus: false
+        nameFocus: false,
+        focusOnce: true
     }
 
     componentWillUpdate() {
@@ -32,10 +33,12 @@ class PropertyDetailView extends React.Component<any> {
 
     componentDidUpdate() {
         const { data } = this.props;
-        if (data.property.create && this.refs.inputName && !this.state.nameFocus) {
+        if (!data.property.create && !this.state.focusOnce) {
+            this.setState({focusOnce: true})
+        } else if (data.property.create && this.refs.inputName && !this.state.nameFocus && this.state.focusOnce) {
             const inputName:any = this.refs.inputName;
             inputName.focus();
-            this.setState({nameFocus:true})
+            this.setState({nameFocus:true, focusOnce:false})
         }
     }
 
