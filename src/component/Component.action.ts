@@ -127,7 +127,7 @@ export default handleActions({
             Utils.loop(comp, (item, stack)=> {
                 item.parent = _.last(stack)
                 if (item.type === FileType.FILE) {
-                    Utils.loop(comp.element, (elem, stack)=> {
+                    Utils.loop(item.element, (elem, stack)=> {
                         elem.parent = _.last(stack)
                     })
                 }
