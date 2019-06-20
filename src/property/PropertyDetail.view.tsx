@@ -18,7 +18,8 @@ class PropertyDetailView extends React.Component<any> {
 
     state = {
         idx: 0,
-        hover:''
+        hover:'',
+        nameFocus: false
     }
 
     componentWillUpdate() {
@@ -26,6 +27,16 @@ class PropertyDetailView extends React.Component<any> {
         if (this.state.idx !== 0 && data.property.select.value.length <= this.state.idx ) {
             this.setState({idx:0})
             return false;
+        }
+    }
+
+    componentDidUpdate() {
+        const { data } = this.props;
+        if (data.property.create && this.refs.inputName && !this.state.nameFocus) {
+            const inputName:any = this.refs.inputName;
+            console.log(inputName);
+            inputName.focus();
+            this.setState({nameFocus:true})
         }
     }
 
@@ -108,7 +119,7 @@ class PropertyDetailView extends React.Component<any> {
                         onChange={()=>{
                             const { PropertyActions } = this.props;
                             PropertyActions.updateValue(!data.property.select.value);
-                        }} />}
+                        }}/>}
             </div>
             {this.renderValueObject()}
         </div>
@@ -124,6 +135,9 @@ class PropertyDetailView extends React.Component<any> {
                 <div style={styles.itemValue}>
                     <input id="property-name-input" list='datalist' style={styles.itemInput} type="text" 
                         value={data.property.select.name}
+                        ref={'inputName'}
+                        onFocus={()=>this.setState({nameFocus:true})}
+                        onBlur={()=>this.setState({nameFocus:false})}
                         onChange={(e)=> {
                             PropertyActions.updateKey(e.target.value)
                         }}

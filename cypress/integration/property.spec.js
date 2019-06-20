@@ -143,6 +143,14 @@ describe('Property', function() {
         cy.get('div[id="property-value-object"]').find('.ace_scroller').should('have.text', '{background:green};')
         cy.get('.property-detail-badge').eq(2).click()
         cy.get('div[id="property-value-object"]').find('.ace_scroller').should('have.text', '{background:blue};')
+    })
 
+    it('property name focus', function() {
+        createComponent('new')
+        createElement('div')
+        cy.get('.scrollarea-content').eq(1).find('div').eq(0).click()
+        cy.get('div[id="Property"]').trigger('contextmenu')
+        cy.get('div[id="contextMenu"]>div').eq(0).click()
+        cy.get('#property-name-input').should('have.focus')
     })
 });
