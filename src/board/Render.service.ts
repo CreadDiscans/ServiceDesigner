@@ -205,7 +205,7 @@ export class RenderService extends Singletone<RenderService> {
             return '<'+tag+'></'+tag+'>';
         }
         if (elem.tag === 'root' || elem.id === -1) {
-            return children(forStack)
+            return '<'+tag+'>'+children(forStack)+'</'+tag+'>'
         }
 
         if (elem.tag !== 'render') {
