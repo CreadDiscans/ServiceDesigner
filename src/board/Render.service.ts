@@ -152,7 +152,7 @@ export class RenderService {
                     if (forStack.length !== 0) {
                         itemParam += ',' + forStack.map((item, i)=> 'item' + i + ':item' + i ).join(',')
                     }
-                    return prop.name + '={(e)=>this.onEvent({event:e, name: '+this.getPropValue(elem, 'name')+ itemParam +'})}' 
+                    return prop.name + '={(e)=>this.onEvent({event:"'+prop.name+'",value:e, name: '+this.getPropValue(elem, 'name')+ itemParam +'})}' 
                 } else if (prop.type === PropertyType.Boolean || prop.type === PropertyType.Number || prop.type === PropertyType.Variable) {
                     return prop.name + '={'+prop.value+'}';
                 } else if (prop.type === PropertyType.String) {
@@ -254,7 +254,14 @@ export class RenderService {
             border-style: solid; \
             border-color: black; \
             border-image: initial; \
-        }</style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
+        } \
+        .r-width-13qz1uu { \
+            width: 100%; \
+        } \
+        .r-height-1pi2tsx { \
+            height: 100%; \
+        } \
+        </style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
             if (css.type === CSSType.Url) {
                 return '<link rel="stylesheet" href="'+css.value+'">'
             } else if (css.type === CSSType.Style) {
