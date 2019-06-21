@@ -65,7 +65,8 @@ class App extends React.Component<any> {
                         components: copiedComponents,
                         resource: data.resource
                     }
-                    const renderService = new RenderService().renderAll(copiedComponents, {
+                    const renderService:RenderService = RenderService.getInstance(RenderService);
+                    renderService.renderAll(copiedComponents, {
                         color: data.resource.color,
                         asset: data.resource.asset,
                         css: data.resource.css,

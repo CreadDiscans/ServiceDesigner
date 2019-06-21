@@ -9,9 +9,10 @@ import { bindActionCreators } from 'redux';
 import * as elementActions from '../element/Element.action';
 import * as layoutActions from '../layout/Layout.actions';
 import { FrameType } from '../utils/constant';
-import CodeSandbox from 'react-code-sandbox';
 import { RenderService } from './Render.service';
 import imgJson from '../asset/image.json';
+import { AppRegistry } from 'react-native-web';
+import { FrameView } from './Frame.view';
 
 class BoardView extends React.Component<any> {
 
@@ -23,7 +24,8 @@ class BoardView extends React.Component<any> {
         const {data, LayoutActions} = this.props;
         if (this.refs.frame && data.element.component.id !== -1) {
             try {
-                const renderService = new RenderService().renderOne(data.element.component, {
+                const renderService:RenderService = RenderService.getInstance(RenderService)
+                renderService.renderOne(data.element.component, {
                     css: data.resource.css,
                     color: data.resource.color,
                     asset: data.resource.asset,
@@ -32,19 +34,24 @@ class BoardView extends React.Component<any> {
                     select: data.element.select
                 })
                 const frame:any = this.refs.frame;
-                const body = ReactDOMServer.renderToString(<CodeSandbox imports={renderService.imp}>
-                    {renderService.getBody()}
-                </CodeSandbox>)
+                AppRegistry.registerComponent('App', ()=> FrameView)
+                const { element, getStyleElement } = AppRegistry.getApplication('App', {});
+                const html = ReactDOMServer.renderToString(element)
+                const css = ReactDOMServer.renderToStaticMarkup(getStyleElement({}));
+                const document = `
+                <!DOCTYPE html>
+                <html style="height:100%">
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                ${renderService.head}
+                ${css}
+                <body style="height:100%; overflow-y:hidden">
+                <div id="root" style="display:flex; height: 100%">
+                ${html}
+                </div>
+                `
                 frame.contentWindow.document.open();
-                frame.contentWindow.document.write(' \
-                <head> \
-                    <meta charset="utf-8"> \
-                    <meta name="viewport" content="width=device-width, initial-scale=1"></meta> \
-                    ' +renderService.head + ' \
-                </head>\
-                <body> \
-                    ' + body + '\
-                </body>');
+                frame.contentWindow.document.write(document);
                 frame.contentWindow.document.close();
                 
                 if (data.layout.rendering === false) {

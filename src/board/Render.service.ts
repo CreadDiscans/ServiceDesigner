@@ -9,8 +9,9 @@ import { ajax } from 'rxjs/ajax';
 import { forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Theme } from '../utils/Theme';
+import { Singletone } from '../utils/singletone';
 
-export class RenderService {
+export class RenderService extends Singletone<RenderService> {
 
     private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as reactstrap from 'reactstrap';\nimport './design.style.css';\n";
     private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as reactnative from 'react-native';\n";
@@ -227,48 +228,14 @@ export class RenderService {
     }
 
     toHead() {
-        return ['<style>body{margin:0} \
-        .css-view-1dbjc4n { \
-            -webkit-box-align: stretch; \
-            -webkit-box-direction: normal; \
-            -webkit-box-orient: vertical; \
-            align-items: stretch; \
-            box-sizing: border-box; \
-            display: flex; \
-            flex-basis: auto; \
-            flex-direction: column; \
-            flex-shrink: 0; \
-            margin-bottom: 0px; \
-            margin-left: 0px; \
-            margin-right: 0px; \
-            margin-top: 0px; \
-            min-height: 0px; \
-            min-width: 0px; \
-            padding-bottom: 0px; \
-            padding-left: 0px; \
-            padding-right: 0px; \
-            padding-top: 0px; \
-            position: relative; \
-            z-index: 0; \
-            border-width: 0px; \
-            border-style: solid; \
-            border-color: black; \
-            border-image: initial; \
-        } \
-        .r-width-13qz1uu { \
-            width: 100%; \
-        } \
-        .r-height-1pi2tsx { \
-            height: 100%; \
-        } \
-        </style>'].concat(this.options.css.filter(css=> css.active).map(css=> {
+        return this.options.css.filter(css=> css.active).map(css=> {
             if (css.type === CSSType.Url) {
                 return '<link rel="stylesheet" href="'+css.value+'">'
             } else if (css.type === CSSType.Style) {
                 return '<style>' + css.value + '</style>'
             }
             return ''
-        })).join('\n')
+        }).join('\n')
     }
 
     applyImport(elem) {
