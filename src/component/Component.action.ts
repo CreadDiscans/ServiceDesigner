@@ -103,7 +103,7 @@ export default handleActions({
                 if (item.id === payload.id) idx = i;
             })
             if (idx !== undefined) 
-                payload.children.splice(idx, 1);
+                payload.parent.children.splice(idx, 1);
         } else {
             let idx = undefined;
             state.files.forEach((item, i)=> {
