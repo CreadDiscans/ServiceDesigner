@@ -1,7 +1,6 @@
 import Utils from "./utils";
-import { FileType } from "../models/file";
 import _ from 'lodash';
-import { PropertyType, ElementType } from "./constant";
+import { PropertyType, ElementType, FileType } from "./constant";
 
 export class DeprecateService {
 

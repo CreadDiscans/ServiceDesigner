@@ -4,12 +4,11 @@ import ElementsView from '../element/Element.view';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
 import { connectRouter } from '../redux/connection';
-import { ContextMenuType, ElementType } from '../utils/constant';
+import { ContextMenuType, ElementType, FileType } from '../utils/constant';
 import * as layoutActions from './Layout.actions';
 import * as componentsActions from '../component/Component.action';
 import * as elementsActions from '../element/Element.action';
 import { bindActionCreators } from 'redux';
-import { FileType } from '../models/file';
 
 class ExplorerView extends React.Component<any> {
 

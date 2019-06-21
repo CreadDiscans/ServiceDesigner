@@ -58,3 +58,9 @@ export enum FrameType {
     Portrait = 'portrait',
     Landscape = 'landscape'
 }
+
+export enum FileType {
+    ROOT = 'root',
+    FOLDER = 'folder',
+    FILE = 'file'
+}

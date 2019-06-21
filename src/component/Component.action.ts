@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
-import { FileType } from '../models/file';
 import _ from 'lodash';
 import Utils from '../utils/utils';
+import { FileType } from '../utils/constant';
 
 const CREATE_FILE = 'component/CREATE_FILE';
 const DELETE_FILE = 'component/DELETE_FILE';

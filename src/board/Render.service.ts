@@ -1,9 +1,8 @@
 import React from 'react';
-import { ElementType, PropertyType, CSSType } from '../utils/constant';
+import { ElementType, PropertyType, CSSType, FileType } from '../utils/constant';
 import Utils from '../utils/utils';
 import * as reactstrap from 'reactstrap';
 import * as reactNative from 'react-native-web';
-import { FileType } from '../models/file';
 import _ from 'lodash';
 import { ajax } from 'rxjs/ajax';
 import { forkJoin, of } from 'rxjs';

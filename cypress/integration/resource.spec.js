@@ -1,7 +1,6 @@
 describe('Resource', function() {
     beforeEach(function(){
         cy.visit('/')
-        cy.get('button[name="dev"]').click()
     })
 
     it('Color', function() {
@@ -52,16 +51,16 @@ describe('Resource', function() {
         cy.get('.bottomTab').eq(3).click()
         cy.get('#css-input-url').type('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
         cy.get('#css-button-add-url').click()
-        cy.get('.css-item').click()
+        cy.get('.css-item').last().click()
         cy.get('#css-input-url').should('have.value', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
         cy.get('#css-input-url').type('{backspace}')
         cy.get('#css-button-update').click()
         cy.get('#css-button-cancel').click()
         cy.get('#css-input-url').should('have.value', '')
-        cy.get('.css-item').click()
+        cy.get('.css-item').last().click()
         cy.get('#css-input-url').should('have.value', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.cs')
         cy.get('#css-button-delete').click()
-        cy.get("#css-item-wrap").should('have.text', '')
+        cy.get("#css-item-wrap").should('have.text', 'bootstrapurl')
 
         cy.get('#css-input-file').then(subject=> {
             return cy.fixture('test.css')

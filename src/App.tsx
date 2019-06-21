@@ -1,21 +1,17 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Home from './views/home.view'
-import Sidebar from './views/sidebar/sidebar.view'
-import { Intro } from './views/intro.view'
-import { FrameView } from './views/frame.view';
-import { HomeView } from './layout/Home.view';
-import { Menu } from './utils/Menu';
-import { connectRouter } from './redux/connection';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+
+import { Menu } from './utils/Menu';
+import { Theme } from './utils/Theme';
+import { DeprecateService } from './utils/Deprecate';
+import Utils from './utils/utils';
+import { connectRouter } from './redux/connection';
+import { HomeView } from './layout/Home.view';
+import { RenderService } from './board/Render.service';
 import * as layoutActions from './layout/Layout.actions';
 import * as componentActions from './component/Component.action';
 import * as resourceActions from './resource/Resource.actions';
-import { Theme } from './utils/Theme';
-import _ from 'lodash';
-import Utils from './utils/utils';
-import { RenderService } from './board/Render.service';
-import { DeprecateService } from './utils/Deprecate';
 
 
 class App extends React.Component<any> { 
@@ -96,23 +92,7 @@ class App extends React.Component<any> {
     }
 
     render() {
-        return (
-        <div>
-            <Switch>
-                <Route exact path="/dev"  component={HomeView} />
-                <Route exact path="/frame" component={FrameView} />
-                <Route path="*" render={()=> 
-                    <Sidebar>
-                    <Switch>
-                        <Route exact path="/intro" component={Intro} />
-                        <Route exact path="/home" component={Home} />
-                        <Route path="*" render={() => (<Redirect to="/intro" />)} />
-                    </Switch>
-                    </Sidebar>
-                } />
-            </Switch>
-        </div>
-        );
+        return <HomeView/>
     }
 }
 

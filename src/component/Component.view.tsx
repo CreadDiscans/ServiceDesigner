@@ -1,5 +1,4 @@
 import React from 'react';
-import { File, FileType } from '../models/file';
 import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io';
 import { FaRegFolder, FaRegFile, FaRegClone, FaRegCircle } from 'react-icons/fa';
 import { DiReact } from 'react-icons/di';
@@ -12,7 +11,7 @@ import * as propertyActions from '../property/Property.action';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
 import { Theme } from '../utils/Theme';
-import { ContextMenuType } from '../utils/constant';
+import { ContextMenuType, FileType } from '../utils/constant';
 
 class ComponentView extends React.Component<any> {
 

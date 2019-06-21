@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
-import { FileType } from '../models/file';
 import Utils from '../utils/utils';
+import { FileType } from '../utils/constant';
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
