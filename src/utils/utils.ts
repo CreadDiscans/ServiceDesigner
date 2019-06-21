@@ -18,27 +18,6 @@ export default class Utils {
         localLoop(item)
     }
 
-    static maxId(item:any) {
-        let id = 0;
-        Utils.loop(item, ((child:any)=> {
-            if (id < child.id) {
-                id = child.id;
-            }
-        }));
-        return id;
-    }
-
-    static equal(a:any, b:any) {
-        return JSON.stringify(a) === JSON.stringify(b);
-    }
-
-    static merge(a:any, b:any) {
-        Object.keys(b).forEach(k=> {
-            a[k] = b[k];
-        });
-        return a;
-    }
-
     static transform(inputCssText:any) {
         const transformRules = (self:any, rules:any, result:any) => {
             rules.forEach((rule:any)=>{
@@ -112,38 +91,4 @@ export default class Utils {
         return result;
     }
 
-    static search(list:Array<any>, check:Function):Array<any> {
-        let target;
-        let index;
-        list.forEach((item, i)=> {
-            if (check(item)) {
-                target = item;
-                index = i;
-            }
-        });
-        return [target, index];
-    }
-
-    static toCapital(value:string) {
-        return value[0].toUpperCase() + value.slice(1, value.length);
-    }
-
-    static countLetter(str:string, letter:string) {
-        let cnt = 0;
-        for(let i=0;i<str.length;i++) {
-            if (str[i] === letter) cnt +=1;
-        }
-        return cnt;
-    }
-
-    static arrayMove(arr:Array<any>, old_index:number, new_index:number) {
-        if (new_index >= arr.length) {
-            var k = new_index - arr.length + 1;
-            while (k--) {
-                arr.push(undefined);
-            }
-        }
-        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-        return arr;
-    }
 }
