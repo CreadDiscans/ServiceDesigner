@@ -204,7 +204,7 @@ export class RenderService {
             return '<'+tag+'></'+tag+'>';
         }
         if (elem.tag === 'root' || elem.id === -1) {
-            return '<'+tag+' id="'+ elem.id+ '">' + children(forStack) + '</'+tag+'>'
+            return children(forStack)
         }
 
         if (elem.tag !== 'render') {
