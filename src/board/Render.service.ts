@@ -14,7 +14,7 @@ export class RenderService extends Singletone<RenderService> {
 
     private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as reactstrap from 'reactstrap';\nimport './design.style.css';\n";
     private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as reactnative from 'react-native';\n";
-    private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\tonEvent(e:any){}\n\trenderPart=(name:any)=>{}\n\tsync = (key:any, value:any) => {\n\t\tlet target = this.state;\n\t\tlet parent:any = {};\n\t\tlet lastKey:any = '';\n\t\tkey.split('.').forEach((item:string)=> {\n\t\t\tparent = target;\n\t\t\ttarget = target[item];\n\t\t\tlastKey = item;\n\t\t});\n\t\tif (target !== value) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t}\n\t}\n}\n";
+    private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\tonEvent(e:any){}\n\trenderPart=(name:any)=>{}\n\tsync = (key:any, value:any) => {\n\t\tlet target = this.state;\n\t\tlet parent:any = {};\n\t\tlet lastKey:any = '';\n\t\tkey.split('.').forEach((item:string)=> {\n\t\t\tparent = target;\n\t\t\ttarget = target[item];\n\t\t\tlastKey = item;\n\t\t});\n\t\tif (typeof target === 'object' && JSON.stringify(target) !== JSON.stringify(value)) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t} else if (typeof target !== 'object' && target !== value) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t}\n\t}\n}\n";
     private static TEMPLATE_CLASS = "export class {classname} extends DesignedComponent {\n\t{state}\n\trender() {\n\t\t// @ts-ignore\n\t\treturn {code}\n\t}\n}\n";
 
     // common 
