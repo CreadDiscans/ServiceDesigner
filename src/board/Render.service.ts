@@ -47,6 +47,7 @@ export class RenderService extends Singletone<RenderService> {
     }
 
     renderAll(components, options) {
+        this.js = [];
         this.options = options;
         components.forEach(comp=> Utils.loop(comp, (item, stack)=> {
             if (item.type === FileType.FILE) {
