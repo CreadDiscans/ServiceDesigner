@@ -10,6 +10,7 @@ export class Menu {
             const { remote } = window.require('electron');
             const {Menu} = remote;
             const fs = window.require('fs')
+            const path = window.require('path')
 
             const save = async() => {
                 const data = await saveFile()
@@ -35,6 +36,7 @@ export class Menu {
                                 if (file !== undefined) {
                                     const data = fs.readFileSync(file[0]);
                                     openFile(data.toString())
+                                    this.cachePath = path.dirname(file[0])
                                 }
                             },
                             accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'
