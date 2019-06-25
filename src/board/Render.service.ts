@@ -120,11 +120,11 @@ export class RenderService extends Singletone<RenderService> {
         return 'state='+this.state+';'+this.func+'render('+this.dom+')';
     }
 
-    toHtml(elem, forStack = []) {
+    toHtml(elem, forStack = [], key = -1) {
         this.applyImport(elem);
 
-        const children = (forStack) => {
-            return elem.children.map(item=> this.toHtml(item, forStack)).join('');
+        const children = (forStack, isRoot=false) => {
+            return elem.children.map((item, i)=> this.toHtml(item, forStack, isRoot ? i : -1)).join(isRoot ? ',':'');
         }
 
         const body = () => {
@@ -145,6 +145,8 @@ export class RenderService extends Singletone<RenderService> {
             let attrs = ['id={'+this.getAttrId(elem, forStack, isFor)+'}'];
             if (isFor) {
                 attrs.push('key={i'+(forStack.length-1)+'}')
+            } else if (key !== -1) {
+                attrs.push('key={'+key+'}')
             }
             const styleNameProp = this.getPropValue(elem, 'styleName');
             attrs = attrs.concat(elem.prop.filter(prop=>['for', 'text', 'styleName'].indexOf(prop.name) === -1).map(prop=> {
@@ -205,7 +207,7 @@ export class RenderService extends Singletone<RenderService> {
             return '<'+tag+'></'+tag+'>';
         }
         if (elem.tag === 'root' || elem.id === -1) {
-            return '<'+tag+'>'+children(forStack)+'</'+tag+'>'
+            return '[' + children(forStack, true) + ']'
         }
 
         if (elem.tag !== 'render') {
