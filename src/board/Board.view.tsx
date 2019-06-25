@@ -63,11 +63,19 @@ class BoardView extends React.Component<any> {
                     LayoutActions.rendering(false);
                 }
             }
+        } else {
+            if (this.refs.frame && data.element.component.id === -1) {
+                const frame:any = this.refs.frame;
+                frame.contentWindow.document.open();
+                frame.contentWindow.document.write('');
+                frame.contentWindow.document.close();
+            }
         }
     }
 
     render() {
         const {data, ElementActions} = this.props;
+        console.log(data);
         return <div style={styles.layout}>
             <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"

@@ -12,6 +12,8 @@ import { RenderService } from './board/Render.service';
 import * as layoutActions from './layout/Layout.actions';
 import * as componentActions from './component/Component.action';
 import * as resourceActions from './resource/Resource.actions';
+import * as elementActions from './element/Element.action';
+import * as propertyActions from './property/Property.action';
 
 
 class App extends React.Component<any> { 
@@ -19,16 +21,20 @@ class App extends React.Component<any> {
     componentWillMount() {
         new Menu().init(
             (json) => {
-                const { LayoutActions, ResourceActions, ComponentActions } = this.props;
+                const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions } = this.props;
                 try {
                     const data = JSON.parse(json);
                     if (data.version === 2) {
                         ResourceActions.loadResource(data.resource);
                         ComponentActions.loadComponent(data.components);
+                        ElementActions.clearElement();
+                        PropertyActions.reset();
                     } else {
                         const deprecateService =  new DeprecateService().parseVersion1(data);
                         ResourceActions.loadResource(deprecateService.toResource());
                         ComponentActions.loadComponent(deprecateService.toComponents());
+                        ElementActions.clearElement();
+                        PropertyActions.reset();
                     }
                     LayoutActions.message({
                         background: Theme.success,
@@ -107,7 +113,9 @@ export default connectRouter(
     (dispatch)=>({
         LayoutActions: bindActionCreators(layoutActions, dispatch),
         ResourceActions: bindActionCreators(resourceActions, dispatch),
-        ComponentActions: bindActionCreators(componentActions, dispatch)
+        ComponentActions: bindActionCreators(componentActions, dispatch),
+        ElementActions: bindActionCreators(elementActions, dispatch),
+        PropertyActions: bindActionCreators(propertyActions, dispatch)
     }),
     App
 );

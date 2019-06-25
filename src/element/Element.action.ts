@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import Utils from '../utils/utils';
 import { FileType } from '../utils/constant';
+import _ from 'lodash';
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
@@ -13,6 +14,7 @@ const DELETE_HISTORY = 'element/DELETE_HISTORY';
 const HOVER_ELEMENT = 'element/HOVER_ELEMENT';
 const COLLAPSE_ELEMENT = 'element/COLLAPSE_ELEMENT';
 const DRAG_AND_DROP_ELEMENT = 'element/DRAG_AND_DROP_ELEMENT';
+const CLEAR_ELEMENT = 'element/CLEAR_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
@@ -25,6 +27,7 @@ export const deleteHistory = createAction(DELETE_HISTORY); // id of element
 export const hoverElement = createAction(HOVER_ELEMENT); // element
 export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
 export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to, sibling
+export const clearElement = createAction(CLEAR_ELEMENT);
 
 const initialState = {
   component: {
@@ -180,7 +183,28 @@ export default handleActions({
       payload.from.parent = payload.to;
     }
     return {...state}
-  }
+  },
+  [CLEAR_ELEMENT]: (state, {payload}) => ({
+    component: {
+      id: -1,
+      element:{
+        id:-1,
+        tag:'',
+        lib:'',
+        prop:[],
+        children: [],
+        collapse: true
+      },
+      state: '{}'
+    },
+    hover: undefined,
+    select:undefined,
+    insert: {
+      ing: false,
+      name: '',
+      type: ''
+    },
+    history: [] })
 }, initialState)
 
 const loop = (item, handle) => {
