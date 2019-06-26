@@ -14,6 +14,7 @@ const READY_TO_RENAME = 'component/READY_TO_RENAME';
 const RESET = 'component/RESET';
 const RESET_FOCUS = 'component/RESET_FOCUS';
 const LOAD_COMPONENT = 'component/LOAD_COMPONENT';
+const DRAG_AND_DROP_ELEMENT = 'component/DRAG_AND_DROP_COMPONENT';
 
 export const createFile = createAction(CREATE_FILE); // name, type
 export const deleteFile = createAction(DELETE_FILE); // ref item in files
@@ -26,6 +27,7 @@ export const readyToRename = createAction(READY_TO_RENAME); // create, type, foc
 export const reset = createAction(RESET);
 export const resetFocus = createAction(RESET_FOCUS);
 export const loadComponent = createAction(LOAD_COMPONENT); // array on components
+export const dragAndDropComponent = createAction(DRAG_AND_DROP_ELEMENT); // from, to, sibling
 
 const initialState = {
     files:[],
@@ -137,5 +139,36 @@ export default handleActions({
             ...state,
             files: payload
         }
-    }
+    },
+    [DRAG_AND_DROP_ELEMENT]: (state, {payload}:any)=> {
+      if (payload.to === undefined) {
+        if (payload.from.parent) {
+            payload.from.parent.children = payload.from.parent.children
+                .filter(item=> item.id !== payload.from.id)
+            payload.from.parent = undefined;
+            state.files.push(payload.from);
+        }
+        return {...state}
+      } else {
+        let valid = true;
+        Utils.loop(payload.from, (item)=> {
+            if (item.id === payload.to.id) {
+                valid = false
+            }
+        })
+        if (!valid) {
+            return {...state}
+        }
+        if (payload.from.parent) {
+            payload.from.parent.children = payload.from.parent.children
+                .filter(item=> item.id !== payload.from.id)
+        } else {
+            state.files = state.files
+                .filter(item=> item.id !== payload.from.id)
+        }
+        payload.to.children.push(payload.from);
+        payload.from.parent = payload.to;
+      }
+      return {...state}
+    },
 }, initialState)

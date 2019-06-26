@@ -118,19 +118,19 @@ class ElementView extends React.Component<any> {
                 draggable={true}
                 onClick={()=> this.clickItem(elem)}
                 onContextMenu={(e)=>this.clickItemRight(e, elem)}>
-                <div className="element-item-up" style={Object.assign({
-                    height:5,
-                }, this.state.drop && this.state.sibling && this.state.drop.id === elem.id && {background: Theme.primary})}
-                onDragOver={(e)=> {
-                    e.stopPropagation();
-                    this.setState({drop: elem, sibling:true})
-                }}></div>
-                {elem.children.length === 0 ? this.getLibIcon(elem.lib) : elem.collapse ? 
-                    <IoMdArrowDropdown onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> : 
-                    <IoMdArrowDropright onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> }
-                {elem.tag}
-                {nameProp && nameProp.value !== '' && '[' + nameProp.value + ']'}
-                {this.renderInput(elem)}
+                    <div className="element-item-up" style={Object.assign({
+                        height:5,
+                    }, this.state.drop && this.state.sibling && this.state.drop.id === elem.id && {background: Theme.primary})}
+                    onDragOver={(e)=> {
+                        e.stopPropagation();
+                        this.setState({drop: elem, sibling:true})
+                    }}></div>
+                    {elem.children.length === 0 ? this.getLibIcon(elem.lib) : elem.collapse ? 
+                        <IoMdArrowDropdown onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> : 
+                        <IoMdArrowDropright onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> }
+                    {elem.tag}
+                    {nameProp && nameProp.value !== '' && '[' + nameProp.value + ']'}
+                    {this.renderInput(elem)}
             </div>
             { elem.collapse && elem.children.map(item=> this.renderElement(item, dep+1))}
         </div>

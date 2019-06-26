@@ -18,6 +18,8 @@ class ComponentView extends React.Component<any> {
     state:any =  {
         hover:0,
         collapse: true,
+        drag: undefined,
+        drop: undefined
     }
 
     compare(a,b) {
@@ -101,16 +103,31 @@ class ComponentView extends React.Component<any> {
                     paddingTop:1,
                     paddingBottom:1,
                     paddingLeft:10+dep*5
-                }, this.state.hover === item.id && styles.hover, data.component.select && data.component.select.id === item.id && styles.active)} 
+                }, this.state.hover === item.id && styles.hover, 
+                data.component.select && data.component.select.id === item.id && styles.active,
+                this.state.drop && this.state.drop.id === item.id && {
+                    background: Theme.primary
+                })} 
                 onMouseEnter={()=> this.setState({hover:item.id})}
                 onMouseLeave={()=> this.setState({hover:undefined})}
                 onClick={()=> this.clickItem(item)}
-                onContextMenu={(e)=>this.clickItemRight(e, item)}>
-                {item.type === FileType.FOLDER ? [
-                    !item.collapse && <IoMdArrowDropright style={styles.arrow} key={0} />,
-                    item.collapse && <IoMdArrowDropdown style={styles.arrow} key={1} />
-                ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
-                {item.name}
+                onContextMenu={(e)=>this.clickItemRight(e, item)}
+                onDragStart={()=> this.setState({drag: item})}
+                onDragEnd={()=> {
+                    ComponentActions.dragAndDropComponent({from: this.state.drag, to: this.state.drop})
+                    this.setState({drag: undefined, drop:undefined})
+                }}
+                onDragOver={(e)=> {
+                    e.stopPropagation();
+                    this.setState({drop: item})
+                }}
+                draggable={true}>
+                    {item.type === FileType.FOLDER ? [
+                        !item.collapse && <IoMdArrowDropright style={styles.arrow} key={0} />,
+                        item.collapse && <IoMdArrowDropdown style={styles.arrow} key={1} />
+                    ] : <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} 
+                    />}
+                    {item.name}
             </div>}
             { data.component.select && data.component.select.id === item.id && data.component.create && <div style={{marginLeft:marginLeft}}>
                 {data.component.type === FileType.FOLDER && <IoMdArrowDropright style={styles.arrow} key={0} />}
@@ -166,7 +183,8 @@ class ComponentView extends React.Component<any> {
         return <div>
             {this.renderTitle()}
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout"
-                onContextMenu={(e)=> this.clickItemRight(e, undefined)}>
+                onContextMenu={(e)=> this.clickItemRight(e, undefined)}
+                onDragOver={()=> this.setState({drop: undefined})}>
                 <Resizeable
                     maxHeight={window.innerHeight-300}
                     minHeight={100}

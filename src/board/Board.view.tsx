@@ -75,7 +75,6 @@ class BoardView extends React.Component<any> {
 
     render() {
         const {data, ElementActions} = this.props;
-        console.log(data);
         return <div style={styles.layout}>
             <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"
