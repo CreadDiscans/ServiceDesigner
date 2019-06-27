@@ -88,6 +88,15 @@ class ExplorerView extends React.Component<any> {
                     LayoutActions.hideContextMenu();
                 }
             }, {
+                name: 'Add React Icons',
+                click: ()=> {
+                    const { data, ElementsActions, LayoutActions } = this.props;
+                    if (data.element.component.element.id !== -1) {
+                        ElementsActions.readyToAdd(ElementType.ReactIcons);
+                    }
+                    LayoutActions.hideContextMenu();
+                }
+            },{
                 name: 'Add React Native',
                 click: ()=> {
                     const { data, ElementsActions, LayoutActions } = this.props;

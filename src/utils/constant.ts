@@ -7,6 +7,7 @@ export enum ContextMenuType {
 export enum ElementType {
     Html = 'html',
     Reactstrap = 'reactstrap',
+    ReactIcons = 'reacticons',
     ReactNative = 'reactnative'
 }
 
