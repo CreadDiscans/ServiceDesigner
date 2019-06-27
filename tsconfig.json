@@ -17,7 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "node_modules",
+    "paths": {
+      "react-native": ["react-native-web"]
+    }
   },
   "include": [
     "src",

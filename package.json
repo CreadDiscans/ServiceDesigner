@@ -23,6 +23,7 @@
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "8.0.5",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-named-asset-import": "^0.3.2",
     "babel-preset-react-app": "^9.0.0",
     "bootstrap": "^4.3.1",
@@ -173,6 +174,16 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "^react-native": "react-native-web"
+          }
+        }
+      ]
     ]
   }
 }
