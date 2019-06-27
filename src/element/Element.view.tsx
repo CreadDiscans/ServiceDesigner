@@ -62,6 +62,8 @@ class ElementView extends React.Component<any> {
             return <DiBootstrap style={{...styles.arrow,...{color:Theme.iconBootstrapColor}}} key={0}/>
         } else if (type === ElementType.ReactIcons) {
             return <DiReact style={{...styles.arrow,...{color:Theme.iconReactIconsColor}}} key={0}/>
+        } else if (type === ElementType.ReactNativeElements) {
+            return <DiReact style={{...styles.arrow,...{color:'white'}}} key={0}/>
         } else {
             return <DiReact style={{...styles.arrow,...{color:Theme.iconReactColor}}} key={0}/>
         }

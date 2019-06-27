@@ -6,9 +6,10 @@ export enum ContextMenuType {
 
 export enum ElementType {
     Html = 'html',
-    Reactstrap = 'reactstrap',
-    ReactIcons = 'reacticons',
-    ReactNative = 'reactnative'
+    Reactstrap = 'rs',
+    ReactIcons = 'ri',
+    ReactNative = 'rn',
+    ReactNativeElements = 'rne',
 }
 
 export enum PropertyType {

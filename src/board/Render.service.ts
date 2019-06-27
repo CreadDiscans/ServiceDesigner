@@ -4,6 +4,7 @@ import Utils from '../utils/utils';
 import * as reactstrap from 'reactstrap';
 import * as reacticons from 'react-icons/all';
 import * as reactNative from 'react-native';
+import * as reactNativeElement from 'react-native-elements';
 import _ from 'lodash';
 import { ajax } from 'rxjs/ajax';
 import { forkJoin, of } from 'rxjs';
@@ -13,8 +14,8 @@ import { Singletone } from '../utils/singletone';
 
 export class RenderService extends Singletone<RenderService> {
 
-    private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as reactstrap from 'reactstrap';\nimport * as reacticons from 'react-icons/all'\nimport './design.style.css';\n";
-    private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as reactnative from 'react-native';\n";
+    private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as "+ElementType.Reactstrap+" from 'reactstrap';\nimport * as "+ElementType.ReactIcons+" from 'react-icons/all'\nimport './design.style.css';\n";
+    private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as "+ElementType.ReactNative+" from 'react-native';\nimport * as "+ElementType.ReactNativeElements+" from 'react-native-elements';\n";
     private static TEMPLATE_ABSTRACT = "class DesignedComponent extends React.Component<any, any> {\n\tonEvent(e:any){}\n\trenderPart=(name:any)=>{}\n\tsync = (key:any, value:any) => {\n\t\tlet target = this.state;\n\t\tlet parent:any = {};\n\t\tlet lastKey:any = '';\n\t\tkey.split('.').forEach((item:string)=> {\n\t\t\tparent = target;\n\t\t\ttarget = target[item];\n\t\t\tlastKey = item;\n\t\t});\n\t\tif (typeof target === 'object' && JSON.stringify(target) !== JSON.stringify(value)) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t} else if (typeof target !== 'object' && target !== value) {\n\t\t\tparent[lastKey] = value;\n\t\t\tthis.setState({});\n\t\t}\n\t}\n}\n";
     private static TEMPLATE_CLASS = "export class {classname} extends DesignedComponent {\n\t{state}\n\trender() {\n\t\t// @ts-ignore\n\t\treturn {code}\n\t}\n}\n";
 
@@ -248,6 +249,8 @@ export class RenderService extends Singletone<RenderService> {
             this.imp[ElementType.ReactNative] = reactNative;
         } else if (elem.lib === ElementType.ReactIcons && !(ElementType.ReactIcons in this.imp)) {
             this.imp[ElementType.ReactIcons] = reacticons;
+        } else if (elem.lib === ElementType.ReactNativeElements && !(ElementType.ReactNativeElements in this.imp)) {
+            this.imp[ElementType.ReactNativeElements] = reactNativeElement;
         }
 
     }
