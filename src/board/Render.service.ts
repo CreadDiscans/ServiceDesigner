@@ -35,7 +35,8 @@ export class RenderService extends Singletone<RenderService> {
 
     renderOne(component, options) {
         // console.log(component);
-        if (component.element.children && component.element.children.length > 0 && component.element.children[0].lib === ElementType.ReactNative) {
+        if (component.element.children && component.element.children.length > 0 && 
+                (component.element.children[0].lib === ElementType.ReactNative || component.element.children[0].lib === ElementType.ReactNativeElements)) {
             this.type = 'react-native';
         } else {
             this.type = 'react';

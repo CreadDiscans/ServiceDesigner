@@ -13,11 +13,64 @@ import { RenderService } from './Render.service';
 import imgJson from '../asset/image.json';
 import { AppRegistry } from 'react-native-web';
 import { FrameView } from './Frame.view';
+import AntDesign from '../lib/react-native-vector-icons/Fonts/AntDesign.ttf';
+import Entypo from '../lib/react-native-vector-icons/Fonts/Entypo.ttf';
+import EvilIcons from '../lib/react-native-vector-icons/Fonts/EvilIcons.ttf';
+import Feather from '../lib/react-native-vector-icons/Fonts/Feather.ttf';
+import FontAwesome from '../lib/react-native-vector-icons/Fonts/FontAwesome.ttf';
+import FontAwesome5_Brands from '../lib/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf';
+import FontAwesome5_Regular from '../lib/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf';
+import FontAwesome5_Solid from '../lib/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf';
+import Fontisto from '../lib/react-native-vector-icons/Fonts/Fontisto.ttf';
+import Foundation from '../lib/react-native-vector-icons/Fonts/Foundation.ttf';
+import Ionicons from '../lib/react-native-vector-icons/Fonts/Ionicons.ttf';
+import MaterialCommunityIcons from '../lib/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
+import MaterialIcons from '../lib/react-native-vector-icons/Fonts/MaterialIcons.ttf';
+import Octicons from '../lib/react-native-vector-icons/Fonts/Octicons.ttf';
+import SimpleLineIcons from '../lib/react-native-vector-icons/Fonts/SimpleLineIcons.ttf';
+import Zocial from '../lib/react-native-vector-icons/Fonts/Zocial.ttf';
 
 class BoardView extends React.Component<any> {
 
     state = {
         hover:undefined
+    }
+
+    fontTable = [
+        {name: 'AntDesign', font: AntDesign},
+        {name: 'Entypo', font: Entypo},
+        {name: 'EvilIcons', font: EvilIcons},
+        {name: 'Feather', font: Feather},
+        {name: 'FontAwesome', font: FontAwesome},
+        {name: 'FontAwesome5_Brands', font: FontAwesome5_Brands},
+        {name: 'FontAwesome5_Regular', font: FontAwesome5_Regular},
+        {name: 'FontAwesome5_Solid', font: FontAwesome5_Solid},
+        {name: 'Fontisto', font: Fontisto},
+        {name: 'Foundation', font: Foundation},
+        {name: 'Ionicons', font: Ionicons},
+        {name: 'MaterialCommunityIcons', font: MaterialCommunityIcons},
+        {name: 'MaterialIcons', font: MaterialIcons},
+        {name: 'Octicons', font: Octicons},
+        {name: 'SimpleLineIcons', font: SimpleLineIcons},
+        {name: 'Zocial', font: Zocial},
+    ]
+
+    getFontStyles() {
+        return this.fontTable.map(item=> {
+            const iconFontStyles = `@font-face {
+                src: url(${item.font});
+                font-family: ${item.name};
+            }`;
+
+            const style:any = document.createElement('style');
+            style.type = 'text/css';
+            if (style.styleSheet) {
+              style.styleSheet.cssText = iconFontStyles;
+            } else {
+              style.appendChild(document.createTextNode(iconFontStyles));
+            }
+            return style
+        })
     }
 
     componentDidUpdate() {
@@ -50,8 +103,11 @@ class BoardView extends React.Component<any> {
                 ${html}
                 </div>
                 `
+
                 frame.contentWindow.document.open();
                 frame.contentWindow.document.write(document);
+                this.getFontStyles().forEach(style=> 
+                    frame.contentWindow.document.head.appendChild(style))
                 frame.contentWindow.document.close();
                 
                 if (data.layout.rendering === false) {
