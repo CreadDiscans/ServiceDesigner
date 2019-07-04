@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import _ from 'lodash';
 import Utils from '../utils/utils';
-import { FileType } from '../utils/constant';
+import { FileType, ElementType } from '../utils/constant';
 
 const CREATE_FILE = 'component/CREATE_FILE';
 const DELETE_FILE = 'component/DELETE_FILE';
@@ -130,6 +130,8 @@ export default handleActions({
                 item.parent = _.last(stack)
                 if (item.type === FileType.FILE) {
                     Utils.loop(item.element, (elem, stack)=> {
+                        if (elem.lib === 'reactnative') elem.lib = ElementType.ReactNative
+                        else if (elem.lib === 'reactstrap') elem.lib = ElementType.Reactstrap
                         elem.parent = _.last(stack)
                     })
                 }
