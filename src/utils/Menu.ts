@@ -13,6 +13,9 @@ export class Menu {
             const path = window.require('path')
 
             const save = async() => {
+                if (this.cachePath === undefined) {
+                    return;
+                }
                 const data = await saveFile()
                 if (data === undefined) {
                     return;
