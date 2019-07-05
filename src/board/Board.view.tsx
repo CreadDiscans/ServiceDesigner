@@ -101,6 +101,14 @@ class BoardView extends React.Component<any> {
                 <body style="height:100%; overflow-y:hidden">
                 <div id="root" style="display:flex; height: 100%">
                 ${html}
+                <script>
+                    var forms = document.getElementsByTagName("form");
+                    for(var i=0; i<forms.length; i++) {
+                        forms[i].onsubmit = function() {
+                            return false;
+                        }
+                    } 
+                </script>
                 </div>
                 `
 
