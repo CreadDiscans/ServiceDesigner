@@ -3,30 +3,29 @@ import ComponentsView from '../component/Component.view';
 import ElementsView from '../element/Element.view';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
-import { connectRouter } from '../redux/connection';
 import { ContextMenuType, ElementType, FileType } from '../utils/constant';
-import * as layoutActions from './Layout.actions';
-import * as componentsActions from '../component/Component.action';
-import * as elementsActions from '../element/Element.action';
-import { bindActionCreators } from 'redux';
+import { Props, connection } from '../redux/Reducers';
 
-class ExplorerView extends React.Component<any> {
+class ExplorerView extends React.Component<Props> {
 
     state = {
         hover:''
     }
 
     createFile(type) {
-        const { data, ComponentsActions, LayoutActions } = this.props;
+        const { data, ComponentAction, LayoutAction } = this.props;
         let focus;
         if (data.layout.contextMenu.target === undefined) {
             focus = 'root'
-        } else {
+        } else if ('id' in data.layout.contextMenu.target) {
             focus = 'input_'+data.layout.contextMenu.target.id
             data.layout.contextMenu.target.collapse = true;
         }
-        ComponentsActions.readyToCreateByMenu({create:true, type:type, focus:focus, select:data.layout.contextMenu.target});
-        LayoutActions.hideContextMenu();
+        if (data.layout.contextMenu.target === undefined)
+            ComponentAction.readyToCreateByMenu(true, type, focus, undefined);
+        else if (!('tag' in data.layout.contextMenu.target) && !('value' in data.layout.contextMenu.target))
+            ComponentAction.readyToCreateByMenu(true, type, focus, data.layout.contextMenu.target);
+        LayoutAction.hideContextMenu();
     }
 
     menuItems = {
@@ -40,31 +39,32 @@ class ExplorerView extends React.Component<any> {
             },{
                 name: 'Unselect',
                 click: ()=> {
-                    const { ComponentsActions, LayoutActions } = this.props;
-                    ComponentsActions.selectFile(undefined);
-                    LayoutActions.hideContextMenu();
+                    const { ComponentAction, LayoutAction } = this.props;
+                    ComponentAction.selectFile(undefined);
+                    LayoutAction.hideContextMenu();
                 }
             },{
                 name:'Rename',
                 click: ()=> {
-                    const { data, ComponentsActions, LayoutActions } = this.props;
+                    const { data, ComponentAction, LayoutAction } = this.props;
                     if (data.layout.contextMenu.target) {
-                        ComponentsActions.readyToRename({
-                            name: data.layout.contextMenu.target.name,
-                            create:true,
-                            focus: 'input_'+data.layout.contextMenu.target.id,
-                            type: data.layout.contextMenu.target.type,
-                            rename: data.layout.contextMenu.target.id
-                        });
+                        if (!('tag' in data.layout.contextMenu.target) && !('value' in data.layout.contextMenu.target))
+                            ComponentAction.readyToRename(
+                                data.layout.contextMenu.target.name,
+                                'input_'+data.layout.contextMenu.target.id,
+                                data.layout.contextMenu.target.type,
+                                data.layout.contextMenu.target.id
+                            );
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 } 
             },{
                 name:'Delete',
                 click: ()=> {
-                    const { data, ComponentsActions, LayoutActions } = this.props;
-                    ComponentsActions.deleteFile(data.layout.contextMenu.target);
-                    LayoutActions.hideContextMenu();
+                    const { data, ComponentAction, LayoutAction } = this.props;
+                    if (!('tag' in data.layout.contextMenu.target) && !('value' in data.layout.contextMenu.target))
+                        ComponentAction.deleteFile(data.layout.contextMenu.target);
+                    LayoutAction.hideContextMenu();
                 }
             }
         ],
@@ -72,54 +72,55 @@ class ExplorerView extends React.Component<any> {
             {
                 name: 'Add HTML',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
+                    const { data, ElementAction, LayoutAction } = this.props;
                     if (data.element.component.element.id !== -1) {
-                        ElementsActions.readyToAdd(ElementType.Html);
+                        ElementAction.readyToAdd(ElementType.Html);
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 }
             }, {
                 name: 'Add Reactstrap',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
+                    const { data, ElementAction, LayoutAction } = this.props;
                     if (data.element.component.element.id !== -1) {
-                        ElementsActions.readyToAdd(ElementType.Reactstrap);
+                        ElementAction.readyToAdd(ElementType.Reactstrap);
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 }
             }, {
                 name: 'Add React Icons',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
+                    const { data, ElementAction, LayoutAction } = this.props;
                     if (data.element.component.element.id !== -1) {
-                        ElementsActions.readyToAdd(ElementType.ReactIcons);
+                        ElementAction.readyToAdd(ElementType.ReactIcons);
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 }
             },{
                 name: 'Add React Native',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
+                    const { data, ElementAction, LayoutAction } = this.props;
                     if (data.element.component.element.id !== -1) {
-                        ElementsActions.readyToAdd(ElementType.ReactNative);
+                        ElementAction.readyToAdd(ElementType.ReactNative);
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 }
             },{
                 name: 'Add RN Elements',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
+                    const { data, ElementAction, LayoutAction } = this.props;
                     if (data.element.component.element.id !== -1) {
-                        ElementsActions.readyToAdd(ElementType.ReactNativeElements);
+                        ElementAction.readyToAdd(ElementType.ReactNativeElements);
                     }
-                    LayoutActions.hideContextMenu();
+                    LayoutAction.hideContextMenu();
                 }
             },{
                 name: 'Delete',
                 click: ()=> {
-                    const { data, ElementsActions, LayoutActions } = this.props;
-                    ElementsActions.deleteElement(data.layout.contextMenu.target);
-                    LayoutActions.hideContextMenu();
+                    const { data, ElementAction, LayoutAction } = this.props;
+                    if ('tag' in data.layout.contextMenu.target)
+                        ElementAction.deleteElement(data.layout.contextMenu.target);
+                    LayoutAction.hideContextMenu();
                 }
             }
         ]
@@ -127,9 +128,9 @@ class ExplorerView extends React.Component<any> {
 
     componentWillMount() {
         document.addEventListener('click', (e:any)=> {
-            const { data, LayoutActions } = this.props;
+            const { data, LayoutAction } = this.props;
             if (data.layout.contextMenu.display === 'block') 
-                LayoutActions.hideContextMenu();
+                LayoutAction.hideContextMenu();
         })
     }
 
@@ -222,17 +223,4 @@ const styles:any = {
     }
 }
 
-export default connectRouter(
-    (state)=> ({
-        data: {
-            element:state.element,
-            layout:state.layout
-        }
-    }),
-    (dispatch)=> ({
-        LayoutActions: bindActionCreators(layoutActions, dispatch),
-        ComponentsActions: bindActionCreators(componentsActions, dispatch),
-        ElementsActions: bindActionCreators(elementsActions, dispatch)
-    }),
-    ExplorerView
-)
+export default connection(ExplorerView);

@@ -1,11 +1,9 @@
 import React from 'react';
-import { connectRouter } from '../redux/connection';
-import { bindActionCreators } from 'redux';
-import * as resourceActions from './Resource.actions';
 import { Theme } from '../utils/Theme';
-declare var window:any;
+import { Props, connection } from '../redux/Reducers';
+declare var window:Window & {FileReader: typeof FileReader};
 
-class AssetView extends React.Component<any> {
+class AssetView extends React.Component<Props> {
 
     state = {
         hover:undefined,
@@ -17,15 +15,15 @@ class AssetView extends React.Component<any> {
     fileSelect = (e:any) => {
         const FileReader = new window.FileReader();
         FileReader.onload = (e:any) => {
-            const { ResourceActions } = this.props;
-            ResourceActions.createAsset({name:this.state.newName, value: e.target.result});
+            const { ResourceAction } = this.props;
+            ResourceAction.createAsset(this.state.newName, e.target.result);
             this.setState({newName: '', name: this.state.newName, value: e.target.result});
         }
         FileReader.readAsDataURL(e.target.files[0]);
     }
 
     render() {
-        const { data, ResourceActions } = this.props;
+        const { data, ResourceAction } = this.props;
         return <div>
             <div id="asset-item-wrap" style={styles.colors}>
                 {data.resource.asset.map(asset=> <div className="asset-item" key={asset.name}
@@ -50,7 +48,7 @@ class AssetView extends React.Component<any> {
                         onMouseEnter={()=>this.setState({hover:'delete'})}
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
-                            ResourceActions.deleteAsset(this.state.name);
+                            ResourceAction.deleteAsset(this.state.name);
                             this.setState({name: undefined});
                         }}>Delete</button>,
                     <button id="asset-cancel" key={2}
@@ -123,14 +121,4 @@ const styles = {
     }
 }
 
-export default connectRouter(
-    (state)=> ({
-        data: {
-            resource: state.resource
-        }
-    }),
-    (dispatch)=> ({
-        ResourceActions: bindActionCreators(resourceActions, dispatch)
-    }),
-    AssetView
-)
+export default connection(AssetView);

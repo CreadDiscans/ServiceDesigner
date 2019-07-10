@@ -1,5 +1,4 @@
 import React from 'react';
-import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos, IoIosPhonePortrait, IoIosPhoneLandscape, IoMdBrowsers } from 'react-icons/io';
 import { DiReact, DiCss3, DiCssTricks } from 'react-icons/di';
@@ -11,14 +10,12 @@ import 'brace/mode/json';
 import ColorView from '../resource/Color.view';
 import AssetView from '../resource/Asset.view';
 import CssView from '../resource/Css.view';
-import { bindActionCreators } from 'redux';
-import * as layoutActions from '../layout/Layout.actions';
-import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
 import StyleView from '../resource/Style.view';
+import { Props, connection } from '../redux/Reducers';
 
 
-class BottomView extends React.Component<any> {
+class BottomView extends React.Component<Props> {
 
     state = {
         active: undefined,
@@ -27,13 +24,13 @@ class BottomView extends React.Component<any> {
     }
 
     renderState() {
-        const { data, ElementActions } = this.props;
+        const { data, ElementAction } = this.props;
         return <AceEditor
             style={{width:'100%', height: window.innerHeight}}
             theme="tomorrow_night" 
             mode="json" 
             value={data.element.component.state}
-            onChange={(value)=> ElementActions.updateState(value)}
+            onChange={(value)=> ElementAction.updateState(value)}
             showPrintMargin={true}
             showGutter={true}
             highlightActiveLine={true}
@@ -46,7 +43,7 @@ class BottomView extends React.Component<any> {
     }
 
     render() {
-        const { data, LayoutActions } = this.props;
+        const { data, LayoutAction } = this.props;
         return <div style={styles.layout}>
             <Resizable
                 defaultSize={{height:this.state.active === undefined ? 28 : this.state.height}}
@@ -74,11 +71,11 @@ class BottomView extends React.Component<any> {
                 )}
                 <IoIosArrowDown style={Object.assign({}, styles.icon, this.state.active === undefined && {visibility: 'hidden'})} onClick={()=>this.setState({active:undefined})}/>
                 <IoIosPhoneLandscape style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Landscape && styles.iconActive)} 
-                    onClick={()=> LayoutActions.setFrameType(FrameType.Landscape)}/>
+                    onClick={()=> LayoutAction.setFrameType(FrameType.Landscape)}/>
                 <IoIosPhonePortrait style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Portrait && styles.iconActive)} 
-                    onClick={()=> LayoutActions.setFrameType(FrameType.Portrait)}/>
+                    onClick={()=> LayoutAction.setFrameType(FrameType.Portrait)}/>
                 <IoMdBrowsers style={Object.assign({}, styles.icon, data.layout.frameType === FrameType.Browser && styles.iconActive)}  
-                    onClick={()=> LayoutActions.setFrameType(FrameType.Browser)}/>
+                    onClick={()=> LayoutAction.setFrameType(FrameType.Browser)}/>
                 <div id="bottom-view" style={{height:'calc(100% - 28px)', overflow:'auto', backgroundColor:Theme.bgBodyDarkColor,}} ref={'layout'}>
                     <ScrollArea style={{height:this.refs.layout? this.refs.layout['clientHeight'] : this.state.height-28, minHeight:'100%'}}
                     verticalScrollbarStyle={{backgroundColor:'white'}}>
@@ -138,16 +135,4 @@ const styles:any = {
     }
 }
 
-export default connectRouter(
-    (state)=>({
-        data: {
-            element: state.element,
-            layout: state.layout
-        }
-    }),
-    (dispatch)=>({
-        ElementActions: bindActionCreators(elementActions, dispatch),
-        LayoutActions: bindActionCreators(layoutActions, dispatch)
-    }),
-    BottomView
-)
+export default connection(BottomView);

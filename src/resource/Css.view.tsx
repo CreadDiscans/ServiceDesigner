@@ -1,14 +1,12 @@
 import React from 'react';
-import { connectRouter } from '../redux/connection';
-import { bindActionCreators } from 'redux';
-import * as resourceActions from './Resource.actions';
 import { Theme } from '../utils/Theme';
 import AceEditor from 'react-ace';
 import { CSSType } from '../utils/constant';
+import { Props, connection } from '../redux/Reducers';
 
-declare var window:any;
+declare var window:Window & {FileReader: typeof FileReader};
 
-class CssView extends React.Component<any> {
+class CssView extends React.Component<Props> {
 
     state = {
         hover:undefined,
@@ -22,18 +20,18 @@ class CssView extends React.Component<any> {
         const FileReader = new window.FileReader();
         const name = e.target.files[0].name; 
         FileReader.onload = (e:any) => {
-            const { ResourceActions } = this.props;
-            ResourceActions.createCss({
-                name: name,
-                value: e.target.result,
-                type: CSSType.Style
-            })
+            const { ResourceAction } = this.props;
+            ResourceAction.createCss(
+                name,
+                e.target.result,
+                CSSType.Style
+            )
         }
         FileReader.readAsText(e.target.files[0]);
     }
 
     render() {
-        const { data, ResourceActions } = this.props;
+        const { data, ResourceAction } = this.props;
         return <div>
             <div id="css-item-wrap" style={styles.colors}>
                 {data.resource.css.map(css=> <div className="css-item" key={css.name}
@@ -49,7 +47,7 @@ class CssView extends React.Component<any> {
                             this.setState({name: css.name, type: css.type, url: css.value});
                         }
                     }}>
-                    <input style={{marginRight:5}} type="checkbox" checked={css.active} onChange={()=> ResourceActions.updateCss({name: css.name, active: !css.active})}/>
+                    <input style={{marginRight:5}} type="checkbox" checked={css.active} onChange={()=> ResourceAction.updateCss(css.name, undefined , !css.active)}/>
                     {css.name}
                     <span style={{float:'right'}}>{css.type}</span>
                 </div>)}
@@ -68,11 +66,11 @@ class CssView extends React.Component<any> {
                             onClick={()=> {
                                 if (this.state.url !== '') {
                                     const block = this.state.url.split('/')
-                                    ResourceActions.createCss({
-                                        name: block[block.length-1],
-                                        value: this.state.url,
-                                        type: CSSType.Url
-                                    })
+                                    ResourceAction.createCss(
+                                        block[block.length-1],
+                                        this.state.url,
+                                        CSSType.Url
+                                    )
                                     this.setState({
                                         url:'',
                                         name:'',
@@ -95,11 +93,11 @@ class CssView extends React.Component<any> {
                             onMouseLeave={()=>this.setState({hover:undefined})}
                             onClick={()=> {
                                 if (this.state.name !== '') {
-                                    ResourceActions.createCss({
-                                        name: this.state.name,
-                                        value: this.state.style,
-                                        type: CSSType.Style
-                                    })
+                                    ResourceAction.createCss(
+                                        this.state.name,
+                                        this.state.style,
+                                        CSSType.Style
+                                    )
                                     this.setState({
                                         url:'',
                                         name:'',
@@ -121,17 +119,18 @@ class CssView extends React.Component<any> {
                                     value = this.state.url;
                                 }
 
-                                ResourceActions.updateCss({
-                                    name: this.state.name, 
-                                    value: value,
-                                })
+                                ResourceAction.updateCss(
+                                    this.state.name, 
+                                    value,
+                                    true
+                                )
                             }}>Update</button>,
                         <button id="css-button-delete" 
                             style={Object.assign({}, styles.btn, this.state.hover === 'delete' && styles.btnHover)} key={1}
                             onMouseEnter={()=>this.setState({hover:'delete'})}
                             onMouseLeave={()=>this.setState({hover:undefined})}
                             onClick={()=> {
-                                ResourceActions.deleteCss(this.state.name);
+                                ResourceAction.deleteCss(this.state.name);
                                 this.setState({
                                     url:'',
                                     name:'',
@@ -225,14 +224,4 @@ const styles = {
     }
 }
 
-export default connectRouter(
-    (state)=> ({
-        data: {
-            resource: state.resource
-        }
-    }),
-    (dispatch)=> ({
-        ResourceActions: bindActionCreators(resourceActions, dispatch)
-    }),
-    CssView
-)
+export default connection(CssView);

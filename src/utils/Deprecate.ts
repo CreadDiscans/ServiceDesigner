@@ -23,20 +23,20 @@ export class DeprecateService {
                 Utils.loop(item.element, (item, stack)=> {
                     const forDepth = stack.concat([item]).filter(elem=> 
                         elem.property.filter(prop=> prop.name === 'for' && prop.isActive).length !== 0).length - 1
+                    const property = {
+                        name: 'style', 
+                        type: PropertyType.Object,
+                        value:item.style.map(style=> ({
+                                condition: style.condition.replace('item', 'item'+forDepth), 
+                                value:style.style.replace('style{', '{')
+                            })
+                        )
+                    }
                     const element = {
                         id: elemId,
                         tag: item.name,
                         lib: item.library === undefined ? ElementType.Html : item.library === 'reactNative' ? ElementType.ReactNative : item.library,
-                        prop: [
-                            {
-                                name: 'style', 
-                                type: 'object',
-                                value:item.style.map(style=> ({
-                                    condition: style.condition.replace('item', 'item'+forDepth), 
-                                    value:style.style.replace('style{', '{')
-                                })
-                            )}
-                        ].concat(item.property.filter(prop=> prop.isActive).map(prop=> ({
+                        prop: [property].concat(item.property.filter(prop=> prop.isActive).map(prop=> ({
                             name: prop.name === 'class' ? 'styleName' : prop.name,
                             type: prop.type !== PropertyType.Function && prop.isVariable ? PropertyType.Variable : prop.type,
                             value: prop.isVariable && prop.value.indexOf('item') === 0 ? 
@@ -47,7 +47,7 @@ export class DeprecateService {
                     }
                     elemId += 1;
                     item.convert = element;
-                    const last = _.last(stack)
+                    const last:any = _.last(stack)
                     if (last) {
                         last.convert.children.push(element)
                     } else {
@@ -70,7 +70,7 @@ export class DeprecateService {
                 }
                 id += 1
                 item.convert = component
-                const last = _.last(stack)
+                const last:any = _.last(stack)
                 if (last) {
                     last.convert.children.push(item.convert);
                 } else {

@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { DiReact } from 'react-icons/di';
 import { IoMdClose } from 'react-icons/io';
 import { FaCircle } from 'react-icons/fa';
-import { bindActionCreators } from 'redux';
-import * as elementActions from '../element/Element.action';
-import * as layoutActions from '../layout/Layout.actions';
 import { FrameType } from '../utils/constant';
 import { RenderService } from './Render.service';
 import imgJson from '../asset/image.json';
@@ -29,8 +25,9 @@ import MaterialIcons from '../lib/react-native-vector-icons/Fonts/MaterialIcons.
 import Octicons from '../lib/react-native-vector-icons/Fonts/Octicons.ttf';
 import SimpleLineIcons from '../lib/react-native-vector-icons/Fonts/SimpleLineIcons.ttf';
 import Zocial from '../lib/react-native-vector-icons/Fonts/Zocial.ttf';
+import { Props, connection } from '../redux/Reducers';
 
-class BoardView extends React.Component<any> {
+class BoardView extends React.Component<Props> {
 
     state = {
         hover:undefined
@@ -74,7 +71,7 @@ class BoardView extends React.Component<any> {
     }
 
     componentDidUpdate() {
-        const {data, LayoutActions} = this.props;
+        const {data, LayoutAction} = this.props;
         if (this.refs.frame && data.element.component.id !== -1) {
             try {
                 const renderService:RenderService = RenderService.getInstance(RenderService)
@@ -117,14 +114,13 @@ class BoardView extends React.Component<any> {
                 this.getFontStyles().forEach(style=> 
                     frame.contentWindow.document.head.appendChild(style))
                 frame.contentWindow.document.close();
-                
-                if (data.layout.rendering === false) {
-                    LayoutActions.rendering(true);
+                if (data.layout.rendering === false && !data.pender.pending['layout/RENDERING']) {
+                    LayoutAction.rendering(true);
                 }
             } catch(e) {
                 console.error(e);
-                if (data.layout.rendering === true) {
-                    LayoutActions.rendering(false);
+                if (data.layout.rendering === true && !data.pender.pending['layout/RENDERING']) {
+                    LayoutAction.rendering(false);
                 }
             }
         } else {
@@ -138,14 +134,14 @@ class BoardView extends React.Component<any> {
     }
 
     render() {
-        const {data, ElementActions} = this.props;
+        const {data, ElementAction} = this.props;
         return <div style={styles.layout}>
             <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"
                     style={Object.assign({},styles.tab, data.element.component.id === component.id && styles.tabActive) } key={component.id}
                     onMouseEnter={()=>this.setState({hover: component.id})}
                     onMouseLeave={()=>this.setState({hover:undefined})}
-                    onClick={()=>ElementActions.choiceComponent(component)}>
+                    onClick={()=>ElementAction.choiceComponent(component)}>
                     <DiReact style={styles.tabIcon} />
                     {component.name}
                     {
@@ -156,7 +152,7 @@ class BoardView extends React.Component<any> {
                         :<IoMdClose className="board-tab-close" style={Object.assign({}, styles.tabCloseIcon, this.state.hover === component.id && {visibility: 'visible'})} 
                         onClick={(e)=> {
                             e.stopPropagation();
-                            ElementActions.deleteHistory(component.id)
+                            ElementAction.deleteHistory(component.id)
                         }}/>
                     }
                 </div>)}
@@ -254,17 +250,4 @@ const styles:any = {
     }
 }
 
-export default connectRouter(
-    (state)=>({
-        data: {
-            element: state.element,
-            layout: state.layout,
-            resource: state.resource
-        }
-    }),
-    (dispatch)=>({
-        ElementActions: bindActionCreators(elementActions, dispatch),
-        LayoutActions: bindActionCreators(layoutActions, dispatch)
-    }),
-    BoardView
-)
+export default connection(BoardView);

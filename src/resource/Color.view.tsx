@@ -1,11 +1,9 @@
 import React from 'react';
-import { connectRouter } from '../redux/connection';
 import { SketchPicker } from 'react-color';
 import { Theme } from '../utils/Theme';
-import { bindActionCreators } from 'redux';
-import * as resourceActions from './Resource.actions';
+import { Props, connection } from '../redux/Reducers';
 
-class ColorView extends React.Component<any> {
+class ColorView extends React.Component<Props> {
 
     state = {
         hover: undefined,
@@ -15,7 +13,7 @@ class ColorView extends React.Component<any> {
     }
 
     render() {
-        const { data, ResourceActions } = this.props;
+        const { data, ResourceAction } = this.props;
         return <div style={styles.layout}>
             <div id="color-item-wrap" style={styles.colors}>
                 {data.resource.color.map(color=> <div className="color-item" key={color.name}
@@ -38,14 +36,14 @@ class ColorView extends React.Component<any> {
                         onMouseEnter={()=>this.setState({hover:'update'})}
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=>{
-                            ResourceActions.updateColor({name:this.state.name, value: this.state.color});
+                            ResourceAction.updateColor(this.state.name, this.state.color);
                         }}>Update</button>, 
                     <button id="color-delete" key={1}
                         style={Object.assign({},styles.btn, this.state.hover === 'delete' && {backgroundColor:Theme.bgBodyHoverColor})} 
                         onMouseEnter={()=>this.setState({hover:'delete'})}
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
-                            ResourceActions.deleteColor(this.state.name);
+                            ResourceAction.deleteColor(this.state.name);
                             this.setState({name: undefined});
                         }}>Delete</button>,
                     <button id="color-cancel" key={2}
@@ -64,7 +62,7 @@ class ColorView extends React.Component<any> {
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
                             if (this.state.newName !== '') {
-                                ResourceActions.createColor({name: this.state.newName, value: this.state.color});
+                                ResourceAction.createColor(this.state.newName, this.state.color);
                                 this.setState({newName: ''});
                             }
                         }}>Create</button>
@@ -117,14 +115,4 @@ const styles = {
     }
 }
 
-export default connectRouter(
-    (state)=> ({
-        data: {
-            resource: state.resource
-        }
-    }),
-    (dispatch)=> ({
-        ResourceActions: bindActionCreators(resourceActions, dispatch)
-    }),
-    ColorView
-)
+export default connection(ColorView);

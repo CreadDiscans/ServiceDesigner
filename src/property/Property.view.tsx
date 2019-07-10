@@ -1,14 +1,11 @@
 import React from 'react';
-import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
-import { bindActionCreators } from 'redux';
-import * as propertyActions from './Property.action';
-import * as layoutActions from '../layout/Layout.actions';
 import { ContextMenuType } from '../utils/constant';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
+import { Props, connection } from '../redux/Reducers';
 
-class PropertyView extends React.Component<any> {
+class PropertyView extends React.Component<Props> {
 
     state = {
         hover:undefined
@@ -17,17 +14,17 @@ class PropertyView extends React.Component<any> {
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutActions } = this.props;
-        LayoutActions.showContextMenu({
-            x: e.clientX,
-            y: e.clientY,
-            type: ContextMenuType.Property,
-            target: item
-        })
+        const { LayoutAction } = this.props;
+        LayoutAction.showContextMenu(
+            e.clientX,
+            e.clientY,
+            ContextMenuType.Property,
+            item
+        )
     }
 
     render() {
-        const { data, PropertyActions } = this.props;
+        const { data, PropertyAction } = this.props;
         return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
             <div ref={'layout'}>
@@ -44,7 +41,7 @@ class PropertyView extends React.Component<any> {
                                     onMouseLeave={()=> this.setState({hover: undefined})}
                                     onContextMenu={(e)=>this.clickItemRight(e, prop)}
                                     onClick={()=> {
-                                        PropertyActions.selectProperty(prop)
+                                        PropertyAction.selectProperty(prop)
                                     }}>
                                     <span style={styles.itemName}>{prop.name}</span> 
                                     <span style={styles.itemType}>{prop.type}</span>
@@ -87,15 +84,4 @@ const styles:any = {
     }
 }
 
-export default connectRouter(
-    (state)=> ({
-        data: {
-            property: state.property
-        }
-    }),
-    (dispatch)=> ({
-        PropertyActions: bindActionCreators(propertyActions, dispatch),
-        LayoutActions: bindActionCreators(layoutActions, dispatch)
-    }),
-    PropertyView
-)
+export default connection(PropertyView);

@@ -41,7 +41,7 @@ describe('Elements', function() {
         createComponent('new')
         createElement('div')
         cy.get('.scrollarea-content').eq(1).find('div').eq(0).trigger('contextmenu')
-        cy.get('div[id="contextMenu"]>div').eq(3).click()
+        cy.get('div[id="contextMenu"]>div').eq(5).click()
         cy.get('.scrollarea-content').eq(1).should('have.not.text', 'div')
     })
 
