@@ -3,7 +3,7 @@ import { combineEpics } from 'redux-observable';
 
 import component, { ComponentState, ComponentAction, componentActions } from '../component/Component.action';
 import element, { ElementState, ElementAction, elementActions } from '../element/Element.action';
-import layout, { layoutEpic, LayoutState, LayoutAction, layoutActions } from '../layout/Layout.actions';
+import layout, { LayoutState, LayoutAction, layoutActions } from '../layout/Layout.actions';
 import property, { PropertyState, PropertyAction, propertyActions } from '../property/Property.action';
 import resource, { ResourceState, ResourceAction, resourceActions } from '../resource/Resource.actions';
 import { Location, History } from 'history';
@@ -11,8 +11,6 @@ import { match, withRouter } from 'react-router';
 import { penderReducer } from 'redux-pender';
 import React from 'react';
 import { connect } from 'react-redux';
-
-export const rootEpic = combineEpics(layoutEpic);
 
 export const rootReducer = combineReducers({
     component,

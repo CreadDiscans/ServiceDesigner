@@ -86,7 +86,6 @@
     "react-scrollbar": "^0.5.6",
     "reactstrap": "^7.1.0",
     "redux-actions": "^2.6.5",
-    "redux-observable": "^1.1.0",
     "redux-pender": "^2.0.12",
     "resolve": "1.10.0",
     "rxjs": "^6.4.0",
