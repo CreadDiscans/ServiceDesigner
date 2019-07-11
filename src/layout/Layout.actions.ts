@@ -53,7 +53,6 @@ export const LayoutAction = {
     hideContextMenu: () => Promise.resolve(),
     setFrameType: (frameType: FrameType) => Promise.resolve({frameType}),
     message: (background:string, color:string, text: string) => Promise.resolve({background, color, text}),
-    messageRelease: ()=> Promise.resolve(),
     rendering: (val:boolean) => Promise.resolve(val)
 }
 
@@ -62,10 +61,16 @@ export const layoutActions = {
     hideContextMenu: createAction(HIDE_CONTEXT_MENU, LayoutAction.hideContextMenu),
     setFrameType: createAction(SET_FRAME_TYPE, LayoutAction.setFrameType),
     message: createAction(MESSAGE, LayoutAction.message),
-    messageRelease: createAction(MESSAGE_RELEASE, LayoutAction.messageRelease),
     rendering: createAction(RENDERING, LayoutAction.rendering),
 }
 
+export const messageEpic = action$ => action$.pipe(
+    filter((action:any) => action.type === MESSAGE),
+    delay(3000),
+    mapTo({type: MESSAGE_RELEASE})
+)
+
+export const layoutEpic = combineEpics(messageEpic);
 export default handleActions({
     ...pender({
         type: SHOW_CONTEXT_MENU,
@@ -108,6 +113,9 @@ export default handleActions({
     }),
     ...pender({
         type: RENDERING,
-        onSuccess: (state:LayoutState, {payload}) => ({...state, rendering: payload})
+        onSuccess: (state:LayoutState, {payload}) => {
+            console.log('action', payload)
+            return {...state, rendering: payload}
+        }
     })
 }, initState)

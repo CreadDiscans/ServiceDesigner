@@ -37,14 +37,14 @@ class App extends React.Component<Props> {
                         Theme.success,
                         Theme.successFont,
                         'Loaded Successfully'
-                    ).then(()=> setTimeout(()=> LayoutAction.messageRelease(), 3000))
+                    )
                 } catch(e) {
                     console.log(e)
                     LayoutAction.message(
                         Theme.danger,
                         Theme.dangerFont,
                         'Load Failed'
-                    ).then(()=> setTimeout(()=> LayoutAction.messageRelease(), 3000))
+                    )
                 }
             },  // load File : input data
             async () => {
@@ -75,7 +75,7 @@ class App extends React.Component<Props> {
                         Theme.success,
                         Theme.successFont,
                         'Save Successfully'
-                    ).then(()=> setTimeout(()=> LayoutAction.messageRelease(), 3000))
+                    )
                     return Promise.resolve({
                         json:JSON.stringify(json),
                         js: renderService.toJs(),
@@ -87,7 +87,7 @@ class App extends React.Component<Props> {
                         Theme.danger,
                         Theme.dangerFont,
                         'Save Failed'
-                    ).then(()=> setTimeout(()=> LayoutAction.messageRelease(), 3000))
+                    )
                     return Promise.resolve(undefined)
                 }
             }                        // save File : return {json, js, css}
