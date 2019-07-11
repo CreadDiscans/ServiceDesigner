@@ -2,13 +2,18 @@ import React from 'react';
 import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io';
 import { FaRegFolder, FaRegFile, FaRegClone, FaRegCircle } from 'react-icons/fa';
 import { DiReact } from 'react-icons/di';
+import { connectRouter } from '../redux/connection';
+import { bindActionCreators } from 'redux';
+import * as componentActions from './Component.action';
+import * as elementActions from '../element/Element.action';
+import * as layoutActions from '../layout/Layout.actions';
+import * as propertyActions from '../property/Property.action';
 import ScrollArea from 'react-scrollbar';
 import Resizeable from 're-resizable';
 import { Theme } from '../utils/Theme';
 import { ContextMenuType, FileType } from '../utils/constant';
-import { connection, Props } from '../redux/Reducers';
 
-class ComponentView extends React.Component<Props> {
+class ComponentView extends React.Component<any> {
 
     state:any =  {
         hover:0,
@@ -31,63 +36,63 @@ class ComponentView extends React.Component<Props> {
         if (item.type === FileType.FOLDER) {
             item.collapse = !item.collapse;
         }
-        const { ComponentAction, ElementAction, PropertyAction } = this.props;
-        ComponentAction.selectFile(item);
-        ElementAction.choiceComponent(item);
-        PropertyAction.reset();
+        const { ComponentActions, ElementActions, PropertyActions } = this.props;
+        ComponentActions.selectFile(item);
+        ElementActions.choiceComponent(item);
+        PropertyActions.reset();
     }
 
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutAction, ComponentAction } = this.props;
-        ComponentAction.selectFile(item);
-        LayoutAction.showContextMenu(
-            e.clientX,
-            e.clientY,
-            ContextMenuType.Component,
-            item
-        )
+        const { LayoutActions, ComponentActions } = this.props;
+        ComponentActions.selectFile(item);
+        LayoutActions.showContextMenu({
+            x:e.clientX,
+            y:e.clientY,
+            type: ContextMenuType.Component,
+            target:item
+        })
     }
 
     create(type:FileType) {
-        const { data, ComponentAction } = this.props;
+        const { data, ComponentActions } = this.props;
         let focus;
         if (data.component.select === undefined) {
             focus = 'root'
         } else {
             focus = 'input_'+data.component.select.id
         }
-        ComponentAction.readyToCreate(true, type, focus);
+        ComponentActions.readyToCreate({create: true, type: type, focus:focus});
     }
 
     createComplete() {
-        const { data, ComponentAction } = this.props;
+        const { data, ComponentActions } = this.props;
         if (data.component.name !== '') {
             if (data.component.rename === 0) {
-                ComponentAction.createFile(
-                    data.component.name,
-                    data.component.type
-                )
+                ComponentActions.createFile({
+                    name: data.component.name,
+                    type: data.component.type
+                })
             } else {
                 data.component.select.name = data.component.name
             }
         }
-        ComponentAction.reset();
+        ComponentActions.reset();
     }
 
     unselect() {
-        const { ComponentAction } = this.props;
-        ComponentAction.selectFile(undefined);
+        const { ComponentActions } = this.props;
+        ComponentActions.selectFile(undefined);
     }
 
     collapseAll() {
-        const { ComponentAction } = this.props;
-        ComponentAction.collapseFile();
+        const { ComponentActions } = this.props;
+        ComponentActions.collapseFile();
     }
 
     recursive(item:any, dep:number) {
-        const { data, ComponentAction } = this.props;
+        const { data, ComponentActions } = this.props;
         let marginLeft = 15+dep*5;
         if (data.component.select && data.component.select.type === FileType.FILE) {
             marginLeft -= 5;
@@ -109,7 +114,7 @@ class ComponentView extends React.Component<Props> {
                 onContextMenu={(e)=>this.clickItemRight(e, item)}
                 onDragStart={()=> this.setState({drag: item})}
                 onDragEnd={()=> {
-                    ComponentAction.dragAndDropComponent(this.state.drag, this.state.drop)
+                    ComponentActions.dragAndDropComponent({from: this.state.drag, to: this.state.drop})
                     this.setState({drag: undefined, drop:undefined})
                 }}
                 onDragOver={(e)=> {
@@ -129,7 +134,7 @@ class ComponentView extends React.Component<Props> {
                 {data.component.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                 <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
                     value={data.component.name} 
-                    onChange={(e)=>ComponentAction.updateName(e.target.value)}
+                    onChange={(e)=>ComponentActions.updateName(e.target.value)}
                     onBlur={()=>this.createComplete()} ref={'input_'+item.id}
                     onKeyPress={(e)=>{
                         if (e.key === 'Enter') {
@@ -143,13 +148,13 @@ class ComponentView extends React.Component<Props> {
     }
 
     componentDidUpdate() {
-        const { data, ComponentAction } = this.props;
+        const { data, ComponentActions } = this.props;
         if (data.component.focus !== undefined) {
             const focus:any = data.component.focus;
             const input:any = this.refs[focus];
             if (input) {
                 input.focus();
-                // ComponentAction.resetFocus();
+                ComponentActions.resetFocus();
             }
         }
     }
@@ -174,7 +179,7 @@ class ComponentView extends React.Component<Props> {
     }
 
     render() {
-        const { data, ComponentAction } = this.props;
+        const { data, ComponentActions } = this.props;
         return <div>
             {this.renderTitle()}
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout"
@@ -192,7 +197,7 @@ class ComponentView extends React.Component<Props> {
                             {data.component.type === FileType.FILE && <DiReact style={{...styles.arrow,...{color:'#61dafb'}}} />}
                             <input id="file-create-input" style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
                                 value={data.component.name} 
-                                onChange={(e)=>ComponentAction.updateName(e.target.value)}
+                                onChange={(e)=>ComponentActions.updateName(e.target.value)}
                                 onBlur={()=>this.createComplete()} ref={'root'}
                                 onKeyPress={(e)=>{
                                     if (e.key === 'Enter') {
@@ -256,4 +261,18 @@ const styles:any = {
     }
 }
 
-export default connection(ComponentView)
+export default connectRouter(
+    (state:any)=> ({
+        data: {
+            component: state.component,
+            layout: state.layout
+        }
+    }),
+    (dispatch:any) => ({
+        ComponentActions: bindActionCreators(componentActions, dispatch),
+        ElementActions: bindActionCreators(elementActions, dispatch),
+        LayoutActions: bindActionCreators(layoutActions, dispatch),
+        PropertyActions: bindActionCreators(propertyActions, dispatch)
+    }),
+    ComponentView
+)

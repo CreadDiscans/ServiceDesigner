@@ -1,4 +1,7 @@
 import React from 'react';
+import { connectRouter } from '../redux/connection';
+import { bindActionCreators } from 'redux';
+import * as propertyActions from './Property.action';
 import { Theme } from '../utils/Theme';
 import ScrollArea from 'react-scrollbar';
 import { PropertyType, ElementType } from '../utils/constant';
@@ -10,10 +13,8 @@ import 'brace/theme/tomorrow_night';
 import htmlJson from '../asset/html.json';
 import reactstrapJson from '../asset/reactstrap.json';
 import reactNativeJson from '../asset/react-native.json';
-import { Props, connection } from '../redux/Reducers';
-import _ from 'lodash';
 
-class PropertyDetailView extends React.Component<Props> {
+class PropertyDetailView extends React.Component<any> {
 
     state = {
         idx: 0,
@@ -24,7 +25,7 @@ class PropertyDetailView extends React.Component<Props> {
 
     componentWillUpdate() {
         const { data } = this.props;
-        if (this.state.idx !== 0 && !Array.isArray(data.property.select.value)) {
+        if (this.state.idx !== 0 && data.property.select.value.length <= this.state.idx ) {
             this.setState({idx:0})
             return false;
         }
@@ -42,28 +43,24 @@ class PropertyDetailView extends React.Component<Props> {
     }
 
     renderValueObject() {
-        const { data, PropertyAction } = this.props;
+        const { data, PropertyActions } = this.props;
         return <div id="property-value-object" style={{marginTop:10}}>
             { data.property.select.type === PropertyType.Object && <div>
-                {Array.isArray(data.property.select.value) && data.property.select.value.map((obj, i)=> <div className="property-detail-badge" key={i}
+                {data.property.select.value.map((obj, i)=> <div className="property-detail-badge" key={i}
                     style={Object.assign({}, styles.badge, this.state.idx === i && styles.badgeActive)}
                     onClick={()=> this.setState({idx:i})}>{i}</div>)}
                 <div id="property-detail-add-condition" 
                     style={{...styles.badge,...{padding:0}}} 
                     onClick={()=> {
-                        PropertyAction.addCondition().then(()=> {
-                            if (Array.isArray(data.property.select.value))
-                                this.setState({idx: data.property.select.value.length-1})
-                        })
+                        PropertyActions.addCondition()
+                        this.setState({idx: this.state.idx + 1})
                     }}><span style={styles.badgeText}>+</span></div>
                 <div style={{width:'calc(100% - 20px)', display:'inline-block'}}>
                     <input id="property-detail-condition" style={styles.itemInput} placeholder={'Condition'} disabled={this.state.idx === 0} 
-                        value={Array.isArray(data.property.select.value) 
-                            && this.state.idx < data.property.select.value.length 
-                            && data.property.select.value[this.state.idx].condition}
+                        value={data.property.select.value[this.state.idx].condition}
                         onChange={(e)=> {
                             data.property.select.value[this.state.idx].condition = e.target.value;
-                            PropertyAction.updateValue(data.property.select.value);
+                            PropertyActions.updateValue(data.property.select.value);
                         }}/>
                 </div>
                 <IoMdTrash style={Object.assign({}, {fontSize:18, verticalAlign:'top', cursor:'pointer'}, this.state.hover === 'trash' && {color: Theme.fontActiveColor})} 
@@ -71,25 +68,18 @@ class PropertyDetailView extends React.Component<Props> {
                     onMouseLeave={()=> this.setState({hover:undefined})}
                     onClick={()=> { 
                         if (this.state.idx > 0) {
-                            PropertyAction.deleteCondition(this.state.idx).then(()=> {
-                                if (Array.isArray(data.property.select.value)) {
-                                    if (this.state.idx === data.property.select.value.length -1) {
-                                        this.setState({idx: this.state.idx-1})
-                                    }
-                                }
-                            })
+                            PropertyActions.deleteCondition(this.state.idx)
+                            this.setState({idx: this.state.idx-1})
                         }
                     }}/>
                 <AceEditor
                     style={{width:'100%', height: 300}}
                     theme="tomorrow_night" 
                     mode={data.property.select.name === 'style' ? 'css' : 'json'} 
-                    value={(Array.isArray(data.property.select.value) 
-                        && this.state.idx < data.property.select.value.length) ?
-                        data.property.select.value[this.state.idx].value : ''}
+                    value={data.property.select.value[this.state.idx].value}
                     onChange={(value)=> {
                         data.property.select.value[this.state.idx].value = value;
-                        PropertyAction.updateValue(data.property.select.value);
+                        PropertyActions.updateValue(data.property.select.value);
                     }}
                     showPrintMargin={true}
                     showGutter={false}
@@ -117,22 +107,20 @@ class PropertyDetailView extends React.Component<Props> {
                 { (data.property.select.type === PropertyType.String || 
                     data.property.select.type === PropertyType.Number || 
                     data.property.select.type === PropertyType.Variable) &&
-                    (typeof data.property.select.value === 'string' || typeof data.property.select.value === 'number' ) &&
                     <input id="property-value-input" style={styles.itemInput} 
                         type={data.property.select.type === PropertyType.Number ? 'number' : 'text'} 
                         value={data.property.select.value} 
                         onChange={(e)=> {
-                            const { PropertyAction } = this.props;
-                            PropertyAction.updateValue(e.target.value);
+                            const { PropertyActions } = this.props;
+                            PropertyActions.updateValue(e.target.value);
                         }}/>
                 }
                 { data.property.select.type === PropertyType.Boolean && 
-                    typeof data.property.select.value === 'boolean' &&
                     <input id="property-value-input" style={{verticalAlign:'bottom'}} type="checkbox" 
                         checked={data.property.select.value}
                         onChange={()=>{
-                            const { PropertyAction } = this.props;
-                            PropertyAction.updateValue(!data.property.select.value);
+                            const { PropertyActions } = this.props;
+                            PropertyActions.updateValue(!data.property.select.value);
                         }}/>}
             </div>
             {this.renderValueObject()}
@@ -140,7 +128,7 @@ class PropertyDetailView extends React.Component<Props> {
     }
 
     renderDetail() {
-        const { data, PropertyAction } = this.props;
+        const { data, PropertyActions } = this.props;
         return <div>
             <div style={styles.item}>
                 <div style={styles.itemName}>
@@ -153,7 +141,7 @@ class PropertyDetailView extends React.Component<Props> {
                         onFocus={()=>this.setState({nameFocus:true})}
                         onBlur={()=>this.setState({nameFocus:false})}
                         onChange={(e)=> {
-                            PropertyAction.updateKey(e.target.value)
+                            PropertyActions.updateKey(e.target.value)
                         }}
                         />
                 </div>
@@ -166,8 +154,8 @@ class PropertyDetailView extends React.Component<Props> {
                     <select id="property-type-select" style={styles.itemInput} 
                         value={data.property.select.type}
                         onChange={(e)=> {
-                            const { PropertyAction } = this.props;
-                            PropertyAction.updateType(_.last(Object.values(PropertyType).filter(val=> val === e.target.value)))
+                            const { PropertyActions } = this.props;
+                            PropertyActions.updateType(e.target.value)
                             }}>
                         {Object.keys(PropertyType).map(key=> <option key={key} value={PropertyType[key]}>{key}</option>)}
                     </select>
@@ -179,8 +167,8 @@ class PropertyDetailView extends React.Component<Props> {
                     onMouseEnter={()=>this.setState({hover:'btn'})}
                     onMouseLeave={()=>this.setState({hover:undefined})}
                     onClick={()=> {
-                    const {PropertyAction} = this.props;
-                    PropertyAction.createProperty();
+                    const {PropertyActions} = this.props;
+                    PropertyActions.createProperty();
                     this.setState({idx:0})
                 }}>Save</button>
             </div>}
@@ -291,4 +279,14 @@ const styles:any = {
     }
 }
 
-export default connection(PropertyDetailView);
+export default connectRouter(
+    (state)=> ({
+        data: {
+            property: state.property
+        }
+    }),
+    (dispatch)=> ({
+        PropertyActions: bindActionCreators(propertyActions, dispatch)
+    }),
+    PropertyDetailView
+)

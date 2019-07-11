@@ -1,9 +1,11 @@
 import React from 'react';
+import { connectRouter } from '../redux/connection';
+import { bindActionCreators } from 'redux';
+import * as resourceActions from './Resource.actions';
 import { Theme } from '../utils/Theme';
 import AceEditor from 'react-ace';
-import { Props, connection } from '../redux/Reducers';
 
-class StyleView extends React.Component<Props> {
+class StyleView extends React.Component<any> {
 
     state = {
         hover:undefined,
@@ -13,7 +15,7 @@ class StyleView extends React.Component<Props> {
     }
 
     render() {
-        const { data, ResourceAction } = this.props;
+        const { data, ResourceActions } = this.props;
         return <div>
             <div id="style-item-wrap" style={styles.styles}>
                 {data.resource.style.map(style=> <div className="style-item" key={style.name}
@@ -35,10 +37,10 @@ class StyleView extends React.Component<Props> {
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
                             if (this.state.name !== '') {
-                                ResourceAction.createStyle(
-                                    this.state.name,
-                                    this.state.value
-                                )
+                                ResourceActions.createStyle({
+                                    name: this.state.name,
+                                    value: this.state.value
+                                })
                                 this.setState({
                                     name: '',
                                     value: '',
@@ -52,17 +54,17 @@ class StyleView extends React.Component<Props> {
                             onMouseEnter={()=>this.setState({hover:'update'})}
                             onMouseLeave={()=>this.setState({hover:undefined})}
                             onClick={()=> 
-                                ResourceAction.updateStyle(
-                                    this.state.name, 
-                                    this.state.value,
-                                )
+                                ResourceActions.updateStyle({
+                                    name: this.state.name, 
+                                    value: this.state.value,
+                                })
                             }>Update</button>,
                         <button id="style-button-delete" 
                             style={Object.assign({}, styles.btn, this.state.hover === 'delete' && styles.btnHover)} key={1}
                             onMouseEnter={()=>this.setState({hover:'delete'})}
                             onMouseLeave={()=>this.setState({hover:undefined})}
                             onClick={()=> {
-                                ResourceAction.deleteStyle(this.state.name);
+                                ResourceActions.deleteStyle(this.state.name);
                                 this.setState({
                                     name: '',
                                     value: '',
@@ -156,4 +158,14 @@ const styles = {
     }
 }
 
-export default connection(StyleView);
+export default connectRouter(
+    (state)=> ({
+        data: {
+            resource: state.resource
+        }
+    }),
+    (dispatch)=> ({
+        ResourceActions: bindActionCreators(resourceActions, dispatch)
+    }),
+    StyleView
+)

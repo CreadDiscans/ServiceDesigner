@@ -1,12 +1,15 @@
 import React from 'react';
+import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
 import PropertiesView from '../property/Property.view';
 import PropertyDetailView from '../property/PropertyDetail.view';
 import { ContextMenuType } from '../utils/constant';
-import { connection, Props } from '../redux/Reducers';
+import { bindActionCreators } from 'redux';
+import * as layoutActions from '../layout/Layout.actions';
+import * as propertyActions from '../property/Property.action';
 
-class EditorView extends React.Component<Props> {
+class EditorView extends React.Component<any> {
 
     state = {
         hover: ''
@@ -17,18 +20,18 @@ class EditorView extends React.Component<Props> {
             {
                 name: 'Add Property',
                 click: ()=> {
-                    const { PropertyAction, LayoutAction } = this.props;
-                    PropertyAction.readyToCreate();
-                    LayoutAction.hideContextMenu();
+                    const { PropertyActions, LayoutActions } = this.props;
+                    PropertyActions.readyToCreate();
+                    LayoutActions.hideContextMenu();
                 }
             },
             {
                 name: 'Delete Property',
                 click: ()=> {
-                    const { data, PropertyAction, LayoutAction } = this.props;
-                    if (data.layout.contextMenu.target && 'name' in data.layout.contextMenu.target) {
-                        PropertyAction.deleteProperty(data.layout.contextMenu.target.name);
-                        LayoutAction.hideContextMenu();
+                    const { data, PropertyActions, LayoutActions } = this.props;
+                    if (data.layout.contextMenu.target) {
+                        PropertyActions.deleteProperty(data.layout.contextMenu.target.name);
+                        LayoutActions.hideContextMenu();
                     }
                 }
             }
@@ -99,4 +102,15 @@ const styles:any = {
     }
 }
 
-export default connection(EditorView);
+export default connectRouter(
+    (state) => ({
+        data: {
+            layout: state.layout
+        }
+    }),
+    (dispatch) => ({
+        LayoutActions: bindActionCreators(layoutActions, dispatch),
+        PropertyActions: bindActionCreators(propertyActions, dispatch)
+    }),
+    EditorView
+)

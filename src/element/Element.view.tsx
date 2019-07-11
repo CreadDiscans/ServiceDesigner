@@ -2,16 +2,19 @@ import React from 'react';
 import { IoMdArrowDropright, IoMdArrowDropdown } from 'react-icons/io';
 import { DiReact, DiHtml5, DiBootstrap } from 'react-icons/di';
 import ScrollArea from 'react-scrollbar';
+import { connectRouter } from '../redux/connection';
+import { bindActionCreators } from 'redux';
+import * as elementActions from './Element.action';
+import * as layoutActions from '../layout/Layout.actions';
+import * as propertyActions from '../property/Property.action';
 import { Theme } from '../utils/Theme';
 import { ContextMenuType, ElementType } from '../utils/constant';
 import htmlJson from '../asset/html.json';
 import reactstrapJson from '../asset/reactstrap.json';
 import reactNativeJson from '../asset/react-native.json';
 import _ from 'lodash';
-import { connection, Props } from '../redux/Reducers';
-import { PropertyItem } from '../property/Property.action';
 
-class ElementView extends React.Component<Props> {
+class ElementView extends React.Component<any> {
 
     state:any =  {
         hover:'',
@@ -28,28 +31,28 @@ class ElementView extends React.Component<Props> {
     }
 
     clickItem(item) {
-        const { ElementAction, PropertyAction } = this.props;
-        ElementAction.selectElement(item);
-        PropertyAction.choiceElement(item);
+        const { ElementActions, PropertyActions } = this.props;
+        ElementActions.selectElement(item);
+        PropertyActions.choiceElement(item);
     }
 
     clickItemRight(e, item) {
         e.preventDefault();
         e.stopPropagation();
-        const { LayoutAction, ElementAction, PropertyAction } = this.props;
-        ElementAction.selectElement(item);
-        PropertyAction.choiceElement(item);
-        LayoutAction.showContextMenu(
-            e.clientX,
-            e.clientY,
-            ContextMenuType.Element,
-            item
-        )
+        const { LayoutActions, ElementActions, PropertyActions } = this.props;
+        ElementActions.selectElement(item);
+        PropertyActions.choiceElement(item);
+        LayoutActions.showContextMenu({
+            x:e.clientX,
+            y:e.clientY,
+            type: ContextMenuType.Element,
+            target:item
+        })
     }
 
     completeAdd() {
-        const { ElementAction } = this.props;
-        ElementAction.completeAdd()
+        const { ElementActions } = this.props;
+        ElementActions.completeAdd()
     }
 
     getLibIcon(type:ElementType) {
@@ -87,8 +90,8 @@ class ElementView extends React.Component<Props> {
     }
 
     renderElement(elem, dep:number=0) {
-        const { data, ElementAction } = this.props; 
-        const nameProp:PropertyItem = _.last(elem.prop.filter(prop=>prop.name === 'name'));
+        const { data, ElementActions } = this.props; 
+        const nameProp = _.last(elem.prop.filter(prop=>prop.name === 'name'));
         return <div key={elem.id}>
             <div className="element-item" style={Object.assign({
                     cursor:'move',
@@ -101,15 +104,15 @@ class ElementView extends React.Component<Props> {
                 })} 
                 onMouseEnter={()=> {
                     this.setState({hover:elem.id})
-                    ElementAction.hoverElement(elem);
+                    ElementActions.hoverElement(elem);
                 }}
                 onMouseLeave={()=> {
                     this.setState({hover:undefined})
-                    ElementAction.hoverElement(undefined);
+                    ElementActions.hoverElement(undefined);
                 }}
                 onDragStart={()=> this.setState({drag: elem})}
                 onDragEnd={()=> {
-                    ElementAction.dragAndDropElement(this.state.drag, this.state.drop, this.state.sibling)
+                    ElementActions.dragAndDropElement({from: this.state.drag, to: this.state.drop, sibling:this.state.sibling})
                     this.setState({drag: undefined, drop:undefined, sibling:false})
                 }}
                 onDragOver={(e)=> {
@@ -127,8 +130,8 @@ class ElementView extends React.Component<Props> {
                         this.setState({drop: elem, sibling:true})
                     }}></div>
                     {elem.children.length === 0 ? this.getLibIcon(elem.lib) : elem.collapse ? 
-                        <IoMdArrowDropdown onClick={()=> ElementAction.collapseElement(elem)} style={styles.arrow} /> : 
-                        <IoMdArrowDropright onClick={()=> ElementAction.collapseElement(elem)} style={styles.arrow} /> }
+                        <IoMdArrowDropdown onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> : 
+                        <IoMdArrowDropright onClick={()=> ElementActions.collapseElement(elem)} style={styles.arrow} /> }
                     {elem.tag}
                     {nameProp && nameProp.value !== '' && '[' + nameProp.value + ']'}
                     {this.renderInput(elem)}
@@ -138,14 +141,14 @@ class ElementView extends React.Component<Props> {
     }
 
     renderInput(item) {
-        const { data, ElementAction } = this.props;
+        const { data, ElementActions } = this.props;
         return <div style={{marginLeft:10}}>
             {data.element.insert.ing && (item ? (data.element.select && item.id === data.element.select.id) : data.element.select === undefined) && 
             [this.getLibIcon(data.element.insert.type),
             <input key={1} id="element-input"
             list={data.element.insert.type}
             style={{...styles.insertInput,...{width:'calc(100% - 18px)'}}} 
-            onChange={(e)=> ElementAction.updateName(e.target.value)} 
+            onChange={(e)=> ElementActions.updateName(e.target.value)} 
             onBlur={()=> this.completeAdd()}
             ref={'input'}
             onKeyPress={(e)=> {
@@ -158,7 +161,7 @@ class ElementView extends React.Component<Props> {
 
     renderDataList() {
         return <div>
-            <datalist id={ElementType.Html.valueOf()}>
+            <datalist id={ElementType.Html}>
                 {Object.keys(htmlJson).map(tag=> <option key={tag} value={tag}/>)}
             </datalist>
             <datalist id={ElementType.Reactstrap}>
@@ -236,4 +239,16 @@ const styles:any = {
     }
 }
 
-export default connection(ElementView);
+export default connectRouter(
+    (state) => ({
+        data: {
+            element: state.element
+        }
+    }),
+    (dispatch) => ({
+            ElementActions: bindActionCreators(elementActions, dispatch),
+            LayoutActions: bindActionCreators(layoutActions, dispatch),
+            PropertyActions: bindActionCreators(propertyActions, dispatch)
+    }),
+    ElementView
+)

@@ -1,11 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
-import { FrameType, ContextMenuType } from '../utils/constant';
+import { FrameType } from '../utils/constant';
 import { filter, delay, mapTo } from 'rxjs/operators';
 import { combineEpics } from 'redux-observable';
-import { ElementItem } from '../element/Element.action';
-import { ComponentItem } from '../component/Component.action';
-import { pender } from 'redux-pender/lib/utils';
-import { PropertyItem } from '../property/Property.action';
 
 const SHOW_CONTEXT_MENU = 'layout/SHOW_CONTEXT_MENU';
 const HIDE_CONTEXT_MENU = 'layout/HIDE_CONTEXT_MENU';
@@ -14,24 +10,19 @@ const MESSAGE = 'layout/MESSAGE';
 const MESSAGE_RELEASE = 'layout/MESSAGE_RELEASE';
 const RENDERING = 'layout/RENDERING';
 
-export type LayoutState = {
-    frameType: FrameType;
-    contextMenu: {
-        x:number;
-        y:number;
-        type:ContextMenuType;
-        target:ElementItem|ComponentItem|PropertyItem;
-        display:string;
-    },
-    message: {
-        background: string;
-        color: string;
-        text:string;
-    },
-    rendering: boolean;
-}
+export const showContextMenu = createAction(SHOW_CONTEXT_MENU); // x, y, type, target
+export const hideContextMenu = createAction(HIDE_CONTEXT_MENU);
+export const setFrameType = createAction(SET_FRAME_TYPE); // frame type
+export const message = createAction(MESSAGE);   // background, color, text
+export const rendering = createAction(RENDERING); // bool
 
-const initState:LayoutState = {
+export const messageEpic = action$ => action$.pipe(
+    filter((action:any) => action.type === MESSAGE),
+    delay(3000),
+    mapTo({type: MESSAGE_RELEASE})
+)
+
+const initialState = {
     frameType: FrameType.Browser,
     contextMenu: {
         x:0,
@@ -48,74 +39,31 @@ const initState:LayoutState = {
     rendering: false
 }
 
-export const LayoutAction = {
-    showContextMenu: (x:number, y:number, type: ContextMenuType, target:ElementItem|ComponentItem)=> Promise.resolve({x, y, type, target}),
-    hideContextMenu: () => Promise.resolve(),
-    setFrameType: (frameType: FrameType) => Promise.resolve({frameType}),
-    message: (background:string, color:string, text: string) => Promise.resolve({background, color, text}),
-    rendering: (val:boolean) => Promise.resolve(val)
-}
-
-export const layoutActions = {
-    showContextMenu: createAction(SHOW_CONTEXT_MENU, LayoutAction.showContextMenu),
-    hideContextMenu: createAction(HIDE_CONTEXT_MENU, LayoutAction.hideContextMenu),
-    setFrameType: createAction(SET_FRAME_TYPE, LayoutAction.setFrameType),
-    message: createAction(MESSAGE, LayoutAction.message),
-    rendering: createAction(RENDERING, LayoutAction.rendering),
-}
-
-export const messageEpic = action$ => action$.pipe(
-    filter((action:any) => action.type === MESSAGE),
-    delay(3000),
-    mapTo({type: MESSAGE_RELEASE})
-)
-
 export const layoutEpic = combineEpics(messageEpic);
 export default handleActions({
-    ...pender({
-        type: SHOW_CONTEXT_MENU,
-        onSuccess: (state:LayoutState, {payload}) =>{
-            return {
-                ...state,
-                contextMenu: {
-                    x: payload.x,
-                    y: payload.y,
-                    type: payload.type,
-                    target: payload.target,
-                    display:'block'
-                }
+    [SHOW_CONTEXT_MENU]: (state, {payload}:any) => {
+        return {
+            ...state,
+            contextMenu: {
+                x: payload.x,
+                y: payload.y,
+                type: payload.type,
+                target: payload.target,
+                display:'block'
             }
         }
-    }),
-    ...pender({
-        type: HIDE_CONTEXT_MENU,
-        onSuccess: (state:LayoutState, {payload}) => ({...state, contextMenu:{...state.contextMenu, display:'none'}}),
-    }),
-    ...pender({
-        type: SET_FRAME_TYPE,
-        onSuccess: (state:LayoutState, {payload}) => ({...state, frameType: payload}),
-    }),
-    ...pender({
-        type: MESSAGE,
-        onSuccess: (state:LayoutState, {payload}) => ({...state, message:{
-            background:payload.background,
-            color:payload.color,
-            text: payload.text
-        }}),
-    }),
-    ...pender({
-        type: MESSAGE_RELEASE,
-        onSuccess: (state:LayoutState, {payload}) => ({...state, message: {
-            background: undefined,
-            color: undefined,
-            text: ''
-        }}),
-    }),
-    ...pender({
-        type: RENDERING,
-        onSuccess: (state:LayoutState, {payload}) => {
-            console.log('action', payload)
-            return {...state, rendering: payload}
-        }
-    })
-}, initState)
+    },
+    [HIDE_CONTEXT_MENU]: (state, {payload}) => ({...state, contextMenu:{...state.contextMenu, display:'none'}}),
+    [SET_FRAME_TYPE]: (state, {payload}:any) => ({...state, frameType: payload}),
+    [MESSAGE]: (state, {payload}:any) => ({...state, message:{
+        background:payload.background,
+        color:payload.color,
+        text: payload.text
+    }}),
+    [MESSAGE_RELEASE]: (state, {payload})=> ({...state, message: {
+        background: undefined,
+        color: undefined,
+        text: ''
+    }}),
+    [RENDERING]: (state, {payload}:any) => ({...state, rendering: payload})
+}, initialState)

@@ -1,10 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import Utils from '../utils/utils';
-import { FileType, ElementType } from '../utils/constant';
-import { ComponentItem } from '../component/Component.action';
-import { PropertyItem } from '../property/Property.action';
-import { pender } from 'redux-pender';
-import _ from 'lodash';
+import { FileType } from '../utils/constant';
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
@@ -19,279 +15,198 @@ const COLLAPSE_ELEMENT = 'element/COLLAPSE_ELEMENT';
 const DRAG_AND_DROP_ELEMENT = 'element/DRAG_AND_DROP_ELEMENT';
 const CLEAR_ELEMENT = 'element/CLEAR_ELEMENT';
 
-export type ElementState = {
-  component: ComponentItem;
-  hover?: ElementItem;
-  select?: ElementItem;
-  insert: {
-    ing:boolean, 
-    name:string, 
-    type:ElementType
-  };
-  history: Array<ComponentItem>;
-}
+export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
+export const readyToAdd = createAction(READY_TO_ADD); // type
+export const updateName = createAction(UPDATE_NAME); // name
+export const updateState = createAction(UPDATE_STATE); // state
+export const completeAdd = createAction(COMPLETE_ADD); 
+export const deleteElement = createAction(DELETE_ELEMENT); // element 
+export const selectElement = createAction(SELECT_ELEMENT); // element
+export const deleteHistory = createAction(DELETE_HISTORY); // id of element
+export const hoverElement = createAction(HOVER_ELEMENT); // element
+export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
+export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to, sibling
+export const clearElement = createAction(CLEAR_ELEMENT);
 
-export type ElementItem = {
-  id:number;
-  tag:string;
-  lib?:ElementType;
-  prop:Array<PropertyItem>;
-  children:Array<ElementItem>;
-  collapse:boolean;
-  parent?:ElementItem;
-}
-
-
-const initState:ElementState = {
+const initialState = {
   component: {
     id: -1,
     element:{
       id:-1,
       tag:'',
-      lib:undefined,
+      lib:'',
       prop:[],
       children: [],
       collapse: true
     },
-    state: '{}',
-    type: FileType.ROOT,
-    collapse: false,
-    children: [],
-    name: ''
+    state: '{}'
   },
   hover: undefined,
   select:undefined,
   insert: {
     ing: false,
     name: '',
-    type: undefined
+    type: ''
   },
   history: [] 
 }
 
-export const ElementAction = {
-  choiceComponent:(comp:ComponentItem) => Promise.resolve(comp),
-  readyToAdd:(type:ElementType) => Promise.resolve(type),
-  updateName:(name:string) => Promise.resolve(name),
-  updateState:(state:string) => Promise.resolve(state),
-  completeAdd:() => Promise.resolve(),
-  deleteElement:(elem:ElementItem) => Promise.resolve(elem), 
-  selectElement:(elem:ElementItem) => Promise.resolve(elem),
-  deleteHistory:(id:number) => Promise.resolve(id),
-  hoverElement:(elem:ElementItem) => Promise.resolve(elem),
-  collapseElement:(elem:ElementItem) => Promise.resolve(elem),
-  dragAndDropElement:(from:ElementItem, to:ElementItem, sibling: boolean) => Promise.resolve({from, to, sibling}),
-  clearElement:() => Promise.resolve()
-}
-
-export const elementActions = {
-  choiceComponent: createAction(CHOICE_COMPONENT, ElementAction.choiceComponent),
-  readyToAdd: createAction(READY_TO_ADD, ElementAction.readyToAdd),
-  updateName: createAction(UPDATE_NAME, ElementAction.updateName),
-  updateState: createAction(UPDATE_STATE, ElementAction.updateState),
-  completeAdd: createAction(COMPLETE_ADD, ElementAction.completeAdd), 
-  deleteElement: createAction(DELETE_ELEMENT, ElementAction.deleteElement),
-  selectElement: createAction(SELECT_ELEMENT, ElementAction.selectElement),
-  deleteHistory: createAction(DELETE_HISTORY, ElementAction.deleteHistory),
-  hoverElement: createAction(HOVER_ELEMENT, ElementAction.hoverElement),
-  collapseElement: createAction(COLLAPSE_ELEMENT, ElementAction.collapseElement),
-  dragAndDropElement: createAction(DRAG_AND_DROP_ELEMENT, ElementAction.dragAndDropElement),
-  clearElement: createAction(CLEAR_ELEMENT, ElementAction.clearElement)
-}
-
-
 export default handleActions({
-  ...pender({
-    type:CHOICE_COMPONENT,
-    onSuccess:(state:ElementState, {payload}) => {
-      if (payload.type === FileType.FILE)  {
-        if (payload.element === undefined || payload.element.id === undefined) {
-          payload.element = {
-            id:0,
-            tag:'root',
-            children: []
-          }
-        }
-        if (state.history.filter(component=> component.id === payload.id).length === 0) {
-          state.history.push(payload)
-        }
-        return {...state, component:payload}
-      } else 
-        return {...state}
-    }
-  }),
-  ...pender({
-    type:READY_TO_ADD,
-    onSuccess:(state:ElementState, {payload}) => {
-      return {
-        ...state,
-        insert: {
-          ing:true,
-          type:payload,
-          name:''
+  [CHOICE_COMPONENT]: (state, {payload}:any) => {
+    if (payload.type === FileType.FILE)  {
+      if (payload.element.id === undefined) {
+        payload.element = {
+          id:0,
+          tag:'root',
+          children: []
         }
       }
-    }
-  }),
-  ...pender({
-    type:UPDATE_NAME,
-    onSuccess:(state:ElementState, {payload}) => ({...state, insert:{...state.insert, name:payload}}),
-  }),
-  ...pender({
-    type:UPDATE_STATE,
-    onSuccess:(state:ElementState, {payload}) => {
-      state.component.state = payload;
+      if (state.history.filter(component=> component.id === payload.id).length === 0) {
+        state.history.push(payload)
+      }
+      return {...state, component:payload}
+    } else 
       return {...state}
-    }
-  }),
-  ...pender({
-    type:COMPLETE_ADD,
-    onSuccess:(state:ElementState, {payload}) => {
-      if (state.insert.name !== '' ) {
-        let maxId = 0;
-        Utils.loop(state.component.element, (target)=> {
-          if (maxId < target.id) {
-            maxId = target.id
-          }
-        })
-        const newElem:ElementItem = {
-          id: maxId + 1,
-          tag: state.insert.name,
-          lib: state.insert.type,
-          prop: [],
-          children: [],
-          collapse: true
-        }
-        if (state.select) {
-          newElem['parent'] = state.select;
-          state.select.children.push(newElem);
-        } else {
-          newElem['parent'] = state.component.element;
-          state.component.element.children.push(newElem);
-        }
-      }
-      return {
-        ...state,
-        insert:{
-          ing:false,
-          type:undefined,
-          name:''
-        }
-      }
-    }
-  }),
-  ...pender({
-    type:DELETE_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => {
-      let idx;
-      payload.parent.children.forEach((item,i)=> {
-        if (item.id === payload.id) {
-          idx = i;
-        }
-      });
-      payload.parent.children.splice(idx, 1);
-      return {
-        ...state
-      }
-    }
-  }),
-  ...pender({
-    type:SELECT_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => ({...state, select:payload}),
-  }),
-  ...pender({
-    type:DELETE_HISTORY,
-    onSuccess:(state:ElementState, {payload}) => {
-      let idx = undefined;
-      state.history.forEach((component, i)=> {
-        if (component.id === payload) idx = i;
-      })
-      if (idx !== undefined) {
-        state.history.splice(idx, 1)
-        if (state.component.id === payload) {
-          if (state.history.length === 0) {
-            state.component = _.clone(initState.component)
-          } else {
-            state.component = state.history[state.history.length-1]
-          }
-        }
-      }
-      return {...state}
-    }
-  }),
-  ...pender({
-    type:HOVER_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => ({...state, hover: payload}),
-  }),
-  ...pender({
-    type:COLLAPSE_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => {
-      payload.collapse = !payload.collapse
-      return {...state}
-    }
-  }),
-  ...pender({
-    type:DRAG_AND_DROP_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => {
-      if (payload.to === undefined) {
-        payload.to = state.component.element
-      }
-      let valid = true;
-      Utils.loop(payload.from, (item)=> {
-        if (item.id === payload.to.id) {
-          valid = false
-        }
-      })
-      if (!valid) {
-        return {...state}
-      }
-      payload.from.parent.children.splice(
-        payload.from.parent.children
-          .map((elem, i)=>({id:elem.id, idx:i}))
-          .filter(obj=> obj.id === payload.from.id)
-          .map(obj=> obj.idx)[0], 1
-      )
-      if (payload.sibling) {
-        payload.to.parent.children.splice(
-          payload.to.parent.children
-            .map((elem, i)=>({id:elem.id, idx:i}))
-            .filter(obj=> obj.id === payload.to.id)
-            .map(obj=> obj.idx)[0], 0, payload.from)
-        payload.from.parent = payload.to.parent;
-      } else {
-        payload.to.children.push(payload.from)
-        payload.from.parent = payload.to;
-      }
-      return {...state}
-    }
-  }),
-  ...pender({
-    type:CLEAR_ELEMENT,
-    onSuccess:(state:ElementState, {payload}) => ({
-      component: {
-        id: -1,
-        element:{
-          id:-1,
-          tag:'',
-          lib:undefined,
-          prop:[],
-          children: [],
-          collapse: true
-        },
-        state: '{}',
-        type: FileType.ROOT,
-        collapse: false,
-        children: [],
-        name: ''
-      },
-      hover: undefined,
-      select:undefined,
+  },
+  [READY_TO_ADD]: (state, {payload}:any)=> {
+    return {
+      ...state,
       insert: {
-        ing: false,
-        name: '',
-        type: undefined
-      },
-      history: [] 
+        ing:true,
+        type:payload,
+        name:''
+      }
+    }
+  },
+  [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
+  [UPDATE_STATE]: (state, {payload}:any)=> {
+    state.component.state = payload;
+    return {...state}
+  },
+  [COMPLETE_ADD]: (state, {payload}:any)=>{
+    if (state.insert.name !== '' ) {
+      let maxId = 0;
+      loop(state.component.element, (target)=> {
+        if (maxId < target.id) {
+          maxId = target.id
+        }
+      })
+      const newElem = {
+        id: maxId + 1,
+        tag: state.insert.name,
+        lib: state.insert.type,
+        prop: [],
+        children: [],
+        collapse: true
+      }
+      if (state.select) {
+        newElem['parent'] = state.select;
+        state.select.children.push(newElem);
+      } else {
+        newElem['parent'] = state.component.element;
+        state.component.element.children.push(newElem);
+      }
+    }
+    return {
+      ...state,
+      insert:{
+        ing:false,
+        type:undefined,
+        name:''
+      }
+    }
+  },
+  [DELETE_ELEMENT]: (state, {payload}:any)=> {
+    let idx;
+    payload.parent.children.forEach((item,i)=> {
+      if (item.id === payload.id) {
+        idx = i;
+      }
+    });
+    payload.parent.children.splice(idx, 1);
+    return {
+      ...state
+    }
+  },
+  [SELECT_ELEMENT]: (state, {payload}:any)=>({...state, select:payload}),
+  [DELETE_HISTORY]: (state, {payload}:any)=> {
+    let idx = undefined;
+    state.history.forEach((component, i)=> {
+      if (component.id === payload) idx = i;
     })
-  }),
-}, initState)
+    if (idx !== undefined) {
+      state.history.splice(idx, 1)
+      if (state.component.id === payload) {
+        if (state.history.length === 0) {
+          state.component = Utils.deepcopy(initialState.component)
+        } else {
+          state.component = state.history[state.history.length-1]
+        }
+      }
+    }
+    return {...state}
+  },
+  [HOVER_ELEMENT]: (state, {payload}:any)=> ({...state, hover: payload}),
+  [COLLAPSE_ELEMENT]: (state, {payload}:any)=> {
+    payload.collapse = !payload.collapse
+    return {...state}
+  },
+  [DRAG_AND_DROP_ELEMENT]: (state, {payload}:any)=> {
+    if (payload.to === undefined) {
+      payload.to = state.component.element
+    }
+    let valid = true;
+    Utils.loop(payload.from, (item)=> {
+      if (item.id === payload.to.id) {
+        valid = false
+      }
+    })
+    if (!valid) {
+      return {...state}
+    }
+    payload.from.parent.children.splice(
+      payload.from.parent.children
+        .map((elem, i)=>({id:elem.id, idx:i}))
+        .filter(obj=> obj.id === payload.from.id)
+        .map(obj=> obj.idx)[0], 1
+    )
+    if (payload.sibling) {
+      payload.to.parent.children.splice(
+        payload.to.parent.children
+          .map((elem, i)=>({id:elem.id, idx:i}))
+          .filter(obj=> obj.id === payload.to.id)
+          .map(obj=> obj.idx)[0], 0, payload.from)
+      payload.from.parent = payload.to.parent;
+    } else {
+      payload.to.children.push(payload.from)
+      payload.from.parent = payload.to;
+    }
+    return {...state}
+  },
+  [CLEAR_ELEMENT]: (state, {payload}) => ({
+    component: {
+      id: -1,
+      element:{
+        id:-1,
+        tag:'',
+        lib:'',
+        prop:[],
+        children: [],
+        collapse: true
+      },
+      state: '{}'
+    },
+    hover: undefined,
+    select:undefined,
+    insert: {
+      ing: false,
+      name: '',
+      type: ''
+    },
+    history: [] })
+}, initialState)
+
+const loop = (item, handle) => {
+  handle(item);
+  item.children.forEach(child=> loop(child, handle));
+}
