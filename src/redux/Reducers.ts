@@ -1,4 +1,5 @@
 import { combineReducers, Dispatch, bindActionCreators } from 'redux';
+import { combineEpics } from 'redux-observable';
 
 import component, { ComponentState, ComponentAction, componentActions } from '../component/Component.action';
 import element, { ElementState, ElementAction, elementActions } from '../element/Element.action';
