@@ -1,4 +1,4 @@
-<!-- # development
+# development
 
 npm install
 
@@ -24,10 +24,4 @@ npm run dist
 
   First checkbox is if the attribute is active.
   Second checkbox is if the attribute is binded with state variable.
-  Asset.XXX : Asset tab scheme. -->
-
-commit test
------------
-
-## mark down test
-testing text
+  Asset.XXX : Asset tab scheme.
