@@ -1,5 +1,5 @@
 # ServiceDesigner
-A React & React-Native Editor desktop app built on top of Electron.
+React & React-Native Design Editor desktop app built on top of Electron.
 
 ## development
 ```
@@ -16,7 +16,9 @@ npm run dist
 ```
 ## how to use
 
-- Folder : To create folder or file, should select folder to be parent.
+- File : Create design directory at src and save file in that path. 
+         You can check 'design.save.json' file is created. 
+         Whenever you update design from your project, please open this json file.
 - State : The scheme is json.
 - Style : The Style supports following special shceme.
 
