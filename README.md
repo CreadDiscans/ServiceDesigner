@@ -4,14 +4,16 @@
 > React & React-Native Design Editor desktop app built on top of Electron.  
 > You can update both web and app design created by react or react-native.   -->
 
-### Introduction
-> **_ServiceDesigner_** is helpful especially to developers who are tired of updating code and reloading it again and again.  
-> For example, if you're developing Android Application, you don't have to reload it each time when you update your code.  
-> Just use **_ServiceDesigner_** and check your code visually immediately.  
+## Introduction
+> **_ServiceDesigner_** is especially helpful to whom are tired of updating code and reloading it again and again.  
+> For instance, just think about the case when you develop an Android Application.  
+> You have to run an emulator, wait until it get started, test how it works, update code and reload it.
+> However, with **_ServiceDesigner_**, you don't have to reload your app each time whenever you update your code anymore.  
+> Just use **_ServiceDesigner_**, give it a try.
+> And update your UI _effieciently_, _immediately_, _visually_.  
 <!-- > If you're done with your UI, save it and extend each component wherever you want to use it.   -->
 
 ### Frameworks
-- HTML
 - [React](https://reactjs.org/) : Web framework
 - [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
 
@@ -37,8 +39,3 @@ npm run dist
 
 ## Tutorial
 [Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
-<!-- 1. test 1
-1. test 2
-1. test 3
-1. test 4
-1. test 5 -->
