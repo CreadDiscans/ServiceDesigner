@@ -7,15 +7,18 @@ React & React-Native Design Editor desktop app built on top of Electron.
 -Web : react / App: react-native
 
 ## development
+- Install ServiceDesigner
 ```
 npm install
+```
+- Start ServiceDesigner
+```
 npm start 
 ```
-## build
+<!-- ## build
 ```
-npm install
 npm run dist
-```
+``` -->
 ## how to use
 - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
