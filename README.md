@@ -2,8 +2,8 @@
 React & React-Native Design Editor desktop app built on top of Electron.
 > ServiceDesginer is an Editor to update design of your project using react or react-native.
 - You can update both web and app design created by react or react-native.
-- Web : [react](https://reactjs.org/)
-- App : [react-native](https://facebook.github.io/react-native/)
+<!-- - Web : [React](https://reactjs.org/)
+- App : [React Native](https://facebook.github.io/react-native/) -->
 
 
 1. 들어가야 할 내용
@@ -11,7 +11,11 @@ React & React-Native Design Editor desktop app built on top of Electron.
 - Web / App 모두 사용 가능
 - Web : react / App: react-native
 
-## development
+### Frameworks
+- Web : [React](https://reactjs.org/)
+- App : [React Native](https://facebook.github.io/react-native/)
+
+## Development
 - Install ServiceDesigner
 ```
 npm install
