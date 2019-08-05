@@ -1,10 +1,10 @@
 # ServiceDesigner
 React & React-Native Design Editor desktop app built on top of Electron.
 
-- 들어가야 할 내용
--서비스 소개
--Web / App 모두 사용 가능
--Web : react / App: react-native
+1. 들어가야 할 내용
+- 서비스 소개
+- Web / App 모두 사용 가능
+- Web : react / App: react-native
 
 ## development
 - Install ServiceDesigner
@@ -15,11 +15,14 @@ npm install
 ```
 npm start 
 ```
+
 <!-- ## build
 ```
 npm run dist
 ``` -->
-## how to use
+
+<!-- Tutorial에 들어갈 내용 -->
+<!-- ## how to use
 - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
 - Style : The Style supports following special shceme.
@@ -32,7 +35,7 @@ npm run dist
 
   First checkbox is if the attribute is active.
   Second checkbox is if the attribute is binded with state variable.
-  Asset.XXX : Asset tab scheme.
+  Asset.XXX : Asset tab scheme. -->
 
 ## Tutorial
 1. test 1
