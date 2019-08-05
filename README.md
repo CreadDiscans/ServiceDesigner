@@ -6,11 +6,11 @@
 
 ## Introduction
 > **_ServiceDesigner_** is especially helpful to whom are tired of updating code and reloading it again and again.  
-> For instance, just think about the case when you develop an Android Application.  
-> You have to run an emulator, wait until it get started, test how it works, update code and reload it.
-> However, with **_ServiceDesigner_**, you don't have to reload your app each time whenever you update your code anymore.  
-> Just use **_ServiceDesigner_**, give it a try.
-> And update your UI _effieciently_, _immediately_, _visually_.  
+> For instance, just think about when you develop an Android Application.  
+> You have to run an emulator, wait until it get started, test how it works, update code and reload it.  
+> However, with **_ServiceDesigner_**, you don't have to reload your app whenever you update your code anymore.  
+> Just use **_ServiceDesigner_**, give it a try.  
+> And work with your UI _effieciently_, _immediately_, _visually_.  
 <!-- > If you're done with your UI, save it and extend each component wherever you want to use it.   -->
 
 ### Frameworks
