@@ -10,12 +10,12 @@ Web / App 모두 사용 가능
 Web : react / App: react-native -->
 
 ### Frameworks
-- Web : [React](https://reactjs.org/)
-- App : [React Native](https://facebook.github.io/react-native/)
+- [React](https://reactjs.org/) : Web framework
+- [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
 
 ### Usuable components or toolkit
-- React Bootstrap 4 components : [Reactstrap](https://reactstrap.github.io/)
-- React Native UI Toolkit : [React Native Elements](https://react-native-training.github.io/react-native-elements/)
+- [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components
+- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit
 
 ## Development
 - Install ServiceDesigner
