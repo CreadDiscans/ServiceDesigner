@@ -1,7 +1,7 @@
 # ServiceDesigner
-> ServiceDesginer is an Editor to update design of your project using react or react-native.
-> React & React-Native Design Editor desktop app built on top of Electron.
-> You can update both web and app design created by react or react-native.
+> ServiceDesginer is an Editor to update design of your project using react or react-native.  
+> React & React-Native Design Editor desktop app built on top of Electron.  
+> You can update both web and app design created by react or react-native.  
 
 
 <!-- 들어가야 할 내용
