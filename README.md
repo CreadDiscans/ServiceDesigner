@@ -16,9 +16,7 @@ npm run dist
 ```
 ## how to use
 
-- File : Create design directory at src and save file in that path. 
-         You can check 'design.save.json' file is created. 
-         Whenever you update design from your project, please open this json file.
+- File : Open or save 'design.save.json' file to update design of your project at ServiceDesigner.
 - State : The scheme is json.
 - Style : The Style supports following special shceme.
 
