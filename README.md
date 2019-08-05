@@ -2,11 +2,9 @@
 
 ## development
 ```
-
 npm install
 
-npm start
-   
+npm start 
 ```
 ## build
 
@@ -14,7 +12,6 @@ npm start
 npm install
 
 npm run dist
-
 ```
 ## how to use
 
