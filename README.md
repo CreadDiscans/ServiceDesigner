@@ -1,4 +1,5 @@
 # ServiceDesigner
+A React & React-Native Editor desktop app built on top of Electron.
 
 ## development
 ```
