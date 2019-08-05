@@ -11,10 +11,11 @@ Web : react / App: react-native -->
 
 ### Frameworks
 > 
+- HTML
 - [React](https://reactjs.org/) : Web framework
 - [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
 
-### Usuable components or toolkit
+### Usuable components or toolkit with frameworks
 > 
 - [React Icons](http://react-icons.github.io/react-icons/)
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components
