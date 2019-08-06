@@ -52,7 +52,7 @@
 ```
 Color.XXX
 ```
-```
+```css
 { "backgroundColor": "Color.red" }
 ```
 
