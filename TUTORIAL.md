@@ -1,12 +1,12 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-1. [File](#file)  
-1. [Component](#component)  
-1. [Element](#element)  
-1. [Property](#property)  
-1. [State](#state)  
-1. [Color](#color)  
+### [1. File](#file)  
+### [2. Component](#component)  
+### [3. Element](#element)  
+### [4. Property](#property)  
+### [5. State](#state)  
+### [6. Color](#color)  
 
 ## File  
 ## Component  
