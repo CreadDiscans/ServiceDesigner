@@ -14,6 +14,11 @@
 
 ## File  
 > Open saved 'design.save.json' file to update your project at ServiceDesigner.  
+### Save File
+![ServiceDesigner](./src/asset/img/saveFile.gif)  
+
+### OpenFile
+![ServiceDesigner](./src/asset/img/saveFile.gif)  
 
 ## Component  
 ## Element  
