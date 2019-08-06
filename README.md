@@ -1,5 +1,6 @@
 <!-- README -->
 # ServiceDesigner
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 **_ServiceDesigner_** is an effiecient editor for UI developing using React or React Native framework.
 <!-- > ServiceDesginer is an Editor to update design of your project using react or react-native.  
 > React & React-Native Design Editor desktop app built on top of Electron.  
@@ -13,7 +14,7 @@
 > Just use **_ServiceDesigner_**, give it a try.  
 > And work with your UI _effieciently_, _speedly_, _visually_.  
 
-### Frameworks
+### Base frameworks
 - [React](https://reactjs.org/) : Web framework
 - [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
 
