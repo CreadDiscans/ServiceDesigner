@@ -16,29 +16,29 @@
 
 ## File  
 **File** menu offer features to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-<!-- > When use **ServiceDesigner** at your project, you have to save and open '_design.save.json_'. -->
-> You can check there are **three** type files : '_design.component.tsx_', '_design.save.json_', '_design.style_'.  
-> * '_design.component.tsx_' be used when extend it at the each _web_ or _app_ component.  
-> * '_design.save.json_' be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * '_design.style_' be used when set style or css of each component.  
+> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
+> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component.  
+> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
+> * _design.style_ be used when set style or css of each component.  
 
 ### Save File
 <!-- > If you haven't used **_ServiceDesigner_** before, you need to save file.   -->
 <!-- > It's really simple to save file. Because there are no file to call and updat or fix. -->
-1. Whenever you're ready, click the '_file_' menu and '_save_'.  
-   (The short cut key is _ctrl_ + _s_.)  
-1. Then create '_design_' directory at '_src_', just in case separate design code file from other code files.  
+1. Click the _file_ menu and _save_.  
+    (The short cut key is _ctrl_ + _s_)  
+1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 
-![ServiceDesigner](./src/asset/img/saveFile.gif)  
+> Example of saving file
+![SavingFile](./asset/img/savingFile.gif)  
 
 ### Open File
 <!-- > If there is saved file, let's open it.   -->
-1. Click the '_file_' menu and '_open_'.
-   (The short cut key is _ctrl_ + _o_.)
-1. Select the '_design.save.json_' file and open it.
+1. Click the _file_ menu and _open_.  
+    (The short cut key is _ctrl_ + _o_)
+1. Select the _design.save.json_ file and open it.
 
-
-<!-- ![ServiceDesigner](./src/asset/img/saveFile.gif)   -->
+> Example of opening file
+<!-- ![OpeningFile](./asset/img/saveFile.gif)   -->
 
 ## Component  
 ## Element  

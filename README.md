@@ -7,7 +7,7 @@
 
 <!-- gif 파일 juice 페이지로 수정 필요 => 현재 청음이지 페이지로 보여주고 있으므로 -->
 - just example GIF image yet  
-![ServiceDesigner](./src/asset/img/mainExample.gif)  
+![ServiceDesigner](./asset/img/mainExample.gif)  
 
 
 ## Introduction
