@@ -16,10 +16,10 @@
 > Open saved 'design.save.json' file to update your project at ServiceDesigner.  
 
 ### Save File
-> If you haven't used **_ServiceDesigner_** before, you need to save file.
-> Whenever you're ready, click the '_file_' menu and '_save_' menu.
-> Ths short cut key is _ctrl_ + _s_.
-> Then create '_design_' directory at '_src_', just in case separate design code file from other code files.
+> If you haven't used **_ServiceDesigner_** before, you need to save file.  
+> Whenever you're ready, click the '_file_' menu and '_save_' menu.  
+> Ths short cut key is _ctrl_ + _s_.  
+> Then create '_design_' directory at '_src_', just in case separate design code file from other code files.  
 ![ServiceDesigner](./src/asset/img/saveFile.gif)  
 
 ### OpenFile
