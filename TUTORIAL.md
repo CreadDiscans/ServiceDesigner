@@ -4,6 +4,7 @@
 * [File](#file)  
     * [Save File](#save-file)
     * [Open File](#open-file)
+    * [Other Features of File Menu](#other-features-of-file-menu)
 * [Component](#component)  
 * [Element](#element)  
 * [Property](#property)  
@@ -12,16 +13,16 @@
     * [Color](#color)
     * [Asset](#asset)
     * [Css](#css)
-    * [Style](#style)
+    * [Style](#style)  
 
 ## File  
-**File** menu offer features to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
+**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component.  
+> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
 > * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
 > * _design.style_ be used when set style or css of each component.  
 
-### Save File
+### Save File  
 <!-- > If you haven't used **_ServiceDesigner_** before, you need to save file.   -->
 <!-- > It's really simple to save file. Because there are no file to call and updat or fix. -->
 1. Click the _file_ menu and _save_.  
@@ -31,7 +32,7 @@
 > Example of saving file  
 ![SavingFile](./asset/img/savingFile.gif)  
 
-### Open File
+### Open File  
 <!-- > If there is saved file, let's open it.   -->
 1. Click the _file_ menu and _open_.  
     (The short cut key is _ctrl_ + _o_)
@@ -39,6 +40,14 @@
 
 > Example of opening file  
 <!-- ![OpeningFile](./asset/img/saveFile.gif)   -->
+
+
+### Other Features of File Menu 
+1. _Save to another folder_  
+> You can move newly updated design files to another folder through this feature. 
+> (Sohr cut key is _ctrl_ + _shift_ + _s_)
+1. _reload_
+> Reload **_ServiceDesigner_**.
 
 ## Component  
 ## Element  
