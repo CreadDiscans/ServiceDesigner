@@ -28,7 +28,7 @@
     (The short cut key is _ctrl_ + _s_)  
 1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 
-> Example of saving file
+> Example of saving file  
 ![SavingFile](./asset/img/savingFile.gif)  
 
 ### Open File
@@ -37,7 +37,7 @@
     (The short cut key is _ctrl_ + _o_)
 1. Select the _design.save.json_ file and open it.
 
-> Example of opening file
+> Example of opening file  
 <!-- ![OpeningFile](./asset/img/saveFile.gif)   -->
 
 ## Component  
