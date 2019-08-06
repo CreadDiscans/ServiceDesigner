@@ -44,8 +44,8 @@
 
 ### Other Features of File Menu 
 1. _Save to another folder_  
-> You can move newly updated design files to another folder through this feature. 
-> (Sohr cut key is _ctrl_ + _shift_ + _s_)
+> You can move newly updated design files to another folder through this feature.  
+> (The short cut key is _ctrl_ + _shift_ + _s_)
 1. _reload_
 > Reload **_ServiceDesigner_**.
 
