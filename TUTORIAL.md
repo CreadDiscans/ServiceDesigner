@@ -5,7 +5,12 @@
 * [Component](#component)  
 * [Element](#element)  
 * [Property](#property)  
-* [Feature](#feature)  
+* [Feature](#feature)
+    * State
+    * Color
+    * Asset
+    * Css
+    * Style
 
 ## File  
 > Open saved 'design.save.json' file to update your project at ServiceDesigner.  
@@ -15,13 +20,10 @@
 ## Property  
 > The property supports following special scheme.
 ## Feature
+
 ### State  
 > The scheme is json.  
-### Asset
-> Support Asset variables. The variables should be defined asset tab.
-```
-Asset.XXX
-```
+
 ### Color
 > Support Color variables. The variables should be defined color tab.  
 ```
@@ -30,6 +32,16 @@ Color.XXX
 ```
 { "backgroundColor": "Color.red" }
 ```
+
+### Asset
+> Support Asset variables. The variables should be defined asset tab.
+```
+Asset.XXX
+```
+### Css
+
+### Style
+
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
