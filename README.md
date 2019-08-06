@@ -8,8 +8,8 @@
 ## Introduction
 > Let's think about the case when you developed an Android Application.  
 > You had to run an emulator, wait until it get started, test how it works, fix some part of your code and reload it.  
-> Maybe you are tired of doing necessary, but inefficient work process again and again. 
-<!-- > With **_ServiceDesigner_**, you don't have to reload your app whenever update code anymore.   -->
+> Maybe you are tired of doing necessary, but inefficient work process again and again.  
+> With **_ServiceDesigner_**, you don't have to wasate your time to check how component looks like at the screen.  
 > Just use **_ServiceDesigner_**, give it a try.  
 > And work with your UI _effieciently_, _speedly_, _visually_.  
 
@@ -39,7 +39,7 @@ npm run dist
 
 ## Tutorial
 :books:[Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
-### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
+<!-- ### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
 ### 1. [Component](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
 ### 1. [Element](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
 ### 1. [Property](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
@@ -47,4 +47,4 @@ npm run dist
 ### 1. [Color](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
 ### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
 ### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
-### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
+### 1. [File](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md) -->
