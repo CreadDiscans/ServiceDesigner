@@ -17,13 +17,19 @@
 
 ### Save File
 > If you haven't used **_ServiceDesigner_** before, you need to save file.  
-> Whenever you're ready, click the '_file_' menu and '_save_' menu.  
+> Whenever you're ready, click the '_file_' menu and '_save_'.  
 > Ths short cut key is _ctrl_ + _s_.  
 > Then create '_design_' directory at '_src_', just in case separate design code file from other code files.  
+> You can check there are __three__ newly saved files including of '_design.component.tsx_', '_design.save.json_', '_design.style_'.
+
 ![ServiceDesigner](./src/asset/img/saveFile.gif)  
 
 ### OpenFile
-> If you have used **_ServiceDesigner_** and saved file before, just open your file.
+> If there is saved file, let's open it.  
+> Click the '_file_' menu and '_open_'.
+> Ths short cut key is _ctrl_ + _o_.
+> Select the '_design.save.json_' file and open it.
+
 
 <!-- ![ServiceDesigner](./src/asset/img/saveFile.gif)   -->
 
