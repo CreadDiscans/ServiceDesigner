@@ -1,16 +1,19 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-1. File
-1. Component
-1. Element
-1. Property
-1. State
-1. Color
-1. blah
-1. blah-blah
-1. blah-blah-blah
-1. blah-blah-blah-blah
+### 1. [File](#file)  
+### 1. [Component](#component)  
+### 1. [Element](#element)  
+### 1. [Property](#property)  
+### 1. [State](#state)  
+### 1. [Color](#color)  
+
+## File  
+## Component  
+## Element  
+## Property  
+## State  
+## Color  
 
 - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
