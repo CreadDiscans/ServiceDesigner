@@ -8,8 +8,8 @@
 ## Introduction
 > Let's think about the case when you developed an Android Application.  
 > You had to run an emulator, wait until it get started, test how it works, fix some part of your code and reload it.  
-> Maybe you are tired of doing necessary, but inefficient work process again and again.  
-> With **_ServiceDesigner_**, you don't have to wasate your time to check how component looks like at the screen.  
+> Maybe you are tired of doing necessary, but inefficient work process again and again.:dizzy:  
+> With **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.  
 > Just use **_ServiceDesigner_**, give it a try.  
 > And work with your UI _effieciently_, _speedly_, _visually_.  
 
