@@ -20,10 +20,9 @@
 
 ### Save File
 > If you haven't used **_ServiceDesigner_** before, you need to save file.  
-> It's really simple to save file. 
-> 1. Hello I'm testing   
->   1. Whenever you're ready, click the '_file_' menu and '_save_'.  
->   1. Ths short cut key is _ctrl_ + _s_.  
+> It's really simple to save file. Because there are no file to call and updat or fix.
+> 1. Whenever you're ready, click the '_file_' menu and '_save_'.  
+>    Ths short cut key is _ctrl_ + _s_.  
 > 1. Then create '_design_' directory at '_src_', just in case separate design code file from other code files.  
 > You can check there are **three** newly saved files including of '_design.component.tsx_', '_design.save.json_', '_design.style_'.
 
@@ -53,7 +52,9 @@
 Color.XXX
 ```
 ```css
-{ "backgroundColor": "Color.red" }
+{  
+    "backgroundColor": "Color.red"  
+}
 ```
 
 ### Asset
