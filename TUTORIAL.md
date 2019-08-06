@@ -1,21 +1,37 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-### [1. File](#file)  
-### [2. Component](#component)  
-### [3. Element](#element)  
-### [4. Property](#property)  
-### [5. State](#state)  
-### [6. Color](#color)  
+* [File](#file)  
+* [Component](#component)  
+* [Element](#element)  
+* [Property](#property)  
+* [Feature](#feature)  
 
 ## File  
+> Open saved 'design.save.json' file to update your project at ServiceDesigner.  
+
 ## Component  
 ## Element  
 ## Property  
-## State  
-## Color  
+> The property supports following special scheme.
+## Feature
+### State  
+> The scheme is json.  
+### Asset
+> Support Asset variables. The variables should be defined asset tab.
+```
+Asset.XXX
+```
+### Color
+> Support Color variables. The variables should be defined color tab.  
+```
+Color.XXX
+```
+```
+{ "backgroundColor": "Color.red" }
+```
 
-- File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
+<!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
 - Style : The Style supports following special shceme.
 
@@ -27,4 +43,4 @@
 
   First checkbox is if the attribute is active.
   Second checkbox is if the attribute is binded with state variable.
-  Asset.XXX : Asset tab scheme.
+  Asset.XXX : Asset tab scheme. -->
