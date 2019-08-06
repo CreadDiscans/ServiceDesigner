@@ -2,6 +2,8 @@
 # ServiceDesigner Tutorial
 ## Contents
 * [File](#file)  
+    * [Save File](#save-file)
+    * [Open File](#open-file)
 * [Component](#component)  
 * [Element](#element)  
 * [Property](#property)  
@@ -24,7 +26,7 @@
 
 ![ServiceDesigner](./src/asset/img/saveFile.gif)  
 
-### OpenFile
+### Open File
 > If there is saved file, let's open it.  
 > Click the '_file_' menu and '_open_'.
 > Ths short cut key is _ctrl_ + _o_.
