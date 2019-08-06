@@ -15,11 +15,11 @@
     * [Style](#style)
 
 ## File  
-**File** menu offer save or open file at **_ServiceDesigner_**.  
+**File** menu offer features to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 <!-- > When use **ServiceDesigner** at your project, you have to save and open '_design.save.json_'. -->
 > You can check there are **three** type files : '_design.component.tsx_', '_design.save.json_', '_design.style_'.  
-> * '_design.component.tsx_' be used when extend  each _web_ or _app_ component.  
-> * '_design.save.json_' be used when using **_ServiceDesigner_**. You can open, update and save design file through this json file.  
+> * '_design.component.tsx_' be used when extend each _web_ or _app_ component.  
+> * '_design.save.json_' be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
 > * '_design.style_' be used when set style or css of each component.  
 
 ### Save File
