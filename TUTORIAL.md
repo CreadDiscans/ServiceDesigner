@@ -15,14 +15,15 @@
     * [Style](#style)
 
 ## File  
-> Open saved 'design.save.json' file to update your project at ServiceDesigner.  
+> **File** menu offer save or open file at **_ServiceDesigner_**.  
+<!-- > When use **ServiceDesigner** at your project, you have to save and open '_design.save.json_'. -->
 
 ### Save File
 > If you haven't used **_ServiceDesigner_** before, you need to save file.  
 > Whenever you're ready, click the '_file_' menu and '_save_'.  
 > Ths short cut key is _ctrl_ + _s_.  
 > Then create '_design_' directory at '_src_', just in case separate design code file from other code files.  
-> You can check there are <ins>three</ins> newly saved files including of '_design.component.tsx_', '_design.save.json_', '_design.style_'.
+> You can check there are **three** newly saved files including of '_design.component.tsx_', '_design.save.json_', '_design.style_'.
 
 ![ServiceDesigner](./src/asset/img/saveFile.gif)  
 
