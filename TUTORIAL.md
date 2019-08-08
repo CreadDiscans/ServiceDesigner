@@ -60,14 +60,13 @@
 > Example of using components function.  
 ![Components](./asset/img/components.gif)
 
-![ComponentsMenu](./asset/img/componentsMenu.JPG)
+![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 
 ### Create  
-**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
+Using when **Create** _group_ or _components_.  
+> Right click at **Components** tab and click _New Component_ or _New Group_.  
+> If you don't input new _group_ or _component_'s name, they will not be created.  
+> So please remember to _input the group or components' name_.  
 
 ### Rename  
 **File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
