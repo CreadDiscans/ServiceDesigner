@@ -43,7 +43,7 @@
 1. Select the _design.save.json_ file and open it.
 
 > Example of opening file (=> can be changed later / maybe to file which has more components or groups in design.save.json?) 
-![OpeningFile](./asset/img/openingFile.gif)  
+![OpeningFile](./asset/img/open.gif)  
 
 
 ### Other Features of File Menu 
