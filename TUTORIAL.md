@@ -69,7 +69,7 @@
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
-> * At the first, right-click and click _delete_ wherever you want, like other features. 
+> * Right-click and click _delete_ wherever you want, like other features. 
 > * Just in case, let's imagine the situation that you deleteed some group or component.
 > * _However_ it was accident, not you really wanted it.
 > * Don't be panic already! Please open your file again, before you save it.
@@ -78,12 +78,12 @@
 ### Other Features of Components Tab  
 * _ShortCuts_  
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
-> When you hover COMPONENTS tab, there will be some buttons will be on the tab.
-> There are **three** main featueres in short cuts : _create group_, _create component_, _collapse groups_.
+> When you hover on the _Components tab_, there will be some buttons on the right side of the tab.  
+> There are **three** main featueres in these short cuts : _create group_, _create component_, _collapse groups_.
 
 * _Unselect_  
-> If there is a selected group or component, that one will be highlighted because of the sigh of activated.  
-> So if you click _Unselected_, nothing will be selected in Components tab.  
+> If there is a selected group or component, that one will be highlighted because it was activated.  
+> So if you click _Unselect_, nothing will be selected in Components tab.  
 
 * _Collapse groups in the Components Tab_
 > Collapse all groups in the Components tab. 
