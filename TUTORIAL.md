@@ -54,11 +54,13 @@
 > Reload **_ServiceDesigner_**.
 
 ## Components  
-**Components** tab's main feature is dealing with _group_ or _components_. 
-> There are **three** featueres in this tab : _create_, _rename_, _delete_.
+**Components** tab is for dealing with _group_ or _components_. 
+> There are **three** main featueres in this tab : _create_, _rename_, _delete_.
 
 > Example of using components function.  
-![Components](./asset/img/components.gif)  
+![Components](./asset/img/components.gif)
+
+![ComponentsMenu](./asset/img/componentsMenu.JPG)
 
 ### Create  
 **File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
