@@ -60,7 +60,7 @@
 ![Components](./asset/img/components.gif)
 
 ### Create  
-> * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
+> * Right-click at the _Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
 > * So please remember to _input the group or component's name_.  
 
@@ -78,15 +78,15 @@
 ### Other Features of Components Tab  
 * _ShortCuts_  
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
-> When you hover on the _Components tab_, there will be some buttons on the right side of the tab.  
+> When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
 > There are **three** main featueres in these short cuts : _create group_, _create component_, _collapse groups_.
 
 * _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
-> So if you click _Unselect_, nothing will be selected in Components tab.  
+> So if you click _Unselect_, nothing will be selected in **Components** tab.  
 
 * _Collapse groups in the Components Tab_
-> Collapse all groups in the Components tab. 
+> Collapse all groups in the **Components** tab. 
 
 ## Element  
 ## Property  
