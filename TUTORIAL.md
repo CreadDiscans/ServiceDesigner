@@ -60,20 +60,20 @@
 ![Components](./asset/img/components.gif)
 
 ### Create  
-> * Right click at the **Components** tab and click _New Group_ or _New Component_.  
+> * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
 > * So please remember to _input the group or component's name_.  
 
 ### Rename  
-> * Just like _create_, right click and click _rename_ where you want to do it.
+> * Just like _create_, right-click and click _rename_ where you want to do it.
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
-> * At the first, right click and click _delete_ wherever you want to, like other features. 
+> * At the first, right-click and click _delete_ wherever you want, like other features. 
 > * Just in case, let's imagine the situation that you deleteed some group or component.
 > * _However_ it was accident, not you really wanted it.
-> * Don't be panick already! Please open your file again, before you save it.
-> * Then you can check there will be a group or component which you deleted before open it again.
+> * Don't be panic already! Please open your file again, before you save it.
+> * Then you can check there will be a group or component which you deleted before reopening it.
 
 ### Other Features of Components Tab  
 * _ShortCuts_  
