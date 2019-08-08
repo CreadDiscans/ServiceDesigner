@@ -55,35 +55,38 @@
 
 ## Components  
 **Components** tab is for dealing with _group_ or _components_. 
-> There are **three** main featueres in this tab : _create_, _rename_, _delete_.
 
 > Example of using components function.  
 ![Components](./asset/img/components.gif)
 
-![ComponentsMenu](./asset/img/componentsMenu.JPG)  
-
 ### Create  
-Using this fetaure when you want to **Create** new _group_ or _components_.  
+Using this fetaure when you want to **Create** new _group_ or _component_.  
 > * Right click at the **Components** tab and click _New Component_ or _New Group_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
-> * So please remember to _input the group or components' name_.  
+> * So please remember to _input the group or component's name_.  
 
 ### Rename  
-When you want to rename some group or component, this feature will help you. 
-> * Right click at the **Components** tab and click _New Component_ or _New Group_.  
-> * If you don't input _group_ or _component_'s name newly, name will not be changed.  
+When you want to rename some group or components, this feature will help you. 
+> * Just like _create_, right click and click _rename_ where you want to rename.
+> * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
-**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
+You can also delete group or components in this tab.
+> * At the first, right click and click _delete_ wherenyou want to delete, like other features. 
+> * Just in case, let's imagine the situation that you deleteed some group or component, but it was accident, not you really wanted. 
+> * Please open your file again, before you save it.
+> * Then you can check there will be a group or component which you deleted before open it again.
 
 ### Other Features of Components Tab  
+* _ShortCuts_  
+![ComponentsMenu](./asset/img/componentsMenu.JPG)  
+> When you hover COMPONENTS tab, there will be some buttons will be on the tab.
+> There are **three** main featueres in short cuts : _create group_, _create component_, _collapse groups_.
+
 * _Unselect_  
 > If there is a selected group or component, that one will be highlighted because of the sigh of activated.  
 > So if you click _Unselected_, nothing will be selected in Components tab.  
+
 * _Collapse groups in the Components Tab_
 > Collapse all groups in the Components tab. 
 
