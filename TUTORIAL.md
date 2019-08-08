@@ -5,7 +5,7 @@
     * [Save File](#save-file)
     * [Open File](#open-file)
     * [Other Features of File Menu](#other-features-of-file-menu)
-* [Component](#component)  
+* [Components](#components)  
 * [Element](#element)  
 * [Property](#property)  
 * [Feature](#feature)
@@ -38,7 +38,7 @@
     (The short cut key is _ctrl_ + _o_)
 1. Select the _design.save.json_ file and open it.
 
-> Example of opening file (=> can be changed later) 
+> Example of opening file (=> can be changed later / maybe to file which has more components or groups in design.save.json?) 
 ![OpeningFile](./asset/img/openingFile.gif)  
 
 
@@ -49,7 +49,11 @@
 * _reload_
 > Reload **_ServiceDesigner_**.
 
-## Component  
+## Components 
+
+> Example of using components function.  
+![Components](./asset/img/components.gif)  
+
 ## Element  
 ## Property  
 > The property supports following special scheme.
