@@ -38,8 +38,8 @@
     (The short cut key is _ctrl_ + _o_)
 1. Select the _design.save.json_ file and open it.
 
-> Example of opening file  
-<!-- ![OpeningFile](./asset/img/saveFile.gif)   -->
+> Example of opening file (=> can be changed later) 
+![OpeningFile](./asset/img/openingFile.gif)  
 
 
 ### Other Features of File Menu 

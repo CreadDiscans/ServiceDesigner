@@ -6,9 +6,8 @@
 > You can update both web and app design created by react or react-native.   -->
 
 <!-- gif 파일 juice 페이지로 수정 필요 => 현재 청음이지 페이지로 보여주고 있으므로 -->
-- just example GIF image yet  
+> just example GIF image yet  
 ![ServiceDesigner](./asset/img/mainExample.gif)  
-
 
 ## Introduction
 > Let's think about the case when you developed an Android Application.  
