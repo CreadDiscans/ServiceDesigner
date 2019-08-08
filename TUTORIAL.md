@@ -63,17 +63,15 @@
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 
 ### Create  
-Using when **Create** _group_ or _components_.  
-> Right click at **Components** tab and click _New Component_ or _New Group_.  
-> If you don't input new _group_ or _component_'s name, they will not be created.  
-> So please remember to _input the group or components' name_.  
+Using this fetaure when you want to **Create** new _group_ or _components_.  
+> * Right click at the **Components** tab and click _New Component_ or _New Group_.  
+> * If you don't input new _group_ or _component_'s name, they will not be created.  
+> * So please remember to _input the group or components' name_.  
 
 ### Rename  
-**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
+When you want to rename some group or component, this feature will help you. 
+> * Right click at the **Components** tab and click _New Component_ or _New Group_.  
+> * If you don't input _group_ or _component_'s name newly, name will not be changed.  
 
 ### Delete  
 **File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
@@ -83,11 +81,11 @@ Using when **Create** _group_ or _components_.
 > * _design.style_ be used when set style or css of each component.  
 
 ### Other Features of Components Tab  
-**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
+* _Unselect_  
+> If there is a selected group or component, that one will be highlighted because of the sigh of activated.  
+> So if you click _Unselected_, nothing will be selected in Components tab.  
+* _Collapse groups in the Components Tab_
+> Collapse all groups in the Components tab. 
 
 ## Element  
 ## Property  
