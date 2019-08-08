@@ -56,19 +56,22 @@
 ## Components  
 **Components** tab is for dealing with _group_ or _component_. 
 
-> Example of using components function.  
-![Components](./asset/img/components.gif)
+<!-- > Example of using components function.   -->
+<!-- ![Components](./asset/img/components.gif) -->
 
 ### Create  
+![CreateComponents](./asset/img/createComponents.gif)  
 > * Right-click at the _Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
 > * So please remember to _input the group or component's name_.  
 
 ### Rename  
+![RenameComponents](./asset/img/renameComponents.gif)  
 > * Just like _create_, right-click and click _rename_ where you want to do it.
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
+![DeleteComponents](./asset/img/deleteComponents.gif)  
 > * Right-click and click _delete_ wherever you want, like other features. 
 > * Just in case, let's imagine the situation that you deleteed some group or component.
 > * _However_ it was accident, not you really wanted it.

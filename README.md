@@ -14,7 +14,7 @@
 > You had to run an emulator, wait until it get started, test how it works, fix some part of your code and reload it.  
 > Maybe you are tired of doing necessary, but inefficient work process again and again.:dizzy:  
 > With **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.  
-> Give it a try and let **_ServiceDesigner_** helps to simplify your work process.  
+> Give it a try and let **_ServiceDesigner_** helps to make your work process more convenient.  
 > And work with your UI _effieciently_, _speedly_, _visually_ and _simply_.  
 
 ### Base frameworks
