@@ -56,14 +56,12 @@
 ## Components  
 **Components** tab is for dealing with _group_ or _component_. 
 
-<!-- > Example of using components function.   -->
-<!-- ![Components](./asset/img/components.gif) -->
-
 ### Create  
 ![CreateComponents](./asset/img/createComponents.gif)  
-> * Right-click at the _Components** tab and click _New Group_ or _New Component_.  
+> * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
 > * So please remember to _input the group or component's name_.  
+> * Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 ![RenameComponents](./asset/img/renameComponents.gif)  
