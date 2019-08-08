@@ -54,27 +54,25 @@
 > Reload **_ServiceDesigner_**.
 
 ## Components  
-**Components** tab is for dealing with _group_ or _components_. 
+**Components** tab is for dealing with _group_ or _component_. 
 
 > Example of using components function.  
 ![Components](./asset/img/components.gif)
 
 ### Create  
-Using this fetaure when you want to **Create** new _group_ or _component_.  
-> * Right click at the **Components** tab and click _New Component_ or _New Group_.  
+> * Right click at the **Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
 > * So please remember to _input the group or component's name_.  
 
 ### Rename  
-When you want to rename some group or components, this feature will help you. 
-> * Just like _create_, right click and click _rename_ where you want to rename.
+> * Just like _create_, right click and click _rename_ where you want to do it.
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
-You can also delete group or components in this tab.
-> * At the first, right click and click _delete_ wherenyou want to delete, like other features. 
-> * Just in case, let's imagine the situation that you deleteed some group or component, but it was accident, not you really wanted. 
-> * Please open your file again, before you save it.
+> * At the first, right click and click _delete_ wherever you want to, like other features. 
+> * Just in case, let's imagine the situation that you deleteed some group or component.
+> * _However_ it was accident, not you really wanted it.
+> * Don't be panick already! Please open your file again, before you save it.
 > * Then you can check there will be a group or component which you deleted before open it again.
 
 ### Other Features of Components Tab  
