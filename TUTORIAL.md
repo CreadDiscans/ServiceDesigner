@@ -57,6 +57,7 @@
 **Components** tab is for dealing with _group_ or _component_. 
 
 ### Create  
+![Test](./asset/img/test.gif)  
 ![CreateComponents](./asset/img/createComponents.gif)  
 > * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
 > * If you don't input new _group_ or _component_'s name, they will not be created.  
