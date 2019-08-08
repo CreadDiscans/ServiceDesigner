@@ -54,14 +54,8 @@
 > Reload **_ServiceDesigner_**.
 
 ## Components  
-**File** menu offers feature to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
-
-**Components** tab's main feature is create _group_ or _components_ and deal with it.  
-> You can _ceate_, _rename_ and _delete_ _group_ or _component_ simply in this tab.  
+**Components** tab's main feature is dealing with _group_ or _components_. 
+> There are **three** featueres in this tab : _create_, _rename_, _delete_.
 
 > Example of using components function.  
 ![Components](./asset/img/components.gif)  
