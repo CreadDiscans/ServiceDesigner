@@ -98,16 +98,21 @@
 > Collapse all groups in the **Components** tab. 
 
 ## Element  
-**Element** tab is for displaying screen to render using _React_ or _React Native_ framework and other libraries. 
+**Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
 ### HTML  
-> Using html tag to implement in React framework.
+![HTML](./asset/img/html.GIF)  
+
+> Using html tag to implement in React framework.  
 
 
 ### Reactstrap  
+![ReactStrap](./asset/img/reactStrap.GIF)  
+
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
+![ReactIcons](./asset/img/reactIcons.GIF)  
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
