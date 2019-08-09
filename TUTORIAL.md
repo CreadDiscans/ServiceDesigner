@@ -37,9 +37,8 @@
 
 <!-- > If you haven't used **_ServiceDesigner_** before, you need to save file.   -->
 <!-- > It's really simple to save file. Because there are no file to call and updat or fix. -->
-1. Click the _file_ menu and _save_.  
-    (The short cut key is _ctrl_ + _s_)  
-1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
+> * Click the _file_ menu and _save_. (The short cut key is _ctrl_ + _s_)  
+> * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 
 ### Open File  
 <!-- > Example of opening file   -->
@@ -47,9 +46,8 @@
 ![OpeningFile](./asset/img/openingFile.gif)  
 
 <!-- > If there is saved file, let's open it.   -->
-1. Click the _file_ menu and _open_.  
-    (The short cut key is _ctrl_ + _o_)
-1. Select the _design.save.json_ file and open it.
+> * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
+> * Select the _design.save.json_ file and open it.
 
 ### Other Features of File Menu 
 * _Save to another folder_  
