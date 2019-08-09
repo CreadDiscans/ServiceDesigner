@@ -103,16 +103,26 @@
 ### HTML  
 ![HTML](./asset/img/html.gif)  
 
-> Using html tag to implement in React framework.  
+> Using html tag just like in your coding editor.  
+> Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
+> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
 
 ### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
+> You can use ReactStrap Library in **_ServiceDesigner_**.  
+> Input the name of one of ReactStrap's components, and set property if you want.  
+> You don't have to import components that you are using anymore!  
+
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
 ![ReactIcons](./asset/img/reactIcons.gif)  
+
+> You can also use ReactIcons Library.  
+> Set size, color and other properties as you want.
+
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
