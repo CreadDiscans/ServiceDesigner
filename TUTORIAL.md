@@ -50,10 +50,10 @@
 > * Select the _design.save.json_ file and open it.
 
 ### Other Features of File Menu 
-* _Save to another folder_  
+#### 1. _Save to another folder_  
 > You can move newly updated design files to another folder through this feature.  
 > (The short cut key is _ctrl_ + _shift_ + _s_)
-* _reload_
+#### 2. _reload_
 > Reload **_ServiceDesigner_**.
 
 ## Components  
@@ -83,16 +83,16 @@
 > * Then you can check there will be a group or component which you deleted before reopening it.
 
 ### Other Features of Components Tab  
-* _ShortCuts_  
+#### 1. _ShortCuts_  
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
 > There are **three** main featueres in these short cuts : _create group_, _create component_, _collapse groups_.
 
-* _Unselect_  
+#### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
 > So if you click _Unselect_, nothing will be selected in **Components** tab.  
 
-* _Collapse groups in the Components Tab_
+#### 3. _Collapse groups in the Components Tab_
 > Collapse all groups in the **Components** tab. 
 
 ## Element  
