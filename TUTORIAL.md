@@ -23,6 +23,11 @@
     * [Asset](#asset)
     * [Css](#css)
     * [Style](#style)  
+  
+    
+      
+        
+          
 
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
@@ -30,6 +35,8 @@
 > * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
 > * _design.save.json_ be used when using **_ServiceDesigner_**. You can open and save design file through this json file.  
 > * _design.style_ be used when set style or css of each component.  
+  
+    
 
 ### Save File  
 <!-- > Example of saving file   -->
@@ -55,6 +62,8 @@
 > (The short cut key is _ctrl_ + _shift_ + _s_)
 #### 2. _reload_
 > Reload **_ServiceDesigner_**.
+  
+    
 
 ## Components  
 **Components** tab is for managing _group_ or _component_. 
@@ -94,7 +103,9 @@
 
 #### 3. _Collapse groups in the Components Tab_
 > Collapse all groups in the **Components** tab. 
-
+  
+    
+    
 ## Element  
 **Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
