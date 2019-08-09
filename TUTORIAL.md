@@ -13,7 +13,7 @@
 * [Element](#element)  
     * [HTML](#html)  
     * [Reactstrap](#reactstrap)  
-    * [React Icons](#ract-icons)  
+    * [React Icons](#react-icons)  
     * [React Native](#react-native)  
     * [RN Elements](#rn-elements)  
 * [Property](#property)  
@@ -59,7 +59,7 @@
 > Reload **_ServiceDesigner_**.
 
 ## Components  
-**Components** tab is for dealing with _group_ or _component_. 
+**Components** tab is for managing _group_ or _component_. 
 
 ### Create  
 ![CreatingComponents](./asset/img/creatingComponents.gif)  
@@ -98,14 +98,30 @@
 > Collapse all groups in the **Components** tab. 
 
 ## Element  
-### HTML
-### Reactstrap
-### React Icons
-### React Native
-### RN Elements
-## Property  
+**Element** tab is for displaying screen to render using _React_ or _React Native_ framework and other libraries. 
 
+### HTML  
+> Using html tag to implement in React framework.
+
+
+### Reactstrap  
+- [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
+
+### React Icons  
+- [React Icons](http://react-icons.github.io/react-icons/)  
+
+### React Native  
+- react native
+
+### RN Elements  
+- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
+
+### Delete  
+- delete
+
+## Property  
 > The property supports following special scheme.
+
 ## Feature
 
 ### State  
