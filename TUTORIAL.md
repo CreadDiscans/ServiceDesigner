@@ -101,18 +101,18 @@
 **Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
 ### HTML  
-![HTML](./asset/img/html.GIF)  
+![HTML](./asset/img/html.gif)  
 
 > Using html tag to implement in React framework.  
 
 
 ### Reactstrap  
-![ReactStrap](./asset/img/reactStrap.GIF)  
+![ReactStrap](./asset/img/reactStrap.gif)  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
-![ReactIcons](./asset/img/reactIcons.GIF)  
+![ReactIcons](./asset/img/reactIcons.gif)  
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
