@@ -39,20 +39,14 @@
     
 
 ### Save File  
-<!-- > Example of saving file   -->
 ![SavingFile](./asset/img/savingFile.gif)  
 
-<!-- > If you haven't used **_ServiceDesigner_** before, you need to save file.   -->
-<!-- > It's really simple to save file. Because there are no file to call and updat or fix. -->
 > * Click the _file_ menu and _save_. (The short cut key is _ctrl_ + _s_)  
 > * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 
 ### Open File  
-<!-- > Example of opening file   -->
-<!-- (=> can be changed later / maybe to file which has more components or groups in design.save.json?)  -->
 ![OpeningFile](./asset/img/openingFile.gif)  
 
-<!-- > If there is saved file, let's open it.   -->
 > * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
 > * Select the _design.save.json_ file and open it.
 
@@ -105,7 +99,7 @@
 > Collapse all groups in the **Components** tab. 
   
     
-    
+
 ## Element  
 **Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
