@@ -60,10 +60,11 @@
   
 
 
+## Explorer
 ## Components  
 **Components** tab is for managing _group_ or _component_. 
 
-#### Create  
+### Create  
 ![CreatingComponents](./asset/img/creatingComponents.gif)  
 
 > * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
@@ -71,13 +72,13 @@
 > * So please remember to _input the group or component's name_.  
 > * Also, you can use short cut buttons to create group or component.
 
-#### Rename  
+### Rename  
 ![RenamingComponents](./asset/img/renamingComponents.gif)  
 
 > * Just like _create_, right-click and click _rename_ what you want to do it.
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
-#### Delete  
+### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
 > * Right-click and click _delete_ whatever you want, like other functions. 
@@ -86,8 +87,8 @@
 > * Don't be panic already! Please open your file again, before you save it.
 > * Then you can check there will be a group or component which you deleted before reopening it.
 
-#### Other Functions of Components Tab  
-##### 1. _ShortCuts_  
+### Other Functions of Components Tab  
+#### 1. _ShortCuts_  
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
@@ -95,23 +96,23 @@
 > * _create group_ & _create component_ are same functions from [Create](#create).  
 > * _collapse groups_ literally collapses all groups in the **Components** tab.  
 
-##### 2. _Unselect_  
+#### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
 > So if you click _Unselect_, nothing will be selected in **Components** tab.  
 
 
 
-### Element  
+## Element  
 **Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
-#### HTML  
+### HTML  
 ![HTML](./asset/img/html.gif)  
 
 > * Using html tag just like in your coding editor.  
 > * Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
 > * Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
-#### Reactstrap  
+### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
@@ -122,7 +123,7 @@
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
-#### React Icons  
+### React Icons  
 ![React Icons](./asset/img/reactIcons.gif)  
 
 > **React Icons** provides free open srouce icons for React framework.  
@@ -133,7 +134,7 @@
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
-#### React Native  
+### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
 > * Before you use React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
@@ -142,7 +143,7 @@
 > * Then right-click and add element and input the name what you will use. It's really simple.  
 > * You must input the name in this function also.
 
-#### RN Elements  
+### RN Elements  
 ![RN Elements](./asset/img/reactNativeElements.gif)  
 
 > * If you want to implement and check any detail of project's UI, set the screen as mobile.  
@@ -151,7 +152,7 @@
 
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
-#### Delete  
+### Delete  
 
 > * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
 > * If you deleted some element, and saved your file already, you can't work with that element anymore.  
@@ -159,7 +160,7 @@
 
 ## Editor  
 
-### Properties
+## Properties
 ![Properties](./asset/img/properties.gif)  
 
 > There is an editor on the right side of **_ServiceDesigner_** to handle property.  
@@ -171,7 +172,7 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
-### Property Detail
+## Property Detail
 > There are 
 
 
