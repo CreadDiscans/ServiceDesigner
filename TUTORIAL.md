@@ -173,8 +173,18 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
+> Right-click and _Add Property_ or _Delete Property_ for your element.
+> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.
+>> * If you ended to fill out key and the other values, please click the save button.
+> * For the otherwise, if you want to delete property, just click _Delete Property_.
+
 ## Property Detail
-> There are 
+> There are **three** details to set for the property : _Key_, _Type_, _Value_.  
+> * Key is for set the keyName of property. For example, _name_, _stlye_ are all the keys for the property. 
+> * Type has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
+> * Value is different per _Type_ of property.
+>> * If you set the type function or variable, you have to set value to function's name or variable's name.
+>> * 
 
 
 # Fuction
