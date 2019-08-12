@@ -15,16 +15,18 @@
 > Maybe you are tired of doing necessary, but inefficient work process again and again.:dizzy:  
 > With **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.  
 > Give it a try and let **_ServiceDesigner_** helps to make your work process more convenient.  
-> And work with your UI _effieciently_, _speedly_, _visually_ and _simply_.  
+> And work with your UI _efficiently_, _speedily_, _visually_ and _simply_.  
 
 ### Base frameworks
 - [React](https://reactjs.org/) : Web framework
 - [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
 
-### Usuable components & toolkit with frameworks
+### Usable library & toolkit with frameworks
 - [React Icons](http://react-icons.github.io/react-icons/)
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components
-- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit
+- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
+
+
 
 ## Development
 - Install ServiceDesigner
@@ -40,6 +42,8 @@ npm start
 ```
 npm run dist
 ``` -->
+
+
 
 ## Tutorial
 :books:[Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
