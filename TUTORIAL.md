@@ -1,12 +1,12 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-* [Menu](#menu)
+1. [1. Menu](#1.-menu)
     * [File](#file)  
         * [Save File](#save-file)
         * [Open File](#open-file)
         * [Other Fuctions of File Menu](#other-functions-of-file-menu)
-* [Explorer](#explorer)
+1. [2. Explorer](#2.-explorer)
     * [Components](#components)  
         * [Create](#create)
         * [Rename](#rename)
@@ -18,16 +18,16 @@
         * [React Icons](#react-icons)  
         * [React Native](#react-native)  
         * [RN Elements](#rn-elements)  
-* [Editor](#editor)
+1. [3. Editor](#3.-editor)
     * [Properties](#properties)  
     * [Property Detail](#property-detail)
-* [Fuction](#function)
+1. [4. Fuction](#4.-function)
     * [State](#state)
     * [Color](#color)
     * [Asset](#asset)
     * [Css](#css)
     * [Style](#style)  
-* [Extend](#extend)
+1. [5. Extend](#5.-extend)
 
 
 
