@@ -149,13 +149,17 @@
 ### Delete  
 
 > * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
-> * If you deleted some element, and you saved your file already, you can't work with that element anymore.  
-> * So please be careful when you delete something. 
+> * If you deleted some element, and saved your file already, you can't work with that element anymore.  
+> * So please be careful when you delete element or component. 
 
 ## Property  
-> The property supports following special scheme.
-=> checkhox / asset
+![Property](./asset/img/property.JPG)  
+![Property](./asset/img/property.gif)  
 
+> There is an editor on the right side of **_ServiceDesigner_** to handle property.  
+> When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
+> * _name_ is for setting name of element. You can call the element by name when you extended design component to your project's component.  
+> * _style_ is for setting style of element. You can use if condition and set style per if condition's result value : _true_ or _false_.  
 
 
 ## Fuction
