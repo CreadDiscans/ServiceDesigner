@@ -1,7 +1,7 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-* [1.Menu](#1.menu)
+* [Menu](#menu)
     * [File](#file)  
         * [Save File](#save-file)
         * [Open File](#open-file)
@@ -31,7 +31,7 @@
 
 
 
-## 1.Menu
+## Menu
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
