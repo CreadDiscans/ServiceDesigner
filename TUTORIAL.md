@@ -1,12 +1,12 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-* [1. Menu](#1.-menu)
+* [Menu](#menu)
     * [File](#file)  
         * [Save File](#save-file)
         * [Open File](#open-file)
         * [Other Fuctions of File Menu](#other-functions-of-file-menu)
-* [2. Explorer](#2.-explorer)
+* [Explorer](#explorer)
     * [Components](#components)  
         * [Create](#create)
         * [Rename](#rename)
@@ -18,20 +18,20 @@
         * [React Icons](#react-icons)  
         * [React Native](#react-native)  
         * [RN Elements](#rn-elements)  
-* [3. Editor](#3.-editor)
+* [Editor](#editor)
     * [Properties](#properties)  
     * [Property Detail](#property-detail)
-* [4. Fuction](#4.-function)
+* [Fuction](#function)
     * [State](#state)
     * [Color](#color)
     * [Asset](#asset)
     * [Css](#css)
     * [Style](#style)  
-* [5. Extend](#5.-extend)
+* [Extend](#extend)
 
 
 
-## 1. Menu
+## **Menu**
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
@@ -60,7 +60,7 @@
   
 
 
-## 2. Explorer
+## **Explorer**
 ## Components  
 **Components** tab is for managing _group_ or _component_. 
 
@@ -158,7 +158,7 @@
 > * If you deleted some element, and saved your file already, you can't work with that element anymore.  
 > * So please be careful when you delete element or component. 
 
-## 3. Editor  
+## **Editor**  
 
 ## Properties
 ![Properties](./asset/img/properties.gif)  
@@ -176,7 +176,7 @@
 > There are 
 
 
-## 4. Fuction
+## **Fuction**
 
 ### State  
 > The scheme is json.  
@@ -202,7 +202,7 @@ Asset.XXX
 ### Style
 
 
-## Extend
+## **Extend**
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
