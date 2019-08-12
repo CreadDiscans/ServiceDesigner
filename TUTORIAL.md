@@ -31,7 +31,7 @@
 
 
 
-## **Menu** Menu **Menu** Menu **Menu** Menu **Menu** Menu
+<h2 style="color: purple">Menu<h2>
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
