@@ -110,20 +110,19 @@
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
-> You can use Bootstrap 4 components like React components in this tab.
-
+> You can use Bootstrap 4 components like React components in this tab.  
 > * You can use ReactStrap Library in **_ServiceDesigner_**.  
 > * You don't have to import each components whenever you use it anymore!  
-> * Input the name of one of ReactStrap's components, and set property if you want.  
+> * Just input the name of one of ReactStrap's components, and set property if you want.  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
 ![React Icons](./asset/img/reactIcons.gif)  
 
-> **React Icons** provides free open srouce icons, so you can use them freely anywhere you want. 
-
-> There are **eight** type icons that you can use through React Icons Library.  
+> **React Icons** provides free open srouce icons for React framework.  
+> So you can use them freely anywhere you want.  
+> There are **eight** type of icon librariess that you can use through React Icons.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 > * Set element's name as the name of library's icon what you want to use.
 > * Then set size, color and other properties as you want to at the Property tab if you want.
@@ -133,7 +132,7 @@
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-> * Before you use React Native element, set the screen as mobile by click one of buttons from the bottom.  
+> * Before you use React Native element, set the screen as mobile by click one of the buttons from the bottom.  
 > * You can set the screen to _Portrait_ or to _Landscape_ easily in **_ServiceDesigner_**. Just click the button what you want to set.  
 > * Then right-click and add element and input the name what you will use. It's really simple.  
 > * You must input the name in this function also.
