@@ -23,6 +23,7 @@
     * [Asset](#asset)
     * [Css](#css)
     * [Style](#style)  
+* [Extend](#extend)
 
 
 
@@ -86,8 +87,8 @@
 
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
 > There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
-> * _create group_ & _create component_ are same function of Create.  
-> * _collapse groups_ collapses all groups in the **Components** tab.  
+> * _create group_ & _create component_ are same functions from [Create](#create).  
+> * _collapse groups_ literally collapses all groups in the **Components** tab.  
 
 #### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
@@ -108,16 +109,19 @@
 ### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
+> **ReactStrap** is really helpfull library when you use React and set UI design simply by using bootstrap library.  
+> You can use Bootstrap 4 components like React components in this tab.
+
 > * You can use ReactStrap Library in **_ServiceDesigner_**.  
+> * You don't have to import each components whenever you use it anymore!  
 > * Input the name of one of ReactStrap's components, and set property if you want.  
-> * You don't have to import each components that you are using anymore!  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
 ![ReactIcons](./asset/img/reactIcons.gif)  
 
-> There are **eight** type icons that you can use through React Icons Library.
+> There are **eight** type icons that you can use through React Icons Library.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 > * Set element's name as the name of library's icon what you want to use.
 > * Then set size, color and other properties as you want to at the Property tab if you want.
@@ -127,13 +131,13 @@
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-> * Before you use React Native element, set the screen as mobile by click the below button.  
-> * You can set the screen to _Portrait_ or _Landscape_ easily in **_ServiceDesigner_**. Just click the button what you want to set.  
-> * Then right-click and add element just like when you add components in render() at coding editor when using React Native framework.  
+> * Before you use React Native element, set the screen as mobile by click one of buttons from the bottom.  
+> * You can set the screen to _Portrait_ or to _Landscape_ easily in **_ServiceDesigner_**. Just click the button what you want to set.  
+> * Then right-click and add element and input the name what you will use. It's really simple.  
 > * You must input the name in this function also.
 
 ### RN Elements  
-![RN Elements](./asset/img/rnElements.gif)  
+![RN Elements](./asset/img/rNElements.gif)  
 
 > * You have to set the screen as mobile to not overlook any detail of your UI.
 > * After that, right-click and add element just like adding other element.  
@@ -143,11 +147,13 @@
 
 ### Delete  
 
-> * You can delete elements in this tab. If you input wrong name, just delete in add one newly!  
-> * If you delete some element, and you saved your file, you can't work with that element anymore. So please be careful when you delete it.  
+> * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
+> * If you deleted some element, and you saved your file already, you can't work with that element anymore.  
+> * So please be careful when you delete something. 
 
 ## Property  
 > The property supports following special scheme.
+=> checkhox / asset
 
 
 
@@ -175,6 +181,9 @@ Asset.XXX
 ### Css
 
 ### Style
+
+
+## Extend
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
