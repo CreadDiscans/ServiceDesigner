@@ -31,7 +31,7 @@
 
 
 
-## Menu
+## 1. Menu
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
@@ -60,7 +60,7 @@
   
 
 
-## Explorer
+## 2. Explorer
 ## Components  
 **Components** tab is for managing _group_ or _component_. 
 
@@ -158,7 +158,7 @@
 > * If you deleted some element, and saved your file already, you can't work with that element anymore.  
 > * So please be careful when you delete element or component. 
 
-## Editor  
+## 3. Editor  
 
 ## Properties
 ![Properties](./asset/img/properties.gif)  
@@ -176,7 +176,7 @@
 > There are 
 
 
-## Fuction
+## 4. Fuction
 
 ### State  
 > The scheme is json.  
