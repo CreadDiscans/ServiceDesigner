@@ -127,15 +127,25 @@
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-- react native
+> Before you use React Native element, set the screen as mobile by click the below button.  
+> You can set the screen to _Portrait_ or _Landscape_ easily in **_ServiceDesigner_**. Just click the button what you want to set.  
+> Then right-click and add element just like when you add components in render() at coding editor when using React Native framework.  
+> You must input the name in this function also.
 
 ### RN Elements  
+![RN Elements](./asset/img/rnElements.gif)  
+
+> You have to set the screen as mobile to not overlook any detail of your UI.
+> After that, right-click and add element just like adding other element.  
+> Set the property if it is necessary.
+
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
 ### Delete  
 - delete
 
-
+> You can delete elements in this tab. If you input wrong name, just delete in add one newly!  
+> If you delete some element, and you saved your file, you can't work with that element anymore. So please be careful when you delete it.  
 
 ## Property  
 > The property supports following special scheme.
