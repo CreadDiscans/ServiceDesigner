@@ -39,20 +39,20 @@
 > * _design.save.json_ be used when opening file in **_ServiceDesigner_**. You can update and save design file through this json file.  
 > * _design.style_ be used when set style or css of each component.  
 
-#### Save File  
+#### * Save File  
 ![SavingFile](./asset/img/savingFile.gif)  
 
 > * Click the _file_ menu and _save_. (The short cut key is _ctrl_ + _s_)  
 > * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 > * If you already created _design_ directory before, just save it.
 
-#### Open File  
+#### * Open File  
 ![OpeningFile](./asset/img/openingFile.gif)  
 
 > * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
 > * Select the _design.save.json_ file and open it.
 
-#### Other Fuctions of File Menu 
+#### * Other Fuctions of File Menu 
 ##### 1. _Save to another folder_  
 > You can move newly updated design files to another folder and save them through this function. (The short cut key is _ctrl_ + _shift_ + _s_)
 ##### 2. _reload_
@@ -171,9 +171,8 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
-> There are 
-
 ### Property Detail
+> There are 
 
 
 ## Fuction
