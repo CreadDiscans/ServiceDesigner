@@ -1,5 +1,5 @@
 <!-- TUTORIAL -->
-<span style="fontSize: 100px;"> ServiceDesigner Tutorial <span>
+<span style="font-size: 50px;"> ServiceDesigner Tutorial <span>
 ## Contents
 * [1.Menu](#1.menu)
     * [File](#file)  
