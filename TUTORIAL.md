@@ -1,7 +1,7 @@
 <!-- TUTORIAL -->
 # ServiceDesigner Tutorial
 ## Contents
-* [Menu](#menu)
+* [1.Menu](#1.menu)
     * [File](#file)  
         * [Save File](#save-file)
         * [Open File](#open-file)
@@ -31,7 +31,7 @@
 
 
 
-## Menu
+## 1.Menu
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
@@ -54,7 +54,8 @@
 
 ### Other Fuctions of File Menu 
 #### 1. _Save to another folder_  
-> You can move newly updated design files to another folder and save them through this function. (The short cut key is _ctrl_ + _shift_ + _s_)
+> You can move newly updated design files to another folder and save them through this function.  
+> (The short cut key is _ctrl_ + _shift_ + _s_)
 #### 2. _reload_
 > Reload **_ServiceDesigner_**.
   
@@ -82,7 +83,7 @@
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
 > * Right-click and click _delete_ whatever you want, like other functions. 
-> * Just in case, let's imagine the situation that you deleteed some group or component.
+> * Just in case, let's imagine the situation that you deleted some group or component.
 > * _However_ it was accident, not you really wanted.
 > * Don't be panic already! Please open your file again, before you save it.
 > * Then you can check there will be a group or component which you deleted before reopening it.
@@ -130,14 +131,14 @@
 > There are **eight** type of icon libraries that you can use through React Icons.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 > * Set element's name as the name of library's icon what you want to use.
-> * Then set size, color and other properties as you want to at the Property tab if you want.
+> * Then set size, color and other properties as you want at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-> * Before you use React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
+> * Before use React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > * You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
 > * Just click the button what you want to set.  
 > * Then right-click and add element and input the name what you will use. It's really simple.  
@@ -155,7 +156,7 @@
 ### Delete  
 
 > * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
-> * If you deleted some element, and saved your file already, you can't work with that element anymore.  
+> * If you deleted some element and saved your file already, you can't work with that element anymore.  
 > * So please be careful when you delete element or component. 
 
 ## **Editor**  
