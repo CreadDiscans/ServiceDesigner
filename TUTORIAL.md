@@ -4,12 +4,12 @@
 * [File](#file)  
     * [Save File](#save-file)
     * [Open File](#open-file)
-    * [Other Features of File Menu](#other-features-of-file-menu)
+    * [Other Fuctions of File Menu](#other-functions-of-file-menu)
 * [Components](#components)  
     * [Create](#create)
     * [Rename](#rename)
     * [Delete](#delete)
-    * [Other Features of Components Tab](#other-features-of-components-tab)
+    * [Other Fuctions of Components Tab](#other-functions-of-components-tab)
 * [Element](#element)  
     * [HTML](#html)  
     * [Reactstrap](#reactstrap)  
@@ -17,7 +17,7 @@
     * [React Native](#react-native)  
     * [RN Elements](#rn-elements)  
 * [Property](#property)  
-* [Feature](#feature)
+* [Fuction](#function)
     * [State](#state)
     * [Color](#color)
     * [Asset](#asset)
@@ -46,9 +46,9 @@
 > * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
 > * Select the _design.save.json_ file and open it.
 
-### Other Features of File Menu 
+### Other Fuctions of File Menu 
 #### 1. _Save to another folder_  
-> You can move newly updated design files to another folder and save them through this feature. (The short cut key is _ctrl_ + _shift_ + _s_)
+> You can move newly updated design files to another folder and save them through this function. (The short cut key is _ctrl_ + _shift_ + _s_)
 #### 2. _reload_
 > Reload **_ServiceDesigner_**.
   
@@ -74,20 +74,20 @@
 ### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
-> * Right-click and click _delete_ whatever you want, like other features. 
+> * Right-click and click _delete_ whatever you want, like other functions. 
 > * Just in case, let's imagine the situation that you deleteed some group or component.
 > * _However_ it was accident, not you really wanted.
 > * Don't be panic already! Please open your file again, before you save it.
 > * Then you can check there will be a group or component which you deleted before reopening it.
 
-### Other Features of Components Tab  
+### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
 ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
-> There are **three** main featueres in these short cuts : _create group_, _create component_, _collapse groups_.  
-> * _create group_ & _create component_ : Same function of Create.  
-> * _collapse groups_ : Collapse all groups in the **Components** tab.  
+> There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
+> * _create group_ & _create component_ are same function of Create.  
+> * _collapse groups_ collapses all groups in the **Components** tab.  
 
 #### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
@@ -118,13 +118,15 @@
 ![ReactIcons](./asset/img/reactIcons.gif)  
 
 > There are **eight** type icons that you can use through React Icons Library.
-> : _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> Set element's name as the name of icon what you want to use.
+> _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
+> Set element's name as the name of library's icon what you want to use.
 > Then set size, color and other properties as you want to at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
+![React Native](./asset/img/reactNative.gif)  
+
 - react native
 
 ### RN Elements  
@@ -140,7 +142,7 @@
 
 
 
-## Feature
+## Fuction
 
 ### State  
 > The scheme is json.  
