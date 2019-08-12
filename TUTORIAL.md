@@ -159,11 +159,12 @@
 > There is an editor on the right side of **_ServiceDesigner_** to handle property.  
 > When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
 > * _name_ is for setting name of element.  
->> Check your element that you set it's name. You can check the name of element in element's tab as you set.  
->> You can call the element by name when you extended design component to your project's component.  
+>> You can check the name of element in **Elements** tab as you set.  
+>> You will use _name_ to call the element by it's name when you extended design component to your project's component.  
 > * _style_ is for setting style of element.  
->> If you want to set style of each element, set style value as object in here.
->> Also you can set style per if condition's result value : _true_ or _false_.  
+>> If you want to set style of each element, just fill out as object format.  
+>> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
+
 
 
 ## Fuction
