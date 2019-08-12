@@ -32,35 +32,35 @@
 
 
 ## Menu
-### File  
+## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
 > * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
 > * _design.save.json_ be used when opening file in **_ServiceDesigner_**. You can update and save design file through this json file.  
 > * _design.style_ be used when set style or css of each component.  
 
-#### * Save File  
+### Save File  
 ![SavingFile](./asset/img/savingFile.gif)  
 
 > * Click the _file_ menu and _save_. (The short cut key is _ctrl_ + _s_)  
 > * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 > * If you already created _design_ directory before, just save it.
 
-#### * Open File  
+### Open File  
 ![OpeningFile](./asset/img/openingFile.gif)  
 
 > * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
 > * Select the _design.save.json_ file and open it.
 
-#### * Other Fuctions of File Menu 
-##### 1. _Save to another folder_  
+### Other Fuctions of File Menu 
+#### 1. _Save to another folder_  
 > You can move newly updated design files to another folder and save them through this function. (The short cut key is _ctrl_ + _shift_ + _s_)
-##### 2. _reload_
+#### 2. _reload_
 > Reload **_ServiceDesigner_**.
   
 
 
-### Components  
+## Components  
 **Components** tab is for managing _group_ or _component_. 
 
 #### Create  
