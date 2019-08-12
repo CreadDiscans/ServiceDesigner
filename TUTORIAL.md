@@ -138,7 +138,7 @@
 > * You must input the name in this function also.
 
 ### RN Elements  
-![RN Elements](./asset/img/rNElements.gif)  
+![RN Elements](./asset/img/reactNativeElements.gif)  
 
 > * If you want to implement and check any detail of project's UI, set the screen as mobile.  
 > * After that, right-click and add element just like adding other element.  
