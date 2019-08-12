@@ -109,7 +109,7 @@
 ### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
-> **ReactStrap** is really helpfull library when you use React and set UI design simply by using bootstrap library.  
+> **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
 > You can use Bootstrap 4 components like React components in this tab.
 
 > * You can use ReactStrap Library in **_ServiceDesigner_**.  
@@ -119,7 +119,9 @@
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
-![ReactIcons](./asset/img/reactIcons.gif)  
+![React Icons](./asset/img/reactIcons.gif)  
+
+> **React Icons** provides free open srouce icons, so you can use them freely anywhere you want. 
 
 > There are **eight** type icons that you can use through React Icons Library.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
@@ -139,7 +141,7 @@
 ### RN Elements  
 ![RN Elements](./asset/img/rNElements.gif)  
 
-> * You have to set the screen as mobile to not overlook any detail of your UI.
+> * You have to set the screen as mobile to implement and check any detail of your UI.
 > * After that, right-click and add element just like adding other element.  
 > * Set the property if it is necessary.
 
