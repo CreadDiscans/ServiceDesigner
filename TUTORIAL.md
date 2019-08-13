@@ -190,8 +190,8 @@
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
 > * _Key_ is for setting the keyName of property. For example, _name_, _stlye_ are all the keys for the properties. 
->> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.
->> So at least, you have to set _Key_'s value when adding property.
+>> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
+>> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  * _String_ or _Number_ can only have value which it's type is string or number.  
 >>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
@@ -231,11 +231,11 @@
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
 ## State  
-> In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component.  
+> * In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component.  
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
 >> The example will be [Extend](#extend). Please check it.  
-> And also, you can use this state value as property's value or for if condition.  
+> * And also, you can use this state value as property's value or for if condition.  
 >> [Other Functions of Editor](#other-functions-of-editor) will help you to how to use _state_ in properties.  
 <!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
 <!-- > So give it a try, and work with your project more conveniently!   -->
