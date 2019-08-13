@@ -250,23 +250,23 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ### 1. _Create_
 > * Pick any color that you want to use from the _Color Picker_, and input the name.  
 > * On the other hand, just input _Color Code_ or _RGB_.   
-> * You can check costumed color list from the left side of the color picker.  
-> * In this case, you can't rename costumed color, so please be careful when you create it.  
+> * You can check color variables list from the left side of the color picker.  
+> * In this case, you can't rename color variable, so please be careful when you create it.  
 
 ### 2. _Update_
-> * If you want to change the color value, select the one from the list.  
+> * If you want to change variable's value, select the one from the list.  
 > * Then set color value and click the _Update button_.  
 > * You can check the _Color Code_ and _RGB_ value changed at the list simply.
 
 ### 3. _Delete_
-> * When you want to delete some color, select it and click the _Delete button_.
+> * When you want to delete some variable, select it from the list and click the _Delete button_.
 
 ### 4. _Cancel_
-> * After done with working costumed color, click the _Cancel button_.
-> * Then you can create or update other color again.
+> * After done with working some color variable, click the _Cancel button_.
+> * Then you can create or update other variables again.
 
 ### 5. _Usage_  
-> * You can use costumed color by calling it as property's value : _Color.XXX_.
+> * You can use color variable by calling it as property's value : _Color.XXX_.
 > ```
 > Color.XXX  
 > ```
@@ -275,18 +275,18 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 **Asset** tab support Asset Variables.  
 
 ### 1. _Create_  
-> * Set name for the asset image and click the _Create button_.  
-> * If you don't set name, nothing will happen. So please be aware that you have to set name first.  
+> * Set name for the asset variable and click the _Create button_.  
+> * If you don't set name, nothing will happen. So please be aware that you have to set it's name first.  
 
 ### 2. _Delete_  
-> * If you want to delete asset image file, just select one and click the _Delete button_.  
+> * If you want to delete variable, just select one from the list and click the _Delete button_.  
 
 ### 3. _Cancel_  
-> * After done with working costumed color, click the _Cancel button_.  
-> * Then you can create or update other color again.
+> * After checking with preivew of asset variable, click the _Cancel button_.  
+> * Then you can create or check other variables again.
 
 ### 4. _Usage_  
-> * You can use asset image by calling it as property's value : _Asset.XXX_.
+> * You can use asset variable by calling it as property's value : _Asset.XXX_.
 > ```
 > Asset.XXX  
 > ```
