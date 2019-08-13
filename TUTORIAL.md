@@ -236,20 +236,37 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
->> [Other Functions of Editor](#other-functions-of-editor) will help you know to how to use _state_ in properties.  
+>> [Other Functions of Editor](#other-functions-of-editor) will help you know how to use _state_ in properties.  
 <!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
 <!-- > So give it a try, and work with your project more conveniently!   -->
 
 ## Color
-> Support Color variables. The variables should be defined color tab.  
+**Color** tab support Color variables. 
+
+![Color](./asset/img/color.gif)  
+
+### 1. _Create_
+> * Pick any color that you want to use at the _Color Picker_, and input the name.  
+> * On the other hand, just input _Color Code_ in _Hex_ or _RGB_.   
+> * You can check costumed color list from the left side of color picker.  
+> * In this situation, you can't rename costumed color, so please be careful when you create it.
+
+### 2. _Update_
+> * If you want to change the color value, select the one from the list.  
+> * Then set color value. You can check the _Color Code_ and _RGB_ value changed.
+
+### 3. _Delete_
+> * When you want to delete one of them, click the _Delete button_.
+
+### 4. _Cancel_
+> * After done with your costumed color, click the _Cancel button_.
+> * Then you can create or work with other color.
+
+### 5. Usage
 ```
 Color.XXX
 ```
-```css
-{  
-    "backgroundColor": "Color.red"  
-}
-```
+
 
 ## Asset
 > Support Asset variables. The variables should be defined asset tab.
@@ -270,6 +287,11 @@ Asset.XXX
   Color.XXX : Support Color variables. The variables should be defined color tab.
   Asset.XXX : Support Asset variables. The variables should be defined asset tab.
   ex ) { "backgroundColor": "Color.red" }
+```css
+{  
+    "backgroundColor": "Color.red"  
+}
+```
 
 - Property : the property supports following special shceme.
 
