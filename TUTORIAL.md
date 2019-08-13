@@ -5,13 +5,13 @@
     * [File](#file)  
         * [Save File](#save-file)
         * [Open File](#open-file)
-        * [Other Fuctions of File Menu](#other-functions-of-file-menu)
+        * [Other Functions of File Menu](#other-functions-of-file-menu)
 * [Explorer](#explorer)
     * [Components](#components)  
         * [New](#new)
         * [Rename](#rename)
         * [Delete](#delete)
-        * [Other Fuctions of Components Tab](#other-functions-of-components-tab)
+        * [Other Functions of Components Tab](#other-functions-of-components-tab)
     * [Element](#element)  
         * [HTML](#html)  
         * [Reactstrap](#reactstrap)  
@@ -21,7 +21,8 @@
 * [Editor](#editor)
     * [Properties](#properties)  
     * [Property Detail](#property-detail)
-* [Other Fuctions](#other-functions)
+    * [Other Functions of Editor](#other-functions-of-editor)
+* [Other Functions](#other-functions)
     * [State](#state)
     * [Color](#color)
     * [Asset](#asset)
@@ -52,7 +53,7 @@
 > 1. Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
 > 1. Select the _design.save.json_ file and open it.
 
-### Other Fuctions of File Menu 
+### Other Functions of File Menu 
 #### 1. _Save to another folder_  
 > You can move newly updated design files to another folder and save them through this function.  
 > (The short cut key is _ctrl_ + _shift_ + _s_)
@@ -192,26 +193,36 @@
 >>  * _String_ or _Number_ can only have value which it's type is string or number.  
 >>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
 >>  * _Object_'s value should be started by '{' and ended by '}'. And you can use _if condition_ in this type.  
->>  * _Fuction_ or _Variable_'s value has to be function's name or variable's name.
+>>  * _Function_ or _Variable_'s value has to be function's name or variable's name.
 > * _Value_ is different per _Type_ of property.  
 
-### Detail of Using _If Condition_
+## Other Functions of Editor  
+### 1. _If Condition_  
 ![IfCondition](./asset/img/ifCondition.gif)  
 
 > When you use _Object_ property, maybe you want to use _if condition_, but don't know how.  
-> Don't give up already! It's really simple. Just follow this explanation, then you can apply it wherever you want!
-> you can check there is a _number(zero) and plus button_ upperside of blank where you have to input style value.  
-> Also, there is textinput blank which has 'Condition' placeholder and _trash button_ below the buttons.  
-> 
+> Don't give up already! It's really simple. Just follow this explanation, then you can apply it wherever you want!  
+> #### Add  
+>> As you can see, there is a _number(zero) and plus button_ upperside of blank where you have to input style value.  
+>> So click _the plus button_, then there will be added new number button.
+>> Then, you can input condition at the below textinput which has 'Condition' placeholder.  
+>> For example  
+<!-- >> Also, there is a textinput blank which has 'Condition' placeholder.   -->
+<!-- >> But when the number value is 0, you can't input any text in _Condition_ textinput. -->
+
+> #### Delete  
+>> If you want to delete some _if condition_, just click _trash icon button_.  
 
 <!-- > This will make you know how to use it simply.   -->
 <!-- >> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_. -->
 
+### 2. _For Loop_  
 
-# Other Fuctions
+
+# Other Functions  
 
 ## State  
-> If you used _React_ or _React Native_ framework before, you already know whatis state, and how to use it.  
+> If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.  
 > In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component to use.  
 > In the case that you have to change state's value, use setState at your project's component.  
 > Otherwise, just leave it. It will call design component's state value automatically to your project.  
