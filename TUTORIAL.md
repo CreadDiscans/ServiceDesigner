@@ -233,7 +233,7 @@
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
 > Before continuing, there are some overlapped function in these _Other Functions_.  
-> For example, _Delete_ or _Cancel_ in _Color_, _Asset_ and _Style_.  
+> _Delete_ or _Cancel_ in _Color_, _Asset_ and _Style_ are those.  
 > It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color) again, and follow it.  
 
 ## State  
@@ -295,6 +295,15 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 <!-- > You can add style variable by setting as like class's style code, call and use it in this tab.   -->
 
 ### 1. _Add_  
+> * Set name for style variable and set style code as like class's style code in javascript langauge.
+> For example )  
+>```css
+>.className {  
+>    "backgroundColor": "white";
+>    "width": "100%";
+>    "height": "100%";
+>}
+>```
 
 ### 2. _Update_  
 
