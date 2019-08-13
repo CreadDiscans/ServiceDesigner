@@ -194,9 +194,10 @@
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  * _String_ or _Number_ can only have value which it's type is string or number.  
->>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
->>  * _Object_'s value should be started by '{' and ended by '}'. And you can use _if condition_ in this type.  
->>  * _Function_ or _Variable_'s value has to be function's name or variable's name.
+>>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.  
+>>  * _Object_'s value should be started by _{_ and ended by _}_. And you can use _if condition_ in this type.  
+>>  * _Function_ is for handling event like _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.
+>>  * _Variable_'s value has to be variable's name including of _state_.  
 > * _Value_ is different per _Type_ of property.  
 
 ## Other Functions of Editor  
@@ -234,14 +235,12 @@
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
 ## State  
-> * In **_ServiceDesigner_**, you can set **State** as json format, and use it in your project by extending design component.  
+> * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
 >> The detailed explanation of using _extending_ will be [Extend](#extend). Please check it.  
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
->> [Other Functions of Editor](#other-functions-of-editor) will help you know how to use _state_ in properties.  
-<!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
-<!-- > So give it a try, and work with your project more conveniently!   -->
+>> [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
 ## Color
 **Color** tab support Color Variables.  
@@ -266,7 +265,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * After done with working costumed color, click the _Cancel button_.
 > * Then you can create or update other color again.
 
-### 5. Usage
+### 5. _Usage_  
 > * You can use costumed color by calling it as property's value : _Color.XXX_.
 > ```
 > Color.XXX  
@@ -274,9 +273,23 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ## Asset
 **Asset** tab support Asset Variables.  
-```
-Asset.XXX
-```
+
+### 1. _Create_  
+> * Set name for the asset image and click the _Create button_.
+> * 
+
+### 2. _Delete_  
+
+### 3. _Cancel_  
+> * After done with working costumed color, click the _Cancel button_.
+> * Then you can create or update other color again.
+
+### 4. _Usage_  
+> * You can use costumed asset by calling it as property's value : _Asset.XXX_.
+> ```
+> Asset.XXX  
+> ```
+
 ## Css
 
 ## Style
