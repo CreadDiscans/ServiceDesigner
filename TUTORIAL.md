@@ -275,17 +275,18 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 **Asset** tab support Asset Variables.  
 
 ### 1. _Create_  
-> * Set name for the asset image and click the _Create button_.
-> * 
+> * Set name for the asset image and click the _Create button_.  
+> * If you don't set name, nothing will happen. So please be aware that you have to set name first.  
 
 ### 2. _Delete_  
+> * If you want to delete asset image file, just select one and click the _Delete button_.  
 
 ### 3. _Cancel_  
-> * After done with working costumed color, click the _Cancel button_.
+> * After done with working costumed color, click the _Cancel button_.  
 > * Then you can create or update other color again.
 
 ### 4. _Usage_  
-> * You can use costumed asset by calling it as property's value : _Asset.XXX_.
+> * You can use asset image by calling it as property's value : _Asset.XXX_.
 > ```
 > Asset.XXX  
 > ```
