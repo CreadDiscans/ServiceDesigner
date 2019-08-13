@@ -21,7 +21,7 @@
 * [Editor](#editor)
     * [Properties](#properties)  
     * [Property Detail](#property-detail)
-* [Fuction](#function)
+* [Other Fuctions](#other-functions)
     * [State](#state)
     * [Color](#color)
     * [Asset](#asset)
@@ -37,7 +37,7 @@
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
 > * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component of your project.  
 > * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
-> * _design.style_ is for setting style of your elements in **_ServiceDesigner_**.  
+> * _design.style_ is for setting style of your elements in **_ServiceDesigner_** freely as way you want.  
 
 ### Save File  
 ![SavingFile](./asset/img/savingFile.gif)  
@@ -174,13 +174,13 @@
 
 ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > If you want to add or delete property, just right-click and select what you want to do.  
-> 1. _Add Property_  
+> ### 1. _Add Property_  
 >> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
 >> After filling out key and the other's values, please click the _save button_.  
 >> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
 >> And be careful! If you added properties that element doesn't have, it won't work properly way.  
 >> Just like add text property and set the value in View element, but nothing happened. 
-> 2. _Delete Property_  
+> ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_. 
 
 ## Property Detail
@@ -189,21 +189,36 @@
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.
 >> So at least, you have to set _Key_'s value when adding property.
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
->> _String_ or _Number_ can only have value which it's type is string or number.  
->> _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
->> _Object_'s value should be started by '{' and ended by '}'. And you can use _if condition_ in this type.  
->> _Fuction_ or _Variable_'s value has to be function's name or variable's name.
-> * _Value_ is different per _Type_ of property.
+>>  * _String_ or _Number_ can only have value which it's type is string or number.  
+>>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
+>>  * _Object_'s value should be started by '{' and ended by '}'. And you can use _if condition_ in this type.  
+>>  * _Fuction_ or _Variable_'s value has to be function's name or variable's name.
+> * _Value_ is different per _Type_ of property.  
+
+### Detail of Using _If Condition_
+![IfCondition](./asset/img/ifCondition.gif)  
+
+> When you use _Object_ property, maybe you want to use _if condition_, but don't know how.  
+> Don't give up already! It's really simple. Just follow this explanation, then you can apply it wherever you want!
+> you can check there is a _number(zero) and plus button_ upperside of blank where you have to input style value.  
+> Also, there is textinput blank which has 'Condition' placeholder and _trash button_ below the buttons.  
+> 
+
+<!-- > This will make you know how to use it simply.   -->
 <!-- >> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_. -->
 
 
+# Other Fuctions
 
-# Fuction
+## State  
+> If you used _React_ or _React Native_ framework before, you already know whatis state, and how to use it.  
+> In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component to use.  
+> In the case that you have to change state's value, use setState at your project's component.  
+> Otherwise, just leave it. It will call design component's state value automatically to your project.  
+> And also, you can use this state value as property's value or for if condition.  
+> So give it a try, and work with your project more conveniently!  
 
-### State  
-> The scheme is json.  
-
-### Color
+## Color
 > Support Color variables. The variables should be defined color tab.  
 ```
 Color.XXX
@@ -214,15 +229,15 @@ Color.XXX
 }
 ```
 
-### Asset
+## Asset
 > Support Asset variables. The variables should be defined asset tab.
 ```
 Asset.XXX
 ```
-### Css
+## Css
 
-### Style
-
+## Style
+> You can add style which used frequently by setting style code as like setting class's style, call and use it.
 
 # Extend
 
