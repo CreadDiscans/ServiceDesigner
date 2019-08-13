@@ -185,16 +185,17 @@
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
-> * _Key_ is for set the keyName of property. For example, _name_, _stlye_ are all the keys for the property. 
->> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_.
+> * _Key_ is for setting the keyName of property. For example, _name_, _stlye_ are all the keys for the properties. 
+>> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.
 >> So at least, you have to set _Key_'s value when adding property.
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
->> _Number_ can have value which it's type is number.  
->> _Boolean_'s value is checkbox.  
->> _Object_'s value should be started by '{' and ended by '}'.  
+>> _String_ or _Number_ can only have value which it's type is string or number.  
+>> _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.
+>> _Object_'s value should be started by '{' and ended by '}'. And you can use _if condition_ in this type.  
+>> _Fuction_ or _Variable_'s value has to be function's name or variable's name.
 > * _Value_ is different per _Type_ of property.
->> * If you set the type function or variable, you have to set value to function's name or variable's name.
->> * 
+<!-- >> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_. -->
+
 
 
 # Fuction
