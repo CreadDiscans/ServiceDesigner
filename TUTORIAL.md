@@ -210,7 +210,7 @@
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
 >> * If you use state value, you have to put _this.state._ infront of state's name.  
->> For example )  
+>> For example )
 >>```
 this.state.XXX
 >>```
