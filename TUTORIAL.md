@@ -234,9 +234,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component.  
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
->> The example will be [Extend](#extend). Please check it.
+>> The example will be [Extend](#extend). Please check it.  
 > And also, you can use this state value as property's value or for if condition.  
->> [Other Functions of Editor](#other-functions-of-editor) will help you to how to use _state_ in properties.
+>> [Other Functions of Editor](#other-functions-of-editor) will help you to how to use _state_ in properties.  
 <!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
 <!-- > So give it a try, and work with your project more conveniently!   -->
 
