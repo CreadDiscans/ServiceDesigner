@@ -265,9 +265,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 5. Usage
 > * You can use costumed color by calling it as property's value : _Color.XXX_.
-> ```
-Color.XXX
-> ```
+> ```  
+Color.XXX  
+> ```  
 
 ## Asset
 **Asset** tab support Asset Variables.  
