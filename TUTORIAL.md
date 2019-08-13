@@ -209,7 +209,7 @@
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> * If you use state value, you have to put 'this.state.' infront of state's name.  
+>> * If you use state value, you have to put '_this.state._' infront of state's name.  
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
@@ -228,14 +228,17 @@
 
 
 # Other Functions  
+There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
 ## State  
-> If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.  
-> In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component to use.  
-> In the case that you have to change state's value, use setState at your project's component.  
-> Otherwise, just leave it. It will call design component's state value automatically to your project.  
+> In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component.  
+>> In the case that you have to change state's value, use setState at your project's component.  
+>> Otherwise, just leave it. It will call design component's state value automatically to your project.  
+>> The example will be [Extend](#extend). Please check it.
 > And also, you can use this state value as property's value or for if condition.  
-> So give it a try, and work with your project more conveniently!  
+>> [Other Functions of Editor](#other-functions-of-editor) will help you to how to use _state_ in properties.
+<!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
+<!-- > So give it a try, and work with your project more conveniently!   -->
 
 ## Color
 > Support Color variables. The variables should be defined color tab.  
