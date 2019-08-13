@@ -172,11 +172,16 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
+![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > If you want to add or delete property, just right-click and select what you want to do.  
-> 1. When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
->> If you ended to fill out key and the other values, please click the _save button_.  
->> If you don't click the _save button_, there won't be new property. So please remember to click this button. 
-> 2. For the otherwise, if you want to delete property, just click _Delete Property_.
+> 1. _Add Property_  
+>> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
+>> After filling out key and the other's values, please click the _save button_.  
+>> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
+>> And be careful! If you added properties that element doesn't have, it won't work properly way.  
+>> Just like add text property and set the value in View element, but nothing happened. 
+> 2. _Delete Property_  
+>> If you want to delete property, just click _Delete Property_. 
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
