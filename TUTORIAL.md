@@ -36,22 +36,21 @@
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
 > * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component of your project.  
-> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**.  
->> You can update and save design file through this json file.  
+> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_**.  
 
 ### Save File  
 ![SavingFile](./asset/img/savingFile.gif)  
 
-> * Click the _file_ menu and _Save file_. (The short cut key is _ctrl_ + _s_)  
-> * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
-> * If you already created _design_ directory before, just save it.
+> 1. Click the _file_ menu and _Save file_. (The short cut key is _ctrl_ + _s_)  
+> 1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
+> 1. If you already created _design_ directory before, just save it.
 
 ### Open File  
 ![OpeningFile](./asset/img/openingFile.gif)  
 
-> * Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
-> * Select the _design.save.json_ file and open it.
+> 1. Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
+> 1. Select the _design.save.json_ file and open it.
 
 ### Other Fuctions of File Menu 
 #### 1. _Save to another folder_  
@@ -69,25 +68,25 @@
 ### New  
 ![CreatingComponents](./asset/img/creatingComponents.gif)  
 
-> * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
-> * If you don't input new _group_ or _component_'s name, they will not be created.  
-> * So please remember to _input the group or component's name_.  
-> * Also, you can use short cut buttons to create group or component.
+> Right-click at the **Components** tab and click _New Group_ or _New Component_.  
+> If you don't input new _group_ or _component_'s name, they will not be created.  
+> So please remember to _input the group or component's name_.  
+> Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 ![RenamingComponents](./asset/img/renamingComponents.gif)  
 
-> * Just like _create_, right-click and click _rename_ at the file that you want change the name.
-> * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
+> Just like _create_, right-click and click _rename_ at the file that you want change the name.
+> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
-> * Right-click and click _delete_ like other functions. 
-> * Just in case, let's imagine the situation that you deleted some group or component.
-> * _However_ it was just an accident, not you really wanted.
-> * Don't be panic already! Please open your file again, before you save it.
-> * Then you can check there will be a group or component which you deleted before reopening it.
+> Right-click and click _delete_ like other functions. 
+> Just in case, let's imagine the situation that you deleted some group or component.
+> _However_ it was just an accident, not you really wanted.
+> Don't be panic already! Please open your file again, before you save it.
+> Then you can check there will be a group or component which you deleted before reopening it.
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
@@ -110,15 +109,15 @@
 ### HTML  
 ![HTML](./asset/img/html.gif)  
 
-> * Using html tag just like in your coding editor.  
-> * Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
-> * Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
+> Using html tag just like in your coding editor.  
+> Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
+> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
 ### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
 
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
-> You can use Bootstrap 4 components like React components in this tab.  
+> You can use Bootstrap 4 components in this function.  
 > You don't have to import each components whenever you use it anymore!  
 > Just input the name of one of ReactStrap's components, and set property if you want.  
 
@@ -130,7 +129,7 @@
 > **React Icons** provides free open srouce icons for React framework.  
 > There are **eight** type of icon libraries that you can use through React Icons.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> Set element's name as the name of library's icon what you want to use.
+> Set element's name as the name of library's icon's name what you want to use.  
 > Then set size, color and other properties as you want at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
@@ -138,26 +137,26 @@
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-> * Before use React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
-> * You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
-> * Just click the button what you want to set.  
-> * Then right-click and add element and input the name of compomnent what you want to use. It's really simple.  
-> * You must input the name in this function also.
+> Before using React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
+> You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
+> Just click the button what you want to set.  
+> Then right-click and add element and input the name of compomnent what you want to use. It's really simple.  
+> You must input the name in this function also.
 
 ### RN Elements  
 ![RN Elements](./asset/img/reactNativeElements.gif)  
 
-> * If you want to implement and check any detail of project's UI, set the screen as mobile.  
-> * After that, right-click and add element just like adding other element.  
-> * Set the property if it is necessary.
+> 1. If you want to implement and check any detail of project's UI, set the screen as mobile.  
+> 1. After that, right-click and add element just like adding other element.  
+> 1. Set the property if it is necessary.
 
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
 ### Delete  
 
-> * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
-> * If you deleted some element and saved your file already, you can't work with that element anymore.  
-> * So please be careful when you delete element. 
+> You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
+> If you deleted some element and saved your file already, you can't work with that element anymore.  
+> So please be careful when you delete element. 
 
 # Editor  
 
@@ -166,18 +165,18 @@
 
 > There is an editor on the right side of **_ServiceDesigner_** to manage properties.  
 > When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
-> * _name_ is for setting name of element.  
+> * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
 >> You will use _name_ to call the element when you extended design component to your project's component.  
-> * _style_ is for setting style of element.  
+> * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
 > If you want to add or delete property, just right-click and select what you want to do.  
-> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
+> 1. When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
 >> If you ended to fill out key and the other values, please click the _save button_.  
->> If you don't click the _save button_, there won't be new property. So please remember it. 
-> * For the otherwise, if you want to delete property, just click _Delete Property_.
+>> If you don't click the _save button_, there won't be new property. So please remember to click this button. 
+> 1. For the otherwise, if you want to delete property, just click _Delete Property_.
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
@@ -186,8 +185,8 @@
 >> So at least, you have to set _Key_'s value when adding property.
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >> _Number_ can have value which it's type is number.  
->> _Boolean_'s value is checkbox.
->> _Object_'s value should be started by '{' and ended by '}'.
+>> _Boolean_'s value is checkbox.  
+>> _Object_'s value should be started by '{' and ended by '}'.  
 > * _Value_ is different per _Type_ of property.
 >> * If you set the type function or variable, you have to set value to function's name or variable's name.
 >> * 
