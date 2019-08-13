@@ -139,7 +139,7 @@
 ### React Native  
 ![React Native](./asset/img/reactNative.gif)  
 
-> Before using React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
+> Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
 > Just click the button what you want to set.  
 > Then right-click and add element and input the name of compomnent what you want to use. It's really simple.  
@@ -160,12 +160,11 @@
 >> So please be careful when you delete element. 
 
 # Editor  
-**Editor** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
+**Editor** tab is for managing properties.
 
 ## Properties
 ![Properties](./asset/img/properties.gif)  
 
-> There is an editor on the right side of **_ServiceDesigner_** to manage properties.  
 > When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
 > * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
@@ -183,10 +182,10 @@
 >> After filling out key and the other's values, please click the _save button_.  
 >> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
 >> And be careful! If you added properties that element doesn't have, it won't work properly way.  
->> Just like add text property and set the value in View element, but nothing happened. 
+>> Just like add text property and set the value in View element, but nothing happened.  
 
 > ### 2. _Delete Property_  
->> If you want to delete property, just click _Delete Property_. 
+>> If you want to delete property, just click _Delete Property_.  
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
@@ -206,12 +205,12 @@
 
 #### Add  
 > As you can see, there are _zero button_ and _plus button_.  
-> So click the _plus button_, then there will be added new numbered button.  
-> After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
-> Then you can input condition at the below textinput which has 'Condition' placeholder.  
-> Input any _if condition_ which you want to use it.  
-> If you use state value, you have to put 'this.state.' infront of state's name.
-> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
+> 1. So click the _plus button_, then there will be added new numbered button.  
+> 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
+> 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
+> 1. Input any _if condition_ which you want to use it.  
+>> If you use state value, you have to put 'this.state.' infront of state's name.  
+>> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
 > If you want to delete some _if condition_, just click _trash icon button_.  
@@ -221,11 +220,10 @@
 
 > If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self.  
 > You can set elements automatically and conveniently by using _for loop_.  
-> Add property which has _for_ as Key, and Type is Variable.  
-> And set the Value the name of _array_ or _array object_ state.  
-> You can check the element is added as many as _array's length_.  
-> If you want to use the _array's value_, set Value as _item0_ or _item0.XXX_.  
-> _item0_ is mapped value from the _state array_.  
+> 1. Add property which has _for_ as Key, and Type is Variable.  
+> 1. And set the Value the name of _array_ or _array object_ state.  
+> 1. As the result, you can check the element is added as many as _array's length_.  
+> 1. If you want to use the _array's value_, set Value as '_item0_' or '_item0.XXX_', which is mapped value from the _state array_.  
 
 
 
