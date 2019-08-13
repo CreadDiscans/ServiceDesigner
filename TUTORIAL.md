@@ -205,12 +205,12 @@
 
 #### Add  
 > As you can see, there are _zero button_ and _plus button_.  
-> 1. So click the _plus button_, then there will be added new numbered button.  
+> 1. At first, click the _plus button_, then there will be added new numbered button.  
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> If you use state value, you have to put 'this.state.' infront of state's name.  
->> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
+>> * If you use state value, you have to put 'this.state.' infront of state's name.  
+>> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
 > If you want to delete some _if condition_, just click _trash icon button_.  
@@ -223,7 +223,7 @@
 > 1. Add property which has _for_ as Key, and Type is Variable.  
 > 1. And set the Value the name of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
-> 1. If you want to use the _array's value_, set Value as '_item0_' or '_item0.XXX_', which is mapped value from the _state array_.  
+> 1. If you want to use the _array's value_, set Value as '_item0_' or '_item0.XXX_', which is mapped from the _state array_.  
 
 
 
