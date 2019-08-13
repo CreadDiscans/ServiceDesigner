@@ -209,14 +209,10 @@
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> * You can use costumed color by calling it as property's value : _Color.XXX_.
+>> * If you use state value, you have to put _this.state._ infront of state's name.
 >> ```
 >> this.state.XXX  
 >> ```
-<!-- >> * If you use state value, you have to put _this.state._ infront of state's name.
->> ```
-> this.state.XXX  
->> ``` -->
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
