@@ -8,7 +8,7 @@
         * [Other Fuctions of File Menu](#other-functions-of-file-menu)
 * [Explorer](#explorer)
     * [Components](#components)  
-        * [Create](#create)
+        * [New](#new)
         * [Rename](#rename)
         * [Delete](#delete)
         * [Other Fuctions of Components Tab](#other-functions-of-components-tab)
@@ -36,7 +36,8 @@
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
 > * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component of your project.  
-> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
+> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**.  
+>> You can update and save design file through this json file.  
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_**.  
 
 ### Save File  
@@ -65,7 +66,7 @@
 ## Components  
 **Components** tab is for managing _group_ or _component_. 
 
-### Create  
+### New  
 ![CreatingComponents](./asset/img/creatingComponents.gif)  
 
 > * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
@@ -94,7 +95,7 @@
 
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
 > There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
-> * _create group_ & _create component_ are same functions from [Create](#create).  
+> * _create group_ & _create component_ are same functions from [New](#new).  
 > * _collapse groups_ literally collapses all groups in the **Components** tab.  
 
 #### 2. _Unselect_  
@@ -118,9 +119,8 @@
 
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
 > You can use Bootstrap 4 components like React components in this tab.  
-> * You can use ReactStrap Library in **_ServiceDesigner_**.  
-> * You don't have to import each components whenever you use it anymore!  
-> * Just input the name of one of ReactStrap's components, and set property if you want.  
+> You don't have to import each components whenever you use it anymore!  
+> Just input the name of one of ReactStrap's components, and set property if you want.  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
@@ -130,8 +130,8 @@
 > **React Icons** provides free open srouce icons for React framework.  
 > There are **eight** type of icon libraries that you can use through React Icons.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> * Set element's name as the name of library's icon what you want to use.
-> * Then set size, color and other properties as you want at the Property tab if you want.
+> Set element's name as the name of library's icon what you want to use.
+> Then set size, color and other properties as you want at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
@@ -141,7 +141,7 @@
 > * Before use React Native element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > * You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
 > * Just click the button what you want to set.  
-> * Then right-click and add element and input the name what you will use. It's really simple.  
+> * Then right-click and add element and input the name of compomnent what you want to use. It's really simple.  
 > * You must input the name in this function also.
 
 ### RN Elements  
@@ -157,7 +157,7 @@
 
 > * You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
 > * If you deleted some element and saved your file already, you can't work with that element anymore.  
-> * So please be careful when you delete element or component. 
+> * So please be careful when you delete element. 
 
 # Editor  
 
@@ -173,17 +173,22 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
-> If you want to add or delete property, just right-click and select what you want to do.
-<!-- Right-click and _Add Property_ or _Delete Property_ for your element. -->
-> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.
->> * If you ended to fill out key and the other values, please click the save button.
+> If you want to add or delete property, just right-click and select what you want to do.  
+> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
+>> If you ended to fill out key and the other values, please click the _save button_.  
+>> If you don't click the _save button_, there won't be new property. So please remember it. 
 > * For the otherwise, if you want to delete property, just click _Delete Property_.
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
-> * Key is for set the keyName of property. For example, _name_, _stlye_ are all the keys for the property. 
-> * Type has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
-> * Value is different per _Type_ of property.
+> * _Key_ is for set the keyName of property. For example, _name_, _stlye_ are all the keys for the property. 
+>> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_.
+>> So at least, you have to set _Key_'s value when adding property.
+> * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
+>> _Number_ can have value which it's type is number.  
+>> _Boolean_'s value is checkbox.
+>> _Object_'s value should be started by '{' and ended by '}'.
+> * _Value_ is different per _Type_ of property.
 >> * If you set the type function or variable, you have to set value to function's name or variable's name.
 >> * 
 
