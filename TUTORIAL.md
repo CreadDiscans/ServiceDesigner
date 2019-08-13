@@ -56,7 +56,8 @@
 ### Other Functions of File Menu 
 #### 1. _Save to another folder_  
 > You can move newly updated design files to another folder and save them through this function.  
-> (The short cut key is _ctrl_ + _shift_ + _s_)
+> (The short cut key is _ctrl_ + _shift_ + _s_)  
+
 #### 2. _reload_
 > Reload **_ServiceDesigner_**.
   
@@ -154,12 +155,12 @@
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
 ### Delete  
-
 > You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
 >> If you deleted some element and saved your file already, you can't work with that element anymore.  
 >> So please be careful when you delete element. 
 
 # Editor  
+**Editor** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
 ## Properties
 ![Properties](./asset/img/properties.gif)  
@@ -169,11 +170,13 @@
 > * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
 >> You will use _name_ to call the element when you extended design component to your project's component.  
+
 > * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
 ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
+
 > If you want to add or delete property, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
 >> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
@@ -181,6 +184,7 @@
 >> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
 >> And be careful! If you added properties that element doesn't have, it won't work properly way.  
 >> Just like add text property and set the value in View element, but nothing happened. 
+
 > ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_. 
 
@@ -205,8 +209,9 @@
 > So click the _plus button_, then there will be added new numbered button.  
 > After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > Then you can input condition at the below textinput which has 'Condition' placeholder.  
-> Input any _if condition_ which you want to use it. 
-> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.
+> Input any _if condition_ which you want to use it.  
+> If you use state value, you have to put 'this.state.' infront of state's name.
+> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
 > If you want to delete some _if condition_, just click _trash icon button_.  
@@ -214,7 +219,14 @@
 ### 2. _For Loop_  
 ![ForLoop](./asset/img/forLoop.gif)  
 
-> If you have an array or object array state, you can set elements automatically by using _for loop_.
+> If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self.  
+> You can set elements automatically and conveniently by using _for loop_.  
+> Add property which has _for_ as Key, and Type is Variable.  
+> And set the Value the name of _array_ or _array object_ state.  
+> You can check the element is added as many as _array's length_.  
+> If you want to use the _array's value_, set Value as _item0_ or _item0.XXX_.  
+> _item0_ is mapped value from the _state array_.  
+
 
 
 # Other Functions  
