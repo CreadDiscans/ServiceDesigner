@@ -210,6 +210,9 @@
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
 >> * If you use state value, you have to put _this.state._ infront of state's name.  
+>> For example ) ```
+this.state.XXX
+```
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
@@ -247,23 +250,25 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 1. _Create_
 > * Pick any color that you want to use from the _Color Picker_, and input the name.  
-> * On the other hand, just input _Color Code_ in _Hex_ or _RGB_.   
+> * On the other hand, just input _Color Code_ or _RGB_.   
 > * You can check costumed color list from the left side of the color picker.  
-> * In this situation, you can't rename costumed color, so please be careful when you create it.
+> * In this case, you can't rename costumed color, so please be careful when you create it.
 
 ### 2. _Update_
 > * If you want to change the color value, select the one from the list.  
-> * Then set color value and click the _Update button_. You can check the _Color Code_ and _RGB_ value changed.
+> * Then set color value and click the _Update button_.  
+> * You can check the _Color Code_ and _RGB_ value changed at the list simply.
 
 ### 3. _Delete_
-> * When you want to delete one of them, click the _Delete button_.
+> * When you want to delete some color, select it and click the _Delete button_.
 
 ### 4. _Cancel_
-> * After done with woring costumed color except deleting, click the _Cancel button_.
-> * Then you can creating or updating other color again.
+> * After done with working costumed color, click the _Cancel button_.
+> * Then you can create or update other color again.
 
 ### 5. Usage
-```
+> * You can use costumed color by call it _Color.XXX_.
+> For example ) ```
 Color.XXX
 ```
 
