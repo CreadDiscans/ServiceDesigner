@@ -295,17 +295,16 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 <!-- > You can add style variable by setting as like class's style code, call and use it in this tab.   -->
 
 ### 1. _Add_  
-> * Set name for style variable and set style code as like class's style code in javascript langauge.
-> For example )  
+> * Set name for style variable and set style code as like class's style code in javascript langauge just like below code.  
 >```css
 >.className {  
->    "backgroundColor": "white";
->    "width": "100%";
->    "height": "100%";
+>    keyName: value;
 >}
 >```
 
 ### 2. _Update_  
+> * If you want to update style value, select the one from the list.  
+> * Then update the code and click the _Update button_.  
 
 ### 3. _Usage_  
 > * You can use style variable by calling it as property's key : _styleName_ and set it's value as string type.  
