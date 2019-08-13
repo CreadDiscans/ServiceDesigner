@@ -270,9 +270,16 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ### 5. Usage
 > * You can use costumed color by calling it as property's value : _Color.XXX_.  
 > For example )
+> ```
+Testing One
+> ```
 >```
+Testing Two
+>```
+
+<!-- >```
 Color.XXX
->```
+>``` -->
 
 
 ## Asset
