@@ -201,16 +201,20 @@
 ![IfCondition](./asset/img/ifCondition.gif)  
 
 #### Add  
-> As you can see, there is a _zero button_ and _plus button_ upperside of blank where you have to input object property's value.  
+> As you can see, there are _zero button_ and _plus button_.  
 > So click the _plus button_, then there will be added new numbered button.  
-> After that, click the numbered button except zero. Zero exists for default, not for _if condition_.
+> After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > Then you can input condition at the below textinput which has 'Condition' placeholder.  
-> Input any _if condition_ which you want to use it. You can use not only _Boolean type_, but also _Other types_.  
+> Input any _if condition_ which you want to use it. 
+> You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.
 
 #### Delete  
 > If you want to delete some _if condition_, just click _trash icon button_.  
 
 ### 2. _For Loop_  
+![ForLoop](./asset/img/forLoop.gif)  
+
+> If you have an array or object array state, you can set elements automatically by using _for loop_.
 
 
 # Other Functions  
