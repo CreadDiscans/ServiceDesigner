@@ -210,10 +210,6 @@
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
 >> * If you use state value, you have to put _this.state._ infront of state's name.
-<!-- >> For example ) -->
->>```
-this.state.XXX
->>```  
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
@@ -253,7 +249,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Pick any color that you want to use from the _Color Picker_, and input the name.  
 > * On the other hand, just input _Color Code_ or _RGB_.   
 > * You can check costumed color list from the left side of the color picker.  
-> * In this case, you can't rename costumed color, so please be careful when you create it.
+> * In this case, you can't rename costumed color, so please be careful when you create it.  
 
 ### 2. _Update_
 > * If you want to change the color value, select the one from the list.  
@@ -269,11 +265,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 5. Usage
 > * You can use costumed color by calling it as property's value : _Color.XXX_.
-<!-- > For example )   -->
->```
+> ```
 Color.XXX
->```  
-
+> ```
 
 ## Asset
 **Asset** tab support Asset Variables.  
