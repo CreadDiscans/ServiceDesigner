@@ -295,12 +295,13 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 <!-- > You can add style variable by setting as like class's style code, call and use it in this tab.   -->
 
 ### 1. _Add_  
-> * Set name for style variable and set style code as like class's style code in javascript langauge just like below code.  
->```css
->.className {  
->    keyName: value;
->}
->```
+> * Set name for style variable first.  
+> * Then set style code as like usting _CSS .class selector_ in javascript, just like below code.  
+> ```css
+> .className {  
+>   keyName: value;
+> }
+> ```
 
 ### 2. _Update_  
 > * If you want to update style value, select the one from the list.  
