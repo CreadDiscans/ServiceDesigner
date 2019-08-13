@@ -69,24 +69,24 @@
 ![CreatingComponents](./asset/img/creatingComponents.gif)  
 
 > Right-click at the **Components** tab and click _New Group_ or _New Component_.  
-> If you don't input new _group_ or _component_'s name, they will not be created.  
-> So please remember to _input the group or component's name_.  
-> Also, you can use short cut buttons to create group or component.
+>> If you don't input new _group_ or _component_'s name, they will not be created.  
+>> So please remember to _input the group or component's name_.  
+>> Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 ![RenamingComponents](./asset/img/renamingComponents.gif)  
 
-> Just like _create_, right-click and click _rename_ at the file that you want change the name.
-> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
+> Just like _create_, right-click and click _rename_ at the file that you want change the name.  
+>> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
-> Right-click and click _delete_ like other functions. 
-> Just in case, let's imagine the situation that you deleted some group or component.
-> _However_ it was just an accident, not you really wanted.
-> Don't be panic already! Please open your file again, before you save it.
-> Then you can check there will be a group or component which you deleted before reopening it.
+> Right-click and click _delete_ like other functions.  
+>> Just in case, let's imagine the situation that you deleted some group or component.  
+>> _However_ it was just an accident, not you really wanted.  
+>> Don't be panic already! Please open your file again, before you save it.  
+>> Then you can check there will be a group or component which you deleted before reopening it.  
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
@@ -109,9 +109,9 @@
 ### HTML  
 ![HTML](./asset/img/html.gif)  
 
-> Using html tag just like in your coding editor.  
 > Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
-> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
+>> Just use html tag just like in your coding editor.  
+>> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
 ### Reactstrap  
 ![ReactStrap](./asset/img/reactStrap.gif)  
@@ -155,8 +155,8 @@
 ### Delete  
 
 > You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
-> If you deleted some element and saved your file already, you can't work with that element anymore.  
-> So please be careful when you delete element. 
+>> If you deleted some element and saved your file already, you can't work with that element anymore.  
+>> So please be careful when you delete element. 
 
 # Editor  
 
@@ -176,7 +176,7 @@
 > 1. When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
 >> If you ended to fill out key and the other values, please click the _save button_.  
 >> If you don't click the _save button_, there won't be new property. So please remember to click this button. 
-> 1. For the otherwise, if you want to delete property, just click _Delete Property_.
+> 2. For the otherwise, if you want to delete property, just click _Delete Property_.
 
 ## Property Detail
 > There are **three** details to set for the property : _Key_, _Type_, _Value_.  
