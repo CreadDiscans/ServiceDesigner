@@ -35,21 +35,21 @@
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component and implement it.  
-> * _design.save.json_ be used when opening file in **_ServiceDesigner_**. You can update and save design file through this json file.  
-> * _design.style_ be used when set style or css of each component.  
+> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component of your project.  
+> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
+> * _design.style_ is for setting style of your elements in **_ServiceDesigner_**.  
 
 ### Save File  
 ![SavingFile](./asset/img/savingFile.gif)  
 
-> * Click the _file_ menu and _save_. (The short cut key is _ctrl_ + _s_)  
+> * Click the _file_ menu and _Save file_. (The short cut key is _ctrl_ + _s_)  
 > * Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 > * If you already created _design_ directory before, just save it.
 
 ### Open File  
 ![OpeningFile](./asset/img/openingFile.gif)  
 
-> * Click the _file_ menu and _open_.  (The short cut key is _ctrl_ + _o_)
+> * Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
 > * Select the _design.save.json_ file and open it.
 
 ### Other Fuctions of File Menu 
@@ -76,15 +76,15 @@
 ### Rename  
 ![RenamingComponents](./asset/img/renamingComponents.gif)  
 
-> * Just like _create_, right-click and click _rename_ what you want to do it.
+> * Just like _create_, right-click and click _rename_ at the file that you want change the name.
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
-> * Right-click and click _delete_ whatever you want, like other functions. 
+> * Right-click and click _delete_ like other functions. 
 > * Just in case, let's imagine the situation that you deleted some group or component.
-> * _However_ it was accident, not you really wanted.
+> * _However_ it was just an accident, not you really wanted.
 > * Don't be panic already! Please open your file again, before you save it.
 > * Then you can check there will be a group or component which you deleted before reopening it.
 
@@ -99,7 +99,7 @@
 
 #### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
-> So if you click _Unselect_, nothing will be selected in **Components** tab.  
+> So if you don't need to activate it anymore, just click _Unselect_. Then nothing will be selected in **Components** tab.  
 
 
 
@@ -164,7 +164,7 @@
 ## Properties
 ![Properties](./asset/img/properties.gif)  
 
-> There is an editor on the right side of **_ServiceDesigner_** to handle property.  
+> There is an editor on the right side of **_ServiceDesigner_** to manage properties.  
 > When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
 > * _name_ is for setting name of element.  
 >> You can check the name of element in **Elements** tab as you set.  
@@ -173,7 +173,8 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
-> Right-click and _Add Property_ or _Delete Property_ for your element.
+> If you want to add or delete property, just right-click and select what you want to do.
+<!-- Right-click and _Add Property_ or _Delete Property_ for your element. -->
 > * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.
 >> * If you ended to fill out key and the other values, please click the save button.
 > * For the otherwise, if you want to delete property, just click _Delete Property_.
