@@ -200,21 +200,15 @@
 ### 1. _If Condition_  
 ![IfCondition](./asset/img/ifCondition.gif)  
 
-> When you use _Object_ property, maybe you want to use _if condition_, but don't know how.  
-> Don't give up already! It's really simple. Just follow this explanation, then you can apply it wherever you want!  
-> #### Add  
->> As you can see, there is a _number(zero) and plus button_ upperside of blank where you have to input style value.  
->> So click _the plus button_, then there will be added new number button.
->> Then, you can input condition at the below textinput which has 'Condition' placeholder.  
->> For example  
-<!-- >> Also, there is a textinput blank which has 'Condition' placeholder.   -->
-<!-- >> But when the number value is 0, you can't input any text in _Condition_ textinput. -->
+#### Add  
+> As you can see, there is a _zero button_ and _plus button_ upperside of blank where you have to input object property's value.  
+> So click the _plus button_, then there will be added new numbered button.  
+> After that, click the numbered button except zero. Zero exists for default, not for _if condition_.
+> Then you can input condition at the below textinput which has 'Condition' placeholder.  
+> Input any _if condition_ which you want to use it. You can use not only _Boolean type_, but also _Other types_.  
 
-> #### Delete  
->> If you want to delete some _if condition_, just click _trash icon button_.  
-
-<!-- > This will make you know how to use it simply.   -->
-<!-- >> If you don't set _Key_'s value, it won't be added in properties even if you clicked the _save button_. -->
+#### Delete  
+> If you want to delete some _if condition_, just click _trash icon button_.  
 
 ### 2. _For Loop_  
 
