@@ -209,7 +209,7 @@
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> * If you use state value, you have to put '_this.state._' infront of state's name.  
+>> * If you use state value, you have to put _this.state._ infront of state's name.  
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
@@ -223,7 +223,7 @@
 > 1. Add property which has _for_ as Key, and Type is Variable.  
 > 1. And set the Value the name of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
-> 1. If you want to use the _array's value_, set Value as '_item0_' or '_item0.XXX_', which is mapped from the _state array_.  
+> 1. If you want to use the _array's value_, set Value as _item0_ or _item0.XXX_, which is mapped from the _state array_.  
 
 
 
@@ -231,12 +231,12 @@
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
 ## State  
-> * In **_ServiceDesigner_**, you can set _State_ as json format easily, and use it in your project's component by extending design component.  
+> * In **_ServiceDesigner_**, you can set **State** as json format, and use it in your project by extending design component.  
+>> The detailed explanation of using _extending_ will be [Extend](#extend). Please check it.  
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
->> The example will be [Extend](#extend). Please check it.  
-> * And also, you can use this state value as property's value or for if condition.  
->> [Other Functions of Editor](#other-functions-of-editor) will help you to how to use _state_ in properties.  
+> * And also, you can use this state value as _property's value_ or for _if condition_.  
+>> [Other Functions of Editor](#other-functions-of-editor) will help you know to how to use _state_ in properties.  
 <!-- > If you used _React_ or _React Native_ framework before, you already know what _state_ is, and how to use it.   -->
 <!-- > So give it a try, and work with your project more conveniently!   -->
 
