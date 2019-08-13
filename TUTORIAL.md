@@ -78,13 +78,13 @@
 ### Rename  
 ![RenamingComponents](./asset/img/renamingComponents.gif)  
 
-> Just like _create_, right-click and click _rename_ at the file that you want change the name.  
+> Just like _create_, right-click and click _Rename_ at the file that you want change the name.  
 >> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
 ![DeletingComponents](./asset/img/deletingComponents.gif)  
 
-> Right-click and click _delete_ like other functions.  
+> Right-click and click _Delete_ like other functions.  
 >> Just in case, let's imagine the situation that you deleted some group or component.  
 >> _However_ it was just an accident, not you really wanted.  
 >> Don't be panic already! Please open your file again, before you save it.  
@@ -169,7 +169,6 @@
 > * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
 >> You will use _name_ to call the element when you extended design component to your project's component.  
-
 > * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
@@ -183,7 +182,6 @@
 >> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
 >> And be careful! If you added properties that element doesn't have, it won't work properly way.  
 >> Just like add text property and set the value in View element, but nothing happened.  
-
 > ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_.  
 
@@ -234,6 +232,10 @@
 # Other Functions  
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
+> Before continuing, there are some overlapped function in these _Other Functions_.  
+> For example, _Delete_ or _Cancel_ in _Color_, _Asset_ and _Style_.  
+> It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color) again, and follow it.  
+
 ## State  
 > * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
 >> The detailed explanation of using _extending_ will be [Extend](#extend). Please check it.  
@@ -243,7 +245,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >> [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
 ## Color
-**Color** tab support Color Variables.  
+**Color** tab support _Color Variables_.   
 
 ![Color](./asset/img/color.gif)  
 
@@ -256,47 +258,50 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ### 2. _Update_
 > * If you want to change variable's value, select the one from the list.  
 > * Then set color value and click the _Update button_.  
-> * You can check the _Color Code_ and _RGB_ value changed at the list simply.
+> * You can check the _Color Code_ and _RGB_ value changed at the list simply.  
 
 ### 3. _Delete_
-> * When you want to delete some variable, select it from the list and click the _Delete button_.
+> * When you want to delete some variable, select it from the list and click the _Delete button_.  
 
 ### 4. _Cancel_
-> * After done with working some color variable, click the _Cancel button_.
-> * Then you can create or update other variables again.
+> * After done with working some color variable, click the _Cancel button_.  
+> * Then you can create or update other variables again.  
 
 ### 5. _Usage_  
-> * You can use color variable by calling it as property's value : _Color.XXX_.
+> * You can use color variable by calling it as property's value : _Color.XXX_.  
 > ```
 > Color.XXX  
 > ```
 
+
+
 ## Asset
-**Asset** tab support Asset Variables.  
+**Asset** tab support _Asset Variables_.  
 
 ### 1. _Create_  
 > * Set name for the asset variable and click the _Create button_.  
 > * If you don't set name, nothing will happen. So please be aware that you have to set it's name first.  
 
-### 2. _Delete_  
-> * If you want to delete variable, just select one from the list and click the _Delete button_.  
-
-### 3. _Cancel_  
-> * After checking with preivew of asset variable, click the _Cancel button_.  
-> * Then you can create or check other variables again.
-
-### 4. _Usage_  
+### 2. _Usage_  
 > * You can use asset variable by calling it as property's value : _Asset.XXX_.
 > ```
 > Asset.XXX  
 > ```
 
-## Css
+## Css  
 
-## Style
-> You can add style which used frequently by setting style code as like setting class's style, call and use it.
+## Style  
+> **Style** tab support _Style Variables_.  
+<!-- > You can add style variable by setting as like class's style code, call and use it in this tab.   -->
 
-# Extend
+### 1. _Add_  
+
+### 2. _Update_  
+
+### 3. _Usage_  
+> * You can use style variable by calling it as property's key : _styleName_ and set it's value as string type.  
+
+# Extend  
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
