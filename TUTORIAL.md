@@ -278,6 +278,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Asset
 **Asset** tab support _Asset Variables_.  
 
+<!-- gif 파일 생성 및 삽입 필요 -->
+<!-- ![Asset](./asset/img/asset.gif)   -->
+
 ### 1. _Create_  
 > * Set name for the asset variable and click the _Create button_.  
 > * If you don't set name, nothing will happen. So please be aware that you have to set it's name first.  
@@ -292,7 +295,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ## Style  
 > **Style** tab support _Style Variables_.  
-<!-- > You can add style variable by setting as like class's style code, call and use it in this tab.   -->
+
+<!-- gif 파일 생성 및 삽입 필요 -->
+<!-- ![Style](./asset/img/style.gif)   -->
 
 ### 1. _Add_  
 > * Set name for style variable first.  
@@ -304,7 +309,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > ```
 
 ### 2. _Update_  
-> * If you want to update style value, select the one from the list.  
+> * If you want to update this variable, select the one from the list.  
 > * Then update the code and click the _Update button_.  
 
 ### 3. _Usage_  
