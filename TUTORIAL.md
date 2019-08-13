@@ -210,7 +210,8 @@
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
 >> * If you use state value, you have to put _this.state._ infront of state's name.  
->> For example ) ```
+>> For example ) 
+```
 this.state.XXX
 ```
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
@@ -268,7 +269,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 5. Usage
 > * You can use costumed color by call it _Color.XXX_.
-> For example ) ```
+> For example )
+```
 Color.XXX
 ```
 
