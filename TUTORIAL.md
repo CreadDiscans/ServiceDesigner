@@ -209,7 +209,7 @@
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> * If you use state value, you have to put _this.state._ infront of state's name.  
+>> * If you use state value, you have to put _this.state._ infront of state's name.
 <!-- >> For example ) -->
 >>```
 this.state.XXX
@@ -268,7 +268,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Then you can create or update other color again.
 
 ### 5. Usage
-> * You can use costumed color by calling it as property's value : _Color.XXX_.  
+> * You can use costumed color by calling it as property's value : _Color.XXX_.
 <!-- > For example )   -->
 >```
 Color.XXX
