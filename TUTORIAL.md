@@ -335,19 +335,19 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.
 > * Then import one design component what to use from this design file.  
 > * And _extends_ it to project's component, just like below code.  
->> ```css
->> import { DesignComponentNameToUse } from 'design\-file\-path/design.component';
->> export class ProjectComponentName extends DesignComponentNameToUse {
->>   constructor(props:any) {
->>     super(props);
->>   }
->>   // some function to do
->> }
->> ```
+> ```css
+> import { DesignComponentNameToUse } from 'design\-file\-path/design.component';
+> export class ProjectComponentName extends DesignComponentNameToUse {
+>   constructor(props:any) {
+>     super(props);
+>   }
+>   // some function to do
+> }
+> ```
 > #### 1. _Render React at the Web_  
->> ![renderReact](./asset/img/renderReact.gif)  
+> ![renderReact](./asset/img/renderReact.gif)  
 > #### 2. _Render React Native at the App_  
->> ![renderReactNative](./asset/img/renderReactNative.gif)    
+> ![renderReactNative](./asset/img/renderReactNative.gif)    
 > They are the result screen after rendering design component by extended at the project component.  
 > The alert poped up because set this function at _componentDidMount()_ to both component.  
 > As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
