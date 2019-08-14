@@ -34,7 +34,9 @@
     * [Asset](#asset)
     * [Css](#css)
     * [Style](#style)  
-* [Extend](#extend)
+* [Inheritance](#inheritance)
+    * [Render](#render)
+    * [Using Function](#using-function)
 
 
 
@@ -42,7 +44,7 @@
 ## File  
 **File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at the each _web_ or _app_ component of your project.  
+> * _design.component.tsx_ be used when extend it at component of your project. Each of components have render() method which is inclucing return component array. 
 > * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_** freely as way you want.  
 
@@ -210,11 +212,11 @@
 >>> For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
 >>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
 >>> You can call this function at your project by extending design component.  
->>> About this, go to [Extend](#extend) and check how to use it.  
+>>> About this, go to [Inheritance](#inheritance) and check how to use it.  
 >>  ### 5. _Variable_
 >>> _Variable_'s value has to be variable's name including of _state_.  
->>> You can use variable or props for your project by extending this design component.  
->>> Maybe there will be a balnk in **_ServiceDesigner_**, in this case.  
+>>> You can use variable or props from your project by extending this design component.  
+>>> Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
 >>> So please be careful when working with UI by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
 
@@ -258,7 +260,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ## State  
 > * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
->> The detailed explanation of using _extending_ will be [Extend](#extend). Please check it.  
+>> The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
 >> In the case that you have to change state's value, use setState at your project's component.  
 >> Otherwise, just leave it. It will call design component's state value automatically to your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
@@ -336,7 +338,39 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Set property's key : _styleName_ and type : _String_.
 > * Then call it's name as value.    
 
-# Extend  
+
+
+# Inheritance  
+## Render  
+**Render** needs _React_ or _React Native_ Component, which is design component in **_ServiceDesigner_**.
+
+### 1. _Extend design component_  
+> * When you done with your UI in **_ServiceDesigner_**, open your coding editor and your project.  
+> * If you didn't create project component, create it.
+> * After that, import design component what to use from _design.component.tsx_ and _extends_ it at your component.
+
+> ```css
+> import { DesignedThemeTestReacttest } from 'designTest/design.component';
+> export class AdminThemeHome extends DesignedThemeTestReacttest {
+>   constructor(props:any) {
+>     super(props);
+>   }
+>   componentDidMount() {
+>     console.log('testing');
+>   }
+> }
+> ```
+
+
+### 2. _Create component at your project_
+<!-- > ```css
+> .className {  
+>   keyName: value;
+> }
+> ``` -->
+
+## Using Function
+**Using Function** tab support _Asset Variables_.  
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
