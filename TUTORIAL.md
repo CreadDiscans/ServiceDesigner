@@ -349,9 +349,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * #### Render React Native at the App   
 > ![renderReactNative](./asset/img/renderReactNative.gif)    
 > They are the result screens after rendering the project components that are extending design component.  
-> You can create or call the functions what you want to use, just like call alert function at _componentDidMount()_ in these examples. 
+> You can create or call the functions freely, just like call alert function at _componentDidMount()_ in these examples.  
 > And also, as you know from this result, you don't have to work with UI workprocess complicatedly at your project any more!  
-> Just extend design component at your project, and render it. You will get the result what you want.    
+> Just extend design component at your project, and render it. You will get the result screen that you want.    
 
 ### 2. _Create component at your project_
 <!-- > ```css
