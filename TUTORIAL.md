@@ -343,29 +343,28 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >>     super(props);
 >>   }
 >>   componentDidMount() {
->>     alert('Testing!);
+>>     alert('Render React Testing!);
 >>   }
 >> }
 >> ```
-
 >> ![renderReact](./asset/img/renderReact.gif)  
 >> This is the result of above code.  
 >> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
 >> Just extend design component at your project and work with your code as much as you want.  
 > #### 2. Render React Native to the App
 >> ```css
->> import { DesignedThemeTestReacttest } from 'design/design.component';
->> export class ReactTest extends DesignedThemeTestReacttest {
+>> import {DesignedThemeTestReactnativetest} from './design/design.component';
+>> class ReactNativeTest extends DesignedThemeTestReactnativetest {
 >>   constructor(props:any) {
 >>     super(props);
 >>   }
 >>   componentDidMount() {
->>     alert('Testing!);
+>>     alert('Render React Native Testing!');
 >>   }
 >> }
+>> export default ReactNativeTest;
 >> ```
-
->> ![renderReact](./asset/img/renderReact.gif)  
+>> ![renderReactNative](./asset/img/renderReactNative.gif)  
 >> This is the result of above code.  
 >> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
 >> Just extend design component at your project and work with your code as much as you want.  
