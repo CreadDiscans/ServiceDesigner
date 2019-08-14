@@ -86,8 +86,7 @@
 >> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
-![DeletingComponents](./asset/img/deletingComponents.gif)  
-
+> ![DeletingComponents](./asset/img/deletingComponents.gif)  
 > Right-click and click _Delete_ like other functions.  
 >> Just in case, let's imagine the situation that you deleted some group or component.  
 >> _However_ it was just an accident, not you really wanted.  
@@ -303,7 +302,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Css  
 
 ## Style  
-> **Style** tab support _Style Variables_.  
+**Style** tab support _Style Variables_.  
 
 ![Style](./asset/img/style.gif)  
 
@@ -334,7 +333,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ### 1. _Extend design component_  
 > * When you done with your UI in **_ServiceDesigner_**, open your coding editor and your project.  
 > * First, check saved _design.component.tsx_. There are all components that you created in **_ServiceDesigner_**.
-> * Then import one design component what to use from _design.component.tsx_ and _extends_ it to project's component, just like below.  
+> * Then import one design component what to use from _design.component.tsx_.  
+> * And _extends_ it to project's component, just like below code.  
 > ```css
 > import { DesignedThemeTestReacttest } from 'design/design.component';
 > export class ReactTest extends DesignedThemeTestReacttest {
@@ -346,9 +346,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >   }
 > }
 > ```
->
+
 > ![renderReact](./asset/img/renderReact.gif)  
-> This is the example when start above project.  
+> This is the result of above code.  
+> As you know from this result, you don't have to do complicated UI workprocess at your project any more!  
+> Just extend design component at your project and work with your code as much as you want.
 
 ### 2. _Create component at your project_
 <!-- > ```css
