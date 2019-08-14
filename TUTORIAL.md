@@ -344,14 +344,14 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >   // some function to do
 > }
 > ```
-> #### 1. _Render React at the Web_  
+> * #### Render React at the Web  
 > ![renderReact](./asset/img/renderReact.gif)  
-> #### 2. _Render React Native at the App_  
+> * #### Render React Native at the App   
 > ![renderReactNative](./asset/img/renderReactNative.gif)    
-> They are the result screen after rendering design component by extended at the project component.  
-> The alert poped up because set this function at _componentDidMount()_ to both component.  
-> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
-> Just extend design component at your project and work with your code as much as you want.  
+> They are the result screens after rendering the project components that are extending design component.  
+> You can create or call the functions what you want to use, just like call alert function at _componentDidMount()_ in these examples. 
+> And also, as you know from this result, you don't have to work with UI workprocess complicatedly at your project any more!  
+> Just extend design component at your project, and render it. You will get the result what you want.    
 
 ### 2. _Create component at your project_
 <!-- > ```css
