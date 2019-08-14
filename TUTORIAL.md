@@ -2,7 +2,7 @@
 <!-- GIF file is just guid line -->
 
 
-> The gif image file's main purpose is to explain how it works, so maybe it looks messy.  
+> The gif image file is temporary example, so maybe it looks messy.  
 > It will be uploaded with demo page later.
 
 # ServiceDesigner Tutorial
@@ -198,10 +198,10 @@
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  ### 1. _String_ or _Number_  
->>> _String_ or _Number_ can only have value which it's type is string or number.  
+>>> _String_ or _Number_ can only have value which has string or number type.  
 >>  ### 2. _Boolean_  
->>> _Boolean_'s value is checkbox. You can input it's value by checking or unchecking.  
->>>  _Unchecked_ means _false_, _Checked_ means _true_.
+>>> _Boolean_'s input format is checkbox. You can input it's value by checking or unchecking.  
+>>> _Unchecked_ means _false_, _Checked_ means _true_.
 >>  ### 3. _Object_  
 >>> _Object_'s value should be started by _{_, ended by _}_. And you can use _if condition_ in this type.  
 >>> If you want to learn about using _if condition_, go to [Other Functions of Editor](#other-functions-of-editor) and check it.
@@ -211,7 +211,11 @@
 >>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
 >>> You can call this function at your project by extending design component.  
 >>> About this, go to [Extend](#extend) and check how to use it.  
->>  * _Variable_'s value has to be variable's name including of _state_.  
+>>  ### 5. _Variable_
+>>> _Variable_'s value has to be variable's name including of _state_.  
+>>> You can use variable or props for your project by extending this design component.  
+>>> Maybe there will be a balnk in **_ServiceDesigner_**, in this case.  
+>>> So please be careful when working with UI by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
 
 ## Other Functions of Editor  
