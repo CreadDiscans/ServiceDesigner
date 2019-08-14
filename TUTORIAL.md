@@ -201,10 +201,10 @@
 >>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.  
 >>  * _Object_'s value should be started by _{_ and ended by _}_. And you can use _if condition_ in this type.  
 >>  * _Function_ is for handling event.
->>>     For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
->>>     So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
->>>     You can call this function at your project by extending design component.  
->>>     About this, go to [Extend](#extend) and check how to use it.  
+>>> For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
+>>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
+>>> You can call this function at your project by extending design component.  
+>>> About this, go to [Extend](#extend) and check how to use it.  
 >>  * _Variable_'s value has to be variable's name including of _state_.  
 > * _Value_ is different per _Type_ of property.  
 
