@@ -362,11 +362,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >> * As this example, you have to add Name and Function Property at the first step.  
 >> * The reason to set the name of element is to call event by it's name.  
 >> * It's useful when one component has many elements that occur event.   
-> ### 2. _Call Function by Using onEvent_  
->> * Before call function at your project, open _design.component.tsx_ and find _onEvent(e:any)//- method.  
->> * You can check _DesignedComponent_ has _onEvenet(e)_ method.  
+> #### 2. _Call and Use Function by Using onEvent_  
+>> * Before call function at your project, open _design.component.tsx_ file.  
+>> * You can check _DesignedComponent_ has _onEvenet(e:any)_ method.  
 >> * And other components that you created extend this _DesignedComponent_.  
->> * This structure makes you could use _onEvent(e)_ method at your project by extending design component.  
+>> * This structure makes you could call and use _onEvent(e)_ method at your project by extending design component.  
 >> ```css
 >> functionName = { 
 >>   (e) => this.onEvent ({ 
@@ -376,8 +376,10 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >>   })
 >> }
 >> ```
->> * Also, you can check this property at your element to handle event.  
->> * You can seperate all functions by using _if condtion_ to compare name value, just like below code.   
+>> * Also, you can check this property at your element that you set name and function property.  
+>> * _event_ means key value of property which has function type and _name_ means value of name property.  
+>> * So you can seperate all functions by using _if condtion_ to compare name value in _onEvent(e)_ method called in your project.  
+>> * Just like below code.   
 >> ```css
 >> onEvent(e) {  
 >>   if (e.name === "elementNameOne") {
