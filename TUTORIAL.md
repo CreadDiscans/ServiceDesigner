@@ -359,23 +359,36 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * So if you want to make your project working properly, you have to learn about handling function.  
 > #### 1. _Add Function Property_  
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
->> As this example, you have to add Name and Function Property at the first step.  
->>> * *he reason to set the name of element is to call event by it's name.  
->>> * It's useful when one component has many elements that occur event.   
->>> * You can seperate all functions by using _if condtion_ to compare the value by it's name, just like below code.   
->>> ```css
->>> onEvent(e) {  
->>>   if (e.name === "elementNameOne") {
->>>     // some function to do
->>>   } else if (e.name === "elementNameTwo") {
->>>     // some function to do
->>>   } else {
->>>     // some function to do
->>>   }
->>> }
->>> ```
-<!-- > * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_. -->
-<!-- > * Also,   -->
+>> * As this example, you have to add Name and Function Property at the first step.  
+>> * The reason to set the name of element is to call event by it's name.  
+>> * It's useful when one component has many elements that occur event.   
+> ### 2. _Call Function by Using onEvent_  
+>> * Before call function at your project, open _design.component.tsx_ and find _onEvent(e:any)//- method.  
+>> * You can check _DesignedComponent_ has _onEvenet(e)_ method.  
+>> * And other components that you created extend this _DesignedComponent_.  
+>> * This structure makes you could use _onEvent(e)_ method at your project by extending design component.  
+>> ```css
+>> functionName = { 
+>>   (e) => this.onEvent ({ 
+>>     event:"functionName",
+>>     value:e, 
+>>     name:"elementName"
+>>   })
+>> }
+>> ```
+>> * Also, you can check this property at your element to handle event.  
+>> * You can seperate all functions by using _if condtion_ to compare name value, just like below code.   
+>> ```css
+>> onEvent(e) {  
+>>   if (e.name === "elementNameOne") {
+>>     // some function to do
+>>   } else if (e.name === "elementNameTwo") {
+>>     // some function to do
+>>   } else {
+>>     // some function to do
+>>   }
+>> }
+>> ```
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
