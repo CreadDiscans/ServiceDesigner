@@ -352,13 +352,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > It's really simple! Just extend design component at your project and use it.  
 
 ### 2. _Handle Function_
-> * Add _Button_, _TextInput_, _TouchableOpacity_ or whatever the element that occurs event in your project would be pretty picky.  
+> * Add _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs event in your project would be pretty picky.  
 > * Because, you have to add property which has function as type's value to handle those elements' event.  
-> * If you don't handle with and ignore them, nothing will happen.  
-> * Click or press the button, fill out the textinput, or whatever, I'll say it again, **NOTHING WILL HAPPEN**.  
-> * So if you want to work with your UI proper way in _web_ or _App_, you have to learn about handling function.  
-> * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_.
-> * Also,  
+> * If you don't handle and just ignore them, nothing will happen.  
+> * Click or press the button, fill out the textinput, or do whatever, I'll say it again, **NOTHING WILL HAPPEN**.  
+> * So if you want to make your UI working properly in _web_ or _App_, you have to learn about handling function.  
 
 > ```css
 > onEvent(e) {  
@@ -371,6 +369,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >   }
 > }
 > ```
+> * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_.
+> * Also,  
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
