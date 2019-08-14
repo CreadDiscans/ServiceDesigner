@@ -49,15 +49,13 @@
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_** freely as way you want.  
 
 ### Save File  
-![SavingFile](./asset/img/savingFile.gif)  
-
+> ![SavingFile](./asset/img/savingFile.gif)  
 > 1. Click the _file_ menu and _Save file_. (The short cut key is _ctrl_ + _s_)  
 > 1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
 > 1. If you already created _design_ directory before, just save it.
 
 ### Open File  
-![OpeningFile](./asset/img/openingFile.gif)  
-
+> ![OpeningFile](./asset/img/openingFile.gif)  
 > 1. Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
 > 1. Select the _design.save.json_ file and open it.
 
@@ -76,16 +74,14 @@
 **Components** tab is for managing _group_ or _component_. 
 
 ### New  
-![CreatingComponents](./asset/img/creatingComponents.gif)  
-
+> ![CreatingComponents](./asset/img/creatingComponents.gif)  
 > Right-click at the **Components** tab and click _New Group_ or _New Component_.  
 >> If you don't input new _group_ or _component_'s name, they will not be created.  
 >> So please remember to _input the group or component's name_.  
 >> Also, you can use short cut buttons to create group or component.
 
 ### Rename  
-![RenamingComponents](./asset/img/renamingComponents.gif)  
-
+> ![RenamingComponents](./asset/img/renamingComponents.gif)  
 > Just like _create_, right-click and click _Rename_ at the file that you want change the name.  
 >> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
@@ -100,8 +96,7 @@
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
-![ComponentsMenu](./asset/img/componentsMenu.JPG)  
-
+> ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
 > When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
 > There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
 > * _create group_ & _create component_ are same functions from [New](#new).  
@@ -117,15 +112,13 @@
 **Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
 
 ### HTML  
-![HTML](./asset/img/html.gif)  
-
+> ![HTML](./asset/img/html.gif)  
 > Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
 >> Just use html tag just like in your coding editor.  
 >> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
 ### Reactstrap  
-![ReactStrap](./asset/img/reactStrap.gif)  
-
+> ![ReactStrap](./asset/img/reactStrap.gif)  
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
 > You can use Bootstrap 4 components in this function.  
 > You don't have to import each components whenever you use it anymore!  
@@ -134,8 +127,7 @@
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
-![React Icons](./asset/img/reactIcons.gif)  
-
+> ![React Icons](./asset/img/reactIcons.gif)  
 > **React Icons** provides free open srouce icons for React framework.  
 > There are **eight** type of icon libraries that you can use through React Icons.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
@@ -145,8 +137,7 @@
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
-![React Native](./asset/img/reactNative.gif)  
-
+> ![React Native](./asset/img/reactNative.gif)  
 > Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
 > Just click the button what you want to set.  
@@ -154,8 +145,7 @@
 > You must input the name in this function also.
 
 ### RN Elements  
-![RN Elements](./asset/img/reactNativeElements.gif)  
-
+> ![RN Elements](./asset/img/reactNativeElements.gif)  
 > 1. If you want to implement and check any detail of project's UI, set the screen as mobile.  
 > 1. After that, right-click and add element just like adding other element.  
 > 1. Set the property if it is necessary.
@@ -171,8 +161,7 @@
 **Editor** tab is for managing properties.
 
 ## Properties
-![Properties](./asset/img/properties.gif)  
-
+> ![Properties](./asset/img/properties.gif)  
 > When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
 > * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
@@ -181,8 +170,7 @@
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 
-![PropertiesFunction](./asset/img/propertiesFunction.gif)  
-
+> ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > If you want to add or delete property, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
 >> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
@@ -240,8 +228,7 @@
 > If you want to delete some _if condition_, just click _trash icon button_.  
 
 ### 2. _For Loop_  
-![ForLoop](./asset/img/forLoop.gif)  
-
+> ![ForLoop](./asset/img/forLoop.gif)  
 > If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self.  
 > You can set elements automatically and conveniently by using _for loop_.  
 > 1. Add property which has _for_ as Key, and Type is Variable.  
@@ -346,21 +333,22 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 1. _Extend design component_  
 > * When you done with your UI in **_ServiceDesigner_**, open your coding editor and your project.  
-> * If you didn't create project component, create it.
-> * After that, import design component what to use from _design.component.tsx_ and _extends_ it at your component.
-
+> * First, check saved _design.component.tsx_. There are all components that you created in **_ServiceDesigner_**.
+> * Then import one design component what to use from _design.component.tsx_ and _extends_ it to project's component, just like below.  
 > ```css
-> import { DesignedThemeTestReacttest } from 'designTest/design.component';
-> export class AdminThemeHome extends DesignedThemeTestReacttest {
+> import { DesignedThemeTestReacttest } from 'design/design.component';
+> export class ReactTest extends DesignedThemeTestReacttest {
 >   constructor(props:any) {
 >     super(props);
 >   }
 >   componentDidMount() {
->     console.log('testing');
+>     alert('Testing!);
 >   }
 > }
 > ```
-
+>
+> ![renderReact](./asset/img/renderReact.gif)  
+> This is the example when start above project.  
 
 ### 2. _Create component at your project_
 <!-- > ```css
