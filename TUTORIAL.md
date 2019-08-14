@@ -378,8 +378,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >> ```
 >> * Also, you can check this property at your element that you set name and function property.  
 >> * _event_ means key value of property which has function type and _name_ means value of name property.  
->> * So you can seperate all functions by using _if condtion_ to compare name value in _onEvent(e)_ method called in your project.  
->> * Just like below code.   
 >> ```css
 >> onEvent(e) {  
 >>   if (e.name === "elementNameOne") {
@@ -391,6 +389,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >>   }
 >> }
 >> ```
+>> * So you can seperate all functions by using _if condtion_ to compare **e.name** in _onEvent(e)_ method called in your project.  
+>> * If you want, you can also compare **e.event** by _if condition_.
+
+>> ![ReactFunction](./asset/img/reactFunction.gif)    
+>> ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
