@@ -1,6 +1,5 @@
 <!-- TUTORIAL -->
-<!-- GIF file is just guid line -->
-
+<!-- GIF file is just guid line, it will updated later with demo page -->
 
 > The gif image file is temporary example, so maybe it looks messy.  
 > It will be uploaded with demo page later.
@@ -36,7 +35,6 @@
     * [Style](#style)  
 * [Inheritance](#inheritance)
     * [Render](#render)
-    * [Using Function](#using-function)
 
 
 
@@ -351,17 +349,28 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > They are the result screens after rendering the project components that are extending design component.  
 > You can create or call the functions freely, just like call alert function at _componentDidMount()_ in these examples.  
 > And also, as you know from this result, you don't have to work with UI workprocess complicatedly at your project any more!  
-> Just extend design component at your project, and render it. You will get the result screen that you want.    
+> It's really simple! Just extend design component at your project and use it.  
 
-### 2. _Create component at your project_
-<!-- > ```css
-> .className {  
->   keyName: value;
+### 2. _Handle Function_
+> * Add _Button_, _TextInput_, _TouchableOpacity_ or whatever the element that occurs event in your project would be pretty picky.  
+> * Because, you have to add property which has function as type's value to handle those elements' event.  
+> * If you don't handle with and ignore them, nothing will happen.  
+> * Click or press the button, fill out the textinput, or whatever, I'll say it again, **NOTHING WILL HAPPEN**.  
+> * So if you want to work with your UI proper way in _web_ or _App_, you have to learn about handling function.  
+> * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_.
+> * Also,  
+
+> ```css
+> onEvent(e) {  
+>   if (e.name === "nameValueOne") {
+>     // some function to do
+>   } else if (e.name === "nameValueTwo") {
+>     // some function to do
+>   } else {
+>     // some function to do
+>   }
 > }
-> ``` -->
-
-## Using Function
-**Using Function** tab support _Asset Variables_.  
+> ```
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.

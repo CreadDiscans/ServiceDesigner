@@ -1,5 +1,5 @@
 <!-- README -->
-<!-- GIF file is just guid line -->
+<!-- GIF file is just guid line, it will updated later with demo page-->
 
 # ServiceDesigner
 **_ServiceDesigner_** is an efficient editor for UI developing using React or React Native framework.
