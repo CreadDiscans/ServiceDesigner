@@ -184,10 +184,10 @@
 > If you want to add or delete property, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
 >> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
->> After filling out key and the other's values, please click the _save button_.  
->> If you don't click the _save button_, there won't be new property. So please remember to click this button.  
->> And be careful! If you added properties that element doesn't have, it won't work properly way.  
->> Just like add text property and set the value in View element, but nothing happened.  
+>> After filling out key and the other values, please click the _save button_.  
+>> If you don't click it, there won't be new property. So please remember to click this button.  
+>> And be careful! If you added properties that element doesn't have, nothing will happen although added property.  
+>> Just like, add text property and set the value in View element.  
 > ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_.  
 
@@ -197,10 +197,16 @@
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
->>  * _String_ or _Number_ can only have value which it's type is string or number.  
->>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.  
->>  * _Object_'s value should be started by _{_ and ended by _}_. And you can use _if condition_ in this type.  
->>  * _Function_ is for handling event.
+>>  ### 1. _String_ or _Number_  
+>>> _String_ or _Number_ can only have value which it's type is string or number.  
+>>  ### 2. _Boolean_  
+>>> _Boolean_'s value is checkbox. You can input it's value by checking or unchecking.  
+>>>  _Unchecked_ means _false_, _Checked_ means _true_.
+>>  ### 3. _Object_  
+>>> _Object_'s value should be started by _{_, ended by _}_. And you can use _if condition_ in this type.  
+>>> If you want to learn about using _if condition_, go to [Other Functions of Editor](#other-functions-of-editor) and check it.
+>>  ### 4. _Function_  
+>>> _Function_ is for handling event.  
 >>> For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
 >>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
 >>> You can call this function at your project by extending design component.  
