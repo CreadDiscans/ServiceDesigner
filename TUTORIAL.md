@@ -332,8 +332,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 1. _Extend design component_  
 > * When you done with your UI in **_ServiceDesigner_**, open your coding editor and your project.  
-> * First, check saved _design.component.tsx_. There are all components that you created in **_ServiceDesigner_**.
-> * Then import one design component what to use from _design.component.tsx_.  
+> * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.
+> * Then import one design component what to use from this design file.  
 > * And _extends_ it to project's component, just like below code.  
 > ```css
 > import { DesignedThemeTestReacttest } from 'design/design.component';
@@ -349,8 +349,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 > ![renderReact](./asset/img/renderReact.gif)  
 > This is the result of above code.  
-> As you know from this result, you don't have to do complicated UI workprocess at your project any more!  
-> Just extend design component at your project and work with your code as much as you want.
+> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
+> Just extend design component at your project and work with your code as much as you want.  
 
 ### 2. _Create component at your project_
 <!-- > ```css
