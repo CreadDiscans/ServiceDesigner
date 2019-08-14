@@ -360,23 +360,22 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > #### 1. _Add Function Property_  
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
 >> As this example, you have to add Name and Function Property at the first step.  
->>> The reason to set the name of element is to call event by it's name.  
->>> It's useful when one component has many elements that occur event.   
->>> You can seperate all functions by using _if condtion_ and compare the value by it's name.   
->> The reason 
-> ```css
-> onEvent(e) {  
->   if (e.name === "elementOne") {
->     // some function to do
->   } else if (e.name === "elementNameTwo") {
->     // some function to do
->   } else {
->     // some function to do
->   }
-> }
-> ```
-> * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_.
-> * Also,  
+>>> * *he reason to set the name of element is to call event by it's name.  
+>>> * It's useful when one component has many elements that occur event.   
+>>> * You can seperate all functions by using _if condtion_ to compare the value by it's name, just like below code.   
+>>> ```css
+>>> onEvent(e) {  
+>>>   if (e.name === "elementNameOne") {
+>>>     // some function to do
+>>>   } else if (e.name === "elementNameTwo") {
+>>>     // some function to do
+>>>   } else {
+>>>     // some function to do
+>>>   }
+>>> }
+>>> ```
+<!-- > * As the below code, you can handle event by calling _onEvent(e)_ from _desing.component.tsx_. -->
+<!-- > * Also,   -->
 
 <!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
 - State : The scheme is json.
