@@ -335,39 +335,24 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.
 > * Then import one design component what to use from this design file.  
 > * And _extends_ it to project's component, just like below code.  
-> #### 1. Render React to the Web
 >> ```css
->> import { DesignedThemeTestReacttest } from 'design/design.component';
->> export class ReactTest extends DesignedThemeTestReacttest {
+>> import { DesignComponentNameToUse } from 'design file path/design.component';
+>> export class ProjectComponentName extends DesignComponentNameToUse {
 >>   constructor(props:any) {
 >>     super(props);
 >>   }
 >>   componentDidMount() {
->>     alert('Render React Testing!);
+>>     // some code to do
 >>   }
 >> }
 >> ```
+> #### 1. _Render React at the Web_
 >> ![renderReact](./asset/img/renderReact.gif)  
->> This is the result of above code.  
->> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
->> Just extend design component at your project and work with your code as much as you want.  
-> #### 2. Render React Native to the App
->> ```css
->> import {DesignedThemeTestReactnativetest} from './design/design.component';
->> class ReactNativeTest extends DesignedThemeTestReactnativetest {
->>   constructor(props:any) {
->>     super(props);
->>   }
->>   componentDidMount() {
->>     alert('Render React Native Testing!');
->>   }
->> }
->> export default ReactNativeTest;
->> ```
+> #### 2. _Render React Native at the App_
 >> ![renderReactNative](./asset/img/renderReactNative.gif)  
->> This is the result of above code.  
->> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
->> Just extend design component at your project and work with your code as much as you want.  
+> This is the result screen after rendering react design component.  
+> As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
+> Just extend design component at your project and work with your code as much as you want.  
 
 ### 2. _Create component at your project_
 <!-- > ```css
