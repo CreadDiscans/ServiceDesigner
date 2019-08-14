@@ -343,9 +343,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > }
 > ```
 > * #### Render React at the Web  
-> ![renderReact](./asset/img/renderReact.gif)  
+> ![RenderReact](./asset/img/renderReact.gif)  
 > * #### Render React Native at the App   
-> ![renderReactNative](./asset/img/renderReactNative.gif)    
+> ![RenderReactNative](./asset/img/renderReactNative.gif)    
 > They are the result screens after rendering the project components that are extending design component.  
 > You can create or call the functions freely, just like call alert function at _componentDidMount()_ in these examples.  
 > And also, as you know from this result, you don't have to work with UI workprocess complicatedly at your project any more!  
@@ -353,16 +353,22 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 2. _Handle Function_
 > * Add _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs event in your project would be pretty picky.  
-> * Because, you have to add property which has function as type's value to handle those elements' event.  
+> * Because, you have to add property which has _Function_ as type to handle those elements' event.  
 > * If you don't handle and just ignore them, nothing will happen.  
-> * Click or press the button, fill out the textinput, or do whatever, I'll say it again, **NOTHING WILL HAPPEN**.  
-> * So if you want to make your UI working properly in _web_ or _App_, you have to learn about handling function.  
-
+> * Click or press the button, fill out the textinput, or do whatever, **NOTHING WILL HAPPEN**.  
+> * So if you want to make your project working properly, you have to learn about handling function.  
+> #### 1. _Add Function Property_  
+>> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
+>> As this example, you have to add Name and Function Property at the first step.  
+>>> The reason to set the name of element is to call event by it's name.  
+>>> It's useful when one component has many elements that occur event.   
+>>> You can seperate all functions by using _if condtion_ and compare the value by it's name.   
+>> The reason 
 > ```css
 > onEvent(e) {  
->   if (e.name === "nameValueOne") {
+>   if (e.name === "elementOne") {
 >     // some function to do
->   } else if (e.name === "nameValueTwo") {
+>   } else if (e.name === "elementNameTwo") {
 >     // some function to do
 >   } else {
 >     // some function to do
