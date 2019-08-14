@@ -344,10 +344,10 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >>   // some function to do
 >> }
 >> ```
-> #### 1. _Render React at the Web_
+> #### 1. _Render React at the Web_  
 >> ![renderReact](./asset/img/renderReact.gif)  
-> #### 2. _Render React Native at the App_
->> ![renderReactNative](./asset/img/renderReactNative.gif)  
+> #### 2. _Render React Native at the App_  
+>> ![renderReactNative](./asset/img/renderReactNative.gif)    
 > They are the result screen after rendering design component by extended at the project component.  
 > The alert poped up because set this function at _componentDidMount()_ to both component.  
 > As you know from this result, you don't have to do UI workprocess complicatedly at your project any more!  
