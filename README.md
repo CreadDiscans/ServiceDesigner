@@ -1,4 +1,6 @@
 <!-- README -->
+<!-- GIF file is just guid line -->
+
 # ServiceDesigner
 **_ServiceDesigner_** is an efficient editor for UI developing using React or React Native framework.
 <!-- > ServiceDesginer is an Editor to update design of your project using react or react-native.  

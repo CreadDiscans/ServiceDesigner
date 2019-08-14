@@ -1,4 +1,10 @@
 <!-- TUTORIAL -->
+<!-- GIF file is just guid line -->
+
+
+> The gif image file's main purpose is to explain how it works, so maybe it looks messy.  
+> It will be uploaded with demo page later.
+
 # ServiceDesigner Tutorial
 ## Contents
 * [Menu](#menu)
@@ -194,7 +200,11 @@
 >>  * _String_ or _Number_ can only have value which it's type is string or number.  
 >>  * _Boolean_'s value is checkbox : _Unchecked_ means _false_, _Checked_ means _true_.  
 >>  * _Object_'s value should be started by _{_ and ended by _}_. And you can use _if condition_ in this type.  
->>  * _Function_ is for handling event like _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.
+>>  * _Function_ is for handling event.
+>>> For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
+>>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
+>>> You can call this function at your project by extending design component.  
+>>> About this, go to [Extend](#extend) and check how to use it.  
 >>  * _Variable_'s value has to be variable's name including of _state_.  
 > * _Value_ is different per _Type_ of property.  
 
@@ -278,12 +288,12 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Asset
 **Asset** tab support _Asset Variables_.  
 
-<!-- gif 파일 생성 및 삽입 필요 -->
-<!-- ![Asset](./asset/img/asset.gif)   -->
+![Asset](./asset/img/asset.gif)  
 
 ### 1. _Create_  
 > * Set name for the asset variable and click the _Create button_.  
 > * If you don't set name, nothing will happen. So please be aware that you have to set it's name first.  
+> * Select image file and open it. Now your asset variable is ready to use.  
 
 ### 2. _Usage_  
 > * You can use asset variable by calling it as property's value : _Asset.XXX_.
@@ -296,8 +306,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Style  
 > **Style** tab support _Style Variables_.  
 
-<!-- gif 파일 생성 및 삽입 필요 -->
-<!-- ![Style](./asset/img/style.gif)   -->
+![Style](./asset/img/style.gif)  
 
 ### 1. _Add_  
 > * Set name for style variable first.  
