@@ -107,8 +107,8 @@
 > So if you don't need to activate it anymore, just click _Unselect_. Then nothing will be selected in **Components** tab.  
 
 #### 3. _Collapse_
-> If you want to collapse some group, but not all groups, just the group.  
-> If you want to uncollapse, click it again.  
+> * If you want to collapse some group, but not all groups, just the group.  
+> * When uncollapse it, click it again.  
 
 
 
@@ -124,9 +124,9 @@
 ### Reactstrap  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
 > **ReactStrap** provides bootstrap component for React framework.  
-> You can use _Bootstrap 4 components_ in this function.  
-> You don't have to import each components whenever you use it!  
-> Just input the name of one of ReactStrap's components, and set property if you want.  
+> * You can use _Bootstrap 4 components_ in this function.  
+> * You don't have to import each components whenever you use it!  
+> * Just input the name of one of ReactStrap's components, and set property if you need.  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
@@ -135,8 +135,8 @@
 > **React Icons** provides free open srouce icons for React framework.  
 > It has **eight** type of icon libraries that you can use easily.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> Set element's name as the name of icon from the libraries what you want to use.  
-> Then set size, color and other properties at the Property tab if you want.
+> * Set element's name as the name of icon from the libraries what you want to use.  
+> * Then set size, color and other properties at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
@@ -144,20 +144,21 @@
 > ![React Native](./asset/img/reactNative.gif)  
 > Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
-> Just click the button which version that you want to work with UI .  
+> Just click the button that you want to work with UI .  
 > Then right-click and add element and input the name of compomnent what you need.  
 > You must input the name in this function also.
 
 ### RN Elements  
 > ![RN Elements](./asset/img/reactNativeElements.gif)  
-> 1. If you want to work with your project's UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
+> 1. If you want to work with UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
 > 1. After that, right-click and add React Native element.  
 > 1. Set the property if it is necessary.
 
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
 ### Delete  
-> You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
+> You can delete elements in this tab.  
+> If you input wrong name, just right-click, delete it and add new one!  
 >> * If you deleted some element and saved your file already, you have to add same element if you need it.  
 >> * So please be careful when you delete element. 
 
@@ -173,42 +174,43 @@
 > * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
-> As you can see, properties work for setting UI not only at the **_ServiceDesigner_** but also at your project.  
+> * As you can see, properties needed for setting UI not only at the **_ServiceDesigner_** but also at your project.  
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > If you want to add or delete properties, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
 >> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
 >> * After filling out key and the other values, please click the _save button_.  
->> * If you don't click it, there won't be new property. So please remember to click this button.  
->> * And be careful! If you added properties that element doesn't have, nothing will happen.  
->> * Just like, add text property and set the value in View element.  
+>> * If you don't click it, there won't be new property. So please remember clicking this button.  
+>> * And be careful! If you add properties that element doesn't have, nothing will happen.  
+>> * Just like, add text property and set the value in View element which doesn't have text property.  
 > ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_.  
 
 ## Property Detail
-> There are **three** details to set for the property : _Key_, _Type_, _Value_.  
-> * _Key_ is for setting the keyName of property. For example, _name_, _stlye_ are all the keys for the properties. 
+> There are **three** details to set the property : _Key_, _Type_, _Value_.  
+> * _Key_ is for setting the keyName of property. For example, _name_, _stlye_ are all the key values for the properties. 
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  ### 1. _String_ or _Number_  
 >>> _String_ or _Number_ can only have value which has string or number type.  
 >>  ### 2. _Boolean_  
->>> _Boolean_'s input format is checkbox. You can input it's value by checking or unchecking.  
->>> _Unchecked_ means _false_, _Checked_ means _true_.
+>>> You can input it's value by checking or unchecking when the type is _Boolean_.  
+>>> : _Unchecked_ means _false_, _Checked_ means _true_.
 >>  ### 3. _Object_  
->>> _Object_'s value should be started by _{_, ended by _}_. And you can use _if condition_ in this type.  
->>> If you want to learn about using _if condition_, go to [Other Functions of Editor](#other-functions-of-editor) and check it.
+>>> * _Object_'s value should be started with _{_, ended in _}_.  
+>>> * And you can use _if condition_ in this type.  
+>>> * If you want to learn about using _if condition_, go to [Other Functions of Editor](#other-functions-of-editor) and check it.  
 >>  ### 4. _Function_  
->>> _Function_ is for handling event.  
->>> For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
->>> So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
->>> You can call this function at your project by extending design component.  
->>> About this, go to [Inheritance](#inheritance) and check how to use it.  
+>>> * _Function_ is for handling event.  
+>>> * For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
+>>> * So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
+>>> * You can call this function at your project by extending design component.  
+>>> * About this, go to [Inheritance](#inheritance) and check how to use it.  
 >>  ### 5. _Variable_
 >>> _Variable_'s value has to be variable's name including of _state_.  
->>> You can use variable or props from your project by extending this design component.  
+>>> You can call and use variable or props from your project by extending this design component.  
 >>> Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
 >>> So please be careful when working with UI by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
@@ -219,7 +221,7 @@
 
 #### Add  
 > As you can see, there are _zero button_ and _plus button_.  
-> 1. At first, click the _plus button_, then there will be added new numbered button.  
+> 1. At first, click the _plus button_, then there will be new numbered button which is added.  
 > 1. After that, click the _number button_ except **zero**. Zero exists for default, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
@@ -239,7 +241,7 @@
 > 1. Add property which has _for_ as Key, and Type is Variable.  
 > 1. And set the Value the name of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
-> 1. If you want to use the _array's value_, set Value as _item0_ or _item0.XXX_, which is mapped from the _state array_.  
+> 1. If you want to use the _array's value_, set property's Value as _item0_ or _item0.XXX_, which is mapped from the _state array_.  
 
 
 
@@ -248,13 +250,13 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 > Before continuing, there are some overlapped function in these _Other Functions_.  
 > _Delete_ or _Cancel_ in _Color_, _Asset_ and _Style_ are those.  
-> It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color) again, and follow it.  
+> It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color), and follow it.  
 
 ## State  
 > * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
->> The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
->> In the case that you have to change state's value, use setState at your project's component.  
->> Otherwise, just leave it. It will call design component's state value automatically to your project.  
+>>  * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
+>>  * In the case that you have to change state's value, change it at your project.  
+>>  * Otherwise, just leave it. It will call design component's state value automatically in your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
 >> [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
@@ -267,7 +269,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Pick any color that you want to use from the _Color Picker_, and input the name.  
 > * On the other hand, just input _Color Code_ or _RGB_.   
 > * You can check color variables list from the left side of the color picker.  
-> * In this case, you can't rename color variable, so please be careful when you create it.  
 
 ### 2. _Update_
 > * If you want to change variable's value, select the one from the list.  
@@ -282,7 +283,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Then you can create or update other variables again.  
 
 ### 5. _Usage_  
-> * You can use color variable by calling it as property's value : _Color.XXX_.  
+> * You can use color variable by calling it as property's value.  
 > ```
 > Color.XXX  
 > ```
@@ -300,7 +301,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Select image file and open it. Now your asset variable is ready to use.  
 
 ### 2. _Usage_  
-> * You can use asset variable by calling it as property's value : _Asset.XXX_.
+> * You can use asset variable by calling it as property's value.
 > ```
 > Asset.XXX  
 > ```
