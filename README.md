@@ -1,5 +1,5 @@
 <!-- README -->
-<!-- GIF file is just guid line, it will updated later with demo page-->
+<!-- GIF file is just guid line, it will updated later with demo page -->
 
 # ServiceDesigner
 **_ServiceDesigner_** is an efficient editor for UI developing using React or React Native framework.
@@ -12,12 +12,13 @@
 ![ServiceDesigner](./asset/img/mainExample.gif)  
 
 ## Introduction
-> Let's think about the case when you developed an Android Application.  
-> You had to run an emulator, wait until it get started, test how it works, fix some part of your code and reload it.  
-> Maybe you are tired of doing necessary, but inefficient work process again and again.:dizzy:  
-> With **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.  
-> Give it a try and let **_ServiceDesigner_** helps to make your work process more convenient.  
-> And work with your UI _efficiently_, _speedily_, _visually_ and _simply_.  
+> For example, Let's think about the case when you developed an Android Application.  
+> You had to run an emulator, wait until it get started, test how it works, fix some part of your code and _reload_ it.  
+> Maybe you are tired of reloading it again and again.:dizzy:  
+> However, with **_ServiceDesigner_**, you will be free with those inefficient work process.  
+> Just give it a try! And let **_ServiceDesigner_** helps to make your work process more convenient.  
+> Work with your UI _efficiently_, _speedily_ and _simply_ with **_ServiceDesigner_**.  
+<!-- > However, with **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.   -->
 
 ### Base frameworks
 - [React](https://reactjs.org/) : Web framework

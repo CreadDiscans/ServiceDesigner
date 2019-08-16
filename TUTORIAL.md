@@ -40,27 +40,30 @@
 
 # Menu
 ## File  
-**File** menu is for to save or open design file at **_ServiceDesigner_**, so user can update or test their UI.  
+**File** menu is for to save or open design file at **_ServiceDesigner_**, so user can work with their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
-> * _design.component.tsx_ be used when extend it at component of your project. Each of components have render() method which is inclucing return component array. 
-> * _design.save.json_ be used when working with UI in **_ServiceDesigner_**. You can update and save design file through this json file.  
+> * _design.component.tsx_ is for extending design component at your project.  
+>> There are all components that you created at **_ServiceDesigner_**.  
+>> All of them have render() method inclucing return array of elements.  
+> * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_** freely as way you want.  
 
-### Save File  
+### Save File(_ctrl_ + _s_)  
 > ![SavingFile](./asset/img/savingFile.gif)  
-> 1. Click the _file_ menu and _Save file_. (The short cut key is _ctrl_ + _s_)  
-> 1. Then create _design_ directory at _src_, just in case separate design code file from other code files.  
+> 1. Click the _file_ menu and _Save file_.  
+> 1. Then create _design_ directory at _src_, to separate design component from others just in case.
+> 1. And save it.  
 > 1. If you already created _design_ directory before, just save it.
 
-### Open File  
+### Open File(_ctrl_ + _o_)  
 > ![OpeningFile](./asset/img/openingFile.gif)  
-> 1. Click the _file_ menu and _Open file_.  (The short cut key is _ctrl_ + _o_)
+> 1. Click the _file_ menu and _Open file_.  
 > 1. Select the _design.save.json_ file and open it.
 
 ### Other Functions of File Menu 
-#### 1. _Save to another folder_  
-> You can move newly updated design files to another folder and save them through this function.  
-> (The short cut key is _ctrl_ + _shift_ + _s_)  
+#### 1. _Save to another folder_(_ctrl_ + _shift_ + _o_)    
+> 1. Click the _file_ menu and _Save to another folder_.  
+> 1. Select the folder whatever you want and save it.  
 
 #### 2. _reload_
 > Reload **_ServiceDesigner_**.
@@ -74,22 +77,22 @@
 ### New  
 > ![CreatingComponents](./asset/img/creatingComponents.gif)  
 > Right-click at the **Components** tab and click _New Group_ or _New Component_.  
->> If you don't input new _group_ or _component_'s name, they will not be created.  
->> So please remember to _input the group or component's name_.  
->> Also, you can use short cut buttons to create group or component.
+>> * If you don't input new _group_ or _component_'s name, they will not be created.  
+>> * So please remember to _input the group or component's name_.  
+>> * Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 > ![RenamingComponents](./asset/img/renamingComponents.gif)  
-> Just like _create_, right-click and click _Rename_ at the file that you want change the name.  
->> If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
+> * Just like _[NEW](#new)_, right-click and click _Rename_ at the file that you want to .change the name.  
+> * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
 > ![DeletingComponents](./asset/img/deletingComponents.gif)  
 > Right-click and click _Delete_ like other functions.  
->> Just in case, let's imagine the situation that you deleted some group or component.  
->> _However_ it was just an accident, not you really wanted.  
->> Don't be panic already! Please open your file again, before you save it.  
->> Then you can check there will be a group or component which you deleted before reopening it.  
+>> * Just in case, let's imagine the situation that you deleted some group or component.  
+>> * _However_ it was just an accident, not you really wanted.  
+>> * Don't be panic already! Please open your file again, before you save it.  
+>> * Then you can check there will be a group or component which you deleted before reopening it.  
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
@@ -103,6 +106,10 @@
 > If there is a selected group or component, that one will be highlighted because it was activated.  
 > So if you don't need to activate it anymore, just click _Unselect_. Then nothing will be selected in **Components** tab.  
 
+#### 3. _Collapse_
+> If you want to collapse some group, but not all groups, just the group.  
+> If you want to uncollapse, click it again.  
+
 
 
 ## Element  
@@ -111,14 +118,14 @@
 ### HTML  
 > ![HTML](./asset/img/html.gif)  
 > Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
->> Just use html tag just like in your coding editor.  
->> Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
+>> * Use html tag just like in your coding editor.  
+>> * Please remember it, if you don't intput the name, it will be not added. Just like at the Components tab.  
 
 ### Reactstrap  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
 > **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
 > You can use Bootstrap 4 components in this function.  
-> You don't have to import each components whenever you use it anymore!  
+> You don't have to import each components whenever you use it!  
 > Just input the name of one of ReactStrap's components, and set property if you want.  
 
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
@@ -126,19 +133,19 @@
 ### React Icons  
 > ![React Icons](./asset/img/reactIcons.gif)  
 > **React Icons** provides free open srouce icons for React framework.  
-> There are **eight** type of icon libraries that you can use through React Icons.  
+> It has **eight** type of icon libraries that you can use easily.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> Set element's name as the name of library's icon's name what you want to use.  
-> Then set size, color and other properties as you want at the Property tab if you want.
+> Set element's name as the name of icon from the libraries what you want to use.  
+> Then set size, color and other properties at the Property tab if you want.
 
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
 > ![React Native](./asset/img/reactNative.gif)  
 > Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
-> You can set the screen _to Portrait_ or _to Landscape_ easily from these buttons.  
-> Just click the button what you want to set.  
-> Then right-click and add element and input the name of compomnent what you want to use. It's really simple.  
+> You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
+> Just click the button which version that you want to test UI .  
+> Then right-click and add element and input the name of compomnent what you need. It's really simple.  
 > You must input the name in this function also.
 
 ### RN Elements  
