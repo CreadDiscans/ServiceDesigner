@@ -174,8 +174,7 @@
 > * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
-
-> As you can see, properties needed for setting UI not only at the **_ServiceDesigner_** but also at your project.  
+> As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > If you want to add or delete properties, just right-click and select what you want to do.  
@@ -242,7 +241,7 @@
 > 1. Add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value the name of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
->> * If you want to use array's or array object's value, you have to use _item0_ which is mapped from the _state array_.  
+>> * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_.  
 >> ```
 >> item0        // array  
 >> item0.XXX    // array object
@@ -319,7 +318,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 1. _Add_  
 > * Set name for style variable first.  
-> * Then set style code as usting _CSS .class selector_ in JS, just like below code.  
+> * Then set style code as using _CSS .class selector_ in JS, just like below code.  
 > ```css
 > .className {  
 >   keyName: value;
@@ -339,11 +338,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 # Inheritance  
 ## Render  
-**Render** needs _React_ or _React Native_ Component, which is design component in **_ServiceDesigner_**.
+To **Render** component including of it's UI, you have to call the component from _design.component.tsx_ at your project.
 
 ### 1. _Extend design component_  
-> * When you done with your UI in **_ServiceDesigner_**, open your coding editor and your project.  
-> * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.
+> * When you done with your UI, open your coding editor and your project.  
+> * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.  
 > * Then import one design component what to use from this design file.  
 > * And _extends_ it to project's component, just like below code.  
 > ```css
@@ -360,13 +359,12 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * #### Render React Native at the App   
 > ![RenderReactNative](./asset/img/renderReactNative.gif)    
 > * They are the result screens after rendering the project components that are extending design component.  
-> * You can create or call the functions freely, just like call alert function at _componentDidMount()_ in these examples.  
-> * And also, you don't have to work with UI workprocess complicatedly at your project any more!  
+> * You can create or call the functions freely, just like call alert function at _componentDidMount()_ in above examples.  
 > * It's really simple! Just extend design component at your project and use it.  
 
 ### 2. _Handle Function_
-> * Add _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs event in your project would be pretty picky.  
-> * Because, you have to add property which has _Function_ as type to handle those elements' event.  
+> * Add element like _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs event in your project would be pretty picky.  
+> * Because you have to add property which has _Function_ as type's value to handle those elements' event.  
 > * If you don't handle and just ignore them, nothing will happen.  
 > * Click or press the button, fill out the textinput, or do whatever, **NOTHING WILL HAPPEN**.  
 > * So if you want to make your project working perfectly, you have to learn about handling function.  
@@ -375,11 +373,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >> * As this example, you have to add Name and Function Property at the first step.  
 >> * The reason to set the name of element is calling event by it's name.  
 >> * It's useful when one component has many elements that occur event.   
-> #### 2. _Call and Use Function by Using onEvent_  
->> * Before call function at your project, open _design.component.tsx_ file.  
->> * You can check _DesignedComponent_ has _onEvenet(e:any)_ method.  
+> #### 2. _Call and Use Function by Calling onEvent_  
+>> * Before calling function at your project, open _design.component.tsx_ file.  
+>> * You can check that _DesignedComponent_ has _onEvenet(e:any)_ method.  
 >> * And other components that you created extend this _DesignedComponent_.  
->> * This structure makes you could call and use _onEvent(e)_ method at your project by extending design component.  
+>> * This structure makes you could call and use _onEvent(e)_ method at your project by extending.  
 >> ```css
 >> functionName = { 
 >>   (e) => this.onEvent ({ 
