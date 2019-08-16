@@ -40,11 +40,11 @@
 
 # Menu
 ## File  
-**File** menu is for to save or open design file at **_ServiceDesigner_**, so user can work with their UI.  
+**File** menu is to save or open design file at **_ServiceDesigner_**, so user can work with their UI.  
 > You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
 > * _design.component.tsx_ is for extending design component at your project.  
->> There are all components that you created at **_ServiceDesigner_**.  
->> All of them have render() method inclucing return array of elements.  
+>   * There are all components that you created at **_ServiceDesigner_**.  
+>   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
 > * _design.style_ is for setting style of your elements in **_ServiceDesigner_** freely as way you want.  
 
@@ -83,7 +83,7 @@
 
 ### Rename  
 > ![RenamingComponents](./asset/img/renamingComponents.gif)  
-> * Just like _[NEW](#new)_, right-click and click _Rename_ at the file that you want to .change the name.  
+> * Just like [NEW](#new), right-click and click _Rename_ at the file that you want to .change the name.  
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
@@ -123,8 +123,8 @@
 
 ### Reactstrap  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
-> **ReactStrap** is really helpfull when you use React and set UI design simply by using bootstrap library.  
-> You can use Bootstrap 4 components in this function.  
+> **ReactStrap** provides bootstrap component for React framework.  
+> You can use _Bootstrap 4 components_ in this function.  
 > You don't have to import each components whenever you use it!  
 > Just input the name of one of ReactStrap's components, and set property if you want.  
 
@@ -144,44 +144,45 @@
 > ![React Native](./asset/img/reactNative.gif)  
 > Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
-> Just click the button which version that you want to test UI .  
-> Then right-click and add element and input the name of compomnent what you need. It's really simple.  
+> Just click the button which version that you want to work with UI .  
+> Then right-click and add element and input the name of compomnent what you need.  
 > You must input the name in this function also.
 
 ### RN Elements  
 > ![RN Elements](./asset/img/reactNativeElements.gif)  
-> 1. If you want to implement and check any detail of project's UI, set the screen as mobile.  
-> 1. After that, right-click and add element just like adding other element.  
+> 1. If you want to work with your project's UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
+> 1. After that, right-click and add React Native element.  
 > 1. Set the property if it is necessary.
 
 - [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
 
 ### Delete  
 > You can delete elements in this tab. If you input wrong name, just right-click, delete it and add new one!  
->> If you deleted some element and saved your file already, you can't work with that element anymore.  
->> So please be careful when you delete element. 
+>> * If you deleted some element and saved your file already, you have to add same element if you need it.  
+>> * So please be careful when you delete element. 
 
 # Editor  
 **Editor** tab is for managing properties.
 
 ## Properties
 > ![Properties](./asset/img/properties.gif)  
-> When you add an element at your component, **two** derfault properties also created automatically : _name_, _style_.  
+> When you add an element at your component, **two** default properties added automatically : _name_, _style_.  
 > * _name_  
 >> You can check the name of element in **Elements** tab as you set.  
->> You will use _name_ to call the element when you extended design component to your project's component.  
+>> You will use _name_ to call the element when you extend design component to your project.  
 > * _style_
 >> You can set style of each element in this tab. Just fill out as object format.  
 >> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
+> As you can see, properties work for setting UI not only at the **_ServiceDesigner_** but also at your project.  
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
-> If you want to add or delete property, just right-click and select what you want to do.  
+> If you want to add or delete properties, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
->> When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
->> After filling out key and the other values, please click the _save button_.  
->> If you don't click it, there won't be new property. So please remember to click this button.  
->> And be careful! If you added properties that element doesn't have, nothing will happen although added property.  
->> Just like, add text property and set the value in View element.  
+>> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
+>> * After filling out key and the other values, please click the _save button_.  
+>> * If you don't click it, there won't be new property. So please remember to click this button.  
+>> * And be careful! If you added properties that element doesn't have, nothing will happen.  
+>> * Just like, add text property and set the value in View element.  
 > ### 2. _Delete Property_  
 >> If you want to delete property, just click _Delete Property_.  
 

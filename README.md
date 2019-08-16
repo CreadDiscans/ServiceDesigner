@@ -2,7 +2,7 @@
 <!-- GIF file is just guid line, it will updated later with demo page -->
 
 # ServiceDesigner
-**_ServiceDesigner_** is an efficient editor for UI developing using React or React Native framework.
+**_ServiceDesigner_** is an efficient editor for developing UI based on React or React Native framework.
 <!-- > ServiceDesginer is an Editor to update design of your project using react or react-native.  
 > React & React-Native Design Editor desktop app built on top of Electron.  
 > You can update both web and app design created by react or react-native.   -->
@@ -12,9 +12,9 @@
 ![ServiceDesigner](./asset/img/mainExample.gif)  
 
 ## Introduction
-> For example, Let's think about the case when you developed an Android Application.  
+> For example, let's think about the case when you developed an Android Application.  
 > You had to run an emulator, wait until it get started, test how it works, fix some part of your code and _reload_ it.  
-> Maybe you are tired of reloading it again and again.:dizzy:  
+> Maybe you are tired of this routine, especially reloading it again and again.:dizzy:  
 > However, with **_ServiceDesigner_**, you will be free with those inefficient work process.  
 > Just give it a try! And let **_ServiceDesigner_** helps to make your work process more convenient.  
 > Work with your UI _efficiently_, _speedily_ and _simply_ with **_ServiceDesigner_**.  
