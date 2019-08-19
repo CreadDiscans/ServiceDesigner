@@ -47,6 +47,7 @@
 >   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
 > * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.  
+
 > Whenever you update some part of elements, properties or whatever at **_ServiceDesigner_**, the files will be updated automatically.  
 > Except _design.style.css_. This file is static, so nothing will be changed.  
 
@@ -79,9 +80,9 @@
 ### New  
 > ![CreatingComponents](./asset/img/creatingComponents.gif)  
 > * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
-> * If you don't input new _group_ or _component_'s name, they will not be created.  
-> * So please remember to _input the group or component's name_.  
-> * Also, you can use short cut buttons to create group or component.
+>   * If you don't input new _group_ or _component_'s name, they will not be created.  
+>   * So please remember to _input the group or component's name_.  
+>   * Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 > ![RenamingComponents](./asset/img/renamingComponents.gif)  
@@ -91,10 +92,10 @@
 ### Delete  
 > ![DeletingComponents](./asset/img/deletingComponents.gif)  
 > * Right-click and click _Delete_ like other functions.  
-> * Just in case, let's imagine the situation that you deleted some group or component.  
-> * _However_ it was just an accident, not you really wanted.  
-> * Don't be panic already! Please open your file again, before you save it.  
-> * Then you can check there will be a group or component which you deleted before reopening it.  
+>   * Just in case, let's imagine the situation that you deleted some group or component.  
+>   * _However_ it was just an accident, not you really wanted.  
+>   * Don't be panic already! Please open your file again, before you save it.  
+>   * Then you can check there will be a group or component which you deleted before reopening it.  
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
@@ -116,7 +117,7 @@
 
 
 ## Element  
-**Element** tab is for working with UI to render using _React_ or _React Native_ framework and several libraries.  
+**Element** tab is for working with UI design to render using _React_ or _React Native_ framework and several libraries.  
 
 ### HTML  
 > ![HTML](./asset/img/html.gif)  
@@ -125,7 +126,7 @@
 > * Please remember it, if you don't intput the name, it will not be added. Just like at the [Components](#components).
 
 ### Reactstrap  
-> **ReactStrap** provides bootstrap component for React framework.([Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components)  
+> [ReactStrap](https://reactstrap.github.io/) provides bootstrap component for React framework.  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
 > * You can use _Bootstrap 4 components_ in this function.  
 > * You don't have to import each components whenever you use it!  
@@ -133,35 +134,31 @@
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
-> **React Icons** provides free open srouce icons for React framework.([React Icons](http://react-icons.github.io/react-icons/))  
+> [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for React framework.  
 > ![React Icons](./asset/img/reactIcons.gif)  
-> It has **eight** type of icon libraries that you can use easily.  
-> _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
+> * It has **eight** type of icon libraries that you can use easily.  
+> * _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 > * Set element's name as the name of icon from the libraries what you want to use.  
 > * Then set size, color and other properties at the Property tab if you want.
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
 > ![React Native](./asset/img/reactNative.gif)  
-> Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
-> You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
-> Just click the button that you want to work with UI.  
-> Then right-click and add element and input the name of compomnent what you need.  
-> You must input the name in this function also.
+> * Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
+> * You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
+> * Just click the button that you want to work with UI.  
+> * Then right-click and add element and input the name of compomnent what you need.  
 
 ### RN Elements  
+> [React Native Elements](https://react-native-training.github.io/react-native-elements/) provides UI toolkit for React Native framework.
 > ![RN Elements](./asset/img/reactNativeElements.gif)  
-> 1. If you want to work with UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
-> 1. After that, right-click and add React Native element.  
-> 1. Set the property if it is necessary.
-
-- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
+> * If you want to work with UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
+> * After that, right-click and add React Native element.  
+> * Set the property if it is necessary.
 
 ### Delete  
-> You can delete elements in this tab.  
+> You can delete elements through this function.  
 > If you input wrong name, just right-click, delete it and add new one!  
->> * If you deleted some element and saved your file already, you have to add same element if you need it.  
->> * So please be careful when you delete element. 
 
 # Editor  
 **Editor** tab is for managing properties.
@@ -170,35 +167,37 @@
 > ![Properties](./asset/img/properties.gif)  
 > When you add an element at your component, **two** default properties added automatically : _name_, _style_.  
 > * _name_  
->> You can check the name of element in **Elements** tab as you set.  
->> You will use _name_ to call the element when you extend design component to your project.  
+>>  * You can check the name of element in **Elements** tab as you set.  
+>>  * You will use _name_ to call the element when you extend design component to your project.  
 > * _style_
->> You can set style of each element in this tab. Just fill out as object format.  
->> And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
+>>  * You can set style of each element in this tab. Just fill out as object format.  
+>>  * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 > As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
-> If you want to add or delete properties, just right-click and select what you want to do.  
 > ### 1. _Add Property_  
->> * When you clicked _Add Property_, you have to fill out _Property Detail_, at least the _key_.  
+>> * Right-click and click _Add Property_.
+>> * You have to fill out _Property Detail_, at least the _key_.  
 >> * After filling out key and the other values, please click the _save button_.  
 >> * If you don't click it, there won't be new property. So please remember clicking this button.  
 >> * And be careful! If you add properties that element doesn't have, nothing will happen.  
 >> * Just like, add text property and set the value in View element which doesn't have text property.  
 > ### 2. _Delete Property_  
->> If you want to delete property, just click _Delete Property_.  
+>> Right-click and click _Delete Property_.
 
 ## Property Detail
 > There are **three** details to set the property : _Key_, _Type_, _Value_.  
-> * _Key_ is for setting the keyName of property. For example, _name_, _stlye_ are all the key values for the properties. 
+> * _Key_ is for setting the keyName of property. 
+>   * For example, _name_, _stlye_ are all the key values for the properties. 
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  ### 1. _String_ or _Number_  
 >>> _String_ or _Number_ can only have value which has string or number type.  
 >>  ### 2. _Boolean_  
->>> You can input it's value by checking or unchecking when the type is _Boolean_.  
->>> : _Unchecked_ means _false_, _Checked_ means _true_.
+>>> * You can input it's value by checking or unchecking when the type is _Boolean_.  
+>>>     * _Unchecked_ means _false_.
+>>>     * _Checked_ means _true_.
 >>  ### 3. _Object_  
 >>> * _Object_'s value should be started with _{_, ended in _}_.  
 >>> * And you can use _if condition_ in this type.  
