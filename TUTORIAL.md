@@ -41,12 +41,14 @@
 # Menu
 ## File  
 **File** menu is to save or open design file at **_ServiceDesigner_**, so user can work with their UI.  
-> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style_.  
+> You can check there are **three** type files : _design.component.tsx_, _design.save.json_, _design.style.css_.  
 > * _design.component.tsx_ is for extending design component at your project.  
 >   * There are all components that you created at **_ServiceDesigner_**.  
 >   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
-> * _design.style_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.  
+> * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.  
+> Whenever you update some part of elements, properties or whatever at **_ServiceDesigner_**, the files will be updated automatically.  
+> Except _design.style.css_. This file is static, so nothing will be changed.  
 
 ### Save File(_ctrl_ + _s_)  
 > ![SavingFile](./asset/img/savingFile.gif)  
@@ -76,10 +78,10 @@
 
 ### New  
 > ![CreatingComponents](./asset/img/creatingComponents.gif)  
-> Right-click at the **Components** tab and click _New Group_ or _New Component_.  
->> * If you don't input new _group_ or _component_'s name, they will not be created.  
->> * So please remember to _input the group or component's name_.  
->> * Also, you can use short cut buttons to create group or component.
+> * Right-click at the **Components** tab and click _New Group_ or _New Component_.  
+> * If you don't input new _group_ or _component_'s name, they will not be created.  
+> * So please remember to _input the group or component's name_.  
+> * Also, you can use short cut buttons to create group or component.
 
 ### Rename  
 > ![RenamingComponents](./asset/img/renamingComponents.gif)  
@@ -88,11 +90,11 @@
 
 ### Delete  
 > ![DeletingComponents](./asset/img/deletingComponents.gif)  
-> Right-click and click _Delete_ like other functions.  
->> * Just in case, let's imagine the situation that you deleted some group or component.  
->> * _However_ it was just an accident, not you really wanted.  
->> * Don't be panic already! Please open your file again, before you save it.  
->> * Then you can check there will be a group or component which you deleted before reopening it.  
+> * Right-click and click _Delete_ like other functions.  
+> * Just in case, let's imagine the situation that you deleted some group or component.  
+> * _However_ it was just an accident, not you really wanted.  
+> * Don't be panic already! Please open your file again, before you save it.  
+> * Then you can check there will be a group or component which you deleted before reopening it.  
 
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
@@ -104,7 +106,8 @@
 
 #### 2. _Unselect_  
 > If there is a selected group or component, that one will be highlighted because it was activated.  
-> So if you don't need to activate it anymore, just click _Unselect_. Then nothing will be selected in **Components** tab.  
+> So if you don't need to activate it anymore, just click _Unselect_.  
+> As the result, nothing will be selected in **Components** tab.  
 
 #### 3. _Collapse_
 > * If you want to collapse some group, but not all groups, just the group.  
@@ -117,27 +120,25 @@
 
 ### HTML  
 > ![HTML](./asset/img/html.gif)  
-> Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
->> * Use html tag just like in your coding editor.  
->> * Please remember it, if you don't intput the name, it will be not added. Just like at the [Components](#components).
+> * Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
+> * Use html tag just like in your coding editor.  
+> * Please remember it, if you don't intput the name, it will not be added. Just like at the [Components](#components).
 
 ### Reactstrap  
+> **ReactStrap** provides bootstrap component for React framework.([Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components)  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
-> **ReactStrap** provides bootstrap component for React framework.  
 > * You can use _Bootstrap 4 components_ in this function.  
 > * You don't have to import each components whenever you use it!  
 > * Just input the name of one of ReactStrap's components, and set property if you need.  
-
 - [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
 
 ### React Icons  
+> **React Icons** provides free open srouce icons for React framework.([React Icons](http://react-icons.github.io/react-icons/))  
 > ![React Icons](./asset/img/reactIcons.gif)  
-> **React Icons** provides free open srouce icons for React framework.  
 > It has **eight** type of icon libraries that you can use easily.  
 > _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 > * Set element's name as the name of icon from the libraries what you want to use.  
 > * Then set size, color and other properties at the Property tab if you want.
-
 - [React Icons](http://react-icons.github.io/react-icons/)  
 
 ### React Native  
