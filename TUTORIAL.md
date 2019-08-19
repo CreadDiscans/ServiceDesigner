@@ -204,7 +204,7 @@
 >>> * If you want to learn about using _if condition_, go to [Other Functions of Editor](#other-functions-of-editor) and check it.  
 >>  ### 4. _Function_  
 >>> * _Function_ is for handling event.  
->>> * For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button's event.  
+>>> * For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button event.  
 >>> * So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
 >>> * You can call this function at your project by extending design component.  
 >>> * About this, go to [Inheritance](#inheritance) and check how to use it.  
@@ -212,7 +212,7 @@
 >>> * _Variable_'s value has to be variable's name including of _state_.  
 >>> * You can call and use variable or props from your project by extending this design component.  
 >>> * Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
->>> * So please be careful when working with UI by using other variables except state.  
+>>> * So please be careful when working with UI design by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
 
 ## Other Functions of Editor  
@@ -225,7 +225,7 @@
 > 1. After that, click the _number button_ except **zero**. It exists for default value, not for _if condition_.  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
->> * If you use state value, you have to put _this.state._ infront of state's name.
+>> * If you use state value, you have to put _this.state._ infront of state's name like the below.
 >> ```
 >> this.state.XXX  
 >> ```
@@ -235,13 +235,13 @@
 > If you want to delete some _if condition_, just click _trash icon button_.  
 
 ### 2. _For Loop_  
-> ![ForLoop](./asset/img/forLoop.gif)  
 > If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self.  
 > You can set elements automatically and conveniently by using _for loop_.  
+> ![ForLoop](./asset/img/forLoop.gif)  
 > 1. Add property which has _for_ as Key, and Variable as Type.  
-> 1. And set the Value the name of _array_ or _array object_ state.  
+> 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
->> * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_.  
+>> * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_ like the below.  
 >> ```
 >> item0        // array  
 >> item0.XXX    // array object
@@ -251,15 +251,15 @@
 # Other Functions  
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
-> Before continuing, there are some overlapped function in these _Other Functions_.  
-> _Delete_ or _Cancel_ in _Color_, _Asset_ and _Style_ are those.  
-> It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color), and follow it.  
+> * Before continuing, there are some overlapped function in these _Other Functions_.  
+> * _Delete_ and _Cancel_ in _Color_, _Asset_ and _Style_ are those.  
+> * It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color), and follow it.  
 
 ## State  
 > * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
->>  * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
->>  * In the case that you have to change state's value by event or whatever, do it at your project.  
->>  * Otherwise, just leave it. It will call design component's state value automatically in your project.  
+>  * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
+>  * In the case that you have to change state's value by event or whatever, do it at your project.  
+>  * Otherwise, just leave it. It will call design component's state value automatically in your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
 >> [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
@@ -301,7 +301,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ### 1. _Create_  
 > * Set name for the asset variable and click the _Create button_.  
 > * If you don't set name, nothing will happen. So please be aware that you have to set it's name first.  
-> * Select image file and open it. Now your asset variable is ready to use.  
+> * Select image file and open it.  
+> * Now your asset variable is ready to use.  
 
 ### 2. _Usage_  
 > * You can use asset variable by calling it as property's value.
@@ -318,7 +319,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 1. _Add_  
 > * Set name for style variable first.  
-> * Then set style code as using _CSS .class selector_ in JS, just like below code.  
+> * Then set style code as using _CSS .class selector_ in JS, just like the below code.  
 > ```css
 > .className {  
 >   keyName: value;
@@ -341,10 +342,10 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 To **Render** component including of it's UI, you have to call the component from _design.component.tsx_ at your project.
 
 ### 1. _Extend design component_  
-> * When you done with your UI, open your coding editor and your project.  
-> * First, check saved _design.component.tsx_ which has all components that you created in **_ServiceDesigner_**.  
-> * Then import one design component what to use from this design file.  
-> * And _extends_ it to project's component, just like below code.  
+> * When you done with your UI design component, open your coding editor and your project.  
+> * At the first, check the saved _design.component.tsx_ which has all components that you created at the **_ServiceDesigner_**.  
+> * Then select one design component and import it from this file.  
+> * And _extends_ it to project's component, just like the below code.  
 > ```css
 > import { DesignComponentNameToUse } from 'designFilePath/design.component';
 > export class ProjectComponentName extends DesignComponentNameToUse {
@@ -359,15 +360,15 @@ To **Render** component including of it's UI, you have to call the component fro
 > * #### Render React Native at the App   
 > ![RenderReactNative](./asset/img/renderReactNative.gif)    
 > * They are the result screens after rendering the project components that are extending design component.  
-> * You can create or call the functions freely, just like call alert function at _componentDidMount()_ in above examples.  
+> * You can create or call the functions freely, just like calling alert function at _componentDidMount()_ at the above examples.  
 > * It's really simple! Just extend design component at your project and use it.  
 
 ### 2. _Handle Function_
-> * Add element like _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs event in your project would be pretty picky.  
+> * Add element like _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs would be pretty picky.  
 > * Because you have to add property which has _Function_ as type's value to handle those elements' event.  
 > * If you don't handle and just ignore them, nothing will happen.  
-> * Click or press the button, fill out the textinput, or do whatever, **NOTHING WILL HAPPEN**.  
-> * So if you want to make your project working perfectly, you have to learn about handling function.  
+> * Click or press the button, fill out the textinput or do whatever, **NOTHING WILL HAPPEN**.  
+> * So to make your project working perfectly, you have to learn about handling function.  
 > #### 1. _Add Function Property_  
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
 >> * As this example, you have to add Name and Function Property at the first step.  
@@ -375,8 +376,8 @@ To **Render** component including of it's UI, you have to call the component fro
 >> * It's useful when one component has many elements that occur event.   
 > #### 2. _Call and Use Function by Calling onEvent_  
 >> * Before calling function at your project, open _design.component.tsx_ file.  
->> * You can check that _DesignedComponent_ has _onEvenet(e:any)_ method.  
->> * And other components that you created extend this _DesignedComponent_.  
+>> * You can check that _DesignedComponent_ class has _onEvenet(e:any)_ method.  
+>> * And other components that you created extend this class.  
 >> * This structure makes you could call and use _onEvent(e)_ method at your project by extending.  
 >> ```css
 >> functionName = { 
@@ -387,7 +388,7 @@ To **Render** component including of it's UI, you have to call the component fro
 >>   })
 >> }
 >> ```
->> * Also, you can check this property at your element that you set name and function property.  
+>> * Also, you can check this property at your element that you set name and function property at the **_ServiceDesigner_**.  
 >> * _event_ means key value of property which has function type and _name_ means value of name property.  
 >> ```css
 >> onEvent(e) {  
@@ -400,7 +401,7 @@ To **Render** component including of it's UI, you have to call the component fro
 >>   }
 >> }
 >> ```
->> * So you can seperate all functions by using _if condtion_ to compare **e.name** in _onEvent(e)_ method called in your project.  
+>> * So you can seperate all functions by using _if condtion_ to compare **e.name** in _onEvent(e)_ method called.  
 >> * If you want, you can also compare **e.event** by _if condition_.
 
 >> ![ReactFunction](./asset/img/reactFunction.gif)    
