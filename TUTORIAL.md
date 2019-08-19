@@ -133,8 +133,8 @@
 
 ### React Icons  
 > ![React Icons](./asset/img/reactIcons.gif)  
-> [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for React framework.  
-> * It has **eight** type of icon libraries that you can use easily.  
+> * [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for React framework.  
+>   * It has **eight** type of icon libraries that you can use easily.  
 >   * _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 >   * Set element's name as the name of icon from the libraries what you want to use.  
 >   * Then set size, color and other properties at the Property tab if you want.
@@ -231,7 +231,7 @@
 
 ### 2. _For Loop_  
 > ![ForLoop](./asset/img/forLoop.gif)  
-> If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self to show them.  
+> If you have an _array_ or _array object_ state, you don't have to add all elements again and again to show them.  
 > You can set elements automatically and conveniently by using _for loop_.  
 > 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
@@ -254,7 +254,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * In **_ServiceDesigner_**, you can set **State** as _json format_ and use it in your project by extending design component.  
 > * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
 > * In the case that you have to change state's value by event or whatever, do it at your project.  
-> * Otherwise, just leave it. It will call design component's state value from the **_ServiceDesigner_** automatically at your project.  
+> * Otherwise, just leave it. It will call design component's state value automatically at your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
 > * [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
