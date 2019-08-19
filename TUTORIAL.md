@@ -47,8 +47,7 @@
 >   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
 > * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.  
-
-> Whenever you update some part of elements, properties or whatever at **_ServiceDesigner_**, the files will be updated automatically.  
+> Whenever you update some part of components at **_ServiceDesigner_**, the files will be updated automatically.  
 > Except _design.style.css_. This file is static, so nothing will be changed.  
 
 ### Save File(_ctrl_ + _s_)  
@@ -126,21 +125,19 @@
 > * Please remember it, if you don't intput the name, it will not be added. Just like at the [Components](#components).
 
 ### Reactstrap  
-> [ReactStrap](https://reactstrap.github.io/) provides bootstrap component for React framework.  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
-> * You can use _Bootstrap 4 components_ in this function.  
-> * You don't have to import each components whenever you use it!  
-> * Just input the name of one of ReactStrap's components, and set property if you need.  
-- [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components  
+> * [ReactStrap](https://reactstrap.github.io/) provides bootstrap component for React framework.  
+>   * You can use _Bootstrap 4 components_ in this function.  
+>   * You don't have to import each components whenever you use it!  
+>   * Just input the name of one of ReactStrap's components, and set property if you need.  
 
 ### React Icons  
-> [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for React framework.  
 > ![React Icons](./asset/img/reactIcons.gif)  
+> [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for React framework.  
 > * It has **eight** type of icon libraries that you can use easily.  
-> * _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
-> * Set element's name as the name of icon from the libraries what you want to use.  
-> * Then set size, color and other properties at the Property tab if you want.
-- [React Icons](http://react-icons.github.io/react-icons/)  
+>   * _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
+>   * Set element's name as the name of icon from the libraries what you want to use.  
+>   * Then set size, color and other properties at the Property tab if you want.
 
 ### React Native  
 > ![React Native](./asset/img/reactNative.gif)  
@@ -150,11 +147,11 @@
 > * Then right-click and add element and input the name of compomnent what you need.  
 
 ### RN Elements  
-> [React Native Elements](https://react-native-training.github.io/react-native-elements/) provides UI toolkit for React Native framework.
 > ![RN Elements](./asset/img/reactNativeElements.gif)  
-> * If you want to work with UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
-> * After that, right-click and add React Native element.  
-> * Set the property if it is necessary.
+> * [React Native Elements](https://react-native-training.github.io/react-native-elements/) provides UI toolkit for React Native framework.
+>   * If you want to work with UI without missing any details, set the screen as mobile, just like [React Native](#react-native).  
+>   * After that, right-click and add React Native element.  
+>   * Set the property if it is necessary.
 
 ### Delete  
 > You can delete elements through this function.  
@@ -165,13 +162,13 @@
 
 ## Properties
 > ![Properties](./asset/img/properties.gif)  
-> When you add an element at your component, **two** default properties added automatically : _name_, _style_.  
+> * When you add an element at your component, **two** default properties added automatically : _name_, _style_.  
 > * _name_  
->>  * You can check the name of element in **Elements** tab as you set.  
->>  * You will use _name_ to call the element when you extend design component to your project.  
+>   * You can check the name of element in **Elements** tab as you set.  
+>   * You will use _name_ to call the element when you extend design component to your project.  
 > * _style_
->>  * You can set style of each element in this tab. Just fill out as object format.  
->>  * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
+>   * You can set style of each element in this tab. Just fill out as object format.  
+>   * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 > As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
@@ -188,16 +185,15 @@
 ## Property Detail
 > There are **three** details to set the property : _Key_, _Type_, _Value_.  
 > * _Key_ is for setting the keyName of property. 
->   * For example, _name_, _stlye_ are all the key values for the properties. 
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
 >> So at least, you have to set _Key_'s value when adding property.  
 > * _Type_ has **six** detailed types : _String_, _Number_, _Boolean_, _Function_, _Object_, _Variable_.
 >>  ### 1. _String_ or _Number_  
 >>> _String_ or _Number_ can only have value which has string or number type.  
 >>  ### 2. _Boolean_  
->>> * You can input it's value by checking or unchecking when the type is _Boolean_.  
->>>     * _Unchecked_ means _false_.
->>>     * _Checked_ means _true_.
+>>> * You can input it's value by clicking the checkbox when the type is _Boolean_.  
+>>>     * _Unchecked_ = _false_.
+>>>     * _Checked_ = _true_.
 >>  ### 3. _Object_  
 >>> * _Object_'s value should be started with _{_, ended in _}_.  
 >>> * And you can use _if condition_ in this type.  
@@ -211,8 +207,8 @@
 >>  ### 5. _Variable_
 >>> * _Variable_'s value has to be variable's name including of _state_.  
 >>> * You can call and use variable or props from your project by extending this design component.  
->>> * Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
->>> * So please be careful when working with UI design by using other variables except state.  
+>>>     * Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
+>>>     * So please be careful when working with UI design by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
 
 ## Other Functions of Editor  
@@ -220,9 +216,8 @@
 ![IfCondition](./asset/img/ifCondition.gif)  
 
 #### Add  
-> As you can see, there are _zero button_ and _plus button_.  
 > 1. At first, click the _plus button_, then there will be new numbered button which is added.  
-> 1. After that, click the _number button_ except **zero**. It exists for default value, not for _if condition_.  
+> 1. After that, click the _number button_ except **zero**(exists for default value, not for _if condition_).  
 > 1. Then you can input condition at the below textinput which has 'Condition' placeholder.  
 > 1. Input any _if condition_ which you want to use it.  
 >> * If you use state value, you have to put _this.state._ infront of state's name like the below.
@@ -232,13 +227,13 @@
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which it's type of result is _Boolean_.  
 
 #### Delete  
-> If you want to delete some _if condition_, just click _trash icon button_.  
+> If you want to delete some _if condition_, select the number of it and just click _trash icon button_.  
 
 ### 2. _For Loop_  
-> If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self.  
-> You can set elements automatically and conveniently by using _for loop_.  
 > ![ForLoop](./asset/img/forLoop.gif)  
-> 1. Add property which has _for_ as Key, and Variable as Type.  
+> If you have an _array_ or _array object_ state, you don't have to add all elements again and again by your self to show them.  
+> You can set elements automatically and conveniently by using _for loop_.  
+> 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
 >> * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_ like the below.  
@@ -253,24 +248,24 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 > * Before continuing, there are some overlapped function in these _Other Functions_.  
 > * _Delete_ and _Cancel_ in _Color_, _Asset_ and _Style_ are those.  
-> * It's literally all the same way, so if you want to need a help with those functions, go to [Color](#color), and follow it.  
+> * It's literally all the same way, so if you want to need a help with the above functions, go to [Color](#color), and follow it.  
 
 ## State  
-> * In **_ServiceDesigner_**, you can set **State** as _json format_, and use it in your project by extending design component.  
->  * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
->  * In the case that you have to change state's value by event or whatever, do it at your project.  
->  * Otherwise, just leave it. It will call design component's state value automatically in your project.  
+> * In **_ServiceDesigner_**, you can set **State** as _json format_ and use it in your project by extending design component.  
+> * The detailed explanation of using _extends_ will be [Inheritance](#inheritance). Please check it.  
+> * In the case that you have to change state's value by event or whatever, do it at your project.  
+> * Otherwise, just leave it. It will call design component's state value from the **_ServiceDesigner_** automatically at your project.  
 > * And also, you can use this state value as _property's value_ or for _if condition_.  
->> [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
+> * [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
 ## Color
-**Color** tab support _Color Variables_.   
+<!-- **Color** tab support _Color Variables_.    -->
 
 ![Color](./asset/img/color.gif)  
 
 ### 1. _Create_
 > * Pick any color that you want to use from the _Color Picker_, and input the name.  
-> * On the other hand, just input _Color Code_ or _RGB_.   
+> * On the other hand, just input _Color Code_ or _RGB_ value.   
 > * You can check color variables list from the left side of the color picker.  
 
 ### 2. _Update_
@@ -282,11 +277,11 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * When you want to delete some variable, select it from the list and click the _Delete button_.  
 
 ### 4. _Cancel_
-> * After done, click the _Cancel button_.  
+> * After done what you did with variable, click the _Cancel button_.  
 > * Then you can create or update other variables again.  
 
 ### 5. _Usage_  
-> * You can use color variable by calling it as property's value.  
+> * You can use color variable by calling it as property's value like the below.  
 > ```
 > Color.XXX  
 > ```
@@ -294,7 +289,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 
 ## Asset
-**Asset** tab support _Asset Variables_.  
+<!-- **Asset** tab support _Asset Variables_.   -->
 
 ![Asset](./asset/img/asset.gif)  
 
@@ -305,7 +300,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Now your asset variable is ready to use.  
 
 ### 2. _Usage_  
-> * You can use asset variable by calling it as property's value.
+> * You can use asset variable by calling it as property's value just like the below.
 > ```
 > Asset.XXX  
 > ```
@@ -313,7 +308,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Css  
 
 ## Style  
-**Style** tab support _Style Variables_.  
+<!-- **Style** tab support _Style Variables_.   -->
 
 ![Style](./asset/img/style.gif)  
 
@@ -332,8 +327,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 3. _Usage_  
 > * You can use style variable by calling name.  
-> * Set property's key : _styleName_ and type : _String_.
-> * Then call it's name as value.    
+> * Set _styleName_ as property's Key and _String_ as Type.
+> * Then set this style's name as Value.    
 
 
 
@@ -343,8 +338,8 @@ To **Render** component including of it's UI, you have to call the component fro
 
 ### 1. _Extend design component_  
 > * When you done with your UI design component, open your coding editor and your project.  
-> * At the first, check the saved _design.component.tsx_ which has all components that you created at the **_ServiceDesigner_**.  
-> * Then select one design component and import it from this file.  
+> * Then check the saved _design.component.tsx_ which has all components that you created at the **_ServiceDesigner_**.  
+> * After that, select one design component and import it from this file.  
 > * And _extends_ it to project's component, just like the below code.  
 > ```css
 > import { DesignComponentNameToUse } from 'designFilePath/design.component';
@@ -357,23 +352,23 @@ To **Render** component including of it's UI, you have to call the component fro
 > ```
 > * #### Render React at the Web  
 > ![RenderReact](./asset/img/renderReact.gif)  
-> * #### Render React Native at the App   
+> * #### Render React Native at the App(Emulator)  
 > ![RenderReactNative](./asset/img/renderReactNative.gif)    
-> * They are the result screens after rendering the project components that are extending design component.  
-> * You can create or call the functions freely, just like calling alert function at _componentDidMount()_ at the above examples.  
+> * They are the result screens after rendering the project components extending design component.  
+> * You can create or call the functions freely, just like calling alert function at the above examples.  
 > * It's really simple! Just extend design component at your project and use it.  
 
 ### 2. _Handle Function_
 > * Add element like _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs would be pretty picky.  
-> * Because you have to add property which has _Function_ as type's value to handle those elements' event.  
+> * Because you have to add property which has _Function_ as Type of property to handle those elements' event.  
 > * If you don't handle and just ignore them, nothing will happen.  
 > * Click or press the button, fill out the textinput or do whatever, **NOTHING WILL HAPPEN**.  
 > * So to make your project working perfectly, you have to learn about handling function.  
 > #### 1. _Add Function Property_  
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
 >> * As this example, you have to add Name and Function Property at the first step.  
->> * The reason to set the name of element is calling event by it's name.  
->> * It's useful when one component has many elements that occur event.   
+>> * The reason to set the name of element is to call event by it's name.  
+>> * It's useful when one component has many elements that occur event, so distinguish it by calling name.   
 > #### 2. _Call and Use Function by Calling onEvent_  
 >> * Before calling function at your project, open _design.component.tsx_ file.  
 >> * You can check that _DesignedComponent_ class has _onEvenet(e:any)_ method.  
@@ -388,7 +383,7 @@ To **Render** component including of it's UI, you have to call the component fro
 >>   })
 >> }
 >> ```
->> * Also, you can check this property at your element that you set name and function property at the **_ServiceDesigner_**.  
+>> * Also, you can check _event_ property at the element that you set _function_ property at the **_ServiceDesigner_**.  
 >> * _event_ means key value of property which has function type and _name_ means value of name property.  
 >> ```css
 >> onEvent(e) {  
@@ -403,25 +398,9 @@ To **Render** component including of it's UI, you have to call the component fro
 >> ```
 >> * So you can seperate all functions by using _if condtion_ to compare **e.name** in _onEvent(e)_ method called.  
 >> * If you want, you can also compare **e.event** by _if condition_.
-
->> ![ReactFunction](./asset/img/reactFunction.gif)    
->> ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
-
-<!-- - File : Open saved 'design.save.json' file to update your project at ServiceDesigner.
-- State : The scheme is json.
-- Style : The Style supports following special shceme.
-
-  Color.XXX : Support Color variables. The variables should be defined color tab.
-  Asset.XXX : Support Asset variables. The variables should be defined asset tab.
-  ex ) { "backgroundColor": "Color.red" }
-```css
-{  
-    "backgroundColor": "Color.red"  
-}
-```
-
-- Property : the property supports following special shceme.
-
-  First checkbox is if the attribute is active.
-  Second checkbox is if the attribute is binded with state variable.
-  Asset.XXX : Asset tab scheme. -->
+> * #### React Function in onEvent Method
+> ![ReactFunction](./asset/img/reactFunction.gif)  
+> * #### React Native Function in onEvent Method
+> ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
+> * They are the result screens testing functions by calling onEvent method at the each framework.  
+> * You can create or call the functions freely inside of onEvent method, just like calling alert function when clicking or pressing the button at the above examples.
