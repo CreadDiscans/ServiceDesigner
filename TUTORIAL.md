@@ -86,7 +86,7 @@
 
 ### Rename  
 > ![RenamingComponents](./asset/img/renamingComponents.gif)  
-> * Just like [NEW](#new), right-click and click _Rename_ at _group_ or _component_ that you want to change the name.  
+> * Just like [NEW](#new), right-click and click _Rename_ at _group_ or _component_ that you want to rename.  
 > * If you don't input _group_ or _component_'s name newly, it's name will not be changed.  
 
 ### Delete  
@@ -131,11 +131,11 @@
 > * [ReactStrap](https://reactstrap.github.io/) provides bootstrap component for _React_ framework.  
 >   * You can use _Bootstrap 4 components_ in this function.  
 >   * You don't have to import each components whenever you use it!  
->   * Just input the name of one of ReactStrap's components, and set property if you need.  
+>   * Just input the name to use from ReactStrap's components, and set property if you need.  
 
 ### React Icons  
 > ![React Icons](./asset/img/reactIcons.gif)  
-> * [React Icons](http://react-icons.github.io/react-icons/) provides free open srouce icons for _React_ framework.  
+> * [React Icons](http://react-icons.github.io/react-icons/) provides free open source icons for _React_ framework.  
 >   * It has **eight** type of icon libraries that you can use easily.  
 >   * _Font Awesome_, _Ionicons_, _Material Design icons_, _Typicons_, _Github Octicons_, _Feather_, _Game Icons_, _Weather Icons_.  
 >   * Set element's name as the name of icon from the libraries what you want to use.  
@@ -145,7 +145,7 @@
 > ![React Native](./asset/img/reactNative.gif)  
 > * Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > * You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
-> * Just Choose one screen that you want to work with UI.  
+> * Just Choose one screen that you want to work with UI design.  
 > * Then right-click and add element and input the name of compomnent what you need.  
 
 ### RN Elements  
@@ -204,13 +204,13 @@
 >>  ### 4. _Function_  
 >>> * _Function_ is for handling event.  
 >>> * For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button event.  
->>> * So if you want to handle them, set _Key_ as functions's name and set _Type_ as _Function_.  
+>>> * So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
 >>> * You can call this function at your project by extending design component.  
 >>> * About this, go to [Inheritance](#inheritance) and check how to use it.  
 >>  ### 5. _Variable_
 >>> * _Variable_'s value has to be variable's name including of _state_.  
 >>> * You can call and use variable or props from your project by extending this design component.  
->>>     * Maybe there will be a blank in **_ServiceDesigner_**, in this case.  
+>>>     * Maybe there will be a blank in **_ServiceDesigner_** screen, in this case.  
 >>>     * So please be careful when working with UI design by using other variables except state.  
 > * _Value_ is different per _Type_ of property.  
 
@@ -219,7 +219,7 @@
 ![IfCondition](./asset/img/ifCondition.gif)  
 
 #### Add  
-> 1. At first, click the _plus_ button, then there will be _new numbered_ button which is added.  
+> 1. At first, click the _plus_ button, then there will be a _new numbered_ button which is added.  
 > 1. After that, click the _numbered_ button except **zero**(exists for default value, not for _if condition_).  
 > 1. Then you can input condition at the below textinput which has _Condition_ placeholder.  
 > 1. Input any _if condition_ which you want to use.  
@@ -227,7 +227,7 @@
 >> ```
 >> this.state.XXX  
 >> ```
->> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which return _Boolean_ type as a result.  
+>> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which returns _Boolean_ type as a result.  
 
 #### Delete  
 > If you want to delete some _if condition_, select the number of it and just click _trash icon_ button.  
@@ -251,9 +251,10 @@
 # Other Functions  
 There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, _Css_, _Style_.
 
-> * Before continuing, there are some overlapped function in these **Other Functions**.  
+> * Before continuing, there are some overlapped functions in these **Other Functions**.  
 > * _Delete_ and _Cancel_ in _Color_, _Asset_, _Css_ and _Style_ are those.  
-> * It's literally all the same way, so if you want to need a help with the above functions, go to [Color](#color), and follow it.  
+> * It's literally all the same way, so the explanation will be skipped except [Color](#color).  
+> * If you need a help with the above functions, go to [Color](#color), and follow it.  
 
 ## State  
 > * In **_ServiceDesigner_**, you can set **State** as _json format_ and use it in your project by extending design component.  
@@ -267,9 +268,9 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ![Color](./asset/img/color.gif)  
 
 ### 1. _Create_
-> * Pick any color that you want to use from the _Color Picker_, and input the name. And click the _Create_ button. 
+> * Pick any color that you want to use from the _Color Picker_, and input the name. 
 > * On the other hand, just input _Color Code_ or _RGB_ value.   
-> * You can check color variables list from the left side of the color picker.  
+> * After clicking the _Create_ button, you can check color variables list from the left side of the color picker.  
 
 ### 2. _Update_
 > * If you want to change variable's value, select the one from the list.  
@@ -399,7 +400,8 @@ To **Render** design component, you have to call the component from _design.comp
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
 >> * As this example, you have to add _name_ and _function_ property at the first step.  
 >> * The reason to set the _name_ of element is to call event by it's name.  
->> * It's useful when one component has many elements that occur event, so distinguish it by calling name.   
+>> * It's useful when one component has many elements that occur event.  
+>> * Because you can distinguish each element by calling the name of it.   
 > #### 2. _Call and Use Function by Calling onEvent(e)_  
 >> * Before calling function at your project, open _design.component.tsx_ file.  
 >> * You can check that _DesignedComponent_ class has **onEvenet(e:any)** method.  
@@ -427,7 +429,7 @@ To **Render** design component, you have to call the component from _design.comp
 >>   }
 >> }
 >> ```
->> * So you can seperate all functions by using _if condtion_ to compare **e.name** in **onEvent(e)** method called.  
+>> * So you can seperate all functions by using _if condtion_ to compare **e.name** in **onEvent(e)** method.  
 >> * You can also compare **e.event** by _if condition_.
 > #### 1. _React Function in onEvent Method_
 > ![ReactFunction](./asset/img/reactFunction.gif)  
