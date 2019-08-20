@@ -49,4 +49,6 @@ npm run dist
 
 
 ## Tutorial
-:books:[Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md)
+:books:[Tutorial](https://github.com/CreadDiscans/ServiceDesigner/blob/tutorial/TUTORIAL.md)
+<!-- ServiceDesigner 원래 계정 문서로 접속되도록 수정 -->
+<!-- :books:[Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md) -->
