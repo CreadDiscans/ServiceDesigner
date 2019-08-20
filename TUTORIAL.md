@@ -237,11 +237,13 @@
 > * You can set elements automatically and conveniently by using _for loop_.  
 > 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
-> 1. As the result, you can check the element is added as many as _array's length_.  
->>  * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_ like the below.  
+> 1. As the result, you can check the element is added as much as _array's length_.  
+>> * If you want to use array's value, you have to use _item_  + _i_ which is mapped from the _state array_ like the below.  
+>>  * _i_ is number value. Usually _i_ will be **_0_**.  
+>>  * However, when dealing with _N-Dimensional_ array or array object, _i_ value will be added as much as _N_ value.
 >> ```
->> item0        // array  
->> item0.XXX    // array object
+>> itemi        // array  
+>> itemi.XXX    // array object
 >> ```
 
 
@@ -261,8 +263,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * [Other Functions of Editor](#other-functions-of-editor) will help you understand how to use _state_ in properties.  
 
 ## Color
-<!-- **Color** tab support _Color Variables_.    -->
-
 ![Color](./asset/img/color.gif)  
 
 ### 1. _Create_
@@ -291,8 +291,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 
 ## Asset
-<!-- **Asset** tab support _Asset Variables_.   -->
-
 ![Asset](./asset/img/asset.gif)  
 
 ### 1. _Create_  
@@ -310,8 +308,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 ## Css  
 
 ## Style  
-<!-- **Style** tab support _Style Variables_.   -->
-
 ![Style](./asset/img/style.gif)  
 
 ### 1. _Add_  
