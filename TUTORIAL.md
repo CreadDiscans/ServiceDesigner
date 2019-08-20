@@ -23,18 +23,18 @@
         * [React Icons](#react-icons)  
         * [React Native](#react-native)  
         * [RN Elements](#rn-elements)  
-* [Editor](#editor)
+* [Editor](#editor)  
     * [Properties](#properties)  
-    * [Property Detail](#property-detail)
-    * [Other Functions of Editor](#other-functions-of-editor)
-* [Other Functions](#other-functions)
-    * [State](#state)
-    * [Color](#color)
-    * [Asset](#asset)
-    * [Css](#css)
+    * [Property Detail](#property-detail)  
+    * [Other Functions of Editor](#other-functions-of-editor)  
+* [Other Functions](#other-functions)  
+    * [State](#state)  
+    * [Color](#color)  
+    * [Asset](#asset)  
+    * [Css](#css)  
     * [Style](#style)  
-* [Inheritance](#inheritance)
-    * [Render](#render)
+* [Inheritance](#inheritance)  
+    * [Render](#render)  
 
 
 
@@ -304,33 +304,28 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > ```
 
 ## Css  
-> * You can activate css variable by checking the checkbox of the list.  
->   * _Checked_ = active : _true_.  
->   * _Unchecked_ = active : _false_.  
-### 1. _URL_  
+### _URL_  
 #### 1. _Add_
-![CssAddURL](./asset/img/cssAddURL.gif)  
+> ![CssAddURL](./asset/img/cssAddURL.gif)  
 > * _Copy_ the URL or CDN of **Css** library like _BootstrapCDN_ instead of installing it.  
 > * Just _paste_ the copied link and click the _Add URL_ button. It's really simple.  
 > * If you don't input any link, nothing will happen.
-
 #### 2. _Update_
 > * If you add wrong URL, select the one and input correct URL.  
 > * Then click the _Update_ button.  
 
-### 2. _File_
+### _File_
 #### 1. _Add_
-![CssAddFile](./asset/img/cssAddFile.gif)  
+> ![CssAddFile](./asset/img/cssAddFile.gif)  
 > * If there is downloaded **Css** library file, click the _Add File_ button.
 > * Then open the file what you want to apply at your design components.  
-
 #### 2. _Update_
 > * When you want to update added file, select one and update the code from the file.  
 > * If you added wrong file, just delete it and add new one.
 
-#### 3. _Style_
+### _Style_
 #### 1. _Add_
-![CssAddStyle](./asset/img/cssAddStyle.gif)  
+> ![CssAddStyle](./asset/img/cssAddStyle.gif)  
 > * Set name for css variable first.  
 > * Then set css style code per the tag, just like the below code.  
 > ```css
@@ -338,10 +333,14 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 >   keyName: value;
 > }
 > ```
-
 #### 2. _Update_
 > * Select one what you want to update from the list.  
 > * And update the style code, click the _Update_ button.
+
+### _Usage_
+> * You can activate css variable by checking the checkbox of the list.  
+>   * _Checked_ = active : _true_.  
+>   * _Unchecked_ = active : _false_.  
 
 ## Style  
 ![Style](./asset/img/style.gif)  
