@@ -8,8 +8,8 @@
 ## Contents
 * [Menu](#menu)
     * [File](#file)  
-        * [Save File](#save-file)
-        * [Open File](#open-file)
+        * [Save File](#save-file(_ctrl_-+-_s_))
+        * [Open File](#open-file(_ctrl_-+-_o_))
         * [Other Functions of File Menu](#other-functions-of-file-menu)
 * [Explorer](#explorer)
     * [Components](#components)  
