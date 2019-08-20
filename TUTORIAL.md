@@ -122,9 +122,9 @@
 
 ### HTML  
 > ![HTML](./asset/img/html.gif)  
-> * Right-click and clcik _Add Html_, and put the name of what you want to add in your component.  
-> * Use **HTML** tag just like in your coding editor.  
-> * Please remember it. If you don't intput the name, it will not be added. Just like at the [Components](#components).
+> * Right-click and click _Add Html_, and put the name of what you want to add in your component.  
+> * Use **HTML** tag just like at coding editor.  
+> * Please remember it. If you don't input the name, it will not be added. Just like at the [Components](#components).
 
 ### Reactstrap  
 > ![ReactStrap](./asset/img/reactStrap.gif)  
@@ -145,7 +145,7 @@
 > ![React Native](./asset/img/reactNative.gif)  
 > * Before using **React Native** element, set the screen as mobile by clicking one of the buttons from the bottom.  
 > * You can set the screen _to Portrait_ or _to Landscape_ easily through these buttons.  
-> * Just click the button that you want to work with UI.  
+> * Just Choose one screen that you want to work with UI.  
 > * Then right-click and add element and input the name of compomnent what you need.  
 
 ### RN Elements  
@@ -156,8 +156,8 @@
 >   * Set the property if it is necessary.
 
 ### Delete  
-> You can delete elements through this function.  
-> If you input wrong name, just right-click, delete it and add new one!  
+> * If you unneed it anymore, just right-click and click the _Delete_.  
+> * Just in case that input the wrong name, you have to dele it and add new one.   
 
 # Editor  
 **Editor** tab is for managing properties.
@@ -178,7 +178,7 @@
 > ### 1. _Add Property_  
 >> * Right-click and click _Add Property_.
 >> * You have to fill out _Property Detail_, at least the _key_.  
->> * After filling out key and the other values, please click the _save button_.  
+>> * After filling out key and the other values, please click the _Save_ button.  
 >> * If you don't click it, there won't be new property. So please remember clicking this button.  
 >> * And be careful! If you add properties that element doesn't have, nothing will happen.  
 >> * Just like, add text property and set the value in View element which doesn't have text property.  
@@ -195,8 +195,8 @@
 >>> _String_ or _Number_ can only have value which has string or number type.  
 >>  ### 2. _Boolean_  
 >>> * You can input it's value by clicking the checkbox when the type is _Boolean_.  
->>>     * _Unchecked_ = _false_.
->>>     * _Checked_ = _true_.
+>>>     * _Checked_ = _true_.  
+>>>     * _Unchecked_ = _false_.  
 >>  ### 3. _Object_  
 >>> * _Object_'s value should be started with _{_, ended in _}_.  
 >>> * And you can use _if condition_ in this type.  
@@ -204,7 +204,7 @@
 >>  ### 4. _Function_  
 >>> * _Function_ is for handling event.  
 >>> * For example, there are _onClick_ in _React_ or _onPress_ in _React Native_ to handle button event.  
->>> * So if you want to handle them, set _Key_ as function's name and set _Type_ as _Function_.  
+>>> * So if you want to handle them, set _Key_ as functions's name and set _Type_ as _Function_.  
 >>> * You can call this function at your project by extending design component.  
 >>> * About this, go to [Inheritance](#inheritance) and check how to use it.  
 >>  ### 5. _Variable_
@@ -219,7 +219,7 @@
 ![IfCondition](./asset/img/ifCondition.gif)  
 
 #### Add  
-> 1. At first, click the _plus_ button, then there will be new numbered button which is added.  
+> 1. At first, click the _plus_ button, then there will be _new numbered_ button which is added.  
 > 1. After that, click the _numbered_ button except **zero**(exists for default value, not for _if condition_).  
 > 1. Then you can input condition at the below textinput which has _Condition_ placeholder.  
 > 1. Input any _if condition_ which you want to use.  
@@ -230,13 +230,13 @@
 >> * You can use not only _Boolean type_, but also _Other types_ as _if condition_ which return _Boolean_ type as a result.  
 
 #### Delete  
-> If you want to delete some _if condition_, select the number of it and just click _trash icon button_.  
+> If you want to delete some _if condition_, select the number of it and just click _trash icon_ button.  
 
 ### 2. _For Loop_  
 > ![ForLoop](./asset/img/forLoop.gif)  
 > * If you have an _array_ or _array object_ state, you don't have to add all elements again and again to show them.  
 > * You can set elements automatically and conveniently by using **for loop**.  
-> 1. To use **for loop**, add property which has _for_ as Key, and Variable as Type.  
+> 1. To use **for loop**, add property which has _for_ as _Key_, and Variable as _Type_.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as much as _array's length_.  
 >> * If you want to use array's value, you have to use _item_  + _i_ which is mapped from the _state array_.  
@@ -358,8 +358,8 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 ### 3. _Usage_  
 > * You can use style variable at element's property by calling name.  
-> * Set _styleName_ as property's Key and _String_ as Type.
-> * Then set this style's name as Value.    
+> * Set property's _Key_ as _styleName_ and _Type_ as String.
+> * Then set _Value_ as this style's name.    
 
 
 
