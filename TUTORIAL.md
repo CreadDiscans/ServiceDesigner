@@ -100,15 +100,15 @@
 ### Other Functions of Components Tab  
 #### 1. _ShortCuts_  
 > ![ComponentsMenu](./asset/img/componentsMenu.JPG)  
-> When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
-> There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
-> * _create group_ & _create component_ are same functions from [New](#new).  
-> * _collapse groups_ literally collapses all groups in the **Components** tab.  
+> * When you hover on the **Components** tab, there will be some buttons on the right side of the tab.  
+> * There are **three** main functions in these short cuts : _create group_, _create component_, _collapse groups_.  
+>   * _create group_ & _create component_ are same functions from [New](#new).  
+>   * _collapse groups_ literally collapses all groups in the **Components** tab.  
 
 #### 2. _Unselect_  
-> If there is a selected group or component, that one will be highlighted because it was activated.  
-> So if you don't need to activate it anymore, just click _Unselect_.  
-> As the result, nothing will be selected in **Components** tab.  
+> * If there is a selected group or component, that one will be highlighted because it was activated.  
+> * So if you don't need to activate it anymore, just click _Unselect_.  
+> * As the result, nothing will be selected in **Components** tab.  
 
 #### 3. _Collapse_
 > * If you want to collapse some group, but not all groups, just the group.  
@@ -171,7 +171,7 @@
 >   * You can set style of each element in this tab. Just fill out as object format.  
 >   * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
 >  
-> As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
+> * As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > ### 1. _Add Property_  
@@ -182,10 +182,10 @@
 >> * And be careful! If you add properties that element doesn't have, nothing will happen.  
 >> * Just like, add text property and set the value in View element which doesn't have text property.  
 > ### 2. _Delete Property_  
->> Right-click and click _Delete Property_.
+>> * Right-click and click _Delete Property_.
 
 ## Property Detail
-> There are **three** details to set the property : _Key_, _Type_, _Value_.  
+ There are **three** details to set the property : _Key_, _Type_, _Value_.  
 > * _Key_ is for setting the keyName of property. 
 >> If you don't set _Key_'s value, there will be added blank property, and it won't work properly.  
 >> So at least, you have to set _Key_'s value when adding property.  
@@ -288,8 +288,6 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > Color.XXX  
 > ```
 
-
-
 ## Asset
 ![Asset](./asset/img/asset.gif)  
 
@@ -306,6 +304,44 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > ```
 
 ## Css  
+> * You can activate css variable by checking the checkbox of the list.  
+>   * _Checked_ = active : _true_.  
+>   * _Unchecked_ = active : _false_.  
+### 1. _URL_  
+#### 1. _Add_
+![CssAddURL](./asset/img/cssAddURL.gif)  
+> * _Copy_ the URL or CDN of **Css** library like _BootstrapCDN_ instead of installing it.  
+> * Just _paste_ the copied link and click the _Add URL_ button. It's really simple.  
+> * If you don't input any link, nothing will happen.
+
+#### 2. _Update_
+> * If you add wrong URL, select the one and input correct URL.  
+> * Then click the _Update_ button.  
+
+### 2. _File_
+#### 1. _Add_
+![CssAddFile](./asset/img/cssAddFile.gif)  
+> * If there is downloaded **Css** library file, click the _Add File_ button.
+> * Then open the file what you want to apply at your design components.  
+
+#### 2. _Update_
+> * When you want to update added file, select one and update the code from the file.  
+> * If you added wrong file, just delete it and add new one.
+
+#### 3. _Style_
+#### 1. _Add_
+![CssAddStyle](./asset/img/cssAddStyle.gif)  
+> * Set name for css variable first.  
+> * Then set css style code per the tag, just like the below code.  
+> ```css
+> .tagName {  
+>   keyName: value;
+> }
+> ```
+
+#### 2. _Update_
+> * Select one what you want to update from the list.  
+> * And update the style code, click the _Update_ button.
 
 ## Style  
 ![Style](./asset/img/style.gif)  
@@ -324,7 +360,7 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > * Then update the code and click the _Update button_.  
 
 ### 3. _Usage_  
-> * You can use style variable by calling name.  
+> * You can use style variable at element's property by calling name.  
 > * Set _styleName_ as property's Key and _String_ as Type.
 > * Then set this style's name as Value.    
 
