@@ -46,9 +46,9 @@
 >   * There are all components that you created at **_ServiceDesigner_**.  
 >   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
-> * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.  
-> Whenever you update some part of components at **_ServiceDesigner_**, the files will be updated automatically.  
-> Except _design.style.css_. This file is static, so nothing will be changed.  
+> * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.      
+>Whenever you update some part of components at **_ServiceDesigner_**, the files will be updated automatically.  
+>Except _design.style.css_. This file is static, so nothing will be changed.  
 
 ### Save File(_ctrl_ + _s_)  
 > ![SavingFile](./asset/img/savingFile.gif)  
@@ -169,7 +169,7 @@
 > * _style_
 >   * You can set style of each element in this tab. Just fill out as object format.  
 >   * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
-> As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
+>As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > ### 1. _Add Property_  
@@ -231,8 +231,8 @@
 
 ### 2. _For Loop_  
 > ![ForLoop](./asset/img/forLoop.gif)  
-> If you have an _array_ or _array object_ state, you don't have to add all elements again and again to show them.  
-> You can set elements automatically and conveniently by using _for loop_.  
+> * If you have an _array_ or _array object_ state, you don't have to add all elements again and again to show them.  
+> * You can set elements automatically and conveniently by using _for loop_.  
 > 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
@@ -334,13 +334,13 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 
 # Inheritance  
 ## Render  
-To **Render** component including of it's UI, you have to call the component from _design.component.tsx_ at your project.
+To **Render** design component, you have to call the component from _design.component.tsx_ at your project.
 
 ### 1. _Extend design component_  
-> * When you done with your UI design component, open your coding editor and your project.  
-> * Then check the saved _design.component.tsx_ which has all components that you created at the **_ServiceDesigner_**.  
-> * After that, select one design component and import it from this file.  
-> * And _extends_ it to project's component, just like the below code.  
+> * When you done with your UI design work, open your coding editor and your project.  
+> * Then check _design.component.tsx_ which has all components that you created at the **_ServiceDesigner_**.  
+> * After that, select one design component and _extends_ it to project's component.  
+> * If you don't get it, just follow the below code.  
 > ```css
 > import { DesignComponentNameToUse } from 'designFilePath/design.component';
 > export class ProjectComponentName extends DesignComponentNameToUse {
@@ -350,24 +350,24 @@ To **Render** component including of it's UI, you have to call the component fro
 >   // some function to do
 > }
 > ```
-> * #### Render React at the Web  
+> #### 1. Render React at the Web  
 > ![RenderReact](./asset/img/renderReact.gif)  
-> * #### Render React Native at the App(Emulator)  
+> #### 2. Render React Native at the App(Emulator)  
 > ![RenderReactNative](./asset/img/renderReactNative.gif)    
 > * They are the result screens after rendering the project components extending design component.  
-> * You can create or call the functions freely, just like calling alert function at the above examples.  
+> * You can create or call the functions freely, just like calling alert function at componentDidMount().  
 > * It's really simple! Just extend design component at your project and use it.  
 
 ### 2. _Handle Function_
-> * Add element like _Button_, _TextInput_, _TouchableOpacity_ or whatever occurs would be pretty picky.  
-> * Because you have to add property which has _Function_ as Type of property to handle those elements' event.  
+> * Add element like _Button_, _TouchableOpacity_, TextInput or whatever occurs would be pretty picky.  
+> * Because you have to add property which has _Function_ as Type to handle those elements' event.  
 > * If you don't handle and just ignore them, nothing will happen.  
 > * Click or press the button, fill out the textinput or do whatever, **NOTHING WILL HAPPEN**.  
 > * So to make your project working perfectly, you have to learn about handling function.  
-> #### 1. _Add Function Property_  
+> #### 1. _Add Name and Function Property_  
 >> ![AddFunctionProperty](./asset/img/addFunctionProperty.gif)    
->> * As this example, you have to add Name and Function Property at the first step.  
->> * The reason to set the name of element is to call event by it's name.  
+>> * As this example, you have to add _name_ and _function_ property at the first step.  
+>> * The reason to set the _name_ of element is to call event by it's name.  
 >> * It's useful when one component has many elements that occur event, so distinguish it by calling name.   
 > #### 2. _Call and Use Function by Calling onEvent_  
 >> * Before calling function at your project, open _design.component.tsx_ file.  
@@ -384,7 +384,7 @@ To **Render** component including of it's UI, you have to call the component fro
 >> }
 >> ```
 >> * Also, you can check _event_ property at the element that you set _function_ property at the **_ServiceDesigner_**.  
->> * _event_ means key value of property which has function type and _name_ means value of name property.  
+>>  * _event_ is key value of property which has function type.   
 >> ```css
 >> onEvent(e) {  
 >>   if (e.name === "elementNameOne") {
@@ -397,10 +397,11 @@ To **Render** component including of it's UI, you have to call the component fro
 >> }
 >> ```
 >> * So you can seperate all functions by using _if condtion_ to compare **e.name** in _onEvent(e)_ method called.  
->> * If you want, you can also compare **e.event** by _if condition_.
-> * #### React Function in onEvent Method
+>> * You can also compare **e.event** by _if condition_.
+> #### 1. React Function in onEvent Method
 > ![ReactFunction](./asset/img/reactFunction.gif)  
-> * #### React Native Function in onEvent Method
+> #### 2. React Native Function in onEvent Method
 > ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
-> * They are the result screens testing functions by calling onEvent method at the each framework.  
-> * You can create or call the functions freely inside of onEvent method, just like calling alert function when clicking or pressing the button at the above examples.
+> * They are the result screens testing functions by calling _onEvent(e)_ method at the each framework.  
+> * You can create or call the functions freely inside of _onEvent(e)_ method.  
+> * Just like calling alert function when clicking or pressing the button. 
