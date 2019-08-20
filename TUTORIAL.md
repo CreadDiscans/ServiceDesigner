@@ -238,13 +238,13 @@
 > 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as much as _array's length_.  
->> * If you want to use array's value, you have to use _item_  + _i_ which is mapped from the _state array_ like the below.  
->>  * _i_ is number value. Usually _i_ will be **_0_**.  
->>  * However, when dealing with _N-Dimensional_ array or array object, _i_ value will be added as much as _N_ value.
+>> * If you want to use array's value, you have to use _item_  + _i_ which is mapped from the _state array_.  
 >> ```
 >> itemi        // array  
 >> itemi.XXX    // array object
->> ```
+>> ```  
+>> * _i_ is number value. Usually _i_ will be **_0_**.  
+>> * However, when dealing with _N-Dimensional_, _i_ value will be added as much as _N_ value.  
 
 
 # Other Functions  
