@@ -47,8 +47,9 @@
 >   * All of them have render() method including return array of elements.  
 > * _design.save.json_ is for working with UI in **_ServiceDesigner_**.  
 > * _design.style.css_ is for setting style property of your elements in **_ServiceDesigner_** freely as way you want.      
->Whenever you update some part of components at **_ServiceDesigner_**, the files will be updated automatically.  
->Except _design.style.css_. This file is static, so nothing will be changed.  
+>  
+> Whenever you update some part of components at **_ServiceDesigner_**, the files will be updated automatically.  
+> Except _design.style.css_. This file is static, so nothing will be changed.   
 
 ### Save File(_ctrl_ + _s_)  
 > ![SavingFile](./asset/img/savingFile.gif)  
@@ -169,7 +170,8 @@
 > * _style_
 >   * You can set style of each element in this tab. Just fill out as object format.  
 >   * And also, you can set style per _if condition's result value_ : _true_ or _false_ in here.  
->As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
+>  
+> As you can see, properties needed for setting UI not only at **_ServiceDesigner_** but also at your project.
 
 > ![PropertiesFunction](./asset/img/propertiesFunction.gif)  
 > ### 1. _Add Property_  
@@ -236,7 +238,7 @@
 > 1. To use _for loop_, add property which has _for_ as Key, and Variable as Type.  
 > 1. And set the Value _the name_ of _array_ or _array object_ state.  
 > 1. As the result, you can check the element is added as many as _array's length_.  
->> * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_ like the below.  
+>>  * If you want to use array's value, you have to use _item0_ which is mapped from the _state array_ like the below.  
 >> ```
 >> item0        // array  
 >> item0.XXX    // array object
@@ -402,6 +404,6 @@ To **Render** design component, you have to call the component from _design.comp
 > ![ReactFunction](./asset/img/reactFunction.gif)  
 > #### 2. React Native Function in onEvent Method
 > ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
-> * They are the result screens testing functions by calling _onEvent(e)_ method at the each framework.  
+> * They are the result screens testing functions by calling _onEvent(e)_ method at each framework.  
 > * You can create or call the functions freely inside of _onEvent(e)_ method.  
-> * Just like calling alert function when clicking or pressing the button. 
+> * Just like calling alert function when clicking or pressing the button from the above examples. 
