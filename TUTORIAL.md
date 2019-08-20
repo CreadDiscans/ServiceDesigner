@@ -8,7 +8,7 @@
 ## Contents
 * [Menu](#menu)
     * [File](#file)  
-        * [Save File(_ctrl_ + _s_)](#save-file\(\_ctrl\_\+\_s\_\))
+        * [Save File(_ctrl_ + _s_)](#save-file%28ctrl_-+-_s_%29)
         * [Open File](#open-file(_ctrl_-+-_o_))
         * [Other Functions of File Menu](#other-functions-of-file-menu)
 * [Explorer](#explorer)
