@@ -52,7 +52,6 @@
 > Except _design.style.css_. This file is static, so nothing will be changed.   
 
 ### Save File  
-> * The short cut is _ctrl_ + _s_.  
 > ![SavingFile](./asset/img/savingFile.gif)  
 > 1. Click the _file_ menu and _Save file_.  
 > 1. Then create _design_ directory at _src_, to separate design component from others just in case.
@@ -60,14 +59,12 @@
 > 1. If you already created _design_ directory before, just save it.  
 
 ### Open File  
-> * The short cut is _ctrl_ + _o_.  
 > ![OpeningFile](./asset/img/openingFile.gif)  
 > 1. Click the _file_ menu and _Open file_.  
 > 1. Select the _design.save.json_ file and open it.  
 
 ### Other Functions of File Menu  
 #### 1. _Save to another folder_    
-> * The short cut is _ctrl_ + _shift_ + _o_.  
 > 1. Click the _file_ menu and _Save to another folder_.  
 > 1. Select the folder and save it.  
 
@@ -307,27 +304,17 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > ```
 
 ## Css  
-* ### _URL_  
-#### 1. _Add_
+### 1. _Add_  
+#### * _URL_
 > ![CssAddURL](./asset/img/cssAddURL.gif)  
 > * _Copy_ the URL or CDN of **Css** library like _BootstrapCDN_ instead of installing it.  
 > * Just _paste_ the copied link and click the _Add URL_ button. It's really simple.  
-> * If you don't input any link, nothing will happen.
-#### 2. _Update_
-> * If you add wrong URL, select the one and input correct URL.  
-> * Then click the _Update_ button.  
-
-* ### _File_
-#### 1. _Add_
+> * If you don't input any link, nothing will happen.  
+#### * _File_
 > ![CssAddFile](./asset/img/cssAddFile.gif)  
 > * If there is downloaded **Css** library file, click the _Add File_ button.
 > * Then open the file what you want to apply at your design components.  
-#### 2. _Update_
-> * When you want to update added file, select one and update the code from the file.  
-> * If you added wrong file, just delete it and add new one.
-
-* ### _Style_
-#### 1. _Add_
+#### * _Style_
 > ![CssAddStyle](./asset/img/cssAddStyle.gif)  
 > * Set name for css variable first.  
 > * Then set css style code per the tag, just like the below code.  
@@ -335,12 +322,20 @@ There are other functions in **_ServiceDesigner_** : _State_, _Color_, _Asset_, 
 > .tagName {  
 >   keyName: value;
 > }
-> ```
-#### 2. _Update_
+> ```  
+
+### 2. _Update_  
+#### * _URL_
+> * If you add wrong URL, select the one and input correct URL.  
+> * Then click the _Update_ button.  
+#### * _File_
+> * When you want to update added file, select one and update the code from the file.  
+> * If you added wrong file, just delete it and add new one.
+#### * _Style_
 > * Select one what you want to update from the list.  
 > * And update the style code, click the _Update_ button.
 
-* ### _Usage_
+### 3. _Usage_
 > * You can activate css variable by checking the checkbox of the list.  
 >   * _Checked_ = active : _true_.  
 >   * _Unchecked_ = active : _false_.  
