@@ -467,8 +467,9 @@ To render some component in to your designed component, you have to use **render
 > renderPart = (name:any) => {  
 >   // return <ComponentName to use />
 > }
-> ```
-> * Just call **renderPart** as _arrow function expression_ to prevent occuring an error.  
+> ```  
+> * If you don't get it at all yet, just copy this code and test it.  
+> * Just call **renderPart** as _arrow function expression_ to prevent occuring an error like above.  
 > * If you just return some component, it will return all the same component even though it's _name_ value is different.
 
 > ```css
@@ -483,7 +484,7 @@ To render some component in to your designed component, you have to use **render
 > }
 > ```  
 > * If you want to reutrn different component per name value, just set _if condition_ in **renderPart**.
-> * You can seperate all return component value by using _if condtion_ to compare **name** in **renderPart(name)** method.  
+> * You can seperate all returned components by using _if condtion_ to compare **name** in **renderPart(name)** method.  
 
 > #### 1. _RenderPart function test in React_
 > ![ReactRenderPart](./asset/img/reactRenderPart.gif)  
