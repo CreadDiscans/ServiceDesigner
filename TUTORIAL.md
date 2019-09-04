@@ -468,9 +468,9 @@ To render some component in to your designed component, you have to use **render
 >   // return <ComponentName to use />
 > }
 > ```  
-> * If you don't get it at all yet, just copy this code and test it.  
+> * If you don't get it at all yet, copy this code and test it.  
 > * Just call **renderPart** as _arrow function expression_ to prevent occuring an error like above.  
-> * If you just return some component, it will return all the same component even though it's _name_ value is different.
+> * If you return some component, it will return all the same component even though it's _name_ value is different.
 
 > ```css
 > renderPart = (name:any) => {  
@@ -491,8 +491,8 @@ To render some component in to your designed component, you have to use **render
 > #### 2. _RenderPart function test in React Native_
 > ![ReactNativeRenderPart](./asset/img/reactNativeRenderPart.gif)    
 > * They are the result screens calling **renderPart(name)** method at each framework.  
-> * You can return simple component customized at your coding editor.  
+> * You can return simple customized component at your coding editor.  
 > * Also, you can call and return other designed component in **renderPart**, like above _ReactRenderPart_ example.  
 > * As you can see, **renderPart** works perfectly at _React Native_ framework.  
 > * Just remember it. If you want to return some component per the name value, deal with it at **_ServiceDesigner_**.  
-> * Set _if condition_ in style of _render_ element to controll the component to return in to your _render_ element.  
+> * Set _if condition_ in style of _render_ element to controll returning component in to your _render_ element.  
