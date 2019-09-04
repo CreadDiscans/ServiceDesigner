@@ -441,32 +441,36 @@ To **Render** design component, you have to call the component from _design.comp
 > * Just like calling alert function when clicking or pressing the button from the above examples.  
 
 ## RenderPart  
-To render some customized component in to your designed component, you have to use _renderPart_ function at your project.  
+To render some component in to your designed component, you have to use _renderPart_ function at your project.  
 
 ### 1. _Add Render Element and Set Name Property_  
 > * Before using _renderPart_ at your project, let's just check _design.component.tsx_ file.  
 > * As you can see, there is a _DesignedComponent_ class, which has **renderPart(name:any)** method.  
-> * And other components that you created at _**ServiceDesigner**_ extend it.  
-> * Also, you can check there are _item0_ and _i0_ in some element which is mapped by for loop.  
-> * We used _item + i_ before, to distinguish elements from the array or array object.  
-> * However, if you want to use **renderPart** method, it would be different just a little.  
-> * You have to set name property to have _i0_ as value, not _item_ + _i_, and _Variable_ as Type.  
-> * If you deal with _N-Dimensional_, _i_ value will be added as much as _N_ value.  
+> * Also, you can check there are _item0_ and _i0_ in some element which is mapped by _for loop_.  
+> * Maybe you rememer that you used _item + i_ before, to distinguish elements from the array or array object.  
+> * The difference of between them is really simple.  
+>   * _item0_ : each value of array.  
+>   * _i0_ : index of array.  
+> * When you use _renderPart_ method, you will need index, not value of array.  
+> * So you have to set name property to have _i_ + _i_ as value, not _item_ + _i_, and _Variable_ as Type.  
+
 > #### 1. _Add Render in React's Component_  
 > ![AddRenderReact](./asset/img/addRenderReact.gif)  
-> * This GIF shows the way to add _render_ element and set properties.  
+> * This gif file shows the way to add _render_ element and set properties.  
 > * Before adding _render_ element, you have to add _for loop_ property to parent element of _render_ element.  
-> * This _for loop_ makes you can use _i_ + _i_ as the value of name property. So don't forget it!
+> * This _for loop_ makes you can use _i_ + _i_ as the value of name property. So don't forget it!  
+> * If you done with adding render element and setting it's name, you did most things to do!  
 
 ### 2. _Call the render element by Calling renderPart(name)_
-> * If you add the _render_ element and set name property, it's time to use **renderPart** method.
-> * Because you have to add property which has _Function_ as Type to handle those elements' event.  
-> * If you don't handle and just ignore them, nothing will happen.  
-> * Click or press the button, fill out the textinput or do whatever, **NOTHING WILL HAPPEN**.  
-> * So to make your project working perfectly, you have to learn about handling function.  
+> * Now, it's time to learn the way to use **renderPart** method.  
+> ```css
+> renderPart = (name) => {  
+>   // return <ComponentName to use />
+> }
+> ```
+> * Just call _renderPart_ method as _arrow function expression_ to prevent occuring an error.  
+> * It will return all the same component even though name would be different.
 
-> * Also, you can check **event** property at the element that you set _function_ property at **_ServiceDesigner_**.  
->      * **event** is key value of property which has function type.   
 > ```css
 > renderPart = (name) => {  
 >   if (name === "i0Value") {
@@ -477,13 +481,14 @@ To render some customized component in to your designed component, you have to u
 >     // return <ComponentName to use />
 >   }
 > }
-> ```
-> * So you can seperate all functions by using _if condtion_ to compare **e.name** in **onEvent(e)** method.  
-> * You can also compare **e.event** by _if condition_.
+> ```  
+> * If you want to reutrn different component per name value, just set _if condition_ in _renderPArt_ method.
+> * You can seperate all functions by using _if condtion_ to compare **name** in **renderPart(name)** method.  
 > #### 1. _RenderPart function test in React_
 > ![ReactRenderPart](./asset/img/reactRenderPart.gif)  
 > #### 2. _RenderPart function test in React Native_
 > ![ReactNativeRenderPart](./asset/img/reactNativeRenderPart.gif)    
-> * They are the result screens the result of calling **renderPart(name)** method at each framework.  
-> * You can create or call the functions freely inside of **onEvent(e)** method.  
-> * Just like calling alert function when clicking or pressing the button from the above examples. 
+> * They are the result screens calling **renderPart(name)** method at each framework.  
+> * You can call and return other designed component in _renderPart_, like above ReactRenderPart example.  
+> * Also, you can use _renderPart_ at _React Native_ framework.  
+> * Just rememberit. If you want to return some component per the name value, please set _if condition_ in style of _render_ element. 
