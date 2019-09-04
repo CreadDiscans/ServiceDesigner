@@ -448,7 +448,7 @@ To render some component in to your designed component, you have to use **render
 > * As you can see, there is a _DesignedComponent_ class, which has **renderPart(name:any)** method.  
 > * And also, you can check there are _item0_ and _i0_ in some element which is mapped by _for loop_.  
 > * Maybe you used _item + i_ before, to distinguish elements from the array or array object.  
-> * But in this case, it will be different to deal with same _for loop_.  
+> * But in this case, you have to deal with same _for loop_ differently.  
 > * The difference of between them is really simple : _What will you use?_  
 >   * _item0_ : each _value_ of array.  
 >   * _i0_ : eacch _index_ of array.  
@@ -493,6 +493,6 @@ To render some component in to your designed component, you have to use **render
 > * They are the result screens calling **renderPart(name)** method at each framework.  
 > * You can return simple customized component at your coding editor.  
 > * Also, you can call and return other designed component in **renderPart**, like above _ReactRenderPart_ example.  
-> * As you can see, **renderPart** works perfectly at _React Native_ framework.  
+> * As you can see, **renderPart** works perfectly at _React Native_ framework as well.  
 > * Just remember it. If you want to return some component per the name value, deal with it at **_ServiceDesigner_**.  
 > * Set _if condition_ in style of _render_ element to controll returning component in to your _render_ element.  
