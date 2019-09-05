@@ -35,6 +35,7 @@
     * [Style](#style)  
 * [Inheritance](#inheritance)  
     * [Render](#render)  
+    * [RenderPart](#renderpart)  
 
 
 
@@ -419,7 +420,7 @@ To **Render** design component, you have to call the component from _design.comp
 >> * Also, you can check **event** property at the element that you set _function_ property at **_ServiceDesigner_**.  
 >>      * **event** is key value of property which has function type.   
 >> ```css
->> onEvent(e) {  
+>> onEvent(e:any) {  
 >>   if (e.name === "elementNameOne") {
 >>     // some function to do
 >>   } else if (e.name === "elementNameTwo") {
@@ -437,4 +438,61 @@ To **Render** design component, you have to call the component from _design.comp
 > ![ReactNativeFunction](./asset/img/reactNativeFunction.gif)    
 > * They are the result screens testing functions by calling **onEvent(e)** method at each framework.  
 > * You can create or call the functions freely inside of **onEvent(e)** method.  
-> * Just like calling alert function when clicking or pressing the button from the above examples. 
+> * Just like calling alert function when clicking or pressing the button from the above examples.  
+
+## RenderPart  
+To render some component in to your designed component, you have to use **renderPart** method at your project.  
+
+### 1. _Add Render Element and Set Name Property_  
+> * Before using **renderPart** at your project, let's check _design.component.tsx_ file just a little.  
+> * As you can see, there is a _DesignedComponent_ class, which has **renderPart(name:any)** method.  
+> * And also, you can check there are _item0_ and _i0_ in some element which is mapped by _for loop_.  
+> * Maybe you used _item + i_ before, to distinguish elements from the array or array object.  
+> * But in this case, you have to deal with same _for loop_ differently.  
+> * The difference of between them is really simple : _What will you use?_  
+>   * _item0_ : each _value_ of array.  
+>   * _i0_ : eacch _index_ of array.  
+> * When you use **renderPart**, you will need _index_, not value of array.  
+> * So you have to set name property to have _i_ + _i_ as value and _Variable_ as Type.  
+
+> #### 1. _Add Render in React's Component_  
+> ![AddRenderReact](./asset/img/addRenderReact.gif)  
+> * This gif file shows the way to add _render_ element and set properties.  
+> * Before adding _render_ element, you have to add _for loop_ property at parent element of _render_ element.  
+> * This _for loop_ makes you can use _i_ + _i_ as the value of name property. So don't forget it!  
+
+### 2. _Handle RenderPart_
+> * Now, it's time to learn the way to use **renderPart** method.  
+> ```css
+> renderPart = (name:any) => {  
+>   // return <ComponentName to use />
+> }
+> ```  
+> * If you don't get it yet, just copy this code and test it.  
+> * You have to call **renderPart** as _arrow function expression_ to prevent occuring an error like above.  
+> * In this case, it will return all the same component even though it's _name_ value is different.  
+
+> ```css
+> renderPart = (name:any) => {  
+>   if (name === "i0Value") {
+>     // return <ComponentName to use />
+>   } else if (name === "another i0Value") {
+>     // return <ComponentName to use />
+>   } else {
+>     // return <ComponentName to use />
+>   }
+> }
+> ```  
+> * If you want to reutrn different component per name value, just set _if condition_ in **renderPart**.
+> * You can seperate all returned components by using _if condtion_ to compare **name** in **renderPart(name)** method.  
+
+> #### 1. _RenderPart function test in React_
+> ![ReactRenderPart](./asset/img/reactRenderPart.gif)  
+> #### 2. _RenderPart function test in React Native_
+> ![ReactNativeRenderPart](./asset/img/reactNativeRenderPart.gif)    
+> * They are the result screens calling **renderPart(name)** method at each framework.  
+> * You can return simple customized component at your coding editor.  
+> * And also, you can call and return other designed component in **renderPart**, like above _ReactRenderPart_ example.  
+> * As you can see, **renderPart** works perfectly at _React Native_ framework as well.  
+> * Just remember it. If you want to return some component per the name value, deal with it at **_ServiceDesigner_**.  
+> * Set _if condition_ in style of _render_ element to controll returning component in to your _render_ element.  

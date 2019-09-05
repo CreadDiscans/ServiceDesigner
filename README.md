@@ -49,8 +49,4 @@ npm run dist
 
 
 ## Tutorial
-<!-- Fork 계정 TUTORIAL 문서로 이동 -->
-> Click this : Forked Service Designer
-<!-- :books:[Tutorial](https://github.com/hyun12345/ServiceDesigner/blob/tutorial/TUTORIAL.md) -->
-<!-- 원계정 TUTORIAL 문서로 이동 : 현재 없으므로 404 에러 발생-->
 :books:[Tutorial](https://github.com/CreadDiscans/ServiceDesigner/blob/master/TUTORIAL.md)
