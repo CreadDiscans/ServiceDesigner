@@ -452,13 +452,13 @@ To render some component in to your designed component, you have to use **render
 > * The difference of between them is really simple : _What will you use?_  
 >   * _item0_ : each _value_ of array.  
 >   * _i0_ : eacch _index_ of array.  
-> * When you use **renderPart**, you will need index, not value of array.  
-> * So you have to set name property to have _i_ + _i_ as value, not _item_ + _i_, and _Variable_ as Type.  
+> * When you use **renderPart**, you will need _index_, not value of array.  
+> * So you have to set name property to have _i_ + _i_ as value and _Variable_ as Type.  
 
 > #### 1. _Add Render in React's Component_  
 > ![AddRenderReact](./asset/img/addRenderReact.gif)  
 > * This gif file shows the way to add _render_ element and set properties.  
-> * Before adding _render_ element, you have to add _for loop_ property to parent element of _render_ element.  
+> * Before adding _render_ element, you have to add _for loop_ property at parent element of _render_ element.  
 > * This _for loop_ makes you can use _i_ + _i_ as the value of name property. So don't forget it!  
 
 ### 2. _Handle RenderPart_
@@ -468,9 +468,9 @@ To render some component in to your designed component, you have to use **render
 >   // return <ComponentName to use />
 > }
 > ```  
-> * If you don't get it at all yet, copy this code and test it.  
-> * Just call **renderPart** as _arrow function expression_ to prevent occuring an error like above.  
-> * If you return some component, it will return all the same component even though it's _name_ value is different.
+> * If you don't get it yet, just copy this code and test it.  
+> * You have to call **renderPart** as _arrow function expression_ to prevent occuring an error like above.  
+> * In this case, it will return all the same component even though it's _name_ value is different.  
 
 > ```css
 > renderPart = (name:any) => {  
@@ -492,7 +492,7 @@ To render some component in to your designed component, you have to use **render
 > ![ReactNativeRenderPart](./asset/img/reactNativeRenderPart.gif)    
 > * They are the result screens calling **renderPart(name)** method at each framework.  
 > * You can return simple customized component at your coding editor.  
-> * Also, you can call and return other designed component in **renderPart**, like above _ReactRenderPart_ example.  
+> * And also, you can call and return other designed component in **renderPart**, like above _ReactRenderPart_ example.  
 > * As you can see, **renderPart** works perfectly at _React Native_ framework as well.  
 > * Just remember it. If you want to return some component per the name value, deal with it at **_ServiceDesigner_**.  
 > * Set _if condition_ in style of _render_ element to controll returning component in to your _render_ element.  

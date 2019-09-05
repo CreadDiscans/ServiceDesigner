@@ -50,4 +50,4 @@ npm run dist
 
 ## Tutorial
 <!-- 원계정 TUTORIAL 문서로 이동-->
-:books:[Tutorial](https://github.com/CreadDiscans/ServiceDesigner/blob/tutorial/TUTORIAL.md)
+:books:[Tutorial](https://github.com/CreadDiscans/ServiceDesigner/blob/master/TUTORIAL.md)
