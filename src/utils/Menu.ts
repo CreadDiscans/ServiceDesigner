@@ -7,7 +7,8 @@ export class Menu {
 
     init(openFile, saveFile) {
         try {
-            const { remote } = window.require('electron');
+            
+            const { remote, MenuItem } = window.require('electron');
             const {Menu} = remote;
             const fs = window.require('fs')
             const path = window.require('path')
@@ -28,6 +29,7 @@ export class Menu {
             }
 
             // define template
+            
             const template = [
                 {
                     label: 'File',
@@ -42,7 +44,7 @@ export class Menu {
                                     this.cachePath = path.dirname(file[0])
                                 }
                             },
-                            accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'
+                            accelerator: window.process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'                            
                         },
                         {
                             label: 'Save file',
@@ -56,7 +58,7 @@ export class Menu {
                                 save();
                                 
                             },
-                            accelerator: process.platform === 'darwin' ? 'Command+S' : 'Ctrl+S'
+                            accelerator: window.process.platform === 'darwin' ? 'Command+S' : 'Ctrl+S'
                         },
                         {
                             label: 'Save to another foleder',
@@ -67,7 +69,7 @@ export class Menu {
                                 }
                                 save();
                             },
-                            accelerator: process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
+                            accelerator: window.process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
                         },
                         {
                             label: 'reload',
@@ -82,10 +84,22 @@ export class Menu {
                     ]
                 }
             ];
-            
+            if (window.process.platform === 'darwin') {
+                template.push({ 
+                    label: 'Edit', 
+                    submenu: [
+                        new MenuItem({ label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" }),
+                        new MenuItem({ label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" }),
+                        new MenuItem({ type: "separator" }),
+                        new MenuItem({ label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" }),
+                        new MenuItem({ label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" }),
+                        new MenuItem({ label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" }),
+                        new MenuItem({ label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" })
+                    ] 
+                  })
+              }
             const menu = Menu.buildFromTemplate(template);
             Menu.setApplicationMenu(menu);
         } catch(e) {}
     }
 }
-
