@@ -8,11 +8,12 @@ export class Menu {
     init(openFile, saveFile) {
         try {
             
-            const { remote, MenuItem } = window.require('electron');
-            const {Menu} = remote;
+            const electron = window.require('electron');
+            const remote = electron.remote;
+            const Menu = electron.Menu || remote.Menu;
+            const MenuItem = electron.MenuItem || remote.MenuItem;
             const fs = window.require('fs')
             const path = window.require('path')
-
             const save = async() => {
                 if (this.cachePath === undefined) {
                     return;
@@ -44,7 +45,7 @@ export class Menu {
                                     this.cachePath = path.dirname(file[0])
                                 }
                             },
-                            accelerator: window.process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'                            
+                            accelerator: remote.process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O'                            
                         },
                         {
                             label: 'Save file',
@@ -58,7 +59,7 @@ export class Menu {
                                 save();
                                 
                             },
-                            accelerator: window.process.platform === 'darwin' ? 'Command+S' : 'Ctrl+S'
+                            accelerator: remote.process.platform === 'darwin' ? 'Command+S' : 'Ctrl+S'
                         },
                         {
                             label: 'Save to another foleder',
@@ -69,7 +70,7 @@ export class Menu {
                                 }
                                 save();
                             },
-                            accelerator: window.process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
+                            accelerator: remote.process.platform === 'darwin' ? 'Command+Shift+S' : 'Ctrl+Shift+S'
                         },
                         {
                             label: 'reload',
@@ -84,7 +85,7 @@ export class Menu {
                     ]
                 }
             ];
-            if (window.process.platform === 'darwin') {
+            if (remote.process.platform === 'darwin') {
                 template.push({ 
                     label: 'Edit', 
                     submenu: [
