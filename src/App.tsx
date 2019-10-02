@@ -80,7 +80,7 @@ class App extends React.Component<any> {
                         text: 'Save Successfully'
                     })
                     return Promise.resolve({
-                        json:JSON.stringify(json),
+                        json:JSON.stringify(json, null, 2),
                         js: renderService.toJs(),
                         css: await renderService.toCss()
                     })
