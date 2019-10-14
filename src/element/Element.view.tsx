@@ -42,9 +42,14 @@ class ElementView extends React.Component<any> {
         const { LayoutActions, ElementActions, PropertyActions } = this.props;
         ElementActions.selectElement(item);
         PropertyActions.choiceElement(item);
+        const itemHeight = 138
+        let y = e.clientY
+        if (e.clientY + itemHeight > window.innerHeight) {
+            y = window.innerHeight - itemHeight
+        }
         LayoutActions.showContextMenu({
             x:e.clientX,
-            y:e.clientY,
+            y:y,
             type: ContextMenuType.Element,
             target:item
         })
