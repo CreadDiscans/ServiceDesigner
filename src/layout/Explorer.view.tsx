@@ -5,7 +5,7 @@ import { Theme } from '../utils/Theme';
 import Resizable from 're-resizable';
 import { connectRouter } from '../redux/connection';
 import { ContextMenuType, ElementType, FileType } from '../utils/constant';
-import * as layoutActions from './Layout.actions';
+import LayoutActions, * as layoutActions from './Layout.actions';
 import * as componentsActions from '../component/Component.action';
 import * as elementsActions from '../element/Element.action';
 import { bindActionCreators } from 'redux';
@@ -115,6 +115,18 @@ class ExplorerView extends React.Component<any> {
                     LayoutActions.hideContextMenu();
                 }
             },{
+                name: 'Copy',
+                click: ()=> {
+                    const { data, ElementsActions } = this.props;
+                    ElementsActions.copyElement(data.layout.contextMenu.target);
+                }
+            }, {
+                name: 'Paste',
+                click: ()=> {
+                    const { data, ElementsActions} = this.props;
+                    ElementsActions.pasteElement(data.layout.contextMenu.target);
+                }
+            },{
                 name: 'Delete',
                 click: ()=> {
                     const { data, ElementsActions, LayoutActions } = this.props;
@@ -142,6 +154,15 @@ class ExplorerView extends React.Component<any> {
                 display:data.layout.contextMenu.display}}}>
             
             { this.menuItems[data.layout.contextMenu.type]
+                .filter(menu=> {
+                    if(!data.layout.contextMenu.target && menu.name === 'Copy') {
+                        return false;
+                    }
+                    if(!data.element.copiedElement && menu.name === 'Paste') {
+                        return false;
+                    }
+                    return true;
+                })
                 .map(menu=> <div key={menu.name}
                     style={Object.assign({}, styles.contextMenuItem, this.state.hover === menu && styles.hover)}
                     onMouseEnter={()=> this.setState({hover:menu})}

@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import Utils from '../utils/utils';
 import { FileType } from '../utils/constant';
+import _ from 'lodash';
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
@@ -14,6 +15,8 @@ const HOVER_ELEMENT = 'element/HOVER_ELEMENT';
 const COLLAPSE_ELEMENT = 'element/COLLAPSE_ELEMENT';
 const DRAG_AND_DROP_ELEMENT = 'element/DRAG_AND_DROP_ELEMENT';
 const CLEAR_ELEMENT = 'element/CLEAR_ELEMENT';
+const COPY_ELEMENT = 'element/COPY_ELEMENT';
+const PASTE_ELEMENT = 'element/PASTE_ELEMENT';
 
 export const choiceComponent = createAction(CHOICE_COMPONENT); // ref of component
 export const readyToAdd = createAction(READY_TO_ADD); // type
@@ -27,6 +30,8 @@ export const hoverElement = createAction(HOVER_ELEMENT); // element
 export const collapseElement = createAction(COLLAPSE_ELEMENT) // element
 export const dragAndDropElement = createAction(DRAG_AND_DROP_ELEMENT) // from, to, sibling
 export const clearElement = createAction(CLEAR_ELEMENT);
+export const copyElement = createAction(COPY_ELEMENT); // target elem
+export const pasteElement = createAction(PASTE_ELEMENT); // parent elem
 
 const initialState = {
   component: {
@@ -48,7 +53,8 @@ const initialState = {
     name: '',
     type: ''
   },
-  history: [] 
+  history: [],
+  copiedElement: undefined
 }
 
 export default handleActions({
@@ -203,7 +209,42 @@ export default handleActions({
       name: '',
       type: ''
     },
-    history: [] })
+    history: [],
+    copiedElement: undefined }),
+  [COPY_ELEMENT]: (state, {payload}:any) => ({...state, copiedElement: payload}),
+  [PASTE_ELEMENT]: (state, {payload}:any) => {
+    let parent;
+    if(payload === undefined) {
+      parent = state.component.element
+    } else {
+      parent = payload;
+    }
+    let maxId = 0;
+    loop(state.component.element, (target)=> {
+      if (maxId < target.id) {
+        maxId = target.id
+      }
+    })
+    
+    let item = _.clone(state.copiedElement)
+    loop(item, (_item)=> {
+      delete item.parent;
+      _item.id = maxId +1;
+      maxId += 1;
+    })
+    item = Utils.deepcopy(item);
+    item.parent = parent;
+
+    Utils.loop(item, (_item, _stack)=> {
+      if (_stack.length != 0) {
+        _item.parent = _stack[_stack.length-1]
+      }
+    })
+    parent.children.push(item);
+    return {
+      ...state
+    }
+  }
 }, initialState)
 
 const loop = (item, handle) => {
