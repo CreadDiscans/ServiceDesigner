@@ -102,7 +102,7 @@
   "devDependencies": {
     "cypress": "^3.6.1",
     "electron": "^4.1.0",
-    "electron-builder": "^20.44.4",
+    "electron-builder": "^22.1.0",
     "foreman": "^3.0.1",
     "jquery": "^3.4.1",
     "typescript": "^3.3.1"
@@ -116,7 +116,7 @@
     "electron": "electron .",
     "test": "node scripts/test.js",
     "dist:win": "npm run react-build && electron-builder --ia32 --x64 -w",
-    "dist:osx": "npm run react-build && build --mac",
+    "dist:osx": "npm run react-build && electron-builder --mac",
     "cypress:open": "cypress open"
   },
   "build": {
