@@ -83,6 +83,17 @@ export class Menu {
                             }
                         }
                     ]
+                },
+                {
+                    label: 'Info',
+                    submenu: [
+                        {
+                            label: 'Version',
+                            click: ()=> {
+                                alert('Version '+ remote.app.getVersion())
+                            }
+                        }
+                    ]
                 }
             ];
             if (remote.process.platform === 'darwin') {
