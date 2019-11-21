@@ -228,7 +228,7 @@ export default handleActions({
     
     let item = _.clone(state.copiedElement)
     loop(item, (_item)=> {
-      delete item.parent;
+      delete _item.parent;
       _item.id = maxId +1;
       maxId += 1;
     })
