@@ -229,10 +229,12 @@ export default handleActions({
     let item = _.clone(state.copiedElement)
     loop(item, (_item)=> {
       delete _item.parent;
+    })
+    item = Utils.deepcopy(item);
+    loop(item, (_item)=> {
       _item.id = maxId +1;
       maxId += 1;
     })
-    item = Utils.deepcopy(item);
     item.parent = parent;
 
     Utils.loop(item, (_item, _stack)=> {
