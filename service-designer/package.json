@@ -1,0 +1,125 @@
+{
+	"name": "service-designer",
+	"displayName": "Service Designer",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.40.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onView:components",
+		"onCommand:componentProvider.loadSource"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "service-designer",
+					"title": "Service Designer",
+					"icon": "media/dep.svg"
+				}
+			]
+		},
+		"views": {
+			"service-designer": [
+				{
+					"id": "components",
+					"name": "Components"
+				},
+				{
+					"id": "elements",
+					"name": "Elements"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "componentProvider.loadSource",
+				"title": "Set design source path",
+				"icon": "media/refresh.svg"
+			},
+			{
+				"command": "componentProvider.selectComponent",
+				"title": "Select Component"
+			},
+			{
+				"command": "elementProvider.selectElement",
+				"title": "Select Element"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "componentProvider.loadSource",
+					"group": "navigation",
+					"when": "view == components"
+				}
+			]
+		},
+		"configuration": [
+			{
+				"title": "Service Designer path",
+				"properties": {
+					"servicedesigner.source": {
+						"type": "string",
+						"default": null
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.40.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"typescript": "^3.6.4",
+		"tslint": "^5.20.0",
+		"vscode-test": "^1.2.2"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.149",
+		"@types/react": "^16.9.13",
+		"@types/react-dom": "^16.9.4",
+		"babel-plugin-module-resolver": "^3.2.0",
+		"babel-preset-react-app": "^9.0.2",
+		"css": "^2.2.4",
+		"lodash": "^4.17.15",
+		"react": "^16.12.0",
+		"react-code-sandbox": "^1.0.0",
+		"react-dom": "^16.12.0",
+		"react-icons": "^3.8.0",
+		"react-native": "^0.61.5",
+		"react-native-web": "^0.11.7",
+		"reactstrap": "^8.1.1",
+		"rxjs": "^6.5.3"
+	},
+	"babel": {
+		"presets": [
+			"react-app"
+		],
+		"plugins": [
+			[
+				"module-resolver",
+				{
+					"alias": {
+						"^react-native$": "react-native-web"
+					}
+				}
+			]
+		]
+	}
+}
