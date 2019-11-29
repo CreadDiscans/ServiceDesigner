@@ -4,6 +4,7 @@ import * as path from 'path';
 import { DataManager } from './DataManager';
 import { ElementProvider } from './ElementProvider';
 import { Uri } from 'vscode';
+import { ReactPanel } from './ReactPanel';
 
 export class CompoentProvider implements vscode.TreeDataProvider<Component> {
 
@@ -75,20 +76,21 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
     selectCompoenet(args:any) {
         this.manager.selectComponent(args)
         this.elemProvider.refresh()
-        if (!this.panel) {
-            this.panel = vscode.window.createWebviewPanel(
-                'desinger',
-                'Designer',
-                vscode.ViewColumn.One,
-                {}
-            )
-            this.panel.onDidDispose(()=> {
-                this.panel = undefined;
-            })
-        } else if(!this.panel.active) {
-            this.panel.reveal()
-        }
-        this.panel.webview.html = this.manager.getWebViewContent();
+        // if (!this.panel) {
+        //     this.panel = vscode.window.createWebviewPanel(
+        //         'desinger',
+        //         'Designer',
+        //         vscode.ViewColumn.One,
+        //         {}
+        //     )
+        //     this.panel.onDidDispose(()=> {
+        //         this.panel = undefined;
+        //     })
+        // } else if(!this.panel.active) {
+        //     this.panel.reveal()
+        // }
+        // this.panel.webview.html = this.manager.getWebViewContent();
+        // console.log(this.panel.webview.html)
     }
 }
 
@@ -117,7 +119,7 @@ export class Component extends vscode.TreeItem {
         if (this.collapsibleState === vscode.TreeItemCollapsibleState.Collapsed) 
             return null;
         else 
-            return path.join(__filename, '..', '..', 'media', 'react.png')
+            return path.join(__filename, '..', 'media', 'react.png')
     }
     
 }

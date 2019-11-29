@@ -77,15 +77,15 @@ export class Element extends vscode.TreeItem {
     
     getIconPath() {
         if (this.lib === ElementType.Html) {
-            return path.join(__filename, '..', '..', 'media', 'html.png')
+            return path.join(__filename, '..', 'media', 'html.png')
         } else if (this.lib == ElementType.ReactIcons) {
-            return path.join(__filename, '..', '..', 'media', 'react-icons.svg')
+            return path.join(__filename, '..', 'media', 'react-icons.svg')
         } else if (this.lib == ElementType.ReactNative) {
-            return path.join(__filename, '..', '..', 'media', 'react.png')
+            return path.join(__filename, '..', 'media', 'react.png')
         } else if (this.lib == ElementType.ReactNativeElements) {
-            return path.join(__filename, '..', '..', 'media', 'react.png')
+            return path.join(__filename, '..', 'media', 'react.png')
         } else if (this.lib == ElementType.Reactstrap) {
-            return path.join(__filename, '..', '..', 'media', 'bootstrap.png')
+            return path.join(__filename, '..', 'media', 'bootstrap.png')
         }
     }
     

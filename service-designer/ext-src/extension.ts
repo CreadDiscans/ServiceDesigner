@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import { CompoentProvider } from './ComponentProvider';
 import { ElementProvider } from './ElementProvider';
+import { ReactPanel } from './ReactPanel';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -15,7 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.registerTreeDataProvider('components', componentProvider)
 		vscode.window.registerTreeDataProvider('elements', elementProvider);
 		vscode.commands.registerCommand('componentProvider.loadSource', ()=> componentProvider.loadSource());
-		vscode.commands.registerCommand('componentProvider.selectComponent', (args)=> componentProvider.selectCompoenet(args));
+		vscode.commands.registerCommand('componentProvider.selectComponent', (args)=> {
+			componentProvider.selectCompoenet(args)
+			ReactPanel.createOrShow(context.extensionPath);
+		});
 		vscode.commands.registerCommand('elementProvider.selectElement', (args)=> elementProvider.selectElement(args));
 	} else {
 		vscode.window.showErrorMessage('Project not selected');

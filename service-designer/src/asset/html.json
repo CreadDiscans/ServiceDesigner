@@ -1,0 +1,69 @@
+{
+    "div": [
+        "text",
+        "onClick",
+        "onMouseEnter",
+        "onMouseLeave"
+    ],
+    "span": [
+        "text",
+        "onClick"
+    ],
+    "img": [
+        "src",
+        "alt"
+    ],
+    "input": [
+        "type",
+        "value",
+        "placeholder",
+        "onChange",
+        "onKeyPress"
+    ],
+    "h1": [
+        "text"
+    ],
+    "h2": [
+        "text"
+    ],
+    "h3": [
+        "text"
+    ],
+    "h4": [
+        "text"
+    ],
+    "h5": [
+        "text"
+    ],
+    "h6": [
+        "text"
+    ],
+    "p": [
+        "text"
+    ],
+    "a": [
+        "text",
+        "href"
+    ],
+    "button": [
+        "text",
+        "onClick"
+    ],
+    "select": [
+        "value",
+        "onChange"
+    ],
+    "option": [
+        "text",
+        "value"
+    ],
+    "ul": [],
+    "li": [
+        "text"
+    ],
+    "table": [],
+    "tr": [],
+    "td": [],
+    "th": [],
+    "render": []
+}

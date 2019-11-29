@@ -1,0 +1,31 @@
+{
+    "Alert": [
+        "color",
+        "text"
+    ],
+    "Badge": [
+        "color",
+        "pill",
+        "text"
+    ],
+    "Button": [
+        "outline",
+        "onClick",
+        "text"
+    ],
+    "Input": [
+        "value",
+        "onChange"
+    ],
+    "Container": [
+        "fluid"
+    ],
+    "Row": [],
+    "Col": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+    ]
+}
