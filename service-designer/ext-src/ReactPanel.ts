@@ -32,7 +32,7 @@ export class ReactPanel {
 		this._extensionPath = extensionPath;
 
 		// Create and show a new webview panel
-		this._panel = vscode.window.createWebviewPanel(ReactPanel.viewType, "React", column, {
+		this._panel = vscode.window.createWebviewPanel(ReactPanel.viewType, "Designer", column, {
 			// Enable javascript in the webview
 			enableScripts: true,
 

@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { FileType, ElementType } from "./constant";
 import Utils from './Utils';
+import * as fs from 'fs';
 
 export class DataManager {
     static instance:DataManager;
@@ -41,5 +42,19 @@ export class DataManager {
                 }
             })
         })
+    }
+
+    save(path:string) {
+        this.data.components.forEach((comp:any)=> {
+            Utils.loop(comp, (item:any, stack:any)=> {
+                delete item.parent
+                if (item.type === FileType.FILE) {
+                    Utils.loop(item.element, (elem:any, stack:any)=> {
+                        delete elem.parent
+                    })
+                }
+            })
+        })
+        fs.writeFileSync(path, JSON.stringify(this.data, null, 4))
     }
 }

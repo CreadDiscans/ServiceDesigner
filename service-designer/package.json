@@ -7,7 +7,7 @@
 		"vscode": "^1.40.0"
 	},
 	"categories": [
-		"Other"
+		"Designer"
 	],
 	"activationEvents": [
 		"onView:components",
@@ -49,6 +49,62 @@
 			{
 				"command": "elementProvider.selectElement",
 				"title": "Select Element"
+			},
+			{
+				"command": "componentProvider.createComponent",
+				"title": "New Component",
+				"icon": "media/plus.png"
+			},
+			{
+				"command": "componentProvider.createGroup",
+				"title": "New Group",
+				"icon": "media/add-file.png"
+			},
+			{
+				"command": "componentProvider.rename",
+				"title": "Rename"
+			},
+			{
+				"command": "componentProvider.delete",
+				"title": "Delete"
+			},
+			{
+				"command": "elementProvider.addHTML",
+				"title": "Add HTML",
+				"icon": "media/html.png"
+			},
+			{
+				"command": "elementProvider.addReactstrap",
+				"title": "Add Reactstrap"
+			},
+			{
+				"command": "elementProvider.addReactIcons",
+				"title": "Add React Icons"
+			},
+			{
+				"command": "elementProvider.addReactNative",
+				"title": "Add React Native",
+				"icon": "media/react.png"
+			},
+			{
+				"command": "elementProvider.addRNElement",
+				"title": "Add RN Element"
+			},
+			{
+				"command": "elementProvider.copy",
+				"title": "Copy"
+			},
+			{
+				"command": "elementProvider.paste",
+				"title": "Paste"
+			},
+			{
+				"command": "elementProvider.delete",
+				"title": "Delete"
+			},
+			{
+				"command": "elementProvider.rename",
+				"title": "Rename"
 			}
 		],
 		"menus": {
@@ -57,6 +113,93 @@
 					"command": "componentProvider.loadSource",
 					"group": "navigation",
 					"when": "view == components"
+				},
+				{
+					"command": "componentProvider.createComponent",
+					"group": "navigation",
+					"when": "view == components"
+				},
+				{
+					"command": "componentProvider.createGroup",
+					"group": "navigation",
+					"when": "view == components"
+				},
+				{
+					"command": "elementProvider.addHTML",
+					"group": "navigation",
+					"when": "view == elements"
+				},
+				{
+					"command": "elementProvider.addReactNative",
+					"group": "navigation",
+					"when": "view == elements"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "componentProvider.createComponent",
+					"group": "navigation",
+					"when": "view == components && viewItem == component"
+				},
+				{
+					"command": "componentProvider.createGroup",
+					"group": "navigation",
+					"when": "view == components && viewItem == component"
+				},
+				{
+					"command": "componentProvider.rename",
+					"group": "5_cutcopypaste",
+					"when": "view == components && viewItem == component"
+				},
+				{
+					"command": "componentProvider.delete",
+					"group": "5_cutcopypaste",
+					"when": "view == components && viewItem == component"
+				},
+				{
+					"command": "elementProvider.addHTML",
+					"group": "navigation",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.addReactstrap",
+					"group": "navigation",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.addReactIcons",
+					"group": "navigation",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.addReactNative",
+					"group": "navigation",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.addRNElement",
+					"group": "navigation",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.copy",
+					"group": "5_cutcopypaste",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.paste",
+					"group": "5_cutcopypaste",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.delete",
+					"group": "5_cutcopypaste",
+					"when": "view == elements && viewItem == element"
+				},
+				{
+					"command": "elementProvider.rename",
+					"group": "5_cutcopypaste",
+					"when": "view == elements && viewItem == element"
 				}
 			]
 		},
