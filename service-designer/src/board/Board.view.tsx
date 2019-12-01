@@ -145,7 +145,7 @@ class BoardView extends React.Component<any> {
     render() {
         const {data, ElementActions} = this.props;
         return <div style={styles.layout}>
-            <div id="board-tab-wrap" style={styles.tabWrap}>
+            {/* <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"
                     style={Object.assign({},styles.tab, data.element.component.id === component.id && styles.tabActive) } key={component.id}
                     onMouseEnter={()=>this.setState({hover: component.id})}
@@ -165,7 +165,7 @@ class BoardView extends React.Component<any> {
                         }}/>
                     }
                 </div>)}
-            </div>
+            </div> */}
             {data.layout.frameType === FrameType.Portrait && 
                 <img alt='' style={styles.phonePortrait} src={imgJson.portrait} />}
             {data.layout.frameType === FrameType.Landscape && 
@@ -199,8 +199,7 @@ const styles:any = {
         width:'100%',
         borderWidth:0,
         background:'white',
-        height:'calc(100% - 58px)',
-        marginTop:29
+        height:'calc(100% - 29px)',
     },
     frameProtrait: {
         position:'absolute',
@@ -220,8 +219,8 @@ const styles:any = {
         height:0
     },
     phonePortrait: {
-        marginTop:29, 
-        height:'calc(100% - 60px)',
+        height:'calc(100%)',
+        paddingBottom: 30,
         objectFit: 'contain',
         margin:'auto'
     },

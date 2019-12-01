@@ -4,20 +4,17 @@ import * as path from 'path';
 import * as _ from 'lodash';
 import { ElementType } from './constant';
 import Utils from './Utils';
+import { ReactPanel } from './ReactPanel';
 
 export class ElementProvider implements vscode.TreeDataProvider<Element> {
 
 	private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
-    source!:string;
-    rootPath!:string;
     manager!:DataManager;
     copiedElement;
 
-    constructor(rootPath:string) {
-        this.rootPath = rootPath || '';
-        this.source = vscode.workspace.getConfiguration().get('servicedesigner.source') || '';
+    constructor() {
         this.manager = DataManager.getInstance();
     }
 
@@ -54,10 +51,14 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
 
     refresh() {
         this._onDidChangeTreeData.fire();
+        ReactPanel.reload()
     }
 
     selectElement(id:number) {
-        console.log(id);
+        ReactPanel.currentPanel.postMessage({
+            type:'element',
+            id: id
+        })
     }
 
     add(element, lib, tag) {
@@ -82,7 +83,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
             } else {
                 this.manager.selectedComponent.element.children.push(newItem)
             }
-            this.manager.save(this.rootPath+'/'+this.source)
+            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
             this.refresh();
         } else {
             vscode.window.showErrorMessage('Component is not selected.')
@@ -124,7 +125,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
                     }
                 })
                 parent.children.push(item);
-                this.manager.save(this.rootPath+'/'+this.source)
+                this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
                 this.refresh();
             } else {
                 vscode.window.showInformationMessage('There is no copied element.')
@@ -141,7 +142,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
                 } else {
                     this.manager.selectedComponent.element.children.splice(this.manager.selectedComponent.element.children.indexOf(item), 1)
                 }
-                this.manager.save(this.rootPath+'/'+this.source)
+                this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
                 this.refresh()
             } else {
                 vscode.window.showErrorMessage('component not selected') 
@@ -157,7 +158,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
             }
             const item = this.getTarget(element);
             item.tag = name;
-            this.manager.save(this.rootPath+'/'+this.source)
+            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
             this.refresh()
         }
     }

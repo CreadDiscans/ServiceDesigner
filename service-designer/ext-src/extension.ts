@@ -11,7 +11,7 @@ import { ElementType } from './constant';
 export function activate(context: vscode.ExtensionContext) {
 	const folders = vscode.workspace.workspaceFolders;
 	if(folders && folders.length > 0) {
-		const elementProvider = new ElementProvider(folders[0].uri.fsPath);
+		const elementProvider = new ElementProvider();
 		const componentProvider = new CompoentProvider(folders[0].uri.fsPath, elementProvider);
 		vscode.window.registerTreeDataProvider('components', componentProvider)
 		vscode.window.registerTreeDataProvider('elements', elementProvider);
@@ -20,9 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('componentProvider.createGroup', (component)=> componentProvider.createGroup(component))
 		vscode.commands.registerCommand('componentProvider.rename', (component)=> componentProvider.rename(component))
 		vscode.commands.registerCommand('componentProvider.delete', (component)=> componentProvider.delete(component))
-		vscode.commands.registerCommand('componentProvider.selectComponent', (args)=> {
-			componentProvider.selectCompoenet(args)
+		vscode.commands.registerCommand('componentProvider.selectComponent', (id)=> {
 			ReactPanel.createOrShow(context.extensionPath);
+			componentProvider.selectCompoenet(id)
 		});
 		vscode.commands.registerCommand('elementProvider.selectElement', (args)=> elementProvider.selectElement(args));
 		vscode.commands.registerCommand('elementProvider.addHTML', element=> elementProvider.add(element, ElementType.Html, 'div'));

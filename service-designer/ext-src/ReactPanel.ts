@@ -1,5 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import { CompoentProvider } from './ComponentProvider';
 
 /**
  * Manages react webview panels
@@ -16,6 +18,12 @@ export class ReactPanel {
 	private readonly _extensionPath: string;
 	private _disposables: vscode.Disposable[] = [];
 
+    static source;
+	static jsonPath;
+	
+	static Q = [];
+	static ready = false;
+
 	public static createOrShow(extensionPath: string) {
 		const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
 
@@ -28,7 +36,19 @@ export class ReactPanel {
 		}
 	}
 
-	private constructor(extensionPath: string, column: vscode.ViewColumn) {
+	public static reload() {
+		if (ReactPanel.currentPanel) {
+			if(CompoentProvider.id != undefined) {
+				ReactPanel.Q.push({
+					type: 'component',
+					id: CompoentProvider.id
+				})
+			}
+			ReactPanel.currentPanel._panel.webview.html = ReactPanel.currentPanel._getHtmlForWebview()
+		}
+	}
+
+ 	private constructor(extensionPath: string, column: vscode.ViewColumn) {
 		this._extensionPath = extensionPath;
 
 		// Create and show a new webview panel
@@ -41,7 +61,6 @@ export class ReactPanel {
 				vscode.Uri.file(path.join(this._extensionPath, 'build'))
 			]
 		});
-		
 		// Set the webview's initial html content 
 		this._panel.webview.html = this._getHtmlForWebview();
 		// Listen for when the panel is disposed
@@ -50,9 +69,13 @@ export class ReactPanel {
 
 		// Handle messages from the webview
 		this._panel.webview.onDidReceiveMessage(message => {
-			switch (message.command) {
-				case 'alert':
-					vscode.window.showErrorMessage(message.text);
+			switch (message.type) {
+				case 'loaded':
+					ReactPanel.ready = true;
+					ReactPanel.Q.forEach(message=> {
+						this._panel.webview.postMessage(message)
+					})
+					ReactPanel.Q = []
 					return;
 			}
 		}, null, this._disposables);
@@ -62,7 +85,15 @@ export class ReactPanel {
 		// Send a message to the webview webview.
 		// You can send any JSON serializable data.
 		this._panel.webview.postMessage({ command: 'refactor' });
-	}
+    }
+    
+    public postMessage(message) {
+		if (ReactPanel.ready) {
+			this._panel.webview.postMessage(message);
+		} else {
+			ReactPanel.Q.push(message)
+		}
+    }
 
 	public dispose() {
 		ReactPanel.currentPanel = undefined;
@@ -89,6 +120,7 @@ export class ReactPanel {
 
 		// Use a nonce to whitelist which scripts can be run
 		const nonce = getNonce();
+		const json:any = fs.readFileSync(ReactPanel.jsonPath+'/'+ReactPanel.source)
 		return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -97,13 +129,16 @@ export class ReactPanel {
 				<meta name="theme-color" content="#000000">
 				<title>React App</title>
 				<link rel="stylesheet" type="text/css" href="${styleUri}">
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none';img-src vscode-resource: https:; script-src 'nonce-${nonce}' 'unsafe-eval';style-src vscode-resource: 'unsafe-inline' http: https: data:;connect-src 'self' http:">
+				<meta http-equiv="Content-Security-Policy" content="img-src vscode-resource: https: data:; script-src 'nonce-${nonce}' 'unsafe-eval';style-src vscode-resource: 'unsafe-inline' http: https: data:;connect-src 'self' http:">
 				<base href="${vscode.Uri.file(path.join(this._extensionPath, 'build')).with({ scheme: 'vscode-resource' })}/">
 			</head>
 			<body style="overflow-y:hidden">
 				<noscript>You need to enable JavaScript to run this app.</noscript>
 				<div id="root"></div>
 				
+				<script nonce="${nonce}" id="raw_data" type="application/json">
+					${json}
+				</script>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
