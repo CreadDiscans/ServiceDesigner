@@ -12,6 +12,27 @@ import { HomeView } from './layout/Home.view';
 import Utils from './utils/utils';
 
 declare var acquireVsCodeApi;
+export class HostConnect {
+    static instance;
+
+    static getInstance() {
+        if (!HostConnect.instance) {
+            HostConnect.instance = new HostConnect()
+        }
+        return HostConnect.instance
+    }
+
+    vscode;
+
+    constructor() {
+        this.vscode = acquireVsCodeApi()
+    }
+
+    postMessage(message) {
+        this.vscode.postMessage(message);
+    }
+}
+
 class App extends React.Component<any> { 
 
     componentWillMount() {
@@ -53,8 +74,7 @@ class App extends React.Component<any> {
     }
 
     componentDidMount() {
-        const vscode = acquireVsCodeApi();
-        vscode.postMessage({type:'loaded'})
+        HostConnect.getInstance().postMessage({type:'loaded'})
     }
 
     render() {

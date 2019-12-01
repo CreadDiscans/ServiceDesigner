@@ -2,6 +2,8 @@ import * as _ from 'lodash';
 import { FileType, ElementType } from "./constant";
 import Utils from './Utils';
 import * as fs from 'fs';
+import { ReactPanel } from './ReactPanel';
+import { CompoentProvider } from './ComponentProvider';
 
 export class DataManager {
     static instance:DataManager;
@@ -56,5 +58,86 @@ export class DataManager {
             })
         })
         fs.writeFileSync(path, JSON.stringify(this.data, null, 4))
+    }
+
+    updateState(component_id, state) {
+        this.data.components.forEach(comp=> {
+            Utils.loop(comp, (item, stack)=> {
+                if (item.id == component_id) {
+                    item.state = state
+                    this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                }
+            })
+        })
+    }
+
+    updateReasource(key, action, value) {
+        if(action == 'create') {
+            if (this.data.resource[key].filter(item=> item.name == value.name).length === 0) {
+                this.data.resource[key].push(value)
+            }
+        } else if (action == 'update') {
+            this.data.resource[key].filter(item=>item.name === value.name).forEach(item=> {
+                if (value.value !== undefined) {
+                    item.value = value.value
+                }
+                if (value.active !== undefined) {
+                    item.active = value.active
+                }
+            })
+        } else if (action == 'delete') {
+            let idx = undefined;
+            this.data.resource[key].forEach((item, i)=> {
+                if (item.name === value.name) {
+                    idx = i;
+                }
+            })
+            if (idx != undefined) {
+                this.data.resource[key].splice(idx, 1);
+            }
+        }
+        this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+    }
+
+    updateProperty(elem_id, action, value) {
+        let elem;
+        this.data.components.forEach(comp=> {
+            Utils.loop(comp, (item, stack)=> {
+                if (item.id == CompoentProvider.id) {
+                    Utils.loop(item.element, (_elem, _stack)=> {
+                        if (_elem.id == elem_id) {
+                            elem = _elem;
+                        }
+                    })
+                }
+            })
+        })
+        if (action == 'create') {
+            if (elem && elem.prop.filter(prop=>prop.name === value.name).length === 0) {
+                elem.prop.push(value)
+            }
+        } else if (action == 'update') {
+            if (elem) {
+                elem.prop.filter(prop=>prop.name === value.name).forEach(prop=> {
+                    if (value.type !== undefined) {
+                        prop.type = value.type
+                    }
+                    if (value.value !== undefined) {
+                        prop.value = value.value
+                    }
+                })
+            }
+        } else if (action == 'delete') {
+            if (elem) {
+                let idx = undefined;
+                elem.prop.forEach((item,i)=> {
+                    if (item.name === value.name) idx = i;
+                })
+                if (idx !== undefined) {
+                    elem.prop.splice(idx, 1);
+                }
+            }
+        }
+        this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
     }
 }

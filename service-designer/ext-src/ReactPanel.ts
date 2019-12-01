@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { CompoentProvider } from './ComponentProvider';
+import { DataManager } from './DataManager';
 
 /**
  * Manages react webview panels
@@ -38,12 +39,6 @@ export class ReactPanel {
 
 	public static reload() {
 		if (ReactPanel.currentPanel) {
-			if(CompoentProvider.id != undefined) {
-				ReactPanel.Q.push({
-					type: 'component',
-					id: CompoentProvider.id
-				})
-			}
 			ReactPanel.currentPanel._panel.webview.html = ReactPanel.currentPanel._getHtmlForWebview()
 		}
 	}
@@ -72,10 +67,28 @@ export class ReactPanel {
 			switch (message.type) {
 				case 'loaded':
 					ReactPanel.ready = true;
-					ReactPanel.Q.forEach(message=> {
-						this._panel.webview.postMessage(message)
-					})
+					if (ReactPanel.Q.length === 0) {
+						if (CompoentProvider.id !== undefined) {
+							this._panel.webview.postMessage({
+								type: 'component',
+								id: CompoentProvider.id
+							})
+						}
+					} else {
+						ReactPanel.Q.forEach(message=> {
+							this._panel.webview.postMessage(message)
+						})
+					}
 					ReactPanel.Q = []
+					return;
+				case 'state':
+					DataManager.getInstance().updateState(message.comp_id, JSON.parse(message.value))
+					return;
+				case 'resource':
+					DataManager.getInstance().updateReasource(message.key, message.action, JSON.parse(message.value))
+					return;
+				case 'property':
+					DataManager.getInstance().updateProperty(message.elem_id, message.action, JSON.parse(message.value))
 					return;
 			}
 		}, null, this._disposables);

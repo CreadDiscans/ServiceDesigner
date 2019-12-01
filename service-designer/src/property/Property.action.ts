@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { PropertyType } from '../utils/constant';
+import { HostConnect } from '../App';
 
 const CHOICE_ELEMENT = 'property/CHOICE_ELEMENT';
 const CREATE_PROPERTY = 'property/CREATE_PROPERTY';
@@ -70,6 +71,16 @@ export default handleActions({
                 value: state.select.value,
                 type: state.select.type
             });  
+            HostConnect.getInstance().postMessage({
+                type: 'property',
+                elem_id: state.element.id,
+                action: 'create',
+                value: JSON.stringify({
+                    name: state.select.name,
+                    value: state.select.value,
+                    type: state.select.type
+                })
+            })
         }
         return {
             ...state,
@@ -86,7 +97,17 @@ export default handleActions({
         state.element.prop.forEach((item, i)=> {
             if (item.name === payload) idx = i
         });
-        if (idx !== undefined) state.element.prop.splice(idx, 1);
+        if (idx !== undefined) {
+            state.element.prop.splice(idx, 1);
+            HostConnect.getInstance().postMessage({
+                type: 'property',
+                elem_id: state.element.id,
+                action: 'delete',
+                value: JSON.stringify({
+                    name: payload,
+                })
+            })
+        }
         return {
             ...state,
             select:{
@@ -122,12 +143,36 @@ export default handleActions({
         } else if (payload === PropertyType.Variable) {
             state.select.value = '';
         }
+        if (!state.create) {
+            HostConnect.getInstance().postMessage({
+                type: 'property',
+                elem_id: state.element.id,
+                action: 'update',
+                value: JSON.stringify({
+                    name: state.select.name,
+                    type: state.select.type,
+                    value: state.select.value
+                })
+            })
+        }
         return {
             ...state
         }
     },
     [UPDATE_VALUE]: (state, {payload}:any) => {
         state.select.value = payload
+        if (!state.create) {
+            HostConnect.getInstance().postMessage({
+                type: 'property',
+                elem_id: state.element.id,
+                action: 'update',
+                value: JSON.stringify({
+                    name: state.select.name,
+                    type: state.select.type,
+                    value: state.select.value
+                })
+            })
+        }
         return {
             ...state
         }
@@ -138,11 +183,33 @@ export default handleActions({
     },
     [ADD_CONDITION]: (state, {payload}:any) => {
         state.select.value.push({condition:'', value:''})
+        if (!state.create) {
+            HostConnect.getInstance().postMessage({
+                type: 'property',
+                elem_id: state.element.id,
+                action: 'update',
+                value: JSON.stringify({
+                    name: state.select.name,
+                    value: state.select.value
+                })
+            })
+        }
         return {...state}
     },
     [DELETE_CONDITION]: (state, {payload}:any) => {
         if (payload !== 0) {
             state.select.value.splice(payload, 1);
+            if (!state.create) {
+                HostConnect.getInstance().postMessage({
+                    type: 'property',
+                    elem_id: state.element.id,
+                    action: 'update',
+                    value: JSON.stringify({
+                        name: state.select.name,
+                        value: state.select.value
+                    })
+                })
+            }
         }
         return {...state}
     },
