@@ -266,7 +266,8 @@
 		"redux-actions": "^2.6.5",
 		"redux-observable": "^1.2.0",
 		"rewire": "^4.0.1",
-		"rxjs": "^6.5.3"
+		"rxjs": "^6.5.3",
+		"xmlhttprequest": "^1.8.0"
 	},
 	"babel": {
 		"presets": [

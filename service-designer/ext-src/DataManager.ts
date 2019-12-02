@@ -4,6 +4,7 @@ import Utils from './Utils';
 import * as fs from 'fs';
 import { ReactPanel } from './ReactPanel';
 import { CompoentProvider } from './ComponentProvider';
+import { RenderService } from './RenderService';
 
 export class DataManager {
     static instance:DataManager;
@@ -57,7 +58,26 @@ export class DataManager {
                 }
             })
         })
-        fs.writeFileSync(path, JSON.stringify(this.data, null, 4))
+        this.export(path)
+        // fs.writeFileSync(path, JSON.stringify(this.data, null, 4))
+    }
+
+    async export(path) {
+        const json = {
+            version: 2,
+            components: this.data.components,
+            resource: this.data.resource
+        }
+        const renderService:RenderService = new RenderService();
+        renderService.renderAll(this.data.components, {
+            color: this.data.resource.color,
+            asset: this.data.resource.asset,
+            css: this.data.resource.css,
+            style: this.data.resource.style
+        })
+        fs.writeFileSync(path, JSON.stringify(json, null, 2))
+        fs.writeFileSync(path.replace('save.json', 'component.tsx'), renderService.toJs())
+        fs.writeFileSync(path.replace('save.json', 'style.css'), await renderService.toCss())
     }
 
     updateState(component_id, state) {
