@@ -20,7 +20,6 @@ export class ReactPanel {
 	private _disposables: vscode.Disposable[] = [];
 
     static source;
-	static jsonPath;
 	
 	static Q = [];
 	static ready = false;
@@ -133,7 +132,7 @@ export class ReactPanel {
 
 		// Use a nonce to whitelist which scripts can be run
 		const nonce = getNonce();
-		const json:any = fs.readFileSync(ReactPanel.jsonPath+'/'+ReactPanel.source)
+		const json:any = fs.readFileSync(ReactPanel.source)
 		return `<!DOCTYPE html>
 			<html lang="en">
 			<head>

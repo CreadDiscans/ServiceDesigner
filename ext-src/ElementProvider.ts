@@ -83,7 +83,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
             } else {
                 this.manager.selectedComponent.element.children.push(newItem)
             }
-            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+            this.manager.save(ReactPanel.source)
             this.refresh();
         } else {
             vscode.window.showErrorMessage('Component is not selected.')
@@ -125,7 +125,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
                     }
                 })
                 parent.children.push(item);
-                this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                this.manager.save(ReactPanel.source)
                 this.refresh();
             } else {
                 vscode.window.showInformationMessage('There is no copied element.')
@@ -142,7 +142,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
                 } else {
                     this.manager.selectedComponent.element.children.splice(this.manager.selectedComponent.element.children.indexOf(item), 1)
                 }
-                this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                this.manager.save(ReactPanel.source)
                 this.refresh()
             } else {
                 vscode.window.showErrorMessage('component not selected') 
@@ -158,7 +158,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
             }
             const item = this.getTarget(element);
             item.tag = name;
-            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+            this.manager.save(ReactPanel.source)
             this.refresh()
         }
     }

@@ -85,7 +85,7 @@ export class DataManager {
             Utils.loop(comp, (item, stack)=> {
                 if (item.id == component_id) {
                     item.state = state
-                    this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                    this.save(ReactPanel.source)
                 }
             })
         })
@@ -116,7 +116,7 @@ export class DataManager {
                 this.data.resource[key].splice(idx, 1);
             }
         }
-        this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+        this.save(ReactPanel.source)
     }
 
     updateProperty(elem_id, action, value) {
@@ -158,6 +158,6 @@ export class DataManager {
                 }
             }
         }
-        this.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+        this.save(ReactPanel.source)
     }
 }

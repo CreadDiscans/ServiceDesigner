@@ -17,9 +17,8 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
 
     static id;
 
-    constructor(rootPath:string,
+    constructor(
         public elemProvider: ElementProvider) {
-        ReactPanel.jsonPath = rootPath || '';
         ReactPanel.source = vscode.workspace.getConfiguration().get('servicedesigner.source') || '';
         this.manager = DataManager.getInstance();
     }
@@ -47,10 +46,10 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
         if(element) {
             return Promise.resolve(makeComps(element.children));
         } else {
-            if (ReactPanel.source === null) {
+            if (!ReactPanel.source) {
                 return Promise.resolve([])
             } else {
-                const json:any = fs.readFileSync(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                const json:any = fs.readFileSync(ReactPanel.source)
                 const data = JSON.parse(json);
                 this.manager.init(data);
                 return Promise.resolve(makeComps(this.manager.data.components));
@@ -59,22 +58,41 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
     }
 
     async loadSource() {
-        const path = (await vscode.window.showInputBox({ prompt: 'design path', placeHolder: '', value: '' })) || '';
-        if(path == '') {
-            const json:any = fs.readFileSync(ReactPanel.jsonPath+'/'+ReactPanel.source)
-            const data = JSON.parse(json);
-            this.manager.init(data);
-            this._onDidChangeTreeData.fire();
-            this.elemProvider.refresh();
+        
+        const uri = await vscode.window.showOpenDialog({
+            canSelectFolders:true
+        })
+        if (uri == undefined) {
+            if (ReactPanel.source) {
+                const json:any = fs.readFileSync(ReactPanel.source)
+                const data = JSON.parse(json);
+                this.manager.init(data);
+                this._onDidChangeTreeData.fire();
+                this.elemProvider.refresh();
+            }
             return;
-        }
-        try {
-            fs.readFileSync(ReactPanel.jsonPath+'/'+path)
-            vscode.workspace.getConfiguration().update('servicedesigner.source', path, vscode.ConfigurationTarget.Workspace)
-            ReactPanel.source = path
-            this._onDidChangeTreeData.fire();
-        } catch(e) {
-            vscode.window.showErrorMessage('Fail to load design.save.json');
+        } else {
+            try {
+                fs.readFileSync(uri[0].path + '/design.save.json')
+                vscode.workspace.getConfiguration().update('servicedesigner.source', uri[0].path + '/design.save.json', vscode.ConfigurationTarget.Workspace)
+                ReactPanel.source = uri[0].path + '/design.save.json'
+                this._onDidChangeTreeData.fire();
+            } catch(e) {
+                fs.writeFileSync(uri[0].path + '/design.save.json', JSON.stringify({
+                    version: 2,
+                    components: [],
+                    resource: {
+                        css: [],
+                        style: [],
+                        color: [],
+                        asset: []
+                    }
+                }, null, 2))
+                fs.readFileSync(uri[0].path + '/design.save.json')
+                vscode.workspace.getConfiguration().update('servicedesigner.source', uri[0].path + '/design.save.json', vscode.ConfigurationTarget.Workspace)
+                ReactPanel.source = uri[0].path + '/design.save.json'
+                this._onDidChangeTreeData.fire();
+            }
         }
     }
 
@@ -114,12 +132,12 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
             if (item) {
                 if (item.type == FileType.FILE) {
                     item.parent.children.push(newItem)
-                    this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                    this.manager.save(ReactPanel.source)
                     this._onDidChangeTreeData.fire();
                     ReactPanel.reload()
                 } else if (item.type == FileType.FOLDER) {
                     item.children.push(newItem)
-                    this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                    this.manager.save(ReactPanel.source)
                     this._onDidChangeTreeData.fire();
                     ReactPanel.reload()
                 } else {
@@ -130,7 +148,7 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
             }
         } else {
             this.manager.data.components.push(newItem)
-            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+            this.manager.save(ReactPanel.source)
             this._onDidChangeTreeData.fire();
             ReactPanel.reload()
         }
@@ -158,12 +176,12 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
             if (item) {
                 if (item.type == FileType.FILE) {
                     item.parent.children.push(newItem)
-                    this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                    this.manager.save(ReactPanel.source)
                     this._onDidChangeTreeData.fire();
                     ReactPanel.reload()
                 } else if (item.type == FileType.FOLDER) {
                     item.children.push(newItem)
-                    this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+                    this.manager.save(ReactPanel.source)
                     this._onDidChangeTreeData.fire();
                     ReactPanel.reload()
                 } else {
@@ -174,7 +192,7 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
             }
         } else {
             this.manager.data.components.push(newItem);
-            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+            this.manager.save(ReactPanel.source)
             this._onDidChangeTreeData.fire();
             ReactPanel.reload()
         }
@@ -187,7 +205,7 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
         }
         const {item, stack}:any = this.getTarget(component);
         item.name = name;
-        this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+        this.manager.save(ReactPanel.source)
         this._onDidChangeTreeData.fire();
         ReactPanel.reload()
     }
@@ -204,7 +222,7 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
                 this.manager.data.components.splice(this.manager.data.components.indexOf(item), 1)
             }
             this.manager.selectedComponent = null;
-            this.manager.save(ReactPanel.jsonPath+'/'+ReactPanel.source)
+            this.manager.save(ReactPanel.source)
             this._onDidChangeTreeData.fire();
             ReactPanel.reload()
         } else {

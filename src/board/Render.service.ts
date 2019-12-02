@@ -3,7 +3,7 @@ import { ElementType, PropertyType, CSSType, FileType } from '../utils/constant'
 import Utils from '../utils/utils';
 import * as reactstrap from 'reactstrap';
 import * as reacticons from 'react-icons/all';
-import * as reactNative from 'react-native';
+import * as reactNative from 'react-native-web';
 import * as reactNativeElement from '../lib/react-native-elements/src';
 import _ from 'lodash';
 import { ajax } from 'rxjs/ajax';
