@@ -72,13 +72,19 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
             }
             return;
         } else {
+            let path;
+            if (process.platform === 'win32') {
+                path = uri[0].path.slice(1) + '/design.save.json'
+            } else {
+                path = uri[0].path + '/design.save.json'
+            }
             try {
-                fs.readFileSync(uri[0].path + '/design.save.json')
-                vscode.workspace.getConfiguration().update('servicedesigner.source', uri[0].path + '/design.save.json', vscode.ConfigurationTarget.Workspace)
-                ReactPanel.source = uri[0].path + '/design.save.json'
+                fs.readFileSync(path)
+                vscode.workspace.getConfiguration().update('servicedesigner.source', path, vscode.ConfigurationTarget.Workspace)
+                ReactPanel.source = path
                 this._onDidChangeTreeData.fire();
             } catch(e) {
-                fs.writeFileSync(uri[0].path + '/design.save.json', JSON.stringify({
+                fs.writeFileSync(path, JSON.stringify({
                     version: 2,
                     components: [],
                     resource: {
@@ -88,9 +94,9 @@ export class CompoentProvider implements vscode.TreeDataProvider<Component> {
                         asset: []
                     }
                 }, null, 2))
-                fs.readFileSync(uri[0].path + '/design.save.json')
-                vscode.workspace.getConfiguration().update('servicedesigner.source', uri[0].path + '/design.save.json', vscode.ConfigurationTarget.Workspace)
-                ReactPanel.source = uri[0].path + '/design.save.json'
+                fs.readFileSync(path)
+                vscode.workspace.getConfiguration().update('servicedesigner.source', path, vscode.ConfigurationTarget.Workspace)
+                ReactPanel.source = path
                 this._onDidChangeTreeData.fire();
             }
         }

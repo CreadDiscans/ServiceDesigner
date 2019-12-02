@@ -2,7 +2,7 @@
   "name": "service-designer",
   "displayName": "Service Designer",
   "description": "",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "repository": "https://github.com/CreadDiscans/ServiceDesigner",
   "engines": {
     "vscode": "^1.40.0"
