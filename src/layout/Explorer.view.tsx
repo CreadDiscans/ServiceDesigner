@@ -2,7 +2,7 @@ import React from 'react';
 import ComponentsView from '../component/Component.view';
 import ElementsView from '../element/Element.view';
 import { Theme } from '../utils/Theme';
-import Resizable from 're-resizable';
+import { Resizable } from 're-resizable';
 import { connectRouter } from '../redux/connection';
 import { ContextMenuType, ElementType, FileType } from '../utils/constant';
 import LayoutActions, * as layoutActions from './Layout.actions';

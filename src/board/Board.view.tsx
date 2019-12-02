@@ -55,6 +55,12 @@ class BoardView extends React.Component<any> {
         {name: 'Zocial', font: Zocial},
     ]
 
+    electron:any;
+
+    constructor(props) {
+        super(props)
+    }
+
     getFontStyles() {
         return this.fontTable.map(item=> {
             const iconFontStyles = `@font-face {
@@ -76,6 +82,8 @@ class BoardView extends React.Component<any> {
     componentDidUpdate() {
         const {data, LayoutActions} = this.props;
         if (this.refs.frame && data.element.component.id !== -1) {
+            const frame:any = this.refs.frame;
+            let document;
             try {
                 const renderService:RenderService = RenderService.getInstance(RenderService)
                 renderService.renderOne(data.element.component, {
@@ -86,12 +94,11 @@ class BoardView extends React.Component<any> {
                     hover: data.element.hover,
                     select: data.element.select
                 })
-                const frame:any = this.refs.frame;
                 AppRegistry.registerComponent('App', ()=> FrameView)
                 const { element, getStyleElement } = AppRegistry.getApplication('App', {});
                 const html = ReactDOMServer.renderToString(element)
                 const css = ReactDOMServer.renderToStaticMarkup(getStyleElement({}));
-                const document = `
+                document = `
                 <!DOCTYPE html>
                 <html style="height:100%">
                 <meta charset="utf-8">
@@ -111,22 +118,20 @@ class BoardView extends React.Component<any> {
                 </script>
                 </div>
                 `
-
-                frame.contentWindow.document.open();
-                frame.contentWindow.document.write(document);
-                this.getFontStyles().forEach(style=> 
-                    frame.contentWindow.document.head.appendChild(style))
-                frame.contentWindow.document.close();
                 
                 if (data.layout.rendering === false) {
                     LayoutActions.rendering(true);
                 }
             } catch(e) {
-                console.error(e);
-                if (data.layout.rendering === true) {
-                    LayoutActions.rendering(false);
-                }
+                document = e.toString()
+                console.log(e.stack)
             }
+
+            frame.contentWindow.document.open();
+            frame.contentWindow.document.write(document);
+            this.getFontStyles().forEach(style=> 
+                frame.contentWindow.document.head.appendChild(style))
+            frame.contentWindow.document.close();
         } else {
             if (this.refs.frame && data.element.component.id === -1) {
                 const frame:any = this.refs.frame;
@@ -140,7 +145,7 @@ class BoardView extends React.Component<any> {
     render() {
         const {data, ElementActions} = this.props;
         return <div style={styles.layout}>
-            <div id="board-tab-wrap" style={styles.tabWrap}>
+            {/* <div id="board-tab-wrap" style={styles.tabWrap}>
                 {data.element.history.map(component=> <div className="board-tab"
                     style={Object.assign({},styles.tab, data.element.component.id === component.id && styles.tabActive) } key={component.id}
                     onMouseEnter={()=>this.setState({hover: component.id})}
@@ -160,7 +165,7 @@ class BoardView extends React.Component<any> {
                         }}/>
                     }
                 </div>)}
-            </div>
+            </div> */}
             {data.layout.frameType === FrameType.Portrait && 
                 <img alt='' style={styles.phonePortrait} src={imgJson.portrait} />}
             {data.layout.frameType === FrameType.Landscape && 
@@ -194,8 +199,7 @@ const styles:any = {
         width:'100%',
         borderWidth:0,
         background:'white',
-        height:'calc(100% - 58px)',
-        marginTop:29
+        height:'calc(100% - 29px)',
     },
     frameProtrait: {
         position:'absolute',
@@ -215,8 +219,8 @@ const styles:any = {
         height:0
     },
     phonePortrait: {
-        marginTop:29, 
-        height:'calc(100% - 60px)',
+        height:'calc(100%)',
+        paddingBottom: 30,
         objectFit: 'contain',
         margin:'auto'
     },

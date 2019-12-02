@@ -2,99 +2,79 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
-import { Menu } from './utils/Menu';
-import { Theme } from './utils/Theme';
-import { DeprecateService } from './utils/Deprecate';
-import Utils from './utils/utils';
 import { connectRouter } from './redux/connection';
-import { HomeView } from './layout/Home.view';
-import { RenderService } from './board/Render.service';
 import * as layoutActions from './layout/Layout.actions';
 import * as componentActions from './component/Component.action';
 import * as resourceActions from './resource/Resource.actions';
 import * as elementActions from './element/Element.action';
 import * as propertyActions from './property/Property.action';
+import { HomeView } from './layout/Home.view';
+import Utils from './utils/utils';
 
+declare var acquireVsCodeApi;
+export class HostConnect {
+    static instance;
+
+    static getInstance() {
+        if (!HostConnect.instance) {
+            HostConnect.instance = new HostConnect()
+        }
+        return HostConnect.instance
+    }
+
+    vscode;
+
+    constructor() {
+        this.vscode = acquireVsCodeApi()
+    }
+
+    postMessage(message) {
+        this.vscode.postMessage(message);
+    }
+}
 
 class App extends React.Component<any> { 
 
     componentWillMount() {
-        new Menu().init(
-            (json) => {
-                const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions } = this.props;
-                try {
-                    const data = JSON.parse(json);
-                    if (data.version === 2) {
-                        ResourceActions.loadResource(data.resource);
-                        ComponentActions.loadComponent(data.components);
-                        ElementActions.clearElement();
-                        PropertyActions.reset();
-                    } else {
-                        const deprecateService =  new DeprecateService().parseVersion1(data);
-                        ResourceActions.loadResource(deprecateService.toResource());
-                        ComponentActions.loadComponent(deprecateService.toComponents());
-                        ElementActions.clearElement();
-                        PropertyActions.reset();
+        const raw_data = JSON.parse(document.getElementById('raw_data').textContent);
+        const { ResourceActions, ComponentActions, ElementActions, PropertyActions } = this.props;
+        ResourceActions.loadResource(raw_data.resource);
+        ComponentActions.loadComponent(raw_data.components);
+        ElementActions.clearElement();
+        PropertyActions.reset();
+        window.addEventListener("message", (event:any)=>{
+            const { data, ComponentActions, ElementActions, PropertyActions} = this.props;
+            const message = event.data
+            let target;
+            switch(message.type) {
+                case 'component':
+                    data.component.files.forEach(comp=> Utils.loop(comp, (item, stack)=> {
+                        if (item.id == message.id) {
+                            target = item
+                        }
+                    })); 
+                    if(target) {
+                        ComponentActions.selectFile(target)
+                        ElementActions.choiceComponent(target)
                     }
-                    LayoutActions.message({
-                        background: Theme.success,
-                        color: Theme.successFont,
-                        text: 'Loaded Successfully'
+                    break
+                case 'element':
+                    Utils.loop(data.element.component.element, (item, stack)=> {
+                        if (item.id == message.id) {
+                            target = item
+                        }
                     })
-                } catch(e) {
-                    console.log(e)
-                    LayoutActions.message({
-                        background: Theme.danger,
-                        color: Theme.dangerFont,
-                        text: 'Load Failed'
-                    })
-                }
-            },  // load File : input data
-            async () => {
-                const { data, LayoutActions } = this.props;
-                try {
-                    const copiedComponents = _.cloneDeep(data.component.files);
-                    copiedComponents.forEach(comp=> {
-                        Utils.loop(comp, (item)=> {
-                            delete item.parent;
-                            Utils.loop(item.element, (elem)=> {
-                                delete elem.parent;
-                            })
-                        })
-                    })
-                    const json = {
-                        version: 2,
-                        components: copiedComponents,
-                        resource: data.resource
+                    if (target) {
+                        ElementActions.selectElement(target)
+                        PropertyActions.choiceElement(target)
                     }
-                    const renderService:RenderService = RenderService.getInstance(RenderService);
-                    renderService.renderAll(copiedComponents, {
-                        color: data.resource.color,
-                        asset: data.resource.asset,
-                        css: data.resource.css,
-                        style: data.resource.style
-                    })
-                    LayoutActions.message({
-                        background: Theme.success,
-                        color: Theme.successFont,
-                        text: 'Save Successfully'
-                    })
-                    return Promise.resolve({
-                        json:JSON.stringify(json, null, 2),
-                        js: renderService.toJs(),
-                        css: await renderService.toCss()
-                    })
-                } catch(e) {
-                    console.log(e)
-                    LayoutActions.message({
-                        background: Theme.danger,
-                        color: Theme.dangerFont,
-                        text: 'Save Failed'
-                    })
-                    return Promise.resolve(undefined)
-                }
-            }                        // save File : return {json, js, css}
-        )
+                    break                    
+            }
+        }, false);
+    }
+
+    componentDidMount() {
+        HostConnect.getInstance().postMessage({type:'loaded'})
     }
 
     render() {
@@ -106,6 +86,7 @@ export default connectRouter(
     (state)=>({
         data: {
             component: state.component,
+            element: state.element,
             resource: state.resource,
             layout: state.layout
         }

@@ -2,6 +2,9 @@ import { createAction, handleActions } from 'redux-actions';
 import Utils from '../utils/utils';
 import { FileType } from '../utils/constant';
 import _ from 'lodash';
+import { HostConnect } from '../App';
+
+declare var acquireVsCodeApi;
 
 const CHOICE_COMPONENT = 'element/CHOICE_COMPONENT';
 const READY_TO_ADD = 'element/READY_TO_ADD';
@@ -86,7 +89,12 @@ export default handleActions({
   },
   [UPDATE_NAME]: (state,{payload}:any)=>({...state, insert:{...state.insert, name:payload}}),
   [UPDATE_STATE]: (state, {payload}:any)=> {
-    state.component.state = payload;
+    state.component.state = payload;    
+    HostConnect.getInstance().postMessage({
+      type:'state',
+      comp_id: state.component.id,
+      value: JSON.stringify(payload)
+    })
     return {...state}
   },
   [COMPLETE_ADD]: (state, {payload}:any)=>{

@@ -6,7 +6,7 @@ import * as propertyActions from './Property.action';
 import * as layoutActions from '../layout/Layout.actions';
 import { ContextMenuType } from '../utils/constant';
 import ScrollArea from 'react-scrollbar';
-import Resizeable from 're-resizable';
+import { Resizable } from 're-resizable';
 
 class PropertyView extends React.Component<any> {
 
@@ -31,7 +31,7 @@ class PropertyView extends React.Component<any> {
         return <div id="Property" onContextMenu={(e)=>this.clickItemRight(e, undefined)}>
             <div style={styles.group}>Properties</div>
             <div ref={'layout'}>
-                <Resizeable
+                <Resizable
                     maxHeight={window.innerHeight-300}
                     minHeight={100}
                     enable={{top:false, bottom:true, left:false, right:false}}>
@@ -52,7 +52,7 @@ class PropertyView extends React.Component<any> {
                             )}
                         </div>
                     </ScrollArea>
-                </Resizeable>
+                </Resizable>
             </div>
         </div>
     }

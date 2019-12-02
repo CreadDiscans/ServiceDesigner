@@ -1,52 +1,65 @@
-<!-- README -->
-<!-- GIF file is just guid line, it will updated later with demo page -->
+# service-designer README
 
-# ServiceDesigner
-**_ServiceDesigner_** is an efficient editor for working with UI design based on React or React Native framework.
-<!-- > ServiceDesginer is an Editor to update design of your project using react or react-native.  
-> React & React-Native Design Editor desktop app built on top of Electron.  
-> You can update both web and app design created by react or react-native.   -->
+This is the README for your extension "service-designer". After writing up a brief description, we recommend including the following sections.
 
-<!-- gif 파일 juice 페이지로 수정 필요 => 현재 청음이지 페이지로 보여주고 있으므로 -->
-> just example GIF image yet  
-![ServiceDesigner](./asset/img/mainExample.gif)  
+## Features
 
-## Introduction
-> Let's think about building an Android Application.  
-> You have to run an emulator, wait until it get started, test how it works, fix some part of your code and _reload_ it.  
-> Maybe you are tired of this routine, especially reloading it again and again.:dizzy:  
-> However, with **_ServiceDesigner_**, you will be free with those inefficient work process.  
-> Just give it a try! And let **_ServiceDesigner_** helps to make your work process more convenient.  
-> Work with your UI design _efficiently_, _speedily_ and _simply_ with **_ServiceDesigner_**.  
-<!-- > However, with **_ServiceDesigner_**, you don't have to waste your time to check how component looks like at the screen.   -->
+Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-### Base frameworks
-- [React](https://reactjs.org/) : Web framework
-- [React Native](https://facebook.github.io/react-native/) : Mobile Application framework
+For example if there is an image subfolder under your extension project workspace:
 
-### Usable library & toolkit with frameworks
-- [React Icons](http://react-icons.github.io/react-icons/)
-- [Reactstrap](https://reactstrap.github.io/) : React Bootstrap 4 components
-- [React Native Elements](https://react-native-training.github.io/react-native-elements/) : React Native UI Toolkit  
+\!\[feature X\]\(images/feature-x.png\)
 
+> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
+## Requirements
 
-## Development
-- Install ServiceDesigner
-```
-npm install
-```
-- Start ServiceDesigner
-```
-npm start 
-```
+If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-<!-- ## build
-```
-npm run dist
-``` -->
+## Extension Settings
 
+Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
 
+For example:
 
-## Tutorial
-:books:[Tutorial](https://github.com/CreadDiscans/ServiceDesigner/blob/master/TUTORIAL.md)
+This extension contributes the following settings:
+
+* `myExtension.enable`: enable/disable this extension
+* `myExtension.thing`: set to `blah` to do something
+
+## Known Issues
+
+Calling out known issues can help limit users opening duplicate issues against your extension.
+
+## Release Notes
+
+Users appreciate release notes as you update your extension.
+
+### 1.0.0
+
+Initial release of ...
+
+### 1.0.1
+
+Fixed issue #.
+
+### 1.1.0
+
+Added features X, Y, and Z.
+
+-----------------------------------------------------------------------------------------------------------
+
+## Working with Markdown
+
+**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+
+* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
+* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
+* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+
+### For more information
+
+* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
+* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+
+**Enjoy!**

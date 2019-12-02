@@ -7,7 +7,7 @@ import BoardView from '../board/Board.view';
 export class HomeView extends React.Component {
     render() {
         return <div style={styles.layout}  onContextMenu={(e)=> e.preventDefault()}>
-            <ExplorerView />
+            {/* <ExplorerView /> */}
             <div style={styles.main}>
                 <BoardView />
                 <BottomView />

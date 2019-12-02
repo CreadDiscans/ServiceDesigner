@@ -96,7 +96,7 @@ class ElementView extends React.Component<any> {
 
     renderElement(elem, dep:number=0) {
         const { data, ElementActions } = this.props; 
-        const nameProp = _.last(elem.prop.filter(prop=>prop.name === 'name'));
+        const nameProp:any = _.last(elem.prop.filter(prop=>prop.name === 'name'));
         return <div key={elem.id}>
             <div className="element-item" style={Object.assign({
                     cursor:'move',

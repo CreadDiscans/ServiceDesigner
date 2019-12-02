@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/MaterialCommunityIcons.json';
+import glyphMap from './glyphmaps/MaterialCommunityIcons.json.js';
 
 const iconSet = createIconSet(glyphMap, 'Material Design Icons', 'MaterialCommunityIcons.ttf');
 

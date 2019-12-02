@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { CSSType } from '../utils/constant';
+import { HostConnect } from '../App';
 
 const CREATE_COLOR = 'resource/CREATE_COLOR';
 const DELETE_COLOR = 'resource/DELETE_COLOR';
@@ -55,11 +56,29 @@ export default handleActions({
                 name: payload.name,
                 value: payload.value
             })
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'color',
+                action: 'create',
+                value: JSON.stringify({
+                    name: payload.name,
+                    value: payload.value
+                })
+            })
         }
         return {...state}
     },
     [UPDATE_COLOR]: (state, {payload}:any)=> {
         state.color.filter(color=>color.name === payload.name).forEach(color=>color.value = payload.value);
+        HostConnect.getInstance().postMessage({
+            type:'resource',
+            key:'color',
+            action: 'update',
+            value: JSON.stringify({
+                name: payload.name,
+                value: payload.value
+            })
+        })
         return {...state}
     },
     [DELETE_COLOR]: (state, {payload}:any)=> {
@@ -71,6 +90,14 @@ export default handleActions({
         })
         if (idx !== undefined) {
             state.color.splice(idx, 1)
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'color',
+                action: 'delete',
+                value: JSON.stringify({
+                    name: payload.name
+                })
+            })
         }
         return {...state}
     },
@@ -80,11 +107,29 @@ export default handleActions({
                 name: payload.name,
                 value: payload.value
             })
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'asset',
+                action: 'create',
+                value: JSON.stringify({
+                    name: payload.name,
+                    value: payload.value
+                })
+            })
         }
         return {...state}
     },
     [UPDATE_ASSET]: (state, {payload}:any)=> {
         state.asset.filter(asset=>asset.name === payload.name).forEach(asset=>asset.value = payload.value);
+        HostConnect.getInstance().postMessage({
+            type:'resource',
+            key:'asset',
+            action: 'update',
+            value: JSON.stringify({
+                name: payload.name,
+                value: payload.value
+            })
+        })
         return {...state}
     },
     [DELETE_ASSET]: (state, {payload}:any)=> {
@@ -96,6 +141,14 @@ export default handleActions({
         })
         if (idx !== undefined) {
             state.asset.splice(idx, 1)
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'asset',
+                action: 'delete',
+                value: JSON.stringify({
+                    name: payload.name
+                })
+            })
         }
         return {...state}
     },
@@ -106,6 +159,17 @@ export default handleActions({
                 value: payload.value,
                 type: payload.type,
                 active: true
+            })
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'asset',
+                action: 'create',
+                value: JSON.stringify({
+                    name: payload.name,
+                    value: payload.value,
+                    type: payload.type,
+                    active: true
+                })
             })
         }
         return {...state}
@@ -119,6 +183,14 @@ export default handleActions({
         })
         if (idx !== undefined) {
             state.css.splice(idx, 1)
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'css',
+                action: 'delete',
+                value: JSON.stringify({
+                    name: payload.name
+                })
+            })
         }
         return {...state}
     },
@@ -130,6 +202,16 @@ export default handleActions({
             if (payload.active !== undefined) {
                 css.active = payload.active;
             }
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'css',
+                action: 'update',
+                value: JSON.stringify({
+                    name: payload.name,
+                    value: payload.value,
+                    active: payload.active
+                })
+            })
         });
         return {...state}
     },
@@ -147,6 +229,15 @@ export default handleActions({
                 name: payload.name,
                 value: payload.value
             })
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'style',
+                action: 'create',
+                value: JSON.stringify({
+                    name: payload.name,
+                    value: payload.value
+                })
+            })
         }
         return {...state}
     },
@@ -159,6 +250,14 @@ export default handleActions({
         })
         if (idx !== undefined) {
             state.style.splice(idx, 1)
+            HostConnect.getInstance().postMessage({
+                type:'resource',
+                key:'style',
+                action: 'delete',
+                value: JSON.stringify({
+                    name: payload.name
+                })
+            })
         }
         return {...state}
     },
@@ -166,6 +265,15 @@ export default handleActions({
         state.style.filter(style=>style.name === payload.name).forEach(style=> {
             style.value = payload.value;
         });
+        HostConnect.getInstance().postMessage({
+            type:'resource',
+            key:'style',
+            action: 'update',
+            value: JSON.stringify({
+                name: payload.name,
+                value: payload.value
+            })
+        })
         return {...state}
     },
 }, initialState)

@@ -3,7 +3,7 @@ import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
 import { IoIosArrowDown, IoMdColorPalette, IoMdPhotos, IoIosPhonePortrait, IoIosPhoneLandscape, IoMdBrowsers } from 'react-icons/io';
 import { DiReact, DiCss3, DiCssTricks } from 'react-icons/di';
-import Resizable from 're-resizable';
+import { Resizable } from 're-resizable';
 import AceEditor from 'react-ace';
 import ScrollArea from 'react-scrollbar';
 import 'brace/theme/tomorrow_night';
@@ -12,7 +12,7 @@ import ColorView from '../resource/Color.view';
 import AssetView from '../resource/Asset.view';
 import CssView from '../resource/Css.view';
 import { bindActionCreators } from 'redux';
-import * as layoutActions from '../layout/Layout.actions';
+import * as layoutActions from './Layout.actions';
 import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
 import StyleView from '../resource/Style.view';
@@ -49,7 +49,7 @@ class BottomView extends React.Component<any> {
         const { data, LayoutActions } = this.props;
         return <div style={styles.layout}>
             <Resizable
-                defaultSize={{height:this.state.active === undefined ? 28 : this.state.height}}
+                defaultSize={{width: '100%',height:this.state.active === undefined ? 28 : this.state.height}}
                 enable={{top:this.state.active !== undefined, bottom:false, right:false, left:false}}
                 minHeight={this.state.active === undefined ? 0 : 100}
                 maxHeight={this.state.active === undefined ? 28 : window.innerHeight - 100}

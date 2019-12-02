@@ -9,7 +9,7 @@ import * as elementActions from '../element/Element.action';
 import * as layoutActions from '../layout/Layout.actions';
 import * as propertyActions from '../property/Property.action';
 import ScrollArea from 'react-scrollbar';
-import Resizeable from 're-resizable';
+import { Resizable } from 're-resizable';
 import { Theme } from '../utils/Theme';
 import { ContextMenuType, FileType } from '../utils/constant';
 
@@ -185,7 +185,7 @@ class ComponentView extends React.Component<any> {
             <div id="components-body" style={Object.assign({}, styles.layout, this.state.collapse && styles.groupHide)} ref="layout"
                 onContextMenu={(e)=> this.clickItemRight(e, undefined)}
                 onDragOver={()=> this.setState({drop: undefined})}>
-                <Resizeable
+                <Resizable
                     maxHeight={window.innerHeight-300}
                     minHeight={100}
                     enable={{top:false, bottom:true, left:false, right:false}}>
@@ -207,7 +207,7 @@ class ComponentView extends React.Component<any> {
                                 autoComplete="off"/>
                         </div>}
                     </ScrollArea>
-                </Resizeable>
+                </Resizable>
             </div>
         </div>
     }

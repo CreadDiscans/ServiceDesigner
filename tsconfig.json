@@ -1,28 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "rootDir": "src",
-		"outDir": "out",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "preserve",
-    "baseUrl": "node_modules",
-    "paths": {
-      "react-native": ["react-native-web"]
-    }
+    "baseUrl": "node_modules"
   },
   "include": [
     "src",

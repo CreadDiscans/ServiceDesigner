@@ -1,12 +1,12 @@
 import React from 'react';
 import { connectRouter } from '../redux/connection';
 import { Theme } from '../utils/Theme';
-import Resizable from 're-resizable';
+import { Resizable } from 're-resizable';
 import PropertiesView from '../property/Property.view';
 import PropertyDetailView from '../property/PropertyDetail.view';
 import { ContextMenuType } from '../utils/constant';
 import { bindActionCreators } from 'redux';
-import * as layoutActions from '../layout/Layout.actions';
+import * as layoutActions from './Layout.actions';
 import * as propertyActions from '../property/Property.action';
 
 class EditorView extends React.Component<any> {

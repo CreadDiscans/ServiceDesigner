@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/AntDesign.json';
+import glyphMap from './glyphmaps/AntDesign.json.js';
 
 const iconSet = createIconSet(glyphMap, 'anticon', 'AntDesign.ttf');
 

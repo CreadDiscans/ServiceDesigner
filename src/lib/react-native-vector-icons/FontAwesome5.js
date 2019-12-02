@@ -5,8 +5,8 @@
 
 import { createFA5iconSet } from './lib/create-icon-set-from-fontawesome5';
 
-import glyphMap from './glyphmaps/FontAwesome5Free.json';
-import metadata from './glyphmaps/FontAwesome5Free_meta.json';
+import glyphMap from './glyphmaps/FontAwesome5Free.json.js';
+import metadata from './glyphmaps/FontAwesome5Free_meta.json.js';
 
 export { FA5Style } from './lib/create-icon-set-from-fontawesome5';
 
