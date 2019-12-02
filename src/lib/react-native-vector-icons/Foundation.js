@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/Foundation.json.js';
+import glyphMap from './glyphmaps/Foundation.json';
 
 const iconSet = createIconSet(glyphMap, 'fontcustom', 'Foundation.ttf');
 

@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/FontAwesome.json.js';
+import glyphMap from './glyphmaps/FontAwesome.json';
 
 const iconSet = createIconSet(glyphMap, 'FontAwesome', 'FontAwesome.ttf');
 

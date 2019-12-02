@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/Feather.json.js';
+import glyphMap from './glyphmaps/Feather.json';
 
 const iconSet = createIconSet(glyphMap, 'Feather', 'Feather.ttf');
 

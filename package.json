@@ -1,288 +1,299 @@
 {
-	"name": "service-designer",
-	"displayName": "Service Designer",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.40.0"
-	},
-	"categories": [
-		"Designer"
-	],
-	"activationEvents": [
-		"onView:components",
-		"onCommand:componentProvider.loadSource"
-	],
-	"main": "./build/ext-src/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "service-designer",
-					"title": "Service Designer",
-					"icon": "media/dep.svg"
-				}
-			]
-		},
-		"views": {
-			"service-designer": [
-				{
-					"id": "components",
-					"name": "Components"
-				},
-				{
-					"id": "elements",
-					"name": "Elements"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "componentProvider.loadSource",
-				"title": "Set design source path",
-				"icon": "media/refresh.svg"
-			},
-			{
-				"command": "componentProvider.selectComponent",
-				"title": "Select Component"
-			},
-			{
-				"command": "elementProvider.selectElement",
-				"title": "Select Element"
-			},
-			{
-				"command": "componentProvider.createComponent",
-				"title": "New Component",
-				"icon": "media/plus.png"
-			},
-			{
-				"command": "componentProvider.createGroup",
-				"title": "New Group",
-				"icon": "media/add-file.png"
-			},
-			{
-				"command": "componentProvider.rename",
-				"title": "Rename"
-			},
-			{
-				"command": "componentProvider.delete",
-				"title": "Delete"
-			},
-			{
-				"command": "elementProvider.addHTML",
-				"title": "Add HTML",
-				"icon": "media/html.png"
-			},
-			{
-				"command": "elementProvider.addReactstrap",
-				"title": "Add Reactstrap"
-			},
-			{
-				"command": "elementProvider.addReactIcons",
-				"title": "Add React Icons"
-			},
-			{
-				"command": "elementProvider.addReactNative",
-				"title": "Add React Native",
-				"icon": "media/react.png"
-			},
-			{
-				"command": "elementProvider.addRNElement",
-				"title": "Add RN Element"
-			},
-			{
-				"command": "elementProvider.copy",
-				"title": "Copy"
-			},
-			{
-				"command": "elementProvider.paste",
-				"title": "Paste"
-			},
-			{
-				"command": "elementProvider.delete",
-				"title": "Delete"
-			},
-			{
-				"command": "elementProvider.rename",
-				"title": "Rename"
-			}
-		],
-		"menus": {
-			"view/title": [
-				{
-					"command": "componentProvider.loadSource",
-					"group": "navigation",
-					"when": "view == components"
-				},
-				{
-					"command": "componentProvider.createComponent",
-					"group": "navigation",
-					"when": "view == components"
-				},
-				{
-					"command": "componentProvider.createGroup",
-					"group": "navigation",
-					"when": "view == components"
-				},
-				{
-					"command": "elementProvider.addHTML",
-					"group": "navigation",
-					"when": "view == elements"
-				},
-				{
-					"command": "elementProvider.addReactNative",
-					"group": "navigation",
-					"when": "view == elements"
-				}
-			],
-			"view/item/context": [
-				{
-					"command": "componentProvider.createComponent",
-					"group": "navigation",
-					"when": "view == components && viewItem == component"
-				},
-				{
-					"command": "componentProvider.createGroup",
-					"group": "navigation",
-					"when": "view == components && viewItem == component"
-				},
-				{
-					"command": "componentProvider.rename",
-					"group": "5_cutcopypaste",
-					"when": "view == components && viewItem == component"
-				},
-				{
-					"command": "componentProvider.delete",
-					"group": "5_cutcopypaste",
-					"when": "view == components && viewItem == component"
-				},
-				{
-					"command": "elementProvider.addHTML",
-					"group": "navigation",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.addReactstrap",
-					"group": "navigation",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.addReactIcons",
-					"group": "navigation",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.addReactNative",
-					"group": "navigation",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.addRNElement",
-					"group": "navigation",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.copy",
-					"group": "5_cutcopypaste",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.paste",
-					"group": "5_cutcopypaste",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.delete",
-					"group": "5_cutcopypaste",
-					"when": "view == elements && viewItem == element"
-				},
-				{
-					"command": "elementProvider.rename",
-					"group": "5_cutcopypaste",
-					"when": "view == elements && viewItem == element"
-				}
-			]
-		},
-		"configuration": [
-			{
-				"title": "Service Designer path",
-				"properties": {
-					"servicedesigner.source": {
-						"type": "string",
-						"default": null
-					}
-				}
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"start": "react-scripts start",
-		"build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-		"test": "react-scripts test --env=jsdom",
-		"eject": "react-scripts eject"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.11.7",
-		"@types/vscode": "^1.40.0",
-		"glob": "^7.1.5",
-		"mocha": "^6.2.2",
-		"tslint": "^5.20.0",
-		"typescript": "^3.2.1",
-		"vscode-test": "^1.2.2"
-	},
-	"dependencies": {
-		"@types/lodash": "^4.14.149",
-		"@types/react": "^16.9.13",
-		"@types/react-dom": "^16.9.4",
-		"babel-plugin-module-resolver": "^3.2.0",
-		"babel-preset-react-app": "^9.0.2",
-		"bootstrap": "^4.4.0",
-		"brace": "^0.11.1",
-		"css": "^2.2.4",
-		"eslint": "^6.7.1",
-		"install": "^0.13.0",
-		"lodash": "^4.17.15",
-		"re-resizable": "^6.1.0",
-		"react": "^16.12.0",
-		"react-ace": "^8.0.0",
-		"react-code-sandbox": "^1.0.0",
-		"react-color": "^2.17.3",
-		"react-dom": "^16.12.0",
-		"react-icons": "^3.8.0",
-		"react-native": "^0.61.5",
-		"react-native-status-bar-height": "^2.4.0",
-		"react-native-web": "^0.11.7",
-		"react-redux": "^7.1.3",
-		"react-router": "^5.1.2",
-		"react-router-dom": "^5.1.2",
-		"react-scripts": "^3.2.0",
-		"react-scrollbar": "^0.5.6",
-		"reactstrap": "^8.1.1",
-		"redux": "^4.0.4",
-		"redux-actions": "^2.6.5",
-		"redux-observable": "^1.2.0",
-		"rewire": "^4.0.1",
-		"rxjs": "^6.5.3",
-		"vscode": "^1.1.36",
-		"xmlhttprequest": "^1.8.0"
-	},
-	"babel": {
-		"presets": [
-			"react-app"
-		],
-		"plugins": [
-			[
-				"module-resolver",
-				{
-					"alias": {
-						"^react-native$": "react-native-web"
-					}
-				}
-			]
-		]
-	}
+  "name": "service-designer",
+  "displayName": "Service Designer",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "categories": [
+    "Designer"
+  ],
+  "activationEvents": [
+    "onView:components",
+    "onCommand:componentProvider.loadSource"
+  ],
+  "main": "./build/ext-src/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "service-designer",
+          "title": "Service Designer",
+          "icon": "media/dep.svg"
+        }
+      ]
+    },
+    "views": {
+      "service-designer": [
+        {
+          "id": "components",
+          "name": "Components"
+        },
+        {
+          "id": "elements",
+          "name": "Elements"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "componentProvider.loadSource",
+        "title": "Set design source path",
+        "icon": "media/refresh.svg"
+      },
+      {
+        "command": "componentProvider.selectComponent",
+        "title": "Select Component"
+      },
+      {
+        "command": "elementProvider.selectElement",
+        "title": "Select Element"
+      },
+      {
+        "command": "componentProvider.createComponent",
+        "title": "New Component",
+        "icon": "media/plus.png"
+      },
+      {
+        "command": "componentProvider.createGroup",
+        "title": "New Group",
+        "icon": "media/add-file.png"
+      },
+      {
+        "command": "componentProvider.rename",
+        "title": "Rename"
+      },
+      {
+        "command": "componentProvider.delete",
+        "title": "Delete"
+      },
+      {
+        "command": "elementProvider.addHTML",
+        "title": "Add HTML",
+        "icon": "media/html.png"
+      },
+      {
+        "command": "elementProvider.addReactstrap",
+        "title": "Add Reactstrap"
+      },
+      {
+        "command": "elementProvider.addReactIcons",
+        "title": "Add React Icons"
+      },
+      {
+        "command": "elementProvider.addReactNative",
+        "title": "Add React Native",
+        "icon": "media/react.png"
+      },
+      {
+        "command": "elementProvider.addRNElement",
+        "title": "Add RN Element"
+      },
+      {
+        "command": "elementProvider.copy",
+        "title": "Copy"
+      },
+      {
+        "command": "elementProvider.paste",
+        "title": "Paste"
+      },
+      {
+        "command": "elementProvider.delete",
+        "title": "Delete"
+      },
+      {
+        "command": "elementProvider.rename",
+        "title": "Rename"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "componentProvider.loadSource",
+          "group": "navigation",
+          "when": "view == components"
+        },
+        {
+          "command": "componentProvider.createComponent",
+          "group": "navigation",
+          "when": "view == components"
+        },
+        {
+          "command": "componentProvider.createGroup",
+          "group": "navigation",
+          "when": "view == components"
+        },
+        {
+          "command": "elementProvider.addHTML",
+          "group": "navigation",
+          "when": "view == elements"
+        },
+        {
+          "command": "elementProvider.addReactNative",
+          "group": "navigation",
+          "when": "view == elements"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "componentProvider.createComponent",
+          "group": "navigation",
+          "when": "view == components && viewItem == component"
+        },
+        {
+          "command": "componentProvider.createGroup",
+          "group": "navigation",
+          "when": "view == components && viewItem == component"
+        },
+        {
+          "command": "componentProvider.rename",
+          "group": "5_cutcopypaste",
+          "when": "view == components && viewItem == component"
+        },
+        {
+          "command": "componentProvider.delete",
+          "group": "5_cutcopypaste",
+          "when": "view == components && viewItem == component"
+        },
+        {
+          "command": "elementProvider.addHTML",
+          "group": "navigation",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.addReactstrap",
+          "group": "navigation",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.addReactIcons",
+          "group": "navigation",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.addReactNative",
+          "group": "navigation",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.addRNElement",
+          "group": "navigation",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.copy",
+          "group": "5_cutcopypaste",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.paste",
+          "group": "5_cutcopypaste",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.delete",
+          "group": "5_cutcopypaste",
+          "when": "view == elements && viewItem == element"
+        },
+        {
+          "command": "elementProvider.rename",
+          "group": "5_cutcopypaste",
+          "when": "view == elements && viewItem == element"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Service Designer path",
+        "properties": {
+          "servicedesigner.source": {
+            "type": "string",
+            "default": null
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "start": "react-scripts start",
+    "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "glob": "^7.1.5",
+    "mocha": "^6.2.2",
+    "tslint": "^5.20.0",
+    "typescript": "^3.2.1",
+    "vscode-test": "^1.2.2"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-preset-react-app": "^9.0.2",
+    "bootstrap": "^4.4.0",
+    "brace": "^0.11.1",
+    "css": "^2.2.4",
+    "eslint": "^6.7.1",
+    "install": "^0.13.0",
+    "lodash": "^4.17.15",
+    "re-resizable": "^6.1.0",
+    "react": "^16.12.0",
+    "react-ace": "^8.0.0",
+    "react-code-sandbox": "^1.0.0",
+    "react-color": "^2.17.3",
+    "react-dom": "^16.12.0",
+    "react-icons": "^3.8.0",
+    "react-native": "^0.61.5",
+    "react-native-status-bar-height": "^2.4.0",
+    "react-native-web": "^0.11.7",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.2.0",
+    "react-scrollbar": "^0.5.6",
+    "reactstrap": "^8.1.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-observable": "^1.2.0",
+    "rewire": "^4.0.1",
+    "rxjs": "^6.5.3",
+    "vscode": "^1.1.36",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "^react-native$": "react-native-web"
+          }
+        }
+      ]
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

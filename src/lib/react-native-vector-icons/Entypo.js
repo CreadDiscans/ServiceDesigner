@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/Entypo.json.js';
+import glyphMap from './glyphmaps/Entypo.json';
 
 const iconSet = createIconSet(glyphMap, 'Entypo', 'Entypo.ttf');
 

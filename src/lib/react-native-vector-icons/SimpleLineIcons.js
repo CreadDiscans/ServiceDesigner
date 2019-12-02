@@ -4,7 +4,7 @@
  */
 
 import createIconSet from './lib/create-icon-set';
-import glyphMap from './glyphmaps/SimpleLineIcons.json.js';
+import glyphMap from './glyphmaps/SimpleLineIcons.json';
 
 const iconSet = createIconSet(glyphMap, 'simple-line-icons', 'SimpleLineIcons.ttf');
 
