@@ -78,8 +78,8 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
                 collapse: true
             }
             if (element) {
-                const target = this.getTarget(element);
-                target.children.push(newItem);
+                const { item, parent } = this.getTarget(element);
+                item.children.push(newItem);
             } else {
                 this.manager.selectedComponent.element.children.push(newItem)
             }
@@ -92,7 +92,8 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
 
     copy(element) {
         if (element && this.manager.selectedComponent) {
-            this.copiedElement = this.getTarget(element);
+            const { item, parent } = this.getTarget(element);
+            this.copiedElement = item
             vscode.window.showInformationMessage('Element is copied.');
         }
     }
@@ -100,7 +101,8 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
     paste(element) {
         if (element && this.manager.selectedComponent) {
             if (this.copiedElement) {
-                let parent = this.getTarget(element);
+                let target = this.getTarget(element);
+                let parent = target.item;
                 let maxId = 0;
                 Utils.loop(this.manager.selectedComponent.element, (target, stack)=> {
                     if (maxId < target.id) {
@@ -135,10 +137,10 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
 
     delete(element) {
         if(element && this.manager.selectedComponent) {
-            const item = this.getTarget(element);
+            const { item, parent } = this.getTarget(element);
             if (item) {
-                if(item.parent) {
-                    item.parent.children.splice(item.parent.children.indexOf(item), 1)
+                if(parent) {
+                    parent.children.splice(parent.children.indexOf(item), 1)
                 } else {
                     this.manager.selectedComponent.element.children.splice(this.manager.selectedComponent.element.children.indexOf(item), 1)
                 }
@@ -156,7 +158,7 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
             if(name == '') {
                 return;
             }
-            const item = this.getTarget(element);
+            const { item, parent } = this.getTarget(element);
             item.tag = name;
             this.manager.save(ReactPanel.source)
             this.refresh()
@@ -165,14 +167,21 @@ export class ElementProvider implements vscode.TreeDataProvider<Element> {
 
     getTarget(element:Element) {
         let _item = null;
+        let _parent = null;
         this.manager.selectedComponent.element.children.forEach((elem:any)=> {
             Utils.loop(elem, (item:any, stack:any)=> {
                 if (element.id == item.id) {
                     _item = item;
+                    if (stack.length !== 0 ) {
+                        _parent = stack[stack.length-1]
+                    }
                 }
             })
         })
-        return _item;
+        return {
+            item:_item,
+            parent: _parent
+        }
     }
 }
 
