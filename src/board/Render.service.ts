@@ -13,7 +13,7 @@ import { Theme } from '../utils/Theme';
 import { Singletone } from '../utils/singletone';
 
 export class RenderService extends Singletone<RenderService> {
-    private static TEMPLATE_REACT_ICONS_IMPORT = "import * as ri_fa from 'react-icons/fa';\nimport * as ri_io from 'react-icons/io';\nimport * as ri_md from 'react-icons/md';\nimport * as ri_ti from 'react-icons/ti';\nimport * as ri_go from 'react-icons/go';\nimport * as ri_fi from 'react-icons/fi';\nimport * as ri_gi from 'react-icons/gi';\nimport * as ri_wi from 'react-icons/wi';\nimport * as ri_di from 'react-icons/di';";
+    private static TEMPLATE_REACT_ICONS_IMPORT = "import * as ri_fa from 'react-icons/fa';\nimport * as ri_io from 'react-icons/io';\nimport * as ri_md from 'react-icons/md';\nimport * as ri_ti from 'react-icons/ti';\nimport * as ri_go from 'react-icons/go';\nimport * as ri_fi from 'react-icons/fi';\nimport * as ri_gi from 'react-icons/gi';\nimport * as ri_wi from 'react-icons/wi';\nimport * as ri_di from 'react-icons/di';\nimport rsc from './design.resource.json';";
     private static TEMPLATE_REACT_ICONS_ASSIGN = "const ri = {};\nObject.assign(ri, ri_fa);\nObject.assign(ri, ri_io);\nObject.assign(ri, ri_md);\nObject.assign(ri, ri_ti);\nObject.assign(ri, ri_go);\nObject.assign(ri, ri_fi);\nObject.assign(ri, ri_gi);\nObject.assign(ri, ri_wi);\nObject.assign(ri, ri_di);";
     private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as "+ElementType.Reactstrap+" from 'reactstrap';\n"+RenderService.TEMPLATE_REACT_ICONS_IMPORT+"\nimport './design.style.css';\n"+RenderService.TEMPLATE_REACT_ICONS_ASSIGN+'\n';
     private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as "+ElementType.ReactNative+" from 'react-native';\nimport * as "+ElementType.ReactNativeElements+" from 'react-native-elements';\n";
@@ -53,6 +53,7 @@ export class RenderService extends Singletone<RenderService> {
     renderAll(components, options) {
         this.js = [];
         this.options = options;
+        options.run_renderAll = true;
         components.forEach(comp=> Utils.loop(comp, (item, stack)=> {
             if (item.type === FileType.FILE) {
                 const prefix = stack.map(stackItem=> _.capitalize(stackItem.name)).join('')
@@ -117,6 +118,16 @@ export class RenderService extends Singletone<RenderService> {
                 resolve(css);
             })
         })
+    }
+
+    toResouce() {
+        const output = {
+            color:{},
+            asset:{}
+        }
+        this.options.color.forEach(item=> output.color[item.name]=item.value)
+        this.options.asset.forEach(item=> output.asset[item.name]=item.value)
+        return output
     }
 
     getBody() {
@@ -195,13 +206,23 @@ export class RenderService extends Singletone<RenderService> {
             }));
             let output = attrs.join(' ');
             
-            this.options.color.sort((a,b)=> a.name > b.name ? -1 : 1).forEach(color=> {    
-                const re = new RegExp("Color."+color.name, 'g');
-                output = output.replace(re, color.value);
+            this.options.color.sort((a,b)=> a.name > b.name ? -1 : 1).forEach(color=> {  
+                if (this.options.run_renderAll) {
+                    const re = new RegExp('"Color.'+color.name+'"', 'g');
+                    output = output.replace(re, 'rsc.color["'+color.name+'"]');
+                } else {
+                    const re = new RegExp("Color."+color.name, 'g');
+                    output = output.replace(re, color.value);
+                }
             });
             this.options.asset.sort((a,b)=> a.name > b.name ? -1 : 1).forEach(asset=> {
-                const re = new RegExp("Asset."+asset.name, 'g');
-                output = output.replace(re, asset.value);
+                if (this.options.run_renderAll) {
+                    const re = new RegExp('"Asset.'+asset.name+'"', 'g');
+                    output = output.replace(re, 'rsc.asset["'+asset.name+'"]');
+                } else {
+                    const re = new RegExp("Asset."+asset.name, 'g');
+                    output = output.replace(re, asset.value);
+                }
             })
             return output;
         }

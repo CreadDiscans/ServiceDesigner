@@ -82,7 +82,8 @@ class App extends React.Component<any> {
                     return Promise.resolve({
                         json:JSON.stringify(json, null, 2),
                         js: renderService.toJs(),
-                        css: await renderService.toCss()
+                        css: await renderService.toCss(),
+                        rsc:JSON.stringify(renderService.toResouce(), null, 2)
                     })
                 } catch(e) {
                     console.log(e)

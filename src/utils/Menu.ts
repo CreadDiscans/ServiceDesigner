@@ -27,6 +27,7 @@ export class Menu {
                 if (data.css !== undefined) {
                     fs.writeFileSync(this.cachePath+'/design.style.css', data.css)
                 }
+                fs.writeFileSync(this.cachePath+'/design.resource.json', data.rsc)
             }
 
             // define template
