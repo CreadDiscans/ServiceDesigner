@@ -76,6 +76,8 @@ class BoardView extends React.Component<any> {
     componentDidUpdate() {
         const {data, LayoutActions} = this.props;
         if (this.refs.frame && data.element.component.id !== -1) {
+            const frame:any = this.refs.frame;
+            let document;
             try {
                 const renderService:RenderService = RenderService.getInstance(RenderService)
                 renderService.renderOne(data.element.component, {
@@ -86,12 +88,11 @@ class BoardView extends React.Component<any> {
                     hover: data.element.hover,
                     select: data.element.select
                 })
-                const frame:any = this.refs.frame;
                 AppRegistry.registerComponent('App', ()=> FrameView)
                 const { element, getStyleElement } = AppRegistry.getApplication('App', {});
                 const html = ReactDOMServer.renderToString(element)
                 const css = ReactDOMServer.renderToStaticMarkup(getStyleElement({}));
-                const document = `
+                document = `
                 <!DOCTYPE html>
                 <html style="height:100%">
                 <meta charset="utf-8">
@@ -112,21 +113,22 @@ class BoardView extends React.Component<any> {
                 </div>
                 `
 
-                frame.contentWindow.document.open();
-                frame.contentWindow.document.write(document);
-                this.getFontStyles().forEach(style=> 
-                    frame.contentWindow.document.head.appendChild(style))
-                frame.contentWindow.document.close();
                 
                 if (data.layout.rendering === false) {
                     LayoutActions.rendering(true);
                 }
             } catch(e) {
+                document = e.toString()
                 console.error(e);
                 if (data.layout.rendering === true) {
                     LayoutActions.rendering(false);
                 }
             }
+            frame.contentWindow.document.open();
+            frame.contentWindow.document.write(document);
+            this.getFontStyles().forEach(style=> 
+                frame.contentWindow.document.head.appendChild(style))
+            frame.contentWindow.document.close();
         } else {
             if (this.refs.frame && data.element.component.id === -1) {
                 const frame:any = this.refs.frame;
