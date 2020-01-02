@@ -1,3 +1,4 @@
+import { subject } from "../support/Aws";
 
 declare var window:any;
 
@@ -82,6 +83,15 @@ export class Menu {
                             click: ()=> {
                                 remote.getCurrentWindow().close()
                             }
+                        }
+                    ]
+                },
+                {
+                    label: 'Support',
+                    submenu: [
+                        {
+                            label: 'Aws S3',
+                            click: ()=> subject.next(true)
                         }
                     ]
                 },

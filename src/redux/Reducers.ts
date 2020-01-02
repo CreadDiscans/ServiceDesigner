@@ -6,6 +6,7 @@ import element from '../element/Element.action';
 import layout, { layoutEpic } from '../layout/Layout.actions';
 import property from '../property/Property.action';
 import resource from '../resource/Resource.actions';
+import support from '../support/Support.actions';
 
 export const rootEpic = combineEpics(layoutEpic);
 
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
     layout,
     property,
     resource,
+    support
 })

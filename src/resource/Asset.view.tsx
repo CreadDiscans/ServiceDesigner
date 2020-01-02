@@ -3,6 +3,7 @@ import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
 import * as resourceActions from './Resource.actions';
 import { Theme } from '../utils/Theme';
+import { S3upload, S3remove } from '../support/Aws';
 declare var window:any;
 
 class AssetView extends React.Component<any> {
@@ -17,9 +18,16 @@ class AssetView extends React.Component<any> {
     fileSelect = (e:any) => {
         const FileReader = new window.FileReader();
         FileReader.onload = (e:any) => {
-            const { ResourceActions } = this.props;
-            ResourceActions.createAsset({name:this.state.newName, value: e.target.result});
-            this.setState({newName: '', name: this.state.newName, value: e.target.result});
+            const { data, ResourceActions } = this.props;
+            if (data.support.aws.isConnected) {
+                S3upload(data.support.aws.bucket,data.support.aws.region, this.state.newName, e.target.result).then(value=> {
+                    ResourceActions.createAsset({name:this.state.newName, value: value});
+                    this.setState({newName: '', name: this.state.newName, value: value});     
+                })
+            } else {
+                ResourceActions.createAsset({name:this.state.newName, value: e.target.result});
+                this.setState({newName: '', name: this.state.newName, value: e.target.result});
+            }
         }
         FileReader.readAsDataURL(e.target.files[0]);
     }
@@ -50,6 +58,9 @@ class AssetView extends React.Component<any> {
                         onMouseEnter={()=>this.setState({hover:'delete'})}
                         onMouseLeave={()=>this.setState({hover:undefined})}
                         onClick={()=> {
+                            if (data.support.aws.isConnected) {
+                                S3remove(data.support.aws.bucket, this.state.name)
+                            }
                             ResourceActions.deleteAsset(this.state.name);
                             this.setState({name: undefined});
                         }}>Delete</button>,
@@ -126,7 +137,8 @@ const styles = {
 export default connectRouter(
     (state)=> ({
         data: {
-            resource: state.resource
+            resource: state.resource,
+            support: state.support
         }
     }),
     (dispatch)=> ({
