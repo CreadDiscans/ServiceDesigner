@@ -16,6 +16,7 @@ import * as layoutActions from '../layout/Layout.actions';
 import * as elementActions from '../element/Element.action';
 import { FrameType } from '../utils/constant';
 import StyleView from '../resource/Style.view';
+import { FaAws } from 'react-icons/fa';
 
 
 class BottomView extends React.Component<any> {
@@ -66,7 +67,7 @@ class BottomView extends React.Component<any> {
                         }}>
                         {tab === 'State' && <DiReact style={styles.tabIcon}/>}
                         {tab === 'Color' && <IoMdColorPalette style={{...styles.tabIcon,...{color:'#C33'}}}/>}
-                        {tab === 'Asset' && <IoMdPhotos style={{...styles.tabIcon,...{color:'#CCC'}}}/>}
+                        {tab === 'Asset' && (data.support.aws.isConnected ? <FaAws style={{...styles.tabIcon,...{color:'#F8991d'}}}/>: <IoMdPhotos style={{...styles.tabIcon,...{color:'#CCC'}}}/>)}
                         {tab === 'Css' && <DiCss3 style={{...styles.tabIcon,...{color:'#006db2'}}}/>}
                         {tab === 'Style' && <DiCssTricks style={{...styles.tabIcon, ...{color: '#ff8a00'}}} />}
                         {tab}
@@ -142,7 +143,8 @@ export default connectRouter(
     (state)=>({
         data: {
             element: state.element,
-            layout: state.layout
+            layout: state.layout,
+            support: state.support
         }
     }),
     (dispatch)=>({

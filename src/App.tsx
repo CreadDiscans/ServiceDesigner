@@ -17,6 +17,8 @@ import * as propertyActions from './property/Property.action';
 import { Zeplin } from './utils/Zeplin';
 import { Subscription } from 'rxjs';
 
+import * as supportActions from './support/Support.actions';
+import SupportAws, {isAwsVaild} from './support/Aws';
 
 class App extends React.Component<any> { 
 
@@ -26,7 +28,7 @@ class App extends React.Component<any> {
         this.sub = Zeplin.subject.subscribe(val=> this.setState({}))
         new Menu().init(
             (json) => {
-                const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions } = this.props;
+                const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions, SupportActions } = this.props;
                 try {
                     const data = JSON.parse(json);
                     if (data.version === 2) {
@@ -34,6 +36,14 @@ class App extends React.Component<any> {
                         ComponentActions.loadComponent(data.components);
                         ElementActions.clearElement();
                         PropertyActions.reset();
+                        if (data.support) {
+                            isAwsVaild(data.support.aws).then(()=> {
+                                SupportActions.setAwsConfig({
+                                    ...data.support.aws,
+                                    isConnected:true
+                                });
+                            })
+                        }
                     } else {
                         const deprecateService =  new DeprecateService().parseVersion1(data);
                         ResourceActions.loadResource(deprecateService.toResource());
@@ -70,7 +80,15 @@ class App extends React.Component<any> {
                     const json = {
                         version: 2,
                         components: copiedComponents,
-                        resource: data.resource
+                        resource: data.resource,
+                        support: {
+                            aws: {
+                                accessKeyId: data.support.aws.accessKeyId,
+                                secretAccessKey: data.support.aws.secretAccessKey,
+                                region: data.support.aws.region,
+                                bucket: data.support.aws.bucket
+                            }
+                        }
                     }
                     const renderService:RenderService = RenderService.getInstance(RenderService);
                     renderService.renderAll(copiedComponents, {
@@ -121,6 +139,7 @@ class App extends React.Component<any> {
             <HomeView/>
             {Zeplin.getModelView()}
             {Zeplin.getWebView()}
+            <SupportAws/>
         </div>
     }
 }
@@ -130,7 +149,8 @@ export default connectRouter(
         data: {
             component: state.component,
             resource: state.resource,
-            layout: state.layout
+            layout: state.layout,
+            support: state.support
         }
     }),
     (dispatch)=>({
@@ -138,7 +158,8 @@ export default connectRouter(
         ResourceActions: bindActionCreators(resourceActions, dispatch),
         ComponentActions: bindActionCreators(componentActions, dispatch),
         ElementActions: bindActionCreators(elementActions, dispatch),
-        PropertyActions: bindActionCreators(propertyActions, dispatch)
+        PropertyActions: bindActionCreators(propertyActions, dispatch),
+        SupportActions: bindActionCreators(supportActions, dispatch)
     }),
     App
 );

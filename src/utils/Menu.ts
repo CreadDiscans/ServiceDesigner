@@ -1,4 +1,5 @@
 import { Zeplin } from "./Zeplin";
+import { subject } from "../support/Aws";
 
 declare var window:any;
 
@@ -87,19 +88,15 @@ export class Menu {
                     ]
                 },
                 {
-                    label: 'Zeplin',
+                    label: 'Support',
                     submenu: [
                         {
-                            label: 'set Chrome Driver path',
-                            click: ()=> {
-                                Zeplin.setChromeDriverPath()
-                            }
+                            label: 'Aws S3',
+                            click: ()=> subject.next(true)
                         },
                         {
-                            label: 'import',
-                            click: ()=> {
-                                Zeplin.import()
-                            }
+                            label: 'Zeplin',
+                            click: ()=> alert('zeplin')
                         }
                     ]
                 },
