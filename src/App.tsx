@@ -14,11 +14,16 @@ import * as componentActions from './component/Component.action';
 import * as resourceActions from './resource/Resource.actions';
 import * as elementActions from './element/Element.action';
 import * as propertyActions from './property/Property.action';
+import { Zeplin } from './utils/Zeplin';
+import { Subscription } from 'rxjs';
 
 
 class App extends React.Component<any> { 
 
+    sub:Subscription;
+
     componentWillMount() {
+        this.sub = Zeplin.subject.subscribe(val=> this.setState({}))
         new Menu().init(
             (json) => {
                 const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions } = this.props;
@@ -98,8 +103,25 @@ class App extends React.Component<any> {
         )
     }
 
+    zep_init = false
+
+    componentDidUpdate() {
+        if (!this.zep_init && Zeplin.url.indexOf('https://') === 0) {
+            Zeplin.init()
+            this.zep_init = true
+        }
+    }
+
+    componentWillUnmount() {
+        this.sub.unsubscribe()
+    }
+
     render() {
-        return <HomeView/>
+        return <div>
+            <HomeView/>
+            {Zeplin.getModelView()}
+            {Zeplin.getWebView()}
+        </div>
     }
 }
 

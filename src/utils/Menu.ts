@@ -1,3 +1,4 @@
+import { Zeplin } from "./Zeplin";
 
 declare var window:any;
 
@@ -81,6 +82,23 @@ export class Menu {
                             label: 'Exit',
                             click: ()=> {
                                 remote.getCurrentWindow().close()
+                            }
+                        }
+                    ]
+                },
+                {
+                    label: 'Zeplin',
+                    submenu: [
+                        {
+                            label: 'set Chrome Driver path',
+                            click: ()=> {
+                                Zeplin.setChromeDriverPath()
+                            }
+                        },
+                        {
+                            label: 'import',
+                            click: ()=> {
+                                Zeplin.import()
                             }
                         }
                     ]
