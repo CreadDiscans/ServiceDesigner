@@ -14,7 +14,7 @@ import { Singletone } from '../utils/singletone';
 
 export class RenderService extends Singletone<RenderService> {
     private static TEMPLATE_REACT_ICONS_IMPORT = "import * as ri_fa from 'react-icons/fa';\nimport * as ri_io from 'react-icons/io';\nimport * as ri_md from 'react-icons/md';\nimport * as ri_ti from 'react-icons/ti';\nimport * as ri_go from 'react-icons/go';\nimport * as ri_fi from 'react-icons/fi';\nimport * as ri_gi from 'react-icons/gi';\nimport * as ri_wi from 'react-icons/wi';\nimport * as ri_di from 'react-icons/di';\nimport rsc from './design.resource.json';";
-    private static TEMPLATE_REACT_ICONS_ASSIGN = "const ri = {};\nObject.assign(ri, ri_fa);\nObject.assign(ri, ri_io);\nObject.assign(ri, ri_md);\nObject.assign(ri, ri_ti);\nObject.assign(ri, ri_go);\nObject.assign(ri, ri_fi);\nObject.assign(ri, ri_gi);\nObject.assign(ri, ri_wi);\nObject.assign(ri, ri_di);";
+    private static TEMPLATE_REACT_ICONS_ASSIGN = "const o = (...a) => a.length===0?{}:Object.assign({},...a)\nconst ri = o(ri_fa,ri_io,ri_md,ri_ti,ri_go,ri_fi,ri_gi,ri_wi,ri_di);\n";
     private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as "+ElementType.Reactstrap+" from 'reactstrap';\n"+RenderService.TEMPLATE_REACT_ICONS_IMPORT+"\nimport './design.style.css';\n"+RenderService.TEMPLATE_REACT_ICONS_ASSIGN+'\n';
     private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as "+ElementType.ReactNative+" from 'react-native';\nimport * as "+ElementType.ReactNativeElements+" from 'react-native-elements';\n";
     private static TEMPLATE_ABSTRACT = "class DesignedComponent<P, S> extends React.Component<P, S> {\n\tonEvent(e:any){}\n\trenderPart(name:any){}\n}\n";
@@ -132,7 +132,7 @@ export class RenderService extends Singletone<RenderService> {
 
     getBody() {
         // console.log(this.dom);
-        return 'state='+this.state+';'+this.func+'render('+this.dom+')';
+        return 'const o = (...a) => a.length===0?{}:Object.assign({},...a);state='+this.state+';'+this.func+'render('+this.dom+')';
     }
 
     toHtml(elem, forStack = [], key = -1) {
@@ -157,7 +157,8 @@ export class RenderService extends Singletone<RenderService> {
         }
 
         const attr = (isFor=false) => {
-            let attrs = ['id={'+this.getAttrId(elem, forStack, isFor)+'}'];
+            // let attrs = ['id={'+this.getAttrId(elem, forStack, isFor)+'}'];
+            let attrs = [];
             if (isFor) {
                 attrs.push('key={i'+(forStack.length-1)+'}')
             } else if (key !== -1) {
@@ -174,12 +175,13 @@ export class RenderService extends Singletone<RenderService> {
                 } else if (prop.type === PropertyType.Boolean || prop.type === PropertyType.Number || prop.type === PropertyType.Variable) {
                     return prop.name + '={'+prop.value+'}';
                 } else if (prop.type === PropertyType.String) {
+                    if (prop.value === '') return ''
                     if (prop.name === 'source') {
                         return prop.name + '={{uri:"'+prop.value+'"}}';
                     }
                     return prop.name + '={"'+prop.value+'"}';
                 } else if (prop.type === PropertyType.Object) {
-                    return prop.name + '={Object.assign({}, '+prop.value.map(item=> {
+                    const val_list = prop.value.map(item=> {
                         let value = prop.name === 'style' ? Utils.transform('style ' + item.value)['style'] : JSON.stringify(item.value);
                         if (styleNameProp !== undefined) {
                             this.options.style.forEach(style=> {
@@ -200,7 +202,12 @@ export class RenderService extends Singletone<RenderService> {
                         } else {
                             return item.condition + ' && ' + JSON.stringify(value);
                         }
-                    }).join(',')+')}';
+                    }).filter(strObj=> strObj != '{}').join(',')
+                    if (val_list === '') {
+                        return ''
+                    } else {
+                        return prop.name + '={o('+val_list+')}';
+                    }
                 }
                 return ''
             }));
