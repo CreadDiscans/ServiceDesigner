@@ -14,7 +14,7 @@ import { Singletone } from '../utils/singletone';
 
 export class RenderService extends Singletone<RenderService> {
     private static TEMPLATE_REACT_ICONS_IMPORT = "import * as ri_fa from 'react-icons/fa';\nimport * as ri_io from 'react-icons/io';\nimport * as ri_md from 'react-icons/md';\nimport * as ri_ti from 'react-icons/ti';\nimport * as ri_go from 'react-icons/go';\nimport * as ri_fi from 'react-icons/fi';\nimport * as ri_gi from 'react-icons/gi';\nimport * as ri_wi from 'react-icons/wi';\nimport * as ri_di from 'react-icons/di';\nimport rsc from './design.resource.json';";
-    private static TEMPLATE_REACT_ICONS_ASSIGN = "const o = (...a) => a.length===0?{}:Object.assign({},...a)\nconst ri = o(ri_fa,ri_io,ri_md,ri_ti,ri_go,ri_fi,ri_gi,ri_wi,ri_di);\n";
+    private static TEMPLATE_REACT_ICONS_ASSIGN = "// @ts-ignore\nconst o = (...a) => a.length===0?{}:Object.assign({},...a)\nconst ri = o(ri_fa,ri_io,ri_md,ri_ti,ri_go,ri_fi,ri_gi,ri_wi,ri_di);\n";
     private static TEMPLATE_REACT_IMPORT = "import React from 'react';\nimport * as "+ElementType.Reactstrap+" from 'reactstrap';\n"+RenderService.TEMPLATE_REACT_ICONS_IMPORT+"\nimport './design.style.css';\n"+RenderService.TEMPLATE_REACT_ICONS_ASSIGN+'\n';
     private static TEMPLATE_REACT_NATIVE_IMPORT = "import  React from 'react';\nimport * as "+ElementType.ReactNative+" from 'react-native';\nimport * as "+ElementType.ReactNativeElements+" from 'react-native-elements';\n";
     private static TEMPLATE_ABSTRACT = "class DesignedComponent<P, S> extends React.Component<P, S> {\n\tonEvent(e:any){}\n\trenderPart(name:any){}\n}\n";
