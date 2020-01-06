@@ -20,7 +20,7 @@ function createWindow () {
       slashes: true
     });
   }
-  win = new BrowserWindow({width: 1024, height: 768, webPreferences:{devTools:debug}})
+  win = new BrowserWindow({width: 1024, height: 768, webPreferences:{devTools:debug, webPreferences: { webSecurity: false }}})
 
 //   and load the index.html of the app.
 //   win.loadFile('src/index.html')

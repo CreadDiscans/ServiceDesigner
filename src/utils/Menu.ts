@@ -1,4 +1,4 @@
-import { Zeplin } from "./Zeplin";
+import { ZeplinSubject } from "../support/Zeplin";
 import { subject } from "../support/Aws";
 
 declare var window:any;
@@ -96,7 +96,7 @@ export class Menu {
                         },
                         {
                             label: 'Zeplin',
-                            click: ()=> alert('zeplin')
+                            click: ()=> ZeplinSubject.next(true)
                         }
                     ]
                 },

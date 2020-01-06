@@ -14,18 +14,13 @@ import * as componentActions from './component/Component.action';
 import * as resourceActions from './resource/Resource.actions';
 import * as elementActions from './element/Element.action';
 import * as propertyActions from './property/Property.action';
-import { Zeplin } from './utils/Zeplin';
-import { Subscription } from 'rxjs';
-
 import * as supportActions from './support/Support.actions';
 import SupportAws, {isAwsVaild} from './support/Aws';
+import SupportZeplin from './support/Zeplin';
 
 class App extends React.Component<any> { 
 
-    sub:Subscription;
-
     componentWillMount() {
-        this.sub = Zeplin.subject.subscribe(val=> this.setState({}))
         new Menu().init(
             (json) => {
                 const { LayoutActions, ResourceActions, ComponentActions, ElementActions, PropertyActions, SupportActions } = this.props;
@@ -121,24 +116,10 @@ class App extends React.Component<any> {
         )
     }
 
-    zep_init = false
-
-    componentDidUpdate() {
-        if (!this.zep_init && Zeplin.url.indexOf('https://') === 0) {
-            Zeplin.init()
-            this.zep_init = true
-        }
-    }
-
-    componentWillUnmount() {
-        this.sub.unsubscribe()
-    }
-
     render() {
         return <div>
             <HomeView/>
-            {Zeplin.getModelView()}
-            {Zeplin.getWebView()}
+            <SupportZeplin />
             <SupportAws/>
         </div>
     }
