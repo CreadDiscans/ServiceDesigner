@@ -193,6 +193,7 @@ const styles:any = {
         right:0
     },
     frame: {
+        position:'absolute',
         width:'100%',
         borderWidth:0,
         background:'white',

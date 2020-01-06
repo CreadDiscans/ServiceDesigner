@@ -3,10 +3,11 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Progress } f
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
-import { FileType, ElementType } from '../utils/constant';
+import { FileType, ElementType, PropertyType, CSSType } from '../utils/constant';
 import * as componentActions from '../component/Component.action';
 import * as elementActions from '../element/Element.action';
 import * as propertyActions from '../property/Property.action';
+import * as resourceActions from '../resource/Resource.actions';
 import _ from 'lodash';
 import { ajax } from 'rxjs/ajax';
 
@@ -24,6 +25,7 @@ class SupportZeplin extends React.Component<any> {
     }
     sub!:Subscription;
     urlReg = new RegExp(/https:\/\/app\.zeplin\.io\/project\/\w+\/screen\/\w+/)
+    webview_init = false;
 
     UNSAFE_componentWillMount() {
         this.sub = ZeplinSubject.subscribe(val=>{
@@ -73,61 +75,121 @@ class SupportZeplin extends React.Component<any> {
         return <div></div>
     }
 
-    // ignoreStyle = ['position', 'width', 'height']
+    parseProperty(layer, option) {
+        const rgbToStr = (obj) => 'rgba('+obj['r']+','+obj['g']+','+obj['b']+','+obj['a']+')'
+        const props = []
+        const style:any = {}
+        // style.width = (layer.rect.width/option.width*100)+'%'
+        // style.height = (layer.rect.height/option.height*100)+'%'
+        // style.top = (layer.rect.y/option.height*100)+'%'
+        // style.left = (layer.rect.x/option.width*100)+'%'
+        style.minWidth = layer.rect.width.toFixed(0)
+        style.minHeight = layer.rect.height.toFixed(0)
+        if (layer.rect.y !== 0) style.top = layer.rect.y.toFixed(0)
+        if (layer.rect.x !== 0) style.left = layer.rect.x.toFixed(0)
+        if(layer.content) {
+            const text = {
+                name:'text',
+                type:PropertyType.String,
+                value:layer.content.split('\n').map(str=>str.trim()).join(' ')
+            }
+            props.push(text)
+            layer.textStyles.forEach(item=> {
+                Object.keys(item.style).forEach(s=> {
+                    if (s === 'color') {
+                        if (item.style[s].a !== 0) {
+                            style.color = rgbToStr(item.style[s])
+                        }
+                    } else if(s === 'fontFace') {
+                        // style.fontFamily = item.style[s]
+                    } else if(s === 'lineHeight') {
+                        // style.lineHeight = item.style[s]/21
+                    } else {
+                        style[s] = item.style[s]
+                    }
+                })
+            })
+        }
+        layer.fills.forEach(item=> {
+            style.backgroundColor = rgbToStr(item.color)
+        })
+        if(layer.borderRadius > 0) {
+            style.borderRadius = layer.borderRadius
+        }
+        layer.borders.forEach(item=> {
+            if (item.color.a !== 0) {
+                style.borderColor = rgbToStr(item.color)
+                if(item.thickness !== 1) style.borderWidth = item.thickness
+            }
+        })
+        let styleObj = '{'+Object.keys(style).map(key=>key.replace(/([A-Z])/g, (g)=>`-${g[0].toLowerCase()}`)+':'+style[key]+';').join('\n  ')+'\n}'
+        props.push({
+            name:'style',
+            type: PropertyType.Object,
+            value: [{condition:'',value: styleObj}]
+        })
+        return props
+    }
 
-    // makeStyleFromPayload(payload) {
-    //     const rawLines = payload.css.split('{')[1].split('}')[0].split(';')
-    //     let lines = rawLines.filter(line=> {
-    //         line = line.trim()
-    //         if (line.indexOf(':') == -1) return false;
-    //         const key = line.split(':')[0].trim()
-    //         if (this.ignoreStyle.indexOf(key) != -1) return false;
-    //         return true;
-    //     }).map(line=> {
-    //         line = line.trim()
-    //         const key = line.split(':')[0].trim()
-    //         let val = line.split(':')[1].trim()
-    //         payload.color.forEach(c=> {
-    //             val = val.replace('var(--'+c.key+')', c.value)
-    //         })
-    //         return '\n  '+key+':'+val+';' 
-    //     })
-    //     if (lines.length === 0 ) return undefined
-    //     lines = lines.concat(rawLines.filter(line=> {
-    //         line = line.trim()
-    //         if (line.indexOf(':') == -1) return false;
-    //         const key = line.split(':')[0].trim()
-    //         if(key == 'width' || key == 'height') {
-    //             return true
-    //         } else {
-    //             return false
-    //         }
-    //     }).map(line=> {
-    //         line = line.trim()
-    //         const key = line.split(':')[0].trim()
-    //         let val = line.split(':')[1].trim()
-    //         payload.color.forEach(c=> {
-    //             val = val.replace('var(--'+c.key+')', c.value)
-    //         })
-    //         return '\n  min-'+key+':'+val+';' 
-    //     }))
-    //     console.log(payload)
-    //     return '{\n\
-    //     \n  position:absolute;\
-    //     \n  top:'+payload.top+';\
-    //     \n  left:'+payload.left+';\
-    //     \n  width:'+payload.width+';\
-    //     \n  height:'+payload.height+';\
-    //     '+lines.join('')+'\
-    //     \n}'
-    // }
-
-    // makeAssetFromPayload(payload) {
-
-    // }
+    async getImageBase64(url) {
+        return new Promise(resolve=> {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    resolve(reader.result);
+                }
+                reader.readAsDataURL(xhr.response);
+            }
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        }) 
+    }
 
     async parserPayload(payload, rootElem) {
-        const { ElementActions } = this.props;
+        const { ElementActions, ResourceActions } = this.props;
+        let elemId = 2;
+        const makeElem = async(layer, parent) => {
+            // console.log(layer)
+            const elem = {
+                id:elemId,
+                tag:'div',
+                lib:ElementType.Html,
+                prop:this.parseProperty(layer, {
+                    width:payload.width,
+                    height:payload.height
+                }),
+                children: [],
+                collapse: false,
+                parent:parent.elem
+            }
+            elemId += 1;
+            for(const asset of payload.assets.filter(item=>item.layerId===layer.sourceId)) {
+                const name = asset.displayName.replace(' ','_')
+                ResourceActions.createAsset({
+                    name:name,
+                    value:await this.getImageBase64(asset.contents[0].url)
+                })
+                elem.children.push({
+                    id: elemId += 1,
+                    tag:'img',
+                    lib:ElementType.Html,
+                    prop:[{
+                        name:'src',
+                        type:PropertyType.String,
+                        value:'Asset.'+name
+                    }],
+                    children: [],
+                    collapse: false,
+                    parent:elem
+                })
+            }
+
+            parent.elem.children.push(elem)
+            layer.elem = elem
+            return Promise.resolve()
+        }
         const loop = (items, parent, action) => {
             items.forEach((child)=> {
                 action(child, parent)
@@ -136,39 +198,34 @@ class SupportZeplin extends React.Component<any> {
                 }
             })
         }
-        let total = 0;
-        let current = 0;
-        const workQueue = []
-        loop(payload.layers, {elem:rootElem}, (layer, parent)=> {
-            total += 1
-            workQueue.push({layer:layer, parent:parent})
+        return new Promise(resolve=> {
+            let total = 0;
+            let current = 0;
+            const workQueue = []
+            loop(payload.layers, {elem:rootElem}, (layer, parent)=> {
+                total += 1
+                workQueue.push({layer:layer, parent:parent})
+            })
+            const work = () => setTimeout(async()=> {
+                if (workQueue.length !== 0) {
+                    const item = workQueue.shift()
+                    await makeElem(item.layer, item.parent)
+                    this.setState({progress:current/total})
+                    current += 1
+                    work()
+                } else {
+                    ElementActions.selectElement(rootElem)
+                    this.setState({isOpen:false, waiting:false, zeplinUrl:'',progress:0})
+                    resolve()
+                }
+            }, 1)
+            work()
         })
-        const makeElem = (layer, parent) => {
-            ElementActions.selectElement(parent.elem)
-            ElementActions.readyToAdd(ElementType.Html)
-            ElementActions.updateName('div')
-            ElementActions.completeAdd()
-            layer.elem = _.last(parent.elem.children)
-        }
-        const work = () => setTimeout(()=> {
-            if (workQueue.length !== 0) {
-                const item = workQueue.shift()
-                makeElem(item.layer, item.parent)
-                this.setState({progress:current/total})
-                current += 1
-                work()
-            } else {
-                this.setState({isOpen:false, waiting:false, zeplinUrl:'',progress:0})
-            }
-        }, 1)
-        work()
-
     } 
 
     startCrawling() {
         this.setState({isOpen:true, waiting:true})
-        const webview:any = document.getElementById('zeplin')
-        const { ComponentActions, ElementActions, PropertyActions } = this.props;
+        const { ComponentActions, ElementActions, PropertyActions, ResourceActions } = this.props;
         ComponentActions.selectFile(undefined)
         ComponentActions.createFile({
             name:this.state.componentName,
@@ -180,135 +237,58 @@ class SupportZeplin extends React.Component<any> {
             ElementActions.choiceComponent(item);
             PropertyActions.reset();
         })
+        ElementActions.selectElement(undefined);
+        const webview:any = document.getElementById('zeplin')
         ElementActions.readyToAdd(ElementType.Html);
         ElementActions.updateName('div');
         ElementActions.completeAdd();
         const rootElem = this.props.data.element.component.element.children[0];
-
-        webview.addEventListener('console-message', (e)=> {
-            ajax.get(e.message).subscribe(res=> {
-                this.parserPayload(res.response, rootElem)
-            })
-            // if (e.message === 'finish') {
-            //     this.setState({isOpen:false, waiting:false, zeplinUrl:''})
-            // } else if (e.message.indexOf('progress-') === 0) {
-            //     const block = e.message.split('progress-')[1].split('/')
-            //     this.setState({progress:Number(block[0])/Number(block[1])})
-            // } else {
-            //     try {
-            //         const payload = JSON.parse(e.message)
-            //         const style = this.makeStyleFromPayload(payload)
-            //         if (style !== undefined) {
-            //             ElementActions.selectElement(rootElem)
-            //             ElementActions.readyToAdd(ElementType.Html)
-            //             ElementActions.updateName('div')
-            //             ElementActions.completeAdd()
-            //             const elem = _.last(this.props.data.element.component.element.children[0].children);
-            //             ElementActions.selectElement(elem);
-            //             PropertyActions.choiceElement(elem);
-            //             this.props.data.property.element.prop.filter(item=>item.name === 'style').map(item=> {
-            //                 PropertyActions.selectProperty(item);
-            //                 item.value[0].value = style
-            //                 PropertyActions.updateValue(item.value)
-            //             })
-            //             payload.content.forEach(item=> {
-            //                 PropertyActions.readyToCreate()
-            //                 PropertyActions.updateKey('text')
-            //                 PropertyActions.updateValue(item.text)
-            //                 PropertyActions.createProperty()
-            //             })
-            //             payload.asset.forEach(item=> {
-            //                 ElementActions.readyToAdd(ElementType.Html)
-            //                 ElementActions.updateName('img')
-            //                 ElementActions.completeAdd()
-            //                 const elem = _.last(this.props.data.element.component.element.children[0].children);
-            //                 const img = _.last(elem.children)
-            //                 ElementActions.selectElement(img)
-            //                 PropertyActions.choiceElement(img)
-            //                 PropertyActions.readyToCreate()
-            //                 PropertyActions.updateKey('src')
-            //                 PropertyActions.updateValue(item.value)
-            //                 PropertyActions.createProperty()
-            //             })
-            //         }
-            //     }catch(e) {
-            //         console.log(e.message)
-            //     }
-            // }
+        ElementActions.selectElement(rootElem);
+        PropertyActions.choiceElement(rootElem);
+        PropertyActions.readyToCreate()
+        PropertyActions.updateKey('className')
+        PropertyActions.updateValue('fromZeplin')
+        PropertyActions.createProperty()
+        ResourceActions.createCss({
+            name:'notosans',
+            type:CSSType.Url,
+            value:'https://fonts.googleapis.com/earlyaccess/notosanskr.css'
         })
-        // const script = '\
-        // var headers = [];\
-        // function getStandard(frame) {\
-        //     if (frame === null) return [0,0];\
-        //     var result = getStandard(frame.offsetParent);\
-        //     return [frame.offsetLeft+result[0], frame.offsetTop+result[1]];\
-        // }\
-        // async function findSnippet(){\
-        //     return new Promise(resolve=>{\
-        //         const startTime = new Date().getTime();\
-        //         const it = setInterval(()=> {\
-        //             if(document.getElementsByClassName("sidebarHeader").length > 0){\
-        //                 let _header = document.getElementsByClassName("sidebarHeader")[0].querySelector("h2").textContent;\
-        //                 if(headers.indexOf(_header) === -1) {\
-        //                     clearInterval(it);\
-        //                     headers.push(_header);\
-        //                     resolve();\
-        //                 }\
-        //             }\
-        //             if (new Date().getTime() - startTime > 5000) {\
-        //                 resolve();\
-        //             }\
-        //         }, 100);\
-        //     });\
-        // }\
-        // var interval = setInterval(async()=>{\
-        //     if (document.getElementsByClassName("zplLayer").length != 0){\
-        //         clearInterval(interval);\
-        //         var std = getStandard(document.getElementsByClassName("layers")[0]);\
-        //         var layers = Array.from(document.getElementsByClassName("zplLayer"));\
-        //         var clickEvent = document.createEvent("MouseEvents");\
-        //         for(var i=0;i<layers.length;i++) {\
-        //             var layer = layers[i];\
-        //             var x = std[0]+layer.offsetLeft;\
-        //             var y = std[1]+layer.offsetTop;\
-        //             clickEvent.initMouseEvent("click",true,false,window,0,x,y,x,y,false, false, false, false, 0, null);\
-        //             layer.dispatchEvent(clickEvent);\
-        //             await findSnippet();\
-        //             const data = {\
-        //                 top:layer.style.top,\
-        //                 left:layer.style.left,\
-        //                 width:layer.style.width,\
-        //                 height:layer.style.height,\
-        //                 css:document.getElementsByClassName("snippet")[0].textContent\
-        //             };\
-        //             data.color = Array.from(document.getElementsByClassName("colorInfo")).map(item=>({\
-        //                 key:item.querySelector("input")===null?"empty":item.querySelector("input").value,\
-        //                 value:item.textContent\
-        //             }));\
-        //             data.asset = Array.from(document.getElementsByClassName("assetSection")).map(item=>({\
-        //                 name: item.querySelector("input").value,\
-        //                 value: item.querySelector("img").src\
-        //             }));\
-        //             data.content = Array.from(document.getElementsByClassName("contentSection")).map(item=>({\
-        //                 text:item.querySelector("p").textContent\
-        //             }));\
-        //             console.log(JSON.stringify(data));\
-        //             document.getElementsByClassName("layers")[0].click();\
-        //             console.log("progress-"+i+"/"+layers.length);\
-        //         }\
-        //         console.log("finish");\
-        //     }\
-        // });'
-        const script2 = '\
+        ResourceActions.createCss({
+            name:'fromZeplin',
+            type:CSSType.Style,
+            value:'.fromZeplin div {\n position:absolute;\n  font-family:Noto Sans KR\n  font-weight:300\n}'
+        })
+        let lock = false;
+        webview.addEventListener('console-message', (e)=> {
+            if (e.message.indexOf('https://cdn.zeplin.io')===0 && !lock) {
+                lock = true;
+                ajax.get(e.message).subscribe((res)=> {
+                    console.log(e.message, res.response)
+                    setTimeout(async()=> {
+                        await this.parserPayload(res.response, rootElem)
+                        webview.executeJavaScript('location.href="about:blank"', true)
+                        lock = false;
+                        this.setState({isOpen:false, waiting:false, zeplinUrl:'',progress:0})
+                    })
+                })
+            }
+        })
+        const script = '\
+        var called = false;\
         var interval = setInterval(async()=>{\
             if (document.getElementsByClassName("zplLayer").length != 0){\
                 clearInterval(interval);\
-                console.log(performance.getEntries().filter(item=>item.name.indexOf("https://cdn.zeplin.io") === 0 && item.initiatorType === "fetch")[0].name);\
-                \
+                const entries = performance.getEntries().filter(item=>item.name.indexOf("https://cdn.zeplin.io") === 0 && item.initiatorType === "fetch");\
+                if(!called) {\
+                    console.log(entries[0].name);\
+                    called = true;\
+                }\
             }\
-        });\
+        }, 1000);\
         '
-        webview.executeJavaScript(script2, true)
+        webview.executeJavaScript(script, true)
+        
     }
 
     render() {
@@ -361,7 +341,8 @@ export default connectRouter(
     (dispatch)=>({
         ComponentActions: bindActionCreators(componentActions, dispatch),
         ElementActions: bindActionCreators(elementActions, dispatch),
-        PropertyActions: bindActionCreators(propertyActions, dispatch)
+        PropertyActions: bindActionCreators(propertyActions, dispatch),
+        ResourceActions: bindActionCreators(resourceActions, dispatch)
     }),
     SupportZeplin
 )
