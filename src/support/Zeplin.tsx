@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Progress } from 'reactstrap';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { connectRouter } from '../redux/connection';
@@ -8,24 +8,23 @@ import * as componentActions from '../component/Component.action';
 import * as elementActions from '../element/Element.action';
 import * as propertyActions from '../property/Property.action';
 import * as resourceActions from '../resource/Resource.actions';
-import _ from 'lodash';
-import { ajax } from 'rxjs/ajax';
 
 export const ZeplinSubject = new BehaviorSubject(false);
-
 class SupportZeplin extends React.Component<any> {
 
-    state = {
+    state:any = {
         isOpen:false,
         title:'Import from zepline',
         componentName: '',
+        urlInput:'',
         zeplinUrl:'',
         waiting:false,
-        progress:0
+        current:0,
+        totalCnt:1
     }
     sub!:Subscription;
     urlReg = new RegExp(/https:\/\/app\.zeplin\.io\/project\/\w+\/screen\/\w+/)
-    webview_init = false;
+    elemId = 2;
 
     UNSAFE_componentWillMount() {
         this.sub = ZeplinSubject.subscribe(val=>{
@@ -39,6 +38,10 @@ class SupportZeplin extends React.Component<any> {
         this.sub.unsubscribe()
     }
 
+    componentDidMount() {
+        this.initWebView()
+    }
+
     trigger() {
         this.setState({
             isOpen:true,
@@ -48,8 +51,12 @@ class SupportZeplin extends React.Component<any> {
     }
 
     confirm() {
-        const state = {isOpen:false}
-        if (this.state.zeplinUrl.match(this.urlReg) === null) {
+        const state = {
+            isOpen:false,
+            zeplinUrl:this.state.urlInput,
+            urlInput:''
+        }
+        if (this.state.urlInput.match(this.urlReg) === null) {
             alert('Invalid URL')
             state['zeplinUrl'] = ''
         }
@@ -61,74 +68,119 @@ class SupportZeplin extends React.Component<any> {
     }
 
     initWebView() {
-        const interval = setInterval(()=> {
-            const webview:any = document.getElementById('zeplin')
-            if (webview) {
-                clearInterval(interval)
-                webview.addEventListener('did-finish-load', ()=> {
-                    if (webview.getURL().match(this.urlReg) !== null) {
-                        this.startCrawling()
-                    }
-                })
-            }
-        }, 500)
-        return <div></div>
-    }
-
-    parseProperty(layer, option) {
-        const rgbToStr = (obj) => 'rgba('+obj['r']+','+obj['g']+','+obj['b']+','+obj['a']+')'
-        const props = []
-        const style:any = {}
-        // style.width = (layer.rect.width/option.width*100)+'%'
-        // style.height = (layer.rect.height/option.height*100)+'%'
-        // style.top = (layer.rect.y/option.height*100)+'%'
-        // style.left = (layer.rect.x/option.width*100)+'%'
-        style.minWidth = layer.rect.width.toFixed(0)
-        style.minHeight = layer.rect.height.toFixed(0)
-        if (layer.rect.y !== 0) style.top = layer.rect.y.toFixed(0)
-        if (layer.rect.x !== 0) style.left = layer.rect.x.toFixed(0)
-        if(layer.content) {
-            const text = {
-                name:'text',
-                type:PropertyType.String,
-                value:layer.content.split('\n').map(str=>str.trim()).join(' ')
-            }
-            props.push(text)
-            layer.textStyles.forEach(item=> {
-                Object.keys(item.style).forEach(s=> {
-                    if (s === 'color') {
-                        if (item.style[s].a !== 0) {
-                            style.color = rgbToStr(item.style[s])
-                        }
-                    } else if(s === 'fontFace') {
-                        // style.fontFamily = item.style[s]
-                    } else if(s === 'lineHeight') {
-                        // style.lineHeight = item.style[s]/21
-                    } else {
-                        style[s] = item.style[s]
-                    }
-                })
+        const webview:any = document.getElementById('zeplin')
+        if (webview) {
+            webview.addEventListener('did-finish-load', ()=> {
+                if (webview.getURL().match(this.urlReg) !== null) {
+                    this.startCrawling()
+                }
+            })
+            webview.addEventListener('console-message', (e) => {
+                if(e.message.indexOf('jsonData-')===0) {
+                    const data = JSON.parse(e.message.substring(9))
+                    this.makeElement(data)
+                    this.setState({current:data.current})
+                } else if (e.message.indexOf('start-') === 0) {
+                    this.setState({totalCnt:Number(e.message.substring(6))})
+                } else if (e.message === 'finish') {
+                    this.setState({isOpen:false, waiting:false, zeplinUrl:'',current:0, totalCnt:1})
+                    const {ElementActions} = this.props;
+                    const rootElem = this.props.data.element.component.element.children[0];
+                    ElementActions.selectElement(rootElem)
+                } else {
+                    console.log(e.message)
+                }
             })
         }
-        layer.fills.forEach(item=> {
-            style.backgroundColor = rgbToStr(item.color)
+    }
+
+    ignoreStyle = ['width', 'height', 'top', 'left', 'font-family']
+
+    makeStyleFromPayload(payload) {
+        const rawLines = payload.css.split('{')[1].split('}')[0].split(';')
+        let lines = rawLines.filter(line=> {
+            line = line.trim()
+            if (line.indexOf(':') == -1) return false;
+            const key = line.split(':')[0].trim()
+            if (this.ignoreStyle.indexOf(key) != -1) return false;
+            return true;
+        }).map(line=> {
+            line = line.trim()
+            const key = line.split(':')[0].trim()
+            let val = line.split(':')[1].trim()
+            payload.color.forEach(c=> {
+                val = val.replace('var(--'+c.key+')', c.value)
+            })
+            return '\n  '+key+':'+val+';' 
         })
-        if(layer.borderRadius > 0) {
-            style.borderRadius = layer.borderRadius
-        }
-        layer.borders.forEach(item=> {
-            if (item.color.a !== 0) {
-                style.borderColor = rgbToStr(item.color)
-                if(item.thickness !== 1) style.borderWidth = item.thickness
+        if (lines.length === 0 ) return undefined
+        return '{\n\
+        \n  top:'+Number(payload.top.replace('%','')).toFixed(1)+'%;\
+        \n  left:'+Number(payload.left.replace('%','')).toFixed(1)+'%;\
+        \n  width:'+Number(payload.width.replace('%','')).toFixed(1)+'%;\
+        \n  height:'+Number(payload.height.replace('%','')).toFixed(1)+'%;\
+        '+lines.join('')+'\
+        \n}'
+    }
+    
+    async makeElement(payload) {
+        const style = this.makeStyleFromPayload(payload)
+        if (style !== undefined) {
+            const rootElem = this.props.data.element.component.element.children[0];
+            const props = [{
+                name:'name',
+                type:PropertyType.String,
+                value:payload.name
+            },{
+                name:'style',
+                type: PropertyType.Object,
+                value: [{condition:'',value: style}]
+            }]
+            payload.content.forEach(item=> {
+                props.push({
+                    name:'text',
+                    type: PropertyType.String,
+                    value: item.text.split('\n').map(text=>text.trim()).join(' ')
+                })
+            })
+            const elem = {
+                id:this.elemId,
+                tag:'div',
+                lib:ElementType.Html,
+                prop:props,
+                children: [],
+                collapse: false,
+                parent:rootElem
             }
-        })
-        let styleObj = '{'+Object.keys(style).map(key=>key.replace(/([A-Z])/g, (g)=>`-${g[0].toLowerCase()}`)+':'+style[key]+';').join('\n  ')+'\n}'
-        props.push({
-            name:'style',
-            type: PropertyType.Object,
-            value: [{condition:'',value: styleObj}]
-        })
-        return props
+            rootElem.children.push(elem)
+            this.elemId += 1
+            for(const asset of payload.asset) {
+                const {ResourceActions} = this.props;
+                ResourceActions.createAsset({
+                    name:asset.name,
+                    value:await this.getImageBase64(asset.value)
+                })
+                elem.children.push({
+                    id:this.elemId,
+                    tag:'img',
+                    lib:ElementType.Html,
+                    prop:[{
+                        name:'src',
+                        type:PropertyType.String,
+                        value:'Asset.'+asset.name
+                    }, {
+                        name:'style',
+                        type:PropertyType.Object,
+                        value:[{condition:'', value:'{width:100%;}'}]
+                    }],
+                    children: [],
+                    collapse: false,
+                    parent:elem
+                })
+                this.elemId += 1
+            }
+        }
+        return Promise.resolve()
     }
 
     async getImageBase64(url) {
@@ -147,84 +199,9 @@ class SupportZeplin extends React.Component<any> {
         }) 
     }
 
-    async parserPayload(payload, rootElem) {
-        const { ElementActions, ResourceActions } = this.props;
-        let elemId = 2;
-        const makeElem = async(layer, parent) => {
-            // console.log(layer)
-            const elem = {
-                id:elemId,
-                tag:'div',
-                lib:ElementType.Html,
-                prop:this.parseProperty(layer, {
-                    width:payload.width,
-                    height:payload.height
-                }),
-                children: [],
-                collapse: false,
-                parent:parent.elem
-            }
-            elemId += 1;
-            for(const asset of payload.assets.filter(item=>item.layerId===layer.sourceId)) {
-                const name = asset.displayName.replace(' ','_')
-                ResourceActions.createAsset({
-                    name:name,
-                    value:await this.getImageBase64(asset.contents[0].url)
-                })
-                elem.children.push({
-                    id: elemId += 1,
-                    tag:'img',
-                    lib:ElementType.Html,
-                    prop:[{
-                        name:'src',
-                        type:PropertyType.String,
-                        value:'Asset.'+name
-                    }],
-                    children: [],
-                    collapse: false,
-                    parent:elem
-                })
-            }
-
-            parent.elem.children.push(elem)
-            layer.elem = elem
-            return Promise.resolve()
-        }
-        const loop = (items, parent, action) => {
-            items.forEach((child)=> {
-                action(child, parent)
-                if (child.layers) {
-                    loop(child.layers, child, action)
-                }
-            })
-        }
-        return new Promise(resolve=> {
-            let total = 0;
-            let current = 0;
-            const workQueue = []
-            loop(payload.layers, {elem:rootElem}, (layer, parent)=> {
-                total += 1
-                workQueue.push({layer:layer, parent:parent})
-            })
-            const work = () => setTimeout(async()=> {
-                if (workQueue.length !== 0) {
-                    const item = workQueue.shift()
-                    await makeElem(item.layer, item.parent)
-                    this.setState({progress:current/total})
-                    current += 1
-                    work()
-                } else {
-                    ElementActions.selectElement(rootElem)
-                    this.setState({isOpen:false, waiting:false, zeplinUrl:'',progress:0})
-                    resolve()
-                }
-            }, 1)
-            work()
-        })
-    } 
-
     startCrawling() {
         this.setState({isOpen:true, waiting:true})
+        this.elemId = 2;
         const { ComponentActions, ElementActions, PropertyActions, ResourceActions } = this.props;
         ComponentActions.selectFile(undefined)
         ComponentActions.createFile({
@@ -259,33 +236,66 @@ class SupportZeplin extends React.Component<any> {
             type:CSSType.Style,
             value:'.fromZeplin div {\n position:absolute;\n  font-family:Noto Sans KR\n  font-weight:300\n}'
         })
-        let lock = false;
-        webview.addEventListener('console-message', (e)=> {
-            if (e.message.indexOf('https://cdn.zeplin.io')===0 && !lock) {
-                lock = true;
-                ajax.get(e.message).subscribe((res)=> {
-                    console.log(e.message, res.response)
-                    setTimeout(async()=> {
-                        await this.parserPayload(res.response, rootElem)
-                        webview.executeJavaScript('location.href="about:blank"', true)
-                        lock = false;
-                        this.setState({isOpen:false, waiting:false, zeplinUrl:'',progress:0})
-                    })
-                })
-            }
-        })
         const script = '\
-        var called = false;\
+        var current = 0;\
+        function getStandard(frame) {\
+            if (frame === null) return [0,0];\
+            var result = getStandard(frame.offsetParent);\
+            return [frame.offsetLeft+result[0], frame.offsetTop+result[1]];\
+        }\
+        async function getLayerInfo(layer, clickEvent) {\
+            return new Promise(resolve=> {\
+                const work = () => {\
+                    if (layer.className === "zplLayer selected") {\
+                        const data = {\
+                            current: current,\
+                            name: document.getElementsByClassName("sidebarHeader")[0].querySelector("h2").textContent,\
+                            top:layer.style.top,\
+                            left:layer.style.left,\
+                            width:layer.style.width,\
+                            height:layer.style.height,\
+                            css:document.getElementsByClassName("snippet")[0].textContent\
+                        };\
+                        data.color = Array.from(document.getElementsByClassName("colorInfo")).map(item=>({\
+                            key:item.querySelector("input")===null?"empty":item.querySelector("input").value,\
+                            value:item.textContent\
+                        }));\
+                        data.asset = Array.from(document.getElementsByClassName("assetSection")).map(item=>({\
+                            name: item.querySelector("input").value,\
+                            value: item.querySelector("img").src\
+                        }));\
+                        data.content = Array.from(document.getElementsByClassName("contentSection")).map(item=>({\
+                            text:item.querySelector("p").textContent\
+                        }));\
+                        console.log("jsonData-"+JSON.stringify(data));\
+                        resolve();\
+                    } else {\
+                        layer.dispatchEvent(clickEvent);\
+                        setTimeout(()=>work(), 100);\
+                    }\
+                };\
+                work();\
+            });\
+        }\
         var interval = setInterval(async()=>{\
             if (document.getElementsByClassName("zplLayer").length != 0){\
                 clearInterval(interval);\
-                const entries = performance.getEntries().filter(item=>item.name.indexOf("https://cdn.zeplin.io") === 0 && item.initiatorType === "fetch");\
-                if(!called) {\
-                    console.log(entries[0].name);\
-                    called = true;\
+                var std = getStandard(document.getElementsByClassName("layers")[0]);\
+                var clickEvent = document.createEvent("MouseEvents");\
+                console.log("start-"+document.getElementsByClassName("zplLayer").length);\
+                for (const layer of Array.from(document.getElementsByClassName("zplLayer"))) {\
+                    current += 1;\
+                    if (layer.offsetWidth <= 1 || layer.offsetHeight <= 1) {\
+                        continue\
+                    }\
+                    var x = std[0] + layer.offsetLeft+1;\
+                    var y = std[1] + layer.offsetTop+1;\
+                    clickEvent.initMouseEvent("click",true,false,window,0,x,y,x,y,false, false, false, false, 0, null);\
+                    await getLayerInfo(layer, clickEvent);\
                 }\
+                console.log("finish");\
             }\
-        }, 1000);\
+        }, 100);\
         '
         webview.executeJavaScript(script, true)
         
@@ -298,13 +308,13 @@ class SupportZeplin extends React.Component<any> {
                 <ModalBody>
                     {this.state.waiting ? <div style={{textAlign:'center'}}>
                         Please waiting until crawling the zeplin page...<br /><br />
-                        <Progress animated value={this.state.progress*100} />
+                        <Progress animated value={(this.state.current/this.state.totalCnt)*100} />
                     </div> : <div>
                         <Input placeholder="Component Name" value={this.state.componentName} onChange={(e)=> {
                             this.setState({componentName:e.target.value})
                         }}/>
-                        <Input placeholder="zeplin URL" value={this.state.zeplinUrl} onChange={(e)=> {
-                            this.setState({zeplinUrl:e.target.value})
+                        <Input placeholder="zeplin URL" value={this.state.urlInput} onChange={(e)=> {
+                            this.setState({urlInput:e.target.value})
                         }} />
                     </div>}
                 </ModalBody>
@@ -315,17 +325,14 @@ class SupportZeplin extends React.Component<any> {
                     </div>}
                 </ModalFooter>
             </Modal> 
-            {(!this.state.isOpen || this.state.waiting) && this.state.zeplinUrl.indexOf('https://') === 0 && <div>
-                <webview id="zeplin" src={this.state.zeplinUrl} style={{
-                    position:'fixed',
-                    width:'100%',
-                    height:'100%',
-                    zIndex:100,
-                    background:'white'
-                }}/>
-                {this.initWebView()}
-            </div>
-            }
+            <webview id="zeplin" src={this.state.zeplinUrl} style={{
+                position:'fixed',
+                display: ((!this.state.isOpen || this.state.waiting) && this.state.zeplinUrl.indexOf('https://') === 0 ) ? 'inline-flex' :'none',
+                width:'100%',
+                height:'100%',
+                zIndex:100,
+                background:'white'
+            }}/>
         </div>
     }
 }
