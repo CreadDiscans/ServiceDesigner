@@ -1,6 +1,6 @@
 {
   "name": "designer",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "private": true,
   "dependencies": {
     "@types/aws-sdk": "^2.7.0",
