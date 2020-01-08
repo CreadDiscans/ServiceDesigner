@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Progress } f
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { connectRouter } from '../redux/connection';
 import { bindActionCreators } from 'redux';
-import { FileType, ElementType, PropertyType, CSSType } from '../utils/constant';
+import { ElementType, PropertyType, CSSType } from '../utils/constant';
 import * as componentActions from '../component/Component.action';
 import * as elementActions from '../element/Element.action';
 import * as propertyActions from '../property/Property.action';
@@ -15,12 +15,15 @@ class SupportZeplin extends React.Component<any> {
     state:any = {
         isOpen:false,
         title:'Import from zepline',
-        componentName: '',
         urlInput:'',
         zeplinUrl:'',
         waiting:false,
         current:0,
-        totalCnt:1
+        totalCnt:1,
+        startX:0,
+        startY:0,
+        endX:0,
+        endY:0
     }
     sub!:Subscription;
     urlReg = new RegExp(/https:\/\/app\.zeplin\.io\/project\/\w+\/screen\/\w+/)
@@ -43,11 +46,19 @@ class SupportZeplin extends React.Component<any> {
     }
 
     trigger() {
-        this.setState({
-            isOpen:true,
-            zeplinUrl:'',
-            componentName:''
-        })
+        const {data} = this.props;
+        if (data.element.select) {
+            this.setState({
+                isOpen:true,
+                zeplinUrl:'',
+                startX:0,
+                startY:0,
+                endX:0,
+                endY:0
+            })
+        } else {
+            alert('Element is not selected.');
+        }
     }
 
     confirm() {
@@ -58,10 +69,6 @@ class SupportZeplin extends React.Component<any> {
         }
         if (this.state.urlInput.match(this.urlReg) === null) {
             alert('Invalid URL')
-            state['zeplinUrl'] = ''
-        }
-        if (this.state.componentName == '') {
-            alert('Component Name is Empty')
             state['zeplinUrl'] = ''
         }
         this.setState(state)
@@ -78,14 +85,19 @@ class SupportZeplin extends React.Component<any> {
             webview.addEventListener('console-message', (e) => {
                 if(e.message.indexOf('jsonData-')===0) {
                     const data = JSON.parse(e.message.substring(9))
-                    this.makeElement(data)
+                    if (data.x >= this.state.startX &&
+                        data.y >= this.state.startY &&
+                        data.x+data.w <= this.state.endX &&
+                        data.y+data.h <= this.state.endY) {
+                            this.makeElement(data)
+                    }
                     this.setState({current:data.current})
                 } else if (e.message.indexOf('start-') === 0) {
                     this.setState({totalCnt:Number(e.message.substring(6))})
                 } else if (e.message === 'finish') {
                     this.setState({isOpen:false, waiting:false, zeplinUrl:'',current:0, totalCnt:1})
                     const {ElementActions} = this.props;
-                    const rootElem = this.props.data.element.component.element.children[0];
+                    const rootElem = this.props.data.element.select;
                     ElementActions.selectElement(rootElem)
                 } else {
                     console.log(e.message)
@@ -96,7 +108,7 @@ class SupportZeplin extends React.Component<any> {
 
     ignoreStyle = ['width', 'height', 'top', 'left', 'font-family']
 
-    makeStyleFromPayload(payload) {
+    makeStyleFromPayload(payload, withSize=false) {
         const rawLines = payload.css.split('{')[1].split('}')[0].split(';')
         let lines = rawLines.filter(line=> {
             line = line.trim()
@@ -114,19 +126,22 @@ class SupportZeplin extends React.Component<any> {
             return '\n  '+key+':'+val+';' 
         })
         if (lines.length === 0 ) return undefined
+        let size = '\
+        \n  width:'+payload.w+'px;\
+        \n  height:'+payload.h+'px;\
+        '
         return '{\n\
-        \n  top:'+Number(payload.top.replace('%','')).toFixed(1)+'%;\
-        \n  left:'+Number(payload.left.replace('%','')).toFixed(1)+'%;\
-        \n  width:'+Number(payload.width.replace('%','')).toFixed(1)+'%;\
-        \n  height:'+Number(payload.height.replace('%','')).toFixed(1)+'%;\
+        \n  top:'+(payload.y-this.state.startY)+'px;\
+        \n  left:'+(payload.x-this.state.startX)+'px;\
+        '+(withSize? size :'')+'\
         '+lines.join('')+'\
         \n}'
     }
     
     async makeElement(payload) {
-        const style = this.makeStyleFromPayload(payload)
+        const style = this.makeStyleFromPayload(payload, payload.content.length === 0)
         if (style !== undefined) {
-            const rootElem = this.props.data.element.component.element.children[0];
+            const rootElem = this.props.data.element.select
             const props = [{
                 name:'name',
                 type:PropertyType.String,
@@ -202,26 +217,19 @@ class SupportZeplin extends React.Component<any> {
     startCrawling() {
         this.setState({isOpen:true, waiting:true})
         this.elemId = 2;
-        const { ComponentActions, ElementActions, PropertyActions, ResourceActions } = this.props;
-        ComponentActions.selectFile(undefined)
-        ComponentActions.createFile({
-            name:this.state.componentName,
-            type:FileType.FILE
-        })
-        const {data} = this.props;
-        data.component.files.filter(item=>item.name === this.state.componentName).forEach(item=> {
-            ComponentActions.selectFile(item);
-            ElementActions.choiceComponent(item);
-            PropertyActions.reset();
-        })
-        ElementActions.selectElement(undefined);
+        const { data, PropertyActions, ResourceActions } = this.props;
+        const loop = (item) => {
+            if (item.id >= this.elemId) {
+                this.elemId = item.id + 1
+            }
+            item.children.forEach(child=> loop(child))
+        }
+        loop(data.element.component.element)
         const webview:any = document.getElementById('zeplin')
-        ElementActions.readyToAdd(ElementType.Html);
-        ElementActions.updateName('div');
-        ElementActions.completeAdd();
-        const rootElem = this.props.data.element.component.element.children[0];
-        ElementActions.selectElement(rootElem);
+        const rootElem = this.props.data.element.select;
         PropertyActions.choiceElement(rootElem);
+        PropertyActions.selectProperty(rootElem.prop.filter(item=>item.name==='style')[0])
+        PropertyActions.updateValue([{condition:'', value:'{\n  height:'+(this.state.endY-this.state.startY)+'px;\n}'}])
         PropertyActions.readyToCreate()
         PropertyActions.updateKey('className')
         PropertyActions.updateValue('fromZeplin')
@@ -234,7 +242,7 @@ class SupportZeplin extends React.Component<any> {
         ResourceActions.createCss({
             name:'fromZeplin',
             type:CSSType.Style,
-            value:'.fromZeplin div {\n position:absolute;\n  font-family:Noto Sans KR\n  font-weight:300\n}'
+            value:'.fromZeplin div {\n  position:absolute;\n  font-family:Noto Sans KR;\n  font-weight:300;\n}\n.fromZeplin {\n  position:relative;\n}'
         })
         const script = '\
         var current = 0;\
@@ -254,7 +262,11 @@ class SupportZeplin extends React.Component<any> {
                             left:layer.style.left,\
                             width:layer.style.width,\
                             height:layer.style.height,\
-                            css:document.getElementsByClassName("snippet")[0].textContent\
+                            css:document.getElementsByClassName("snippet")[0].textContent,\
+                            x:Number(document.getElementsByClassName("propertyValue")[0].textContent.replace("px","")),\
+                            y:Number(document.getElementsByClassName("propertyValue")[1].textContent.replace("px","")),\
+                            w:Number(document.getElementsByClassName("propertyValue")[2].textContent.replace("px","")),\
+                            h:Number(document.getElementsByClassName("propertyValue")[3].textContent.replace("px","")),\
                         };\
                         data.color = Array.from(document.getElementsByClassName("colorInfo")).map(item=>({\
                             key:item.querySelector("input")===null?"empty":item.querySelector("input").value,\
@@ -310,11 +322,24 @@ class SupportZeplin extends React.Component<any> {
                         Please waiting until crawling the zeplin page...<br /><br />
                         <Progress animated value={(this.state.current/this.state.totalCnt)*100} />
                     </div> : <div>
-                        <Input placeholder="Component Name" value={this.state.componentName} onChange={(e)=> {
-                            this.setState({componentName:e.target.value})
-                        }}/>
                         <Input placeholder="zeplin URL" value={this.state.urlInput} onChange={(e)=> {
                             this.setState({urlInput:e.target.value})
+                        }} />
+                        <div style={{display:'inline-block', width:'25%', textAlign:'center'}}>start X</div>
+                        <Input style={{display:'inline', width:'25%'}} value={this.state.startX} type='number' onChange={(e)=> {
+                            this.setState({startX:e.target.value})
+                        }} />
+                        <div style={{display:'inline-block', width:'25%', textAlign:'center'}}>start Y</div>
+                        <Input style={{display:'inline', width:'25%'}} value={this.state.startY} type='number' onChange={(e)=> {
+                            this.setState({startY:e.target.value})
+                        }} />
+                        <div style={{display:'inline-block', width:'25%', textAlign:'center'}}>end X</div>
+                        <Input style={{display:'inline', width:'25%'}} value={this.state.endX} type='number' onChange={(e)=> {
+                            this.setState({endX:e.target.value})
+                        }} />
+                        <div style={{display:'inline-block', width:'25%', textAlign:'center'}}>end Y</div>
+                        <Input style={{display:'inline', width:'25%'}} value={this.state.endY} type='number' onChange={(e)=> {
+                            this.setState({endY:e.target.value})
                         }} />
                     </div>}
                 </ModalBody>
