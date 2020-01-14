@@ -94,12 +94,12 @@ class BoardView extends React.Component<any> {
                 const css = ReactDOMServer.renderToStaticMarkup(getStyleElement({}));
                 document = `
                 <!DOCTYPE html>
-                <html style="height:100%">
+                <html>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 ${renderService.head}
                 ${css}
-                <body style="height:100%; overflow-y:hidden">
+                <body style="height:100%;>
                 <div id="root" style="display:flex; height: 100%">
                 ${html}
                 <script>
